@@ -9,15 +9,15 @@ module.exports = {
     updateChannel: 'stable',
 
     // default font size in pixels for all tabs
-    fontSize: 16,
+    fontSize: 20,
 
     // font family with optional fallbacks
-    fontFamily: 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: 'Menlo, "Ricty Diminished Discord", Consolas, "FiraCode", monospace',
 
     // default font weight: 'normal' or 'bold'
     fontWeight: 'normal',
 
-    // font weight for bold characters: 'normal' or 'bold'
+    // font weight for bold charactehrs: 'normal' or 'bold'
     fontWeightBold: 'bold',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
@@ -30,7 +30,7 @@ module.exports = {
     cursorShape: 'BEAM',
 
     // set to `true` (without backticks and without quotes) for blinking cursor
-    cursorBlink: false,
+    cursorBlink: true,
 
     // color of the text
     foregroundColor: '#fff',
@@ -68,21 +68,21 @@ module.exports = {
     // an array here instead of a color map object
     colors: {
       black: '#000000',
-      red: '#C51E14',
-      green: '#1DC121',
-      yellow: '#C7C329',
-      blue: '#0A2FC4',
-      magenta: '#C839C5',
-      cyan: '#20C5C6',
-      white: '#C7C7C7',
-      lightBlack: '#686868',
-      lightRed: '#FD6F6B',
-      lightGreen: '#67F86F',
-      lightYellow: '#FFFA72',
-      lightBlue: '#6A76FB',
-      lightMagenta: '#FD7CFC',
-      lightCyan: '#68FDFE',
-      lightWhite: '#FFFFFF',
+      red: '#ff0000',
+      green: '#33ff00',
+      yellow: '#ffff00',
+      blue: '#0066ff',
+      magenta: '#cc00ff',
+      cyan: '#00ffff',
+      white: '#d0d0d0',
+      lightBlack: '#808080',
+      lightRed: '#ff0000',
+      lightGreen: '#33ff00',
+      lightYellow: '#ffff00',
+      lightBlue: '#0066ff',
+      lightMagenta: '#cc00ff',
+      lightCyan: '#00ffff',
+      lightWhite: '#ffffff',
     },
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
@@ -97,7 +97,7 @@ module.exports = {
     //
     // PowerShell on Windows
     // - Example: `C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe`
-    shell: '',
+    shell: '/usr/bin/zsh',
 
     // for setting shell arguments (i.e. for using interactive shellArgs: `['-i']`)
     // by default `['--login']` will be used
@@ -123,7 +123,19 @@ module.exports = {
     // bellSoundURL: 'http://example.com/bell.mp3',
 
     // for advanced config flags please refer to https://hyper.is/#cfg
+
+    // hyper-pokemon
+    pokemon: 'Dragonair', // Define your favorite pokemon themeh
+    pokecursor: 'true', // Activate your theme's pokecursor
+    pokemonSyntax: 'dark', // Define the color of the terminal tabs
+    unibody: 'true', // Define the color of the Hyper window header
+    poketab: 'true', // Deactivate your theme's poketab
+
+    // hyper-statusline(Disablrd by hyper-pokemon?)
+    hyperStatusLine: {
+    },
   },
+
 
   // a list of plugins to fetch and install from npm
   // format: [@org/]project[#version]
@@ -131,7 +143,13 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: [],
+  plugins: [
+
+    "hyper-statusline",
+    // "hyperline",
+    
+    "hyper-pokemon",
+  ],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here

@@ -125,7 +125,9 @@ module.exports = {
     // for advanced config flags please refer to https://hyper.is/#cfg
 
     // hyper-pokemon
-    pokemon: 'Dragonair', // Define your favorite pokemon themeh
+    // Define your favorite pokemon themeh
+    pokemon: 'random',
+    // my selection ['Bulbasaur', 'Caterpie', 'Spearow', 'Pikachu', 'Raichu', 'Sandshrew', 'Sandslash', 'Nidoran-female', 'Nidorina', 'Nidoqueen', 'Zubat', 'Golbat', 'Poliwag', 'Poliwhirl', 'Poliwrath', 'Abra', 'Kadabra', 'Alakazam', 'Gastly', 'Haunter', 'Gengar', 'Onix', 'Horsea', 'Seadra', 'Scyther', 'Lapras', 'Ditto', 'Eevee', 'Vaporeon', 'Jolteon', 'Flareon', 'Snorlax', 'Articuno', 'Zapdos', 'Moltres', 'Dratini', 'Dragonair', 'Dragonite', 'Mewtwo', 'Mew', 'Mudkip', ], 
     pokecursor: 'true', // Activate your theme's pokecursor
     pokemonSyntax: 'dark', // Define the color of the terminal tabs
     unibody: 'true', // Define the color of the Hyper window header

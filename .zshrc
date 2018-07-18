@@ -41,6 +41,8 @@ RPROMPT=[%?]
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init - zsh)"
 
+screenfetch
+
 # source ~/.zplug/init.zsh
 
 #  Load theme file

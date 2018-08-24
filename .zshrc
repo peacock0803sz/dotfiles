@@ -22,10 +22,10 @@ zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
-# eval "$(dircolors -b)"
-# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-# zstyle ':completion:*' list-colors ''
-# zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+eval "$(dircolors -b)"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
 zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
@@ -35,13 +35,62 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-PROMPT=%#
-RPROMPT=[%?]
+# PROMPT=%#
+# RPROMPT=[%?]
 
+mkcd() {
+    mkdir $1
+    cd $1
+}
+
+# anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init - zsh)"
 
-# source ~/.zplug/init.zsh
+#linuxbrew
+export PATH='/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin':"$PATH"
 
-#  Load theme file
-# zplug 'dracula/zsh', as:theme
+source ~/.zplug/init.zsh
+
+# 読み込み順序を設定する
+# 例: "zsh-syntax-highlighting" は compinit の後に読み込まれる必要がある
+# (2 以上は compinit 後に読み込まれるようになる)
+zplug "zsh-users/zsh-syntax-highlighting"
+
+zplug "mollifier/cd-gitroot"
+
+zplug "mollifier/anyframe"
+
+zplug "zsh-users/zsh-completions"
+
+# fzf-bin にホスティングされているので注意
+# またファイル名が fzf-bin となっているので file:fzf としてリネームする
+zplug "junegunn/fzf-bin"
+
+# 依存管理
+# "emoji-cli" は "jq" があるときにのみ読み込まれる
+zplug "stedolan/jq", \
+    from:gh-r, \
+    as:command, \
+    rename-to:jq
+zplug "b4b4r07/emoji-cli", \
+    on:"stedolan/jq"
+
+# テーマファイルを読み込む
+zplug 'dracula/zsh', as:theme
+
+# 未インストール項目をインストールする
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# zplug 'zplug/zplug', hook-build:'zplug --self-manage
+
+# コマンドをリンクして、PATH に追加し、プラグインは読み込む
+zplug load --verbose
+
+screenfetch
+

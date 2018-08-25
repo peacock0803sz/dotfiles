@@ -77,7 +77,8 @@ zplug "b4b4r07/emoji-cli", \
     on:"stedolan/jq"
 
 # テーマファイルを読み込む
-zplug 'dracula/zsh', as:theme
+# zplug "dracula/zsh", as:theme
+zplug "agkozak/agkozak-zsh-prompt"
 
 # 未インストール項目をインストールする
 if ! zplug check --verbose; then

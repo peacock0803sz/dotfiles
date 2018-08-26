@@ -1,2 +1,3 @@
-rofi.modi: drun,windowcd,keys,system:~/dotfiles/.config/rofi/system.sh
+rofi.modi: drun,run,windowcd,window,keys,system:~/dotfiles/.config/rofi/system.sh
 rofi.theme: /usr/share/rofi/themes/Monokai.rasi
+rofi.font:Ubuntu Regular 16

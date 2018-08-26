@@ -47,6 +47,10 @@ mkcd() {
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init - zsh)"
 
+# scalaenv
+export PATH="${HOME}/.scalaenv/bin:${PATH}"
+eval "$(scalaenv init -)"
+
 #linuxbrew
 export PATH='/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin':"$PATH"
 
@@ -95,3 +99,5 @@ zplug load --verbose
 
 screenfetch
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

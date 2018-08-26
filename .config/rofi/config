@@ -1,0 +1,1 @@
+rofi.modi: drun,windowcd,keys,system:~/dotfiles/.config/rofi/system.sh

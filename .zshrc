@@ -51,7 +51,7 @@ eval "$(anyenv init - zsh)"
 export PATH="${HOME}/.scalaenv/bin:${PATH}"
 eval "$(scalaenv init -)"
 
-#linuxbrew
+# linuxbrew
 export PATH='/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin':"$PATH"
 
 source ~/.zplug/init.zsh
@@ -67,6 +67,8 @@ zplug "mollifier/anyframe"
 
 zplug "zsh-users/zsh-completions"
 
+# fzf本体
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # fzf-bin にホスティングされているので注意
 # またファイル名が fzf-bin となっているので file:fzf としてリネームする
 zplug "junegunn/fzf-bin"
@@ -99,5 +101,3 @@ zplug load --verbose
 
 screenfetch
 
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

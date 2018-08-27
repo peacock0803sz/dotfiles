@@ -1,7 +1,7 @@
 * {
-   maincolor: #ed8712;
-   highlight: bold #ed8712;
-   urgentcolor: #e53714;
+   maincolor: #009900;
+   highlight: bold #009900;
+   urgentcolor: #006600;
 
    fgwhite: #cfcfcf;
    blackdarkest: #1d1d1d;

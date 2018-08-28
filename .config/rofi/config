@@ -1,4 +1,4 @@
-rofi.modi: drun,run,windowcd,window,keys,system:~/dotfiles/.config/rofi/system.sh
+rofi.modi: drun,run,windowcd,window,keys,
 rofi.font:Ubuntu Regular 16
 rofi.sidebar-mode: true
 rofi.theme: ~/dotfiles/.config/rofi/green-dark.rasi

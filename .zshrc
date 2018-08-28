@@ -43,6 +43,11 @@ mkcd() {
     cd $1
 }
 
+# Autostart if not already in tmux.
+if [[ ! -n $TMUX ]]; then
+  tmux new-session
+fi
+
 # anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init - zsh)"
@@ -100,4 +105,3 @@ fi
 zplug load --verbose
 
 screenfetch
-

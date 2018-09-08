@@ -15,14 +15,14 @@ draw_outline no
 draw_shades no
 
 use_xft yes
-xftfont TakaoGothic:style=Regular:size=15
+xftfont Ubuntu:style=Regular:size=14
 
 override_utf8_locale yes
 out_to_console no
 out_to_stderr no
 extra_newline no
 
-update_interval 0.5
+update_interval 0.3
 uppercase no
 
 show_graph_scale yes
@@ -45,13 +45,11 @@ Uptime:$uptime Processes:$processes
 $hr
 CPU1:${cpu cpu1}% ${cpubar cpu1 8,70} CPU3:${cpu cpu3}% ${cpubar cpu3 8,70}
 CPU2:${cpu cpu2}% ${cpubar cpu2 8,70} CPU4:${cpu cpu4}% ${cpubar cpu4 8,70}
- ${cpugraph cpu0 75,}
-$hr
-
+${cpugraph cpu0 50, 360 000000 ffffff}
 RAM:${mem}/${memmax} ${membar}
- ${memgraph 75,}
-Swap:${swap}/${swapmax} ${swapbar}
+${memgraph 50, 360 000000 ffffff}
+Swap:${swap}/${swapmax}
 $hr
 Network
 Down ${downspeed enp0s31f6}${goto 190}UP ${upspeed enp0s31f6}
-${downspeedgraph enp0s31f6 50,180 000000 ffffff} ${upspeedgraph enp0s31f6 50,180 000000 ffffff}
+${downspeedgraph enp0s31f6 50, 180 000000 ffffff} ${upspeedgraph enp0s31f6 50, 180 000000 ffffff}

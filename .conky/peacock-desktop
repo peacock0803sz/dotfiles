@@ -1,6 +1,6 @@
 alignment top_left
 gap_x 3010
-gap_y 1600
+gap_y 3000
 
 double_buffer yes
 background yes
@@ -15,7 +15,7 @@ draw_outline no
 draw_shades no
 
 use_xft yes
-xftfont TakaoGothic:style=Regular:size=12
+xftfont Ubuntu:style=Regular:size=12
 
 override_utf8_locale yes
 out_to_console no
@@ -41,8 +41,9 @@ own_window_argb_value 192
 cpu_avg_samples 4
 
 TEXT
-${font Ubuntu:style=Bold:pixelsize=32}${time %y/%m/%d}${font}
+${font GenshinGothic:style=Bold:pixelsize=32}${time %y/%m/%d %O}${font}
 ${font Ubuntu:style=Bold:pixelsize=64}${time %H:%M:%S}${font}
+$hr
 Uptime:$uptime Processes:$processes
 $hr
 CPU1:${cpu cpu1}% ${cpubar cpu1 8,93} CPU3:${cpu cpu3}% ${cpubar cpu3 8,93}

@@ -15,7 +15,7 @@ draw_outline no
 draw_shades no
 
 use_xft yes
-xftfont TakaoGothic:style=Regular:size=15
+xftfont TakaoGothic:style=Regular:size=12
 
 override_utf8_locale yes
 out_to_console no
@@ -41,9 +41,11 @@ own_window_argb_value 192
 cpu_avg_samples 4
 
 TEXT
+${font Ubuntu:style=Bold:pixelsize=32}${time %y/%m/%d}${font}
+${font Ubuntu:style=Bold:pixelsize=64}${time %H:%M:%S}${font}
 Uptime:$uptime Processes:$processes
 $hr
-CPU1:${cpu cpu1}% ${cpubar cpu1 8,70} CPU3:${cpu cpu3}% ${cpubar cpu3 8,70}
+CPU1:${cpu cpu1}% ${cpubar cpu1 8,93} CPU3:${cpu cpu3}% ${cpubar cpu3 8,70}
 ${cpugraph cpu1 50,180} ${cpugraph cpu3 50,180}
 CPU2:${cpu cpu2}% ${cpubar cpu2 8,70} CPU4:${cpu cpu4}% ${cpubar cpu4 8,70}
 ${cpugraph cpu2 50,180} ${cpugraph cpu4 50,180}

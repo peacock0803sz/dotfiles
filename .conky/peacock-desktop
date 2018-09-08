@@ -43,8 +43,8 @@ cpu_avg_samples 4
 TEXT
 Uptime:$uptime Processes:$processes
 $hr
-CPU1:${cpu cpu1}% CPU3:${cpu cpu3}%
-CPU2:${cpu cpu2}% CPU4:${cpu cpu4}%
+CPU1:${cpu cpu1}% ${cpubar cpu1 8,70} CPU3:${cpu cpu3}% ${cpubar cpu3 8,70}
+CPU2:${cpu cpu2}% ${cpubar cpu2 8,70} CPU4:${cpu cpu4}% ${cpubar cpu4 8,70}
  ${cpugraph cpu0 75,}
 RAM:${mem}/${memmax} ${membar}
  ${memgraph 75,}

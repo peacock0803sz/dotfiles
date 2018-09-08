@@ -45,9 +45,9 @@ ${font Ubuntu:style=Bold:pixelsize=32}${time %y/%m/%d}${font}
 ${font Ubuntu:style=Bold:pixelsize=64}${time %H:%M:%S}${font}
 Uptime:$uptime Processes:$processes
 $hr
-CPU1:${cpu cpu1}% ${cpubar cpu1 8,93} CPU3:${cpu cpu3}% ${cpubar cpu3 8,70}
+CPU1:${cpu cpu1}% ${cpubar cpu1 8,93} CPU3:${cpu cpu3}% ${cpubar cpu3 8,93}
 ${cpugraph cpu1 50,180} ${cpugraph cpu3 50,180}
-CPU2:${cpu cpu2}% ${cpubar cpu2 8,70} CPU4:${cpu cpu4}% ${cpubar cpu4 8,70}
+CPU2:${cpu cpu2}% ${cpubar cpu2 8,93} CPU4:${cpu cpu4}% ${cpubar cpu4 8,93}
 ${cpugraph cpu2 50,180} ${cpugraph cpu4 50,180}
 RAM:${mem}/${memmax} ($memperc%)
 ${memgraph 50,}

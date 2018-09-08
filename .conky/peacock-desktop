@@ -1,13 +1,13 @@
 alignment top_left
-gap_x 3000
+gap_x 3010
 gap_y 1600
 
 double_buffer yes
 background yes
 
 default_color ffffff
-default_outline_color 66ffff
-default_shade_color 66ffff
+default_outline_color 666666
+default_shade_color 666666
 
 draw_borders no
 draw_graph_borders yes

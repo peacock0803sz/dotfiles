@@ -53,4 +53,5 @@ RAM:${mem}/${memmax} ${membar}
 Swap:${swap}/${swapmax} ${swapbar}
 $hr
 Network
-Down ${downspeed enp0s31f6} ${goto 190}UP ${upspeed enp0s31f6}
+Down ${downspeed enp0s31f6}${goto 190}UP ${upspeed enp0s31f6}
+${downspeedgraph enp0s31f6 50,180 000000 ffffff} ${upspeedgraph enp0s31f6 50,180 000000 ffffff}

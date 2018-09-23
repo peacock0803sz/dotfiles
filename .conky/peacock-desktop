@@ -1,6 +1,6 @@
 alignment top_left
 gap_x 3120
-gap_y 1600
+gap_y 0
 
 double_buffer yes
 background yes
@@ -15,7 +15,7 @@ draw_outline no
 draw_shades no
 
 use_xft yes
-xftfont Ubuntu:style=Regular:size=12
+xftfont Ubuntu:style=Regular:size=13
 
 override_utf8_locale yes
 out_to_console no
@@ -41,17 +41,18 @@ own_window_argb_value 192
 cpu_avg_samples 4
 
 TEXT
-${font GenshinGothic:style=Regular:pixelsize=32}${time %y/%m/%d}${font}
-${font Ubuntu:style=Bold:pixelsize=64}${time %H:%M:%S}${font}
+${font Ubuntu:style=Bold:pixelsize=34}${time %m/%d %H:%M:%S}${font}
 $hr
-CPU1:${cpu cpu1}% ${cpubar cpu1 8,100} CPU3:${cpu cpu3}% ${cpubar cpu3 8,100}
-${cpugraph cpu1 40,180} ${cpugraph cpu3 40,180}
-CPU2:${cpu cpu2}% ${cpubar cpu2 8,100} CPU4:${cpu cpu4}% ${cpubar cpu4 8,100}
-${cpugraph cpu2 40,180} ${cpugraph cpu4 40,180}
+CPU1:${cpu cpu1}%${goto 125}CPU3:${cpu cpu3}%
+${cpubar cpu1 4,118} ${cpubar cpu3 4,118}
+CPU2:${cpu cpu2}%${goto 125}CPU4:${cpu cpu4}%
+${cpubar cpu2 4,118} ${cpubar cpu4 4,118}
+${cpugraph cpu0 50,}
 RAM:${mem}/${memmax} ($memperc%)
-${memgraph 40,}
+${memgraph 50,}
 Swap:${swap}/${swapmax} ($swapperc%)
 $hr
-Download:${downspeed enp0s31f6}${goto 188}Upload:${upspeed enp0s31f6}
-${downspeedgraph enp0s31f6 40,180 000000 ffffff} ${upspeedgraph enp0s31f6 40,180 000000 ffffff}
-Uptime:$uptime Processes:$processes
+Down:${downspeed enp0s31f6}${goto 125}Up:${upspeed enp0s31f6}
+${downspeedgraph enp0s31f6 50,118 000000 ffffff} ${upspeedgraph enp0s31f6 50,118 000000 ffffff}
+Uptime:$uptime
+Processes:$processes

@@ -48,6 +48,9 @@ if [[ ! -n $TMUX ]]; then
   tmux new-session
 fi
 
+# gopath
+export GOPATH="$GOROOT/"
+
 # anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init - zsh)"

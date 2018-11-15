@@ -12,5 +12,8 @@
     "vim.cursorStylePerMode.replace": "line",
     "vim.cursorStylePerMode.visual": "line",
     "vim.cursorStylePerMode.visualblock": "block",
-    "vim.cursorStylePerMode.visualline": "underline"
+    "vim.cursorStylePerMode.visualline": "underline",
+    "terminal.integrated.rendererType": "dom",
+    "terminal.integrated.fontSize": 18,
+    "explorer.confirmDelete": false
 }

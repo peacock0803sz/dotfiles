@@ -6,5 +6,11 @@
     "workbench.colorTheme": "Monokai",
     "workbench.statusBar.feedback.visible": false,
     "terminal.integrated.cursorStyle": "line",
-    "terminal.integrated.fontFamily": "Ricty Diminished Discord for powerline"
+    "terminal.integrated.fontFamily": "Ricty Diminished Discord for powerline",
+    "vim.cursorStylePerMode.insert": "line",
+    "vim.cursorStylePerMode.normal": "line",
+    "vim.cursorStylePerMode.replace": "line",
+    "vim.cursorStylePerMode.visual": "line",
+    "vim.cursorStylePerMode.visualblock": "block",
+    "vim.cursorStylePerMode.visualline": "underline"
 }

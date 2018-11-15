@@ -1,0 +1,10 @@
+{
+    "window.titleBarStyle": "custom",
+    "editor.fontFamily": "Fira Code",
+    "editor.wordWrap": "bounded",
+    "editor.fontLigatures": true,
+    "workbench.colorTheme": "Monokai",
+    "workbench.statusBar.feedback.visible": false,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.fontFamily": "Ricty Diminished Discord for powerline"
+}

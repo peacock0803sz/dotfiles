@@ -19,5 +19,7 @@
     "python.linting.enabled": false,
     "editor.scrollBeyondLastLine": false,
     "explorer.confirmDragAndDrop": false,
-    "window.zoomLevel": 0
+    "window.zoomLevel": 0,
+    "git.confirmSync": false,
+    "git.autofetch": true
 }

@@ -15,5 +15,9 @@
     "vim.cursorStylePerMode.visualline": "underline",
     "terminal.integrated.rendererType": "dom",
     "terminal.integrated.fontSize": 18,
-    "explorer.confirmDelete": false
+    "explorer.confirmDelete": false,
+    "python.linting.enabled": false,
+    "editor.scrollBeyondLastLine": false,
+    "explorer.confirmDragAndDrop": false,
+    "window.zoomLevel": 0
 }

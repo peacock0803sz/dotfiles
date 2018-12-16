@@ -21,5 +21,36 @@
     "explorer.confirmDragAndDrop": false,
     "window.zoomLevel": 0,
     "git.confirmSync": false,
-    "git.autofetch": true
+    "git.autofetch": true,
+    "[javascript]": {
+        "editor.tabSize": 2,
+    },
+    "workbench.iconTheme": "material-icon-theme",
+    "auto-close-tag.SublimeText3Mode": true,
+    "auto-close-tag.fullMode": true,
+    "auto-close-tag.activationOnLanguage": [
+        "xml",
+        "php",
+        "blade",
+        "ejs",
+        "jinja",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "plaintext",
+        "vue",
+        "liquid",
+        "erb",
+        "lang-cfml",
+        "cfml",
+        "HTML (Eex)"
+    ],
+    "[html]": {
+        "editor.tabSize": 4,
+    },
+    "editor.tokenColorCustomizations": {
+        "comments": "#a1a1a1"
+    },
+    "editor.autoClosingBrackets": "always"
 }

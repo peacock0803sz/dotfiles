@@ -15,7 +15,7 @@ HISTFILE=~/.zsh_history
 
 # Use modern completion system
 autoload -Uz promptinit
-compinit
+# compinit
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -56,8 +56,8 @@ export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init - zsh)"
 
 # scalaenv
-export PATH="${HOME}/.scalaenv/bin:${PATH}"
-eval "$(scalaenv init -)"
+# export PATH="${HOME}/.scalaenv/bin:${PATH}"
+# eval "$(scalaenv init -)"
 
 # linuxbrew
 export PATH='/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin':"$PATH"

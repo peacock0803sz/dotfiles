@@ -71,21 +71,14 @@ GHQ_ROOT = "$HOME/ghq"
 # 例: "zsh-syntax-highlighting" は compinit の後に読み込まれる必要がある
 # (2 以上は compinit 後に読み込まれるようになる)
 zplug "zsh-users/zsh-syntax-highlighting"
-
+zplug "zsh-users/zsh-history-substring-search"
 zplug "mollifier/cd-gitroot"
-
 zplug "mollifier/anyframe"
-
 zplug "zsh-users/zsh-completions"
 
-zplug "tsub/4448666a276b088bce3f19005f512c15", from:gist # ghq-fzf.zsh
-
 zplug "tsub/f4036e067a59b242a161fc3c8a5f01dd", from:gist # history-fzf.zsh
-
 zplug "tsub/81ac9b881cf2475977c9cb619021ef3c", from:gist # ssh-fzf.zsh
-
 zplug "tsub/90e63082aa227d3bd7eb4b535ade82a0", from:gist # git-branch-fzf.zsh
-
 zplug "tsub/29bebc4e1e82ad76504b1287b4afba7c", from:gist # tree-fzf.zsh
 
 # fzf本体

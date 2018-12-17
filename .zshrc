@@ -81,6 +81,19 @@ zplug "tsub/81ac9b881cf2475977c9cb619021ef3c", from:gist # ssh-fzf.zsh
 zplug "tsub/90e63082aa227d3bd7eb4b535ade82a0", from:gist # git-branch-fzf.zsh
 zplug "tsub/29bebc4e1e82ad76504b1287b4afba7c", from:gist # tree-fzf.zsh
 
+ghq-fzf() {
+    local selected_dir=$(ghq list | fzf --query="$LBUFFER")
+
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd $(ghq root)/${selected_dir}"
+    fi
+
+    zle reset-prompt
+}
+
+zle -N ghq-fzf
+bindkey "^g" ghq-fzf
+
 # fzf本体
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # fzf-bin にホスティングされているので注意

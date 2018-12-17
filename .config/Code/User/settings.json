@@ -2,5 +2,11 @@
     "window.titleBarStyle": "custom",
     "workbench.colorTheme": "Monokai",
     "workbench.iconTheme": "material-icon-theme",
-    "git.enableSmartCommit": true
+    "git.enableSmartCommit": true,
+    "editor.fontFamily": "'Fira Code', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.renderWhitespace": "boundary",
+    "editor.scrollBeyondLastLine": false,
+    "editor.fontLigatures": true,
+    "editor.minimap.enabled": false,
+    "editor.wordWrap": "bounded"
 }

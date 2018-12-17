@@ -1,0 +1,6 @@
+{
+    "window.titleBarStyle": "custom",
+    "workbench.colorTheme": "Monokai",
+    "workbench.iconTheme": "material-icon-theme",
+    "git.enableSmartCommit": true
+}

@@ -43,21 +43,8 @@ mkcd() {
     cd $1
 }
 
-# Autostart if not already in tmux.
-if [[ ! -n $TMUX ]]; then
-  tmux new-session
-fi
-
 # gopath
 export GOPATH="$GOROOT/"
-
-# anyenv
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init - zsh)"
-
-# scalaenv
-export PATH="${HOME}/.scalaenv/bin:${PATH}"
-eval "$(scalaenv init -)"
 
 # linuxbrew
 export PATH='/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin':"$PATH"

@@ -1,7 +1,7 @@
 {
     "window.titleBarStyle": "custom",
     "editor.fontFamily": "Fira Code",
-    "editor.wordWrap": "bounded",
+    "editor.wordWrap": "wordWrapColumn",
     "editor.fontLigatures": true,
     "workbench.colorTheme": "Monokai",
     "workbench.statusBar.feedback.visible": false,
@@ -47,10 +47,17 @@
         "HTML (Eex)"
     ],
     "[html]": {
-        "editor.tabSize": 4,
+        "editor.tabSize": 2,
     },
     "editor.tokenColorCustomizations": {
         "comments": "#a1a1a1"
     },
-    "editor.autoClosingBrackets": "always"
+    "editor.autoClosingBrackets": "always",
+    "editor.detectIndentation": false,
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "all",
+    "git.enableSmartCommit": true,
+    "editor.overviewRulerLanes": 1,
+    "gitlens.blame.heatmap.location": "left",
+    "gitlens.currentLine.scrollable": false
 }

@@ -64,6 +64,9 @@ export PATH='/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin':"$P
 
 source ~/.zplug/init.zsh
 
+# ghq
+GHQ_ROOT = "$HOME/ghq"
+
 # 読み込み順序を設定する
 # 例: "zsh-syntax-highlighting" は compinit の後に読み込まれる必要がある
 # (2 以上は compinit 後に読み込まれるようになる)

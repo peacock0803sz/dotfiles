@@ -9,5 +9,6 @@
     "editor.fontLigatures": true,
     "editor.minimap.enabled": false,
     "editor.wordWrap": "bounded",
-    "window.restoreWindows": "none"
+    "window.restoreWindows": "none",
+    "git.confirmSync": false
 }

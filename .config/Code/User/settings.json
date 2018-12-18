@@ -8,5 +8,6 @@
     "editor.scrollBeyondLastLine": false,
     "editor.fontLigatures": true,
     "editor.minimap.enabled": false,
-    "editor.wordWrap": "bounded"
+    "editor.wordWrap": "bounded",
+    "window.restoreWindows": "none"
 }

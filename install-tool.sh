@@ -10,4 +10,3 @@ source .zshrc
 mkdir -p $(anyenv root)/plugins
 git clone https://github.com/znz/anyenv-git.git $(anyenv root)/plugins/anyenv-git
 git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
-

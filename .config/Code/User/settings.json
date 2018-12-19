@@ -59,5 +59,9 @@
     "git.enableSmartCommit": true,
     "editor.overviewRulerLanes": 1,
     "gitlens.blame.heatmap.location": "left",
-    "gitlens.currentLine.scrollable": false
+    "gitlens.currentLine.scrollable": false,
+    "[css]": {
+        "editor.tabSize": 2,
+    },
+    "window.restoreWindows": "none"
 }

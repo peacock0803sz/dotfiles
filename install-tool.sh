@@ -5,6 +5,7 @@ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/instal
 
 #anyenv
 git clone https://github.com/riywo/anyenv ~/.anyenv
+zsh
 source .zshrc
 #anyenv plugins
 mkdir -p $(anyenv root)/plugins

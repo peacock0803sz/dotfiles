@@ -9,3 +9,4 @@ ln -s ~/dotfiles/.config/rofi .config/rofi
 ln -s ~/dotfiles/tmux.conf .tmux.conf
 ln -s ~/dotfiles/.config/Code/User/settings.json ~/.config/Code/User/settings.json 
 ln -s ~/dotfiles/.xprofile .xprofile
+ln -s ~/dotfiles/.config/redshift/redshift.conf .config/redshift/redshift.conf

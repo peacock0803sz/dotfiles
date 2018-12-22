@@ -48,6 +48,11 @@ mkcd() {
 #   tmux new-session
 #fi
 
+# aliases
+
+alias gh='ghq'
+alias gh g='ghq get'
+
 # gopath
 export GOPATH="$GOROOT"
 

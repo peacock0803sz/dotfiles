@@ -59,6 +59,10 @@ source ~/.zplug/init.zsh
 export GOPATH=~/go
 export PATH="$PATH:$GOPATH/bin"
 
+# anyenv
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init - zsh)"
+
 # ghq
 # export GHQ_ROOT = "$HOME/ghq"
 

@@ -50,8 +50,8 @@ mkcd() {
 
 # aliases
 
-alias gh='ghq'
-alias sZsh='source ~/.zshrc'
+alias gh='ghq get'
+alias SZ='source ~/.zshrc'
 
 # gopath
 export GOPATH="$GOROOT"

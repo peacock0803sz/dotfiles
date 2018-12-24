@@ -131,7 +131,7 @@ SPACESHIP_PACKAGE_PREFIX=( )
 SPACESHIP_EXEC_TIME_PREFIX=( )
 SPACESHIP_EXEC_TIME_ELAPSED=0
 
-SPACESHIP_PROMPT_ORDER=(dir line_sep package node ruby elixir golang php rust haskell docker venv conda pyenv exit_code exec_time git line_sep char)
+SPACESHIP_PROMPT_ORDER=(dir line_sep git package node ruby elixir golang php rust haskell docker venv conda pyenv exit_code line_sep exec_time char)
 
 << comment
 

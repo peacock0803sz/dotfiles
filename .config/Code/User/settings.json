@@ -63,5 +63,8 @@
     "[css]": {
         "editor.tabSize": 2,
     },
-    "window.restoreWindows": "none"
+    "window.restoreWindows": "none",
+    "files.exclude": {
+        "**/.git": false
+    }
 }

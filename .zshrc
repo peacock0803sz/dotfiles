@@ -153,3 +153,4 @@ neofetch --ascii_distro arch
 
 # opam configuration
 test -r /home/peacock/.opam/opam-init/init.zsh && . /home/peacock/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)

@@ -114,7 +114,7 @@ zplug "b4b4r07/emoji-cli", \
 
 zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
 
-SPACESHIP_DIR_TRUNC=2
+SPACESHIP_DIR_TRUNC=0
 SPACESHIP_DIR_TRUNC_REPO=false
 SPACESHIP_PROMPT_DEFAULT_PREFIX=( )
 
@@ -125,7 +125,7 @@ SPACESHIP_PACKAGE_PREFIX=( )
 SPACESHIP_EXEC_TIME_PREFIX=( )
 SPACESHIP_EXEC_TIME_ELAPSED=0
 
-SPACESHIP_PROMPT_ORDER=(dir git exec_time line_sep char)
+SPACESHIP_PROMPT_ORDER=(dir line_sep package node ruby elixir golang php rust haskell docker venv conda pyenv exit_code exec_time git line_sep char)
 
 << comment
 

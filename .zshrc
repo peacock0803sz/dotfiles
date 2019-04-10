@@ -59,13 +59,6 @@ source ~/.zplug/init.zsh
 export GOPATH=~/go
 export PATH="$PATH:$GOPATH/bin"
 
-# anyenv
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init - zsh)"
-
-# ghq
-# export GHQ_ROOT = "$HOME/ghq"
-
 # 読み込み順序を設定する
 # 例: "zsh-syntax-highlighting" は compinit の後に読み込まれる必要がある
 # (2 以上は compinit 後に読み込まれるようになる)
@@ -125,7 +118,7 @@ SPACESHIP_PACKAGE_PREFIX=( )
 SPACESHIP_EXEC_TIME_PREFIX=( )
 SPACESHIP_EXEC_TIME_ELAPSED=0
 
-SPACESHIP_PROMPT_ORDER=(dir line_sep package node ruby elixir golang php rust haskell docker venv conda pyenv exit_code exec_time git line_sep char)
+SPACESHIP_PROMPT_ORDER=(dir package exit_code exec_time git line_sep char)
 
 << comment
 

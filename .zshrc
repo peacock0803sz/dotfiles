@@ -50,10 +50,18 @@ mkcd() {
 
 # aliases
 
-alias gh='ghq'
-alias sZsh='source ~/.zshrc'
+alias gh='ghq get'
+alias SZ='source ~/.zshrc'
 
 source ~/.zplug/init.zsh
+
+# Go
+export GOPATH=~/go
+export PATH="$PATH:$GOPATH/bin"
+
+# anyenv
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init - zsh)"
 
 # ghq
 # export GHQ_ROOT = "$HOME/ghq"
@@ -141,4 +149,8 @@ fi
 # コマンドをリンクして、PATH に追加し、プラグインは読み込む
 zplug load --verbose
 
-screenfetch
+neofetch --ascii_distro arch
+
+# opam configuration
+test -r /home/peacock/.opam/opam-init/init.zsh && . /home/peacock/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)

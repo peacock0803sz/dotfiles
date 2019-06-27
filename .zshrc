@@ -149,8 +149,12 @@ fi
 # コマンドをリンクして、PATH に追加し、プラグインは読み込む
 zplug load --verbose
 
-neofetch --ascii_distro arch
-
 # opam configuration
 test -r /home/peacock/.opam/opam-init/init.zsh && . /home/peacock/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+# neovim
+export XDG_CONFIG_HOME="$HOME/.config"
+export NVIM_CACHE_HOME="$HOME/.vim/bundles"
+
+neofetch --disable cpu gpu memory

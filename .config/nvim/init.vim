@@ -1,3 +1,5 @@
+inoremap <silent> jj <ESC>
+
 "dein Scripts-----------------------------
 "
 if &compatible

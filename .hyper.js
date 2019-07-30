@@ -125,7 +125,7 @@ module.exports = {
     // for advanced config flags please refer to https://hyper.is/#cfg
 
     // hyper-pokemon 
-    pokemon: 'Bulbasaur', // Define your favorite pokemon themeh
+    pokemon: 'Caterpie ', // Define your favorite pokemon themeh
     pokecursor: 'true', // Activate your theme's pokecursor
     pokemonSyntax: 'dark', // Define the color of the terminal tabs
     unibody: 'true', // Define the color of the Hyper window header
@@ -149,7 +149,7 @@ module.exports = {
     // "hyperline",
     
     'hyper-pokemon',
-    // 'hyper-transparent-bg',
+    'hyper-transparent-bg',
   ],
 
   // in development, you can create a directory under

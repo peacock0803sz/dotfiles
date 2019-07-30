@@ -44,9 +44,9 @@ mkcd() {
 }
 
 # Autostart if not already in tmux.
-# if [[ ! -n $TMUX ]]; then
-#   tmux new-session
-#fi
+if [[ ! -n $TMUX ]]; then
+    tmux new-session
+fi
 
 # aliases
 
@@ -156,5 +156,6 @@ eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 # neovim
 export XDG_CONFIG_HOME="$HOME/.config"
 export NVIM_CACHE_HOME="$HOME/.vim/bundles"
+export EDITOR=nvim
 
 neofetch --disable cpu gpu memory

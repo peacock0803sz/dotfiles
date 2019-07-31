@@ -13,7 +13,7 @@ BEHIND="⇣"
 DIVERGED="⇕"
 
 cd $1
-if [ -e .git ]; then
+if [ `git status 2>&1 | tr '\n' ' ' | awk '{print $2}'` = 'branch' ]; then
   if [ `git status --untracked-file=all --porcelain | grep '??' | tr "\n" " " | awk '{print $1}'` = '??' ]; then
     STATUS=$UNTRACKED$STATUS
   fi

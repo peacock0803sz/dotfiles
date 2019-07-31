@@ -125,7 +125,7 @@ module.exports = {
     // for advanced config flags please refer to https://hyper.is/#cfg
 
     // hyper-pokemon 
-    pokemon: 'Caterpie ', // Define your favorite pokemon themeh
+    pokemon: 'Articuno', // Define your favorite pokemon themeh
     pokecursor: 'true', // Activate your theme's pokecursor
     pokemonSyntax: 'dark', // Define the color of the terminal tabs
     unibody: 'true', // Define the color of the Hyper window header

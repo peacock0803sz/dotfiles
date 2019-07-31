@@ -45,4 +45,6 @@ if [ `git status 2>&1 | tr '\n' ' ' | awk '{print $2}'` = 'branch' ]; then
     STATUS=$DIVERGED$STATUS
   fi
   echo "["$STATUS"]"
+elif [ `git status | grep nothing` = 'nothing to commit, working tree clean' ]; then
+  echo "Clean"
 fi

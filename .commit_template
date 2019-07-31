@@ -1,0 +1,55 @@
+# Type commit massage here!
+
+# ==== Emojis ====
+# :tada: 最初のコミット/新機能(大きめ)
+# :bookmark: リリース/バージョンタグ
+# :sparkles: 新機能(小さめ)
+# :bug: バグフィックス
+# :card_index: メタデータ
+# :books: 
+# :bulb: ソースコードのドキュメント化
+# :racehorse: パフォーマンス改善
+# :lipstick: UI改善
+# :rotating_light: テストコミット
+# :white_check_mark: テストコード追加
+# :heavy_check_mark: テスト通過
+# :zap: アップデート
+# :art: フォーマット改善
+# :recycle: リファクタリング
+# :fire: コード/ファイル削除
+# :green_heart: CI/CD関連修正
+# :lock: セキュリティ関連
+# :arrow_up: 依存関係アップグレード
+# :arrow_down: 依存関係ダウングレード
+# :shirt: Linter warning削除
+# :alien: 外部APIによる更新
+# :pencil: ドキュメント整備
+# :ambulance: ホットフィックス
+# :rocket: デプロイコミット
+# :apple: macOS関連
+# :penguin: Linux関連
+# :checkered_flag: Windows関連
+# :construction: WIP
+# :construction_worker: CI追加
+# :chart_with_upwards_trend: アナリティクス関連
+# :heavy_minus_sign: 依存関係追加
+# :heavy_plus_sign: 依存関係削除
+# :whale: Docker関連
+# :wrench: 設定ファイル関連
+# :package: バイナリファイル/パッケージ関連
+# :twisted_rightwards_arrows: マージコミット
+# :poop: クソコード
+# :rewind: ロールバック
+# :boom: 破壊的変更
+# :ok_hand: コードレビュー関連
+# :wheelchair: アクセシビリティ
+# :truck: ファイル移動
+# :globe_with_meridians: 国際化/ローカライゼーション
+# :pencil2: Typo修正
+# :page_facing_up: ライセンス関連
+# :loud_sound: ログ追加
+# :mute: ログ削除
+# :busts_in_silhouette: コントリビューター追加
+# :see_no_evil: .gitignore関連
+# :label: 型関連
+# :mag: SEO

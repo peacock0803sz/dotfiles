@@ -1,6 +1,7 @@
 inoremap <silent> jj <ESC>
 set colorcolumn=88
 set number
+set shiftwidth=2
 
 "dein Scripts-----------------------------
 if &compatible
@@ -18,29 +19,34 @@ if dein#load_state('$HOME/.cache/dein')
   call dein#add('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')
   filetype plugin indent on
   syntax enable
+  "let g:dein#auto_recache = 1
 
   " Add or remove your plugins here like this:
-  call dein#add('Shougo/neosnippet-snippets')
+  "call dein#add('Shougo/neosnippet-snippets')
   call dein#add('itchyny/lightline.vim')
   call dein#add('sainnhe/sonokai')
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('lighttiger2505/deoplete-vim-lsp')
+  " call dein#add('Shougo/deoplete.nvim')
+  " call dein#add('lighttiger2505/deoplete-vim-lsp')
   call dein#add('prabirshrestha/async.vim')
-  call dein#add('prabirshrestha/vim-lsp')
-  call dein#add('mattn/vim-lsp-settings')
+  " call dein#add('prabirshrestha/vim-lsp')
+  " call dein#add('mattn/vim-lsp-settings')
+  call dein#add('neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' }) 
+  call dein#add('nvim-treesitter/nvim-treesitter')
 
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
   call dein#add('yuki-ycino/fzf-preview.vim')
   call dein#add('kien/rainbow_parentheses.vim')
   call dein#add('Yggdroot/indentLine')
-  call dein#add('preservim/nerdtree')
-  call dein#add('Xuyuanp/nerdtree-git-plugin')
+  "call dein#add('preservim/nerdtree')
+  "call dein#add('Xuyuanp/nerdtree-git-plugin')
   call dein#add('rhysd/committia.vim')
+  "call dein#add('airblade/vim-gitgutter')
 
   " Required:
   call dein#end()
   call dein#save_state()
 endif
+
 let g:deoplete#enable_at_startup = 1
 let g:lightline = {
   \ 'colorscheme': 'sonokai',
@@ -62,15 +68,8 @@ let g:sonokai_enable_italic = 1
 let g:sonokai_disable_italic_comment = 1
 colorscheme sonokai
 
-" NERDTree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let NERDTreeShowHidden=1
-let g:NERDTreeWinSize = 25
-map <C-n> :NERDTreeToggle<CR>
-
 " tab setting
+set showtabline=2
 nnoremap [TABCMD]  <nop>
 nmap     <leader>t [TABCMD]
 nnoremap <silent> [TABCMD]f :<c-u>tabfirst<cr>
@@ -79,9 +78,10 @@ nnoremap <silent> [TABCMD]n :<c-u>tabnext<cr>
 nnoremap <silent> [TABCMD]N :<c-u>tabNext<cr>
 nnoremap <silent> [TABCMD]p :<c-u>tabprevious<cr>
 nnoremap <silent> [TABCMD]e :<c-u>tabedit<cr>
-nnoremap <silent> [TABCMD]c :<c-u>tabclose<cr>
+nnoremap <silent> [TABCMD]w :<c-u>tabclose<cr>
 nnoremap <silent> [TABCMD]o :<c-u>tabonly<cr>
 nnoremap <silent> [TABCMD]s :<c-u>tabs<cr>
+nnoremap <silent> [TABCMD]s :<c-u>tabnew<cr>
 
 " fzf-preview
 nmap <Leader>f [fzf-p]

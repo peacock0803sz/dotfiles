@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Set up the prompt
 
 # promptinit
@@ -31,6 +38,7 @@ zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin
 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
@@ -50,15 +58,18 @@ alias acvenv='source venv/bin/activate'
 alias nvimconf='nvim $HOME/.config/nvim/init.vim'
 alias zshconf='nvim $HOME/.zshrc'
 alias tmuxconf='nvim $HOME/.tmux.conf'
-alias tmux-git='tmux new-window -n git \; split-window -h -l 180 \; send-keys -t git.1 "cat ~/.commit_template" C-m'
+if [[ $TMUX ]];then
+  export FZF_TMUX=1
+fi
+
 
 # Go
 export GOPATH=~/go
 export PATH="$PATH:$GOPATH/bin"
 
 # anyenv
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init - zsh)"
+# export PATH="$HOME/.anyenv/bin:$PATH"
+# eval "$(anyenv init - zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -128,8 +139,8 @@ export LANG=ja_JP.UTF-8
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 #yarn
-export PATH="$PATH:/Users/peacock/.anyenv/envs/nodenv/shims/yarn"
-export PATH="$PATH:`yarn global bin`"
+# export PATH="$PATH:/Users/peacock/.anyenv/envs/nodenv/shims/yarn"
+# export PATH="$PATH:`yarn global bin`"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -150,15 +161,32 @@ zinit light-mode for \
     zinit-zsh/z-a-patch-dl \
     zinit-zsh/z-a-as-monitor \
     zinit-zsh/z-a-bin-gem-node \
+    zinit-zsh/z-a-meta-plugins \
     zsh-users/zsh-autosuggestions \
+    zsh-users/zsh-completions \
     zdharma/fast-syntax-highlighting \
     zdharma/history-search-multi-word \
+    eastokes/aws-plugin-zsh \
+    chr-fritz/docker-completion.zshplugin \
+    akoenig/npm-run.plugin.zsh \
+    srijanshetty/zsh-pip-completion \
+    hlissner/zsh-autopair
 
-# zinit ice lucid wait"0" depth"1" blockf
-# zinit light yuki-ycino/fzf-preview.zsh
-source $(ghq root)/github.com/yuki-ycino/fzf-preview.zsh/fzf-preview.zsh
+zinit ice wait lucid atload"zicompinit; zicdreplay" blockf 
+zinit light b4b4r07/enhancd
+
+zinit ice lucid depth"1" blockf
+zinit light yuki-ycino/fzf-preview.zsh
+# source $(ghq root)/github.com/yuki-ycino/fzf-preview.zsh/fzf-preview.zsh
+
 bindkey '^i' fzf-or-normal-completion
-bindkey '^b' fzf-grep-vscode
+bindkey '^v' fzf-grep-vscode
+bindkey '^ '   fzf-snippet-selection
+bindkey ' '    fzf-auto-snippet-and-space
+bindkey '^m'   fzf-auto-snippet-and-accept-line
+bindkey '^[f'  fzf-snippet-next-placeholder
+bindkey '^i'   fzf-or-normal-completion
+bindkey '^x^s' fzf-snippet-selection
 
 zinit load romkatv/powerlevel10k
 

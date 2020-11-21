@@ -1,7 +1,9 @@
 inoremap <silent> jj <ESC>
 set colorcolumn=88
 set number
+set clipboard+=unnamedplus
 set shiftwidth=2
+
 
 "dein Scripts-----------------------------
 if &compatible

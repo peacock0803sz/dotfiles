@@ -1499,6 +1499,7 @@
   # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS. It displays an icon and orange text greeting the user.
   #
   # Type `p10k help segment` for documentation and a more sophisticated example.
+  typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=cyan
   function prompt_example() {
     if [ -e './venv/' ]; then
       p10k segment -f 208 -i "$(./venv/bin/python -V)" -t ''

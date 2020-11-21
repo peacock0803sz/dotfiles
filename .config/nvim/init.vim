@@ -33,6 +33,7 @@ if dein#load_state('$HOME/.cache/dein')
   " call dein#add('prabirshrestha/vim-lsp')
   " call dein#add('mattn/vim-lsp-settings')
   call dein#add('neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' }) 
+  call dein#add('tjdevries/coc-zsh')
   call dein#add('nvim-treesitter/nvim-treesitter')
 
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })

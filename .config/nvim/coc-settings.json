@@ -1,0 +1,14 @@
+{
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "~/python/3.8/bin/black", 
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Path": "~/python/3.8/bin/flake8",
+  "python.linting.mypyEnabled": true,
+  "python.linting.mypyPath": "~/python/3.8/bin/mypy",
+  "python.linting.mypyArgs": [
+  	"--ignore-missing-imports",
+  	"--follow-imports=silent",
+  	"--show-column-numbers"
+  ]
+}

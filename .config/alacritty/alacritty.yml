@@ -3,14 +3,15 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: xterm-256color
+  TERM: xterm-256color
+  # LANG: "ja_JP.UTF-8"
 
 window:
   # Window dimensions (changes require restart)
@@ -18,8 +19,8 @@ window:
   # Specified in number of columns/lines, not pixels.
   # If both are `0`, this setting is ignored.
   dimensions:
-    columns: 180
-    lines: 50
+    columns: 200
+    lines: 66
 
   # Window position (changes require restart)
   #
@@ -66,6 +67,7 @@ window:
   # Window title
   title: Alacritty
 
+  dynamic_title: false
   # Window class (Linux only):
   # class: Alacritty
 
@@ -74,6 +76,22 @@ scrolling:
   # Specifying '0' will disable scrolling.
   history: 10000
 
+  # Number of lines the viewport will move for every line scrolled when
+  # scrollback is enabled (history > 0).
+  multiplier: 3
+
+  # Faux Scrolling
+  #
+  # The `faux_multiplier` setting controls the number of lines the terminal
+  # should scroll when the alternate screen buffer is active. This is used
+  # to allow mouse scrolling for applications like `man`.
+  #
+  # Specifying `0` will disable faux scrolling.
+  # faux_multiplier: 3
+
+  # Scroll to the bottom when new text is written to the terminal.
+  # auto_scroll: true
+
 # Spaces per Tab (changes require restart)
 #
 # This setting defines the width of a tab in cells.
@@ -81,6 +99,7 @@ scrolling:
 # Some applications, like Emacs, rely on knowing about the width of a tab.
 # To prevent unexpected behavior in these applications, it's also required to
 # change the `it` value in terminfo when altering this setting.
+# tabspaces: 4
 
 # Font configuration (changes require restart)
 font:
@@ -133,7 +152,6 @@ font:
   # Thin strokes are suitable for retina displays, but for non-retina screens
   # it is recommended to set `use_thin_strokes` to `false`
   #
-  macOS >= 10.14.x:
   #
   # If the font quality on non-retina display looks bad then set
   # `use_thin_strokes` to `true` and enable font smoothing by running the
@@ -197,6 +215,11 @@ colors:
 #   - EaseOutCirc
 #   - Linear
 #
+# Specifying a `duration` of `0` will disable the visual bell.
+# visual_bell:
+#   animation: EaseOutExpo
+#   duration: 0
+#   color: '0xffffff'
 
 # Background opacity
 #
@@ -313,7 +336,7 @@ live_config_reload: true
 enable_experimental_conpty_backend: false
 
 # Send ESC (\x1b) before characters when alt is pressed.
-alt_send_esc: true
+alt_send_esc: false
 
 debug:
   # Display the time it takes to redraw each frame.
@@ -563,3 +586,31 @@ key_bindings:
   - { key: F11,      mods: Super,   chars: "\x1b[23;3~"                      }
   - { key: F12,      mods: Super,   chars: "\x1b[24;3~"                      }
   - { key: NumpadEnter,             chars: "\n"                              }
+
+  - { key: A, mods: Alt, chars: "\x1ba"}
+  - { key: B, mods: Alt, chars: "\x1bb"}
+  - { key: C, mods: Alt, chars: "\x1bc"}
+  - { key: D, mods: Alt, chars: "\x1bd"}
+  - { key: E, mods: Alt, chars: "\x1be"}
+  - { key: F, mods: Alt, chars: "\x1bf"}
+  - { key: G, mods: Alt, chars: "\x1bg"}
+  - { key: H, mods: Alt, chars: "\x1bh"}
+  - { key: I, mods: Alt, chars: "\x1bi"}
+  - { key: J, mods: Alt, chars: "\x1bj"}
+  - { key: K, mods: Alt, chars: "\x1bk"}
+  - { key: L, mods: Alt, chars: "\x1bl"}
+  - { key: M, mods: Alt, chars: "\x1bm"}
+  - { key: N, mods: Alt, chars: "\x1bn"}
+  - { key: O, mods: Alt, chars: "\x1bo"}
+  - { key: P, mods: Alt, chars: "\x1bp"}
+  - { key: Q, mods: Alt, chars: "\x1bq"}
+  - { key: R, mods: Alt, chars: "\x1br"}
+  - { key: S, mods: Alt, chars: "\x1bs"}
+  - { key: T, mods: Alt, chars: "\x1bt"}
+  - { key: U, mods: Alt, chars: "\x1bu"}
+  - { key: V, mods: Alt, chars: "\x1bv"}
+  - { key: W, mods: Alt, chars: "\x1bw"}
+  - { key: X, mods: Alt, chars: "\x1bx"}
+  - { key: Y, mods: Alt, chars: "\x1by"}
+  - { key: Z, mods: Alt, chars: "\x1bz"}
+

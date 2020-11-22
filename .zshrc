@@ -62,14 +62,16 @@ if [[ $TMUX ]];then
   export FZF_TMUX=1
 fi
 
+if [[ -e /etc/lsb-release ]]; then
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+fi
 
 # Go
 export GOPATH=~/go
 export PATH="$PATH:$GOPATH/bin"
-
-# anyenv
-# export PATH="$HOME/.anyenv/bin:$PATH"
-# eval "$(anyenv init - zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -138,9 +140,7 @@ export LANG=ja_JP.UTF-8
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
-#yarn
-# export PATH="$PATH:/Users/peacock/.anyenv/envs/nodenv/shims/yarn"
-# export PATH="$PATH:`yarn global bin`"
+export NVM_DIR="$HOME/.nvm"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then

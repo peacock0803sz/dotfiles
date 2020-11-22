@@ -47,7 +47,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # RPROMPT=[%?]
 
 mkcd() {
-    mkdir $1
+    mkdir -p $1
     cd $1
 }
 

@@ -27,11 +27,7 @@ if dein#load_state('$HOME/.cache/dein')
   "call dein#add('Shougo/neosnippet-snippets')
   call dein#add('itchyny/lightline.vim')
   call dein#add('sainnhe/sonokai')
-  " call dein#add('Shougo/deoplete.nvim')
-  " call dein#add('lighttiger2505/deoplete-vim-lsp')
   call dein#add('prabirshrestha/async.vim')
-  " call dein#add('prabirshrestha/vim-lsp')
-  " call dein#add('mattn/vim-lsp-settings')
   call dein#add('neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' }) 
   call dein#add('tjdevries/coc-zsh')
   call dein#add('nvim-treesitter/nvim-treesitter')
@@ -40,10 +36,8 @@ if dein#load_state('$HOME/.cache/dein')
   call dein#add('yuki-ycino/fzf-preview.vim')
   call dein#add('kien/rainbow_parentheses.vim')
   call dein#add('Yggdroot/indentLine')
-  "call dein#add('preservim/nerdtree')
-  "call dein#add('Xuyuanp/nerdtree-git-plugin')
   call dein#add('rhysd/committia.vim')
-  "call dein#add('airblade/vim-gitgutter')
+  call dein#add('airblade/vim-gitgutter')
 
   " Required:
   call dein#end()
@@ -127,6 +121,11 @@ if dein#check_install()
   call dein#install()
 endif
 "End dein Scripts-------------------------
+
+highlight Normal ctermbg=NONE guibg=NONE
+highlight NonText ctermbg=NONE guibg=NONE
+highlight SpecialKey ctermbg=NONE guibg=NONE
+highlight EndOfBuffer ctermbg=NONE guibg=NONE
 
 set conceallevel=0
 let g:indentLine_enabled = 0

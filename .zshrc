@@ -141,9 +141,6 @@ zinit light-mode for \
   srijanshetty/zsh-pip-completion \
   hlissner/zsh-autopair
 
-zinit ice wait lucid atload"zicompinit; zicdreplay" blockf 
-zinit light b4b4r07/enhancd
-
 zinit ice lucid depth"1" blockf
 zinit light yuki-ycino/fzf-preview.zsh
 # source $(ghq root)/github.com/yuki-ycino/fzf-preview.zsh/fzf-preview.zsh

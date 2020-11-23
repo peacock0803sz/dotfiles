@@ -4,7 +4,6 @@ set number
 set clipboard+=unnamedplus
 set shiftwidth=2
 
-
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
@@ -44,7 +43,12 @@ if dein#load_state('$HOME/.cache/dein')
   call dein#save_state()
 endif
 
-let g:deoplete#enable_at_startup = 1
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+"End dein Scripts-------------------------
+
 let g:lightline = {
   \ 'colorscheme': 'sonokai',
   \ 'active': {
@@ -116,14 +120,9 @@ function! g:committia_hooks.edit_open(info)
   imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
 endfunction
 
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
-"End dein Scripts-------------------------
-
 highlight Normal ctermbg=NONE guibg=NONE
 highlight NonText ctermbg=NONE guibg=NONE
+highlight LineNr ctermbg=NONE guibg=NONE
 highlight SpecialKey ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
 

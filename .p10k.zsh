@@ -300,31 +300,33 @@
   #   typeset -g POWERLEVEL9K_DIR_CLASSES=(
   #     '~/work(|/*)'  WORK     ''
   #     '~(|/*)'       HOME     ''
-  #     '*'            DEFAULT  '')
+  #     '*'            DEFAULT  ''
+  #   )
   #
   # Whenever the current directory is ~/work or a subdirectory of ~/work, it gets styled with class
   # WORK or WORK_NOT_WRITABLE.
   #
   # Simply assigning classes to directories doesn't have any visible effects. It merely gives you an
   # option to define custom colors and icons for different directory classes.
-  #
-  #   # Styling for WORK.
-  #   typeset -g POWERLEVEL9K_DIR_WORK_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  #   typeset -g POWERLEVEL9K_DIR_WORK_FOREGROUND=31
-  #   typeset -g POWERLEVEL9K_DIR_WORK_SHORTENED_FOREGROUND=103
-  #   typeset -g POWERLEVEL9K_DIR_WORK_ANCHOR_FOREGROUND=39
-  #
-  #   # Styling for WORK_NOT_WRITABLE.
-  #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_FOREGROUND=31
-  #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_SHORTENED_FOREGROUND=103
-  #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_ANCHOR_FOREGROUND=39
+
+  # Styling for WORK.
+  typeset -g POWERLEVEL9K_DIR_WORK_VISUAL_IDENTIFIER_EXPANSION=''
+  typeset -g POWERLEVEL9K_DIR_WORK_FOREGROUND=39
+  typeset -g POWERLEVEL9K_DIR_WORK_SHORTENED_FOREGROUND=103
+  typeset -g POWERLEVEL9K_DIR_WORK_ANCHOR_FOREGROUND=39
+
+  # Styling for WORK_NOT_WRITABLE.
+  typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_VISUAL_IDENTIFIER_EXPANSION='!'
+  typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_FOREGROUND=red
+  typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_SHORTENED_FOREGROUND=red
+  typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_ANCHOR_FOREGROUND=red
   #
   # If a styling parameter isn't explicitly defined for some class, it falls back to the classless
   # parameter. For example, if POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_FOREGROUND is not set, it falls
   # back to POWERLEVEL9K_DIR_FOREGROUND.
-  #
-  typeset -g POWERLEVEL9K_DIR_CLASSES=()
+  typeset -g POWERLEVEL9K_DIR_CLASSES=(
+    "$GHQ_WORKDIR(|/*)" WORK 'WORK'
+  )
 
   # Custom prefix.
   # typeset -g POWERLEVEL9K_DIR_PREFIX='%fin '

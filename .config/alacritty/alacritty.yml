@@ -614,3 +614,30 @@ key_bindings:
   - { key: Y, mods: Alt, chars: "\x1by"}
   - { key: Z, mods: Alt, chars: "\x1bz"}
 
+  - { key: A, mods: Shift|Alt, chars: "\x1bA"}
+  - { key: B, mods: Shift|Alt, chars: "\x1bB"}
+  - { key: C, mods: Shift|Alt, chars: "\x1bC"}
+  - { key: D, mods: Shift|Alt, chars: "\x1bD"}
+  - { key: E, mods: Shift|Alt, chars: "\x1bE"}
+  - { key: F, mods: Shift|Alt, chars: "\x1bF"}
+  - { key: G, mods: Shift|Alt, chars: "\x1bG"}
+  - { key: H, mods: Shift|Alt, chars: "\x1bH"}
+  - { key: I, mods: Shift|Alt, chars: "\x1bI"}
+  - { key: J, mods: Shift|Alt, chars: "\x1bJ"}
+  - { key: K, mods: Shift|Alt, chars: "\x1bK"}
+  - { key: L, mods: Shift|Alt, chars: "\x1bL"}
+  - { key: M, mods: Shift|Alt, chars: "\x1bM"}
+  - { key: N, mods: Shift|Alt, chars: "\x1bN"}
+  - { key: O, mods: Shift|Alt, chars: "\x1bO"}
+  - { key: P, mods: Shift|Alt, chars: "\x1bP"}
+  - { key: Q, mods: Shift|Alt, chars: "\x1bQ"}
+  - { key: R, mods: Shift|Alt, chars: "\x1bR"}
+  - { key: S, mods: Shift|Alt, chars: "\x1bS"}
+  - { key: T, mods: Shift|Alt, chars: "\x1bT"}
+  - { key: U, mods: Shift|Alt, chars: "\x1bU"}
+  - { key: V, mods: Shift|Alt, chars: "\x1bV"}
+  - { key: W, mods: Shift|Alt, chars: "\x1bW"}
+  - { key: X, mods: Shift|Alt, chars: "\x1bX"}
+  - { key: Y, mods: Shift|Alt, chars: "\x1bY"}
+  - { key: Z, mods: Shift|Alt, chars: "\x1bZ"}
+

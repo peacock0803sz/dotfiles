@@ -15,7 +15,7 @@ Plug 'sainnhe/sonokai'
 Plug 'prabirshrestha/async.vim'
 Plug 'neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' } 
 Plug 'tjdevries/coc-zsh'
-Plug 'nvim-treesitter/nvim-treesitter'
+"Plug 'nvim-treesitter/nvim-treesitter'
 
 Plug 'junegunn/fzf', { 'build': './install --all', 'merged': 0 }
 Plug 'yuki-ycino/fzf-preview.vim'
@@ -104,4 +104,4 @@ highlight SpecialKey ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
 
 set conceallevel=0
-let g:indentLine_enabled = 0
+"let g:indentLine_enabled = 0

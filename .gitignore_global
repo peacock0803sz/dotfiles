@@ -75,6 +75,8 @@ $RECYCLE.BIN/
 
 ### https://raw.github.com/github/gitignore/18aa6d83774d514da479d73a4beb864cd4220231/Global/Vim.gitignore
 
+**/.vim/
+
 # Swap
 [._]*.s[a-v][a-z]
 !*.svg  # comment out if you don't need vector files
@@ -155,6 +157,9 @@ flycheck_*.el
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
+
+**/.idea/
+
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
@@ -222,5 +227,18 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+
+
+### https://raw.github.com/github/gitignore/18aa6d83774d514da479d73a4beb864cd4220231/Global/VisualStudioCode.gitignore
+
+.vscode/*
+# !.vscode/settings.json
+# !.vscode/tasks.json
+# !.vscode/launch.json
+# !.vscode/extensions.json
+# *.code-workspace
+
+# Local History for Visual Studio Code
+.history/
 
 

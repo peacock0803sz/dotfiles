@@ -100,6 +100,9 @@ if [[ "$(uname)" == 'Darwin' ]]; then
   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 fi
 
+# alias for terraform
+alias tf="terraform"
+
 # Go
 export GOPATH=~/go
 export PATH="$PATH:$GOPATH/bin"
@@ -203,3 +206,6 @@ export NVM_DIR="$HOME/.config/nvm"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+nvm use default --silent
+

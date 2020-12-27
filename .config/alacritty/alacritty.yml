@@ -19,7 +19,7 @@ window:
   # Specified in number of columns/lines, not pixels.
   # If both are `0`, this setting is ignored.
   dimensions:
-    columns: 200
+    columns: 215
     lines: 66
 
   # Window position (changes require restart)
@@ -132,7 +132,7 @@ font:
     style: Italic
 
   # Point size
-  size: 12.0
+  size: 14.0
 
   # # Offset is the extra space around each character. `offset.y` can be thought of
   # # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -613,4 +613,31 @@ key_bindings:
   - { key: X, mods: Alt, chars: "\x1bx"}
   - { key: Y, mods: Alt, chars: "\x1by"}
   - { key: Z, mods: Alt, chars: "\x1bz"}
+
+  - { key: A, mods: Shift|Alt, chars: "\x1bA"}
+  - { key: B, mods: Shift|Alt, chars: "\x1bB"}
+  - { key: C, mods: Shift|Alt, chars: "\x1bC"}
+  - { key: D, mods: Shift|Alt, chars: "\x1bD"}
+  - { key: E, mods: Shift|Alt, chars: "\x1bE"}
+  - { key: F, mods: Shift|Alt, chars: "\x1bF"}
+  - { key: G, mods: Shift|Alt, chars: "\x1bG"}
+  - { key: H, mods: Shift|Alt, chars: "\x1bH"}
+  - { key: I, mods: Shift|Alt, chars: "\x1bI"}
+  - { key: J, mods: Shift|Alt, chars: "\x1bJ"}
+  - { key: K, mods: Shift|Alt, chars: "\x1bK"}
+  - { key: L, mods: Shift|Alt, chars: "\x1bL"}
+  - { key: M, mods: Shift|Alt, chars: "\x1bM"}
+  - { key: N, mods: Shift|Alt, chars: "\x1bN"}
+  - { key: O, mods: Shift|Alt, chars: "\x1bO"}
+  - { key: P, mods: Shift|Alt, chars: "\x1bP"}
+  - { key: Q, mods: Shift|Alt, chars: "\x1bQ"}
+  - { key: R, mods: Shift|Alt, chars: "\x1bR"}
+  - { key: S, mods: Shift|Alt, chars: "\x1bS"}
+  - { key: T, mods: Shift|Alt, chars: "\x1bT"}
+  - { key: U, mods: Shift|Alt, chars: "\x1bU"}
+  - { key: V, mods: Shift|Alt, chars: "\x1bV"}
+  - { key: W, mods: Shift|Alt, chars: "\x1bW"}
+  - { key: X, mods: Shift|Alt, chars: "\x1bX"}
+  - { key: Y, mods: Shift|Alt, chars: "\x1bY"}
+  - { key: Z, mods: Shift|Alt, chars: "\x1bZ"}
 

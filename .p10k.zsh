@@ -51,13 +51,12 @@
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
-    example                 # show python version if exist ./venv
     # anaconda                # conda environment (https://conda.io/)
     # pyenv                   # python environment (https://github.com/pyenv/pyenv)
     # goenv                   # go environment (https://github.com/syndbg/goenv)
-    # nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
-    # nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
-    # nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
+    nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
+    nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
+    nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
     # node_version          # node.js version
     # go_version            # go version (https://golang.org)
     # rust_version          # rustc version (https://www.rust-lang.org)
@@ -65,7 +64,7 @@
     # php_version           # php version (https://www.php.net/)
     # laravel_version       # laravel php framework version (https://laravel.com/)
     # java_version          # java version (https://www.java.com/)
-    # package               # name@version from package.json (https://docs.npmjs.com/files/package.json)
+    package               # name@version from package.json (https://docs.npmjs.com/files/package.json)
     # rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
     # rvm                     # ruby version from rvm (https://rvm.io)
     # fvm                     # flutter version management (https://github.com/leoafarias/fvm)
@@ -205,7 +204,7 @@
 
   ##################################[ dir: current directory ]##################################
   # Default current directory color.
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=31
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=39
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
@@ -217,7 +216,7 @@
   # segment is always an anchor.
   typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=39
   # Display anchor directory segments in bold.
-  typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=false
   # Don't shorten directories that contain any of these files. They are anchors.
   local anchor_files=(
     .bzr
@@ -840,9 +839,11 @@
 
   ###[ virtualenv: python virtual environment (https://docs.python.org/3/library/venv.html) ]###
   # Python virtual environment color.
+
+  typeset -g POWERLEVEL9K_VIRTUALENV_GENERIC_NAMES=true
   typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=37
   # Don't show Python version next to the virtual environment name.
-  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
+  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
   # If set to "false", won't show virtualenv if pyenv is already shown.
   # If set to "if-different", won't show virtualenv if it's the same as pyenv.
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_WITH_PYENV=false
@@ -932,7 +933,7 @@
   # $(nodenv version-name) == $(nodenv global).
   typeset -g POWERLEVEL9K_NODENV_PROMPT_ALWAYS_SHOW=false
   # If set to false, hide node version if it's equal to "system".
-  typeset -g POWERLEVEL9K_NODENV_SHOW_SYSTEM=true
+  typeset -g POWERLEVEL9K_NODENV_SHOW_SYSTEM=false
   # Custom icon.
   # typeset -g POWERLEVEL9K_NODENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
@@ -941,6 +942,9 @@
   typeset -g POWERLEVEL9K_NVM_FOREGROUND=70
   # Custom icon.
   # typeset -g POWERLEVEL9K_NVM_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_NVM_PROMPT_ALWAYS_SHOW=false
+  # If set to false, hide node version if it's equal to "system".
+  typeset -g POWERLEVEL9K_NVM_SHOW_SYSTEM=false
 
   ############[ nodeenv: node.js environment (https://github.com/ekalinin/nodeenv) ]############
   # Nodeenv color.
@@ -1499,31 +1503,31 @@
   # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS. It displays an icon and orange text greeting the user.
   #
   # Type `p10k help segment` for documentation and a more sophisticated example.
-  typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=cyan
-  function prompt_example() {
-    if [ -e './venv/' ]; then
-      p10k segment -f 208 -i "$(./venv/bin/python -V)" -t ''
-    fi
-  }
+  # typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=cyan
+  # function prompt_example() {
+  #   if [ -e './venv/' ]; then
+  #     p10k segment -f 208 -i "$(./venv/bin/python -V)" -t ''
+  #   fi
+  # }
 
-  # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
-  # is to generate the prompt segment for display in instant prompt. See
-  # https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.
-  #
-  # Powerlevel10k will call instant_prompt_* at the same time as the regular prompt_* function
-  # and will record all `p10k segment` calls it makes. When displaying instant prompt, Powerlevel10k
-  # will replay these calls without actually calling instant_prompt_*. It is imperative that
-  # instant_prompt_* always makes the same `p10k segment` calls regardless of environment. If this
-  # rule is not observed, the content of instant prompt will be incorrect.
-  #
-  # Usually, you should either not define instant_prompt_* or simply call prompt_* from it. If
-  # instant_prompt_* is not defined for a segment, the segment won't be shown in instant prompt.
-  function instant_prompt_example() {
-    # Since prompt_example always makes the same `p10k segment` calls, we can call it from
-    # instant_prompt_example. This will give us the same `example` prompt segment in the instant
-    # and regular prompts.
-    prompt_example
-  }
+  # # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
+  # # is to generate the prompt segment for display in instant prompt. See
+  # # https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.
+  # #
+  # # Powerlevel10k will call instant_prompt_* at the same time as the regular prompt_* function
+  # # and will record all `p10k segment` calls it makes. When displaying instant prompt, Powerlevel10k
+  # # will replay these calls without actually calling instant_prompt_*. It is imperative that
+  # # instant_prompt_* always makes the same `p10k segment` calls regardless of environment. If this
+  # # rule is not observed, the content of instant prompt will be incorrect.
+  # #
+  # # Usually, you should either not define instant_prompt_* or simply call prompt_* from it. If
+  # # instant_prompt_* is not defined for a segment, the segment won't be shown in instant prompt.
+  # function instant_prompt_example() {
+  #   # Since prompt_example always makes the same `p10k segment` calls, we can call it from
+  #   # instant_prompt_example. This will give us the same `example` prompt segment in the instant
+  #   # and regular prompts.
+  #   prompt_example
+  # }
 
   # User-defined prompt segments can be customized the same way as built-in segments.
   # typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=208

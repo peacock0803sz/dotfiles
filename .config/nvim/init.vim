@@ -28,8 +28,6 @@ Plug 'neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' }
 Plug 'tjdevries/coc-zsh'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 
-Plug 'junegunn/fzf', { 'build': './install --all', 'merged': 0 }
-
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'rhysd/committia.vim'
@@ -212,29 +210,28 @@ if has('nvim')
   nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
   nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
   lua <<EOF
+  -- Built-in actions
+  local transform_mod = require('telescope.actions.mt').transform_mod
+
   local actions = require('telescope.actions')
   -- Global remapping
   ------------------------------
   require('telescope').setup{
     defaults = {
+      set_env = { ['COLORTERM'] = 'truecolor' },
       mappings = {
         i = {
-          -- To disable a keymap, put [map] = false
-          -- So, to not map "<C-n>", just put
           ["<c-x>"] = false,
-          -- Otherwise, just set the mapping to the function that you want it to be.
           ["<C-i>"] = actions.goto_file_selection_split,
-          -- Add up multiple actions
           ["<CR>"] = actions.goto_file_selection_edit + actions.center,
         },
         n = {
           ["<esc>"] = actions.close,
-        }
-      }
+        },
+      },
     }
   }
 EOF
-
   
   " treesitter
   lua <<EOF

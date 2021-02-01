@@ -211,15 +211,39 @@ if has('nvim')
   nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
   nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
   nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+  lua <<EOF
+  local actions = require('telescope.actions')
+  -- Global remapping
+  ------------------------------
+  require('telescope').setup{
+    defaults = {
+      mappings = {
+        i = {
+          -- To disable a keymap, put [map] = false
+          -- So, to not map "<C-n>", just put
+          ["<c-x>"] = false,
+          -- Otherwise, just set the mapping to the function that you want it to be.
+          ["<C-i>"] = actions.goto_file_selection_split,
+          -- Add up multiple actions
+          ["<CR>"] = actions.goto_file_selection_edit + actions.center,
+        },
+        n = {
+          ["<esc>"] = actions.close,
+        }
+      }
+    }
+  }
+EOF
+
   
   " treesitter
   lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-  },
-}
+  require'nvim-treesitter.configs'.setup {
+    ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    highlight = {
+      enable = true,              -- false will disable the whole extension
+    },
+  }
 EOF
 endif
 

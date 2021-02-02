@@ -209,39 +209,7 @@ if has('nvim')
   nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
   nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
   nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-  lua <<EOF
-  -- Built-in actions
-  local transform_mod = require('telescope.actions.mt').transform_mod
-
-  local actions = require('telescope.actions')
-  -- Global remapping
-  ------------------------------
-  require('telescope').setup{
-    defaults = {
-      set_env = { ['COLORTERM'] = 'truecolor' },
-      mappings = {
-        i = {
-          ["<c-x>"] = false,
-          ["<C-i>"] = actions.goto_file_selection_split,
-          ["<CR>"] = actions.goto_file_selection_edit + actions.center,
-        },
-        n = {
-          ["<esc>"] = actions.close,
-        },
-      },
-    }
-  }
-EOF
-  
-  " treesitter
-  lua <<EOF
-  require'nvim-treesitter.configs'.setup {
-    ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    highlight = {
-      enable = true,              -- false will disable the whole extension
-    },
-  }
-EOF
+  lua require('init')
 endif
 
 " committia

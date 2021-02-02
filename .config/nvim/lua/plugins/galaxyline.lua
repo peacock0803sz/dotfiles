@@ -14,6 +14,7 @@ BufferNumber = buffer.get_buffer_number
 FileTypeName = buffer.get_buffer_filetype
 -- Git Provider
 GitBranch = vcs.get_git_branch
+IsGitRepo = vcs.chech_git_workspace
 DiffAdd = vcs.diff_add             -- support vim-gitgutter vim-signify gitsigns
 DiffModified = vcs.diff_modified   -- support vim-gitgutter vim-signify gitsigns
 DiffRemove = vcs.diff_remove       -- support vim-gitgutter vim-signify gitsigns
@@ -136,7 +137,7 @@ gls.left[4] = {
         provider = get_current_file_name,
         condition = buffer_not_empty,
         highlight = {colors.fg, colors.section_bg, 'bold'},
-        -- separator = '|',
+        separator = '|',
         separator_highlight = {colors.section_bg, colors.bg}
     }
 }
@@ -176,6 +177,21 @@ gls.left[13] = {
         separator_highlight = {colors.section_bg, colors.bg}
     }
 }
+gls.left[14] = {
+    Space = {
+        provider = function() return ' ' end,
+        highlight = {colors.section_bg, colors.bg}
+    }
+}
+gls.left[15] = {
+    DiagnosticInfo = {
+        provider = 'DiagnosticHint',
+        icon = '!',
+        highlight = {colors.green, colors.section_bg},
+        separator = ' ',
+        separator_highlight = {colors.section_bg, colors.bg}
+    }
+}
 
 gls.right[1] = {
     DiffAdd = {
@@ -201,3 +217,44 @@ gls.right[3] = {
         highlight = {colors.red1, colors.bg}
     }
 }
+
+gls.right[4] = {
+    Space = {
+        provider = function() return ' ' end,
+        highlight = {colors.section_bg, colors.bg}
+    }
+}
+gls.right[5] = {
+    GitIcon = {
+        provider = function() return '' end,
+        condition = buffer_not_empty and IsGitRepo,
+        highlight = {colors.middlegrey, colors.bg}
+    }
+}
+gls.right[6] = {
+    GitBranch = {
+        provider = 'GitBranch',
+        condition = buffer_not_empty,
+        highlight = {colors.green, colors.bg, 'bold'}
+    }
+}
+gls.right[7] = {
+    PerCent = {
+        provider = 'LinePercent',
+        separator = ' ',
+        separator_highlight = {colors.blue, colors.bg},
+        highlight = {colors.gray2, colors.blue}
+    }
+}
+
+gls.short_line_right[1] = {
+    BufferIcon = {
+        provider = 'BufferIcon',
+        highlight = {colors.yellow, colors.section_bg},
+        separator = '',
+        separator_highlight = {colors.section_bg, colors.bg}
+    }
+}
+
+-- Force manual load so that nvim boots with a status line
+gl.load_galaxyline()

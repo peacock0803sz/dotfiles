@@ -21,7 +21,9 @@ syntax enable
 " plugins
 call plug#begin('~/.vim/plugged')
 
-Plug 'itchyny/lightline.vim'
+"Plug 'itchyny/lightline.vim'
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'sainnhe/sonokai'
 Plug 'prabirshrestha/async.vim'
 Plug 'neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' } 
@@ -47,15 +49,17 @@ call plug#end()
 autocmd BufWritePre *.py execute ':Black'
 let g:black_linelength=100
 
-let g:lightline = {
-  \ 'colorscheme': 'sonokai',
-  \ 'active': {
-    \ 'left': [[ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'filename', 'modified' ]],
-    \ 'right': [[ 'lineinfo' ], [ 'fileencoding', 'filetype', ]],
-  \ },
-  \ 'component': {'charvaluehex': '0x%B'},
-  \ 'component_function': {'gitbranch': 'FugitiveHead'},
-\ }
+set noshowmode
+lua require('plugins.galaxyline')
+" let g:lightline = {
+"   \ 'colorscheme': 'sonokai',
+"   \ 'active': {
+"     \ 'left': [[ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'filename', 'modified' ]],
+"     \ 'right': [[ 'lineinfo' ], [ 'fileencoding', 'filetype', ]],
+"   \ },
+"   \ 'component': {'charvaluehex': '0x%B'},
+"   \ 'component_function': {'gitbranch': 'FugitiveHead'},
+" \ }
 
 " Colorscheme
 " important!!
@@ -64,7 +68,7 @@ set termguicolors
 " the configuration options should be placed before `colorscheme sonokai`
 let g:sonokai_style = 'andromeda'
 let g:sonokai_enable_italic = 1
-let g:sonokai_disable_italic_comment = 1
+let g:sonokai_enable_italic = 1
 colorscheme sonokai
 
 " tab setting
@@ -209,7 +213,7 @@ if has('nvim')
   nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
   nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
   nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-  lua require('init')
+  lua require('plugins')
 endif
 
 " committia

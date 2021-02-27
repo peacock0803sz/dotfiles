@@ -8,11 +8,6 @@ require('telescope').setup{
   defaults = {
     set_env = { ['COLORTERM'] = 'truecolor' },
     mappings = {
-      i = {
-        ["<c-x>"] = false,
-        ["<C-i>"] = actions.goto_file_selection_split,
-        ["<CR>"] = actions.goto_file_selection_edit + actions.center,
-      },
       n = {
         ["<esc>"] = actions.close,
       },

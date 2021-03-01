@@ -89,6 +89,34 @@ local function get_current_file_name()
     return file .. ' '
 end
 
+
+local function lsp_status(status)
+    shorter_stat = ''
+    for match in string.gmatch(status, "[^%s]+")  do
+        err_warn = string.find(match, "^[WE]%d+", 0)
+        if not err_warn then
+            shorter_stat = shorter_stat .. ' ' .. match
+        end
+    end
+    return shorter_stat
+end
+
+
+local function get_coc_lsp()
+  local status = vim.fn['coc#status']()
+  if not status or status == '' then
+      return ''
+  end
+  return lsp_status(status)
+end
+
+local function lsp_info()
+  if vim.fn.exists('*coc#rpc#start_server') == 1 then
+    return get_coc_lsp()
+    end
+  return ''
+end
+
 gls.left[1] = {
     ViMode = {
         provider = function()
@@ -114,34 +142,37 @@ gls.left[1] = {
         highlight = {colors.bg, colors.bg, 'bold'}
     }
 }
+
 gls.left[2] = {
-    FileIcon = {
-        provider = {function() return '  ' end, 'FileIcon'},
-        condition = buffer_not_empty,
-        highlight = {
-            require('galaxyline.provider_fileinfo').get_file_icon,
-            colors.section_bg
-        },
-	separator = ' '
+    Space = {
+        provider = function() return ' ' end,
+        highlight = {colors.fg, colors.bg}
     }
 }
+
 gls.left[3] = {
-    FileType = {
-        provider = FileTypeName,
-        highlight = {colors.fg, colors.section_bg},
-	separator = ' | '
-    }
-}
-gls.left[4] = {
     FileName = {
-        provider = get_current_file_name,
+        provider = FileName,
         condition = buffer_not_empty,
         highlight = {colors.fg, colors.section_bg, 'bold'},
         separator = '|',
         separator_highlight = {colors.section_bg, colors.bg}
     }
 }
+gls.left[4] = {
+  LspInfo = {
+    provider = lsp_info,
+    highlight = {colors.fg, colors.bg},
+    separator = '|'
+  }
+}
 
+gls.left[8] = {
+    Space = {
+        provider = function() return ' ' end,
+        highlight = {colors.fg, colors.bg}
+    }
+}
 gls.left[9] = {
     DiagnosticError = {
         provider = 'DiagnosticError',

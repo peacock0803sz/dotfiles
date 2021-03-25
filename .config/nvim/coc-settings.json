@@ -10,5 +10,21 @@
   	"--ignore-missing-imports",
   	"--follow-imports=silent",
   	"--show-column-numbers"
-  ]
+  ],
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": [
+        "terraform",
+        "tf"
+       ],
+      "initializationOptions": {},
+      "settings": {}
+     },
+    "efm": {
+    "command": "efm-langserver",
+    "args": [],
+    "filetypes": ["vim", "eruby", "markdown", "yaml", "html"]
+    }
+  }
 }

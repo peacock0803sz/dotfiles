@@ -21,20 +21,27 @@ syntax enable
 " plugins
 call plug#begin('~/.vim/plugged')
 
-Plug 'itchyny/lightline.vim'
+"Plug 'itchyny/lightline.vim'
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'sainnhe/sonokai'
 Plug 'prabirshrestha/async.vim'
 Plug 'neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' } 
 Plug 'tjdevries/coc-zsh'
-"Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 
-Plug 'junegunn/fzf', { 'build': './install --all', 'merged': 0 }
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'rhysd/committia.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'psf/black', { 'branch': 'stable' }
+
+" Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+Plug 'lambdalisue/fern.vim'
 
 call plug#end()
 
@@ -42,15 +49,17 @@ call plug#end()
 autocmd BufWritePre *.py execute ':Black'
 let g:black_linelength=100
 
-let g:lightline = {
-  \ 'colorscheme': 'sonokai',
-  \ 'active': {
-    \ 'left': [[ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'filename', 'modified' ]],
-    \ 'right': [[ 'lineinfo' ], [ 'fileencoding', 'filetype', ]],
-  \ },
-  \ 'component': {'charvaluehex': '0x%B'},
-  \ 'component_function': {'gitbranch': 'FugitiveHead'},
-\ }
+set noshowmode
+lua require('plugins.galaxyline')
+" let g:lightline = {
+"   \ 'colorscheme': 'sonokai',
+"   \ 'active': {
+"     \ 'left': [[ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'filename', 'modified' ]],
+"     \ 'right': [[ 'lineinfo' ], [ 'fileencoding', 'filetype', ]],
+"   \ },
+"   \ 'component': {'charvaluehex': '0x%B'},
+"   \ 'component_function': {'gitbranch': 'FugitiveHead'},
+" \ }
 
 " Colorscheme
 " important!!
@@ -59,7 +68,7 @@ set termguicolors
 " the configuration options should be placed before `colorscheme sonokai`
 let g:sonokai_style = 'andromeda'
 let g:sonokai_enable_italic = 1
-let g:sonokai_disable_italic_comment = 1
+let g:sonokai_enable_italic = 1
 colorscheme sonokai
 
 " tab setting
@@ -115,8 +124,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-" xmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>fo  <Plug>(coc-format-selected)
+nmap <leader>fo  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -198,25 +207,14 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-" Fzf-preview.vim
-nmap <Leader>f [fzf-p]
-xmap <Leader>f [fzf-p]
-
-nnoremap <silent> [fzf-p]p     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
-nnoremap <silent> [fzf-p]gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
-nnoremap <silent> [fzf-p]ga    :<C-u>CocCommand fzf-preview.GitActions<CR>
-nnoremap <silent> [fzf-p]b     :<C-u>CocCommand fzf-preview.Buffers<CR>
-nnoremap <silent> [fzf-p]B     :<C-u>CocCommand fzf-preview.AllBuffers<CR>
-nnoremap <silent> [fzf-p]o     :<C-u>CocCommand fzf-preview.FromResources buffer project_mru<CR>
-nnoremap <silent> [fzf-p]<C-o> :<C-u>CocCommand fzf-preview.Jumps<CR>
-nnoremap <silent> [fzf-p]g;    :<C-u>CocCommand fzf-preview.Changes<CR>
-nnoremap <silent> [fzf-p]/     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
-nnoremap <silent> [fzf-p]*     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
-nnoremap          [fzf-p]gr    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
-xnoremap          [fzf-p]gr    "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
-nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
-nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
-nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
+if has('nvim')
+  " telescope.nvim
+  nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+  nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+  nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+  nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+  lua require('plugins')
+endif
 
 " committia
 let g:committia_hooks = {}
@@ -241,5 +239,5 @@ highlight LineNr ctermbg=NONE guibg=NONE
 highlight SpecialKey ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
 
-set conceallevel=0
+autocmd Filetype json setl conceallevel=0 " It doesn't works
 "let g:indentLine_enabled = 0

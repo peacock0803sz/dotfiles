@@ -108,10 +108,10 @@
   )
 
   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
-  typeset -g POWERLEVEL9K_MODE=ascii
+  typeset -g POWERLEVEL9K_MODE=nerdfont-complete
   # When set to `moderate`, some icons will have an extra space after them. This is meant to avoid
   # icon overlap when using non-monospace fonts. When set to `none`, spaces are not added.
-  typeset -g POWERLEVEL9K_ICON_PADDING=none
+  typeset -g POWERLEVEL9K_ICON_PADDING=moderate
 
   # Basic style options that define the overall look of your prompt. You probably don't want to
   # change them.
@@ -154,10 +154,10 @@
   # probably want to set POWERLEVEL9K_PROMPT_ADD_NEWLINE=false above and
   # POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_CHAR=' ' below.
   typeset -g POWERLEVEL9K_SHOW_RULER=false
-  typeset -g POWERLEVEL9K_RULER_CHAR='-'        # reasonable alternative: '·'
+  typeset -g POWERLEVEL9K_RULER_CHAR='─'        # reasonable alternative: '·'
   typeset -g POWERLEVEL9K_RULER_FOREGROUND=242
 
-  # Filler between left and right prompt on the first prompt line. You can set it to '·' or '-'
+  # Filler between left and right prompt on the first prompt line. You can set it to '·' or '─'
   # to make it easier to see the alignment between left and right prompt and to separate prompt
   # from command output. It serves the same purpose as ruler (see above) without increasing
   # the number of prompt lines. You'll probably want to set POWERLEVEL9K_SHOW_RULER=false
@@ -180,8 +180,8 @@
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
   typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=
-  # Make the icon bold.
-  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='${P9K_CONTENT}'
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='⭐'
 
   ################################[ prompt_char: prompt symbol ]################################
   # Green prompt symbol if the last command succeeded.
@@ -204,7 +204,7 @@
 
   ##################################[ dir: current directory ]##################################
   # Default current directory color.
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=39
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=31
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
@@ -274,12 +274,12 @@
   # the full directory that was used in previous commands.
   typeset -g POWERLEVEL9K_DIR_HYPERLINK=false
 
-  # Enable special styling for non-writable directories. See POWERLEVEL9K_LOCK_ICON and
-  # POWERLEVEL9K_DIR_CLASSES below.
-  typeset -g POWERLEVEL9K_DIR_SHOW_WRITABLE=v2
+  # Enable special styling for non-writable and non-existent directories. See POWERLEVEL9K_LOCK_ICON
+  # and POWERLEVEL9K_DIR_CLASSES below.
+  typeset -g POWERLEVEL9K_DIR_SHOW_WRITABLE=v3
 
-  # The default icon shown next to non-writable directories when POWERLEVEL9K_DIR_SHOW_WRITABLE is
-  # set to v2.
+  # The default icon shown next to non-writable and non-existent directories when
+  # POWERLEVEL9K_DIR_SHOW_WRITABLE is set to v3.
   # typeset -g POWERLEVEL9K_LOCK_ICON='⭐'
 
   # POWERLEVEL9K_DIR_CLASSES allows you to specify custom icons and colors for different
@@ -292,8 +292,8 @@
   #
   # Triplets are tried in order. The first triplet whose pattern matches $PWD wins.
   #
-  # If POWERLEVEL9K_DIR_SHOW_WRITABLE is set to v2 and the current directory is not writable,
-  # its class gets suffix _NOT_WRITABLE.
+  # If POWERLEVEL9K_DIR_SHOW_WRITABLE is set to v3, non-writable and non-existent directories
+  # acquire class suffix _NOT_WRITABLE and NON_EXISTENT respectively.
   #
   # For example, given these settings:
   #
@@ -302,8 +302,9 @@
   #     '~(|/*)'       HOME     ''
   #     '*'            DEFAULT  '')
   #
-  # Whenever the current directory is ~/work or a subdirectory of ~/work, it gets styled with class
-  # WORK or WORK_NOT_WRITABLE.
+  # Whenever the current directory is ~/work or a subdirectory of ~/work, it gets styled with one
+  # of the following classes depending on its writability and existence: WORK, WORK_NOT_WRITABLE or
+  # WORK_NON_EXISTENT.
   #
   # Simply assigning classes to directories doesn't have any visible effects. It merely gives you an
   # option to define custom colors and icons for different directory classes.
@@ -319,6 +320,12 @@
   #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_FOREGROUND=31
   #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_SHORTENED_FOREGROUND=103
   #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_ANCHOR_FOREGROUND=39
+  #
+  #   # Styling for WORK_NON_EXISTENT.
+  #   typeset -g POWERLEVEL9K_DIR_WORK_NON_EXISTENT_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  #   typeset -g POWERLEVEL9K_DIR_WORK_NON_EXISTENT_FOREGROUND=31
+  #   typeset -g POWERLEVEL9K_DIR_WORK_NON_EXISTENT_SHORTENED_FOREGROUND=103
+  #   typeset -g POWERLEVEL9K_DIR_WORK_NON_EXISTENT_ANCHOR_FOREGROUND=39
   #
   # If a styling parameter isn't explicitly defined for some class, it falls back to the classless
   # parameter. For example, if POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_FOREGROUND is not set, it falls
@@ -339,7 +346,7 @@
 
   # Formatter for Git status.
   #
-  # Example output: master <42>42 *42 merge ~42 +42 !42 ?42.
+  # Example output: master ⇣42⇡42 *42 merge ~42 +42 !42 ?42.
   #
   # You can edit the function to customize how Git status looks.
   #
@@ -372,41 +379,49 @@
     fi
 
     local res
-    local where  # branch or tag
+
     if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
-      res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}"
-      where=${(V)VCS_STATUS_LOCAL_BRANCH}
-    elif [[ -n $VCS_STATUS_TAG ]]; then
-      res+="${meta}#"
-      where=${(V)VCS_STATUS_TAG}
+      local branch=${(V)VCS_STATUS_LOCAL_BRANCH}
+      # If local branch name is at most 32 characters long, show it in full.
+      # Otherwise show the first 12 … the last 12.
+      # Tip: To always show local branch name in full without truncation, delete the next line.
+      (( $#branch > 32 )) && branch[13,-13]="…"  # <-- this line
+      res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
     fi
 
-    # If local branch name or tag is at most 32 characters long, show it in full.
-    # Otherwise show the first 12 .. the last 12.
-    # Tip: To always show local branch name in full without truncation, delete the next line.
-    (( $#where > 32 )) && where[13,-13]=".."
+    if [[ -n $VCS_STATUS_TAG
+          # Show tag only if not on a branch.
+          # Tip: To always show tag, delete the next line.
+          && -z $VCS_STATUS_LOCAL_BRANCH  # <-- this line
+        ]]; then
+      local tag=${(V)VCS_STATUS_TAG}
+      # If tag name is at most 32 characters long, show it in full.
+      # Otherwise show the first 12 … the last 12.
+      # Tip: To always show tag name in full without truncation, delete the next line.
+      (( $#tag > 32 )) && tag[13,-13]="…"  # <-- this line
+      res+="${meta}#${clean}${tag//\%/%%}"
+    fi
 
-    res+="${clean}${where//\%/%%}"  # escape %
-
-    # Display the current Git commit if there is no branch or tag.
-    # Tip: To always display the current Git commit, remove `[[ -z $where ]] &&` from the next line.
-    [[ -z $where ]] && res+="${meta}@${clean}${VCS_STATUS_COMMIT[1,8]}"
+    # Display the current Git commit if there is no branch and no tag.
+    # Tip: To always display the current Git commit, delete the next line.
+    [[ -z $VCS_STATUS_LOCAL_BRANCH && -z $VCS_STATUS_LOCAL_BRANCH ]] &&  # <-- this line
+      res+="${meta}@${clean}${VCS_STATUS_COMMIT[1,8]}"
 
     # Show tracking branch name if it differs from local branch.
     if [[ -n ${VCS_STATUS_REMOTE_BRANCH:#$VCS_STATUS_LOCAL_BRANCH} ]]; then
-      res+="${meta}:${clean}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}"  # escape %
+      res+="${meta}:${clean}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}"
     fi
 
-    # <42 if behind the remote.
-    (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${clean}<${VCS_STATUS_COMMITS_BEHIND}"
-    # >42 if ahead of the remote; no leading space if also behind the remote: <42>42.
+    # ⇣42 if behind the remote.
+    (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
+    # ⇡42 if ahead of the remote; no leading space if also behind the remote: ⇣42⇡42.
     (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && res+=" "
-    (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean}>${VCS_STATUS_COMMITS_AHEAD}"
-    # <-42 if behind the push remote.
-    (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${clean}<-${VCS_STATUS_PUSH_COMMITS_BEHIND}"
+    (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean}⇡${VCS_STATUS_COMMITS_AHEAD}"
+    # ⇠42 if behind the push remote.
+    (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
     (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" "
-    # ->42 if ahead of the push remote; no leading space if also behind: <-42->42.
-    (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}->${VCS_STATUS_PUSH_COMMITS_AHEAD}"
+    # ⇢42 if ahead of the push remote; no leading space if also behind: ⇠42⇢42.
+    (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}⇢${VCS_STATUS_PUSH_COMMITS_AHEAD}"
     # *42 if have stashes.
     (( VCS_STATUS_STASHES        )) && res+=" ${clean}*${VCS_STATUS_STASHES}"
     # 'merge' if the repo is in an unusual state.
@@ -421,12 +436,12 @@
     # See POWERLEVEL9K_VCS_UNTRACKED_ICON above if you want to use a different icon.
     # Remove the next line if you don't want to see untracked files at all.
     (( VCS_STATUS_NUM_UNTRACKED  )) && res+=" ${untracked}${(g::)POWERLEVEL9K_VCS_UNTRACKED_ICON}${VCS_STATUS_NUM_UNTRACKED}"
-    # "-" if the number of unstaged files is unknown. This can happen due to
+    # "─" if the number of unstaged files is unknown. This can happen due to
     # POWERLEVEL9K_VCS_MAX_INDEX_SIZE_DIRTY (see below) being set to a non-negative number lower
     # than the number of files in the Git index, or due to bash.showDirtyState being set to false
     # in the repository config. The number of staged and untracked files may also be unknown
     # in this case.
-    (( VCS_STATUS_HAS_UNSTAGED == -1 )) && res+=" ${modified}-"
+    (( VCS_STATUS_HAS_UNSTAGED == -1 )) && res+=" ${modified}─"
 
     typeset -g my_git_format=$res
   }
@@ -482,32 +497,32 @@
   # it will signify success by turning green.
   typeset -g POWERLEVEL9K_STATUS_OK=false
   typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=70
-  typeset -g POWERLEVEL9K_STATUS_OK_VISUAL_IDENTIFIER_EXPANSION='ok'
+  typeset -g POWERLEVEL9K_STATUS_OK_VISUAL_IDENTIFIER_EXPANSION='✔'
 
   # Status when some part of a pipe command fails but the overall exit status is zero. It may look
   # like this: 1|0.
   typeset -g POWERLEVEL9K_STATUS_OK_PIPE=true
   typeset -g POWERLEVEL9K_STATUS_OK_PIPE_FOREGROUND=70
-  typeset -g POWERLEVEL9K_STATUS_OK_PIPE_VISUAL_IDENTIFIER_EXPANSION='ok'
+  typeset -g POWERLEVEL9K_STATUS_OK_PIPE_VISUAL_IDENTIFIER_EXPANSION='✔'
 
   # Status when it's just an error code (e.g., '1'). No need to show it if prompt_char is enabled as
   # it will signify error by turning red.
   typeset -g POWERLEVEL9K_STATUS_ERROR=false
   typeset -g POWERLEVEL9K_STATUS_ERROR_FOREGROUND=160
-  typeset -g POWERLEVEL9K_STATUS_ERROR_VISUAL_IDENTIFIER_EXPANSION='err'
+  typeset -g POWERLEVEL9K_STATUS_ERROR_VISUAL_IDENTIFIER_EXPANSION='✘'
 
   # Status when the last command was terminated by a signal.
   typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL=true
   typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_FOREGROUND=160
   # Use terse signal names: "INT" instead of "SIGINT(2)".
   typeset -g POWERLEVEL9K_STATUS_VERBOSE_SIGNAME=false
-  typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_VISUAL_IDENTIFIER_EXPANSION=
+  typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_VISUAL_IDENTIFIER_EXPANSION='✘'
 
   # Status when some part of a pipe command fails and the overall exit status is also non-zero.
   # It may look like this: 1|0.
   typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE=true
   typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_FOREGROUND=160
-  typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_VISUAL_IDENTIFIER_EXPANSION='err'
+  typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_VISUAL_IDENTIFIER_EXPANSION='✘'
 
   ###################[ command_execution_time: duration of the last command ]###################
   # Show duration of the last command if takes at least this many seconds.
@@ -585,7 +600,7 @@
   typeset -g POWERLEVEL9K_ASDF_SHOW_SYSTEM=true
 
   # If set to non-empty value, hide tools unless there is a file matching the specified file pattern
-  # in the current directory, or its parent diretory, or its grandparent directory, and so on.
+  # in the current directory, or its parent directory, or its grandparent directory, and so on.
   #
   # Note: If this parameter is set to empty value, it won't hide tools.
   # Note: SHOW_ON_UPGLOB isn't specific to asdf. It works with all prompt segments.
@@ -784,11 +799,11 @@
   ###########[ timewarrior: timewarrior tracking status (https://timewarrior.net/) ]############
   # Timewarrior color.
   typeset -g POWERLEVEL9K_TIMEWARRIOR_FOREGROUND=110
-  # If the tracked task is longer than 24 characters, truncate and append "..".
+  # If the tracked task is longer than 24 characters, truncate and append "…".
   # Tip: To always display tasks without truncation, delete the following parameter.
   # Tip: To hide task names and display just the icon when time tracking is enabled, set the
   # value of the following parameter to "".
-  typeset -g POWERLEVEL9K_TIMEWARRIOR_CONTENT_EXPANSION='${P9K_CONTENT:0:24}${${P9K_CONTENT:24}:+..}'
+  typeset -g POWERLEVEL9K_TIMEWARRIOR_CONTENT_EXPANSION='${P9K_CONTENT:0:24}${${P9K_CONTENT:24}:+…}'
 
   # Custom icon.
   # typeset -g POWERLEVEL9K_TIMEWARRIOR_VISUAL_IDENTIFIER_EXPANSION='⭐'
@@ -796,7 +811,7 @@
   ##############[ taskwarrior: taskwarrior task count (https://taskwarrior.org/) ]##############
   # Taskwarrior color.
   typeset -g POWERLEVEL9K_TASKWARRIOR_FOREGROUND=74
-  
+
   # Taskwarrior segment format. The following parameters are available within the expansion.
   #
   # - P9K_TASKWARRIOR_PENDING_COUNT   The number of pending tasks: `task +PENDING count`.
@@ -1411,7 +1426,7 @@
   typeset -g POWERLEVEL9K_VPN_IP_CONTENT_EXPANSION=
   # Regular expression for the VPN network interface. Run `ifconfig` or `ip -4 a show` while on VPN
   # to see the name of the interface.
-  typeset -g POWERLEVEL9K_VPN_IP_INTERFACE='(gpd|wg|(.*tun))[0-9]*'
+  typeset -g POWERLEVEL9K_VPN_IP_INTERFACE='(gpd|wg|(.*tun)|tailscale)[0-9]*'
   # If set to true, show one segment per matching network interface. If set to false, show only
   # one segment corresponding to the first matching network interface.
   # Tip: If you set it to true, you'll probably want to unset POWERLEVEL9K_VPN_IP_CONTENT_EXPANSION.
@@ -1432,10 +1447,10 @@
   #   P9K_IP_TX_BYTES   | total number of bytes sent
   #   P9K_IP_RX_RATE    | receive rate (since last prompt)
   #   P9K_IP_TX_RATE    | send rate (since last prompt)
-  typeset -g POWERLEVEL9K_IP_CONTENT_EXPANSION='$P9K_IP_IP${P9K_IP_RX_RATE:+ %70F<$P9K_IP_RX_RATE}${P9K_IP_TX_RATE:+ %215F>$P9K_IP_TX_RATE}'
+  typeset -g POWERLEVEL9K_IP_CONTENT_EXPANSION='$P9K_IP_IP${P9K_IP_RX_RATE:+ %70F⇣$P9K_IP_RX_RATE}${P9K_IP_TX_RATE:+ %215F⇡$P9K_IP_TX_RATE}'
   # Show information for the first network interface whose name matches this regular expression.
   # Run `ifconfig` or `ip -4 a show` to see the names of all network interfaces.
-  typeset -g POWERLEVEL9K_IP_INTERFACE='e.*'
+  typeset -g POWERLEVEL9K_IP_INTERFACE='[ew].*'
   # Custom icon.
   # typeset -g POWERLEVEL9K_IP_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
@@ -1454,7 +1469,7 @@
   # Show battery in yellow when it's discharging.
   typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND=178
   # Battery pictograms going from low to high level of charge.
-  typeset -g POWERLEVEL9K_BATTERY_STAGES=('battery')
+  typeset -g POWERLEVEL9K_BATTERY_STAGES='\uf58d\uf579\uf57a\uf57b\uf57c\uf57d\uf57e\uf57f\uf580\uf581\uf578'
   # Don't show the remaining time to charge/discharge.
   typeset -g POWERLEVEL9K_BATTERY_VERBOSE=false
 
@@ -1503,31 +1518,28 @@
   # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS. It displays an icon and orange text greeting the user.
   #
   # Type `p10k help segment` for documentation and a more sophisticated example.
-  # typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=cyan
-  # function prompt_example() {
-  #   if [ -e './venv/' ]; then
-  #     p10k segment -f 208 -i "$(./venv/bin/python -V)" -t ''
-  #   fi
-  # }
+  function prompt_example() {
+    p10k segment -f 208 -i '⭐' -t 'hello, %n'
+  }
 
-  # # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
-  # # is to generate the prompt segment for display in instant prompt. See
-  # # https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.
-  # #
-  # # Powerlevel10k will call instant_prompt_* at the same time as the regular prompt_* function
-  # # and will record all `p10k segment` calls it makes. When displaying instant prompt, Powerlevel10k
-  # # will replay these calls without actually calling instant_prompt_*. It is imperative that
-  # # instant_prompt_* always makes the same `p10k segment` calls regardless of environment. If this
-  # # rule is not observed, the content of instant prompt will be incorrect.
-  # #
-  # # Usually, you should either not define instant_prompt_* or simply call prompt_* from it. If
-  # # instant_prompt_* is not defined for a segment, the segment won't be shown in instant prompt.
-  # function instant_prompt_example() {
-  #   # Since prompt_example always makes the same `p10k segment` calls, we can call it from
-  #   # instant_prompt_example. This will give us the same `example` prompt segment in the instant
-  #   # and regular prompts.
-  #   prompt_example
-  # }
+  # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
+  # is to generate the prompt segment for display in instant prompt. See
+  # https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.
+  #
+  # Powerlevel10k will call instant_prompt_* at the same time as the regular prompt_* function
+  # and will record all `p10k segment` calls it makes. When displaying instant prompt, Powerlevel10k
+  # will replay these calls without actually calling instant_prompt_*. It is imperative that
+  # instant_prompt_* always makes the same `p10k segment` calls regardless of environment. If this
+  # rule is not observed, the content of instant prompt will be incorrect.
+  #
+  # Usually, you should either not define instant_prompt_* or simply call prompt_* from it. If
+  # instant_prompt_* is not defined for a segment, the segment won't be shown in instant prompt.
+  function instant_prompt_example() {
+    # Since prompt_example always makes the same `p10k segment` calls, we can call it from
+    # instant_prompt_example. This will give us the same `example` prompt segment in the instant
+    # and regular prompts.
+    prompt_example
+  }
 
   # User-defined prompt segments can be customized the same way as built-in segments.
   # typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=208
@@ -1540,7 +1552,7 @@
   #   - always:   Trim down prompt when accepting a command line.
   #   - same-dir: Trim down prompt when accepting a command line unless this is the first command
   #               typed after changing current working directory.
-  typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=off
+  typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=always
 
   # Instant prompt mode.
   #

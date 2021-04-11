@@ -8,7 +8,9 @@ set mouse=a
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
 
-autocmd WinEnter * if &buftype ==# 'terminal' | startinsert | endif
+augroup terminal
+  autocmd WinEnter * if &buftype ==# 'terminal' | startinsert | endif
+augroup end
 
 noremap  <A-w> <C-w>w
 inoremap <A-w> <Esc><C-w>w
@@ -22,19 +24,25 @@ syntax enable
 call plug#begin('~/.vim/plugged')
 
 "Plug 'itchyny/lightline.vim'
-Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+" Plug 'romgrk/barbar.nvim'
+Plug 'akinsho/nvim-bufferline.lua'
 Plug 'sainnhe/sonokai'
 Plug 'prabirshrestha/async.vim'
 Plug 'neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' } 
 Plug 'tjdevries/coc-zsh'
+Plug 'rafcamlet/coc-nvim-lua'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
-
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'windwp/nvim-autopairs'
 Plug 'rhysd/committia.vim'
+Plug 'lambdalisue/gina.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'psf/black', { 'branch': 'stable' }
+
+Plug 'thinca/vim-quickrun'
 
 " Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'nvim-lua/popup.nvim'
@@ -47,32 +55,21 @@ call plug#end()
 
 "Black
 autocmd BufWritePre *.py execute ':Black'
-let g:black_linelength=100
+let g:black_linelength=88
 
+" status line
 set noshowmode
 lua require('plugins.galaxyline')
-" let g:lightline = {
-"   \ 'colorscheme': 'sonokai',
-"   \ 'active': {
-"     \ 'left': [[ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'filename', 'modified' ]],
-"     \ 'right': [[ 'lineinfo' ], [ 'fileencoding', 'filetype', ]],
-"   \ },
-"   \ 'component': {'charvaluehex': '0x%B'},
-"   \ 'component_function': {'gitbranch': 'FugitiveHead'},
-" \ }
 
-" Colorscheme
-" important!!
 set termguicolors
 
 " the configuration options should be placed before `colorscheme sonokai`
 let g:sonokai_style = 'andromeda'
 let g:sonokai_enable_italic = 1
-let g:sonokai_enable_italic = 1
 colorscheme sonokai
 
 " tab setting
-set showtabline=1
+set showtabline=2
 nnoremap [TABCMD]  <nop>
 nmap     <leader>t [TABCMD]
 nnoremap <silent> [TABCMD]f :<c-u>tabfirst<cr>
@@ -85,7 +82,8 @@ nnoremap <silent> [TABCMD]w :<c-u>tabclose<cr>
 nnoremap <silent> [TABCMD]o :<c-u>tabonly<cr>
 nnoremap <silent> [TABCMD]c :<c-u>tabs<cr>
 nnoremap <silent> [TABCMD]s :<c-u>tabnew<cr>
-nnoremap <silent> [TABCMD]v :<c-u>tabvew<cr>
+
+lua require('bufferline').setup()
 
 " Coc Settings
 " Make <CR> auto-select the first completion item and notify coc.nvim to
@@ -207,14 +205,15 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-if has('nvim')
-  " telescope.nvim
-  nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-  nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-  nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-  nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-  lua require('plugins')
-endif
+" telescope.nvim
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+lua require('plugins')
+
+lua require('nvim-autopairs').setup()
 
 " committia
 let g:committia_hooks = {}

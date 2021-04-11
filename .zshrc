@@ -152,7 +152,6 @@ zinit light-mode for \
   zdharma/fast-syntax-highlighting \
   zdharma/history-search-multi-word \
   mollifier/anyframe \
-  eastokes/aws-plugin-zsh \
   akoenig/npm-run.plugin.zsh \
   srijanshetty/zsh-pip-completion \
   hlissner/zsh-autopair
@@ -213,3 +212,5 @@ zinit load romkatv/powerlevel10k
 
 nvm use default --silent
 
+# To customize prompt, run `p10k configure` or edit ~/dotfiles/.p10k.zsh.
+[[ ! -f ~/dotfiles/.p10k.zsh ]] || source ~/dotfiles/.p10k.zsh

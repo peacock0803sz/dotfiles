@@ -1,7 +1,6 @@
 # jupyter notebooks
 
 *.ipynb
-notebooks/
 
 .vim/
 .idea/

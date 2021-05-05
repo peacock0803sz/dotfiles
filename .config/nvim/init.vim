@@ -40,7 +40,6 @@ Plug 'windwp/nvim-autopairs'
 Plug 'rhysd/committia.vim'
 Plug 'lambdalisue/gina.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'psf/black', { 'branch': 'stable' }
 
 Plug 'thinca/vim-quickrun'
 
@@ -52,10 +51,6 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'lambdalisue/fern.vim'
 
 call plug#end()
-
-"Black
-autocmd BufWritePre *.py execute ':Black'
-let g:black_linelength=88
 
 " status line
 set noshowmode

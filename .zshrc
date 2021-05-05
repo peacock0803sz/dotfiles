@@ -91,25 +91,35 @@ if [[ $TMUX ]];then
   export FZF_TMUX=1
 fi
 
-if [[ -e /etc/debian_version ]]; then
-  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-fi
+case ${OSTYPE} in
+  darwin*)
+    # Add Visual Studio Code (code)
+    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
-if [[ $(which pacman) ]]; then
-  source /usr/share/nvm/init-nvm.sh
-  export NVM_DIR="$HOME/.nvm"
-  source /usr/share/nvm/nvm.sh
-  source /usr/share/nvm/bash_completion
-  source /usr/share/nvm/install-nvm-exec
-fi
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-if [[ "$(uname)" == 'Darwin' ]]; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-fi
+    source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+    source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+    ;;
+  linux*)
+    if [ -e /etc/debian_version ]; then
+      eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+      [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
+      [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+    elif [ -e /etc/arch_version ]; then
+      source /usr/share/nvm/init-nvm.sh
+      export NVM_DIR="$HOME/.nvm"
+      source /usr/share/nvm/nvm.sh
+      source /usr/share/nvm/bash_completion
+      source /usr/share/nvm/install-nvm-exec
+
+      source /opt/google-cloud-sdk/completion.zsh.inc
+      source /opt/google-cloud-sdk/path.zsh.inc
+    fi
+    ;;
+esac
 
 # alias for terraform
 alias tf="terraform"
@@ -124,14 +134,8 @@ export NVIM_CACHE_HOME="$HOME/.vim/bundles"
 export EDITOR=nvim
 export LANG=ja_JP.UTF-8
 
-# Add Visual Studio Code (code)
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-
 # aws completion
-complete -C '/usr/bin/aws_completer' aws
-
-source /opt/google-cloud-sdk/completion.zsh.inc
-source /opt/google-cloud-sdk/path.zsh.inc
+complete -C `command -v aws_completer` aws
 
 #yarn
 #export PATH="$PATH:/Users/peacock/.anyenv/envs/nodenv/shims/yarn"

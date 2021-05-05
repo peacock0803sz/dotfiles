@@ -22,9 +22,9 @@
       "settings": {}
      },
     "efm": {
-    "command": "efm-langserver",
-    "args": [],
-    "filetypes": ["vim", "eruby", "markdown", "yaml", "html"]
+      "command": "efm-langserver",
+      "args": [],
+      "filetypes": ["vim", "eruby", "markdown", "yaml", "html"]
     },
     "ccls": {
       "command": "ccls",

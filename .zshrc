@@ -21,6 +21,7 @@ SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
 autoload -Uz compinit
+autoload bashcompinit && bashcompinit
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' menu select=2
 zstyle ':completion:*' group-name ''
@@ -67,6 +68,8 @@ function mkcd() {
   mkdir -p $1
   cd $1
 }
+
+export PATH="$HOME/.local/bin:$PATH"
 
 autoload -Uz vcs_info
 function gitroot() {
@@ -124,6 +127,12 @@ export LANG=ja_JP.UTF-8
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
+# aws completion
+complete -C '/usr/bin/aws_completer' aws
+
+source /opt/google-cloud-sdk/completion.zsh.inc
+source /opt/google-cloud-sdk/path.zsh.inc
+
 #yarn
 #export PATH="$PATH:/Users/peacock/.anyenv/envs/nodenv/shims/yarn"
 #export PATH="$PATH:`yarn global bin`"
@@ -156,18 +165,27 @@ zinit light-mode for \
   srijanshetty/zsh-pip-completion \
   hlissner/zsh-autopair
 
-zinit ice lucid depth"1" blockf
-zinit light yuki-ycino/fzf-preview.zsh
-# source $(ghq root)/github.com/yuki-ycino/fzf-preview.zsh/fzf-preview.zsh
-bindkey '^i' fzf-or-normal-completion
-bindkey '^v' fzf-grep-vscode
+# zinit ice lucid depth"1" blockf
+# zinit light yuki-ycino/fzf-preview.zsh
 
-bindkey '^ '   fzf-snippet-selection
-bindkey ' '    fzf-auto-snippet-and-space
-bindkey '^m'   fzf-auto-snippet-and-accept-line
-bindkey '^[f'  fzf-snippet-next-placeholder
-bindkey '^i'   fzf-or-normal-completion
-bindkey '^x^s' fzf-snippet-selection
+# bindkey '^i' fzf-or-normal-completion
+# bindkey '^v' fzf-grep-vscode
+#
+# bindkey '^ '   fzf-snippet-selection
+# bindkey ' '    fzf-auto-snippet-and-space
+# bindkey '^m'   fzf-auto-snippet-and-accept-line
+# bindkey '^[f'  fzf-snippet-next-placeholder
+# bindkey '^i'   fzf-or-normal-completion
+# bindkey '^x^s' fzf-snippet-selection
+
+# export PATH="$(ghq root)/github.com/yuki-yano/fzf-preview-deno.zsh/bin/:$PATH"
+# source $(ghq root)/github.com/yuki-yano/fzf-preview-deno.zsh/fzf-preview.zsh
+zinit light "yuki-yano/fzf-preview-deno.zsh"
+
+bindkey ' '    fp-auto-snippet
+bindkey '^m'   fp-auto-snippet-and-accept-line
+bindkey '^x^s' fp-insert-snippet
+bindkey '^t'   fp-completion
 
 function ghq-fzf() {
   local selected_dir=$(ghq list | fzf --query="$LBUFFER")

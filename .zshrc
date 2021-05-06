@@ -93,6 +93,7 @@ fi
 
 case ${OSTYPE} in
   darwin*)
+    export PATH="/opt/homebrew/opt/python@3.8/bin:$PATH"
     # Add Visual Studio Code (code)
     export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 

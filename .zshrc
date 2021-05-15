@@ -93,6 +93,7 @@ fi
 
 case ${OSTYPE} in
   darwin*)
+    export PATH="/opt/homebrew/opt/python@3.8/bin:$PATH"
     # Add Visual Studio Code (code)
     export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
@@ -108,7 +109,7 @@ case ${OSTYPE} in
       eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
       [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
       [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-    elif [ -e /etc/arch_version ]; then
+    elif [ -e /etc/arch-release ]; then
       source /usr/share/nvm/init-nvm.sh
       export NVM_DIR="$HOME/.nvm"
       source /usr/share/nvm/nvm.sh

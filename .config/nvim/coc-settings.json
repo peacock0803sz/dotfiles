@@ -7,9 +7,9 @@
   "python.linting.mypyEnabled": true,
   "python.linting.mypyPath": "mypy",
   "python.linting.mypyArgs": [
-  	"--ignore-missing-imports",
-  	"--follow-imports=silent",
-  	"--show-column-numbers"
+    "--ignore-missing-imports",
+    "--follow-imports=silent",
+    "--show-column-numbers"
   ],
   "languageserver": {
     "terraform": {

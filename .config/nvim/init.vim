@@ -23,10 +23,8 @@ syntax enable
 " plugins
 call plug#begin('~/.vim/plugged')
 
-"Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
-" Plug 'romgrk/barbar.nvim'
 Plug 'akinsho/nvim-bufferline.lua'
 Plug 'sainnhe/sonokai'
 Plug 'prabirshrestha/async.vim'
@@ -36,12 +34,10 @@ Plug 'rafcamlet/coc-nvim-lua'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'Yggdroot/indentLine'
-Plug 'windwp/nvim-autopairs'
+Plug 'machakann/vim-sandwich'
 Plug 'rhysd/committia.vim'
 Plug 'lambdalisue/gina.vim'
 Plug 'airblade/vim-gitgutter'
-
-Plug 'thinca/vim-quickrun'
 
 " Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'nvim-lua/popup.nvim'
@@ -52,9 +48,15 @@ Plug 'lambdalisue/fern.vim'
 
 call plug#end()
 
-" status line
-set noshowmode
-lua require('plugins.galaxyline')
+let g:lightline = {
+  \ 'colorscheme': 'sonokai',
+  \ 'active': {
+    \ 'left': [[ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'filename', 'modified' ]],
+    \ 'right': [[ 'lineinfo' ], [ 'fileencoding', 'filetype', ]],
+  \ },
+  \ 'component': {'charvaluehex': '0x%B'},
+  \ 'component_function': {'gitbranch': 'FugitiveHead'},
+\ }
 
 set termguicolors
 
@@ -200,15 +202,13 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+
 " telescope.nvim
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
-lua require('plugins')
-
-lua require('nvim-autopairs').setup()
 
 " committia
 let g:committia_hooks = {}
@@ -234,4 +234,3 @@ highlight SpecialKey ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
 
 autocmd Filetype json setl conceallevel=0 " It doesn't works
-"let g:indentLine_enabled = 0

@@ -65,6 +65,18 @@ let g:sonokai_style = 'andromeda'
 let g:sonokai_enable_italic = 1
 colorscheme sonokai
 
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true
+  }
+}
+EOF
+
 " tab setting
 set showtabline=2
 nnoremap [TABCMD]  <nop>

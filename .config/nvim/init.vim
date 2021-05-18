@@ -39,6 +39,7 @@ Plug 'rhysd/committia.vim'
 Plug 'lambdalisue/gina.vim'
 Plug 'airblade/vim-gitgutter'
 
+Plug 'vim-test/vim-test'
 " Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -201,6 +202,8 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+let g:test#python#runner = 'pytest'
 
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 

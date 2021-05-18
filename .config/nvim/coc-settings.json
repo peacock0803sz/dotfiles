@@ -9,7 +9,8 @@
   "python.linting.mypyArgs": [
     "--ignore-missing-imports",
     "--follow-imports=silent",
-    "--show-column-numbers"
+    "--show-column-numbers",
+    "--python-version 3.10"
   ],
   "languageserver": {
     "terraform": {

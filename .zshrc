@@ -94,6 +94,7 @@ fi
 case ${OSTYPE} in
   darwin*)
     alias rosetta="arch -x86_64 /bin/zsh"
+    alias python3.8="/usr/bin/python3"
     # Add Visual Studio Code (code)
     export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 

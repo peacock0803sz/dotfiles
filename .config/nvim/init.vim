@@ -1,36 +1,28 @@
 inoremap <silent> jj <ESC>
-set colorcolumn=88,100,120
+set colorcolumn=88,100
 set number
+set signcolumn=number
 set clipboard+=unnamedplus
 set shiftwidth=2
-
+set pumblend=30
 set mouse=a
-map <ScrollWheelUp> <C-Y>
-map <ScrollWheelDown> <C-E>
-
-augroup terminal
-  autocmd WinEnter * if &buftype ==# 'terminal' | startinsert | endif
-augroup end
-
-noremap  <A-w> <C-w>w
-inoremap <A-w> <Esc><C-w>w
-tnoremap <A-w> <C-\><C-n><C-w>w
-tnoremap <A-\> <C-\><C-n>
-
 filetype plugin indent on
 syntax enable
 
 " plugins
+" {{{
 call plug#begin('~/.vim/plugged')
 
 Plug 'itchyny/lightline.vim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'akinsho/nvim-bufferline.lua'
 Plug 'sainnhe/sonokai'
 Plug 'prabirshrestha/async.vim'
+
 Plug 'neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' } 
 Plug 'tjdevries/coc-zsh'
+Plug 'neoclide/coc-pairs'
 Plug 'rafcamlet/coc-nvim-lua'
+
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'Yggdroot/indentLine'
@@ -48,24 +40,25 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'lambdalisue/fern.vim'
 
 call plug#end()
+" }}}
 
+" colorscheme and statusline {{{
 let g:lightline = {
   \ 'colorscheme': 'sonokai',
   \ 'active': {
-    \ 'left': [[ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'filename', 'modified' ]],
+    \ 'left': [[ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ]],
     \ 'right': [[ 'lineinfo' ], [ 'fileencoding', 'filetype', ]],
   \ },
   \ 'component': {'charvaluehex': '0x%B'},
-  \ 'component_function': {'gitbranch': 'FugitiveHead'},
 \ }
 
 set termguicolors
 
-" the configuration options should be placed before `colorscheme sonokai`
-let g:sonokai_style = 'andromeda'
+let g:sonokai_style = 'default'
 let g:sonokai_enable_italic = 1
 colorscheme sonokai
 
+" treesitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
@@ -77,8 +70,22 @@ require'nvim-treesitter.configs'.setup {
   }
 }
 EOF
+" }}}
 
-" tab setting
+" maps generaly
+" {{{
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-E>
+
+" <A-w> to toggle buffer everywhre
+noremap  <A-w> <C-w>w
+inoremap <A-w> <Esc><C-w>w
+tnoremap <A-w> <C-\><C-n><C-w>w
+tnoremap <A-\> <C-\><C-n>
+" }}}
+
+
+" tab setting {{{
 set showtabline=2
 nnoremap [TABCMD]  <nop>
 nmap     <leader>t [TABCMD]
@@ -92,14 +99,12 @@ nnoremap <silent> [TABCMD]w :<c-u>tabclose<cr>
 nnoremap <silent> [TABCMD]o :<c-u>tabonly<cr>
 nnoremap <silent> [TABCMD]c :<c-u>tabs<cr>
 nnoremap <silent> [TABCMD]s :<c-u>tabnew<cr>
+" }}}
 
-lua require('bufferline').setup()
-
-" Coc Settings
+" Coc Settings {{{
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm(): "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -214,6 +219,7 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" }}}
 
 let g:test#python#runner = 'pytest'
 
@@ -225,7 +231,7 @@ nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
-" committia
+" committia {{{
 let g:committia_hooks = {}
 function! g:committia_hooks.edit_open(info)
   " Additional settings
@@ -241,11 +247,15 @@ function! g:committia_hooks.edit_open(info)
   imap <buffer><C-n> <Plug>(committia-scroll-diff-down-half)
   imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
 endfunction
+" }}}
 
+" transparents {{{
 highlight Normal ctermbg=NONE guibg=NONE
 highlight NonText ctermbg=NONE guibg=NONE
 highlight LineNr ctermbg=NONE guibg=NONE
 highlight SpecialKey ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
+" }}}
 
+" F**K Conceal!!!
 autocmd Filetype json setl conceallevel=0 " It doesn't works

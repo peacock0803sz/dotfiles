@@ -12,6 +12,7 @@ syntax enable
 " plugins
 " {{{
 call plug#begin('~/.vim/plugged')
+Plug 'vim-jp/vimdoc-ja'
 
 Plug 'itchyny/lightline.vim'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -23,7 +24,12 @@ Plug 'tjdevries/coc-zsh'
 Plug 'neoclide/coc-pairs'
 Plug 'rafcamlet/coc-nvim-lua'
 
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
+
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'machakann/vim-sandwich'
@@ -33,9 +39,6 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'vim-test/vim-test'
 " Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'lambdalisue/fern.vim'
 

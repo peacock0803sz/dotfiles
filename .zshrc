@@ -43,8 +43,6 @@ zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 zstyle ':completion:*:options'         description 'yes'
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
@@ -175,6 +173,8 @@ zinit light yuki-yano/zeno.zsh
 
 export ZENO_ENABLE_FZF_TMUX=1
 export ZENO_FZF_TMUX_OPTIONS="-p 90%,90%"
+export ZENO_GIT_CAT="bat --color=always"
+export ZENO_GIT_TREE="exa --tree"
 bindkey ' '    zeno-auto-snippet
 bindkey '^m'   zeno-auto-snippet-and-accept-line
 bindkey '^x^s' zeno-insert-snippet

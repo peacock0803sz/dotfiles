@@ -140,10 +140,6 @@ export LANG=ja_JP.UTF-8
 # aws completion
 complete -C `command -v aws_completer` aws
 
-#yarn
-#export PATH="$PATH:/Users/peacock/.anyenv/envs/nodenv/shims/yarn"
-#export PATH="$PATH:`yarn global bin`"
-
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
   print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
@@ -172,42 +168,45 @@ zinit light-mode for \
   srijanshetty/zsh-pip-completion \
   hlissner/zsh-autopair
 
-# zinit ice lucid depth"1" blockf
-# zinit light yuki-ycino/fzf-preview.zsh
+# export PATH="$(ghq root)/github.com/yuki-yano/zeno.zsh/bin/:$PATH"
+# source $(ghq root)/github.com/yuki-yano/zeno.zsh/zeno.zsh
+zinit ice lucid depth"1" blockf
+zinit light yuki-yano/zeno.zsh
 
-# bindkey '^i' fzf-or-normal-completion
-# bindkey '^v' fzf-grep-vscode
-#
-# bindkey '^ '   fzf-snippet-selection
-# bindkey ' '    fzf-auto-snippet-and-space
-# bindkey '^m'   fzf-auto-snippet-and-accept-line
-# bindkey '^[f'  fzf-snippet-next-placeholder
-# bindkey '^i'   fzf-or-normal-completion
-# bindkey '^x^s' fzf-snippet-selection
-
-# export PATH="$(ghq root)/github.com/yuki-yano/fzf-preview-deno.zsh/bin/:$PATH"
-# source $(ghq root)/github.com/yuki-yano/fzf-preview-deno.zsh/fzf-preview.zsh
-zinit light "yuki-yano/fzf-preview-deno.zsh"
-
-bindkey ' '    fp-auto-snippet
-bindkey '^m'   fp-auto-snippet-and-accept-line
-bindkey '^x^s' fp-insert-snippet
-bindkey '^t'   fp-completion
+export ZENO_ENABLE_FZF_TMUX=1
+export ZENO_FZF_TMUX_OPTIONS="-p 90%,90%"
+bindkey ' '    zeno-auto-snippet
+bindkey '^m'   zeno-auto-snippet-and-accept-line
+bindkey '^x^s' zeno-insert-snippet
+bindkey '^t'   zeno-completion
 
 function ghq-fzf() {
-  local selected_dir=$(ghq list | fzf --query="$LBUFFER")
+  local dir
 
-  if [ -n "$selected_dir" ]; then
-    BUFFER="cd $(ghq root)/${selected_dir}"
+  if [[ ! -z ${TMUX} ]]; then
+    dir=$(ghq list -p | sed -e "s|${HOME}|~|" | fzf-tmux $ZENO_FZF_TMUX_OPTIONS --preview "bat \$(eval echo {})/README.md" --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up)
+  else
+    dir=$(ghq list -p | sed -e "s|${HOME}|~|" | fzf --preview "bat \$(eval echo {})/README.md" --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up)
   fi
 
+  if [[ $dir == "" ]]; then
+    return 1
+  fi
+
+  BUFFER="cd $dir"
+  CURSOR=$#BUFFER
   zle reset-prompt
 }
 zle -N ghq-fzf
 bindkey "^g" ghq-fzf
 
 function history-fzf () {
-  BUFFER=$(history -n 1 | fzf --query="$LBUFFER")
+  if [[ ! -z ${TMUX} ]]; then
+    BUFFER=$(history -n 1 | fzf-tmux --query="$LBUFFER")
+  else
+    BUFFER=$(history -n 1 | fzf --query="$LBUFFER")
+  fi
+
   CURSOR=$#BUFFER
   zle reset-prompt
 }

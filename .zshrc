@@ -80,11 +80,8 @@ function gitroot() {
 
 alias reloadzsh='exec -l zsh'
 alias acvenv='source venv/bin/activate'
-alias vimconf='vim $HOME/.vimrc'
-alias nvimconf='nvim $HOME/.config/nvim/init.vim'
-alias zshconf='nvim $HOME/.zshrc'
-alias tmuxconf='nvim $HOME/.tmux.conf'
-# alias tmux-git='tmux new-window -n git \; split-window -h -l 140 \; send-keys -t git.1 "cat ~/.commit_template" C-m'
+export NVIMRC='$HOME/.config/nvim/init.vim'
+
 if [[ $TMUX ]];then
   export FZF_TMUX=1
 fi

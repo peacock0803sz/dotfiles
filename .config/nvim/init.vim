@@ -1,82 +1,36 @@
-inoremap <silent> jj <ESC>
+" display
 set colorcolumn=88,100
 set number
 set signcolumn=number
 set clipboard+=unnamedplus
-set shiftwidth=2
 set pumblend=30
-set mouse=a
 filetype plugin indent on
 syntax enable
-
-" plugins
-" {{{
-call plug#begin('~/.vim/plugged')
-Plug 'vim-jp/vimdoc-ja'
-
-Plug 'itchyny/lightline.vim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'sainnhe/sonokai'
-Plug 'prabirshrestha/async.vim'
-
-Plug 'neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' } 
-Plug 'tjdevries/coc-zsh'
-Plug 'neoclide/coc-pairs'
-Plug 'rafcamlet/coc-nvim-lua'
-
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
-
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'Yggdroot/indentLine'
-Plug 'machakann/vim-sandwich'
-Plug 'rhysd/committia.vim'
-Plug 'lambdalisue/gina.vim'
-Plug 'airblade/vim-gitgutter'
-
-Plug 'vim-test/vim-test'
-" Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
-
-Plug 'lambdalisue/fern.vim'
-
-call plug#end()
+set mouse=a
 " }}}
 
-" colorscheme and statusline {{{
-let g:lightline = {
-  \ 'colorscheme': 'sonokai',
-  \ 'active': {
-    \ 'left': [[ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ]],
-    \ 'right': [[ 'lineinfo' ], [ 'fileencoding', 'filetype', ]],
-  \ },
-  \ 'component': {'charvaluehex': '0x%B'},
-\ }
+" indent {{{
+set expandtab
+set shiftround
+set shiftwidth=2
+set smartindent
+set smarttab
+set softtabstop=0
+set autoindent
+set tabstop=2
+" }}}
+"
 
-set termguicolors
-
-let g:sonokai_style = 'default'
-let g:sonokai_enable_italic = 1
-colorscheme sonokai
-
-" treesitter
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true
-  }
-}
-EOF
+" c-mode maps {{{
+cnoremap <C-a> <Home>
+cnoremap <C-b> <Left>
+cnoremap <C-e> <End>
+cnoremap <C-f> <Right>
+cnoremap <C-n> <Down>
+cnoremap <C-p> <Up>
 " }}}
 
-" maps generaly
-" {{{
+" scroll maps {{{
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
 
@@ -104,7 +58,82 @@ nnoremap <silent> [TABCMD]c :<c-u>tabs<cr>
 nnoremap <silent> [TABCMD]s :<c-u>tabnew<cr>
 " }}}
 
+" plugins
+" {{{
+call plug#begin('~/.vim/plugged')
+Plug 'vim-jp/vimdoc-ja'
+
+Plug 'itchyny/lightline.vim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'sainnhe/sonokai'
+Plug 'prabirshrestha/async.vim'
+
+Plug 'neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' } 
+let g:coc_global_extensions = [
+  \ 'coc-pairs', 
+  \ 'coc-fzf-preview',
+  \ 'coc-json',
+  \ 'coc-pyright', 
+  \ 'coc-deno', 
+  \ '']
+Plug 'tjdevries/coc-zsh'
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
+
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'machakann/vim-sandwich'
+
+Plug 'monaqa/dial.nvim'
+Plug 'lambdalisue/suda.vim'
+
+Plug 'rhysd/committia.vim'
+Plug 'lambdalisue/gina.vim'
+Plug 'airblade/vim-gitgutter'
+
+Plug 'vim-test/vim-test'
+
+Plug 'lambdalisue/fern.vim'
+
+call plug#end()
+" }}}
+
+" colorscheme and statusline {{{
+let g:lightline = {
+  \ 'colorscheme': 'sonokai',
+  \ 'active': {
+    \ 'left': [[ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ]],
+    \ 'right': [[ 'lineinfo' ], [ 'fileencoding', 'filetype', ]],
+  \ },
+  \ 'component': {'charvaluehex': '0x%B'},
+\ }
+
+set termguicolors
+
+let g:sonokai_style = 'default'
+let g:sonokai_enable_italic = 1
+colorscheme sonokai
+" }}}
+
+" treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true
+  }
+}
+EOF
+" }}}
+
+
 " Coc Settings {{{
+
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm(): "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
@@ -228,11 +257,39 @@ let g:test#python#runner = 'pytest'
 
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 
-" telescope.nvim
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+" dial.nvim {{{
+nnoremap <C-+> <Plug>(dial-increment)
+nnoremap <C--> <Plug>(dial-decrement)
+xnoremap <C-+> <Plug>(dial-increment)
+xnoremap <C--> <Plug>(dial-decrement)
+" }}}
+
+" fern {{{
+nnoremap <Leader>F :Fern -drawer .<CR>
+" }}}
+
+
+" fzf-preview {{{
+nmap <Leader>f [fzf-p]
+xmap <Leader>f [fzf-p]
+
+nnoremap <silent> [fzf-p]p     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+nnoremap <silent> [fzf-p]gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
+nnoremap <silent> [fzf-p]ga    :<C-u>CocCommand fzf-preview.GitActions<CR>
+nnoremap <silent> [fzf-p]b     :<C-u>CocCommand fzf-preview.Buffers<CR>
+nnoremap <silent> [fzf-p]B     :<C-u>CocCommand fzf-preview.AllBuffers<CR>
+nnoremap <silent> [fzf-p]o     :<C-u>CocCommand fzf-preview.FromResources buffer project_mru<CR>
+nnoremap <silent> [fzf-p]<C-o> :<C-u>CocCommand fzf-preview.Jumps<CR>
+nnoremap <silent> [fzf-p]g;    :<C-u>CocCommand fzf-preview.Changes<CR>
+nnoremap <silent> [fzf-p]/     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+nnoremap <silent> [fzf-p]*     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap          [fzf-p]gr    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+xnoremap          [fzf-p]gr    "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
+nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
+nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
+" }}}
 
 " committia {{{
 let g:committia_hooks = {}

@@ -265,6 +265,10 @@ xnoremap <C-+> <Plug>(dial-increment)
 xnoremap <C--> <Plug>(dial-decrement)
 " }}}
 
+" fern {{{
+nnoremap <Leader>F :Fern -drawer .<CR>
+" }}}
+
 
 " fzf-preview {{{
 nmap <Leader>f [fzf-p]

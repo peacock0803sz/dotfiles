@@ -96,6 +96,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-test/vim-test'
 
 Plug 'lambdalisue/fern.vim'
+Plug 'yuki-yano/fern-preview.vim'
 
 call plug#end()
 " }}}

@@ -80,6 +80,7 @@ function gitroot() {
 
 alias reloadzsh='exec -l zsh'
 alias acvenv='source venv/bin/activate'
+alias load-dotenv='export $(cat .env | grep -v ^# | xargs);'
 export NVIMRC="$HOME/.config/nvim/init.vim"
 
 if [[ $TMUX ]];then

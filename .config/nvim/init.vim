@@ -34,7 +34,7 @@ cnoremap <C-p> <Up>
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
 
-" <A-w> to toggle buffer everywhre
+" <A-w> to toggle buffer everywhere
 noremap  <A-w> <C-w>w
 inoremap <A-w> <Esc><C-w>w
 tnoremap <A-w> <C-\><C-n><C-w>w
@@ -70,12 +70,34 @@ Plug 'prabirshrestha/async.vim'
 
 Plug 'neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' } 
 let g:coc_global_extensions = [
-  \ 'coc-pairs', 
-  \ 'coc-fzf-preview',
-  \ 'coc-json',
-  \ 'coc-pyright', 
+  \ 'coc-actions',
+  \ 'coc-calc',
+  \ 'coc-css',
   \ 'coc-deno', 
-  \ '']
+  \ 'coc-diagnostic',
+  \ 'coc-docker',
+  \ 'coc-eslint',
+  \ 'coc-fzf-preview',
+  \ 'coc-git',
+  \ 'coc-go',
+  \ 'coc-html',
+  \ 'coc-json',
+  \ 'coc-markdownlint',
+  \ 'coc-marketplace',
+  \ 'coc-pairs', 
+  \ 'coc-prettier',
+  \ 'coc-pyright', 
+  \ 'coc-sh',
+  \ 'coc-spell-checker',
+  \ 'coc-stylelint',
+  \ 'coc-tag',
+  \ 'coc-tailwindcss',
+  \ 'coc-tsserver',
+  \ 'coc-vetur',
+  \ 'coc-vimlsp',
+  \ 'coc-word',
+  \ 'coc-yaml',
+\ ]
 Plug 'tjdevries/coc-zsh'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }

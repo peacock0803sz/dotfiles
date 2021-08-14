@@ -293,7 +293,7 @@ xnoremap <C--> <Plug>(dial-decrement)
 " }}}
 
 " fern {{{
-nnoremap <Leader>Fe :Fern -drawer .<CR>
+nnoremap <Leader>fe :Fern -drawer .<CR>
 " }}}
 
 

@@ -100,6 +100,7 @@ case ${OSTYPE} in
 
     source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
     source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+    export CLOUDSDK_PYTHON="/opt/homebrew/Cellar/python@3.9/3.9.6/bin/python3"
     ;;
   linux*)
     if [ -e /etc/debian_version ]; then
@@ -198,7 +199,7 @@ function ghq-fzf() {
 zle -N ghq-fzf
 bindkey "^g" ghq-fzf
 
-function history-fzf () {
+function history-fzf() {
   if [[ ! -z ${TMUX} ]]; then
     BUFFER=$(history -n 1 | fzf-tmux --query="$LBUFFER")
   else
@@ -211,7 +212,7 @@ function history-fzf () {
 zle -N history-fzf
 bindkey '^r' history-fzf
 
-function ssh-fzf () {
+function ssh-fzf() {
   local selected_host=$(grep "Host " ~/.ssh/config | grep -v '*' | cut -b 6- | fzf --query="$LBUFFER")
   if [ -n "$selected_host" ]; then
     BUFFER="ssh ${selected_host}"
@@ -221,6 +222,60 @@ function ssh-fzf () {
 }
 zle -N ssh-fzf
 bindkey '^\' ssh-fzf
+
+VENVFZF_ROOT="${HOME}/venvs"
+VENVFZF_VENV_OPTIONS=""
+VENVFZF_FZF="fzf"
+PYTHONROOT="/Library/Frameworks/Python.framework/Versions/"
+if [[ -n ${TMUX} ]] && [[ $(which fzf-tmux) ]]; then
+  VENVFZF_FZF="fzf-tmux"
+fi
+
+function venv-fzf() {
+  local dir=$(_list_venvs | $VENVFZF_FZF --prompt="VNEV> " | cut -d " " -f 1)
+  BUFFER=". $dir"
+  CURSOR=$#BUFFER
+  zle reset-prompt
+}
+
+function _list_venvs() {
+  local dirs=$(find $HOME/venvs -maxdepth 4 -mindepth 4 -type d)
+
+  for p in $dirs; do
+    if [[ -d $p/bin ]]; then
+      echo "$p/bin/activate ($($p/bin/python3 -V))"
+    fi
+  done
+}
+zle -N venv-fzf
+bindkey '^v' venv-fzf
+
+function mkvenv() {
+  local _venv_dir=$(pwd | awk -F "/" '{print $(NF-2),$(NF-1),$NF}' | tr ' ' '/')
+  local venv_name="$_venv_dir/venv"
+  read _venv_name\?"Input a name of dir (default: ${venv_name})> "
+  if [[ ! -z ${_venv_name} ]]; then
+    venv_name=${_venv_name}
+  fi
+
+  local expected_venv="${VENVFZF_ROOT}/${venv_name}/venv"
+  if [[ -d expected_venv ]]; then
+    echo "${expected_venv} is Already exist !!"
+    return
+  elif [[ ! -e expected_venv ]]; then
+    mkdir -p $expected_venv
+  fi
+
+  local versions=$(find $PYTHONROOT -maxdepth 1 | grep -e "[0-9]$")
+  for v in $versions; do
+    echo $v
+  done
+
+  read _py_number\?"Choise a number you wants use python > "
+  local _py="$PYTHONROOT/$_py_number/bin/python3"
+  echo "$_py -m venv ${expected_venv}"
+  $_py -m venv ${expected_venv}
+}
 
 # zinit light "https://gist.github.com/peacock0803sz/2d283b4f3ce74c780aa89b1c18fe08b8"
 

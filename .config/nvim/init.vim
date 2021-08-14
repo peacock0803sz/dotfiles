@@ -89,7 +89,6 @@ let g:coc_global_extensions = [
   \ 'coc-pyright', 
   \ 'coc-rust-analyzer',
   \ 'coc-sh',
-  \ 'coc-spell-checker',
   \ 'coc-stylelint',
   \ 'coc-tag',
   \ 'coc-tailwindcss',
@@ -99,7 +98,6 @@ let g:coc_global_extensions = [
   \ 'coc-word',
   \ 'coc-yaml',
 \ ]
-Plug 'tjdevries/coc-zsh'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 

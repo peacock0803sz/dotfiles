@@ -145,8 +145,6 @@ dist/
 # Flycheck
 flycheck_*.el
 
-# server auth directory
-/server/
 
 # projectiles files
 .projectile
@@ -174,3 +172,4 @@ flycheck_*.el
 # Local History for Visual Studio Code
 .history/
 
+**/pip-wheel-metadata/*

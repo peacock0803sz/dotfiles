@@ -87,9 +87,8 @@ let g:coc_global_extensions = [
   \ 'coc-pairs', 
   \ 'coc-prettier',
   \ 'coc-pyright', 
-  \ 'coc-sh',
-  \ 'coc-spell-checker',
   \ 'coc-stylelint',
+  \ 'coc-sh',
   \ 'coc-tag',
   \ 'coc-tailwindcss',
   \ 'coc-tsserver',
@@ -98,7 +97,6 @@ let g:coc_global_extensions = [
   \ 'coc-word',
   \ 'coc-yaml',
 \ ]
-Plug 'tjdevries/coc-zsh'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
@@ -192,8 +190,12 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>fo  <Plug>(coc-format-selected)
-nmap <leader>fo  <Plug>(coc-format-selected)
+" xmap <leader>fo  <Plug>(coc-format-selected)
+" nmap <leader>fo  <Plug>(coc-format-selected)
+
+xmap <leader>FO <Plug>(coc-format)
+nmap <leader>FO <Plug>(coc-format)
+
 
 augroup mygroup
   autocmd!
@@ -289,7 +291,7 @@ xnoremap <C--> <Plug>(dial-decrement)
 " }}}
 
 " fern {{{
-nnoremap <Leader>F :Fern -drawer .<CR>
+nnoremap <Leader>Fe :Fern -drawer .<CR>
 " }}}
 
 

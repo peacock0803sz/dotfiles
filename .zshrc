@@ -223,28 +223,32 @@ function ssh-fzf() {
 zle -N ssh-fzf
 bindkey '^\' ssh-fzf
 
-VENVFZF_ROOT="${HOME}/venvs"
+export VENVFZF_ROOT="${HOME}/venvs"
 VENVFZF_VENV_OPTIONS=""
-VENVFZF_FZF="fzf"
+FZF="fzf"
 PYTHONROOT="/Library/Frameworks/Python.framework/Versions/"
 if [[ -n ${TMUX} ]] && [[ $(which fzf-tmux) ]]; then
-  VENVFZF_FZF="fzf-tmux"
+  FZF="fzf-tmux"
 fi
 
 function venv-fzf() {
-  local dir=$(_list_venvs | $VENVFZF_FZF --prompt="VNEV> " | cut -d " " -f 1)
-  BUFFER=". $dir"
-  CURSOR=$#BUFFER
+  local dir=$(_list_venvs | $FZF --prompt="VNEV> " | cut -d " " -f 1)
+  if [[ -n $dir ]]; then
+    BUFFER=". $dir"
+    CURSOR=$#BUFFER
+    zle accept-line
+  fi
   zle reset-prompt
 }
 
 function _list_venvs() {
-  local dirs=$(find $HOME/venvs -maxdepth 4 -mindepth 4 -type d)
+  local dirs=$(find $VENVFZF_ROOT -maxdepth 7 -mindepth 5 -type d | grep "bin")
 
-  for p in $dirs; do
-    if [[ -d $p/bin ]]; then
-      echo "$p/bin/activate ($($p/bin/python3 -V))"
-    fi
+  for d in $dirs; do
+    echo $d
+    # if [[ -f $d/bin/python3 ]]; then
+    #   echo "$d/bin/activate"
+    # fi
   done
 }
 zle -N venv-fzf

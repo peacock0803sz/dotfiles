@@ -101,6 +101,9 @@ case ${OSTYPE} in
     source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
     source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
     export CLOUDSDK_PYTHON="/opt/homebrew/Cellar/python@3.9/3.9.6/bin/python3"
+
+    export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
     ;;
   linux*)
     if [ -e /etc/debian_version ]; then

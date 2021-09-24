@@ -1,6 +1,6 @@
 {
   "python.formatting.provider": "black",
-  "python.formatting.blackPath": "black", 
+  "python.formatting.blackPath": "black",
   "python.linting.enabled": true,
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Path": "flake8",
@@ -13,29 +13,26 @@
     "--python-version 3.10"
   ],
   "rust-analyzer.server.path": "/opt/homebrew/bin/rust-analyzer",
+  "markdownlint.config": {
+    "MD007": { "indent": 4 },
+    "MD013": { "line_length": 200 },
+    "MD026": false
+  },
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
       "args": ["serve"],
-      "filetypes": [
-        "terraform",
-        "tf"
-       ],
+      "filetypes": ["terraform", "tf"],
       "initializationOptions": {},
       "settings": {}
-     },
-    "efm": {
-      "command": "efm-langserver",
-      "args": [],
-      "filetypes": ["vim", "eruby", "markdown", "yaml", "html"]
     },
     "ccls": {
       "command": "ccls",
       "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
       "rootPatterns": [".ccls-root", "compile_commands.json", ".vim/", ".git/"],
       "initializationOptions": {
-         "cache": {
-           "directory": "/tmp/ccls-cache"
+        "cache": {
+          "directory": "/tmp/ccls-cache"
         }
       }
     }

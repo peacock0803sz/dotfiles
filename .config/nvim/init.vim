@@ -4,6 +4,7 @@ set number
 set signcolumn=number
 set clipboard+=unnamedplus
 set pumblend=30
+set ambiwidth=double
 filetype plugin indent on
 syntax enable
 set mouse=a
@@ -67,13 +68,14 @@ Plug 'itchyny/lightline.vim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'sainnhe/sonokai'
 Plug 'prabirshrestha/async.vim'
+Plug 'vim-denops/denops.vim'
 
 Plug 'neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' } 
 let g:coc_global_extensions = [
   \ 'coc-actions',
   \ 'coc-calc',
   \ 'coc-css',
-  \ 'coc-deno', 
+  \ 'coc-deno',
   \ 'coc-diagnostic',
   \ 'coc-docker',
   \ 'coc-eslint',
@@ -83,21 +85,19 @@ let g:coc_global_extensions = [
   \ 'coc-html',
   \ 'coc-json',
   \ 'coc-markdownlint',
-  \ 'coc-marketplace',
-  \ 'coc-pairs', 
+  \ 'coc-pairs',
   \ 'coc-prettier',
-  \ 'coc-pyright', 
+  \ 'coc-pyright',
   \ 'coc-rust-analyzer',
   \ 'coc-sh',
   \ 'coc-stylelint',
   \ 'coc-sh',
   \ 'coc-tag',
-  \ 'coc-tailwindcss',
   \ 'coc-tsserver',
   \ 'coc-vetur',
   \ 'coc-vimlsp',
   \ 'coc-word',
-  \ 'coc-yaml',
+  \ 'coc-yaml'
 \ ]
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -119,6 +119,8 @@ Plug 'vim-test/vim-test'
 
 Plug 'lambdalisue/fern.vim'
 Plug 'yuki-yano/fern-preview.vim'
+
+Plug 'vim-skk/denops-skkeleton.vim'
 
 call plug#end()
 " }}}
@@ -154,6 +156,21 @@ require'nvim-treesitter.configs'.setup {
 EOF
 " }}}
 
+" {{{ skkeleton
+function! s:skkeleton_init() abort
+  call skkeleton#config({
+  \ 'eggLikeNewline': v:true,
+  \ 'showCandidatesCount': 1,
+  \ 'globalJisyo': '$HOME/ghq/github.com/skk-dev/dict/SKK-JISYO.L'
+  \ })
+  call skkeleton#register_kanatable('rom', {
+  \ "z\<Space>": ["\u3000", ''],
+  \ })
+  endfunction
+  autocmd User skkeleton-initialize-pre call s:skkeleton_init()
+imap <C-j> <Plug>(skkeleton-toggle)
+cmap <C-j> <Plug>(skkeleton-toggle)
+" }
 
 " Coc Settings {{{
 
@@ -336,6 +353,16 @@ function! g:committia_hooks.edit_open(info)
 endfunction
 " }}}
 
+" {{{
+augroup plugin-committia
+    autocmd!
+    autocmd BufReadPost COMMIT_EDITMSG,MERGE_MSG if s:should_open('gitcommit') | call committia#open('git') | endif
+
+    " ... Add other VCSs' commit editor filetypes
+    autocmd BufEnter gina-commit call committia#open('git')
+augroup END
+" }}}
+
 " transparents {{{
 highlight Normal ctermbg=NONE guibg=NONE
 highlight NonText ctermbg=NONE guibg=NONE
@@ -345,4 +372,4 @@ highlight EndOfBuffer ctermbg=NONE guibg=NONE
 " }}}
 
 " F**K Conceal!!!
-autocmd Filetype json setl conceallevel=0 " It doesn't works
+ autocmd Filetype json setl conceallevel=0 " It doesn't works

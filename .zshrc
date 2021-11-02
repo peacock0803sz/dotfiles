@@ -103,6 +103,7 @@ case ${OSTYPE} in
     export CLOUDSDK_PYTHON="/opt/homebrew/Cellar/python@3.9/3.9.6/bin/python3"
 
     export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+    export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
     ;;
   linux*)

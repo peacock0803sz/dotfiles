@@ -100,6 +100,7 @@ case ${OSTYPE} in
     export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 
     export XML_CATALOG_FILES=/opt/homebrew/etc/xml/catalog
+    export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
     ;;
   linux*)

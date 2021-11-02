@@ -20,17 +20,12 @@ HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
-autoload -Uz compinit
-autoload bashcompinit && bashcompinit
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*' menu select=2
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list
-zstyle ':completion:*' matcher-list  'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*' special-dirs true
+autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
 
+zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' completer _expand _complete _correct _approximate
+# zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
@@ -103,6 +98,8 @@ case ${OSTYPE} in
     export CLOUDSDK_PYTHON="/opt/homebrew/Cellar/python@3.9/3.9.6/bin/python3"
 
     export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+
+    export XML_CATALOG_FILES=/opt/homebrew/etc/xml/catalog
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
     ;;
   linux*)

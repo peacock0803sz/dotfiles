@@ -120,7 +120,7 @@ Plug 'vim-test/vim-test'
 Plug 'lambdalisue/fern.vim'
 Plug 'yuki-yano/fern-preview.vim'
 
-Plug 'vim-skk/denops-skkeleton.vim'
+Plug 'vim-skk/skkeleton'
 
 call plug#end()
 " }}}
@@ -157,19 +157,16 @@ EOF
 " }}}
 
 " {{{ skkeleton
-function! s:skkeleton_init() abort
-  call skkeleton#config({
-  \ 'eggLikeNewline': v:true,
-  \ 'showCandidatesCount': 1,
-  \ 'globalJisyo': '$HOME/ghq/github.com/skk-dev/dict/SKK-JISYO.L'
-  \ })
-  call skkeleton#register_kanatable('rom', {
-  \ "z\<Space>": ["\u3000", ''],
-  \ })
-  endfunction
-  autocmd User skkeleton-initialize-pre call s:skkeleton_init()
 imap <C-j> <Plug>(skkeleton-toggle)
 cmap <C-j> <Plug>(skkeleton-toggle)
+call skkeleton#config({
+\ 'eggLikeNewline': v:true,
+\ 'showCandidatesCount': 3,
+\ 'globalJisyo': '$HOME/ghq/github.com/skk-dev/dict/SKK-JISYO.L'
+\ })
+call skkeleton#register_kanatable('rom', {
+\ "z\<Space>": ["\u3000", ''],
+\ })
 " }
 
 " Coc Settings {{{

@@ -1,3 +1,6 @@
+filetype off
+filetype plugin indent off
+
 " display
 set colorcolumn=88,100
 set number
@@ -20,7 +23,7 @@ set softtabstop=0
 set autoindent
 set tabstop=2
 " }}}
-"
+
 
 " c-mode maps {{{
 cnoremap <C-a> <Home>

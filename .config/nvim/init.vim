@@ -4,7 +4,7 @@ set number
 set signcolumn=number
 set clipboard+=unnamedplus
 set pumblend=30
-set ambiwidth=double
+set ambiwidth=single
 filetype plugin indent on
 syntax enable
 set mouse=a

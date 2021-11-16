@@ -263,7 +263,7 @@ function mkvenv() {
     venv_name=${_venv_name}
   fi
 
-  local expected_venv="${VENVFZF_ROOT}/${venv_name}/venv"
+  local expected_venv="${VENVFZF_ROOT}/${venv_name}"
   if [[ -d expected_venv ]]; then
     echo "${expected_venv} is Already exist !!"
     return

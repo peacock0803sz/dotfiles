@@ -3,7 +3,7 @@ env:
 
 window:
   dimensions:
-    columns: 210
+    columns: 200
     lines: 56
   decorations: buttonless
 

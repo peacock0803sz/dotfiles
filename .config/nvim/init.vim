@@ -16,12 +16,12 @@ set mouse=a
 " indent {{{
 set expandtab
 set shiftround
-set shiftwidth=2
-set smartindent
-set smarttab
-set softtabstop=0
-set autoindent
-set tabstop=2
+" set shiftwidth=2
+" set smartindent
+" set smarttab
+" set softtabstop=0
+" set autoindent
+" set tabstop=2
 " }}}
 
 

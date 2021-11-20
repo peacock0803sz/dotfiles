@@ -215,7 +215,7 @@ bindkey '^r' history-fzf
 
 function ssh-fzf() {
   local selected_host=$(grep "Host " ~/.ssh/config | grep -v '*' | cut -b 6- | fzf --query="$LBUFFER")
-  if [ -n "$selected_host" ]; then
+  if [[ -n "$selected_host" ]]; then
     BUFFER="ssh ${selected_host}"
     zle accept-line
   fi
@@ -224,18 +224,18 @@ function ssh-fzf() {
 zle -N ssh-fzf
 bindkey '^\' ssh-fzf
 
-export VENVFZF_ROOT="${HOME}/venvs"
+export VENV_ROOT="${HOME}/venvs"
 VENVFZF_VENV_OPTIONS=""
-FZF="fzf"
 PYTHONROOT="/Library/Frameworks/Python.framework/Versions/"
-if [[ -n ${TMUX} ]] && [[ $(which fzf-tmux) ]]; then
-  FZF="fzf-tmux"
-fi
 
 function venv-fzf() {
-  local dir=$(_list_venvs | $FZF --prompt="VNEV> " | cut -d " " -f 1)
+  if [[ ! -z ${TMUX} ]] && [[ $(which fzf-tmux) ]]; then
+    local dir=$(_list_venvs | fzf-tmux -p 90%,90% --prompt="vnev> ")
+  else
+    local dir=$(_list_venvs | fzf --prompt="vnev> ")
+  fi
   if [[ -n $dir ]]; then
-    BUFFER=". $dir"
+    BUFFER=". $dir/bin/activate"
     CURSOR=$#BUFFER
     zle accept-line
   fi
@@ -243,13 +243,10 @@ function venv-fzf() {
 }
 
 function _list_venvs() {
-  local dirs=$(find $VENVFZF_ROOT -maxdepth 7 -mindepth 5 -type d | grep "bin")
+  local dirs=$(find $VENV_ROOT -maxdepth 4 -mindepth 4 -type d)
 
   for d in $dirs; do
     echo $d
-    # if [[ -f $d/bin/python3 ]]; then
-    #   echo "$d/bin/activate"
-    # fi
   done
 }
 zle -N venv-fzf
@@ -263,7 +260,7 @@ function mkvenv() {
     venv_name=${_venv_name}
   fi
 
-  local expected_venv="${VENVFZF_ROOT}/${venv_name}"
+  local expected_venv="${VENV_ROOT}/${venv_name}"
   if [[ -d expected_venv ]]; then
     echo "${expected_venv} is Already exist !!"
     return

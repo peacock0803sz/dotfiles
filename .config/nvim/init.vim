@@ -165,12 +165,15 @@ cmap <C-j> <Plug>(skkeleton-toggle)
 call skkeleton#config({
 \ 'eggLikeNewline': v:true,
 \ 'showCandidatesCount': 3,
-\ 'globalJisyo': '$HOME/ghq/github.com/skk-dev/dict/SKK-JISYO.L'
+\ 'globalJisyo': '~/ghq/github.com/skk-dev/dict/SKK-JISYO.L'
 \ })
-call skkeleton#register_kanatable('rom', {
-\ "z\<Space>": ["\u3000", ''],
-\ })
+" call skkeleton#register_kanatable('rom', {
+" \ "z\<Space>": ["\u3000", ''],
+" \ })
 " }
+autocmd User skkeleton-enable-pre let b:coc_suggest_disable = v:true
+autocmd User skkeleton-disable-pre let b:coc_suggest_disable = v:false
+" }}}
 
 " Coc Settings {{{
 

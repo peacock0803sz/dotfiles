@@ -8,7 +8,6 @@ set signcolumn=number
 set clipboard+=unnamedplus
 set pumblend=30
 set ambiwidth=single
-filetype plugin indent on
 syntax enable
 set mouse=a
 " }}}
@@ -16,12 +15,12 @@ set mouse=a
 " indent {{{
 set expandtab
 set shiftround
-" set shiftwidth=2
-" set smartindent
-" set smarttab
-" set softtabstop=0
-" set autoindent
-" set tabstop=2
+set shiftwidth=2
+set smartindent
+set smarttab
+set softtabstop=0
+set autoindent
+set tabstop=2
 " }}}
 
 
@@ -108,7 +107,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
 Plug 'machakann/vim-sandwich'
 
 Plug 'monaqa/dial.nvim'
@@ -151,9 +150,6 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
   highlight = {
     enable = true,
-  },
-  indent = {
-    enable = true
   }
 }
 EOF

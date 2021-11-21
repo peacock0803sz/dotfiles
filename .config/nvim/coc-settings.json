@@ -17,6 +17,10 @@
     "MD013": { "line_length": 200 },
     "MD026": false
   },
+  "deno.enable": true,
+  "deno.lint": true,
+  "prettier.disableLanguages": ["typescript"],
+  "typescript.format.enabled": false,
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",

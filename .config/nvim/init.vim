@@ -4,7 +4,7 @@ filetype plugin indent off
 " display
 set colorcolumn=88,100
 set number
-set signcolumn=number
+set signcolumn=yes
 set clipboard+=unnamedplus
 set pumblend=30
 set ambiwidth=single
@@ -71,6 +71,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'sainnhe/sonokai'
 Plug 'prabirshrestha/async.vim'
 Plug 'vim-denops/denops.vim'
+Plug 'skanehira/denops-docker.vim'
 
 Plug 'neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' } 
 let g:coc_global_extensions = [
@@ -91,6 +92,7 @@ let g:coc_global_extensions = [
   \ 'coc-prettier',
   \ 'coc-pyright',
   \ 'coc-rust-analyzer',
+  \ 'coc-snippets',
   \ 'coc-sh',
   \ 'coc-stylelint',
   \ 'coc-sh',
@@ -109,13 +111,13 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'kien/rainbow_parentheses.vim'
 "Plug 'Yggdroot/indentLine'
 Plug 'machakann/vim-sandwich'
-
+Plug 'cohama/lexima.vim'
 Plug 'monaqa/dial.nvim'
 Plug 'lambdalisue/suda.vim'
 
 Plug 'rhysd/committia.vim'
 Plug 'lambdalisue/gina.vim'
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 
 Plug 'vim-test/vim-test'
 
@@ -123,6 +125,8 @@ Plug 'lambdalisue/fern.vim'
 Plug 'yuki-yano/fern-preview.vim'
 
 Plug 'vim-skk/skkeleton'
+
+Plug 'thinca/vim-quickrun'
 
 call plug#end()
 " }}}
@@ -309,7 +313,7 @@ xnoremap <C--> <Plug>(dial-decrement)
 " }}}
 
 " fern {{{
-nnoremap <Leader>fe :Fern -drawer .<CR>
+nnoremap <Leader>fe :<C-u>Fern -drawer .<CR>
 " }}}
 
 

@@ -112,6 +112,7 @@ Plug 'kien/rainbow_parentheses.vim'
 "Plug 'Yggdroot/indentLine'
 Plug 'machakann/vim-sandwich'
 Plug 'cohama/lexima.vim'
+Plug 'yuki-yano/fuzzy-motion.vim'
 Plug 'monaqa/dial.nvim'
 Plug 'lambdalisue/suda.vim'
 

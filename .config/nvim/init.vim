@@ -67,8 +67,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-jp/vimdoc-ja'
 
 Plug 'itchyny/lightline.vim'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'sainnhe/sonokai'
+
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'prabirshrestha/async.vim'
 Plug 'vim-denops/denops.vim'
 Plug 'skanehira/denops-docker.vim'
@@ -132,20 +134,43 @@ call plug#end()
 " }}}
 
 " colorscheme and statusline {{{
-let g:lightline = {
-  \ 'colorscheme': 'sonokai',
-  \ 'active': {
-    \ 'left': [[ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ]],
-    \ 'right': [[ 'lineinfo' ], [ 'fileencoding', 'filetype', ]],
-  \ },
-  \ 'component': {'charvaluehex': '0x%B'},
-\ }
+
+lua << END
+require'lualine'.setup {
+  options = {
+    icons_enabled = true,
+    theme = 'tokyonight',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
+}
+END
 
 set termguicolors
 
-let g:sonokai_style = 'default'
-let g:sonokai_enable_italic = 1
-colorscheme sonokai
+let g:tokyonight_style = "storm"
+let g:tokyonight_transparent = v:true
+colorscheme tokyonight
 " }}}
 
 " treesitter

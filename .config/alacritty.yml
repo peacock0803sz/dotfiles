@@ -6,7 +6,7 @@ window:
     columns: 200
     lines: 56
   decorations: buttonless
-  opacity: 0.8
+  opacity: 0.9
 
 scrolling:
   multiplier: 1
@@ -14,9 +14,9 @@ scrolling:
 # Font configuration
 font:
   normal:
-    family: Jetbrains Mono for Powerline
+    family: "JetBrains Mono"
     style: Regular
-  size: 14.0
+  size: 13
 
 # TokyoNight Alacritty Colors
 colors:

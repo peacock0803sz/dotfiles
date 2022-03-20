@@ -12,7 +12,6 @@ fi
 
 setopt histignorealldups sharehistory
 
-# Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
@@ -166,27 +165,33 @@ zinit light-mode for \
   srijanshetty/zsh-pip-completion \
   hlissner/zsh-autopair
 
-# export PATH="$(ghq root)/github.com/yuki-yano/zeno.zsh/bin/:$PATH"
-# source $(ghq root)/github.com/yuki-yano/zeno.zsh/zeno.zsh
-zinit ice lucid depth"1" blockf
-zinit light yuki-yano/zeno.zsh
+source $(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh
+# export ZENO_ROOT="$(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh"
+# zinit ice lucid depth"1" blockf
+# zinit light yuki-yano/zeno.zsh
 
-export ZENO_ENABLE_FZF_TMUX=1
+# export ZENO_ENABLE_FZF_TMUX=1
+export ZENO_ENABLE_SOCK=0
 export ZENO_FZF_TMUX_OPTIONS="-p 90%,90%"
-export ZENO_GIT_CAT="bat --color=always"
+export ZENO_GIT_CAT="bat -p"
 export ZENO_GIT_TREE="exa --tree"
 bindkey ' '    zeno-auto-snippet
 bindkey '^m'   zeno-auto-snippet-and-accept-line
 bindkey '^x^s' zeno-insert-snippet
 bindkey '^t'   zeno-completion
+if [[ -n $ZENO_LOADED ]]; then
+  bindkey ' '  zeno-auto-snippet
+  bindkey '^m' zeno-auto-snippet-and-accept-line
+  bindkey '^i' zeno-completion
+fi
 
 function ghq-fzf() {
   local dir
 
   if [[ ! -z ${TMUX} ]]; then
-    dir=$(ghq list -p | sed -e "s|${HOME}|~|" | fzf-tmux $ZENO_FZF_TMUX_OPTIONS --preview "bat \$(eval echo {})/README.md" --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up)
+    dir=$(ghq list -p | sed -e "s|${HOME}|~|" | fzf-tmux $ZENO_FZF_TMUX_OPTIONS --preview "$ZENO_GIT_CAT \$(eval echo {})/README.md" --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up)
   else
-    dir=$(ghq list -p | sed -e "s|${HOME}|~|" | fzf --preview "bat \$(eval echo {})/README.md" --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up)
+    dir=$(ghq list -p | sed -e "s|${HOME}|~|" | fzf --preview "$ZENO_GIT_CAT \$(eval echo {})/README.md" --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up)
   fi
 
   if [[ $dir == "" ]]; then

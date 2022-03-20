@@ -61,57 +61,28 @@ nnoremap <silent> [TABCMD]c :<c-u>tabs<cr>
 nnoremap <silent> [TABCMD]s :<c-u>tabnew<cr>
 " }}}
 
-" plugins
-" {{{
+" {{{ Plugins
 call plug#begin('~/.vim/plugged')
 Plug 'vim-jp/vimdoc-ja'
 
-Plug 'itchyny/lightline.vim'
-Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'lambdalisue/nerdfont.vim'
+Plug 'nvim-lua/plenary.nvim'
 
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-Plug 'prabirshrestha/async.vim'
+Plug 'sainnhe/sonokai'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'akinsho/bufferline.nvim'
+
 Plug 'vim-denops/denops.vim'
 Plug 'skanehira/denops-docker.vim'
 
 Plug 'neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' } 
-let g:coc_global_extensions = [
-  \ 'coc-actions',
-  \ 'coc-calc',
-  \ 'coc-css',
-  \ 'coc-deno',
-  \ 'coc-diagnostic',
-  \ 'coc-docker',
-  \ 'coc-eslint',
-  \ 'coc-fzf-preview',
-  \ 'coc-git',
-  \ 'coc-go',
-  \ 'coc-html',
-  \ 'coc-json',
-  \ 'coc-markdownlint',
-  \ 'coc-pairs',
-  \ 'coc-prettier',
-  \ 'coc-pyright',
-  \ 'coc-rust-analyzer',
-  \ 'coc-snippets',
-  \ 'coc-sh',
-  \ 'coc-stylelint',
-  \ 'coc-sh',
-  \ 'coc-tag',
-  \ 'coc-tsserver',
-  \ 'coc-vetur',
-  \ 'coc-vimlsp',
-  \ 'coc-word',
-  \ 'coc-yaml'
-\ ]
-
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 
 Plug 'kien/rainbow_parentheses.vim'
-"Plug 'Yggdroot/indentLine'
 Plug 'machakann/vim-sandwich'
 Plug 'cohama/lexima.vim'
 Plug 'yuki-yano/fuzzy-motion.vim'
@@ -120,11 +91,12 @@ Plug 'lambdalisue/suda.vim'
 
 Plug 'rhysd/committia.vim'
 Plug 'lambdalisue/gina.vim'
-"Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
 
 Plug 'vim-test/vim-test'
 
 Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'yuki-yano/fern-preview.vim'
 
 Plug 'vim-skk/skkeleton'
@@ -134,23 +106,34 @@ Plug 'thinca/vim-quickrun'
 call plug#end()
 " }}}
 
-" colorscheme and statusline {{{
-
-lua << END
+" statusline {{{
+lua << EOF
 require'lualine'.setup {
   options = {
     icons_enabled = true,
-    theme = 'tokyonight',
-    component_separators = { left = '', right = ''},
+    theme = 'sonokai',
+    component_separators = { left = '|', right = '|'},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {},
     always_divide_middle = true,
   },
   sections = {
     lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_b = {
+      'branch', 
+      {
+        'diff',
+        colored = true,
+        diff_color = {
+          added    = {fg = '#9ece6a'},
+          modified = {fg = '#e0af68'},
+          removed  = {fg = '#db4b4b'},
+        },
+        symbols={added='+', modified='~', removed='-'},
+      },
+    },
+    lualine_c = {'diagnostics'},
+    lualine_x = {'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
   },
@@ -162,20 +145,29 @@ require'lualine'.setup {
     lualine_y = {},
     lualine_z = {}
   },
-  tabline = {},
   extensions = {}
 }
-END
+EOF
+" }}} statusline
 
+" {{ tabline
+lua << EOF
+require('bufferline').setup {
+  name_formatter = 'path',
+}
+EOF
+" }}
+
+" {{{ ColorScheme
 set termguicolors
 
-let g:tokyonight_style = "storm"
-let g:tokyonight_transparent = v:true
-colorscheme tokyonight
+let g:sonokai_style = 'atlantis'
+let g:sonokai_disable_italic_comment = 1
+colorscheme sonokai
 " }}}
 
 " treesitter
-lua <<EOF
+lua << EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
   highlight = {
@@ -199,6 +191,39 @@ call skkeleton#config({
 " }
 autocmd User skkeleton-enable-pre let b:coc_suggest_disable = v:true
 autocmd User skkeleton-disable-pre let b:coc_suggest_disable = v:false
+" }}}
+
+" {{{ Coc global extensions
+let g:coc_global_extensions = [
+  \ 'coc-actions',
+  \ 'coc-calc',
+  \ 'coc-css',
+  \ 'coc-deno',
+  \ 'coc-diagnostic',
+  \ 'coc-docker',
+  \ 'coc-eslint',
+  \ 'coc-fzf-preview',
+  \ 'coc-go',
+  \ 'coc-html',
+  \ 'coc-htmldjango',
+  \ 'coc-json',
+  \ 'coc-lua',
+  \ 'coc-markdownlint',
+  \ 'coc-pairs',
+  \ 'coc-prettier',
+  \ 'coc-pyright',
+  \ 'coc-rust-analyzer',
+  \ 'coc-snippets',
+  \ 'coc-sh',
+  \ 'coc-stylelint',
+  \ 'coc-sh',
+  \ 'coc-tag',
+  \ 'coc-tsserver',
+  \ 'coc-vetur',
+  \ 'coc-vimlsp',
+  \ 'coc-word',
+  \ 'coc-yaml'
+\ ]
 " }}}
 
 " Coc Settings {{{
@@ -339,7 +364,14 @@ xnoremap <C--> <Plug>(dial-decrement)
 " }}}
 
 " fern {{{
+let g:fern#renderer = "nerdfont"
+
 nnoremap <Leader>fe :<C-u>Fern -drawer .<CR>
+augroup fern-signcolumn
+  autocmd!
+  autocmd FileType fern set signcolumn=no
+  autocmd FileType fern set nonumber
+augroup END
 " }}}
 
 
@@ -380,16 +412,25 @@ function! g:committia_hooks.edit_open(info)
   imap <buffer><C-n> <Plug>(committia-scroll-diff-down-half)
   imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
 endfunction
+
+augroup plugin-committia
+  autocmd!
+  autocmd BufReadPost COMMIT_EDITMSG,MERGE_MSG if s:should_open('gitcommit') | call committia#open('git') | endif
+  autocmd BufEnter gina-commit call committia#open('git')
+augroup END
 " }}}
 
-" {{{
-augroup plugin-committia
-    autocmd!
-    autocmd BufReadPost COMMIT_EDITMSG,MERGE_MSG if s:should_open('gitcommit') | call committia#open('git') | endif
+" {{{ gitsign
 
-    " ... Add other VCSs' commit editor filetypes
-    autocmd BufEnter gina-commit call committia#open('git')
-augroup END
+lua << EOF
+require('gitsigns').setup {
+  --
+}
+EOF
+" }}}
+
+" {{{ vue.js
+autocmd BufEnter,BufRead *.njk set filetype=django
 " }}}
 
 " transparents {{{
@@ -401,4 +442,4 @@ highlight EndOfBuffer ctermbg=NONE guibg=NONE
 " }}}
 
 " F**K Conceal!!!
- autocmd Filetype json setl conceallevel=0 " It doesn't works
+ autocmd Filetype json setl conceallevel=0

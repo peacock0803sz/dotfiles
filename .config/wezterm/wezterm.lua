@@ -8,25 +8,26 @@ return {
   -- Window
   initial_cols = 184,
   initial_rows = 54,
-  window_background_opacity = 0.8,
+  window_background_opacity = 0.9,
   -- default_workspace = "0",
 
   -- Fonts
   font = wezterm.font_with_fallback({
+      {family="UDEV Gothic", weight="Bold"},
       {family="HackGenNerd", weight="Bold"},
-      {family="JetBrains Mono", weight="Bold"},
   }),
   font_size = 14.0,
 
-  color_scheme = "3024 Night",
+  color_scheme = "MaterialDarker",
 
   use_ime = false,
+
   -- Keybindings
   disable_default_key_bindings = true,
   leader = {key="s", mods="CTRL", timeout_milliseconds=1000},
   keys = {
     {key="r", mods="LEADER", action="ReloadConfiguration"},
-    {key="f", mods="ALT", action=wezterm.action{Search={CaseSensitiveString=""}}},
+    {key="f", mods="LEADER", action=wezterm.action{Search={CaseSensitiveString=""}}},
     {key="q", mods="CMD", action="QuitApplication"},
 
     -- Clipboards
@@ -57,7 +58,6 @@ return {
     -- Tabs
     {key="w", mods="ALT", action=wezterm.action{ShowLauncherArgs={flags="FUZZY|TABS"}}},
     {key="s", mods="ALT", action=wezterm.action{SpawnTab="CurrentPaneDomain"}},
-    {key="w", mods="LEADER", action=wezterm.action{CloseCurrentTab={confirm=false}}},
     {key="j", mods="ALT", action=wezterm.action{ActivateTabRelative=1}},
     {key="k", mods="ALT", action=wezterm.action{ActivateTabRelative=-1}},
     {key="1", mods="ALT", action=wezterm.action{ActivateTab=0}},
@@ -72,6 +72,7 @@ return {
 
 
     -- Panes
+    {key="w", mods="LEADER", action=wezterm.action{CloseCurrentPane={confirm=false}}},
     {key="x", mods="ALT", action=wezterm.action{SplitVertical={domain="CurrentPaneDomain"}}},
     {key="v", mods="ALT", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
     {key="h", mods="ALT|SHIFT", action=wezterm.action{ActivatePaneDirection="Left"}},

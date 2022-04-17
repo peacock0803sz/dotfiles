@@ -70,6 +70,11 @@ function gitroot() {
   fi
 }
 
+# visual editor
+autoload -Uz edit-command-line; zle -N edit-command-line
+# bindkey -M vicmd v edit-command-line
+bindkey "^x^e" edit-command-line
+
 # aliases
 
 alias reloadzsh='exec -l zsh'
@@ -100,7 +105,8 @@ case ${OSTYPE} in
 
     export XML_CATALOG_FILES=/opt/homebrew/etc/xml/catalog
     export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+    [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
     ;;
   linux*)
     if [ -e /etc/debian_version ]; then
@@ -139,9 +145,9 @@ complete -C `command -v aws_completer` aws
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-  print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+  print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
   command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-  command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+  command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
     print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
     print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
@@ -152,18 +158,20 @@ autoload -Uz _zinit
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
-zinit light-mode for \
-  zinit-zsh/z-a-patch-dl \
-  zinit-zsh/z-a-as-monitor \
-  zinit-zsh/z-a-bin-gem-node \
-  zsh-users/zsh-autosuggestions \
-  zsh-users/zsh-completions \
-  zdharma/fast-syntax-highlighting \
-  zdharma/history-search-multi-word \
-  mollifier/anyframe \
-  akoenig/npm-run.plugin.zsh \
-  srijanshetty/zsh-pip-completion \
-  hlissner/zsh-autopair
+zinit light zdharma-continuum/zinit-annex-as-monitor
+zinit light zdharma-continuum/zinit-annex-bin-gem-node
+zinit light zdharma-continuum/zinit-annex-patch-dl
+zinit light zdharma-continuum/zinit-annex-rust
+
+zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light zdharma-continuum/history-search-multi-word
+zinit light mollifier/anyframe
+zinit light akoenig/npm-run.plugin.zsh
+zinit light srijanshetty/zsh-pip-completion
+zinit light hlissner/zsh-autopair
+
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-completions
 
 source $(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh
 # export ZENO_ROOT="$(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh"

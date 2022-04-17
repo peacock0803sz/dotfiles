@@ -1,5 +1,6 @@
 filetype off
 filetype plugin indent off
+let $EDITOR = 'neovim-remote'
 
 " display
 set colorcolumn=88,100
@@ -16,7 +17,7 @@ set mouse=a
 set expandtab
 set shiftround
 set shiftwidth=2
-set smartindent
+" set smartindent
 set smarttab
 set softtabstop=0
 set autoindent
@@ -102,6 +103,7 @@ Plug 'yuki-yano/fern-preview.vim'
 Plug 'vim-skk/skkeleton'
 
 Plug 'thinca/vim-quickrun'
+Plug 'folke/which-key.nvim'
 
 call plug#end()
 " }}}
@@ -151,17 +153,17 @@ EOF
 " }}} statusline
 
 " {{ tabline
-lua << EOF
-require('bufferline').setup {
-  name_formatter = 'path',
-}
-EOF
+" lua << EOF
+" require('bufferline').setup {
+"   name_formatter = 'path',
+" }
+" EOF
 " }}
 
 " {{{ ColorScheme
 set termguicolors
 
-let g:sonokai_style = 'atlantis'
+let g:sonokai_style = 'andromeda'
 let g:sonokai_disable_italic_comment = 1
 colorscheme sonokai
 " }}}
@@ -176,6 +178,16 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 " }}}
+
+" {{{ which-key
+lua << EOF
+require('which-key').setup{}
+EOF
+
+nnoremap <leader>? :WhichKey <CR>
+inoremap <c-?> :WhichKey i <CR>
+" }}}
+
 
 " {{{ skkeleton
 imap <C-j> <Plug>(skkeleton-toggle)

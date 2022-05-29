@@ -79,6 +79,7 @@ Plug 'vim-denops/denops.vim'
 Plug 'skanehira/denops-docker.vim'
 
 Plug 'neoclide/coc.nvim', { 'merged': 0, 'branch': 'release' } 
+Plug 'dccsillag/magma-nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
@@ -171,7 +172,7 @@ colorscheme sonokai
 " treesitter
 lua << EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
+  ensure_installed = {"python", "javascript", "vue", "rust"},
   highlight = {
     enable = true,
   }
@@ -361,6 +362,17 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" }}}
+
+" magma-nvim {{{
+nnoremap <silent><expr> <Leader>j        :MagmaEvaluateOperator<CR>
+nnoremap <silent>       <Leader>jl       :MagmaEvaluateLine<CR>
+xnoremap <silent>       <Leader>j<Enter> :<C-u>MagmaEvaluateVisual<CR>
+nnoremap <silent>       <Leader>jc       :MagmaReevaluateCell<CR>
+nnoremap <silent>       <Leader>jd       :MagmaDelete<CR>
+nnoremap <silent>       <Leader>jo       :MagmaShowOutput<CR>
+
+let g:magma_automatically_open_output = v:true
 " }}}
 
 let g:test#python#runner = 'pytest'

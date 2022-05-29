@@ -107,6 +107,10 @@ case ${OSTYPE} in
     export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
     [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+
+    # terraform
+    autoload -U +X bashcompinit && bashcompinit
+    complete -o nospace -C /opt/homebrew/bin/terraform terraform
     ;;
   linux*)
     if [ -e /etc/debian_version ]; then
@@ -179,17 +183,14 @@ source $(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh
 # zinit light yuki-yano/zeno.zsh
 
 # export ZENO_ENABLE_FZF_TMUX=1
-export ZENO_ENABLE_SOCK=0
+export ZENO_ENABLE_SOCK=1
 export ZENO_FZF_TMUX_OPTIONS="-p 90%,90%"
-export ZENO_GIT_CAT="bat -p"
+export ZENO_GIT_CAT="bat -p --color=always"
 export ZENO_GIT_TREE="exa --tree"
-bindkey ' '    zeno-auto-snippet
-bindkey '^m'   zeno-auto-snippet-and-accept-line
-bindkey '^x^s' zeno-insert-snippet
-bindkey '^t'   zeno-completion
 if [[ -n $ZENO_LOADED ]]; then
   bindkey ' '  zeno-auto-snippet
   bindkey '^m' zeno-auto-snippet-and-accept-line
+  bindkey '^x^s' zeno-insert-snippet
   bindkey '^i' zeno-completion
 fi
 
@@ -291,6 +292,8 @@ function mkvenv() {
   echo "$_py -m venv ${expected_venv}"
   $_py -m venv ${expected_venv}
 }
+
+export PIP_REQUIRE_VIRTUALENV=true
 
 # zinit light "https://gist.github.com/peacock0803sz/2d283b4f3ce74c780aa89b1c18fe08b8"
 

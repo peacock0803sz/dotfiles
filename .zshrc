@@ -293,7 +293,11 @@ function mkvenv() {
   $_py -m venv ${expected_venv}
 }
 
-export PIP_REQUIRE_VIRTUALENV=true
+export PIP_REQUIRE_VIRTUALENV=1
+
+# Ruby
+
+eval "$(rbenv init - zsh)"
 
 # zinit light "https://gist.github.com/peacock0803sz/2d283b4f3ce74c780aa89b1c18fe08b8"
 

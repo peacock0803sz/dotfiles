@@ -173,3 +173,5 @@ flycheck_*.el
 .history/
 
 **/pip-wheel-metadata/*
+
+.*-version

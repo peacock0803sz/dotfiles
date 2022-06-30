@@ -3,6 +3,7 @@
   "python.formatting.blackPath": "black",
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Path": "flake8",
+  "python.linting.flake8Args": ["--max-line-length 88"],
   "python.linting.mypyEnabled": true,
   "python.linting.mypyPath": "mypy",
   "python.linting.mypyArgs": [
@@ -12,19 +13,7 @@
     "--python-version 3.10"
   ],
   "rust-analyzer.server.path": "/opt/homebrew/bin/rust-analyzer",
-  "markdownlint.config": {
-    "MD007": { "indent": 4 },
-    "MD013": { "line_length": 200 },
-    "MD026": false
-  },
   "languageserver": {
-    "terraform": {
-      "command": "terraform-ls",
-      "args": ["serve"],
-      "filetypes": ["terraform", "tf"],
-      "initializationOptions": {},
-      "settings": {}
-    },
     "ccls": {
       "command": "ccls",
       "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
@@ -34,6 +23,18 @@
           "directory": "/tmp/ccls-cache"
         }
       }
+    },
+    "marksman": {
+      "command": "marksman",
+      "args": ["server"],
+      "filetypes": ["markdown"]
+    },
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
     }
   }
 }

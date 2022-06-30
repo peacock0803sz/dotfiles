@@ -1,6 +1,5 @@
 filetype off
 filetype plugin indent off
-let $EDITOR = 'neovim-remote'
 
 " display
 set colorcolumn=88,100
@@ -221,7 +220,6 @@ let g:coc_global_extensions = [
   \ 'coc-htmldjango',
   \ 'coc-json',
   \ 'coc-lua',
-  \ 'coc-markdownlint',
   \ 'coc-pairs',
   \ 'coc-prettier',
   \ 'coc-pyright',

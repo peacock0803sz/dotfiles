@@ -9,8 +9,7 @@
   "python.linting.mypyArgs": [
     "--ignore-missing-imports",
     "--follow-imports=silent",
-    "--show-column-numbers",
-    "--python-version 3.10"
+    "--show-column-numbers"
   ],
   "rust-analyzer.server.path": "/opt/homebrew/bin/rust-analyzer",
   "languageserver": {

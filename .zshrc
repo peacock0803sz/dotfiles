@@ -99,7 +99,7 @@ case ${OSTYPE} in
 
     source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
     source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-    export CLOUDSDK_PYTHON="/opt/homebrew/Cellar/python@3.9/3.9.6/bin/python3"
+    export PATH=${0:A:h}/bin:$PATH
 
     export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 
@@ -240,7 +240,7 @@ bindkey '^\' ssh-fzf
 
 export VENV_ROOT="${HOME}/venvs"
 VENVFZF_VENV_OPTIONS=""
-PYTHONROOT="/Library/Frameworks/Python.framework/Versions/"
+PYTHONROOT="/Library/Frameworks/Python.framework/Versions"
 
 function venv-fzf() {
   if [[ ! -z ${TMUX} ]] && [[ $(which fzf-tmux) ]]; then
@@ -282,15 +282,13 @@ function mkvenv() {
     mkdir -p $expected_venv
   fi
 
-  local versions=$(find $PYTHONROOT -maxdepth 1 | grep -e "[0-9]$")
-  for v in $versions; do
-    echo $v
-  done
+  echo "$(find $PYTHONROOT -maxdepth 1 | grep -e '[0-9]$')"
 
   read _py_number\?"Choise a number you wants use python > "
-  local _py="$PYTHONROOT/$_py_number/bin/python3"
+  local _py="$PYTHONROOT$_py_number/bin/python3"
   echo "$_py -m venv ${expected_venv}"
   $_py -m venv ${expected_venv}
+  source ${expected_venv}/bin/activate
 }
 
 export PIP_REQUIRE_VIRTUALENV=1

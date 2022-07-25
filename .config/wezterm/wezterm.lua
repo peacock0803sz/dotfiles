@@ -8,7 +8,7 @@ return {
   -- Window
   initial_cols = 184,
   initial_rows = 54,
-  window_background_opacity = 0.9,
+  window_background_opacity = 1,
   -- default_workspace = "0",
 
   -- Fonts

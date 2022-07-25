@@ -135,7 +135,7 @@ esac
 alias tf="terraform"
 
 # Go
-export GOPATH=~/go
+export GOPATH="$HOME/go/"
 export PATH="$PATH:$GOPATH/bin"
 
 # neovim
@@ -146,6 +146,13 @@ export LANG=ja_JP.UTF-8
 
 # aws completion
 complete -C `command -v aws_completer` aws
+
+# kubectl
+source <(kubectl completion zsh)
+kubectl completion zsh > "${fpath[1]}/_kubectl"
+
+source <(eksctl completion zsh)
+eksctl completion zsh > "${fpath[1]}/_eksctl"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then

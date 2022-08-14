@@ -41,7 +41,7 @@ return {
     {key="0", mods="ALT|SHIFT", action="ResetFontAndWindowSize"},
 
     -- Workspaces
-    {key="w", mods="ALT|SHIFT", action=wezterm.action{ShowLauncherArgs={flags="FUZZY|WORKSPACES"}}},
+    {key="w", mods="ALT|SHIFT", action=wezterm.action.ShowLauncherArgs{flags="FUZZY|WORKSPACES"}},
     {key="s", mods="ALT|SHIFT", action=wezterm.action{SwitchToWorkspace={}}},
     {key="l", mods="ALT", action=wezterm.action{SwitchWorkspaceRelative=1}},
     {key="h", mods="ALT", action=wezterm.action{SwitchWorkspaceRelative=-1}},

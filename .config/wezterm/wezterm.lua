@@ -8,7 +8,7 @@ return {
   -- Window
   initial_cols = 184,
   initial_rows = 54,
-  window_background_opacity = 1,
+  window_background_opacity = 0.9,
   -- default_workspace = "0",
 
   -- Fonts
@@ -18,7 +18,12 @@ return {
   }),
   font_size = 14.0,
 
-  color_scheme = "MaterialDarker",
+  color_scheme_dirs = { "./colors" },
+  color_scheme = "nightfox_wezterm",
+  colors = {
+    cursor_bg = "white",
+    cursor_border = "white"
+  },
 
   use_ime = false,
 

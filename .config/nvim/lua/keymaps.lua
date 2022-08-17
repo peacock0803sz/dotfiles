@@ -1,3 +1,5 @@
+local M = {}
+
 local opts = { noremap=true, silent=true }
 -- c-mode
 vim.api.nvim_set_keymap("c", "<C-a>", "<Home>", opts)
@@ -24,3 +26,6 @@ vim.api.nvim_set_keymap("n", "[TABCMD]w", ":<C-u>tabclose<CR>", opts)
 vim.api.nvim_set_keymap("n", "[TABCMD]o", ":<C-u>tabonly<CR>", opts)
 vim.api.nvim_set_keymap("n", "[TABCMD]c", ":<C-u>tabs<CR>", opts)
 vim.api.nvim_set_keymap("n", "[TABCMD]s", ":<C-u>tabnew<CR>", opts)
+
+M.opts = opts
+return M

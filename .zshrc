@@ -247,7 +247,7 @@ bindkey '^\' ssh-fzf
 
 export VENV_ROOT="${HOME}/venvs"
 VENVFZF_VENV_OPTIONS=""
-PYTHONROOT="/Library/Frameworks/Python.framework/Versions"
+PYTHONROOT="/Library/Frameworks/Python.framework/Versions/"
 
 function venv-fzf() {
   if [[ ! -z ${TMUX} ]] && [[ $(which fzf-tmux) ]]; then

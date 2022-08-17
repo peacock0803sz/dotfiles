@@ -1,5 +1,4 @@
 .vscode/
 
-.config/.DS_Store
-
-.DS_Store
+**/.DS_Store
+.config/nvim/plugin

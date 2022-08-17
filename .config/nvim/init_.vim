@@ -37,13 +37,6 @@ cnoremap <C-p> <Up>
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
 
-" <A-w> to toggle buffer everywhere
-noremap  <A-w> <C-w>w
-inoremap <A-w> <Esc><C-w>w
-tnoremap <A-w> <C-\><C-n><C-w>w
-tnoremap <A-\> <C-\><C-n>
-" }}}
-
 
 " tab setting {{{
 set showtabline=2
@@ -78,7 +71,8 @@ Plug 'vim-denops/denops.vim'
 Plug 'skanehira/denops-docker.vim'
 
 Plug 'neovim/nvim-lspconfig'
-Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
@@ -339,9 +333,39 @@ lua << EOS
         ["rust-analyzer"] = {}
       }
   }
+  require'lspconfig'.sumneko_lua.setup {
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = 'LuaJIT',
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {'vim'},
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
+  }
 EOS
 " }}}
 
+" Mason {{{
+lua << EOS
+  require("mason").setup(
+  require("mason-lspconfig").setup({
+    ensure_installed = { "sumneko_lua", "rust_analyzer", "pyright" }
+  })
+EOS
+" }}}
 
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 

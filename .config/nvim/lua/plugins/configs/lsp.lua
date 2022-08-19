@@ -1,7 +1,7 @@
 local opts = require("keymaps").opts
 
 -- diagnostics mappings
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+-- vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 -- vim.keymap.set('n', '<space>[d', vim.diagnostic.goto_prev, opts)
 -- vim.keymap.set('n', '<space>]d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
@@ -25,7 +25,7 @@ local on_attach = function(_, bufnr)
   -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   -- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', '<space>gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>fo', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', '<space>fo', vim.lsp.buf.format, bufopts)
 end
 
 -- specific language server configs
@@ -44,6 +44,8 @@ local settings = {
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {enable = false},
     }
+  },
+  pyright = { -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
   }
 }
 
@@ -52,13 +54,12 @@ local lspconfig = require("lspconfig")
 require("mason").setup()
 require("mason-lspconfig").setup()
 require("mason-lspconfig").setup_handlers({ function(server)
+  local capabilities = require("plugins.configs.cmp").capabilities
   local opt = require("cmp_nvim_lsp").update_capabilities(
-    vim.lsp.protocol.make_client_capabilities(),
+    capabilities,
     {on_attach = on_attach}  -- keymaps
   )
-
-  for key, value in pairs(settings) do
-    if key == server then opt.settings = value end
-  end
+  opt.on_attach = on_attach
+  opt.settings = settings[server]
   lspconfig[server].setup(opt)
 end })

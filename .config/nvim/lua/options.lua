@@ -17,7 +17,7 @@ vim.o.softtabstop = 0
 vim.o.shiftround = true
 vim.o.shiftwidth = 2
 vim.o.smarttab = true
--- vim.o.smartindent = true
-vim.o.autoindent = true
+vim.o.smartindent = false
+vim.o.autoindent = false
 
 vim.o.tabline = 2

@@ -1,8 +1,8 @@
-local cmp = require'cmp'
+local M = {}
+local cmp = require("cmp")
 
 cmp.setup({
   snippet = {
-    -- REQUIRED - you must specify a snippet engine
     expand = function(args)
       require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
     end,
@@ -53,9 +53,7 @@ cmp.setup.cmdline(':', {
   })
 })
 
--- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
-  capabilities = capabilities
-}
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities = require('cmp_nvim_lsp').update_capabilities(M.capabilities)
+
+return M

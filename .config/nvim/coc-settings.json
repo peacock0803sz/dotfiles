@@ -1,4 +1,5 @@
 {
+  "Lua.diagnostics.globals": ["vim", "wezterm"],
   "python.formatting.provider": "black",
   "python.formatting.blackPath": "black",
   "python.linting.flake8Enabled": true,

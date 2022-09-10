@@ -21,3 +21,4 @@ vim.o.smartindent = false
 vim.o.autoindent = false
 
 vim.o.tabline = 2
+vim.opt.swapfile = false

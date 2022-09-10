@@ -16,10 +16,17 @@ return require('packer').startup(function(use)
   use {'vim-denops/denops.vim'}
   use {'skanehira/denops-docker.vim'}
 
-  use {'neovim/nvim-lspconfig'}
-  use {'williamboman/mason.nvim'}
-  use {'williamboman/mason-lspconfig.nvim'}
-  use {'kkharji/lspsaga.nvim'}
+  if vim.env.lsp_provider == "nvim_lsp" then
+    use {'neovim/nvim-lspconfig'}
+    use {'williamboman/mason.nvim'}
+    use {'williamboman/mason-lspconfig.nvim'}
+    use {'kkharji/lspsaga.nvim'}
+  end
+
+  -- coc.nvim
+  if vim.env.lsp_provider == "coc" then
+    use {'neoclide/coc.nvim', branch='release'}
+  end
 
   use {'jose-elias-alvarez/null-ls.nvim'}
 

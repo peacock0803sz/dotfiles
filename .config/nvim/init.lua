@@ -1,3 +1,6 @@
+local lsp_provider = "coc"
+vim.env.lsp_provider = lsp_provider
+
 require("options")
 
 require("plugins.list")
@@ -12,7 +15,6 @@ for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/plugins/c
   require("plugins.configs." .. file:gsub("%.lua$", ""))
 end
 
-local lsp_provider = "coc"
 -- lsp provider
 for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/plugins/configs/" .. lsp_provider, [[v:val =~ "\.lua$"]])) do
   require("plugins.configs." .. lsp_provider .. "." .. file:gsub("%.lua$", ""))

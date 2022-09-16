@@ -1,63 +1,63 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
-  use {'wbthomason/packer.nvim'}
-  use {'vim-jp/vimdoc-ja'}
+  use { 'wbthomason/packer.nvim' }
+  use { 'vim-jp/vimdoc-ja' }
 
-  use {'nvim-lua/plenary.nvim'}
-  use {'kyazdani42/nvim-web-devicons'}
-  use {'lambdalisue/nerdfont.vim'}
+  use { 'nvim-lua/plenary.nvim' }
+  use { 'kyazdani42/nvim-web-devicons' }
+  use { 'lambdalisue/nerdfont.vim' }
 
   use { "EdenEast/nightfox.nvim", run = ":NightfoxCompile", }
 
-  use {'nvim-lualine/lualine.nvim'}
-  use {'akinsho/bufferline.nvim'}
+  use { 'nvim-lualine/lualine.nvim' }
+  use { 'akinsho/bufferline.nvim' }
 
-  use {'vim-denops/denops.vim'}
-  use {'skanehira/denops-docker.vim'}
+  use { 'vim-denops/denops.vim' }
+  use { 'skanehira/denops-docker.vim' }
 
   if vim.env.lsp_provider == "nvim_lsp" then
-    use {'neovim/nvim-lspconfig'}
-    use {'williamboman/mason.nvim'}
-    use {'williamboman/mason-lspconfig.nvim'}
-    use {'kkharji/lspsaga.nvim'}
+    use { 'neovim/nvim-lspconfig' }
+    use { 'williamboman/mason.nvim' }
+    use { 'williamboman/mason-lspconfig.nvim' }
+    use { 'kkharji/lspsaga.nvim' }
   end
 
   -- coc.nvim
   if vim.env.lsp_provider == "coc" then
-    use {'neoclide/coc.nvim', branch='release'}
+    use { 'neoclide/coc.nvim', branch = 'release' }
   end
 
-  use {'jose-elias-alvarez/null-ls.nvim'}
+  use { 'jose-elias-alvarez/null-ls.nvim' }
 
-  use {'hrsh7th/cmp-nvim-lsp'}
-  use {'hrsh7th/cmp-buffer'}
-  use {'hrsh7th/cmp-path'}
-  use {'hrsh7th/cmp-cmdline'}
-  use {'hrsh7th/nvim-cmp'}
-  use {'L3MON4D3/LuaSnip'}
-  use {'saadparwaiz1/cmp_luasnip'}
+  use { 'hrsh7th/cmp-nvim-lsp' }
+  use { 'hrsh7th/cmp-buffer' }
+  use { 'hrsh7th/cmp-path' }
+  use { 'hrsh7th/cmp-cmdline' }
+  use { 'hrsh7th/nvim-cmp' }
+  use { 'L3MON4D3/LuaSnip' }
+  use { 'saadparwaiz1/cmp_luasnip' }
 
-  use {'nvim-treesitter/nvim-treesitter', {run=':TSUpdate'}}
+  use { 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } }
 
-  use {"nvim-telescope/telescope.nvim"}
+  use { "nvim-telescope/telescope.nvim" }
 
-  use {'kien/rainbow_parentheses.vim'}
-  use {'machakann/vim-sandwich'}
-  use {'cohama/lexima.vim'}
-  use {'monaqa/dial.nvim'}
-  use {'lambdalisue/suda.vim'}
+  use { 'kien/rainbow_parentheses.vim' }
+  use { 'machakann/vim-sandwich' }
+  use { 'cohama/lexima.vim' }
+  use { 'monaqa/dial.nvim' }
+  use { 'lambdalisue/suda.vim' }
 
-  use {'rhysd/committia.vim'}
-  use {'lambdalisue/gina.vim'}
-  use {'lewis6991/gitsigns.nvim'}
+  use { 'rhysd/committia.vim' }
+  use { 'lambdalisue/gina.vim' }
+  use { 'lewis6991/gitsigns.nvim' }
 
-  use {'vim-test/vim-test'}
+  use { 'vim-test/vim-test' }
 
-  use {'lambdalisue/fern.vim'}
+  use { 'lambdalisue/fern.vim' }
 
-  use {'vim-skk/skkeleton'}
+  use { 'vim-skk/skkeleton' }
 
-  use {'thinca/vim-quickrun'}
-  use {'folke/which-key.nvim'}
+  use { 'thinca/vim-quickrun' }
+  use { 'folke/which-key.nvim' }
 end)

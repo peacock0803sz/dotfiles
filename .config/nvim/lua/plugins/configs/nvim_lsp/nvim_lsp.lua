@@ -10,7 +10,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', '<space>gD', vim.lsp.buf.declaration, opts)
   -- vim.keymap.set('n', '<space>gd', vim.lsp.buf.definition, bufopts)
   -- vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -32,17 +32,17 @@ end
 local settings = {
   sumneko_lua = { -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
     Lua = {
-      runtime = {version = 'LuaJIT'},
+      runtime = { version = 'LuaJIT' },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
+        globals = { 'vim' },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = vim.api.nvim_get_runtime_file("", true),
       },
       -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {enable = false},
+      telemetry = { enable = false },
     }
   },
   pyright = { -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
@@ -54,10 +54,10 @@ local lspconfig = require("lspconfig")
 require("mason").setup()
 require("mason-lspconfig").setup()
 require("mason-lspconfig").setup_handlers({ function(server)
-  local capabilities = require("plugins.configs.cmp").capabilities
+  local capabilities = require("plugins/configs/nvim_lsp/cmp").capabilities
   local opt = require("cmp_nvim_lsp").update_capabilities(
     capabilities,
-    {on_attach = on_attach}  -- keymaps
+    { on_attach = on_attach }-- keymaps
   )
   opt.on_attach = on_attach
   opt.settings = settings[server]

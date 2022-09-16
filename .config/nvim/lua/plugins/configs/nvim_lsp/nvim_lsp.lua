@@ -7,7 +7,7 @@ local opts = require("keymaps").opts
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- buffer mappings
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -26,6 +26,18 @@ local on_attach = function(_, bufnr)
   -- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', '<space>gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>fo', vim.lsp.buf.format, bufopts)
+
+  vim.keymap.set('n', '<space>or', function()
+    if client.name == "pyright" then
+      local params = {
+        command = 'pyright.organizeimports',
+        arguments = { vim.uri_from_bufnr(0) },
+      }
+      vim.lsp.buf.execute_command(params)
+    else
+      vim.lsp.buf.code_action("source.organizeImports")
+    end
+  end, bufopts)
 end
 
 -- specific language server configs
@@ -45,8 +57,6 @@ local settings = {
       telemetry = { enable = false },
     }
   },
-  pyright = { -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
-  }
 }
 
 -- lspconfig & mason

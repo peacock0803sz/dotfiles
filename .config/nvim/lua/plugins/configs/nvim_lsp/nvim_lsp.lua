@@ -1,3 +1,5 @@
+local M = {}
+
 local opts = require("keymaps").opts
 
 -- diagnostics mappings
@@ -39,6 +41,7 @@ local on_attach = function(client, bufnr)
     end
   end, bufopts)
 end
+M.on_attach = on_attach
 
 -- specific language server configs
 local settings = {
@@ -73,3 +76,5 @@ require("mason-lspconfig").setup_handlers({ function(server)
   opt.settings = settings[server]
   lspconfig[server].setup(opt)
 end })
+
+return M

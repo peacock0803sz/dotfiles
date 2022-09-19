@@ -45,7 +45,7 @@ vim.keymap.set("n", "<space>gr", "<Plug>(coc-reference)", opts)
 
 -- formatting
 vim.keymap.set("n", "<space>fo", "<Plug>(coc-format)", opts)
-vim.keymap.set("n", "<space>or", ":<C-u>call CocAction('runCommand', 'editor.action.organizeImport')<CR>", opts)
+vim.keymap.set("n", "<space>or", "<Cmd>call CocAction('runCommand', 'editor.action.organizeImport')<CR>", opts)
 
 -- Show documentation
 vim.keymap.set("n", "K", function()

@@ -1,6 +1,6 @@
 vim.api.nvim_set_var("fern#renderer", "nerdfont")
 
-vim.keymap.set("n", "<leader>fe", ":<C-u>Fern -drawer .<CR>", {})
+vim.keymap.set("n", "<space>fe", "<Cmd>Fern -drawer .<CR>", {})
 
 local groupname = "fern_signcolumn"
 vim.api.nvim_create_augroup(groupname, { clear = true })

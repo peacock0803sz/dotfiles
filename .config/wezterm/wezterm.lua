@@ -13,8 +13,7 @@ return {
 
   -- Fonts
   font = wezterm.font_with_fallback({
-      {family="UDEV Gothic", weight="Bold"},
-      {family="HackGenNerd", weight="Bold"},
+      {family="UDEV Gothic NF", weight="Bold"},
   }),
   font_size = 14.0,
 

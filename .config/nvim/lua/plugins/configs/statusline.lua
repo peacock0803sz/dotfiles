@@ -1,39 +1,39 @@
-require'lualine'.setup {
+require("lualine").setup({
   options = {
     icons_enabled = true,
-    theme = 'nordfox',
-    component_separators = { left = '|', right = '|'},
-    section_separators = { left = '', right = ''},
+    theme = "nordfox",
+    component_separators = { left = "|", right = "|" },
+    section_separators = { left = "", right = "" },
     disabled_filetypes = {},
     always_divide_middle = true,
   },
   sections = {
-    lualine_a = {'mode'},
+    lualine_a = { "mode" },
     lualine_b = {
-      'branch', 
+      "branch",
       {
-        'diff',
+        "diff",
         colored = true,
         diff_color = {
-          added    = {fg = '#9ece6a'},
-          modified = {fg = '#e0af68'},
-          removed  = {fg = '#db4b4b'},
+          added = { fg = "#9ece6a" },
+          modified = { fg = "#e0af68" },
+          removed = { fg = "#db4b4b" },
         },
-        symbols={added='+', modified='~', removed='-'},
+        symbols = { added = "+", modified = "~", removed = "-" },
       },
     },
-    lualine_c = {'diagnostics'},
-    lualine_x = {'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_c = { "diagnostics" },
+    lualine_x = { "filetype" },
+    lualine_y = { "progress" },
+    lualine_z = { "location" },
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = { "filename" },
+    lualine_x = { "location" },
     lualine_y = {},
-    lualine_z = {}
+    lualine_z = {},
   },
-  extensions = {}
-}
+  extensions = {},
+})

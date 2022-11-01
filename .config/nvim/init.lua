@@ -11,13 +11,21 @@ require("plugins.list")
 
 require("keymaps")
 
-for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/plugins/configs", [[v:val =~ "\.lua$"]])) do
+for _, file in
+  ipairs(vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/plugins/configs", [[v:val =~ "\.lua$"]]))
+do
   require("plugins.configs." .. file:gsub("%.lua$", ""))
 end
 
 -- lsp provider
-for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/plugins/configs/" .. lsp_provider,
-  [[v:val =~ "\.lua$"]])) do
+for _, file in
+  ipairs(
+    vim.fn.readdir(
+      vim.fn.stdpath("config") .. "/lua/plugins/configs/" .. lsp_provider,
+      [[v:val =~ "\.lua$"]]
+    )
+  )
+do
   require("plugins.configs." .. lsp_provider .. "." .. file:gsub("%.lua$", ""))
 end
 

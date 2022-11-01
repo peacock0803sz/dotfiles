@@ -1,6 +1,6 @@
 local M = {}
 
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 -- c-mode
 vim.keymap.set("c", "<C-a>", "<Home>", opts)
 vim.keymap.set("c", "<C-b>", "<Left>", opts)

@@ -7,10 +7,14 @@ vim.api.nvim_create_augroup(groupname, { clear = true })
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = groupname,
   pattern = "fern",
-  callback = function() vim.wo.signcolumn = "no" end
+  callback = function()
+    vim.wo.signcolumn = "no"
+  end,
 })
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = groupname,
   pattern = "fern",
-  callback = function() vim.wo.number = false end
+  callback = function()
+    vim.wo.number = false
+  end,
 })

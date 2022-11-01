@@ -1,4 +1,4 @@
-local opts = require('keymaps').opts
+local opts = require("keymaps").opts
 
 vim.keymap.set("n", "<Space>xx", "<Cmd>TroubleToggle<CR>", opts)
 vim.keymap.set("n", "<Space>xw", "<Cmd>TroubleToggle workspace_diagnostics<CR>", opts)

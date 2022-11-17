@@ -7,6 +7,8 @@ local sources = {
   -- Python
   null_ls.builtins.diagnostics.flake8,
   null_ls.builtins.formatting.black,
+  -- Lua
+  null_ls.builtins.formatting.stylua,
 }
 null_ls.setup({
   -- debug = true,

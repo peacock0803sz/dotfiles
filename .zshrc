@@ -5,6 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+setopt interactivecomments
+
 # Set up the prompt
 
 # promptinit
@@ -135,7 +137,7 @@ esac
 alias tf="terraform"
 
 # Go
-export GOPATH="$HOME/go/"
+export GOPATH="$HOME/qhq/"
 export PATH="$PATH:$GOPATH/bin"
 
 # neovim

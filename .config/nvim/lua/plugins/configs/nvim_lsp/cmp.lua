@@ -24,6 +24,7 @@ cmp.setup({
   }, {
     { name = "buffer" },
     { name = "spell" },
+    { name = "skkleton" },
   }),
 })
 

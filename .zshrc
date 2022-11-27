@@ -5,6 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+setopt interactivecomments
+
 # Set up the prompt
 
 # promptinit
@@ -18,9 +20,6 @@ bindkey -e
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
-
-autoload -Uz compinit && compinit
-autoload -Uz bashcompinit && bashcompinit
 
 zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' auto-description 'specify: %d'
@@ -88,29 +87,43 @@ fi
 
 case ${OSTYPE} in
   darwin*)
-    alias rosetta="arch -x86_64 /bin/zsh"
-    alias python3.8="/usr/bin/python3"
-    # Add Visual Studio Code (code)
-    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    if [[ $(uname -m) = "arm64" ]] then
+      alias rosetta="arch -x86_64 /bin/zsh"
+      alias python3.8="/usr/bin/python3"
+      # Add Visual Studio Code (code)
+      export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+      [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-    source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-    source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-    export PATH=${0:A:h}/bin:$PATH
+      source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+      source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+      export PATH=${0:A:h}/bin:$PATH
 
-    export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+      export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 
-    export XML_CATALOG_FILES=/opt/homebrew/etc/xml/catalog
-    export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+      export XML_CATALOG_FILES=/opt/homebrew/etc/xml/catalog
+      export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
-    [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+      [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
-    # terraform
-    autoload -U +X bashcompinit && bashcompinit
-    complete -o nospace -C /opt/homebrew/bin/terraform terraform
+      # terraform
+      autoload -U +X bashcompinit && bashcompinit
+      complete -o nospace -C /opt/homebrew/bin/terraform terraform
+    elif [[ $(uname -m) = "x86_64" ]] then
+      export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvM
+      [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+      source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+      source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+
+      autoload -U +X bashcompinit && bashcompinit
+      complete -o nospace -C /usr/local/bin/terraform terraform
+    fi
     ;;
   linux*)
     if [ -e /etc/debian_version ]; then
@@ -135,7 +148,7 @@ esac
 alias tf="terraform"
 
 # Go
-export GOPATH="$HOME/go/"
+export GOPATH="$HOME/qhq/"
 export PATH="$PATH:$GOPATH/bin"
 
 # neovim
@@ -184,10 +197,17 @@ zinit light hlissner/zsh-autopair
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 
-source $(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh
+zinit ice as"completion"
+zinit snippet OMZP::docker/_docker
+zinit snippet OMZP::docker-compose/_docker-compose
+
+# source $(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh
 # export ZENO_ROOT="$(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh"
-# zinit ice lucid depth"1" blockf
-# zinit light yuki-yano/zeno.zsh
+zinit ice lucid depth"1" blockf
+zinit light yuki-yano/zeno.zsh
+
+autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
 
 # export ZENO_ENABLE_FZF_TMUX=1
 export ZENO_ENABLE_SOCK=1

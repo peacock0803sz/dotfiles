@@ -5,6 +5,7 @@ vim.wo.signcolumn = "yes"
 vim.o.ambiwidth = "single"
 vim.o.mouse = "a"
 vim.termguicolors = true
+vim.o.colorcolumn = "88,100"
 
 if vim.fn.has("clipboard") == 1 then
   vim.o.clipboard = "unnamedplus,unnamed"
@@ -16,7 +17,7 @@ vim.o.tabstop = 2
 vim.o.softtabstop = 0
 vim.o.shiftround = true
 vim.o.shiftwidth = 2
-vim.o.smarttab = true
+vim.o.smarttab = false
 vim.o.smartindent = false
 vim.o.autoindent = false
 

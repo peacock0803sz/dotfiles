@@ -89,6 +89,8 @@ return require("packer").startup(function(use)
   use({ "vim-skk/skkeleton", requires = "vim-denops/denops.vim", branch = "cmp" })
   use({ "uga-rosa/cmp-skkeleton" })
 
+  use({ "tyru/open-browser-github.vim", requires="tyru/open-browser.vim" })
+
   use({ "thinca/vim-quickrun", requires = "lambdalisue/vim-quickrun-neovim-job" })
   use({ "folke/which-key.nvim" })
 end)

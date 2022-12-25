@@ -29,7 +29,6 @@ do
   require("plugins.configs." .. lsp_provider .. "." .. file:gsub("%.lua$", ""))
 end
 
-require("transparents")
 require("colorscheme")
 
 require("filetypes")

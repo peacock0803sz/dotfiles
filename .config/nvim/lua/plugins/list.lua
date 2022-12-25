@@ -8,7 +8,10 @@ return require("packer").startup(function(use)
   use({ "nvim-lua/plenary.nvim" })
   use({ "lambdalisue/nerdfont.vim" })
 
-  use({ "EdenEast/nightfox.nvim", run = ":NightfoxCompile" })
+  use({ "lambdalisue/guise.vim" })
+
+  -- use({ "rmehri01/onenord.nvim" })
+  use({ "catppuccin/nvim", as = "catppuccin" })
 
   use({ "nvim-lualine/lualine.nvim" })
   use({ "akinsho/bufferline.nvim" })
@@ -31,6 +34,8 @@ return require("packer").startup(function(use)
 
     use({ "kkharji/lspsaga.nvim" })
 
+    use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+
     use({ "jose-elias-alvarez/null-ls.nvim" })
     use({ "folke/lsp-colors.nvim" })
     use({
@@ -38,31 +43,18 @@ return require("packer").startup(function(use)
       after = { "mason.nvim", "nvim-lspconfig" },
       requires = { "kyazdani42/nvim-web-devicons" },
       config = function()
-        require("trouble").setup({
-          --
-        })
+        require("trouble").setup({})
       end,
     })
-    -- use({
-    --   "folke/noice.nvim",
-    --   event = "VimEnter",
-    --   config = function() require("noice").setup() end,
-    --   requires = {
-    --     "MunifTanjim/nui.nvim",
-    --     "hrsh7th/nvim-cmp",
-    --   }
-    -- })
     use({ "folke/neodev.nvim" })
-  end
-
-  -- coc.nvim
-  if vim.env.lsp_provider == "coc" then
+    -- coc.nvim
+  elseif vim.env.lsp_provider == "coc" then
     use({ "neoclide/coc.nvim", branch = "release" })
   end
 
-  use({ "nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" } })
-
+  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use({ "nvim-telescope/telescope.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
+  use({ "lambdalisue/mr.vim" })
 
   use({ "kien/rainbow_parentheses.vim" })
   use({ "machakann/vim-sandwich" })
@@ -86,10 +78,10 @@ return require("packer").startup(function(use)
   })
 
   use({ "skanehira/denops-docker.vim", requires = "vim-denops/denops.vim" })
-  use({ "vim-skk/skkeleton", requires = "vim-denops/denops.vim", branch = "cmp" })
+  use({ "vim-skk/skkeleton", requires = "vim-denops/denops.vim" })
   use({ "uga-rosa/cmp-skkeleton" })
 
-  use({ "tyru/open-browser-github.vim", requires="tyru/open-browser.vim" })
+  use({ "tyru/open-browser-github.vim", requires = "tyru/open-browser.vim" })
 
   use({ "thinca/vim-quickrun", requires = "lambdalisue/vim-quickrun-neovim-job" })
   use({ "folke/which-key.nvim" })

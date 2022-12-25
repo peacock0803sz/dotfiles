@@ -1,6 +1,4 @@
-require("nightfox").setup({
-  options = {
-    transparent = true,
-  },
+vim.cmd("colorscheme catppuccin")
+require("catppuccin").setup({
+  flavour = "mocha"
 })
-vim.cmd("colorscheme nordfox")

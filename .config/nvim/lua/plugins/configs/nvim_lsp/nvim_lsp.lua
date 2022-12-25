@@ -63,6 +63,9 @@ local settings = {
       telemetry = { enable = false },
     },
   },
+  volar = {
+    filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+  },
 }
 
 -- lspconfig & mason

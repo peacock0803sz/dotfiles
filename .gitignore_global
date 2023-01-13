@@ -177,3 +177,9 @@ flycheck_*.el
 .*-version
 
 .nvmrc
+.envrc
+
+tmp/*
+var/*
+
+.cache

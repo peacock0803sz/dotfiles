@@ -8,12 +8,13 @@ return {
   -- Window
   initial_cols = 184,
   initial_rows = 54,
-  window_background_opacity = 0.9,
+  -- window_background_opacity = 0.9,
   -- default_workspace = "0",
 
   -- Fonts
   font = wezterm.font_with_fallback({
     { family = "UDEV Gothic NF", weight = "Bold" },
+    { family = "UDEV Gothic" },
   }),
   font_size = 14.0,
 

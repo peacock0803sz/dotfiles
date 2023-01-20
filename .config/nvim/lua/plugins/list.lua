@@ -1,8 +1,26 @@
--- @NoSpell
-vim.cmd([[packadd packer.nvim]])
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({
+      "git",
+      "clone",
+      "--depth",
+      "1",
+      "https://github.com/wbthomason/packer.nvim",
+      install_path,
+    })
+    vim.cmd([[packadd packer.nvim]])
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
 
 return require("packer").startup(function(use)
-  use({ "wbthomason/packer.nvim" })
+  use("wbthomason/packer.nvim")
+
   use({ "vim-jp/vimdoc-ja" })
 
   use({ "nvim-lua/plenary.nvim" })
@@ -33,19 +51,21 @@ return require("packer").startup(function(use)
     use({ "williamboman/mason-lspconfig.nvim" })
 
     use({ "kkharji/lspsaga.nvim" })
+    use({ "SmiteshP/nvim-navic" })
 
     use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+    use({ "leoluz/nvim-dap-go" })
 
     use({ "jose-elias-alvarez/null-ls.nvim" })
     use({ "folke/lsp-colors.nvim" })
-    use({
-      "folke/trouble.nvim",
-      after = { "mason.nvim", "nvim-lspconfig" },
-      requires = { "kyazdani42/nvim-web-devicons" },
-      config = function()
-        require("trouble").setup({})
-      end,
-    })
+    -- use({
+    --   "folke/trouble.nvim",
+    --   after = { "mason.nvim", "nvim-lspconfig" },
+    --   requires = { "kyazdani42/nvim-web-devicons" },
+    --   config = function()
+    --     require("trouble").setup({})
+    --   end,
+    -- })
     use({ "folke/neodev.nvim" })
     -- coc.nvim
   elseif vim.env.lsp_provider == "coc" then
@@ -76,6 +96,7 @@ return require("packer").startup(function(use)
     after = { "fern.vim" },
     requires = { "lambdalisue/nerdfont.vim" },
   })
+  use({ "github/copilot.vim" })
 
   use({ "skanehira/denops-docker.vim", requires = "vim-denops/denops.vim" })
   use({ "vim-skk/skkeleton", requires = "vim-denops/denops.vim" })
@@ -85,4 +106,8 @@ return require("packer").startup(function(use)
 
   use({ "thinca/vim-quickrun", requires = "lambdalisue/vim-quickrun-neovim-job" })
   use({ "folke/which-key.nvim" })
+
+  if packer_bootstrap then
+    require("packer").sync()
+  end
 end)

@@ -46,10 +46,26 @@ local find_command = join_table({ "rg", "--files" }, include_dotfiles)
 require("telescope").setup({
   defaults = {
     vimgrep_arguments = grep_args,
+    wrap_results = true,
+    preview = {
+      treesitter = true,
+    },
+    layout_config = {
+      vertical = {
+        width = 0.95,
+      },
+      horizontal = {
+        width = 0.95,
+        preview_width = 0.45
+      },
+    },
   },
   pickers = {
     find_files = {
       find_command = find_command,
+    },
+    live_grep = {
+      vimgrep_arguments = grep_args
     },
     recent_used_files = {
       picker_config_key = recent_used_files,

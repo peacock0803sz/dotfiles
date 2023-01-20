@@ -2,6 +2,9 @@
 vim.cmd([[ syntax enable ]])
 vim.wo.number = true
 vim.wo.signcolumn = "yes"
+vim.o.wrap = true
+vim.o.cursorlineopt = "number"
+vim.o.laststatus = 2
 vim.o.ambiwidth = "single"
 vim.o.mouse = "a"
 vim.termguicolors = true

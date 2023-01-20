@@ -1,6 +1,8 @@
 local dapui = require("dapui")
 local dap = require("dap")
 
+dap.set_log_level("DEBUG")
+
 dapui.setup({
   icons = { expanded = "", collapsed = "", current_frame = "" },
   mappings = {
@@ -82,26 +84,48 @@ dapui.setup({
   },
 })
 
-dap.adapters.delve = {
-  type = "server",
-  port = "${port}",
-  executable = {
-    command = "dlv",
-    args = { "dap", "-l", "127.0.0.1:${port}" },
+-- Go
+require("dap-go").setup({
+  dap_configurations = {
+    {
+      type = "go",
+      name = "Attach remote",
+      mode = "remote",
+      request = "attach",
+      remotePath = "/app"
+    },
   },
-}
-dap.configurations.go = {
-  {
-    type = "delve",
-    name = "Debug",
-    request = "launch",
-    program = "${file}",
+  delve = {
+    port = 2346,
   },
-}
+})
+-- dap.adapters.delve = {
+--   type = "server",
+--   host = "127.0.0.1",
+--   port = 2346,
+--   executable = {
+--     command = vim.fn.exepath("dlv"),
+--     args = { "dap", "-l", "127.0.0.1:2346" },
+--   },
+-- }
+-- dap.configurations.go = {
+--   {
+--     type = "delve",
+--     name = "Debug",
+--     mode = "remote",
+--     request = "attach",
+--     showLog = true,
+--     dlvToolPath = vim.fn.exepath("dlv"), -- Adjust to where delve is installed
+--   },
+-- }
+
+require("dap.ext.vscode").load_launchjs()
 
 local opts = require("keymaps").opts
 
 vim.keymap.set("n", "<Space>du", dapui.toggle, opts)
-vim.keymap.set("n", "<Space>dt", dap.toggle_breakpoint, opts)
-vim.keymap.set("n", "<Space>ds", dap.set_breakpoint, opts)
-vim.keymap.set("n", "<Space>dc", dap.clear_breakpoints, opts)
+-- vim.keymap.set("n", "<Space>dc", "<Cmd>lua require('dap').continue()<CR>", opts)
+vim.keymap.set("n", "<Space>dc", dap.continue, opts)
+-- vim.keymap.set("n", "<Space>dl", "<Cmd>lua require('dap').launch()<CR>", opts)
+vim.keymap.set("n", "<Space>db", dap.toggle_breakpoint, opts)
+vim.keymap.set("n", "<Space>dd", dap.clear_breakpoints, opts)

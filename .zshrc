@@ -61,6 +61,7 @@ function mkcd() {
 }
 
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
 
 autoload -Uz vcs_info
 function gitroot() {
@@ -77,16 +78,11 @@ bindkey "^x^e" edit-command-line
 # aliases
 
 alias reloadzsh='exec -l zsh'
-alias acvenv='source venv/bin/activate'
-alias load-dotenv='export $(cat .env | grep -v ^# | xargs);'
-export NVIMRC="$HOME/.config/nvim/init.vim"
-
-if [[ $TMUX ]];then
-  export FZF_TMUX=1
-fi
 
 case ${OSTYPE} in
   darwin*)
+    # tailscale
+    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
     if [[ $(uname -m) = "arm64" ]] then
       alias rosetta="arch -x86_64 /bin/zsh"
       alias python3.8="/usr/bin/python3"
@@ -109,7 +105,6 @@ case ${OSTYPE} in
       [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
       # terraform
-      autoload -U +X bashcompinit && bashcompinit
       complete -o nospace -C /opt/homebrew/bin/terraform terraform
     elif [[ $(uname -m) = "x86_64" ]] then
       export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
@@ -147,6 +142,15 @@ esac
 # alias for terraform
 alias tf="terraform"
 
+# zenn-cli
+alias zenn="deno run -A npm:zenn-cli@latest"
+
+# stoplight prism
+alias prism="deno run -A npm:@stoplight/prism-cli@latest"
+
+# yq
+alias yq="gojq --yaml-input --yaml-output"
+
 # Go
 export GOPATH="$HOME/qhq/"
 export PATH="$PATH:$GOPATH/bin"
@@ -167,6 +171,21 @@ kubectl completion zsh > "${fpath[1]}/_kubectl"
 source <(eksctl completion zsh)
 eksctl completion zsh > "${fpath[1]}/_eksctl"
 
+# direnv
+_direnv_hook() {
+  trap -- '' SIGINT;
+  eval "$("/usr/local/bin/direnv" export zsh)";
+  trap - SIGINT;
+}
+typeset -ag precmd_functions;
+if [[ -z "${precmd_functions[(r)_direnv_hook]+1}" ]]; then
+  precmd_functions=( _direnv_hook ${precmd_functions[@]} )
+fi
+typeset -ag chpwd_functions;
+if [[ -z "${chpwd_functions[(r)_direnv_hook]+1}" ]]; then
+  chpwd_functions=( _direnv_hook ${chpwd_functions[@]} )
+fi
+
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
   print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
@@ -182,24 +201,22 @@ autoload -Uz _zinit
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
-zinit light zdharma-continuum/zinit-annex-as-monitor
-zinit light zdharma-continuum/zinit-annex-bin-gem-node
-zinit light zdharma-continuum/zinit-annex-patch-dl
-zinit light zdharma-continuum/zinit-annex-rust
-
-zinit light zdharma-continuum/fast-syntax-highlighting
-zinit light zdharma-continuum/history-search-multi-word
-zinit light mollifier/anyframe
-zinit light akoenig/npm-run.plugin.zsh
-zinit light srijanshetty/zsh-pip-completion
-zinit light hlissner/zsh-autopair
-
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completions
+zinit for light-mode zdharma-continuum/zinit-annex-as-monitor \
+ zdharma-continuum/zinit-annex-bin-gem-node \
+ zdharma-continuum/zinit-annex-patch-dl \
+ zdharma-continuum/zinit-annex-rust \
+ zdharma-continuum/fast-syntax-highlighting \
+ zdharma-continuum/history-search-multi-word \
+ mollifier/anyframe \
+ srijanshetty/zsh-pip-completion \
+ hlissner/zsh-autopair \
+ zsh-users/zsh-autosuggestions \
+ zsh-users/zsh-completions
 
 zinit ice as"completion"
 zinit snippet OMZP::docker/_docker
 zinit snippet OMZP::docker-compose/_docker-compose
+source <(npm completion)
 
 # source $(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh
 # export ZENO_ROOT="$(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh"
@@ -267,7 +284,6 @@ bindkey '^\' ssh-fzf
 
 export VENV_ROOT="${HOME}/venvs"
 VENVFZF_VENV_OPTIONS=""
-PYTHONROOT="/Library/Frameworks/Python.framework/Versions/"
 
 function venv-fzf() {
   if [[ ! -z ${TMUX} ]] && [[ $(which fzf-tmux) ]]; then
@@ -309,10 +325,22 @@ function mkvenv() {
     mkdir -p $expected_venv
   fi
 
-  echo "$(find $PYTHONROOT -maxdepth 1 | grep -e '[0-9]$')"
+  case ${OSTYPE} in
+    darwin*)
+      if [[ $(uname -m) = "arm64" ]] then
+        local PYTHONROOT="/Library/Frameworks/Python.framework/Versions/"
+        echo "$(find $PYTHONROOT -maxdepth 1 | grep -e '[0-9]$')"
+        read _py_number\?"Choise a number you wants use python > "
+        local _py="$PYTHONROOT$_py_number/bin/python3"
+      elif [[ $(uname -m) = "x86_64" ]] then
+        local PYTHONROOT="/usr/local/bin"
+        echo "$(find $PYTHONROOT -maxdepth 1 | grep -e 'python3\.[0-9]*$')"
+        read _py_number\?"Choise a number you wants use python > "
+        local _py="$PYTHONROOT/python$_py_number/"
+      fi
+    ;;
+  esac
 
-  read _py_number\?"Choise a number you wants use python > "
-  local _py="$PYTHONROOT$_py_number/bin/python3"
   echo "$_py -m venv ${expected_venv}"
   $_py -m venv ${expected_venv}
   source ${expected_venv}/bin/activate
@@ -322,17 +350,10 @@ export PIP_REQUIRE_VIRTUALENV=1
 
 # Ruby
 
-eval "$(rbenv init - zsh)"
-
-# zinit light "https://gist.github.com/peacock0803sz/2d283b4f3ce74c780aa89b1c18fe08b8"
-
 # theme
 zinit load romkatv/powerlevel10k
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[ -f ~/.fzf.zsh ] && source "$HOME/.fzf.zsh"
 
 # place this after nvm initialization!
 autoload -U add-zsh-hook
@@ -359,4 +380,4 @@ load-nvmrc
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/.p10k.zsh.
-[[ ! -f ~/dotfiles/.p10k.zsh ]] || source ~/dotfiles/.p10k.zsh
+[[ ! -f ~/dotfiles/.p10k.zsh ]] || source "$HOME/dotfiles/.p10k.zsh"

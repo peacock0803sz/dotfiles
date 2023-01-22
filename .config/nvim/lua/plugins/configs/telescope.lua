@@ -1,5 +1,6 @@
 local join_table = require("utils").join_table
 
+local actions = require("telescope.actions")
 local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
 local make_entry = require("telescope.make_entry")
@@ -56,7 +57,7 @@ require("telescope").setup({
       },
       horizontal = {
         width = 0.95,
-        preview_width = 0.45
+        preview_width = 0.45,
       },
     },
   },
@@ -65,13 +66,28 @@ require("telescope").setup({
       find_command = find_command,
     },
     live_grep = {
-      vimgrep_arguments = grep_args
+      vimgrep_arguments = grep_args,
     },
     recent_used_files = {
       picker_config_key = recent_used_files,
     },
     recent_written_files = {
       picker_config_key = recent_written_files,
+    },
+  },
+  extensions = {
+    file_browser = {
+      -- disables netrw and use telescope-file-browser in its place
+      hijack_netrw = true,
+      mappings = {
+        ["i"] = {
+          ["<C-R>"] = actions.select_drop,
+          ["<C-d>"] = actions.git_switch_branch,
+        },
+        ["n"] = {
+          -- your custom normal mode mappings
+        },
+      },
     },
   },
 })
@@ -88,5 +104,10 @@ vim.keymap.set("n", "<space>fw", recent_written_files, { silent = true })
 vim.keymap.set("n", "<space>gc", builtin.git_commits, { silent = true })
 vim.keymap.set("n", "<space>gC", builtin.git_bcommits, { silent = true })
 vim.keymap.set("n", "<space>gb", builtin.git_branches, { silent = true })
-vim.keymap.set("n", "<space>ga", builtin.git_status, { silent = true })
-vim.keymap.set("n", "<space>gs", builtin.git_stash, { silent = true })
+vim.keymap.set("n", "<space>gs", builtin.git_status, { silent = true })
+vim.keymap.set("n", "<space>gS", builtin.git_stash, { silent = true })
+
+-- extensions
+require("telescope").load_extension("file_browser")
+vim.keymap.set("n", "<space>F", "<Cmd>Telescope file_browser<CR>", { silent = true })
+

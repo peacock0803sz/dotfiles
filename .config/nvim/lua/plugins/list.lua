@@ -43,6 +43,8 @@ return require("packer").startup(function(use)
     use({ "hrsh7th/cmp-omni", after = { "nvim-cmp" } })
     use({ "f3fora/cmp-spell", after = { "nvim-cmp" } })
 
+    use({ "onsails/lspkind.nvim" })
+
     use({ "L3MON4D3/LuaSnip" })
     use({ "saadparwaiz1/cmp_luasnip" })
 
@@ -74,6 +76,8 @@ return require("packer").startup(function(use)
 
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use({ "nvim-telescope/telescope.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
+  use({ "nvim-telescope/telescope-file-browser.nvim" })
+
   use({ "lambdalisue/mr.vim" })
 
   use({ "kien/rainbow_parentheses.vim" })
@@ -90,12 +94,7 @@ return require("packer").startup(function(use)
 
   use({ "vim-test/vim-test" })
 
-  use({ "lambdalisue/fern.vim" })
-  use({
-    "lambdalisue/fern-renderer-nerdfont.vim",
-    after = { "fern.vim" },
-    requires = { "lambdalisue/nerdfont.vim" },
-  })
+  use({ "nvim-tree/nvim-tree.lua", requires = { "nvim-tree/nvim-web-devicons" } })
   use({ "github/copilot.vim" })
 
   use({ "skanehira/denops-docker.vim", requires = "vim-denops/denops.vim" })

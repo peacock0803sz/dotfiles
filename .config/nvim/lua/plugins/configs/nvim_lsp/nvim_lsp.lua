@@ -50,7 +50,7 @@ M.on_attach = on_attach
 require("neodev").setup({})
 
 -- specific language server configs
-local settings = {
+local mason_settings = {
   sumneko_lua = { -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
     Lua = {
       completion = { callSnippet = "Replace" },
@@ -70,27 +70,41 @@ local settings = {
   volar = {
     filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
   },
+}
+
+local lspconfig_settings = {
   terraform_lsp = {
     -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#terraform_lsp
     filetypes = { "terraform", "tf", "hcl" },
     command = "/usr/local/bin/terraform-lsp",
   },
 }
-
 -- lspconfig & mason
-local lspconfig = require("lspconfig")
+function M.setup_handlers(server, settings)
+  local capabilities = require("plugins/configs/nvim_lsp/cmp").capabilities
+  local opt = require("cmp_nvim_lsp").default_capabilities(
+    capabilities,
+    { on_attach = on_attach } -- keymaps
+  )
+  opt.on_attach = on_attach
+  opt.settings = settings[server]
+  require("lspconfig")[server].setup(opt)
+end
+
+for server, settings in pairs(lspconfig_settings) do
+  require("lspconfig")[server].setup({
+    on_attach = on_attach,
+    settings = {
+      server = settings[server],
+    },
+  })
+end
+
 require("mason").setup()
 require("mason-lspconfig").setup()
 require("mason-lspconfig").setup_handlers({
   function(server)
-    local capabilities = require("plugins/configs/nvim_lsp/cmp").capabilities
-    local opt = require("cmp_nvim_lsp").default_capabilities(
-      capabilities,
-      { on_attach = on_attach } -- keymaps
-    )
-    opt.on_attach = on_attach
-    opt.settings = settings[server]
-    lspconfig[server].setup(opt)
+    M.setup_handlers(server, mason_settings)
   end,
 })
 

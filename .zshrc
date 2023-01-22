@@ -205,7 +205,7 @@ zinit for light-mode zdharma-continuum/zinit-annex-as-monitor \
  zdharma-continuum/zinit-annex-bin-gem-node \
  zdharma-continuum/zinit-annex-patch-dl \
  zdharma-continuum/zinit-annex-rust \
- zdharma-continuum/fast-syntax-highlighting \
+ catppuccin/zsh-syntax-highlighting \
  zdharma-continuum/history-search-multi-word \
  mollifier/anyframe \
  srijanshetty/zsh-pip-completion \
@@ -307,7 +307,7 @@ function _list_venvs() {
   done
 }
 zle -N venv-fzf
-bindkey '^v' venv-fzf
+bindkey '^x^v' venv-fzf
 
 function mkvenv() {
   local _venv_dir=$(pwd | awk -F "/" '{print $(NF-2),$(NF-1),$NF}' | tr ' ' '/')

@@ -60,14 +60,14 @@ return require("packer").startup(function(use)
 
     use({ "jose-elias-alvarez/null-ls.nvim" })
     use({ "folke/lsp-colors.nvim" })
-    -- use({
-    --   "folke/trouble.nvim",
-    --   after = { "mason.nvim", "nvim-lspconfig" },
-    --   requires = { "kyazdani42/nvim-web-devicons" },
-    --   config = function()
-    --     require("trouble").setup({})
-    --   end,
-    -- })
+    use({
+      "folke/trouble.nvim",
+      after = { "mason.nvim", "nvim-lspconfig" },
+      requires = { "kyazdani42/nvim-web-devicons" },
+      config = function()
+        require("trouble").setup({})
+      end,
+    })
     use({ "folke/neodev.nvim" })
     -- coc.nvim
   elseif vim.env.lsp_provider == "coc" then

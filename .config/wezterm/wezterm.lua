@@ -8,18 +8,18 @@ return {
   -- Window
   initial_cols = 184,
   initial_rows = 54,
-  -- window_background_opacity = 0.9,
+  window_background_opacity = 0.9,
   -- default_workspace = "0",
 
   -- Fonts
   font = wezterm.font_with_fallback({
     { family = "UDEV Gothic NF", weight = "Bold" },
-    { family = "UDEV Gothic" },
+    { family = "UDEV Gothic", weight = "Bold" },
+    "Noto Color Emoji",
   }),
-  font_size = 14.0,
+  font_size = 14.5,
 
-  color_scheme_dirs = { "./colors" },
-  color_scheme = "nightfox_wezterm",
+  color_scheme = "Catppuccin Mocha",
   colors = {
     cursor_bg = "white",
     cursor_border = "white",
@@ -31,6 +31,9 @@ return {
   disable_default_key_bindings = true,
   leader = { key = "s", mods = "CTRL", timeout_milliseconds = 1000 },
   keys = {
+    -- QuickSelect
+    { key = "v", mods = "LEADER", action = "ActivateCopyMode" },
+    -- Reload
     { key = "r", mods = "LEADER", action = "ReloadConfiguration" },
     {
       key = "f",

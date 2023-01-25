@@ -1,6 +1,1 @@
-local augroup = vim.api.nvim_create_augroup("GinCommitta", { clear = true })
-
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = { "gitcommit" },
-  command = "",
-})
+vim.g.committia_open_only_vim_starting = 0

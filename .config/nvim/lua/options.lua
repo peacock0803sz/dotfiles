@@ -24,5 +24,10 @@ vim.o.smarttab = false
 vim.o.smartindent = false
 vim.o.autoindent = false
 
+-- folding options
+vim.opt.foldcolumn = "1"
+vim.opt.foldenable = true
+vim.opt.foldmethod = "manual"
+
 vim.o.tabline = 2
 vim.opt.swapfile = false

@@ -370,7 +370,7 @@ load-nvmrc() {
       nvm use --silent
     fi
   elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
+    echo "Reverting to nv eault version"
     nvm use default
   fi
 }

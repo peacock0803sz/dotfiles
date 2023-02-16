@@ -217,6 +217,7 @@ zinit ice as"completion"
 zinit snippet OMZP::docker/_docker
 zinit snippet OMZP::docker-compose/_docker-compose
 source <(npm completion)
+eval "$(op completion zsh)"; compdef _op op
 
 # source $(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh
 # export ZENO_ROOT="$(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh"

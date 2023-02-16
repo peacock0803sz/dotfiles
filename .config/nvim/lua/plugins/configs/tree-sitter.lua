@@ -8,6 +8,7 @@ require("nvim-treesitter.configs").setup({
     "typescript",
     "vue",
     "tsx",
+    "astro",
     "rust",
   },
   highlight = {

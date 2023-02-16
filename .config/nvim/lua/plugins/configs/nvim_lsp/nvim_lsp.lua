@@ -50,6 +50,8 @@ M.on_attach = on_attach
 require("neodev").setup({})
 
 -- specific language server configs
+local root_pattern = require("lspconfig.util").root_pattern
+
 local mason_settings = {
   sumneko_lua = { -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
     Lua = {
@@ -70,14 +72,17 @@ local mason_settings = {
   volar = {
     filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
   },
+  denols = {
+    root_dir = root_pattern("deno.json")
+  }
 }
 
 local lspconfig_settings = {
-  terraform_lsp = {
-    -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#terraform_lsp
-    filetypes = { "terraform", "tf", "hcl" },
-    command = "/usr/local/bin/terraform-lsp",
-  },
+  -- terraform_lsp = {
+  --   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#terraform_lsp
+  --   filetypes = { "terraform", "tf", "hcl" },
+  --   command = "/usr/local/bin/terraform-lsp",
+  -- },
 }
 -- lspconfig & mason
 function M.setup_handlers(server, settings)

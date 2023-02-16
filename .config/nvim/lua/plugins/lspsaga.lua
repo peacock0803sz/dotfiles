@@ -10,3 +10,6 @@ vim.keymap.set("n", "<C-k>", "<Cmd>Lspsaga signature_help<CR>", opts)
 vim.keymap.set("n", "<space>e", "<Cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
 vim.keymap.set("n", "<space>]g", "<Cmd>Lspsaga diagnostic_jump_next<CR>", opts)
 vim.keymap.set("n", "<space>[g", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
+
+local spec = { "glepnir/lspsaga.nvim" }
+return spec

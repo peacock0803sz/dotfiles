@@ -1,0 +1,21 @@
+local spec = {
+  { "folke/neoconf.nvim", cmd = "Neoconf" },
+  { "vim-jp/vimdoc-ja" },
+  { "nvim-lua/plenary.nvim" },
+  { "lambdalisue/nerdfont.vim" },
+  { "lambdalisue/guise.vim" },
+  { "onsails/lspkind.nvim" },
+  { "SmiteshP/nvim-navic" },
+  { "folke/neodev.nvim" },
+  { "machakann/vim-sandwich" },
+  { "cohama/lexima.vim" },
+  { "lambdalisue/suda.vim" },
+  { "mattn/emmet-vim" },
+  { "rhysd/committia.vim" },
+  { "lambdalisue/gina.vim" },
+  { "lambdalisue/gin.vim", dependencies = { "vim-denops/denops.vim" } },
+  { "github/copilot.vim" },
+  { "skanehira/denops-docker.vim", dependencies = "vim-denops/denops.vim" },
+  { "tyru/open-browser-github.vim", dependencies = "tyru/open-browser.vim" },
+}
+return spec

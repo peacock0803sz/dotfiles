@@ -7,3 +7,9 @@ vim.g.quickrun_config = {
     outputter = "quickfix",
   },
 }
+
+local spec = {
+  "thinca/vim-quickrun",
+  dependencies = "lambdalisue/vim-quickrun-neovim-job",
+}
+return spec

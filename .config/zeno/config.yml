@@ -98,6 +98,15 @@ snippets:
   - name: pipe awk
     keyword: "awk"
     snippet: "| awk '{ print ${{column}} }'"
+  - name: YAML to JSON
+    keyword: "yaml2json"
+    snippet: "| gojq --yaml-input"
+  - name: JSON to YAML
+    keyword: "json2yaml"
+    snippet: "| gojq --yaml-output"
+  - name: to macOS Clipboard
+    keyword: pb
+    snippet: "| pbcopy"
 completions:
   - name: kill
     patterns:

@@ -8,7 +8,7 @@ return {
   -- Window
   initial_cols = 184,
   initial_rows = 54,
-  window_background_opacity = 0.9,
+  window_background_opacity = 0.95,
   -- default_workspace = "0",
 
   -- Fonts
@@ -17,7 +17,7 @@ return {
     { family = "UDEV Gothic", weight = "Bold" },
     "Noto Color Emoji",
   }),
-  font_size = 14.5,
+  font_size = 13.0,
 
   color_scheme = "Catppuccin Mocha",
   colors = {

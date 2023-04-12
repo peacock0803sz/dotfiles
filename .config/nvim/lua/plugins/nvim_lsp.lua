@@ -16,10 +16,9 @@ local function config_cmp()
     formatting = {
       -- fields = {'abbr', 'kind', 'menu'},
       format = require("lspkind").cmp_format({
-        mode = "symbol", -- show only symbol annotations
-        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+        mode = "symbol",       -- show only symbol annotations
+        maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
         ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-
         -- The function below will be called before any actual modifications from lspkind
         -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
         before = function(entry, vim_item)
@@ -87,13 +86,13 @@ local on_attach = function(client, bufnr)
 
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   -- diagnostics mappings
-  -- vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-  -- vim.keymap.set('n', '<space>[d', vim.diagnostic.goto_prev, opts)
-  -- vim.keymap.set('n', '<space>]d', vim.diagnostic.goto_next, opts)
+  vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
+  vim.keymap.set("n", "<space>[d", vim.diagnostic.goto_prev, opts)
+  vim.keymap.set("n", "<space>]d", vim.diagnostic.goto_next, opts)
   vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
   vim.keymap.set("n", "<space>gD", vim.lsp.buf.declaration, opts)
   vim.keymap.set("n", "<space>gd", vim.lsp.buf.definition, bufopts)
-  -- vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
   vim.keymap.set("n", "<space>gi", vim.lsp.buf.implementation, bufopts)
   -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
@@ -102,8 +101,8 @@ local on_attach = function(client, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
   vim.keymap.set("n", "<space>gt", vim.lsp.buf.type_definition, bufopts)
-  -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  -- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
+  vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
   vim.keymap.set("n", "<space>gr", vim.lsp.buf.references, bufopts)
   vim.keymap.set("n", "<space>fo", vim.lsp.buf.format, bufopts)
 
@@ -120,17 +119,10 @@ local on_attach = function(client, bufnr)
   end, bufopts)
 end
 
-local lspconfig_settings = {
-  -- terraform_lsp = {
-  --   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#terraform_lsp
-  --   filetypes = { "terraform", "tf", "hcl" },
-  --   command = "/usr/local/bin/terraform-lsp",
-  -- },
-}
 -- lspconfig & mason
 local function setup_handlers(server, settings)
   local capabilities =
-    require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
   local opt = require("cmp_nvim_lsp").default_capabilities(capabilities)
   opt.on_attach = on_attach
@@ -138,13 +130,18 @@ local function setup_handlers(server, settings)
   require("lspconfig")[server].setup(opt)
 end
 
-for server, settings in pairs(lspconfig_settings) do
-  require("lspconfig")[server].setup({
-    on_attach = on_attach,
-    settings = {
-      server = settings[server],
-    },
-  })
+local function lspconfig_config()
+  local config = {
+    --
+  }
+  for server, settings in pairs(config) do
+    require("lspconfig")[server].setup({
+      on_attach = on_attach,
+      settings = {
+        server = settings[server],
+      },
+    })
+  end
 end
 
 local function mason_config()
@@ -152,7 +149,8 @@ local function mason_config()
   require("mason-lspconfig").setup_handlers({
     function(server)
       setup_handlers(server, {
-        sumneko_lua = { -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
+        sumneko_lua = {
+          -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
           Lua = {
             completion = { callSnippet = "Replace" },
             runtime = { version = "LuaJIT" },
@@ -187,17 +185,16 @@ local function mason_config()
 end
 
 local spec = {
-  { "hrsh7th/nvim-cmp", config = config_cmp },
+  { "hrsh7th/nvim-cmp",         config = config_cmp },
   { "hrsh7th/cmp-nvim-lsp" },
-  { "hrsh7th/cmp-buffer", dependencies = { "nvim-cmp" } },
-  { "hrsh7th/cmp-path", dependencies = { "nvim-cmp" } },
-  { "hrsh7th/cmp-cmdline", dependencies = { "nvim-cmp" } },
-  { "hrsh7th/cmp-omni", dependencies = { "nvim-cmp" } },
-  { "f3fora/cmp-spell", dependencies = { "nvim-cmp" } },
-  { "rinx/cmp-skkeleton", dependencies = { "nvim-cmp", "skkeleton" } },
+  { "hrsh7th/cmp-buffer",       dependencies = { "nvim-cmp" } },
+  { "hrsh7th/cmp-path",         dependencies = { "nvim-cmp" } },
+  { "hrsh7th/cmp-cmdline",      dependencies = { "nvim-cmp" } },
+  { "hrsh7th/cmp-omni",         dependencies = { "nvim-cmp" } },
+  { "f3fora/cmp-spell",         dependencies = { "nvim-cmp" } },
+  { "rinx/cmp-skkeleton",       dependencies = { "nvim-cmp", "skkeleton" } },
   { "saadparwaiz1/cmp_luasnip", dependencies = { "L3MON4D3/LuaSnip" } },
-
-  { "neovim/nvim-lspconfig" },
+  { "neovim/nvim-lspconfig",    config = lspconfig_config },
   {
     "williamboman/mason.nvim",
     config = function()

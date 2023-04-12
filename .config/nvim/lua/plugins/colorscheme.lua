@@ -1,15 +1,10 @@
 local function config()
-  vim.cmd("colorscheme catppuccin")
-  require("catppuccin").setup({
-    flavour = "mocha",
-    transparent_background = true,
-    integrations = {
-      cmp = true,
-      gitsigns = true,
-      telescope = true,
-    },
+  require("nightfox").setup({
+    transparent = true,
+    terminal_colors = true,
   })
+  vim.cmd("colorscheme nordfox")
 end
 
-local spec = { "catppuccin/nvim", name = "catppuccin", config = config }
+local spec = { "EdenEast/nightfox.nvim", config = config }
 return spec

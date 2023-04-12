@@ -11,6 +11,7 @@ local function config()
       "tsx",
       "astro",
       "rust",
+      "markdown",
     },
     highlight = {
       enable = true,

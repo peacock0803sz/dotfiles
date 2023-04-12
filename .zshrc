@@ -148,6 +148,9 @@ alias zenn="deno run -A npm:zenn-cli@latest"
 # stoplight prism
 alias prism="deno run -A npm:@stoplight/prism-cli@latest"
 
+# np for npm/yarn/pnpm/bun
+alias ni="bunx @antfu/ni"
+
 # yq
 alias yq="gojq --yaml-input --yaml-output"
 
@@ -205,7 +208,6 @@ zinit for light-mode zdharma-continuum/zinit-annex-as-monitor \
  zdharma-continuum/zinit-annex-bin-gem-node \
  zdharma-continuum/zinit-annex-patch-dl \
  zdharma-continuum/zinit-annex-rust \
- catppuccin/zsh-syntax-highlighting \
  zdharma-continuum/history-search-multi-word \
  mollifier/anyframe \
  srijanshetty/zsh-pip-completion \
@@ -216,7 +218,6 @@ zinit for light-mode zdharma-continuum/zinit-annex-as-monitor \
 zinit ice as"completion"
 zinit snippet OMZP::docker/_docker
 zinit snippet OMZP::docker-compose/_docker-compose
-source <(npm completion)
 eval "$(op completion zsh)"; compdef _op op
 
 # source $(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh
@@ -348,6 +349,10 @@ function mkvenv() {
 }
 
 export PIP_REQUIRE_VIRTUALENV=1
+
+# function google_compute_ssh() {
+#   local
+# }
 
 # Ruby
 

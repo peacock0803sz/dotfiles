@@ -19,7 +19,7 @@ return {
   }),
   font_size = 13.0,
 
-  color_scheme = "Catppuccin Mocha",
+  color_scheme = "nordfox",
   colors = {
     cursor_bg = "white",
     cursor_border = "white",

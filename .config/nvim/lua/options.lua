@@ -7,7 +7,7 @@ vim.o.cursorlineopt = "number"
 vim.o.laststatus = 2
 vim.o.ambiwidth = "single"
 vim.o.mouse = "a"
-vim.termguicolors = true
+vim.o.termguicolors = true
 vim.o.colorcolumn = "88,100"
 
 if vim.fn.has("clipboard") == 1 then

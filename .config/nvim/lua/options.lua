@@ -1,5 +1,5 @@
 -- display options
-vim.cmd([[ syntax enable ]])
+vim.cmd("syntax enable")
 vim.wo.number = true
 vim.wo.signcolumn = "yes"
 vim.o.wrap = true

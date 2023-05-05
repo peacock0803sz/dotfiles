@@ -183,3 +183,5 @@ tmp/*
 var/*
 
 .cache
+
+sandbox.*

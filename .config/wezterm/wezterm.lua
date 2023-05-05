@@ -1,25 +1,42 @@
 local wezterm = require("wezterm")
 
+local function get_appearance()
+  if wezterm.gui then
+    return wezterm.gui.get_appearance()
+  else -- default to dark
+    return "Dark"
+  end
+end
+
+local function get_colorscheme()
+  if get_appearance() == "Light" then
+    return "dawnfox"
+  else
+    return "nordfox"
+  end
+end
+
 wezterm.on("window-config-reloaded", function(window, _)
   window:toast_notification("wezterm", "configuration reloaded!", nil, 4000)
+  wezterm.configuration.color_scheme = get_colorscheme()
 end)
 
 return {
   -- Window
   initial_cols = 184,
   initial_rows = 54,
-  window_background_opacity = 0.95,
-  -- default_workspace = "0",
+  window_background_opacity = 0.925,
+  macos_window_background_blur = 10,
 
   -- Fonts
   font = wezterm.font_with_fallback({
+    { family = "UDEV Gothic",    weight = "Bold" },
     { family = "UDEV Gothic NF", weight = "Bold" },
-    { family = "UDEV Gothic", weight = "Bold" },
     "Noto Color Emoji",
   }),
   font_size = 13.0,
 
-  color_scheme = "nordfox",
+  color_scheme = get_colorscheme(),
   colors = {
     cursor_bg = "white",
     cursor_border = "white",
@@ -40,16 +57,16 @@ return {
       mods = "LEADER",
       action = wezterm.action({ Search = { CaseSensitiveString = "" } }),
     },
-    { key = "q", mods = "CMD", action = "QuitApplication" },
+    { key = "q", mods = "CMD",       action = "QuitApplication" },
 
     -- Clipboards
-    { key = "c", mods = "SUPER", action = wezterm.action({ CopyTo = "Clipboard" }) },
-    { key = "v", mods = "SUPER", action = wezterm.action({ PasteFrom = "Clipboard" }) },
+    { key = "c", mods = "SUPER",     action = wezterm.action({ CopyTo = "Clipboard" }) },
+    { key = "v", mods = "SUPER",     action = wezterm.action({ PasteFrom = "Clipboard" }) },
 
     -- Font & Window Sizing
     { key = "+", mods = "ALT|SHIFT", action = "IncreaseFontSize" },
-    { key = "-", mods = "ALT", action = "DecreaseFontSize" },
-    { key = "0", mods = "ALT", action = "ResetFontSize" },
+    { key = "-", mods = "ALT",       action = "DecreaseFontSize" },
+    { key = "0", mods = "ALT",       action = "ResetFontSize" },
     { key = "0", mods = "ALT|SHIFT", action = "ResetFontAndWindowSize" },
 
     -- Workspaces
@@ -59,8 +76,8 @@ return {
       action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
     },
     { key = "s", mods = "ALT|SHIFT", action = wezterm.action({ SwitchToWorkspace = {} }) },
-    { key = "l", mods = "ALT", action = wezterm.action({ SwitchWorkspaceRelative = 1 }) },
-    { key = "h", mods = "ALT", action = wezterm.action({ SwitchWorkspaceRelative = -1 }) },
+    { key = "l", mods = "ALT",       action = wezterm.action({ SwitchWorkspaceRelative = 1 }) },
+    { key = "h", mods = "ALT",       action = wezterm.action({ SwitchWorkspaceRelative = -1 }) },
     -- {key="1", mods="ALT|SHIFT", action=wezterm.action{SwitchToWorkspace={name="0"}}},
     -- {key="2", mods="ALT|SHIFT", action=wezterm.action{SwitchToWorkspace={name="1"}}},
     -- {key="3", mods="ALT|SHIFT", action=wezterm.action{SwitchToWorkspace={name="2"}}},
@@ -110,9 +127,9 @@ return {
     { key = "j", mods = "ALT|SHIFT", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
     { key = "k", mods = "ALT|SHIFT", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
     { key = "l", mods = "ALT|SHIFT", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
-    { key = "h", mods = "LEADER", action = wezterm.action({ AdjustPaneSize = { "Left", 5 } }) },
-    { key = "j", mods = "LEADER", action = wezterm.action({ AdjustPaneSize = { "Down", 5 } }) },
-    { key = "k", mods = "LEADER", action = wezterm.action({ AdjustPaneSize = { "Up", 5 } }) },
-    { key = "l", mods = "LEADER", action = wezterm.action({ AdjustPaneSize = { "Right", 5 } }) },
+    { key = "h", mods = "LEADER",    action = wezterm.action({ AdjustPaneSize = { "Left", 5 } }) },
+    { key = "j", mods = "LEADER",    action = wezterm.action({ AdjustPaneSize = { "Down", 5 } }) },
+    { key = "k", mods = "LEADER",    action = wezterm.action({ AdjustPaneSize = { "Up", 5 } }) },
+    { key = "l", mods = "LEADER",    action = wezterm.action({ AdjustPaneSize = { "Right", 5 } }) },
   },
 }

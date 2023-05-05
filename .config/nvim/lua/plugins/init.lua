@@ -3,6 +3,7 @@ local spec = {
   { "vim-jp/vimdoc-ja" },
   { "nvim-lua/plenary.nvim" },
   { "lambdalisue/nerdfont.vim" },
+  { "EdenEast/nightfox.nvim" },
   { "lambdalisue/guise.vim" },
   { "onsails/lspkind.nvim" },
   { "SmiteshP/nvim-navic" },

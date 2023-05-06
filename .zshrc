@@ -171,8 +171,8 @@ complete -C `command -v aws_completer` aws
 source <(kubectl completion zsh)
 kubectl completion zsh > "${fpath[1]}/_kubectl"
 
-source <(eksctl completion zsh)
-eksctl completion zsh > "${fpath[1]}/_eksctl"
+# source <(eksctl completion zsh)
+# eksctl completion zsh > "${fpath[1]}/_eksctl"
 
 # direnv
 _direnv_hook() {

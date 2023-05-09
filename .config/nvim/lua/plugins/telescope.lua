@@ -11,32 +11,32 @@ local function config()
     local safe_opts = opts or {}
     local list = vim.fn["mr#mrw#list"]()
     pickers
-      .new(safe_opts, {
-        prompt_title = "Recent written files",
-        finder = finders.new_table({
-          results = list,
-          entry_maker = make_entry.gen_from_file(safe_opts),
-        }),
-        previewer = conf.file_previewer(safe_opts),
-        sorter = conf.file_sorter(safe_opts),
-      })
-      :find()
+        .new(safe_opts, {
+          prompt_title = "Recent written files",
+          finder = finders.new_table({
+            results = list,
+            entry_maker = make_entry.gen_from_file(safe_opts),
+          }),
+          previewer = conf.file_previewer(safe_opts),
+          sorter = conf.file_sorter(safe_opts),
+        })
+        :find()
   end
 
   local recent_used_files = function(opts)
     local safe_opts = opts or {}
     local list = vim.fn["mr#mru#list"]()
     pickers
-      .new(safe_opts, {
-        prompt_title = "Recent used files",
-        finder = finders.new_table({
-          results = list,
-          entry_maker = make_entry.gen_from_file(safe_opts),
-        }),
-        previewer = conf.file_previewer(safe_opts),
-        sorter = conf.file_sorter(safe_opts),
-      })
-      :find()
+        .new(safe_opts, {
+          prompt_title = "Recent used files",
+          finder = finders.new_table({
+            results = list,
+            entry_maker = make_entry.gen_from_file(safe_opts),
+          }),
+          previewer = conf.file_previewer(safe_opts),
+          sorter = conf.file_sorter(safe_opts),
+        })
+        :find()
   end
 
   local vimgrep_arguments = require("telescope.config").values.vimgrep_arguments

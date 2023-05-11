@@ -61,7 +61,6 @@ function mkcd() {
 }
 
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
 
 autoload -Uz vcs_info
 function gitroot() {
@@ -107,6 +106,7 @@ case ${OSTYPE} in
       # terraform
       complete -o nospace -C /opt/homebrew/bin/terraform terraform
     elif [[ $(uname -m) = "x86_64" ]] then
+      export PATH="/usr/local/sbin:$PATH"
       export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
       export NVM_DIR="$HOME/.nvm"
@@ -171,7 +171,10 @@ complete -C `command -v aws_completer` aws
 # source <(kubectl completion zsh)
 # kubectl completion zsh > "${fpath[1]}/_kubectl"
 
+# 1Password
 eval "$(op completion zsh)"; compdef _op op
+source "$HOME/.config/op/plugins.sh"
+
 # direnv
 _direnv_hook() {
   trap -- '' SIGINT;

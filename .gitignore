@@ -2,3 +2,4 @@
 
 **/.DS_Store
 .config/nvim/plugin
+.config/nvim/lazy-lock.json

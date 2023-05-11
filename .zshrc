@@ -55,6 +55,9 @@ zstyle ':completion:*' cache-path "$HOME/.zsh/cache"
 zstyle ':completion:*' remote-access false
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin
 
+autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
+
 export PATH="$HOME/.local/bin:$PATH"
 
 function mkcd() {
@@ -217,9 +220,6 @@ eval "$(op completion zsh)"; compdef _op op
 # export ZENO_ROOT="$(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh"
 zinit ice lucid depth"1" blockf
 zinit light yuki-yano/zeno.zsh
-
-autoload -Uz compinit && compinit
-autoload -Uz bashcompinit && bashcompinit
 
 # export ZENO_ENABLE_FZF_TMUX=1
 export ZENO_ENABLE_SOCK=1

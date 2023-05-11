@@ -16,12 +16,12 @@ local function config_cmp()
     formatting = {
       -- fields = {'abbr', 'kind', 'menu'},
       format = require("lspkind").cmp_format({
-        mode = "symbol", -- show only symbol annotations
-        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+        mode = "symbol",       -- show only symbol annotations
+        maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
         ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
         -- The function below will be called before any actual modifications from lspkind
         -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-        before = function(entry, vim_item)
+        before = function(_, vim_item)
           return vim_item
         end,
       }),
@@ -53,6 +53,8 @@ local function config_cmp()
       { name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
     }, {
       { name = "buffer" },
+      { name = "spell" },
+      { name = "skkleton" },
     }),
   })
 
@@ -122,7 +124,7 @@ end
 -- lspconfig & mason
 local function setup_handlers(server, settings)
   local capabilities =
-    require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
   local opt = require("cmp_nvim_lsp").default_capabilities(capabilities)
   opt.on_attach = on_attach
@@ -185,16 +187,16 @@ local function mason_config()
 end
 
 local spec = {
-  { "hrsh7th/nvim-cmp", config = config_cmp },
+  { "hrsh7th/nvim-cmp",         config = config_cmp },
   { "hrsh7th/cmp-nvim-lsp" },
-  { "hrsh7th/cmp-buffer", dependencies = { "nvim-cmp" } },
-  { "hrsh7th/cmp-path", dependencies = { "nvim-cmp" } },
-  { "hrsh7th/cmp-cmdline", dependencies = { "nvim-cmp" } },
-  { "hrsh7th/cmp-omni", dependencies = { "nvim-cmp" } },
-  { "f3fora/cmp-spell", dependencies = { "nvim-cmp" } },
-  { "rinx/cmp-skkeleton", dependencies = { "nvim-cmp", "skkeleton" } },
+  { "hrsh7th/cmp-buffer",       dependencies = { "nvim-cmp" } },
+  { "hrsh7th/cmp-path",         dependencies = { "nvim-cmp" } },
+  { "hrsh7th/cmp-cmdline",      dependencies = { "nvim-cmp" } },
+  { "hrsh7th/cmp-omni",         dependencies = { "nvim-cmp" } },
+  { "f3fora/cmp-spell",         dependencies = { "nvim-cmp" } },
+  { "rinx/cmp-skkeleton",       dependencies = { "nvim-cmp", "skkeleton" } },
   { "saadparwaiz1/cmp_luasnip", dependencies = { "L3MON4D3/LuaSnip" } },
-  { "neovim/nvim-lspconfig", config = lspconfig_config },
+  { "neovim/nvim-lspconfig",    config = lspconfig_config },
   {
     "williamboman/mason.nvim",
     config = function()

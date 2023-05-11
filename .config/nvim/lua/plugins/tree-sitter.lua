@@ -22,5 +22,10 @@ local function config()
   })
 end
 
-local spec = { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", config = config }
+local spec = {
+  "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+  config = config,
+  lazy = true,
+}
 return spec

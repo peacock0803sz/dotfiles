@@ -21,5 +21,5 @@ local function config()
   })
 end
 
-local spec = { "jose-elias-alvarez/null-ls.nvim", config = config }
+local spec = { "jose-elias-alvarez/null-ls.nvim", config = config, lazy = true }
 return spec

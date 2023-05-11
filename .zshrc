@@ -7,19 +7,14 @@ fi
 
 setopt interactivecomments
 
-# Set up the prompt
-
-# promptinit
-# prompt adam1
-
 setopt histignorealldups sharehistory
-
 bindkey -e
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 export HISTSIZE=10000
 export SAVEHIST=10000
 export HISTFILE="$HOME/.zsh_history"
+export HISTORY_IGNORE="(cd|ls|pwd|exit|rm|n?vim|git reset)"
 
 zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' auto-description 'specify: %d'
@@ -104,7 +99,6 @@ case ${OSTYPE} in
     fi
     ;;
 esac
-
 
 # MySQL and Postgres Lib
 export PATH="$HOMEBREW_PREFIX/opt/mysql-client/bin:$PATH"
@@ -201,15 +195,15 @@ autoload -Uz _zinit
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit for light-mode zdharma-continuum/zinit-annex-as-monitor \
- zdharma-continuum/zinit-annex-bin-gem-node \
- zdharma-continuum/zinit-annex-patch-dl \
- zdharma-continuum/zinit-annex-rust \
- zdharma-continuum/history-search-multi-word \
- mollifier/anyframe \
- srijanshetty/zsh-pip-completion \
- hlissner/zsh-autopair \
- zsh-users/zsh-autosuggestions \
- zsh-users/zsh-completions
+  zdharma-continuum/zinit-annex-bin-gem-node \
+  zdharma-continuum/zinit-annex-patch-dl \
+  zdharma-continuum/zinit-annex-rust \
+  zdharma-continuum/history-search-multi-word \
+  mollifier/anyframe \
+  srijanshetty/zsh-pip-completion \
+  hlissner/zsh-autopair \
+  zsh-users/zsh-autosuggestions \
+  zsh-users/zsh-completions
 
 zinit ice as"completion"
 zinit snippet OMZP::docker/_docker
@@ -252,9 +246,6 @@ function ghq-fzf() {
 }
 zle -N ghq-fzf
 bindkey "^g" ghq-fzf
-
-# Ignore history
-export HISTORY_IGNORE="(cd|ls|pwd|exit|rm|n?vim|git reset)"
 
 function history-fzf() {
   if [[ ! -z ${TMUX} ]]; then
@@ -336,12 +327,6 @@ function mkvenv() {
 
 export PIP_REQUIRE_VIRTUALENV=1
 
-# function google_compute_ssh() {
-#   local
-# }
-
-# Ruby
-
 # theme
 zinit load romkatv/powerlevel10k
 
@@ -371,7 +356,6 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
-
 
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/.p10k.zsh.
 [[ ! -f ~/dotfiles/.p10k.zsh ]] || source "$HOME/dotfiles/.p10k.zsh"

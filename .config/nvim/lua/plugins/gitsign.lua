@@ -30,5 +30,5 @@ local function config()
   })
 end
 
-local spec = { "lewis6991/gitsigns.nvim", config = config, lazy = true }
+local spec = { "lewis6991/gitsigns.nvim", config = config, event = "BufEnter" }
 return spec

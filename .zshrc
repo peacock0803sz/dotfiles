@@ -161,6 +161,7 @@ export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.local/nvim/bin"
 export XDG_CONFIG_HOME="$HOME/.config"
 export NVIM_CACHE_HOME="$HOME/.vim/bundles"
+export PATH="$PATH:$HOME/.local/nvim/bin"
 export EDITOR=nvim
 export LANG=ja_JP.UTF-8
 
@@ -260,6 +261,9 @@ function ghq-fzf() {
 }
 zle -N ghq-fzf
 bindkey "^g" ghq-fzf
+
+# Ignore history
+export HISTORY_IGNORE="(cd|ls|pwd|exit|rm|n?vim|git reset)"
 
 function history-fzf() {
   if [[ ! -z ${TMUX} ]]; then

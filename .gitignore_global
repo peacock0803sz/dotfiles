@@ -185,3 +185,7 @@ var/*
 .cache
 
 sandbox.*
+
+## terraform lock
+**/.terraform.lock.hcl
+

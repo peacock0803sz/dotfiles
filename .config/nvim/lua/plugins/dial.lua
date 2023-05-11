@@ -17,5 +17,5 @@ local function config()
   vim.keymap.set("v", "g<C-x>", map.dec_gvisual(), { noremap = true })
 end
 
-local spec = { "monaqa/dial.nvim", config = config, lazy = true }
+local spec = { "monaqa/dial.nvim", config = config, event = "BufEnter" }
 return spec

@@ -126,7 +126,6 @@ case ${OSTYPE} in
       [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
       [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
     elif [ -e /etc/arch-release ]; then
-      export PATH="$PATH:$HOME/.local/nvim/bin"
       source /usr/share/nvm/init-nvm.sh
       export NVM_DIR="$HOME/.nvm"
       source /usr/share/nvm/nvm.sh
@@ -159,6 +158,7 @@ export GOPATH="$HOME/qhq/"
 export PATH="$PATH:$GOPATH/bin"
 
 # neovim
+export PATH="$PATH:$HOME/.local/nvim/bin"
 export XDG_CONFIG_HOME="$HOME/.config"
 export NVIM_CACHE_HOME="$HOME/.vim/bundles"
 export EDITOR=nvim
@@ -168,12 +168,10 @@ export LANG=ja_JP.UTF-8
 complete -C `command -v aws_completer` aws
 
 # kubectl
-source <(kubectl completion zsh)
-kubectl completion zsh > "${fpath[1]}/_kubectl"
+# source <(kubectl completion zsh)
+# kubectl completion zsh > "${fpath[1]}/_kubectl"
 
-# source <(eksctl completion zsh)
-# eksctl completion zsh > "${fpath[1]}/_eksctl"
-
+eval "$(op completion zsh)"; compdef _op op
 # direnv
 _direnv_hook() {
   trap -- '' SIGINT;

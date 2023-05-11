@@ -9,5 +9,6 @@ local function config()
   })
 end
 
+-- @type LazySpec
 local spec = { "vim-skk/skkeleton", dependencies = "vim-denops/denops.vim", config = config }
 return spec

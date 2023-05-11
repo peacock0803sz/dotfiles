@@ -31,3 +31,7 @@ vim.opt.foldmethod = "manual"
 
 vim.o.tabline = 2
 vim.opt.swapfile = false
+
+-- spelling
+vim.opt.spell = true
+vim.opt.spelllang = { "en_us" }

@@ -121,7 +121,7 @@ local spec = {
     "rcarriga/nvim-dap-ui",
     dependencies = { "mfussenegger/nvim-dap", "leoluz/nvim-dap-go" },
     config = config,
-    lazy = true,
+    event = "BufEnter"
   },
 }
 return spec

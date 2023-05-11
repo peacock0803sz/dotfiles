@@ -17,9 +17,9 @@ setopt histignorealldups sharehistory
 bindkey -e
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE=~/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTFILE="$HOME/.zsh_history"
 
 zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' auto-description 'specify: %d'
@@ -28,7 +28,7 @@ zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
 # eval "$(dircolors -b)"
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
@@ -55,16 +55,16 @@ zstyle ':completion:*' cache-path "$HOME/.zsh/cache"
 zstyle ':completion:*' remote-access false
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin
 
-function mkcd() {
-  mkdir -p $1
-  cd $1
-}
-
 export PATH="$HOME/.local/bin:$PATH"
+
+function mkcd() {
+  mkdir -p "$1"
+  cd "$1" || return
+}
 
 autoload -Uz vcs_info
 function gitroot() {
-  if test $(git rev-parse --git-dir 2> /dev/null); then
+  if test "$(git rev-parse --git-dir 2> /dev/null)"; then
     git rev-parse --show-superproject-working-tree --show-toplevel | head -1
   fi
 }
@@ -74,71 +74,42 @@ autoload -Uz edit-command-line; zle -N edit-command-line
 # bindkey -M vicmd v edit-command-line
 bindkey "^x^e" edit-command-line
 
-# aliases
-
 alias reloadzsh='exec -l zsh'
 
 case ${OSTYPE} in
   darwin*)
-    # tailscale
-    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-    if [[ $(uname -m) = "arm64" ]] then
+    if [[ $(uname -m) = "arm64" ]]; then
       alias rosetta="arch -x86_64 /bin/zsh"
       alias python3.8="/usr/bin/python3"
-      # Add Visual Studio Code (code)
-      export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-      [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-      source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-      source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-      export PATH=${0:A:h}/bin:$PATH
-
-      export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
-
-      export XML_CATALOG_FILES=/opt/homebrew/etc/xml/catalog
-      export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-
-      [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
-
-      # terraform
-      complete -o nospace -C /opt/homebrew/bin/terraform terraform
-    elif [[ $(uname -m) = "x86_64" ]] then
-      export PATH="/usr/local/sbin:$PATH"
-      export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvM
-      [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-      source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-      source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-
-      autoload -U +X bashcompinit && bashcompinit
-      complete -o nospace -C /usr/local/bin/terraform terraform
+      export PYTHONROOT="/Library/Frameworks/Python.framework/Versions/"
+    elif [[ $(uname -m) = "x86_64" ]]; then
+      export PYTHONROOT="/usr/local/bin"
+      export HOMEBREW_PREFIX="/usr/local"
     fi
+
+    export PATH="$HOMEBREW_PREFIX/sbin:$PATH"
+    # tailscale
+    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+    # Visual Studio Code
+    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    # [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
     ;;
   linux*)
-    if [ -e /etc/debian_version ]; then
-      eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-      [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
-      [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-    elif [ -e /etc/arch-release ]; then
-      source /usr/share/nvm/init-nvm.sh
-      export NVM_DIR="$HOME/.nvm"
-      source /usr/share/nvm/nvm.sh
-      source /usr/share/nvm/bash_completion
-      source /usr/share/nvm/install-nvm-exec
-
-      source /opt/google-cloud-sdk/completion.zsh.inc
-      source /opt/google-cloud-sdk/path.zsh.inc
+    if [[ -e /etc/debian_version ]]; then
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      export HOMEBREW_PREFIX="$HOME/linuxbrew/.linuxbrew"
     fi
     ;;
 esac
 
-# alias for terraform
+
+# MySQL and Postgres Lib
+export PATH="$HOMEBREW_PREFIX/opt/mysql-client/bin:$PATH"
+export XML_CATALOG_FILES="$HOMEBREW_PREFIX/etc/xml/catalog"
+export PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
+
+# terraform
+complete -o nospace -C "$HOMEBREW_PREFIX/bin/terraform" terraform
 alias tf="terraform"
 
 # zenn-cli
@@ -157,6 +128,9 @@ alias yq="gojq --yaml-input --yaml-output"
 export GOPATH="$HOME/qhq/"
 export PATH="$PATH:$GOPATH/bin"
 
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # neovim
 export PATH="$PATH:$HOME/.local/nvim/bin"
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -166,11 +140,28 @@ export EDITOR=nvim
 export LANG=ja_JP.UTF-8
 
 # aws completion
-complete -C `command -v aws_completer` aws
+complete -C "$(command -v aws_completer)" aws
 
-# kubectl
-# source <(kubectl completion zsh)
-# kubectl completion zsh > "${fpath[1]}/_kubectl"
+# gcloud for Google Cloud SDK
+if [[ -e $HOMEBREW_PREFIX ]]; then
+  export GCLOUD_PREFIX="$HOMEBREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
+elif [[ -e /etc/arch-release ]]; then
+  export GCLOUD_PREFIX="/opt/google-cloud-sdk"
+fi
+source "$GCLOUD_PREFIX/path.zsh.inc"
+source "$GCLOUD_PREFIX/completion.zsh.inc"
+
+# nvm for nodejs
+export NVM_DIR="$HOME/.nvm"
+if [[ -e $HOMEBREW_PREFIX ]]; then
+  [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && . "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && . "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+elif [[ -e /etc/arch-release ]]; then
+  source /usr/share/nvm/init-nvm.sh
+  source /usr/share/nvm/nvm.sh
+  source /usr/share/nvm/bash_completion
+  source /usr/share/nvm/install-nvm-exec
+fi
 
 # 1Password
 eval "$(op completion zsh)"; compdef _op op
@@ -184,11 +175,11 @@ _direnv_hook() {
 }
 typeset -ag precmd_functions;
 if [[ -z "${precmd_functions[(r)_direnv_hook]+1}" ]]; then
-  precmd_functions=( _direnv_hook ${precmd_functions[@]} )
+  precmd_functions=( _direnv_hook "${precmd_functions[@]}" )
 fi
 typeset -ag chpwd_functions;
 if [[ -z "${chpwd_functions[(r)_direnv_hook]+1}" ]]; then
-  chpwd_functions=( _direnv_hook ${chpwd_functions[@]} )
+  chpwd_functions=( _direnv_hook "${chpwd_functions[@]}" )
 fi
 
 ### Added by Zinit's installer
@@ -245,8 +236,8 @@ fi
 function ghq-fzf() {
   local dir
 
-  if [[ ! -z ${TMUX} ]]; then
-    dir=$(ghq list -p | sed -e "s|${HOME}|~|" | fzf-tmux $ZENO_FZF_TMUX_OPTIONS --preview "$ZENO_GIT_CAT \$(eval echo {})/README.md" --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up)
+  if [[ -n ${TMUX} ]]; then
+    dir=$(ghq list -p | sed -e "s|${HOME}|~|" | fzf-tmux "$ZENO_FZF_TMUX_OPTIONS" --preview "$ZENO_GIT_CAT \$(eval echo {})/README.md" --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up)
   else
     dir=$(ghq list -p | sed -e "s|${HOME}|~|" | fzf --preview "$ZENO_GIT_CAT \$(eval echo {})/README.md" --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up)
   fi
@@ -290,7 +281,7 @@ zle -N ssh-fzf
 bindkey '^\' ssh-fzf
 
 export VENV_ROOT="${HOME}/venvs"
-VENVFZF_VENV_OPTIONS=""
+export VENVFZF_VENV_OPTIONS=""
 
 function venv-fzf() {
   if [[ ! -z ${TMUX} ]] && [[ $(which fzf-tmux) ]]; then
@@ -310,7 +301,7 @@ function _list_venvs() {
   local dirs=$(find $VENV_ROOT -maxdepth 4 -mindepth 4 -type d)
 
   for d in $dirs; do
-    echo $d
+    echo "$d"
   done
 }
 zle -N venv-fzf
@@ -319,8 +310,8 @@ bindkey '^x^v' venv-fzf
 function mkvenv() {
   local _venv_dir=$(pwd | awk -F "/" '{print $(NF-2),$(NF-1),$NF}' | tr ' ' '/')
   local venv_name="$_venv_dir/venv"
-  read _venv_name\?"Input a name of dir (default: ${venv_name})> "
-  if [[ ! -z ${_venv_name} ]]; then
+  read -r _venv_name\?"Input a name of dir (default: ${venv_name})> "
+  if [[ -n ${_venv_name} ]]; then
     venv_name=${_venv_name}
   fi
 
@@ -329,28 +320,18 @@ function mkvenv() {
     echo "${expected_venv} is Already exist !!"
     return
   elif [[ ! -e expected_venv ]]; then
-    mkdir -p $expected_venv
+    mkdir -p "$expected_venv"
   fi
 
-  case ${OSTYPE} in
-    darwin*)
-      if [[ $(uname -m) = "arm64" ]] then
-        local PYTHONROOT="/Library/Frameworks/Python.framework/Versions/"
-        echo "$(find $PYTHONROOT -maxdepth 1 | grep -e '[0-9]$')"
-        read _py_number\?"Choise a number you wants use python > "
-        local _py="$PYTHONROOT$_py_number/bin/python3"
-      elif [[ $(uname -m) = "x86_64" ]] then
-        local PYTHONROOT="/usr/local/bin"
-        echo "$(find $PYTHONROOT -maxdepth 1 | grep -e 'python3\.[0-9]*$')"
-        read _py_number\?"Choise a number you wants use python > "
-        local _py="$PYTHONROOT/python$_py_number/"
-      fi
-    ;;
-  esac
+  find "$PYTHONROOT" -maxdepth 1 | grep -e '[0-9]$'
+  local _py_number
+  read -r _py_number\?"Choise a number you wants use python > "
+
+  local _py="$PYTHONROOT$_py_number/bin/python3"
 
   echo "$_py -m venv ${expected_venv}"
-  $_py -m venv ${expected_venv}
-  source ${expected_venv}/bin/activate
+  $_py -m venv "$expected_venv"
+  source "$expected_venv/bin/activate"
 }
 
 export PIP_REQUIRE_VIRTUALENV=1
@@ -369,11 +350,14 @@ zinit load romkatv/powerlevel10k
 # place this after nvm initialization!
 autoload -U add-zsh-hook
 load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
+  local node_version
+  node_version="$(nvm version)"
+  local nvmrc_path
+  nvmrc_path="$(nvm_find_nvmrc)"
 
   if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+    local nvmrc_node_version
+    nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
 
     if [ "$nvmrc_node_version" = "N/A" ]; then
       nvm install
@@ -388,7 +372,6 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
-export PATH="$HOME/.cargo/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/.p10k.zsh.
 [[ ! -f ~/dotfiles/.p10k.zsh ]] || source "$HOME/dotfiles/.p10k.zsh"

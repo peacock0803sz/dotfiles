@@ -93,6 +93,15 @@ local function config()
         mappings = {
           ["n"] = {
             ["cd"] = change_dir,
+          },
+        },
+      },
+      git_stash = {
+        mappings = {
+          ["n"] = {
+          },
+        },
+      },
     },
     extensions = {
       file_browser = {

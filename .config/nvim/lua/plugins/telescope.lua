@@ -1,7 +1,9 @@
 local function config()
   local join_table = require("utils").join_table
 
+  local utils = require("telescope.utils")
   local actions = require("telescope.actions")
+  local action_state = require("telescope.actions.state")
   local pickers = require("telescope.pickers")
   local finders = require("telescope.finders")
   local make_entry = require("telescope.make_entry")
@@ -11,32 +13,32 @@ local function config()
     local safe_opts = opts or {}
     local list = vim.fn["mr#mrw#list"]()
     pickers
-        .new(safe_opts, {
-          prompt_title = "Recent written files",
-          finder = finders.new_table({
-            results = list,
-            entry_maker = make_entry.gen_from_file(safe_opts),
-          }),
-          previewer = conf.file_previewer(safe_opts),
-          sorter = conf.file_sorter(safe_opts),
-        })
-        :find()
+      .new(safe_opts, {
+        prompt_title = "Recent written files",
+        finder = finders.new_table({
+          results = list,
+          entry_maker = make_entry.gen_from_file(safe_opts),
+        }),
+        previewer = conf.file_previewer(safe_opts),
+        sorter = conf.file_sorter(safe_opts),
+      })
+      :find()
   end
 
   local recent_used_files = function(opts)
     local safe_opts = opts or {}
     local list = vim.fn["mr#mru#list"]()
     pickers
-        .new(safe_opts, {
-          prompt_title = "Recent used files",
-          finder = finders.new_table({
-            results = list,
-            entry_maker = make_entry.gen_from_file(safe_opts),
-          }),
-          previewer = conf.file_previewer(safe_opts),
-          sorter = conf.file_sorter(safe_opts),
-        })
-        :find()
+      .new(safe_opts, {
+        prompt_title = "Recent used files",
+        finder = finders.new_table({
+          results = list,
+          entry_maker = make_entry.gen_from_file(safe_opts),
+        }),
+        previewer = conf.file_previewer(safe_opts),
+        sorter = conf.file_sorter(safe_opts),
+      })
+      :find()
   end
 
   local vimgrep_arguments = require("telescope.config").values.vimgrep_arguments
@@ -44,6 +46,13 @@ local function config()
 
   local grep_args = join_table(vimgrep_arguments, include_dotfiles)
   local find_command = join_table({ "rg", "--files" }, include_dotfiles)
+
+  local function change_dir(bufnr)
+    local selection = action_state.get_selected_entry()
+    vim.cmd("silent lcd " .. vim.fn.fnamemodify(selection.path, ":p:h"))
+    actions.close(bufnr)
+    vim.print("Changed dir to " .. vim.fn.getcwd())
+  end
 
   require("telescope").setup({
     defaults = {
@@ -65,6 +74,11 @@ local function config()
     pickers = {
       find_files = {
         find_command = find_command,
+        mappings = {
+          ["n"] = {
+            ["cd"] = change_dir,
+          },
+        },
       },
       live_grep = {
         vimgrep_arguments = grep_args,
@@ -74,6 +88,19 @@ local function config()
       },
       recent_written_files = {
         picker_config_key = recent_written_files,
+      },
+      git_status = {
+        mappings = {
+          ["n"] = {
+            ["cd"] = change_dir,
+          },
+        },
+      },
+      git_stash = {
+        mappings = {
+          ["n"] = {
+          },
+        },
       },
     },
     extensions = {
@@ -86,7 +113,7 @@ local function config()
             ["<C-d>"] = actions.git_switch_branch,
           },
           ["n"] = {
-            -- your custom normal mode mappings
+            ["cd"] = change_dir,
           },
         },
       },

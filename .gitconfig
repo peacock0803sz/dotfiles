@@ -1,0 +1,13 @@
+[core]
+	excludesFile = ~/dotfiles/.gitignore_global
+[user]
+	name = Peacock
+	email = contact@peacock0803sz.com
+[push]
+	autoSetupRemote = true
+[init]
+	defaultBranch = main
+[merge]
+	tool = nvimdiff
+[pull]
+	rebase = false

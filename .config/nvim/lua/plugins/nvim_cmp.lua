@@ -17,8 +17,8 @@ local function config_cmp()
       -- fields = {'abbr', 'kind', 'menu'},
       format = require("lspkind").cmp_format({
         with_text = true,
-        mode = "symbol_text", -- show only symbol annotations
-        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+        mode = "symbol_text",  -- show only symbol annotations
+        maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
         ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
         -- The function below will be called before any actual modifications from lspkind
         -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
@@ -42,10 +42,10 @@ local function config_cmp()
       { name = "nvim_lsp" },
       { name = "luasnip" }, -- For luasnip users.
       { name = "path" },
+      { name = "skkeleton" },
     }, {
       { name = "buffer" },
       { name = "spell" },
-      { name = "skkleton" },
     }),
     view = {
       -- entries = "native"
@@ -59,7 +59,7 @@ local function config_cmp()
     }, {
       { name = "buffer" },
       { name = "spell" },
-      { name = "skkleton" },
+      { name = "skkeleton" },
     }),
   })
 
@@ -68,6 +68,7 @@ local function config_cmp()
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = "buffer" },
+      { name = "skkeleton" },
     },
   })
 
@@ -76,6 +77,7 @@ local function config_cmp()
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = "path" },
+      { name = "skkeleton" },
     }, {
       { name = "cmdline" },
     }),
@@ -89,8 +91,8 @@ local spec = {
     event = "BufEnter",
   },
   { "hrsh7th/cmp-nvim-lsp" },
-  { "hrsh7th/cmp-buffer", dependencies = { "hrsh7th/nvim-cmp" } },
-  { "hrsh7th/cmp-path", dependencies = { "hrsh7th/nvim-cmp" } },
+  { "hrsh7th/cmp-buffer",  dependencies = { "hrsh7th/nvim-cmp" } },
+  { "hrsh7th/cmp-path",    dependencies = { "hrsh7th/nvim-cmp" } },
   {
     "hrsh7th/cmp-cmdline",
     dependencies = { "hrsh7th/nvim-cmp" },
@@ -102,11 +104,10 @@ local spec = {
     event = "InsertEnter",
   },
   { "hrsh7th/cmp-nvim-lua", dependencies = { "hrsh7th/nvim-cmp" } },
-  { "f3fora/cmp-spell", dependencies = { "hrsh7th/nvim-cmp" } },
+  { "f3fora/cmp-spell",     dependencies = { "hrsh7th/nvim-cmp" } },
   {
     "uga-rosa/cmp-skkeleton",
     dependencies = { "hrsh7th/nvim-cmp", "vim-skk/skkeleton" },
-    event = "InsertEnter",
   },
   {
     "saadparwaiz1/cmp_luasnip",

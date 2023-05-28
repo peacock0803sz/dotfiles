@@ -13,6 +13,7 @@ local function config()
     null_ls.builtins.formatting.black,
     -- Lua
     null_ls.builtins.formatting.stylua,
+    null_ls.builtins.code_actions.shellcheck,
   }
   null_ls.setup({
     -- debug = true,

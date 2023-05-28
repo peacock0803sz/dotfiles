@@ -42,7 +42,7 @@ return {
     cursor_border = "white",
   },
 
-  use_ime = false,
+  use_ime = true,
 
   -- Keybindings
   disable_default_key_bindings = true,

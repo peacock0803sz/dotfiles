@@ -42,7 +42,6 @@ local function config_cmp()
       { name = "nvim_lsp" },
       { name = "luasnip" }, -- For luasnip users.
       { name = "path" },
-      { name = "skkeleton" },
     }, {
       { name = "buffer" },
       { name = "spell" },
@@ -59,7 +58,6 @@ local function config_cmp()
     }, {
       { name = "buffer" },
       { name = "spell" },
-      { name = "skkeleton" },
     }),
   })
 
@@ -68,7 +66,6 @@ local function config_cmp()
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = "buffer" },
-      { name = "skkeleton" },
     },
   })
 
@@ -77,7 +74,6 @@ local function config_cmp()
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = "path" },
-      { name = "skkeleton" },
     }, {
       { name = "cmdline" },
     }),
@@ -105,10 +101,6 @@ local spec = {
   },
   { "hrsh7th/cmp-nvim-lua", dependencies = { "hrsh7th/nvim-cmp" } },
   { "f3fora/cmp-spell",     dependencies = { "hrsh7th/nvim-cmp" } },
-  {
-    "uga-rosa/cmp-skkeleton",
-    dependencies = { "hrsh7th/nvim-cmp", "vim-skk/skkeleton" },
-  },
   {
     "saadparwaiz1/cmp_luasnip",
     dependencies = { "L3MON4D3/LuaSnip" },

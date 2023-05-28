@@ -184,7 +184,7 @@ flycheck_*.el
 
 .cache
 
-sandbox.*
+sandbox*
 
 ## terraform lock
 **/.terraform.lock.hcl

@@ -100,7 +100,11 @@ local function mason_config()
           },
         },
         denols = {
-          root_dir = require("lspconfig.util").root_pattern("deno.json"),
+          init_options = {
+            enable = true,
+            lint = true,
+            unstable = true,
+          },
         },
       })
     end,

@@ -6,5 +6,5 @@ local function config()
   ]])
 end
 
-local spec = { "j-hui/fidget.nvim", config = config }
+local spec = { "j-hui/fidget.nvim", config = config, branch="legacy" }
 return spec

@@ -98,8 +98,7 @@ local function config()
       },
       git_stash = {
         mappings = {
-          ["n"] = {
-          },
+          ["n"] = {},
         },
       },
     },
@@ -126,6 +125,7 @@ local function config()
   vim.keymap.set("n", "<space>fg", builtin.live_grep, { silent = true })
   vim.keymap.set("n", "<space>fb", builtin.buffers, { silent = true })
   vim.keymap.set("n", "<space>fh", builtin.help_tags, { silent = true })
+  vim.keymap.set("n", "<space>fc", builtin.commands, { silent = true })
   vim.keymap.set("n", "<space>fr", recent_used_files, { silent = true })
   vim.keymap.set("n", "<space>fw", recent_written_files, { silent = true })
 
@@ -134,6 +134,13 @@ local function config()
   vim.keymap.set("n", "<space>gb", builtin.git_branches, { silent = true })
   vim.keymap.set("n", "<space>gs", builtin.git_status, { silent = true })
   vim.keymap.set("n", "<space>gS", builtin.git_stash, { silent = true })
+
+  vim.keymap.set("n", "<space>lr", builtin.lsp_references, { silent = true })
+  vim.keymap.set("n", "<space>ls", builtin.lsp_workspace_symbols, { silent = true })
+  vim.keymap.set("n", "<space>ld", builtin.lsp_definitions, { silent = true })
+  vim.keymap.set("n", "<space>lt", builtin.lsp_type_definitions, { silent = true })
+  vim.keymap.set("n", "<space>li", builtin.lsp_implementations, { silent = true })
+  vim.keymap.set("n", "<space>le", builtin.diagnostics, { silent = true })
 
   -- extensions
   require("telescope").load_extension("file_browser")

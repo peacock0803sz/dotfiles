@@ -30,11 +30,11 @@ return {
 
   -- Fonts
   font = wezterm.font_with_fallback({
-    { family = "UDEV Gothic",    weight = "Bold" },
+    { family = "UDEV Gothic", weight = "Bold" },
     { family = "UDEV Gothic NF", weight = "Bold" },
     "Noto Color Emoji",
   }),
-  font_size = 13.0,
+  font_size = 12.0,
 
   color_scheme = get_colorscheme(),
   colors = {
@@ -57,16 +57,16 @@ return {
       mods = "LEADER",
       action = wezterm.action({ Search = { CaseSensitiveString = "" } }),
     },
-    { key = "q", mods = "CMD",       action = "QuitApplication" },
+    { key = "q", mods = "CMD", action = "QuitApplication" },
 
     -- Clipboards
-    { key = "c", mods = "SUPER",     action = wezterm.action({ CopyTo = "Clipboard" }) },
-    { key = "v", mods = "SUPER",     action = wezterm.action({ PasteFrom = "Clipboard" }) },
+    { key = "c", mods = "SUPER", action = wezterm.action({ CopyTo = "Clipboard" }) },
+    { key = "v", mods = "SUPER", action = wezterm.action({ PasteFrom = "Clipboard" }) },
 
     -- Font & Window Sizing
     { key = "+", mods = "ALT|SHIFT", action = "IncreaseFontSize" },
-    { key = "-", mods = "ALT",       action = "DecreaseFontSize" },
-    { key = "0", mods = "ALT",       action = "ResetFontSize" },
+    { key = "-", mods = "ALT", action = "DecreaseFontSize" },
+    { key = "0", mods = "ALT", action = "ResetFontSize" },
     { key = "0", mods = "ALT|SHIFT", action = "ResetFontAndWindowSize" },
 
     -- Workspaces
@@ -76,8 +76,8 @@ return {
       action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
     },
     { key = "s", mods = "ALT|SHIFT", action = wezterm.action({ SwitchToWorkspace = {} }) },
-    { key = "l", mods = "ALT",       action = wezterm.action({ SwitchWorkspaceRelative = 1 }) },
-    { key = "h", mods = "ALT",       action = wezterm.action({ SwitchWorkspaceRelative = -1 }) },
+    { key = "l", mods = "ALT", action = wezterm.action({ SwitchWorkspaceRelative = 1 }) },
+    { key = "h", mods = "ALT", action = wezterm.action({ SwitchWorkspaceRelative = -1 }) },
     -- {key="1", mods="ALT|SHIFT", action=wezterm.action{SwitchToWorkspace={name="0"}}},
     -- {key="2", mods="ALT|SHIFT", action=wezterm.action{SwitchToWorkspace={name="1"}}},
     -- {key="3", mods="ALT|SHIFT", action=wezterm.action{SwitchToWorkspace={name="2"}}},
@@ -127,9 +127,9 @@ return {
     { key = "j", mods = "ALT|SHIFT", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
     { key = "k", mods = "ALT|SHIFT", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
     { key = "l", mods = "ALT|SHIFT", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
-    { key = "h", mods = "LEADER",    action = wezterm.action({ AdjustPaneSize = { "Left", 5 } }) },
-    { key = "j", mods = "LEADER",    action = wezterm.action({ AdjustPaneSize = { "Down", 5 } }) },
-    { key = "k", mods = "LEADER",    action = wezterm.action({ AdjustPaneSize = { "Up", 5 } }) },
-    { key = "l", mods = "LEADER",    action = wezterm.action({ AdjustPaneSize = { "Right", 5 } }) },
+    { key = "h", mods = "LEADER", action = wezterm.action({ AdjustPaneSize = { "Left", 5 } }) },
+    { key = "j", mods = "LEADER", action = wezterm.action({ AdjustPaneSize = { "Down", 5 } }) },
+    { key = "k", mods = "LEADER", action = wezterm.action({ AdjustPaneSize = { "Up", 5 } }) },
+    { key = "l", mods = "LEADER", action = wezterm.action({ AdjustPaneSize = { "Right", 5 } }) },
   },
 }

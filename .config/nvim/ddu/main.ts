@@ -34,12 +34,12 @@ export class Config extends BaseConfig {
       uiParams: {
         ff: {
           split: "floating",
-          startFilter: true,
           filterFloatingPosition: "bottom",
           filterSplitDirection: "botright",
           floatingBorder: "single",
           prompt: ">",
-          autoAction: { name: "preview" },
+          autoAction: { name: "preview", delay: 1 },
+          startAutoAction: true,
           previewFloating: true,
           previewFloatingBorder: "single",
           previewSplit: mayVSplit ? "vertical" : "horizontal",
@@ -49,13 +49,15 @@ export class Config extends BaseConfig {
           winWidth: winWidth,
           winCol: 0,
           previewWidth: mayVSplit ? Math.floor(winWidth / 2) : winWidth,
+          previewHeight: winHeight,
         } as Partial<FfParams>,
         filer: {
           sort: "filename",
           sortTreesFirst: true,
           split: "floating",
-          toggle: false,
           prompt: ">",
+          autoAction: { name: "preview", delay: 1 },
+          startAutoAction: true,
           previewFloating: true,
           previewFloatingBorder: "single",
           previewSplit: mayVSplit ? "vertical" : "horizontal",
@@ -64,6 +66,7 @@ export class Config extends BaseConfig {
           winWidth: winWidth,
           winCol: 0,
           previewWidth: mayVSplit ? Math.floor(winWidth / 2) : winWidth,
+          previewHeight: winHeight,
         } as Partial<FilerParams>,
       },
       sourceOptions: {
@@ -76,11 +79,11 @@ export class Config extends BaseConfig {
       sourceParams: {
         rg: {
           args: [
-            // "--ignore-case",
-            // "--column",
-            // "--no-heading",
-            // "--color",
-            // "never",
+            "--ignore-case",
+            "--column",
+            "--no-heading",
+            "--color",
+            "never",
           ],
         },
         file_rg: {

@@ -72,7 +72,7 @@ export class Config extends BaseConfig {
       sourceOptions: {
         _: {
           ignoreCase: true,
-          matchers: ["matcher_fzf"],
+          matchers: ["matcher_substring"],
           sorters: ["sorter_fzf"],
         },
       },
@@ -101,6 +101,7 @@ export class Config extends BaseConfig {
       },
       filterParams: {
         matcher_fzf: { highlightMatched: "DduSearchMatched" },
+        matcher_substring: { highlightMatched: "Search" },
       },
       kindOptions: {
         file: {

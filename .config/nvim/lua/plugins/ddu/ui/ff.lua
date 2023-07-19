@@ -1,4 +1,8 @@
 local function config()
+  local config_dir = vim.fn.stdpath("config")
+  local dir = config_dir .. "/ddu/ui/ff.ts"
+
+  vim.fn["ddu#custom#load_config"](dir)
   -- local group = vim.api.nvim_create_augroup("plug-ddu-ui-ff", { clear = true })
   vim.api.nvim_create_autocmd("FileType", {
     -- group = group,

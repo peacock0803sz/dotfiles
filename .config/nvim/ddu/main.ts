@@ -22,6 +22,10 @@ export class Config extends BaseConfig {
           matchers: ["matcher_substring"],
           sorters: ["sorter_fzf"],
         },
+        file: {
+          ignoreCase: true,
+          columns: ["icon_filename"],
+        },
       },
       sourceParams: {
         rg: {

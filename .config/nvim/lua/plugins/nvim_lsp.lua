@@ -51,6 +51,9 @@ local function setup_handlers(server, settings)
   opt.on_attach = on_attach
   opt.settings = settings[server]
   require("lspconfig")[server].setup(opt)
+  if server == "grammarly" then
+    vim.g.node_host_prog = os.getenv("HOME") .. "/.nvm/versions/node/v16.20.1/bin/node"
+  end
 end
 
 local function lspconfig_config()
@@ -98,6 +101,9 @@ local function mason_config()
             "vue",
             "json",
           },
+        },
+        grammarly = {
+          init_options = {clientId = os.getenv("GRAMMARLY_CLIENT_ID")}
         },
         denols = {
           init_options = {

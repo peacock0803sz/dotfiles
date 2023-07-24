@@ -8,17 +8,16 @@ local function get_appearance()
   end
 end
 
-local function get_colorscheme()
-  if get_appearance() == "Light" then
-    return "dawnfox"
-  else
-    return "nordfox"
-  end
-end
+-- local function get_colorscheme()
+--   if get_appearance() == "Light" then
+--     return "dawnfox"
+--   else
+--     return "nordfox"
+--   end
+-- end
 
 wezterm.on("window-config-reloaded", function(window, _)
   window:toast_notification("wezterm", "configuration reloaded!", nil, 4000)
-  wezterm.configuration.color_scheme = get_colorscheme()
 end)
 
 return {
@@ -34,9 +33,9 @@ return {
     { family = "UDEV Gothic NF", weight = "Bold" },
     "Noto Color Emoji",
   }),
-  font_size = 12.0,
+  font_size = 14.0,
 
-  color_scheme = get_colorscheme(),
+  color_scheme = "nordfox",
   colors = {
     cursor_bg = "white",
     cursor_border = "white",

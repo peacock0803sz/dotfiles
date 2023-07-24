@@ -21,6 +21,7 @@ export class Config extends BaseConfig {
           ignoreCase: true,
           matchers: ["matcher_substring"],
           sorters: ["sorter_fzf"],
+          converters: ["converter_hl_dir"]
         },
         file: {
           ignoreCase: true,

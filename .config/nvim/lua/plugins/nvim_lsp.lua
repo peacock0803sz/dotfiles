@@ -76,20 +76,22 @@ local function mason_config()
     function(server)
       setup_handlers(server, {
         lua_ls = {
-          -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
-          Lua = {
-            completion = { callSnippet = "Replace" },
-            runtime = { version = "LuaJIT" },
-            diagnostics = {
-              -- Get the language server to recognize the `vim` global
-              globals = { "vim" },
+          settings = {
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
+            Lua = {
+              completion = { callSnippet = "Replace" },
+              runtime = { version = "LuaJIT" },
+              diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { "vim" },
+              },
+              workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+              },
+              -- Do not send telemetry data containing a randomized but unique identifier
+              telemetry = { enable = false },
             },
-            workspace = {
-              -- Make the server aware of Neovim runtime files
-              library = vim.api.nvim_get_runtime_file("", true),
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = { enable = false },
           },
         },
         volar = {
@@ -103,7 +105,7 @@ local function mason_config()
           },
         },
         grammarly = {
-          init_options = {clientId = os.getenv("GRAMMARLY_CLIENT_ID")}
+          init_options = { clientId = os.getenv("GRAMMARLY_CLIENT_ID") },
         },
         denols = {
           init_options = {
@@ -118,7 +120,7 @@ local function mason_config()
 end
 
 local spec = {
-  { "neovim/nvim-lspconfig",    config = lspconfig_config },
+  { "neovim/nvim-lspconfig", config = lspconfig_config },
   {
     "williamboman/mason.nvim",
     config = function()

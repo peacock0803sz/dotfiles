@@ -18,3 +18,10 @@ require("lazy").setup("plugins")
 require("colorscheme")
 require("keymaps")
 require("filetypes")
+
+vim.api.nvim_create_user_command("PluginList", function()
+  local plugins = require("lazy").plugins()
+  for _, plugin in ipairs(plugins) do
+    vim.print(plugin[1])
+  end
+end, {})

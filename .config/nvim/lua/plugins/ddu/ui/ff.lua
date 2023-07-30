@@ -1,7 +1,11 @@
 local function config()
-  -- local group = vim.api.nvim_create_augroup("plug-ddu-ui-ff", { clear = true })
+  local config_dir = vim.fn.stdpath("config")
+  local dir = config_dir .. "/ddu/ui/ff.ts"
+
+  vim.fn["ddu#custom#load_config"](dir)
+  local group = vim.api.nvim_create_augroup("plug-ddu-ui-ff", { clear = true })
   vim.api.nvim_create_autocmd("FileType", {
-    -- group = group,
+    group = group,
     pattern = "ddu-ff",
     callback = function()
       local nmap = function(lh, rh)

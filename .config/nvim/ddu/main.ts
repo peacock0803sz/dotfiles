@@ -6,74 +6,26 @@ import {
 import { fn } from "https://deno.land/x/ddu_vim@v3.3.3/deps.ts";
 import { ConfigArguments } from "https://deno.land/x/ddu_vim@v3.3.3/base/config.ts";
 import { ActionData } from "https://deno.land/x/ddu_kind_file@v0.5.2/file.ts";
-import { Params as FfParams } from "https://deno.land/x/ddu_ui_ff@v1.0.2/ff.ts";
-import { Params as FilerParams } from "https://deno.land/x/ddu_ui_filer@v1.0.2/filer.ts";
-import * as opt from "https://deno.land/x/denops_std@v5.0.1/option/mod.ts";
 
 type Params = Record<string, unknown>;
 
 export class Config extends BaseConfig {
-  override async config(args: ConfigArguments): Promise<void> {
+  override config(args: ConfigArguments): Promise<void> {
     args.setAlias("source", "file_rg", "file_external");
     args.setAlias("action", "tabopen", "open");
 
-    const winCol = await opt.columns.get(args.denops);
-    const winRow = await opt.lines.get(args.denops);
-    const winWidth = Math.floor(winCol * 0.95);
-    const winHeight = Math.floor(winRow * 0.8);
-
-    const mayVSplit = winWidth >= 88; // 88以上なら縦分割
-
     args.contextBuilder.patchGlobal({
       ui: "ff",
-      uiOptions: {
-        filer: {
-          toggle: true,
-        },
-      },
-      uiParams: {
-        ff: {
-          split: "floating",
-          filterFloatingPosition: "bottom",
-          filterSplitDirection: "botright",
-          floatingBorder: "single",
-          prompt: ">",
-          autoAction: { name: "preview", delay: 1 },
-          startAutoAction: true,
-          previewFloating: true,
-          previewFloatingBorder: "single",
-          previewSplit: mayVSplit ? "vertical" : "horizontal",
-          updateTime: 0,
-          winHeight: winHeight,
-          winRow: 2,
-          winWidth: winWidth,
-          winCol: 0,
-          previewWidth: mayVSplit ? Math.floor(winWidth / 2) : winWidth,
-          previewHeight: winHeight,
-        } as Partial<FfParams>,
-        filer: {
-          sort: "filename",
-          sortTreesFirst: true,
-          split: "floating",
-          prompt: ">",
-          autoAction: { name: "preview", delay: 1 },
-          startAutoAction: true,
-          previewFloating: true,
-          previewFloatingBorder: "single",
-          previewSplit: mayVSplit ? "vertical" : "horizontal",
-          winHeight: winHeight,
-          winRow: 2,
-          winWidth: winWidth,
-          winCol: 0,
-          previewWidth: mayVSplit ? Math.floor(winWidth / 2) : winWidth,
-          previewHeight: winHeight,
-        } as Partial<FilerParams>,
-      },
       sourceOptions: {
         _: {
           ignoreCase: true,
           matchers: ["matcher_substring"],
           sorters: ["sorter_fzf"],
+          converters: ["converter_hl_dir"]
+        },
+        file: {
+          ignoreCase: true,
+          columns: ["icon_filename"],
         },
       },
       sourceParams: {

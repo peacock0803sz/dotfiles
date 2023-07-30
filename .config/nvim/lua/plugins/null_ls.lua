@@ -17,9 +17,15 @@ local function config()
   null_ls.setup({
     -- debug = true,
     sources = sources,
-    on_attach = require("plugins.nvim_lsp").on_attach,
   })
 end
 
-local spec = { "jose-elias-alvarez/null-ls.nvim", config = config, }
+local spec = {
+  "jose-elias-alvarez/null-ls.nvim",
+  config = config,
+  dependencies = {
+    "williamboman/mason.nvim",
+    "jay-babu/mason-null-ls.nvim",
+  },
+}
 return spec

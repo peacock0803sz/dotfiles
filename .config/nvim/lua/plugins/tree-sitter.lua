@@ -25,7 +25,7 @@ end
 
 local spec = {
   "nvim-treesitter/nvim-treesitter",
-  -- build = ":TSUpdate",
+  build = ":TSUpdate",
   config = config,
   -- event = "BufRead",
 }

@@ -1,5 +1,5 @@
 local spec = {
-  { "folke/neoconf.nvim",           cmd = "Neoconf" },
+  { "folke/neodev.nvim", },
   { "vim-jp/vimdoc-ja" },
   { "nvim-lua/plenary.nvim",        lazy = true },
   { "lambdalisue/nerdfont.vim" },

@@ -13,4 +13,3 @@ jobs:
         with:
           user-token: ${{ secrets.GITHUB_TOKEN }} # needed for updating workflows
           base-branch: master
-          include: "ddu/*.ts"

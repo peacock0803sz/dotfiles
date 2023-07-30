@@ -56,6 +56,7 @@ export class Config extends BaseConfig {
         matcher_substring: { highlightMatched: "Search" },
       },
       kindOptions: {
+        git_commit: { defaultAction:  "yank"},
         file: {
           defaultAction: "open",
           actions: {

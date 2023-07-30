@@ -10,7 +10,7 @@ export class Config extends BaseConfig {
     const winWidth = Math.floor(winCol * 0.95);
     const winHeight = Math.floor(winRow * 0.8);
 
-    const mayVSplit = winWidth >= 88; // 88以上なら縦分割
+    const mayVSplit = winCol >= 100; // 100以上なら縦分割
 
     args.contextBuilder.patchGlobal({
       ui: "ff",

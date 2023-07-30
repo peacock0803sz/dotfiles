@@ -39,13 +39,13 @@ local function config()
     pattern = "ddu-ff-filter",
     callback = function()
       vim.opt_local.cursorline = false
-      local o = { buffer = true, silent = true, remap = true }
+      local o = { buffer = true, silent = true }
 
       vim.keymap.set("n", "<ESC>", '<Cmd>call ddu#ui#do_action("closeFilterWindow")<CR>', o)
-      vim.keymap.set("i", "<CR>", '<Cmd>call ddu#ui#do_action("leaveFilterWindow")<cr>', o)
+      vim.keymap.set("i", "<CR>", '<ESC><Cmd>call ddu#ui#do_action("leaveFilterWindow")<cr>', o)
       vim.keymap.set("i", "<bs>", function()
         return vim.fn.col(".") <= 1 and "" or "<bs>"
-      end, o)
+      end, { buffer = true, silent = true, expr = true })
     end,
   })
 end

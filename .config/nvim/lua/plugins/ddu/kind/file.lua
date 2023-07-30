@@ -9,13 +9,15 @@ local function config()
       end
 
       local function item_action(name, params, stopinsert)
-        if stopinsert then
-          vim.cmd.stopinsert()
-          vim.schedule(function()
+        return function()
+          if stopinsert then
+            vim.cmd.stopinsert()
+            vim.schedule(function()
+              vim.fn["ddu#ui#do_action"]("itemAction", { name = name, params = params })
+            end)
+          else
             vim.fn["ddu#ui#do_action"]("itemAction", { name = name, params = params })
-          end)
-        else
-          vim.fn["ddu#ui#do_action"]("itemAction", { name = name, params = params })
+          end
         end
       end
       map("n", "<C-v>", item_action("open", { command = "vsplit" }, true))

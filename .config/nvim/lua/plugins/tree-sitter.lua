@@ -12,6 +12,7 @@ local function config()
       "astro",
       "rust",
       "markdown",
+      -- "markdown_inline",
     },
     highlight = {
       enable = true,
@@ -24,8 +25,8 @@ end
 
 local spec = {
   "nvim-treesitter/nvim-treesitter",
-  build = ":TSUpdate",
+  -- build = ":TSUpdate",
   config = config,
-  event = "BufRead",
+  -- event = "BufRead",
 }
 return spec

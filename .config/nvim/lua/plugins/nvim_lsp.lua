@@ -51,6 +51,7 @@ local function setup_handlers(server, settings)
   opt.on_attach = on_attach
   opt.settings = settings[server]
   require("lspconfig")[server].setup(opt)
+
   if server == "grammarly" then
     vim.g.node_host_prog = os.getenv("HOME") .. "/.nvm/versions/node/v16.20.1/bin/node"
   end

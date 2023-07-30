@@ -26,14 +26,14 @@ export class Config extends BaseConfig {
           previewFloating: true,
           previewFloatingBorder: "single",
           previewSplit: mayVSplit ? "vertical" : "horizontal",
-          updateTime: 0,
+          filterUpdateTime: 0,
           winHeight: winHeight,
           winRow: 2,
           winWidth: winWidth,
           winCol: 0,
           previewWidth: mayVSplit ? Math.floor(winWidth / 2) : winWidth,
           previewHeight: winHeight,
-        } as Partial<FfParams>,
+        } satisfies Partial<FfParams>,
       },
     });
     return Promise.resolve();

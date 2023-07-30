@@ -25,8 +25,6 @@ export class Config extends BaseConfig {
           sortTreesFirst: true,
           split: "floating",
           floatingBorder: "single",
-          autoAction: { name: "preview", delay: 1 },
-          startAutoAction: true,
           previewFloating: true,
           previewFloatingBorder: "single",
           previewSplit: mayVSplit ? "vertical" : "horizontal",
@@ -36,7 +34,7 @@ export class Config extends BaseConfig {
           winCol: 0,
           previewWidth: mayVSplit ? Math.floor(winWidth / 2) : winWidth,
           previewHeight: winHeight,
-        } as Partial<FilerParams>,
+        } satisfies Partial<FilerParams>,
       },
     });
     return Promise.resolve();

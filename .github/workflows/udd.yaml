@@ -12,3 +12,4 @@ jobs:
       - uses: hasundue/denopendabot@0.16.3 # @denopendabot hasundue/denopendabot
         with:
           user-token: ${{ secrets.GITHUB_TOKEN }} # needed for updating workflows
+          base-branch: master

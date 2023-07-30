@@ -1,11 +1,11 @@
 local function status_config()
   local helper = require("plugins.ddu.map")
-  helper.map_source("<Space>dgs", "git_status", { sources = { { name = "git_status" } } })
+  helper.map_source("<Space>gs", "git_status", { sources = { { name = "git_status" } } })
 end
 
 local function log_config()
   local helper = require("plugins.ddu.map")
-  helper.map_source("<Space>dgl", "git_log", { sources = { { name = "git_log" } } })
+  helper.map_source("<Space>gl", "git_log", { sources = { { name = "git_log" } } })
 end
 
 local spec = {

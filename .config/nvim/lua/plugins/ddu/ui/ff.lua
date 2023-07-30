@@ -20,11 +20,15 @@ local function config()
       nmap("t", "<nop>")
       -- nmap(";", ":")
 
-      nmap("/", '<Cmd>call ddu#ui#do_action("openFilterWindow")<CR>')
-      nmap("<ESC>", '<Cmd>call ddu#ui#do_action("quit")<CR>')
-      nmap("<CR>", '<Cmd>call ddu#ui#do_action("itemAction")<CR>')
-      nmap(">", '<Cmd>call ddu#ui#do_action("expandItem")<CR>')
-      nmap("+", '<Cmd>call ddu#ui#do_action("chooseAction")<CR>')
+      local helper = require("plugins.ddu.map").map_action
+      helper("n", "<C-v>", "itemAction", { name = "open", params = { command = "vsplit" } })
+      helper("n", "<C-x>", "itemAction", { name = "open", params = { command = "split" } })
+      helper("n", "<C-t>", "itemAction", { name = "open", params = { command = "tabedit" } })
+      helper("n", "/", "openFilterWindow")
+      helper("n", "q", "quit")
+      helper("n", "<ESC>", "quit")
+      helper("n", "<CR>", "itemAction")
+      helper("n", "+", "chooseAction")
     end,
   })
 

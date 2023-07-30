@@ -1,7 +1,7 @@
 local M = {}
 
 --- map ddu#start for keys
-function M.map(keys, name, options)
+function M.map_source(keys, name, options)
   if type(keys) == "string" then
     keys = { keys }
   end
@@ -15,6 +15,13 @@ function M.map(keys, name, options)
       vim.fn["ddu#start"](opts)
     end, { remap = false, desc = "Start ddu source: " .. name })
   end
+end
+
+function M.map_action(mode, lh, name, opts)
+  vim.keymap.set(mode, lh, function()
+    local options = opts or vim.empty_dict()
+    vim.fn["ddu#ui#do_action"](name, options)
+  end, { nowait = true, buffer = true, silent = true, remap = false })
 end
 
 return M

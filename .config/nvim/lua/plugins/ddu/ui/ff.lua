@@ -26,9 +26,11 @@ local function config()
       helper("n", "<C-t>", "itemAction", { name = "open", params = { command = "tabedit" } })
       helper("n", "/", "openFilterWindow")
       helper("n", "q", "quit")
-      helper("n", "<ESC>", "quit")
+      helper("n", "q", "quit")
       helper("n", "<CR>", "itemAction")
       helper("n", "+", "chooseAction")
+      helper("n", "l", "expandItem")
+      helper("n", "h", "collapseItem")
     end,
   })
 

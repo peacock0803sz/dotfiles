@@ -22,6 +22,9 @@ export class Config extends BaseConfig {
           sorters: ["sorter_fzf"],
           converters: ["converter_hl_dir"]
         },
+        git_status: {
+          converters: ["converter_git_status"]
+        },
         file: {
           ignoreCase: true,
           columns: ["icon_filename"],

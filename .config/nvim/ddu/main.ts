@@ -11,7 +11,6 @@ type Params = Record<string, unknown>;
 
 export class Config extends BaseConfig {
   override config(args: ConfigArguments): Promise<void> {
-    args.setAlias("source", "file_rg", "file_external");
     args.setAlias("action", "tabopen", "open");
 
     args.contextBuilder.patchGlobal({
@@ -29,27 +28,9 @@ export class Config extends BaseConfig {
         },
       },
       sourceParams: {
-        rg: {
-          args: [
-            "--ignore-case",
-            "--column",
-            "--no-heading",
-            "--color",
-            "never",
-          ],
-        },
-        file_rg: {
-          cmd: [
-            "rg",
-            "--files",
-            "--glob",
-            "!.git",
-            "--color",
-            "never",
-            "--no-messages",
-          ],
-          updateItems: 50000,
-        },
+        file_external: {
+          cmd: ["fd", "--type", "f", "--hidden", "--follow", "--exclude", ".git"],
+        }
       },
       filterParams: {
         matcher_fzf: { highlightMatched: "DduSearchMatched" },

@@ -1,19 +1,22 @@
 local M = {}
 
 --- map ddu#start for keys
-function M.map_source(keys, name, options)
+function M.map_source(keys, name, args)
   if type(keys) == "string" then
     keys = { keys }
   end
   for _, key in pairs(keys) do
-    vim.keymap.set("n", key, function()
-      local opts = options or {}
+    local function callback()
+      local opts = args or {}
       if type(opts) == "function" then
         opts = opts()
       end
-      opts.name = name
       vim.fn["ddu#start"](opts)
-    end, { remap = false, desc = "Start ddu source: " .. name })
+    end
+    if name == nil then
+      name = args.sources[1].name
+    end
+    vim.keymap.set("n", key, callback, { remap = false, desc = "Start ddu source: " .. name })
   end
 end
 

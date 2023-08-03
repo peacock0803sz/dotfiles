@@ -1,6 +1,10 @@
 local function config()
   local helper = require("plugins.ddu.map")
-  helper.map_source("<Space>ff", "file_external", { sources = { { name = "file_external" } } })
+  helper.map_source(
+    "<Space>ff",
+    "file_external",
+    { sources = { { name = "file_external", resume = true } } }
+  )
 end
 
 local spec =

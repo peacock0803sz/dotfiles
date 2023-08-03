@@ -66,6 +66,7 @@
         "/Users/yoichi/.local/share/nvim/lazy/cmp-nvim-lsp/after",
         "/Users/yoichi/.local/share/nvim/lazy/cmp-buffer/after",
         "/Users/yoichi/dotfiles/.config/nvim/lua",
-        "${3rd}/luassert/library"
+        "${3rd}/luassert/library",
+        "${3rd}/luv/library"
     ]
 }

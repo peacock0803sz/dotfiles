@@ -24,6 +24,10 @@ local function config()
       helper("n", "<C-v>", "itemAction", { name = "open", params = { command = "vsplit" } })
       helper("n", "<C-x>", "itemAction", { name = "open", params = { command = "split" } })
       helper("n", "<C-t>", "itemAction", { name = "open", params = { command = "tabedit" } })
+      vim.keymap.set("n", "<C-q>", function()
+        vim.fn["ddu#ui#do_action"]("toggleAllItems")
+        vim.fn["ddu#ui#do_action"]("itemAction", { name = "quickfix" })
+      end)
       helper("n", "/", "openFilterWindow")
       helper("n", "q", "quit")
       helper("n", "q", "quit")
@@ -41,7 +45,7 @@ local function config()
       vim.opt_local.cursorline = false
       local o = { buffer = true, silent = true }
 
-      vim.keymap.set("n", "<ESC>", '<Cmd>call ddu#ui#do_action("closeFilterWindow")<CR>', o)
+      vim.keymap.set("n", "q", '<Cmd>call ddu#ui#do_action("closeFilterWindow")<CR>', o)
       vim.keymap.set("i", "<CR>", '<ESC><Cmd>call ddu#ui#do_action("leaveFilterWindow")<cr>', o)
       vim.keymap.set("i", "<bs>", function()
         return vim.fn.col(".") <= 1 and "" or "<bs>"

@@ -40,6 +40,7 @@ local function config_cmp()
     }),
     sources = cmp.config.sources({
       { name = "nvim_lsp" },
+      { name = "nvim_lua" },
       { name = "luasnip" }, -- For luasnip users.
       { name = "path" },
     }, {
@@ -73,6 +74,7 @@ local function config_cmp()
   cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
+      { name = "nvim_lua" },
       { name = "path" },
       { name = "zsh" },
     }, {

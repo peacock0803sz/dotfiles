@@ -30,7 +30,7 @@ local setup_keymaps = function()
   })
 end
 
-local function mason_config()
+local function config()
   require("mason").setup()
   local lspconfig = require("lspconfig")
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -38,9 +38,6 @@ local function mason_config()
   require("mason-lspconfig").setup()
   require("mason-lspconfig").setup_handlers({
     function(name)
-      if name == "grammarly" then
-        vim.g.node_host_prog = os.getenv("HOME") .. "/.nvm/versions/node/v16.20.1/bin/node"
-      end
       lspconfig[name].setup({
         capabilities = capabilities,
       })
@@ -74,13 +71,24 @@ local function mason_config()
         },
       })
     end,
+    grammarly = function()
+      lspconfig.grammarly.setup({
+        cmd = {
+          os.getenv("HOME") .. "/.nvm/versions/node/v16.18.1/bin/grammarly-languageserver",
+          "--stdio",
+        },
+        filetypes = { "markdown", "tex", "text", "gitcommit" },
+        init_options = { clientId = os.getenv("GRAMMARLY_CLIENT_ID") },
+        single_file_support = true,
+      })
+    end,
   })
 end
 
 local spec = {
   {
     "williamboman/mason-lspconfig.nvim",
-    config = mason_config,
+    config = config,
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
   },
 }

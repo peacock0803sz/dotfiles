@@ -1,13 +1,8 @@
 local function config()
-  local helper = require("plugins.ddu.map")
-  helper.map_source(
-    "<Space>ff",
-    "file_external",
-    { sources = { { name = "file_external", resume = true } } }
-  )
+	local helper = require("plugins.ddu.map")
+	helper.map_source("<Space>ff", "file_external", { sources = { { name = "file_external", resume = true } } })
 end
 
-local spec =
-  { "matsui54/ddu-source-file_external", dependencies = { "Shougo/ddu.vim" }, config = config }
+local spec = { "matsui54/ddu-source-file_external", dependencies = { "Shougo/ddu.vim" }, config = config }
 
 return spec

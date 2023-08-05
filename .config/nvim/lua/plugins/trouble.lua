@@ -8,7 +8,7 @@ vim.keymap.set("n", "<Space>xq", "<Cmd>TroubleToggle quickfix<CR>", opts)
 vim.keymap.set("n", "<Space>xr", "<Cmd>TroubleToggle lsp_references<CR>", opts)
 
 local spec = {
-  "folke/trouble.nvim",
-  dependencies = { "mason.nvim", "nvim-lspconfig", "nvim-tree/nvim-web-devicons" },
+	"folke/trouble.nvim",
+	dependencies = { "mason.nvim", "nvim-lspconfig", "nvim-tree/nvim-web-devicons" },
 }
 return spec

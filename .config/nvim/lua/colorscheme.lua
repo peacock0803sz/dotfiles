@@ -1,24 +1,24 @@
 require("nightfox").setup({
-  transparent = true,
-  terminal_colors = true,
+	transparent = true,
+	terminal_colors = true,
 })
 
 if vim.o.background == "light" then
-  vim.cmd.colorscheme("dawnfox")
+	vim.cmd.colorscheme("dawnfox")
 else
-  vim.cmd.colorscheme("nordfox")
+	vim.cmd.colorscheme("nordfox")
 end
 
 vim.api.nvim_create_user_command("ToggleColorscheme", function()
-  if vim.o.background == "dark" then
-    vim.o.background = "light"
-    vim.cmd.colorscheme("dawnfox")
-  else
-    vim.o.background = "dark"
-    vim.cmd.colorscheme("nordfox")
-  end
+	if vim.o.background == "dark" then
+		vim.o.background = "light"
+		vim.cmd.colorscheme("dawnfox")
+	else
+		vim.o.background = "dark"
+		vim.cmd.colorscheme("nordfox")
+	end
 end, {
-  nargs = 0,
+	nargs = 0,
 })
 
 vim.cmd([[

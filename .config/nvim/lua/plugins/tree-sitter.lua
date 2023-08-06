@@ -12,8 +12,12 @@ local function config()
       "astro",
       "rust",
       "markdown",
+      "css",
       -- "markdown_inline",
     },
+    auto_install = true,
+    ignore_install = {},
+    sync_install = false,
     highlight = {
       enable = true,
     },

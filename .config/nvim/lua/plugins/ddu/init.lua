@@ -12,7 +12,7 @@ local spec = {
   },
   { "Shougo/ddu-source-action" },
   { import = "plugins.ddu.ui" },
-  { import= "plugins.ddu.kind" },
+  { import = "plugins.ddu.kind" },
   { import = "plugins.ddu.filter" },
   { import = "plugins.ddu.source" },
 }

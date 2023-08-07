@@ -23,7 +23,7 @@ local setup_keymaps = function()
       vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
       vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
       vim.keymap.set("n", "<space>gr", vim.lsp.buf.references, bufopts)
-      vim.keymap.set("n", "<space>fo", vim.lsp.buf.format, bufopts)
+      vim.keymap.set({ "n", "v" }, "<space>fo", vim.lsp.buf.format, bufopts)
 
       vim.keymap.set("n", "<space>or", vim.lsp.buf.code_action, bufopts)
     end,
@@ -31,6 +31,8 @@ local setup_keymaps = function()
 end
 
 local function config()
+  vim.lsp.set_log_level("debug")
+
   require("mason").setup()
   local lspconfig = require("lspconfig")
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -69,17 +71,6 @@ local function config()
             },
           },
         },
-      })
-    end,
-    grammarly = function()
-      lspconfig.grammarly.setup({
-        cmd = {
-          os.getenv("HOME") .. "/.nvm/versions/node/v16.18.1/bin/grammarly-languageserver",
-          "--stdio",
-        },
-        filetypes = { "markdown", "tex", "text", "gitcommit" },
-        init_options = { clientId = os.getenv("GRAMMARLY_CLIENT_ID") },
-        single_file_support = true,
       })
     end,
   })

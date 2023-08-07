@@ -3,5 +3,5 @@ local function config()
 end
 
 local spec =
-{ "yuki-yano/fuzzy-motion.vim", dependencies = { "vim-denops/denops.vim" }, config = config }
+  { "yuki-yano/fuzzy-motion.vim", dependencies = { "vim-denops/denops.vim" }, config = config }
 return spec

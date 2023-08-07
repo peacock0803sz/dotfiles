@@ -3,7 +3,7 @@ local function config()
   helper.map_source(
     "<Space>ff",
     "file_external",
-    { sources = { { name = "file_external", resume = true } } }
+    { sources = { { name = "file_external", params = { resume = true } } } }
   )
 end
 

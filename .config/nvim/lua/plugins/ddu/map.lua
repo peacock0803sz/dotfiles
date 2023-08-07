@@ -7,11 +7,10 @@ function M.map_source(keys, name, args)
   end
   for _, key in pairs(keys) do
     local function callback()
-      local opts = args or {}
-      if type(opts) == "function" then
-        opts = opts()
+      if args == nil then
+        args = vim.empty_dict()
       end
-      vim.fn["ddu#start"](opts)
+      vim.fn["ddu#start"](args)
     end
     if name == nil then
       name = args.sources[1].name

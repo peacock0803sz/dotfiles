@@ -1,4 +1,4 @@
-local setup_keymaps = function()
+local function setup_keymaps()
   vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
   vim.keymap.set("n", "<space>[d", vim.diagnostic.goto_prev)
   vim.keymap.set("n", "<space>]d", vim.diagnostic.goto_next)
@@ -33,16 +33,11 @@ end
 local function config()
   vim.lsp.set_log_level("debug")
 
-  require("mason").setup()
   local lspconfig = require("lspconfig")
-  local capabilities = require("cmp_nvim_lsp").default_capabilities()
-  setup_keymaps()
-  require("mason-lspconfig").setup()
-  require("mason-lspconfig").setup_handlers({
+  ---@type { [1]: fun(name: string), [string]: fun() }
+  local mason_handlers = {
     function(name)
-      lspconfig[name].setup({
-        capabilities = capabilities,
-      })
+      lspconfig[name].setup({ capabilities = require("cmp_nvim_lsp").default_capabilities() })
     end,
     denols = function()
       lspconfig.denols.setup({
@@ -73,14 +68,20 @@ local function config()
         },
       })
     end,
+  }
+
+  require("mason").setup()
+  setup_keymaps()
+  require("mason-lspconfig").setup()
+  require("mason-lspconfig").setup_handlers({
+    unpack(mason_handlers),
   })
 end
 
+---@type LazySpec
 local spec = {
-  {
-    "williamboman/mason-lspconfig.nvim",
-    config = config,
-    dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
-  },
+  "williamboman/mason-lspconfig.nvim",
+  config = config,
+  dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
 }
 return spec

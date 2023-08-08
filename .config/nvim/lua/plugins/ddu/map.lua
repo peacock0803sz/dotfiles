@@ -1,5 +1,8 @@
 local M = {}
 
+---@param keys string|string[]
+---@param name string|nil
+---@param args table
 --- map ddu#start for keys
 function M.map_source(keys, name, args)
   if type(keys) == "string" then

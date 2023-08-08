@@ -20,6 +20,7 @@ local function config()
   })
 end
 
+---@type LazySpec
 local spec = {
   "jose-elias-alvarez/null-ls.nvim",
   config = config,

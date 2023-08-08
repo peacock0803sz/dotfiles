@@ -11,5 +11,6 @@ local opts = require("keymaps").opts
 -- vim.keymap.set("n", "<space>]g", "<Cmd>Lspsaga diagnostic_jump_next<CR>", opts)
 -- vim.keymap.set("n", "<space>[g", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
 
+---@type LazySpec
 local spec = { "glepnir/lspsaga.nvim" }
 return spec

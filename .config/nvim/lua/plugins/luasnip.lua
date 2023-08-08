@@ -10,5 +10,6 @@ local function config()
   end
 end
 
+---@type LazySpec
 local spec = { "L3MON4D3/LuaSnip", cofing = config }
 return spec

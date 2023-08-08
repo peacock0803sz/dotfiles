@@ -83,6 +83,7 @@ local function config_cmp()
   })
 end
 
+---@type LazySpec[]
 local spec = {
   {
     "hrsh7th/nvim-cmp",
@@ -111,5 +112,4 @@ local spec = {
     event = "InsertEnter",
   },
 }
-
 return spec

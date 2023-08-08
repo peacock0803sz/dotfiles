@@ -13,6 +13,8 @@ local function stash_config()
   helper.map_source("<Space>gS", "git_stash", { sources = { { name = "git_stash" } } })
 end
 
+
+---@type LazySpec[]
 local spec = {
   { "kuuote/ddu-source-git_status", dependencies = { "Shougo/ddu.vim" }, config = status_config },
   { "kyoh86/ddu-source-git_log", dependencies = { "Shougo/ddu.vim" }, config = log_config },

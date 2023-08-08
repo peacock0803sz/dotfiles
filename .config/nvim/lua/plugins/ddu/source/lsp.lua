@@ -15,6 +15,6 @@ local function config()
   })
 end
 
+---@type LazySpec
 local spec = { "uga-rosa/ddu-source-lsp", dependencies = { "Shougo/ddu.vim" }, config = config }
-
 return spec

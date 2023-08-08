@@ -50,5 +50,6 @@ local function config()
   })
 end
 
+---@type LazySpec
 local spec = { "nvim-lualine/lualine.nvim", config = config }
 return spec

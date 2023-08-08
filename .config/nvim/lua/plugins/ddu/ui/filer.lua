@@ -32,9 +32,9 @@ local function config()
   })
 end
 
+---@type LazySpec
 local spec = {
   { "Shougo/ddu-ui-filer", config = config, dependencies = "Shougo/ddu.vim" },
   { "ryota2357/ddu-column-icon_filename" },
 }
-
 return spec

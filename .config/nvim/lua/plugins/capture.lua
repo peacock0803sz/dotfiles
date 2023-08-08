@@ -7,9 +7,10 @@ local function config()
         vim.cmd("Capture " .. cmdline)
       end)
     end
-    return "<C-c>"
+    return "<C-C>"
   end, { expr = true })
 end
 
-local spec = { "tyru/capture.vim", config = config }
+---@type LazySpec
+local spec = { "tyru/capture.vim", config = config, event = "CmdlineEnter" }
 return spec

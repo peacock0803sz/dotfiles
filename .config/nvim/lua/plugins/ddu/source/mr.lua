@@ -17,6 +17,7 @@ local function config()
   )
 end
 
+---@type LazySpec
 local spec = {
   "kuuote/ddu-source-mr",
   dependencies = {
@@ -26,5 +27,4 @@ local spec = {
   },
   config = config,
 }
-
 return spec

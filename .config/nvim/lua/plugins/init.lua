@@ -1,3 +1,4 @@
+---@type LazySpec[]
 local spec = {
   { "folke/neodev.nvim" },
   { "vim-jp/vimdoc-ja" },

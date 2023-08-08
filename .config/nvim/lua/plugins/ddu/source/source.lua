@@ -3,5 +3,6 @@ local function config()
   map_source("<Space>s", "source", { sources = { { name = "source" } } })
 end
 
+---@type LazySpec
 local spec = { "4513ECHO/ddu-source-source", dependencies = { "Shougo/ddu.vim" }, config = config }
 return spec

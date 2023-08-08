@@ -12,5 +12,6 @@ local function config()
   map("T", "<Plug>(eft-T)")
 end
 
+---@type LazySpec
 local spec = { "hrsh7th/vim-eft", config = config }
 return spec

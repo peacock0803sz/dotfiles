@@ -4,6 +4,7 @@ local function config()
   vim.fn["ddu#custom#load_config"](dir)
 end
 
+---@type LazySpec[]
 local spec = {
   {
     "Shougo/ddu.vim",

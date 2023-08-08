@@ -12,6 +12,6 @@ local function config()
   )
 end
 
+---@type LazySpec
 local spec = { "kyoh86/ddu-source-github", dependencies = { "Shougo/ddu.vim" }, config = config }
-
 return spec

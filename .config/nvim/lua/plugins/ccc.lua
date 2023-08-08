@@ -7,5 +7,6 @@ local function config()
   })
 end
 
+---@type LazySpec
 local spec = { "uga-rosa/ccc.nvim", config = config }
 return spec

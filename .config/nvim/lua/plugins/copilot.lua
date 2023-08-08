@@ -41,10 +41,6 @@ local function config()
   })
 end
 
-local spec = {
-  "zbirenbaum/copilot.lua",
-  cmd = "Copilot",
-  event = "InsertEnter",
-  config = config,
-}
+---@type LazySpec
+local spec = { "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter", config = config }
 return spec

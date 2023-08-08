@@ -116,12 +116,11 @@ local function config()
   vim.keymap.set("n", "<Space>dd", dap.clear_breakpoints, opts)
 end
 
+---@type LazySpec
 local spec = {
-  {
-    "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap", "leoluz/nvim-dap-go" },
-    config = config,
-    event = "BufEnter",
-  },
+  "rcarriga/nvim-dap-ui",
+  dependencies = { "mfussenegger/nvim-dap", "leoluz/nvim-dap-go" },
+  config = config,
+  event = "BufEnter",
 }
 return spec

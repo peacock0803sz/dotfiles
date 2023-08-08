@@ -3,6 +3,6 @@ local function config()
   map_source("<Space>F", "file", { ui = "filer", sources = { { name = "file" } } })
 end
 
+---@type LazySpec
 local spec = { "Shougo/ddu-source-file", dependencies = { "Shougo/ddu.vim" }, config = config }
-
 return spec

@@ -54,6 +54,7 @@ local function config()
   })
 end
 
+---@type LazySpec
 local spec = {
   {
     "Shougo/ddu-ui-ff",
@@ -61,5 +62,4 @@ local spec = {
     dependencies = "Shougo/ddu.vim",
   },
 }
-
 return spec

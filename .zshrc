@@ -16,6 +16,34 @@ export SAVEHIST=10000
 export HISTFILE="$HOME/.zsh_history"
 export HISTORY_IGNORE="(cd|ls|pwd|exit|rm|n?vim|git reset)"
 
+case ${OSTYPE} in
+  darwin*)
+    if [[ $(uname -m) = "arm64" ]]; then
+      alias rosetta="arch -x86_64 /bin/zsh"
+      alias python3.8="/usr/bin/python3"
+      export PYTHONROOT="/Library/Frameworks/Python.framework/Versions/"
+    elif [[ $(uname -m) = "x86_64" ]]; then
+      export PYTHONROOT="/usr/local/bin"
+      export HOMEBREW_PREFIX="/usr/local"
+    fi
+
+
+    export PATH="$HOMEBREW_PREFIX/sbin:$PATH"
+    # tailscale
+    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+    # Visual Studio Code
+    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+    # [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+    ;;
+  linux*)
+    if [[ -e /etc/debian_version ]]; then
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      export HOMEBREW_PREFIX="$HOME/linuxbrew/.linuxbrew"
+    fi
+    ;;
+esac
+
 zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' auto-description 'specify: %d'
 # zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list
@@ -74,32 +102,6 @@ bindkey "^x^e" edit-command-line
 
 alias reloadzsh='exec -l zsh'
 
-case ${OSTYPE} in
-  darwin*)
-    if [[ $(uname -m) = "arm64" ]]; then
-      alias rosetta="arch -x86_64 /bin/zsh"
-      alias python3.8="/usr/bin/python3"
-      export PYTHONROOT="/Library/Frameworks/Python.framework/Versions/"
-    elif [[ $(uname -m) = "x86_64" ]]; then
-      export PYTHONROOT="/usr/local/bin"
-      export HOMEBREW_PREFIX="/usr/local"
-    fi
-
-    export PATH="$HOMEBREW_PREFIX/sbin:$PATH"
-    # tailscale
-    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-    # Visual Studio Code
-    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-    # [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
-    ;;
-  linux*)
-    if [[ -e /etc/debian_version ]]; then
-      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-      export HOMEBREW_PREFIX="$HOME/linuxbrew/.linuxbrew"
-    fi
-    ;;
-esac
-
 # MySQL and Postgres Lib
 export PATH="$HOMEBREW_PREFIX/opt/mysql-client/bin:$PATH"
 export XML_CATALOG_FILES="$HOMEBREW_PREFIX/etc/xml/catalog"
@@ -122,7 +124,7 @@ alias ni="bunx @antfu/ni"
 alias yq="gojq --yaml-input --yaml-output"
 
 # Go
-export GOPATH="$HOME/qhq/"
+export GOPATH="$HOME/ghq/"
 export PATH="$PATH:$GOPATH/bin"
 
 # Rust

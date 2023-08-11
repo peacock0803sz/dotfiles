@@ -124,7 +124,7 @@ alias ni="bunx @antfu/ni"
 alias yq="gojq --yaml-input --yaml-output"
 
 # Go
-export GOPATH="$HOME/ghq/"
+export GOPATH="$HOME/ghq"
 export PATH="$PATH:$GOPATH/bin"
 
 # Rust

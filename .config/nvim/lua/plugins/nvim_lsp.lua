@@ -25,7 +25,12 @@ local function setup_keymaps()
       vim.keymap.set("n", "<space>gr", vim.lsp.buf.references, bufopts)
       vim.keymap.set({ "n", "v" }, "<space>fo", vim.lsp.buf.format, bufopts)
 
-      vim.keymap.set("n", "<space>or", vim.lsp.buf.code_action, bufopts)
+      -- organize imports
+      vim.keymap.set("n", "<space>or", function()
+        for _, client in ipairs(vim.lsp.get_clients()) do
+          local filetype = vim.bo.filetype
+        end
+      end, bufopts)
     end,
   })
 end
@@ -38,6 +43,11 @@ local function config()
   local mason_handlers = {
     function(name)
       lspconfig[name].setup({ capabilities = require("cmp_nvim_lsp").default_capabilities() })
+    end,
+    bashls = function()
+      lspconfig.bashls.setup({
+        filetypes = { "sh", "bash", "zsh" },
+      })
     end,
     denols = function()
       lspconfig.denols.setup({

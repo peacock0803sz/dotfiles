@@ -13,6 +13,8 @@ local function config()
       "rust",
       "markdown",
       "css",
+      "json",
+      "jsonc",
       -- "markdown_inline",
     },
     auto_install = true,

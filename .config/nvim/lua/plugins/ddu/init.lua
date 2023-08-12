@@ -11,7 +11,6 @@ local spec = {
     config = config,
     dependencies = { "vim-denops/denops.vim" },
   },
-  { "Shougo/ddu-source-action" },
   { import = "plugins.ddu.ui" },
   { import = "plugins.ddu.kind" },
   { import = "plugins.ddu.filter" },

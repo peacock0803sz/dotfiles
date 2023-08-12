@@ -1,5 +1,5 @@
 local function config()
-  vim.keymap.set("c", "<C-c>", function()
+  vim.keymap.set("c", "<C-C>", function()
     if vim.fn.getcmdtype() == ":" then
       local cmdline = vim.fn.getcmdline()
       vim.fn.histadd(":", cmdline)

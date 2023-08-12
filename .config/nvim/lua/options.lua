@@ -8,7 +8,7 @@ vim.o.laststatus = 2
 vim.o.ambiwidth = "single"
 vim.o.mouse = "a"
 vim.o.termguicolors = true
-vim.o.colorcolumn = "88,100"
+-- vim.o.colorcolumn = "88,100"
 
 if vim.fn.has("clipboard") == 1 then
   vim.o.clipboard = "unnamedplus,unnamed"

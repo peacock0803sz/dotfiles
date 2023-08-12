@@ -3,13 +3,10 @@ local function config()
   map_source(
     "<Space>gi",
     "github_repo_issue",
-    { sources = { { name = "github_repo_issue", params = { resume = true } } } }
+    { sources = { { name = "github_repo_issue" } } },
+    true
   )
-  map_source(
-    "<Space>gp",
-    "github_repo_pull",
-    { sources = { { name = "github_repo_pull", params = { resume = true } } } }
-  )
+  map_source("<Space>gp", "github_repo_pull", { sources = { { name = "github_repo_pull" } } }, true)
 end
 
 ---@type LazySpec

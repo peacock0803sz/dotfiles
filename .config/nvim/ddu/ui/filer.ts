@@ -3,6 +3,8 @@ import { ConfigArguments } from "https://deno.land/x/ddu_vim@v3.4.5/base/config.
 import { Params as FilerParams } from "https://deno.land/x/ddu_ui_filer@v1.1.0/filer.ts";
 import * as opt from "https://deno.land/x/denops_std@v5.0.1/option/mod.ts";
 
+import settings from "../settings.ts";
+
 export class Config extends BaseConfig {
   override async config(args: ConfigArguments): Promise<void> {
     const winCol = await opt.columns.get(args.denops);
@@ -10,7 +12,7 @@ export class Config extends BaseConfig {
     const winWidth = Math.floor(winCol * 0.95);
     const winHeight = Math.floor(winRow * 0.8);
 
-    const mayVSplit = winCol >= 100; // 100以上なら縦分割
+    const mayVSplit = winCol >= settings.mayVSplit; // 縦分割
 
     args.contextBuilder.patchGlobal({
       ui: "ff",
@@ -33,7 +35,7 @@ export class Config extends BaseConfig {
           winWidth: winWidth,
           winCol: 0,
           previewWidth: mayVSplit ? Math.floor(winWidth / 2) : winWidth,
-          previewHeight: winHeight,
+          previewHeight: mayVSplit ? winHeight : Math.floor(winHeight / 1.5),
         } satisfies Partial<FilerParams>,
       },
     });

@@ -29,10 +29,10 @@ export class Config extends BaseConfig {
           ignoreCase: true,
           matchers: ["matcher_substring"],
           sorters: ["sorter_fzf"],
-          converters: ["converter_hl_dir"],
+          converters: ["converter_hl_dir", "converter_devicon"],
         },
         git_status: {
-          converters: ["converter_git_status"],
+          converters: ["converter_git_status", "converter_devicon"],
         },
         file: {
           ignoreCase: true,

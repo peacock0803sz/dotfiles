@@ -3,8 +3,9 @@ local M = {}
 ---@param keys string|string[]
 ---@param name string|nil
 ---@param args table
+---@param resume boolean|nil
 --- map ddu#start for keys
-function M.map_source(keys, name, args)
+function M.map_source(keys, name, args, resume)
   if type(keys) == "string" then
     keys = { keys }
   end
@@ -13,6 +14,11 @@ function M.map_source(keys, name, args)
       if args == nil then
         args = vim.empty_dict()
       end
+      -- if resume is true, args.params.resume will be set to true
+      if resume ~= nil then
+        args.resume = resume
+      end
+
       vim.fn["ddu#start"](args)
     end
     if name == nil then

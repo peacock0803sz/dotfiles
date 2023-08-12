@@ -26,6 +26,7 @@ return {
   initial_rows = 54,
   window_background_opacity = 0.925,
   macos_window_background_blur = 10,
+  enable_csi_u_key_encoding = true,
 
   -- Fonts
   font = wezterm.font_with_fallback({

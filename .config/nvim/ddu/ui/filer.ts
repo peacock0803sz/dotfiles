@@ -38,6 +38,12 @@ export class Config extends BaseConfig {
           previewHeight: mayVSplit ? winHeight : Math.floor(winHeight / 1.5),
         } satisfies Partial<FilerParams>,
       },
+      sourceOptions: {
+        file: {
+          converters: ["converter_hl_dir"],
+          columns: ["icon_filename"],
+        },
+      },
     });
     return Promise.resolve();
   }

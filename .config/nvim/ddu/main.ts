@@ -34,10 +34,6 @@ export class Config extends BaseConfig {
         git_status: {
           converters: ["converter_git_status", "converter_devicon"],
         },
-        file: {
-          ignoreCase: true,
-          columns: ["icon_filename"],
-        },
       },
       sourceParams: {
         file_external: {

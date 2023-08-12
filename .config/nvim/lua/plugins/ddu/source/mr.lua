@@ -1,7 +1,7 @@
 local function config()
   local map_source = require("plugins.ddu.map").map_source
-  map_source("<Space>fu", "mru", { sources = { { name = "mr", params = { kind = "mru" } } } }, true)
-  map_source("<Space>fw", "mru", { sources = { { name = "mr", params = { kind = "mrw" } } } }, true)
+  map_source("<Space>fu", "mru", { sources = { { name = "mr" } } }, true)
+  map_source("<Space>fw", "mru", { sources = { { name = "mr" } } }, true)
 end
 
 ---@type LazySpec

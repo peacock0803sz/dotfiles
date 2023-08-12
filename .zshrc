@@ -166,8 +166,6 @@ fi
 eval "$(op completion zsh)"; compdef _op op
 source "$HOME/.config/op/plugins.sh"
 
-export OPENAI_API_KEY=$(op read "op://Personal/OpenAI API Key/api key")
-
 # direnv
 _direnv_hook() {
   trap -- '' SIGINT;

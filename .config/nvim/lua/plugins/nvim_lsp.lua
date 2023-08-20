@@ -44,6 +44,11 @@ local function config()
     function(name)
       lspconfig[name].setup({ capabilities = require("cmp_nvim_lsp").default_capabilities() })
     end,
+    efm = function()
+      lspconfig.efm.setup({
+        init_options = { documentFormatting = true },
+      })
+    end,
     bashls = function()
       lspconfig.bashls.setup({
         filetypes = { "sh", "bash", "zsh" },

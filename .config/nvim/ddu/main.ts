@@ -36,6 +36,9 @@ export class Config extends BaseConfig {
         },
       },
       sourceParams: {
+        rg: {
+          args: ["--column", "--no-heading", "--color", "never"],
+        },
         file_external: {
           cmd: [
             "fd",

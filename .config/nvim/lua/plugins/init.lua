@@ -12,6 +12,7 @@ local spec = {
   { "machakann/vim-sandwich" },
   { "cohama/lexima.vim" },
   { "lambdalisue/suda.vim" },
+  { "lambdalisue/vim-manpager" },
   { "mattn/emmet-vim" },
   { "rhysd/committia.vim" },
   { "tani/glance-vim", dependencies = "vim-denops/denops.vim" },

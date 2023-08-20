@@ -26,7 +26,4 @@ vim.cmd([[
   highlight EndOfBuffer ctermbg=NONE guibg=NONE
   highlight Normal guibg=NONE ctermbg=NONE
   highlight NormalNC guibg=NONE ctermbg=NONE
-
-  highlight! FidgetTitle guibg=NONE ctermbg=NONE
-  highlight! FidgetTask guibg=NONE ctermbg=NONE
 ]])

@@ -71,7 +71,7 @@ local function config()
             format = { enable = false },
             runtime = { version = "LuaJIT" },
             diagnostics = {
-              globals = { "vim" },
+              globals = { "vim", "wezterm" },
             },
             workspace = {
               library = vim.api.nvim_get_runtime_file("", true),

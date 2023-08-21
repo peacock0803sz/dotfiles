@@ -138,6 +138,9 @@ export PATH="$PATH:$HOME/.local/nvim/bin"
 export EDITOR=nvim
 export LANG=ja_JP.UTF-8
 
+# man
+export MANPAGER='nvim -c ASMANPAGER -'
+
 # aws completion
 complete -C "$(command -v aws_completer)" aws
 

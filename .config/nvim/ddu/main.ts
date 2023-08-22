@@ -1,4 +1,4 @@
-import * as stdpath from "https://deno.land/std@0.198.0/path/mod.ts";
+import * as stdpath from "https://deno.land/std@0.199.0/path/mod.ts";
 import {
   ActionArguments,
   ActionFlags,

@@ -111,6 +111,8 @@ export PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
 complete -o nospace -C "$HOMEBREW_PREFIX/bin/terraform" terraform
 alias tf="terraform"
 
+export DENO_NO_PROMPT=1
+
 # zenn-cli
 alias zenn="deno run -A npm:zenn-cli@latest"
 
@@ -214,6 +216,11 @@ zinit ice as"completion"
 zinit snippet OMZP::docker/_docker
 zinit snippet OMZP::docker-compose/_docker-compose
 eval "$(op completion zsh)"; compdef _op op
+
+# Truncate Directory
+hash -d github=$HOME/ghq/github.com
+hash -d work=$HOME/ghq/github.com/topgate
+hash -d personal=$HOME/ghq/github.com/peacock0803sz
 
 # source $(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh
 # export ZENO_ROOT="$(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh"

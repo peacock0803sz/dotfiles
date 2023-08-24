@@ -7,8 +7,22 @@ end
 ---@param s string
 ---@return string
 local function omit_path(s)
-  local r = s:gsub('^[^:]*://[^/]*', ''):gsub('^' .. wezterm.home_dir, '~'):gsub('([^/])[^/]*/', '%1/')
-  return r
+  -- trim `file://` and truncate home directory
+  local path = s:gsub('^[^:]*://[^/]*', ''):gsub('^' .. wezterm.home_dir, '~')
+
+  local map_config = {
+    ["~conf"] = "~/dotfiles/.config",
+    ["~work"] = "~/ghq/github.com/topgate",
+    ["~personal"] = "~/ghq/github.com/peacock0803sz",
+    ["~gh"] = "~/ghq/github.com",
+  }
+
+  for key, value in pairs(map_config) do
+    if path:match(value) then
+      path = path:gsub(value, key)
+    end
+  end
+  return path
 end
 
 ---@param tab_info any
@@ -83,7 +97,7 @@ return {
   initial_rows = 54,
   window_background_opacity = 0.925,
   macos_window_background_blur = 10,
-  enable_csi_u_key_encoding = true,
+  -- enable_csi_u_key_encoding = true,
 
   -- Fonts
   font = wezterm.font_with_fallback({

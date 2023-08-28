@@ -3,6 +3,7 @@
 [user]
 	name = Peacock
 	email = contact@peacock0803sz.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGZoZMoFitD0cy5UUiqRdvZqH/1yiE9+8yKo2YC2heiH
 [push]
 	autoSetupRemote = true
 [init]
@@ -11,3 +12,9 @@
 	tool = nvimdiff
 [pull]
 	rebase = false
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true

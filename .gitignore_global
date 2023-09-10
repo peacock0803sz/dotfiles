@@ -175,6 +175,7 @@ flycheck_*.el
 **/pip-wheel-metadata/*
 
 .*-version
+!.terraform-version
 
 .nvmrc
 .envrc
@@ -184,8 +185,8 @@ flycheck_*.el
 
 .cache
 
-sandbox.*
+sandbox*
 
 ## terraform lock
 **/.terraform.lock.hcl
-
+**/.terraform-relay.yml

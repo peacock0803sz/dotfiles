@@ -12,7 +12,14 @@ local function config()
       "astro",
       "rust",
       "markdown",
+      "css",
+      "json",
+      "jsonc",
+      -- "markdown_inline",
     },
+    auto_install = true,
+    ignore_install = {},
+    sync_install = false,
     highlight = {
       enable = true,
     },
@@ -22,10 +29,6 @@ local function config()
   })
 end
 
-local spec = {
-  "nvim-treesitter/nvim-treesitter",
-  build = ":TSUpdate",
-  config = config,
-  event = "BufRead",
-}
+---@type LazySpec
+local spec = { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", config = config }
 return spec

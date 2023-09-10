@@ -1,10 +1,11 @@
 local function config()
   require("fidget").setup({})
   vim.cmd([[
-    highlight link FidgetTitle EndOfBuffer
-    highlight link FidgetTask EndOfBuffer
+    highlight! FidgetTitle guibg=NONE ctermbg=NONE
+    highlight! FidgetTask guibg=NONE ctermbg=NONE
   ]])
 end
 
-local spec = { "j-hui/fidget.nvim", config = config }
+---@type LazySpec
+local spec = { "j-hui/fidget.nvim", config = config, tag = "legacy" }
 return spec

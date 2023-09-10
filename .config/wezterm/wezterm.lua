@@ -1,24 +1,94 @@
 local wezterm = require("wezterm")
 
-local function get_appearance()
-  if wezterm.gui then
-    return wezterm.gui.get_appearance()
-  else -- default to dark
-    return "Dark"
+local function basename(s)
+  return string.gsub(s, '(.*[/\\])(.*)', '%2')
+end
+
+---@param s string
+---@return string
+local function omit_path(s)
+  -- trim `file://` and truncate home directory
+  local path = s:gsub('^[^:]*://[^/]*', ''):gsub('^' .. wezterm.home_dir, '~')
+
+  local map_config = {
+    ["~conf"] = "~/dotfiles/.config",
+    ["~work"] = "~/ghq/github.com/topgate",
+    ["~personal"] = "~/ghq/github.com/peacock0803sz",
+    ["~gh"] = "~/ghq/github.com",
+  }
+
+  for key, value in pairs(map_config) do
+    if path:match(value) then
+      path = path:gsub(value, key)
+    end
+  end
+  return path
+end
+
+---@param tab_info any
+---@return string
+local function make_title(tab_info)
+  ---@type string
+  local process_name = basename(tab_info.active_pane.foreground_process_name)
+
+  if process_name == 'zsh' then
+    return omit_path(tab_info.active_pane.current_working_dir)
+  elseif process_name ~= '' then
+    return process_name
+  else
+    return ""
   end
 end
 
-local function get_colorscheme()
-  if get_appearance() == "Light" then
-    return "dawnfox"
+---@param tab any
+---@param tabs any
+---@param panes any
+---@param config any
+---@param hover any
+---@param max_width any
+---@return table
+local function format_tab_title(tab, tabs, panes, config, hover, max_width)
+  local white = "#cdcecf"
+  local black = "#2e3440"
+  local title = tab.tab_index + 1 .. ': ' .. make_title(tab)
+
+  if tab.is_active then
+    return {
+      { Background = { Color = white } },
+      { Foreground = { Color = black } },
+      { Text = title },
+    }
   else
-    return "nordfox"
+    return {
+      { Background = { Color = black } },
+      { Foreground = { Color = white } },
+      { Text = title },
+    }
   end
 end
+
+wezterm.on(
+  'format-tab-title', format_tab_title
+)
+
+---comment
+---@param tab any
+---@param pane any
+---@param tabs any
+---@param panes any
+---@param config any
+---@return string
+local function format_window_title(tab, pane, tabs, panes, config)
+  local workspace = wezterm.mux.get_active_workspace()
+  return "[" .. workspace .. "]: " .. make_title(tab)
+end
+
+wezterm.on(
+  'format-window-title', format_window_title
+)
 
 wezterm.on("window-config-reloaded", function(window, _)
   window:toast_notification("wezterm", "configuration reloaded!", nil, 4000)
-  wezterm.configuration.color_scheme = get_colorscheme()
 end)
 
 return {
@@ -27,6 +97,7 @@ return {
   initial_rows = 54,
   window_background_opacity = 0.925,
   macos_window_background_blur = 10,
+  -- enable_csi_u_key_encoding = true,
 
   -- Fonts
   font = wezterm.font_with_fallback({
@@ -34,15 +105,15 @@ return {
     { family = "UDEV Gothic NF", weight = "Bold" },
     "Noto Color Emoji",
   }),
-  font_size = 13.0,
+  font_size = 14.0,
 
-  color_scheme = get_colorscheme(),
+  color_scheme = "nordfox",
   colors = {
     cursor_bg = "white",
     cursor_border = "white",
   },
 
-  use_ime = false,
+  use_ime = true,
 
   -- Keybindings
   disable_default_key_bindings = true,

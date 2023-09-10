@@ -9,10 +9,6 @@ vim.keymap.set("c", "<C-f>", "<Right>", opts)
 vim.keymap.set("c", "<C-n>", "<Down>", opts)
 vim.keymap.set("c", "<C-p>", "<Up>", opts)
 
--- scroll
-vim.keymap.set("", "<ScrollWheelUp>", "<C-Y>", opts)
-vim.keymap.set("", "<ScrollWheelDown>", "<C-E>", opts)
-
 -- tab
 vim.keymap.set("n", "<space>t", "<Plug>(tab)", opts)
 vim.keymap.set("n", "<Plug>(tab)f", "<Cmd>tabfirst<CR>", opts)

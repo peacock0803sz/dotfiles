@@ -1,2 +1,2 @@
-set foldmethod=indent
-set foldcolumn=1
+setlocal foldmethod=indent
+setlocal foldcolumn=3

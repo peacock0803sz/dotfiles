@@ -40,12 +40,12 @@ local function config_cmp()
     }),
     sources = cmp.config.sources({
       { name = "nvim_lsp" },
+      { name = "nvim_lua" },
       { name = "luasnip" }, -- For luasnip users.
       { name = "path" },
     }, {
       { name = "buffer" },
       { name = "spell" },
-      { name = "skkleton" },
     }),
     view = {
       -- entries = "native"
@@ -59,7 +59,6 @@ local function config_cmp()
     }, {
       { name = "buffer" },
       { name = "spell" },
-      { name = "skkleton" },
     }),
   })
 
@@ -75,13 +74,16 @@ local function config_cmp()
   cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
+      { name = "nvim_lua" },
       { name = "path" },
+      { name = "zsh" },
     }, {
       { name = "cmdline" },
     }),
   })
 end
 
+---@type LazySpec[]
 local spec = {
   {
     "hrsh7th/nvim-cmp",
@@ -91,6 +93,7 @@ local spec = {
   { "hrsh7th/cmp-nvim-lsp" },
   { "hrsh7th/cmp-buffer", dependencies = { "hrsh7th/nvim-cmp" } },
   { "hrsh7th/cmp-path", dependencies = { "hrsh7th/nvim-cmp" } },
+  { "tamago324/cmp-zsh", dependencies = { "hrsh7th/nvim-cmp" } },
   {
     "hrsh7th/cmp-cmdline",
     dependencies = { "hrsh7th/nvim-cmp" },
@@ -104,15 +107,9 @@ local spec = {
   { "hrsh7th/cmp-nvim-lua", dependencies = { "hrsh7th/nvim-cmp" } },
   { "f3fora/cmp-spell", dependencies = { "hrsh7th/nvim-cmp" } },
   {
-    "uga-rosa/cmp-skkeleton",
-    dependencies = { "hrsh7th/nvim-cmp", "vim-skk/skkeleton" },
-    event = "InsertEnter",
-  },
-  {
     "saadparwaiz1/cmp_luasnip",
     dependencies = { "L3MON4D3/LuaSnip" },
     event = "InsertEnter",
   },
 }
-
 return spec

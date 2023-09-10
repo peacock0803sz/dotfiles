@@ -16,6 +16,34 @@ export SAVEHIST=10000
 export HISTFILE="$HOME/.zsh_history"
 export HISTORY_IGNORE="(cd|ls|pwd|exit|rm|n?vim|git reset)"
 
+case ${OSTYPE} in
+  darwin*)
+    if [[ $(uname -m) = "arm64" ]]; then
+      alias rosetta="arch -x86_64 /bin/zsh"
+      alias python3.8="/usr/bin/python3"
+      export PYTHONROOT="/Library/Frameworks/Python.framework/Versions/"
+    elif [[ $(uname -m) = "x86_64" ]]; then
+      export PYTHONROOT="/usr/local/bin"
+      export HOMEBREW_PREFIX="/usr/local"
+    fi
+
+
+    export PATH="$HOMEBREW_PREFIX/sbin:$PATH"
+    # tailscale
+    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+    # Visual Studio Code
+    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+    # [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+    ;;
+  linux*)
+    if [[ -e /etc/debian_version ]]; then
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      export HOMEBREW_PREFIX="$HOME/linuxbrew/.linuxbrew"
+    fi
+    ;;
+esac
+
 zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' auto-description 'specify: %d'
 # zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list
@@ -74,32 +102,6 @@ bindkey "^x^e" edit-command-line
 
 alias reloadzsh='exec -l zsh'
 
-case ${OSTYPE} in
-  darwin*)
-    if [[ $(uname -m) = "arm64" ]]; then
-      alias rosetta="arch -x86_64 /bin/zsh"
-      alias python3.8="/usr/bin/python3"
-      export PYTHONROOT="/Library/Frameworks/Python.framework/Versions/"
-    elif [[ $(uname -m) = "x86_64" ]]; then
-      export PYTHONROOT="/usr/local/bin"
-      export HOMEBREW_PREFIX="/usr/local"
-    fi
-
-    export PATH="$HOMEBREW_PREFIX/sbin:$PATH"
-    # tailscale
-    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-    # Visual Studio Code
-    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-    # [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
-    ;;
-  linux*)
-    if [[ -e /etc/debian_version ]]; then
-      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-      export HOMEBREW_PREFIX="$HOME/linuxbrew/.linuxbrew"
-    fi
-    ;;
-esac
-
 # MySQL and Postgres Lib
 export PATH="$HOMEBREW_PREFIX/opt/mysql-client/bin:$PATH"
 export XML_CATALOG_FILES="$HOMEBREW_PREFIX/etc/xml/catalog"
@@ -108,6 +110,8 @@ export PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
 # terraform
 complete -o nospace -C "$HOMEBREW_PREFIX/bin/terraform" terraform
 alias tf="terraform"
+
+export DENO_NO_PROMPT=1
 
 # zenn-cli
 alias zenn="deno run -A npm:zenn-cli@latest"
@@ -122,7 +126,7 @@ alias ni="bunx @antfu/ni"
 alias yq="gojq --yaml-input --yaml-output"
 
 # Go
-export GOPATH="$HOME/qhq/"
+export GOPATH="$HOME/ghq"
 export PATH="$PATH:$GOPATH/bin"
 
 # Rust
@@ -135,6 +139,9 @@ export NVIM_CACHE_HOME="$HOME/.vim/bundles"
 export PATH="$PATH:$HOME/.local/nvim/bin"
 export EDITOR=nvim
 export LANG=ja_JP.UTF-8
+
+# man
+export MANPAGER='nvim -c ASMANPAGER -'
 
 # aws completion
 complete -C "$(command -v aws_completer)" aws
@@ -209,6 +216,11 @@ zinit ice as"completion"
 zinit snippet OMZP::docker/_docker
 zinit snippet OMZP::docker-compose/_docker-compose
 eval "$(op completion zsh)"; compdef _op op
+
+# Truncate Directory
+hash -d github=$HOME/ghq/github.com
+hash -d work=$HOME/ghq/github.com/topgate
+hash -d personal=$HOME/ghq/github.com/peacock0803sz
 
 # source $(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh
 # export ZENO_ROOT="$(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh"
@@ -354,8 +366,6 @@ load-nvmrc() {
     nvm use default
   fi
 }
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
 
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/.p10k.zsh.
 [[ ! -f ~/dotfiles/.p10k.zsh ]] || source "$HOME/dotfiles/.p10k.zsh"

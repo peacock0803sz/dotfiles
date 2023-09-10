@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mattn/efm-langserver/master/schema.json
+version: 2
+lint-debounce: 3s
+
+tools:
+  any-prettier: &any-prettier
+    format-command: "prettier"
+  python-ruff: &python-ruff
+    lint-command: "ruff"
+  python-black: &python-black
+    format-command: "black"
+
+languages:
+  python:
+    - <<: *python-ruff
+    - <<: *python-black
+  markdown:
+    - <<: *any-prettier
+  json:
+    - <<: *any-prettier
+  yaml:
+    - <<: *any-prettier

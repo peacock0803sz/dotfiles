@@ -15,37 +15,39 @@ scrolling:
 font:
   normal:
     family: "UDEV Gothic NF"
-    style: Bold
-  size: 13
+  size: 14
 
-# TokyoNight Alacritty Colors
+# Nightfox Alacritty Colors
+# Style: nordfox
+# Upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/nordfox/nightfox_alacritty.yml
 colors:
+  # Default colors
   primary:
-    background: "#1E1E2E" # base
-    foreground: "#CDD6F4" # text
-    # Bright and dim foreground colors
-    dim_foreground: "#CDD6F4" # text
-    bright_foreground: "#CDD6F4" # text
-
-  # Cursor colors
-  cursor:
-    text: "#1E1E2E" # base
-    cursor: "#F5E0DC" # rosewater
-  vi_mode_cursor:
-    text: "#1E1E2E" # base
-    cursor: "#B4BEFE" # lavender
-
-  # Search colors
-  search:
-    matches:
-      foreground: "#1E1E2E" # base
-      background: "#A6ADC8" # subtext0
-    focused_match:
-      foreground: "#1E1E2E" # base
-      background: "#A6E3A1" # green
-    footer_bar:
-      foreground: "#1E1E2E" # base
-      background: "#A6ADC8" # subtext0
+    background: '0x2e3440'
+    foreground: '0xcdcecf'
+  # Normal colors
+  normal:
+    black:   '0x3b4252'
+    red:     '0xbf616a'
+    green:   '0xa3be8c'
+    yellow:  '0xebcb8b'
+    blue:    '0x81a1c1'
+    magenta: '0xb48ead'
+    cyan:    '0x88c0d0'
+    white:   '0xe5e9f0'
+  # Bright colors
+  bright:
+    black:   '0x465780'
+    red:     '0xd06f79'
+    green:   '0xb1d196'
+    yellow:  '0xf0d399'
+    blue:    '0x8cafd2'
+    magenta: '0xc895bf'
+    cyan:    '0x93ccdc'
+    white:   '0xe7ecf4'
+  indexed_colors:
+    - { index: 16, color: '0xc9826b' }
+    - { index: 17, color: '0xbf88bc' }
 
   # Keyboard regex hints
   hints:

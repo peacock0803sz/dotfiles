@@ -1,5 +1,6 @@
+---@type LazySpec[]
 local spec = {
-  { "folke/neoconf.nvim",           cmd = "Neoconf" },
+  { "folke/neodev.nvim" },
   { "vim-jp/vimdoc-ja" },
   { "nvim-lua/plenary.nvim", lazy = true },
   { "lambdalisue/nerdfont.vim" },
@@ -11,11 +12,13 @@ local spec = {
   { "machakann/vim-sandwich" },
   { "cohama/lexima.vim" },
   { "lambdalisue/suda.vim" },
+  { "lambdalisue/vim-manpager" },
   { "mattn/emmet-vim" },
   { "rhysd/committia.vim" },
-  { "lambdalisue/gina.vim",         event = "BufEnter" },
-  { "lambdalisue/gin.vim",          dependencies = { "vim-denops/denops.vim" } },
-  { "skanehira/denops-docker.vim",  dependencies = "vim-denops/denops.vim" },
+  { "tani/glance-vim", dependencies = "vim-denops/denops.vim" },
+  { "lambdalisue/gin.vim", dependencies = "vim-denops/denops.vim" },
+  -- { "peacock0803sz/gin.vim", dependencies = "vim-denops/denops.vim", dev = true },
+  { "skanehira/denops-docker.vim", dependencies = "vim-denops/denops.vim" },
   { "tyru/open-browser-github.vim", dependencies = "tyru/open-browser.vim" },
 }
 return spec

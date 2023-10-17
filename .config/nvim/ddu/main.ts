@@ -1,4 +1,4 @@
-import * as stdpath from "https://deno.land/std@0.201.0/path/mod.ts";
+import * as stdpath from "https://deno.land/std@0.203.0/path/mod.ts";
 import {
   ActionArguments,
   ActionFlags,
@@ -6,8 +6,8 @@ import {
 } from "https://deno.land/x/ddu_vim@v3.6.0/types.ts";
 import { fn } from "https://deno.land/x/ddu_vim@v3.6.0/deps.ts";
 import { ConfigArguments } from "https://deno.land/x/ddu_vim@v3.6.0/base/config.ts";
-import { ActionData } from "https://deno.land/x/ddu_kind_file@v0.6.0/file.ts";
-import * as u from "https://deno.land/x/unknownutil@v3.6.0/mod.ts";
+import { ActionData } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
+import * as u from "https://deno.land/x/unknownutil@v3.9.0/mod.ts";
 
 type Never = Record<never, never>;
 

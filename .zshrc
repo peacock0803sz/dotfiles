@@ -109,7 +109,6 @@ export PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
 
 # terraform
 complete -o nospace -C "$HOMEBREW_PREFIX/bin/terraform" terraform
-alias tf="terraform"
 
 export DENO_NO_PROMPT=1
 
@@ -121,6 +120,8 @@ alias prism="deno run -A npm:@stoplight/prism-cli@latest"
 
 # np for npm/yarn/pnpm/bun
 alias ni="bunx @antfu/ni"
+
+alias wrangler="bunx @wrangler"
 
 # yq
 alias yq="gojq --yaml-input --yaml-output"

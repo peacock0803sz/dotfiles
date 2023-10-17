@@ -107,6 +107,9 @@ snippets:
   - name: to macOS Clipboard
     keyword: pb
     snippet: "| pbcopy"
+  - name: terraform
+    keyword: tf
+    snippet: "terraform"
 completions:
   - name: kill
     patterns:

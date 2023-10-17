@@ -95,7 +95,7 @@ return {
   -- Window
   initial_cols = 184,
   initial_rows = 54,
-  window_background_opacity = 0.925,
+  window_background_opacity = 0.75,
   macos_window_background_blur = 10,
   -- enable_csi_u_key_encoding = true,
 
@@ -107,11 +107,7 @@ return {
   }),
   font_size = 14.0,
 
-  color_scheme = "nordfox",
-  colors = {
-    cursor_bg = "white",
-    cursor_border = "white",
-  },
+  color_scheme = "dayfox",
 
   use_ime = true,
 

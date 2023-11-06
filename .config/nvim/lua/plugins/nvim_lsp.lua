@@ -36,8 +36,6 @@ local function setup_keymaps()
 end
 
 local function config()
-  vim.lsp.set_log_level("debug")
-
   local lspconfig = require("lspconfig")
   ---@type { [1]: fun(name: string), [string]: fun() }
   local mason_handlers = {
@@ -55,7 +53,9 @@ local function config()
       })
     end,
     denols = function()
+      vim.print("denols")
       lspconfig.denols.setup({
+        filetypes = { "typescript" },
         init_options = {
           enable = true,
           lint = true,

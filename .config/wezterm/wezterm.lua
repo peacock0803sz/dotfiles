@@ -109,7 +109,7 @@ return {
 
   color_scheme = "dayfox",
 
-  use_ime = true,
+  use_ime = false,
 
   -- Keybindings
   disable_default_key_bindings = true,

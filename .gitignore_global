@@ -180,6 +180,9 @@ flycheck_*.el
 .nvmrc
 .envrc
 
+**/.tmp/*
+**/.var/*
+
 **/tmp/*
 **/var/*
 

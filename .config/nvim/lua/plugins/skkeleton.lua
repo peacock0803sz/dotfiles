@@ -1,4 +1,12 @@
-local function config_skk_dict(p)
+local function config(p)
+  vim.keymap.set("i", "<C-j>", "<Plug>(skkeleton-toggle)", {})
+  vim.keymap.set("c", "<C-j>", "<Plug>(skkeleton-toggle)", {})
+
+  vim.fn["skkeleton#config"]({
+    eggLikeNewline = true,
+    showCandidatesCount = 3,
+  })
+
   local dictdir = vim.fs.joinpath(vim.fs.dirname(p.dir), "dict")
   vim.fn["skkeleton#config"]({
     globalDictionaries = {
@@ -17,23 +25,12 @@ local function config_skk_dict(p)
   })
 end
 
-local function config_skkleton()
-  vim.keymap.set("i", "<C-j>", "<Plug>(skkeleton-toggle)", {})
-  vim.keymap.set("c", "<C-j>", "<Plug>(skkeleton-toggle)", {})
-
-  vim.fn["skkeleton#config"]({
-    eggLikeNewline = true,
-    showCandidatesCount = 3,
-  })
-end
-
 -- @type LazySpec
 local spec = {
   {
     "vim-skk/skkeleton",
-    dependencies = "vim-denops/denops.vim",
-    config = config_skkleton,
+    dependencies = { "vim-denops/denops.vim", "skk-dev/dict" },
+    config = config,
   },
-  { "skk-dev/dict", config = config_skk_dict },
 }
 return spec

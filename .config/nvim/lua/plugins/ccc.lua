@@ -8,5 +8,15 @@ local function config()
 end
 
 ---@type LazySpec
-local spec = { "uga-rosa/ccc.nvim", config = config }
+local spec = {
+  "uga-rosa/ccc.nvim",
+  config = config,
+  ft = {
+    "javascript",
+    "javascriptreact",
+    "lua",
+    "typescript",
+    "typescriptreact",
+  }
+}
 return spec

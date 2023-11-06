@@ -10,7 +10,6 @@ local spec = {
   { "SmiteshP/nvim-navic" },
   { "folke/neodev.nvim" },
   { "machakann/vim-sandwich" },
-  { "cohama/lexima.vim" },
   { "lambdalisue/suda.vim" },
   { "lambdalisue/vim-manpager" },
   { "mattn/emmet-vim" },

@@ -34,6 +34,6 @@ local spec = {
     dependencies = "vim-denops/denops.vim",
     config = config_skkleton,
   },
-  { "skk-dev/dict", cond = false, config = config_skk_dict },
+  { "skk-dev/dict", config = config_skk_dict },
 }
 return spec

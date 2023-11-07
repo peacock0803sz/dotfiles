@@ -36,6 +36,8 @@ local function setup_keymaps()
 end
 
 local function config()
+  -- require("neodev").setup({})
+
   local lspconfig = require("lspconfig")
   ---@type { [1]: fun(name: string), [string]: fun() }
   local mason_handlers = {
@@ -68,8 +70,10 @@ local function config()
         settings = {
           Lua = {
             hint = { enable = true },
-            format = { enable = false },
-            runtime = { version = "LuaJIT" },
+            format = { enable = true },
+            runtime = {
+              version = "LuaJIT",
+            },
             diagnostics = {
               globals = { "vim", "wezterm" },
             },
@@ -97,6 +101,6 @@ end
 local spec = {
   "williamboman/mason-lspconfig.nvim",
   config = config,
-  dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+  dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "folke/neodev.nvim" },
 }
 return spec

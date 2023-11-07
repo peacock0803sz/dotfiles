@@ -1,10 +1,4 @@
-local function setup_bootstrap()
-  require("neodev").setup({})
-end
-
 local function config_cmp()
-  setup_bootstrap()
-
   local cmp = require("cmp")
 
   cmp.setup({

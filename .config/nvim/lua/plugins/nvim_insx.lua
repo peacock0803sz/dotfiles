@@ -1,5 +1,6 @@
 local function config()
-  require("insx.preset.standard").setup({})
+  local insx = require("insx")
+  require("insx.preset.standard").setup()
 end
 
 ---@type LazySpec

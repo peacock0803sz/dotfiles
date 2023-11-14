@@ -1,6 +1,5 @@
 ---@type LazySpec[]
 local spec = {
-  { "folke/neodev.nvim" },
   { "vim-jp/vimdoc-ja" },
   { "nvim-lua/plenary.nvim", lazy = true },
   { "lambdalisue/nerdfont.vim" },
@@ -8,7 +7,6 @@ local spec = {
   { "lambdalisue/guise.vim" },
   { "onsails/lspkind.nvim" },
   { "SmiteshP/nvim-navic" },
-  { "folke/neodev.nvim" },
   { "machakann/vim-sandwich" },
   { "lambdalisue/suda.vim" },
   { "lambdalisue/vim-manpager" },

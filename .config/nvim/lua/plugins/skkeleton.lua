@@ -12,15 +12,15 @@ local function config(p)
     globalDictionaries = {
       vim.fs.joinpath(dictdir, "SKK-JISYO.L"),
       vim.fs.joinpath(dictdir, "SKK-JISYO.assoc"),
-      vim.fs.joinpath(dictdir, "SKK-JISYO.emoji"),
+      -- vim.fs.joinpath(dictdir, "SKK-JISYO.emoji"),
       vim.fs.joinpath(dictdir, "SKK-JISYO.edict"),
       vim.fs.joinpath(dictdir, "SKK-JISYO.edict2"),
       vim.fs.joinpath(dictdir, "SKK-JISYO.fullname"),
       vim.fs.joinpath(dictdir, "SKK-JISYO.geo"),
       vim.fs.joinpath(dictdir, "SKK-JISYO.hukugougo"),
-      vim.fs.joinpath(dictdir, "SKK-JISYO.mazegaki"),
+      -- vim.fs.joinpath(dictdir, "SKK-JISYO.mazegaki"),
       vim.fs.joinpath(dictdir, "SKK-JISYO.propernoun"),
-      vim.fs.joinpath(dictdir, "SKK-JISYO.station"),
+      -- vim.fs.joinpath(dictdir, "SKK-JISYO.station"),
     },
   })
 end

@@ -1,4 +1,4 @@
-local function config_cmp()
+local function config()
   local cmp = require("cmp")
 
   cmp.setup({
@@ -85,7 +85,7 @@ end
 local spec = {
   {
     "hrsh7th/nvim-cmp",
-    config = config_cmp,
+    config = config,
     event = "BufEnter",
   },
   { "hrsh7th/cmp-nvim-lsp" },

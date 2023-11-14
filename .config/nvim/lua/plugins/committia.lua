@@ -3,5 +3,5 @@ local function config()
 end
 
 ---@type LazySpec
-local spec = { "rhysd/committia.vim", config = config }
+local spec = { "https://github.com/rhysd/committia.vim", config = config }
 return spec

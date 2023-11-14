@@ -31,5 +31,5 @@ local function config()
 end
 
 ---@type LazySpec
-local spec = { "lewis6991/gitsigns.nvim", config = config, event = "BufEnter" }
+local spec = { "https://github.com/lewis6991/gitsigns.nvim", config = config, event = "BufEnter" }
 return spec

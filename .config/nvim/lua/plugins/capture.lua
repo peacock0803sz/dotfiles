@@ -12,5 +12,5 @@ local function config()
 end
 
 ---@type LazySpec
-local spec = { "tyru/capture.vim", config = config, event = "CmdlineEnter" }
+local spec = { "https://github.com/tyru/capture.vim", config = config, event = "CmdlineEnter" }
 return spec

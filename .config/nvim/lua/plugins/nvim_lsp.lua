@@ -93,12 +93,12 @@ end
 
 ---@type LazySpec
 local spec = {
-  "williamboman/mason-lspconfig.nvim",
+  "https://github.com/williamboman/mason-lspconfig.nvim",
   config = config,
   dependencies = {
-    "williamboman/mason.nvim",
-    "neovim/nvim-lspconfig",
-    -- "folke/neodev.nvim"
+    "https://github.com/williamboman/mason.nvim",
+    "https://github.com/neovim/nvim-lspconfig",
+    -- "https://github.com/folke/neodev.nvim"
   },
 }
 return spec

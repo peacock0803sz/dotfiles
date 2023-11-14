@@ -8,5 +8,5 @@ local function config()
 end
 
 ---@type LazySpec
-local spec = { "folke/which-key.nvim", config = config }
+local spec = { "https://github.com/folke/which-key.nvim", config = config }
 return spec

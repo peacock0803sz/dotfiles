@@ -30,5 +30,5 @@ local function config()
 end
 
 ---@type LazySpec
-local spec = { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", config = config }
+local spec = { "https://github.com/nvim-treesitter/nvim-treesitter", build = ":TSUpdate", config = config }
 return spec

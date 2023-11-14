@@ -17,9 +17,9 @@ local spec = {
   { "kuuote/ddu-source-git_status", dependencies = { "Shougo/ddu.vim" }, config = status_config },
   { "kyoh86/ddu-source-git_log",    dependencies = { "Shougo/ddu.vim" }, config = log_config },
   {
-    "peacock0803sz/ddu-source-git_stash",
+    "https://github.com/peacock0803sz/ddu-source-git_stash",
     dev = true,
-    dependencies = { "Shougo/ddu.vim" },
+    dependencies = { "https://github.com/Shougo/ddu.vim" },
     config = stash_config,
   },
 }

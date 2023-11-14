@@ -3,5 +3,5 @@ local function config()
 end
 
 ---@type LazySpec
-local spec = { "folke/lsp-colors.nvim", config = config }
+local spec = { "https://github.com/folke/lsp-colors.nvim", config = config }
 return spec

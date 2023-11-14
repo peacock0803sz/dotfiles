@@ -11,6 +11,9 @@ local function config()
 end
 
 ---@type LazySpec
-local spec =
-  { "thinca/vim-quickrun", dependencies = "lambdalisue/vim-quickrun-neovim-job", config = config }
+local spec = {
+  "https://github.com/thinca/vim-quickrun",
+  dependencies = "https://github.com/lambdalisue/vim-quickrun-neovim-job",
+  config = config,
+}
 return spec

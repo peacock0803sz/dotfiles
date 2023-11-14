@@ -11,8 +11,12 @@ end
 
 ---@type LazySpec
 local spec = {
-  "folke/trouble.nvim",
-  dependencies = { "mason.nvim", "nvim-lspconfig", "nvim-tree/nvim-web-devicons" },
+  "https://github.com/folke/trouble.nvim",
+  dependencies = {
+    "https://github.com/mason.nvim",
+    "https://github.com/nvim-lspconfig",
+    "https://github.com/nvim-tree/nvim-web-devicons",
+  },
   config = config,
 }
 return spec

@@ -18,5 +18,5 @@ local function config()
 end
 
 ---@type LazySpec
-local spec = { "monaqa/dial.nvim", config = config, event = "BufEnter" }
+local spec = { "https://github.com/monaqa/dial.nvim", config = config, event = "BufEnter" }
 return spec

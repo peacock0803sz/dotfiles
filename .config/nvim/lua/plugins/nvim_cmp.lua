@@ -11,8 +11,8 @@ local function config()
       -- fields = {'abbr', 'kind', 'menu'},
       format = require("lspkind").cmp_format({
         with_text = true,
-        mode = "symbol_text", -- show only symbol annotations
-        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+        mode = "symbol_text",  -- show only symbol annotations
+        maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
         ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
         -- The function below will be called before any actual modifications from lspkind
         -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
@@ -84,34 +84,51 @@ end
 ---@type LazySpec[]
 local spec = {
   {
-    "hrsh7th/nvim-cmp",
+    "https://github.com/hrsh7th/nvim-cmp",
     config = config,
     event = "BufEnter",
   },
-  { "hrsh7th/cmp-nvim-lsp" },
-  { "hrsh7th/cmp-buffer", dependencies = { "hrsh7th/nvim-cmp" } },
-  { "hrsh7th/cmp-path", dependencies = { "hrsh7th/nvim-cmp" } },
-  { "tamago324/cmp-zsh", dependencies = { "hrsh7th/nvim-cmp" } },
   {
-    "hrsh7th/cmp-cmdline",
-    dependencies = { "hrsh7th/nvim-cmp" },
+    "https://github.com/hrsh7th/cmp-nvim-lsp",
+    dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
+  },
+  {
+    "https://github.com/hrsh7th/cmp-buffer",
+    dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
+  },
+  {
+    "https://github.com/hrsh7th/cmp-path",
+    dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
+  },
+  {
+    "https://github.com/tamago324/cmp-zsh",
+    dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
+  },
+  {
+    "https://github.com/hrsh7th/cmp-cmdline",
+    dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
     event = "CmdlineEnter",
   },
   {
-    "hrsh7th/cmp-omni",
-    dependencies = { "hrsh7th/nvim-cmp" },
+    "https://github.com/hrsh7th/cmp-omni",
+    dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
     event = "InsertEnter",
   },
-  { "hrsh7th/cmp-nvim-lua", dependencies = { "hrsh7th/nvim-cmp" } },
-  { "f3fora/cmp-spell", dependencies = { "hrsh7th/nvim-cmp" } },
   {
-    "uga-rosa/cmp-skkeleton",
-    dependencies = { "hrsh7th/nvim-cmp", "vim-skk/skkeleton" },
+    "https://github.com/hrsh7th/cmp-nvim-lua",
+    dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
   },
   {
-    "saadparwaiz1/cmp_luasnip",
-    dependencies = { "L3MON4D3/LuaSnip" },
-    event = "InsertEnter",
+    "https://github.com/f3fora/cmp-spell",
+    dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
+  },
+  {
+    "https://github.com/uga-rosa/cmp-skkeleton",
+    dependencies = { "https://github.com/hrsh7th/nvim-cmp", "https://github.com/vim-skk/skkeleton" },
+  },
+  {
+    "https://github.com/saadparwaiz1/cmp_luasnip",
+    dependencies = { "https://github.com/L3MON4D3/LuaSnip" },
   },
 }
 return spec

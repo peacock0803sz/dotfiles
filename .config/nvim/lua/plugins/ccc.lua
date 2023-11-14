@@ -9,7 +9,7 @@ end
 
 ---@type LazySpec
 local spec = {
-  "uga-rosa/ccc.nvim",
+  "https://github.com/uga-rosa/ccc.nvim",
   config = config,
   ft = {
     "javascript",

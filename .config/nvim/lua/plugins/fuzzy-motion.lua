@@ -3,6 +3,9 @@ local function config()
 end
 
 ---@type LazySpec
-local spec =
-  { "yuki-yano/fuzzy-motion.vim", dependencies = { "vim-denops/denops.vim" }, config = config }
+local spec = {
+  "https://github.com/yuki-yano/fuzzy-motion.vim",
+  dependencies = { "https://github.com/vim-denops/denops.vim" },
+  config = config,
+}
 return spec

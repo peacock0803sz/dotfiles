@@ -4,5 +4,9 @@ local function config()
 end
 
 ---@type LazySpec
-local spec = { "shun/ddu-source-rg", dependencies = { "Shougo/ddu.vim" }, config = config }
+local spec = {
+  "https://github.com/shun/ddu-source-rg",
+  dependencies = { "https://github.com/Shougo/ddu.vim" },
+  config = config,
+}
 return spec

@@ -4,9 +4,9 @@ end
 
 ---@type LazySpec
 local spec = {
-  "yuki-yano/ai-review.vim",
+  "https://github.com/yuki-yano/ai-review.vim",
   config = config,
-  dependencies = { "Shougo/ddu.vim", "vim-denops/denops.vim" },
+  dependencies = { "https://github.com/Shougo/ddu.vim", "https://github.com/vim-denops/denops.vim" },
 }
 
 return spec

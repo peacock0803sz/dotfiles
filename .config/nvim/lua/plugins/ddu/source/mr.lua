@@ -6,11 +6,11 @@ end
 
 ---@type LazySpec
 local spec = {
-  "kuuote/ddu-source-mr",
+  "https://github.com/kuuote/ddu-source-mr",
   dependencies = {
-    "Shougo/ddu.vim",
-    "Shougo/ddu-kind-file",
-    "lambdalisue/mr.vim",
+    "https://github.com/Shougo/ddu.vim",
+    "https://github.com/Shougo/ddu-kind-file",
+    "https://github.com/lambdalisue/mr.vim",
   },
   config = config,
 }

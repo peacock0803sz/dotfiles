@@ -28,8 +28,8 @@ end
 
 ---@type LazySpec
 local spec = {
-  "nvimtools/none-ls.nvim",
+  "https://github.com/nvimtools/none-ls.nvim",
   config = config,
-  dependencies = { "williamboman/mason.nvim" },
+  dependencies = { "https://github.com/williamboman/mason.nvim" },
 }
 return spec

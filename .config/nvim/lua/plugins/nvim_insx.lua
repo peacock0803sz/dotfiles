@@ -4,5 +4,5 @@ local function config()
 end
 
 ---@type LazySpec
-local spec = { "hrsh7th/nvim-insx", config = config }
+local spec = { "https://github.com/hrsh7th/nvim-insx", config = config }
 return spec

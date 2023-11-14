@@ -34,7 +34,11 @@ end
 
 ---@type LazySpec
 local spec = {
-  { "Shougo/ddu-ui-filer", config = config, dependencies = "Shougo/ddu.vim" },
-  { "ryota2357/ddu-column-icon_filename" },
+  {
+    "https://github.com/Shougo/ddu-ui-filer",
+    config = config,
+    dependencies = "https://github.com/Shougo/ddu.vim",
+  },
+  { "https://github.com/ryota2357/ddu-column-icon_filename" },
 }
 return spec

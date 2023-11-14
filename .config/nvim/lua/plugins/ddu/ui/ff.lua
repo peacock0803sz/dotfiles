@@ -57,9 +57,9 @@ end
 ---@type LazySpec
 local spec = {
   {
-    "Shougo/ddu-ui-ff",
+    "https://github.com/Shougo/ddu-ui-ff",
     config = config,
-    dependencies = "Shougo/ddu.vim",
+    dependencies = "https://github.com/Shougo/ddu.vim",
   },
 }
 return spec

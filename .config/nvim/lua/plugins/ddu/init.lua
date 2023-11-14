@@ -7,9 +7,9 @@ end
 ---@type LazySpec[]
 local spec = {
   {
-    "Shougo/ddu.vim",
+    "https://github.com/Shougo/ddu.vim",
     config = config,
-    dependencies = { "vim-denops/denops.vim" },
+    dependencies = { "https://github.com/vim-denops/denops.vim" },
   },
   { import = "plugins.ddu.ui" },
   { import = "plugins.ddu.kind" },

@@ -1,3 +1,6 @@
 ---@type LazySpec
-local spec = { "yuki-yano/ddu-filter-fzf", dependencies = { "Shougo/ddu.vim" } }
+local spec = {
+  "https://github.com/yuki-yano/ddu-filter-fzf",
+  dependencies = { "https://github.com/Shougo/ddu.vim" },
+}
 return spec

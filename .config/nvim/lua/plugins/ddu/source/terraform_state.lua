@@ -7,9 +7,9 @@ end
 ---@type LazySpec[]
 local spec = {
   {
-    "peacock0803sz/ddu-source-terraform_state",
+    "https://github.com/peacock0803sz/ddu-source-terraform_state",
     dev = true,
-    dependencies = { "Shougo/ddu.vim" },
+    dependencies = { "https://github.com/Shougo/ddu.vim" },
     config = state_config,
   },
 }

@@ -7,5 +7,5 @@ local function config()
 end
 
 ---@type LazySpec
-local spec = { "j-hui/fidget.nvim", config = config, tag = "legacy" }
+local spec = { "https://github.com/j-hui/fidget.nvim", config = config, tag = "legacy" }
 return spec

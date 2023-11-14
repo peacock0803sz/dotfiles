@@ -29,7 +29,7 @@ end
 local spec = {
   {
     "vim-skk/skkeleton",
-    dependencies = { "vim-denops/denops.vim", "skk-dev/dict" },
+    dependencies = { "https://github.com/vim-denops/denops.vim", "https://github.com/skk-dev/dict" },
     config = config,
   },
 }

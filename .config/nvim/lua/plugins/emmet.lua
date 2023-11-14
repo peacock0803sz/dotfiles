@@ -8,5 +8,5 @@ local function config()
 end
 
 ---@type LazySpec
-local spec = { "mattn/emmet-vim", config = config }
+local spec = { "https://github.com/mattn/emmet-vim", config = config }
 return spec

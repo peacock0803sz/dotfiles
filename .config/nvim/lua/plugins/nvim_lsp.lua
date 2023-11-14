@@ -38,47 +38,37 @@ end
 local function config()
   -- require("neodev").setup({})
 
+  local rtp = vim.api.nvim_get_runtime_file("", true)
   local lspconfig = require("lspconfig")
   ---@type { [1]: fun(name: string), [string]: fun() }
   local mason_handlers = {
     function(name)
       lspconfig[name].setup({ capabilities = require("cmp_nvim_lsp").default_capabilities() })
     end,
-    efm = function()
-      lspconfig.efm.setup({
-        init_options = { documentFormatting = true },
-      })
-    end,
     bashls = function()
       lspconfig.bashls.setup({
         filetypes = { "sh", "bash", "zsh" },
       })
     end,
-    denols = function()
-      vim.print("denols")
-      lspconfig.denols.setup({
-        filetypes = { "typescript" },
-        init_options = {
-          enable = true,
-          lint = true,
-          unstable = true,
-        },
-      })
-    end,
     lua_ls = function()
+      table.insert(rtp, "${3rd}/luv/library")
+      table.insert(rtp, "${3rd}/luassert/library")
+
       lspconfig.lua_ls.setup({
+        -- capabilities = capabilities,
         settings = {
           Lua = {
             hint = { enable = true },
             format = { enable = true },
             runtime = {
               version = "LuaJIT",
+              checkThirdParty = true,
             },
             diagnostics = {
               globals = { "vim", "wezterm" },
             },
             workspace = {
-              library = vim.api.nvim_get_runtime_file("", true),
+              library = rtp,
             },
             telemetry = {
               enable = false,
@@ -88,6 +78,10 @@ local function config()
       })
     end,
   }
+  lspconfig.denols.setup({
+    filetypes = { "typescript" },
+    single_file_support = true,
+  })
 
   require("mason").setup()
   setup_keymaps()
@@ -101,6 +95,10 @@ end
 local spec = {
   "williamboman/mason-lspconfig.nvim",
   config = config,
-  dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "folke/neodev.nvim" },
+  dependencies = {
+    "williamboman/mason.nvim",
+    "neovim/nvim-lspconfig",
+    -- "folke/neodev.nvim"
+  },
 }
 return spec

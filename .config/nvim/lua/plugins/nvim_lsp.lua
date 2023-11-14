@@ -77,18 +77,24 @@ local function config()
         },
       })
     end,
+    tsserver = function()
+      lspconfig.tsserver.setup({
+        root_dir = lspconfig.util.root_pattern({ "package.json", "node_modules" }),
+        single_file_support = false,
+      })
+    end,
   }
   lspconfig.denols.setup({
     filetypes = { "typescript" },
-    single_file_support = true,
+    root_dir = lspconfig.util.root_pattern({ "deno.json", "deno.jsonc", "deps.ts" }),
+    single_file_support = false,
   })
 
   require("mason").setup()
-  setup_keymaps()
-  require("mason-lspconfig").setup()
-  require("mason-lspconfig").setup_handlers({
-    unpack(mason_handlers),
+  require("mason-lspconfig").setup({
+    handlers = mason_handlers,
   })
+  setup_keymaps()
 end
 
 ---@type LazySpec

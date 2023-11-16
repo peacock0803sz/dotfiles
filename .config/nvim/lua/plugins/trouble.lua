@@ -13,8 +13,8 @@ end
 local spec = {
   "https://github.com/folke/trouble.nvim",
   dependencies = {
-    "https://github.com/mason.nvim",
-    "https://github.com/nvim-lspconfig",
+    "https://github.com/williamboman/mason.nvim",
+    "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/nvim-tree/nvim-web-devicons",
   },
   config = config,

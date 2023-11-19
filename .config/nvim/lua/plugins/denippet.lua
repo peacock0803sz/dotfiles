@@ -8,7 +8,7 @@ end
 ---@type LazySpec
 local spec = {
   "https://github.com/uga-rosa/denippet.vim",
-  dependencies = { "denops.vim", "ddc.vim" },
+  dependencies = { "denops.vim" },
   config = config
 }
 return spec

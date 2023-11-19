@@ -4,20 +4,20 @@ local function config(p)
 
   vim.fn["skkeleton#config"]({
     eggLikeNewline = true,
-    showCandidatesCount = 3,
+    showCandidatesCount = 5,
   })
 
   local dictdir = vim.fs.joinpath(vim.fs.dirname(p.dir), "dict")
   vim.fn["skkeleton#config"]({
     globalDictionaries = {
       vim.fs.joinpath(dictdir, "SKK-JISYO.L"),
-      vim.fs.joinpath(dictdir, "SKK-JISYO.assoc"),
+      -- vim.fs.joinpath(dictdir, "SKK-JISYO.assoc"),
       -- vim.fs.joinpath(dictdir, "SKK-JISYO.emoji"),
       vim.fs.joinpath(dictdir, "SKK-JISYO.edict"),
       vim.fs.joinpath(dictdir, "SKK-JISYO.edict2"),
       vim.fs.joinpath(dictdir, "SKK-JISYO.fullname"),
-      vim.fs.joinpath(dictdir, "SKK-JISYO.geo"),
-      vim.fs.joinpath(dictdir, "SKK-JISYO.hukugougo"),
+      -- vim.fs.joinpath(dictdir, "SKK-JISYO.geo"),
+      -- vim.fs.joinpath(dictdir, "SKK-JISYO.hukugougo"),
       -- vim.fs.joinpath(dictdir, "SKK-JISYO.mazegaki"),
       vim.fs.joinpath(dictdir, "SKK-JISYO.propernoun"),
       -- vim.fs.joinpath(dictdir, "SKK-JISYO.station"),
@@ -28,9 +28,16 @@ end
 -- @type LazySpec
 local spec = {
   {
-    "vim-skk/skkeleton",
+    "https://github.com/vim-skk/skkeleton",
     dependencies = { "https://github.com/vim-denops/denops.vim", "https://github.com/skk-dev/dict" },
     config = config,
+  },
+  {
+    "https://github.com/delphinus/skkeleton_indicator.nvim",
+    after = "skkeleton",
+    config = function()
+      require("skkeleton_indicator").setup({})
+    end,
   },
 }
 return spec

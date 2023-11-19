@@ -43,7 +43,7 @@ local function config()
   ---@type { [1]: fun(name: string), [string]: fun() }
   local mason_handlers = {
     function(name)
-      lspconfig[name].setup({ capabilities = require("cmp_nvim_lsp").default_capabilities() })
+      lspconfig[name].setup({ capabilities = require("ddc_nvim_lsp").make_client_capabilities() })
     end,
     bashls = function()
       lspconfig.bashls.setup({
@@ -97,14 +97,23 @@ local function config()
   setup_keymaps()
 end
 
----@type LazySpec
+---@type LazySpec[]
 local spec = {
-  "https://github.com/williamboman/mason-lspconfig.nvim",
-  config = config,
-  dependencies = {
-    "https://github.com/williamboman/mason.nvim",
-    "https://github.com/neovim/nvim-lspconfig",
-    -- "https://github.com/folke/neodev.nvim"
+  {
+    "https://github.com/williamboman/mason-lspconfig.nvim",
+    config = config,
+    dependencies = {
+      "https://github.com/williamboman/mason.nvim",
+      "https://github.com/neovim/nvim-lspconfig",
+      -- "https://github.com/folke/neodev.nvim"
+    },
+  },
+  {
+    "https://github.com/uga-rosa/ddc-nvim-lsp-setup",
+    dependencies = { "https://github.com/Shougo/ddc-source-nvim-lsp" },
+    config = function()
+      require("ddc_nvim_lsp_setup").setup()
+    end,
   },
 }
 return spec

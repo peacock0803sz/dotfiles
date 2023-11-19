@@ -4,3 +4,4 @@
 .config/nvim/plugin
 .config/nvim/lazy-lock.json
 .luarc.json
+deno.lock

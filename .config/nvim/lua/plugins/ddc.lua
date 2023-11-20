@@ -1,25 +1,4 @@
 local function config()
-  vim.keymap.set("i", "<C-n>", "<Cmd>call pum#map#insert_relative(+1, 'loop')<CR>")
-  vim.keymap.set("i", "<C-p>", "<Cmd>call pum#map#insert_relative(-1, 'loop')<CR>")
-  vim.api.nvim_create_autocmd("User", {
-    pattern = "LazyPluginPost:insx",
-    callback = function()
-      vim.keymap.set("i", "<CR>", function()
-        local info = vim.fn["pum#complete_info"]()
-        if info.pum_visible then
-          if info.selected >= 0 then
-            return vim.fn["pum#map#confirm"]()
-          else
-            return vim.fn["ddc#map#insert_item"](0)
-          end
-        elseif vim.fn["denippet#expandable"]() == false then
-          return vim.keycode("<Plug>(denippet-expand)")
-        else
-          return vim.fn["insx#expand"]("<CR>")
-        end
-      end)
-    end,
-  })
   vim.fn["pum#set_option"]({
     highlight_matches = "Normal",
     max_horizontal_items = 5,
@@ -34,6 +13,10 @@ local function config()
     ui = "pum",
   })
   require("ddc_previewer_floating").enable()
+
+  vim.keymap.set({ "i", "c" }, "<C-n>", "<Cmd>call pum#map#insert_relative(+1, 'loop')<CR>")
+  vim.keymap.set({ "i", "c" }, "<C-p>", "<Cmd>call pum#map#insert_relative(-1, 'loop')<CR>")
+  vim.keymap.set({ "i", "c" }, "<C-y>", "<Cmd>call pum#map#confirm()<CR>")
 end
 
 ---@type LazySpec[]

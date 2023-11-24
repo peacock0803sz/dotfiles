@@ -1,14 +1,14 @@
 local wezterm = require("wezterm")
 
 local function basename(s)
-  return string.gsub(s, '(.*[/\\])(.*)', '%2')
+  return string.gsub(s, "(.*[/\\])(.*)", "%2")
 end
 
 ---@param s string
 ---@return string
 local function omit_path(s)
   -- trim `file://` and truncate home directory
-  local path = s:gsub('^[^:]*://[^/]*', ''):gsub('^' .. wezterm.home_dir, '~')
+  local path = s:gsub("^[^:]*://[^/]*", ""):gsub("^" .. wezterm.home_dir, "~")
 
   local map_config = {
     ["~conf"] = "~/dotfiles/.config",
@@ -31,9 +31,9 @@ local function make_title(tab_info)
   ---@type string
   local process_name = basename(tab_info.active_pane.foreground_process_name)
 
-  if process_name == 'zsh' then
+  if process_name == "zsh" then
     return omit_path(tab_info.active_pane.current_working_dir)
-  elseif process_name ~= '' then
+  elseif process_name ~= "" then
     return process_name
   else
     return ""
@@ -50,7 +50,7 @@ end
 local function format_tab_title(tab, tabs, panes, config, hover, max_width)
   local white = "#cdcecf"
   local black = "#2e3440"
-  local title = tab.tab_index + 1 .. ': ' .. make_title(tab)
+  local title = tab.tab_index + 1 .. ": " .. make_title(tab)
 
   if tab.is_active then
     return {
@@ -67,9 +67,7 @@ local function format_tab_title(tab, tabs, panes, config, hover, max_width)
   end
 end
 
-wezterm.on(
-  'format-tab-title', format_tab_title
-)
+wezterm.on("format-tab-title", format_tab_title)
 
 ---comment
 ---@param tab any
@@ -83,9 +81,7 @@ local function format_window_title(tab, pane, tabs, panes, config)
   return "[" .. workspace .. "]: " .. make_title(tab)
 end
 
-wezterm.on(
-  'format-window-title', format_window_title
-)
+wezterm.on("format-window-title", format_window_title)
 
 wezterm.on("window-config-reloaded", function(window, _)
   window:toast_notification("wezterm", "configuration reloaded!", nil, 4000)
@@ -98,11 +94,12 @@ return {
   window_background_opacity = 0.75,
   macos_window_background_blur = 10,
   -- enable_csi_u_key_encoding = true,
+  window_decorations = "NONE",
 
   -- Fonts
   font = wezterm.font_with_fallback({
-    { family = "UDEV Gothic",    weight = "Bold" },
-    { family = "UDEV Gothic NF", weight = "Bold" },
+    { family = "UDEV Gothic NF",   weight = "Bold" },
+    { family = "JetBrainsMono NF", weight = "Bold" },
     "Noto Color Emoji",
   }),
   font_size = 14.0,

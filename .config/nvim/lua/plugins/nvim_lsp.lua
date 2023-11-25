@@ -89,6 +89,7 @@ local function config()
     root_dir = lspconfig.util.root_pattern({ "deno.json", "deno.jsonc", "deps.ts" }),
     single_file_support = false,
   })
+  lspconfig.sourcekit.setup({})
 
   require("mason").setup()
   require("mason-lspconfig").setup({

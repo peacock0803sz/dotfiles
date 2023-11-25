@@ -94,7 +94,7 @@ return {
   window_background_opacity = 0.75,
   macos_window_background_blur = 10,
   -- enable_csi_u_key_encoding = true,
-  window_decorations = "NONE",
+  window_decorations = "NONE | RESIZE",
 
   -- Fonts
   font = wezterm.font_with_fallback({

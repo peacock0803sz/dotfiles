@@ -1,7 +1,7 @@
 local function config()
   local map_source = require("plugins.ddu.map").map_source
   map_source(
-    "<Space>gi",
+    "<Space>Gi",
     "github_repo_issue",
     { sources = { { name = "github_repo_issue" } } },
     true

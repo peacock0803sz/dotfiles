@@ -1,14 +1,13 @@
 local function config(p)
-  vim.keymap.set("i", "<C-j>", "<Plug>(skkeleton-toggle)", {})
-  vim.keymap.set("c", "<C-j>", "<Plug>(skkeleton-toggle)", {})
-
-  vim.fn["skkeleton#config"]({
-    eggLikeNewline = true,
-    showCandidatesCount = 5,
-  })
+  vim.keymap.set("i", "<C-\\>", "<Plug>(skkeleton-toggle)", {})
+  vim.keymap.set("c", "<C-\\>", "<Plug>(skkeleton-toggle)", {})
 
   local dictdir = vim.fs.joinpath(vim.fs.dirname(p.dir), "dict")
   vim.fn["skkeleton#config"]({
+    eggLikeNewline = true,
+    selectCandidateKeys = "1234567",
+    useGoogleJapaneseInput = true,
+    showCandidatesCount = 2,
     globalDictionaries = {
       vim.fs.joinpath(dictdir, "SKK-JISYO.L"),
       -- vim.fs.joinpath(dictdir, "SKK-JISYO.assoc"),

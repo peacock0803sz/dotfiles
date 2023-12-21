@@ -1,5 +1,12 @@
 local M = {}
 
+vim.cmd([[
+function s:resize() abort
+  return printf(":\<C-u>%s", 78 * 2 <= winwidth(0) ? 'vertical ' : '')
+endfunction
+nnoremap <expr> <C-h> <SID>resize() .. 'h '
+]])
+
 local opts = { noremap = true, silent = true }
 -- c-mode
 vim.keymap.set("c", "<C-a>", "<Home>", opts)

@@ -141,6 +141,9 @@ export PATH="$PATH:$HOME/.local/nvim/bin"
 export EDITOR=nvim
 export LANG=ja_JP.UTF-8
 
+# Pager
+export PAGER="nvim -c PAGER -"
+
 # man
 export MANPAGER='nvim -c ASMANPAGER -'
 

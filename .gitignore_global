@@ -175,7 +175,6 @@ flycheck_*.el
 **/pip-wheel-metadata/*
 
 .*-version
-!.terraform-version
 
 .nvmrc
 .envrc

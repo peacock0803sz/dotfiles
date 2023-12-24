@@ -8,6 +8,7 @@ local spec = {
   { "https://github.com/onsails/lspkind.nvim" },
   { "https://github.com/machakann/vim-sandwich" },
   { "https://github.com/lambdalisue/suda.vim" },
+  { "https://github.com/lambdalisue/vim-pager" },
   { "https://github.com/lambdalisue/vim-manpager" },
   { "https://github.com/mattn/emmet-vim" },
   { "https://github.com/rhysd/committia.vim" },

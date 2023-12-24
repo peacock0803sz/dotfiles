@@ -197,3 +197,5 @@ sandbox*
 ## terraform lock
 **/.terraform.lock.hcl
 **/.terraform-relay.yml
+
+deno.*

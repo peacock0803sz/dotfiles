@@ -285,7 +285,7 @@ function ssh-fzf() {
   zle reset-prompt
 }
 zle -N ssh-fzf
-bindkey '^\' ssh-fzf
+bindkey '^x^s' ssh-fzf
 
 export VENV_ROOT="${HOME}/venvs"
 export VENVFZF_VENV_OPTIONS=""

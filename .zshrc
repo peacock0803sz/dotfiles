@@ -38,8 +38,8 @@ case ${OSTYPE} in
     ;;
   linux*)
     if [[ -e /etc/debian_version ]]; then
-      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-      export HOMEBREW_PREFIX="$HOME/linuxbrew/.linuxbrew"
+      # eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      # export HOMEBREW_PREFIX="$HOME/linuxbrew/.linuxbrew"
     fi
     ;;
 esac

@@ -5,7 +5,7 @@ end
 
 ---@type LazySpec
 local spec = {
-  "https://github.com/uga-rosa/ddu-source-help",
+  "https://github.com/matsui54/ddu-source-help",
   dependencies = { "https://github.com/Shougo/ddu.vim" },
   config = config,
 }

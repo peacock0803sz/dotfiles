@@ -90,6 +90,7 @@ local function config()
     single_file_support = false,
   })
   lspconfig.sourcekit.setup({})
+  lspconfig.nixd.setup({})
 
   require("mason").setup()
   require("mason-lspconfig").setup({

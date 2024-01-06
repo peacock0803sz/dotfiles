@@ -188,6 +188,7 @@ flycheck_*.el
 .cache
 
 sandbox*
+*.tmp
 
 # Git worktree
 

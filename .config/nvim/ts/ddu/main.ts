@@ -1,4 +1,4 @@
-import * as stdpath from "https://deno.land/std@0.210.0/path/mod.ts";
+import * as stdpath from "https://deno.land/std@0.211.0/path/mod.ts";
 import {
   ActionArguments,
   ActionFlags,
@@ -56,6 +56,7 @@ export class Config extends BaseConfig {
         matcher_substring: { highlightMatched: "Search" },
       },
       kindOptions: {
+        _: { defaultAction: "open" },
         git_commit: { defaultAction: "yank" },
         source: { defaultAction: "execute" },
         git_status: {

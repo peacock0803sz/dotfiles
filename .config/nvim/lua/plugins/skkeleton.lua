@@ -6,7 +6,6 @@ local function config(p)
   vim.fn["skkeleton#config"]({
     eggLikeNewline = true,
     selectCandidateKeys = "1234567",
-    useGoogleJapaneseInput = true,
     showCandidatesCount = 2,
     globalDictionaries = {
       vim.fs.joinpath(dictdir, "SKK-JISYO.L"),

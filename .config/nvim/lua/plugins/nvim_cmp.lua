@@ -51,6 +51,16 @@ local function config()
     }),
   })
 
+  cmp.setup.filetype("org", {
+    sources = cmp.config.sources({
+      { name = "orgmode" }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+      { name = "buffer" },
+      { name = "spell" },
+      { name = "skkeleton" },
+    }),
+  })
+
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline("/", {
     mapping = cmp.mapping.preset.cmdline(),

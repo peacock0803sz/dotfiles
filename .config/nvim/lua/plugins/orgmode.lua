@@ -12,8 +12,8 @@ local function config()
 
   -- Setup orgmode
   require("orgmode").setup({
-    org_agenda_files = "~/Documents/notiz/**/*",
-    org_default_notes_file = "~/Documents/notiz/refile.org",
+    org_agenda_files = "~/Documents/Notiz/**/*",
+    org_default_notes_file = "~/Documents/Notiz/refile.org",
   })
 end
 

@@ -2,7 +2,7 @@ local function config(p)
   vim.keymap.set("i", "<C-\\>", "<Plug>(skkeleton-toggle)", {})
   vim.keymap.set("c", "<C-\\>", "<Plug>(skkeleton-toggle)", {})
 
-  local dictdir = vim.fs.joinpath(vim.fs.dirname(p.dir), "dict")
+  local dictdir = p.dir
   vim.fn["skkeleton#config"]({
     eggLikeNewline = true,
     selectCandidateKeys = "1234567",
@@ -23,13 +23,25 @@ local function config(p)
   })
 end
 
--- @type LazySpec
+local function build(p)
+  local plugin_dir = p.dir
+  local macskk_dir = vim.env.HOME
+    .. "/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries/"
+  for fname, _ in vim.fs.dir(plugin_dir) do
+    if fname:match("SKK%-JISYO") then
+      vim.uv.fs_copyfile(vim.fs.joinpath(plugin_dir, fname), vim.fs.joinpath(macskk_dir, fname))
+    end
+  end
+end
+
+-- @type LazySpec[]
 local spec = {
   {
     "https://github.com/vim-skk/skkeleton",
     dependencies = { "https://github.com/vim-denops/denops.vim", "https://github.com/skk-dev/dict" },
     config = config,
   },
+  { "https://github.com/skk-dev/dict", build = build },
   {
     "https://github.com/delphinus/skkeleton_indicator.nvim",
     after = "skkeleton",

@@ -12,7 +12,7 @@ async function getSettings(denops: Denops): Promise<UiParams> {
   const winWidth = Math.floor(winCol * 0.95);
   const winHeight = Math.floor(winRow * 0.8);
 
-  const mayVSplit = winCol >= 50; // 縦分割の上限列数
+  const mayVSplit = winCol >= 140; // 縦分割の上限列数
 
   return {
     split: "floating",

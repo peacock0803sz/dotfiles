@@ -213,9 +213,6 @@ zinit for light-mode zdharma-continuum/zinit-annex-as-monitor \
   zsh-users/zsh-autosuggestions \
   zsh-users/zsh-completions
 
-zinit ice as"completion"
-zinit snippet OMZP::docker/_docker
-zinit snippet OMZP::docker-compose/_docker-compose
 eval "$(op completion zsh)"; compdef _op op
 
 # Truncate Directory

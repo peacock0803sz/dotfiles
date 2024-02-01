@@ -1,5 +1,5 @@
-import { BaseConfig } from "https://deno.land/x/ddu_vim@v3.10.1/types.ts";
-import { ConfigArguments } from "https://deno.land/x/ddu_vim@v3.10.1/base/config.ts";
+import { BaseConfig } from "https://deno.land/x/ddu_vim@v3.10.2/types.ts";
+import { ConfigArguments } from "https://deno.land/x/ddu_vim@v3.10.2/base/config.ts";
 import { Params as FfParams } from "https://deno.land/x/ddu_ui_ff@v1.1.0/ff.ts";
 
 import getSettings from "../settings.ts";

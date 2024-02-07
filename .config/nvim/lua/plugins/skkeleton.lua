@@ -2,20 +2,28 @@ local function config(p)
   vim.keymap.set("i", "<C-\\>", "<Plug>(skkeleton-toggle)", {})
   vim.keymap.set("c", "<C-\\>", "<Plug>(skkeleton-toggle)", {})
 
-  local dictdir = p.dir
+  ---@type string
+  local lazy_root = require("lazy.core.config").options.root
+  local dictdir = lazy_root .. "/dict"
+  local user_dict = ""
+  if vim.fn.has("macunix") then
+    user_dict =
+      "~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries/skk-jisyo.utf8"
+  end
   vim.fn["skkeleton#config"]({
+    userDictionary = user_dict,
     eggLikeNewline = true,
     selectCandidateKeys = "1234567",
-    showCandidatesCount = 2,
+    showCandidatesCount = 1,
     globalDictionaries = {
       vim.fs.joinpath(dictdir, "SKK-JISYO.L"),
       -- vim.fs.joinpath(dictdir, "SKK-JISYO.assoc"),
-      -- vim.fs.joinpath(dictdir, "SKK-JISYO.emoji"),
+      vim.fs.joinpath(dictdir, "SKK-JISYO.emoji"),
       vim.fs.joinpath(dictdir, "SKK-JISYO.edict"),
       vim.fs.joinpath(dictdir, "SKK-JISYO.edict2"),
       vim.fs.joinpath(dictdir, "SKK-JISYO.fullname"),
       -- vim.fs.joinpath(dictdir, "SKK-JISYO.geo"),
-      -- vim.fs.joinpath(dictdir, "SKK-JISYO.hukugougo"),
+      vim.fs.joinpath(dictdir, "SKK-JISYO.hukugougo"),
       -- vim.fs.joinpath(dictdir, "SKK-JISYO.mazegaki"),
       vim.fs.joinpath(dictdir, "SKK-JISYO.propernoun"),
       -- vim.fs.joinpath(dictdir, "SKK-JISYO.station"),

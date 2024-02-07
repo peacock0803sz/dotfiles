@@ -91,7 +91,7 @@ return {
   -- Window
   initial_cols = 184,
   initial_rows = 54,
-  window_background_opacity = 0.75,
+  window_background_opacity = 0.9,
   macos_window_background_blur = 10,
   -- enable_csi_u_key_encoding = true,
   window_decorations = "NONE | RESIZE",
@@ -104,7 +104,7 @@ return {
   }),
   font_size = 14.0,
 
-  color_scheme = "dayfox",
+  color_scheme = "Catppuccin Latte",
 
   use_ime = false,
 

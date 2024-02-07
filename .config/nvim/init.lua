@@ -19,9 +19,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 local opts = { dev = { path = "~/ghq/github.com/peacock0803sz" } }
 require("lazy").setup("plugins", opts)
--- require("plugins.list")
 
-require("colorscheme")
 require("keymaps")
 require("autocommands")
 

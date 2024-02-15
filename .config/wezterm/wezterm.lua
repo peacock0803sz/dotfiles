@@ -89,8 +89,8 @@ end)
 
 return {
   -- Window
-  initial_cols = 184,
-  initial_rows = 54,
+  initial_cols = 180,
+  initial_rows = 60,
   window_background_opacity = 0.9,
   macos_window_background_blur = 10,
   -- enable_csi_u_key_encoding = true,
@@ -102,7 +102,7 @@ return {
     { family = "JetBrainsMono NF", weight = "Bold" },
     "Noto Color Emoji",
   }),
-  font_size = 14.0,
+  font_size = 12.0,
 
   color_scheme = "Catppuccin Latte",
 

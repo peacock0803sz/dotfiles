@@ -1,4 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -113,10 +112,10 @@ complete -o nospace -C "$HOMEBREW_PREFIX/bin/terraform" terraform
 export DENO_NO_PROMPT=1
 
 # zenn-cli
-alias zenn="deno run -A npm:zenn-cli@latest"
+alias zenn="deno run -A --unstable-fs npm:zenn-cli@latest"
 
 # stoplight prism
-alias prism="deno run -A npm:@stoplight/prism-cli@latest"
+alias prism="deno run -A --unstable-fs npm:@stoplight/prism-cli@latest"
 
 # np for npm/yarn/pnpm/bun
 alias ni="bunx @antfu/ni"

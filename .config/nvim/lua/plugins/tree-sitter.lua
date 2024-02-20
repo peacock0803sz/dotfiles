@@ -29,6 +29,24 @@ local function config()
   })
 end
 
----@type LazySpec
-local spec = { "https://github.com/nvim-treesitter/nvim-treesitter", build = ":TSUpdate", config = config }
+local function init(p)
+  local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+  parser_config.unifieddiff = {
+    install_info = {
+      url = p.dir,
+      files = { "src/parser.c", "src/scanner.c" },
+    },
+    filetype = "gin-diff",
+  }
+end
+
+---@type LazySpec[]
+local spec = {
+  { "https://github.com/nvim-treesitter/nvim-treesitter", build = ":TSUpdate", config = config },
+  {
+    "https://github.com/monaqa/tree-sitter-unifieddiff",
+    dependencies = "https://github.com/nvim-treesitter/nvim-treesitter",
+    init = init,
+  },
+}
 return spec

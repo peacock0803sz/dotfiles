@@ -16,7 +16,7 @@ async function getSettings(denops: Denops): Promise<UiParams> {
 
   return {
     split: "floating",
-    filterFloatingPosition: "bottom",
+    filterFloatingPosition: mayVSplit ? "bottom" : "top",
     filterSplitDirection: "botright",
     floatingBorder: "single",
     prompt: ">",
@@ -26,12 +26,12 @@ async function getSettings(denops: Denops): Promise<UiParams> {
     previewFloatingBorder: "single",
     previewSplit: mayVSplit ? "vertical" : "horizontal",
     filterUpdateTime: 0,
-    winHeight: winHeight,
+    winHeight: mayVSplit ? winHeight : Math.floor(winHeight / 1.75),
     winWidth: winWidth,
     winRow: 3,
     winCol: 5,
     previewWidth: mayVSplit ? Math.floor(winWidth / 2) : winWidth,
-    previewHeight: mayVSplit ? winHeight : Math.floor(winHeight / 1.5),
+    previewHeight: mayVSplit ? winHeight : Math.floor(winHeight / 2),
   } satisfies UiParams;
 }
 

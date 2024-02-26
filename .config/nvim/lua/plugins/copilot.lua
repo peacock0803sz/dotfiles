@@ -29,9 +29,10 @@ local function config()
       },
     },
     filetypes = {
-      markdown = true,
+      markdown = false,
+      gitcommit = true,
       gitrebase = false,
-      hgcommit = false,
+      hgcommit = true,
       svn = false,
       cvs = false,
       ["."] = false,

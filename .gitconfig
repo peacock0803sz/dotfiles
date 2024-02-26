@@ -26,3 +26,4 @@
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [delta]
 	light = true
+  syntax-theme = "Catppuccin-latte"

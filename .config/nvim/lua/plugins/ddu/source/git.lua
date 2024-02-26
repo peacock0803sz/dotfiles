@@ -1,6 +1,10 @@
 local map_source = require("plugins.ddu.map").map_source
 
 local function status_config()
+  local config_dir = vim.fn.stdpath("config")
+  local path = config_dir .. "/ts/ddu/sourceOptions/git_status.ts"
+  vim.fn["ddu#custom#load_config"](path)
+
   map_source("<Space>gs", "git_status", { sources = { { name = "git_status" } } }, true)
 end
 

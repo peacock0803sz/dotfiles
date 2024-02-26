@@ -1,22 +1,4 @@
-import * as stdpath from "https://deno.land/std@0.217.0/path/mod.ts";
-import {
-  ActionArguments,
-  ActionFlags,
-  BaseConfig,
-} from "https://deno.land/x/ddu_vim@v3.10.2/types.ts";
-import { fn } from "https://deno.land/x/ddu_vim@v3.10.2/deps.ts";
-import { ConfigArguments } from "https://deno.land/x/ddu_vim@v3.10.2/base/config.ts";
-import { ActionData } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
-import * as u from "https://deno.land/x/unknownutil@v3.16.3/mod.ts";
-
-type Never = Record<never, never>;
-
-type Params = Record<string, unknown>;
-type GitStatusActionData = {
-  status: string;
-  path: string;
-  worktree: string;
-};
+import { BaseConfig, ConfigArguments } from "./deps.ts"
 
 export class Config extends BaseConfig {
   override config(args: ConfigArguments): Promise<void> {
@@ -59,83 +41,6 @@ export class Config extends BaseConfig {
         _: { defaultAction: "open" },
         git_commit: { defaultAction: "yank" },
         source: { defaultAction: "execute" },
-        git_status: {
-          defaultAction: "open",
-          actions: {
-            diff: async (args) => {
-              const action = args.items[0].action as GitStatusActionData;
-              const path = stdpath.join(action.worktree, action.path);
-              await args.denops.call("ddu#start", {
-                name: "file:git_diff",
-                sources: [
-                  {
-                    name: "git_diff",
-                    options: {
-                      path,
-                    },
-                    params: {
-                      ...(u.maybe(args.actionParams, u.isRecord) ?? {}),
-                      onlyFile: true,
-                    },
-                  },
-                ],
-              });
-              return ActionFlags.None;
-            },
-            // fire GinPatch command to selected items
-            // using https://github.com/lambdalisue/gin.vim
-            patch: async (args: ActionArguments<Never>) => {
-              for (const item of args.items) {
-                const action = item.action as GitStatusActionData;
-                await args.denops.cmd("tabnew");
-                await args.denops.cmd("tcd " + action.worktree);
-                await args.denops.cmd("GinPatch ++no-head " + action.path);
-              }
-              return ActionFlags.None;
-            },
-          },
-        },
-        file: {
-          defaultAction: "open",
-          actions: {
-            grep: async (args: ActionArguments<Params>) => {
-              const action = args.items[0]?.action as ActionData;
-
-              await args.denops.call("ddu#start", {
-                name: args.options.name,
-                push: true,
-                sources: [
-                  {
-                    name: "rg",
-                    options: {
-                      machers: [],
-                      volatile: true,
-                    },
-                    params: {
-                      path: action.path,
-                      input: await fn.input(args.denops, "Pattern: "),
-                    },
-                  },
-                ],
-              });
-
-              return Promise.resolve(ActionFlags.None);
-            },
-
-            uiCd: async (args: ActionArguments<Params>) => {
-              const action = args.items[0]?.action as ActionData;
-
-              await args.denops.call("ddu#ui#do_action", {
-                name: "narrow",
-                params: {
-                  path: action.path,
-                },
-              });
-
-              return Promise.resolve(ActionFlags.None);
-            },
-          },
-        },
         "ai-review-request": { defaultAction: "open" },
         "ai-review-log": { defaultAction: "resume" },
         action: {

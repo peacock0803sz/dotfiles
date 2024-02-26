@@ -1,8 +1,4 @@
-import { Denops } from "https://deno.land/x/denops_std@v6.1.0/mod.ts";
-import * as opt from "https://deno.land/x/denops_std@v6.1.0/option/mod.ts";
-
-import { Params as FfParams } from "https://deno.land/x/ddu_ui_ff@v1.1.0/ff.ts";
-import { Params as FilerParams } from "https://deno.land/x/ddu_ui_filer@v1.1.0/filer.ts";
+import { Denops, FfParams, FilerParams, opt } from "./deps.ts";
 
 type UiParams = Partial<FfParams | FilerParams>;
 

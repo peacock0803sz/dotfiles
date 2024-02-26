@@ -1,4 +1,4 @@
-import { BaseConfig, ConfigArguments } from "./deps.ts"
+import { BaseConfig, ConfigArguments } from "./deps.ts";
 
 export class Config extends BaseConfig {
   override config(args: ConfigArguments): Promise<void> {
@@ -15,6 +15,9 @@ export class Config extends BaseConfig {
         },
         git_status: {
           converters: ["converter_git_status", "converter_devicon"],
+        },
+        git_diff: {
+          converters: [],
         },
       },
       sourceParams: {

@@ -16,10 +16,27 @@ local function stash_config()
   map_source("<Space>gS", "git_stash", { sources = { { name = "git_stash" } } }, true)
 end
 
+local function diff_config()
+  --
+end
+
 ---@type LazySpec[]
 local spec = {
-  { "kuuote/ddu-source-git_status", dependencies = { "Shougo/ddu.vim" }, config = status_config },
-  { "kyoh86/ddu-source-git_log",    dependencies = { "Shougo/ddu.vim" }, config = log_config },
+  {
+    "https://github.com/kuuote/ddu-source-git_status",
+    dependencies = { "Shougo/ddu.vim" },
+    config = status_config,
+  },
+  {
+    "https://github.com/kyoh86/ddu-source-git_log",
+    dependencies = { "Shougo/ddu.vim" },
+    config = log_config,
+  },
+  {
+    "https://github.com/kuuote/ddu-source-git_diff",
+    dependencies = { "Shougo/ddu.vim" },
+    config = diff_config,
+  },
   {
     "https://github.com/peacock0803sz/ddu-source-git_stash",
     dev = true,

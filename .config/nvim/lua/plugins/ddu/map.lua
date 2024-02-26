@@ -18,11 +18,14 @@ function M.map_source(keys, name, args, resume)
       if resume ~= nil then
         args.resume = resume
       end
+      if name == nil then
+        name = args.sources[1].name
+      end
+      if args.name == nil then
+        args.name = name
+      end
 
       vim.fn["ddu#start"](args)
-    end
-    if name == nil then
-      name = args.sources[1].name
     end
     vim.keymap.set("n", key, callback, { remap = false, desc = "Start ddu source: " .. name })
   end

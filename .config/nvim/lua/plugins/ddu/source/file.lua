@@ -1,6 +1,6 @@
 local function config()
   local config_dir = vim.fn.stdpath("config")
-  local path = config_dir .. "/ts/ddu/sourceOptions/file.ts"
+  local path = config_dir .. "/ts/ddu/kindOptions/file.ts"
   vim.fn["ddu#custom#load_config"](path)
 
   local map_source = require("plugins.ddu.map").map_source

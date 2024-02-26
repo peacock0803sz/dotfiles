@@ -1,0 +1,28 @@
+import = ["~/.config/alacritty/catppuccin-latte.toml"]
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+padding = { x = 4, y = 32 }
+decorations = "transparent"
+opacity = 0.9
+blur = true
+dynamic_title = false
+decorations_theme_variant = "Light"
+resize_increments = true
+option_as_alt = "Both"
+
+[font]
+normal = { family = "UDEV Gothic NF", style = "Regular" }
+size = 12.0
+
+[terminal]
+osc52 = "CopyPaste"
+
+[keyboard]
+bindings = [
+  { key = "0", mods = "Alt", action = "ResetFontSize" },
+  { key = "=", mods = "Alt|Shift", action = "IncreaseFontSize" },
+  { key = "-", mods = "Alt", action = "DecreaseFontSize" },
+]

@@ -5,6 +5,7 @@ export class Config extends BaseConfig {
     args.setAlias("action", "tabopen", "open");
 
     args.contextBuilder.patchGlobal({
+      resume: true,
       ui: "ff",
       sourceOptions: {
         _: {

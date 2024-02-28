@@ -38,7 +38,7 @@ local function config()
       local file_name = vim.b.ddu_ui_name
       if file_name == "git_status" then
         map_action("n", "a", "itemAction", { name = "add" })
-        -- map_action("n", "r", "itemAction", { name = "restore" })
+        map_action("n", "r", "itemAction", { name = "reset" })
         map_action("n", "p", "itemAction", { name = "patch" })
       end
     end,

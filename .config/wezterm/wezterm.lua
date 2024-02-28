@@ -1,5 +1,4 @@
 local wezterm = require("wezterm")
-local title = require("title")
 local keymaps = require("keymaps")
 local set_profile = require("profile").set_profile
 
@@ -41,9 +40,7 @@ set_profile("ScreenShare", {
   font_size = 16.0,
 })
 
--- Title formatting
-wezterm.on("format-tab-title", title.format_tab_title)
-wezterm.on("format-window-title", title.format_window_title)
+-- Relaad notification
 wezterm.on("window-config-reloaded", function(window, _)
   window:toast_notification("wezterm", "configuration reloaded!", nil, 4000)
 end)

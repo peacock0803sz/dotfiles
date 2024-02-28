@@ -32,7 +32,7 @@ case ${OSTYPE} in
     alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
     # Visual Studio Code
     export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-    export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+    export FPATH="$(brew --prefix)/share/zsh/site-functions:${HOME}/.local/share/zsh/site-functions:${FPATH}"
     # [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
     ;;
   linux*)

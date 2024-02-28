@@ -1,6 +1,10 @@
 local function config()
   local helper = require("plugins.ddu.map")
-  helper.map_source("<Space>fg", "rg", { sources = { { name = "rg" } } })
+  helper.map_source(
+    "<Space>fg",
+    "rg",
+    { sources = { { name = "rg", params = { path = vim.fn.expand("%p:") } } } }
+  )
 end
 
 ---@type LazySpec

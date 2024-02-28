@@ -20,10 +20,22 @@ export class Config extends BaseConfig {
         git_diff: {
           converters: [],
         },
+        rg: {
+          volatile: true,
+          matchers: ["matcher_fzf"],
+          converters: ["converter_devicon"],
+        },
       },
       sourceParams: {
         rg: {
-          args: ["--column", "--no-heading", "--color", "never"],
+          args: [
+            "--column",
+            "--no-heading",
+            "--color",
+            "never",
+            "--hidden",
+            "--glob=!.git"
+          ],
         },
         file_external: {
           cmd: [

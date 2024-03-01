@@ -1,7 +1,7 @@
-export * as stdpath from "https://deno.land/std@0.217.0/path/mod.ts";
+export * as stdpath from "https://deno.land/std@0.218.0/path/mod.ts";
 
-export { type Denops } from "https://deno.land/x/denops_std@v6.1.0/mod.ts";
-export * as opt from "https://deno.land/x/denops_std@v6.1.0/option/mod.ts";
+export { type Denops } from "https://deno.land/x/denops_std@v6.2.0/mod.ts";
+export * as opt from "https://deno.land/x/denops_std@v6.2.0/option/mod.ts";
 export {
   type ActionArguments,
   ActionFlags,

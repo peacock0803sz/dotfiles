@@ -2,6 +2,11 @@ import = ["~/.config/alacritty/catppuccin-latte.toml"]
 
 [env]
 TERM = "xterm-256color"
+NVIM_GHOST = "1"
+
+# [shell]
+# program = "/bin/zsh"
+# args = ["-c", "~/.local/nvim/bin/nvim"]
 
 [window]
 padding = { x = 2, y = 4 }

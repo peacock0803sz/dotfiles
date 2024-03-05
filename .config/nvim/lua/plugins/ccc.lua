@@ -12,6 +12,7 @@ local spec = {
   "https://github.com/uga-rosa/ccc.nvim",
   config = config,
   ft = {
+    "astro",
     "javascript",
     "javascriptreact",
     "lua",

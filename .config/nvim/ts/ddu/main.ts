@@ -10,7 +10,7 @@ export class Config extends BaseConfig {
       sourceOptions: {
         _: {
           ignoreCase: true,
-          matchers: ["matcher_substring"],
+          matchers: ["matcher_fzf"],
           sorters: ["sorter_fzf"],
           converters: ["converter_hl_dir", "converter_devicon"],
         },
@@ -23,6 +23,7 @@ export class Config extends BaseConfig {
         rg: {
           volatile: true,
           matchers: ["matcher_fzf"],
+          sorters: ["sorter_fzf"],
           converters: ["converter_devicon"],
         },
       },

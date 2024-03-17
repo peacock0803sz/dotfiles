@@ -7,9 +7,6 @@ import {
   u,
 } from "../deps.ts";
 
-type Never = Record<never, never>;
-type Params = Record<string, unknown>;
-
 type GitStatusActionData = {
   status: string;
   path: string;
@@ -27,7 +24,7 @@ export class Config extends BaseConfig {
               await args.denops.call("Gin commit");
               return ActionFlags.None;
             },
-            diff: async (args: ActionArguments<Params>) => {
+            diff: async (args: ActionArguments<Record<string, unknown>>) => {
               const action = args.items[0].action as GitStatusActionData;
               const path = stdpath.join(action.worktree, action.path);
               await args.denops.call("ddu#start", {
@@ -49,7 +46,7 @@ export class Config extends BaseConfig {
             },
             // fire GinPatch command to selected items
             // using https://github.com/lambdalisue/gin.vim
-            patch: async (args: ActionArguments<Never>) => {
+            patch: async (args: ActionArguments<Record<never, never>>) => {
               for (const item of args.items) {
                 const action = item.action as GitStatusActionData;
                 await args.denops.cmd("tabnew");

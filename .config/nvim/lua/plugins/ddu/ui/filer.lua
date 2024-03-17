@@ -8,7 +8,12 @@ local function hijack_netrw()
   vim.api.nvim_create_user_command("DduFiler", function()
     local p = vim.fn.expand("%:p")
     vim.fn["ddu#custom#patch_global"]("sourceOptions", { file = { path = vim.fn.expand(p) } })
-    vim.fn["ddu#start"]({ name = "file", ui = "filer", sources = { { name = "file" } } })
+    vim.fn["ddu#start"]({
+      name = "file_external",
+      ui = "filer",
+      sources = { { name = "file_external" } },
+      resume = true,
+    })
   end, {})
 
   local path = vim.fn.expand("%:p")

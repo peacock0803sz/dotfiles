@@ -55,8 +55,8 @@ local function config()
       },
     },
     floating = {
-      max_height = nil,  -- These can be integers or a float between 0 and 1.
-      max_width = nil,   -- Floats will be treated as percentage of your screen.
+      max_height = nil, -- These can be integers or a float between 0 and 1.
+      max_width = nil, -- Floats will be treated as percentage of your screen.
       border = "single", -- Border style. Can be "single", "double" or "rounded"
       mappings = {
         close = { "q", "<Esc>" },
@@ -122,6 +122,7 @@ local spec = {
   dependencies = {
     "https://github.com/mfussenegger/nvim-dap",
     "https://github.com/leoluz/nvim-dap-go",
+    "https://github.com/nvim-neotest/nvim-nio",
   },
   config = config,
   event = "BufEnter",

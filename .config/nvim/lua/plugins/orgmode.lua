@@ -1,6 +1,4 @@
 local function config()
-  require("orgmode").setup_ts_grammar()
-
   -- Setup treesitter
   require("nvim-treesitter.configs").setup({
     highlight = {

@@ -9,7 +9,7 @@ local spec = {
       local path = config_dir .. "/ts/ddu/kindOptions/git_status.ts"
       vim.fn["ddu#custom#load_config"](path)
 
-      map_source("<Space>gs", "git_status", { sources = { { name = "git_status" } } }, true)
+      map_source("<Space>gs", "git_status", { sources = { { name = "git_status" } }, resume = true })
     end,
   },
   {

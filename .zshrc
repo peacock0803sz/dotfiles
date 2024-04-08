@@ -218,8 +218,6 @@ zinit for light-mode zdharma-continuum/zinit-annex-as-monitor \
   zsh-users/zsh-autosuggestions \
   zsh-users/zsh-completions
 
-eval "$(op completion zsh)"; compdef _op op
-
 # Truncate Directory
 hash -d github=$HOME/ghq/github.com
 hash -d work=$HOME/ghq/github.com/topgate

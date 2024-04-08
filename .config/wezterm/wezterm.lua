@@ -40,9 +40,4 @@ set_profile("ScreenShare", {
   font_size = 16.0,
 })
 
--- Relaad notification
-wezterm.on("window-config-reloaded", function(window, _)
-  window:toast_notification("wezterm", "configuration reloaded!", nil, 4000)
-end)
-
 return config

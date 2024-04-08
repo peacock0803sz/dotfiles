@@ -167,9 +167,13 @@ elif [[ -e /etc/arch-release ]]; then
   source /usr/share/nvm/install-nvm-exec
 fi
 
-# 1Password
-eval "$(op completion zsh)"; compdef _op op
-source "$HOME/.config/op/plugins.sh"
+case ${OSTYPE} in
+  darwin*)
+    # 1Password
+    eval "$(op completion zsh)"; compdef _op op
+    source "$HOME/.config/op/plugins.sh"
+    ;;
+esac
 
 # direnv
 _direnv_hook() {

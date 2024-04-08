@@ -1,5 +1,5 @@
 local function config()
-  vim.fn["altercmd#define"]("GinDiff", [[GinDiff ++processor=delta\\ --color-only --staged]])
+  vim.fn["altercmd#define"]("GinDiff", [[GinDiff ++processor=delta\\ --color-only HEAD]])
 end
 
 local function init()
@@ -44,6 +44,7 @@ local spec = {
   {
     "https://github.com/atusy/tsnode-marker.nvim",
     init = init,
+    dependencies = { "https://github.com/nvim-treesitter/nvim-treesitter" },
   },
 }
 return spec

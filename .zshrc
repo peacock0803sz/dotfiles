@@ -147,13 +147,15 @@ export MANPAGER='nvim -c ASMANPAGER -'
 complete -C "$(command -v aws_completer)" aws
 
 # gcloud for Google Cloud SDK
-if [[ -e $HOMEBREW_PREFIX ]]; then
-  export GCLOUD_PREFIX="$HOMEBREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
-elif [[ -e /etc/arch-release ]]; then
-  export GCLOUD_PREFIX="/opt/google-cloud-sdk"
+if [[ -e $(command -v gcloud) ]]; then
+  if [[ -e $HOMEBREW_PREFIX ]]; then
+    export GCLOUD_PREFIX="$HOMEBREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
+  elif [[ -e /etc/arch-release ]]; then
+    export GCLOUD_PREFIX="/opt/google-cloud-sdk"
+  fi
+  source "$GCLOUD_PREFIX/path.zsh.inc"
+  source "$GCLOUD_PREFIX/completion.zsh.inc"
 fi
-source "$GCLOUD_PREFIX/path.zsh.inc"
-source "$GCLOUD_PREFIX/completion.zsh.inc"
 
 # nvm for nodejs
 export NVM_DIR="$HOME/.nvm"

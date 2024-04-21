@@ -83,6 +83,20 @@ local function config()
         single_file_support = false,
       })
     end,
+    pyright = function()
+      lspconfig.pyright.setup({
+        settings = {
+          pyright = {
+            disableOrganizeImports = true,
+          },
+          python = {
+            analysis = {
+              ignore = { "*" },
+            },
+          },
+        }
+      })
+    end
   }
   lspconfig.denols.setup({
     filetypes = { "typescript" },

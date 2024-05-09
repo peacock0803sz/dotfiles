@@ -34,7 +34,7 @@ end
 ---@type LazySpec[]
 local spec = {
   {
-    "https://github.com/lambdalisue/gin.vim",
+    "https://github.com/lambdalisue/vim-gin",
     dependencies = {
       "https://github.com/vim-denops/denops.vim",
       "https://github.com/kana/vim-altercmd",

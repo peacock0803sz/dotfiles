@@ -10,7 +10,7 @@ local spec = {
   dependencies = {
     "https://github.com/Shougo/ddu.vim",
     "https://github.com/Shougo/ddu-kind-file",
-    "https://github.com/lambdalisue/mr.vim",
+    "https://github.com/lambdalisue/vim-mr",
   },
   config = config,
 }

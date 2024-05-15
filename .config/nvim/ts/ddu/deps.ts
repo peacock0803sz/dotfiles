@@ -6,9 +6,9 @@ export {
   type ActionArguments,
   ActionFlags,
   BaseConfig,
-} from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
-export { fn } from "https://deno.land/x/ddu_vim@v3.10.3/deps.ts";
-export { type ConfigArguments } from "https://deno.land/x/ddu_vim@v3.10.3/base/config.ts";
+} from "https://deno.land/x/ddu_vim@v4.0.0/types.ts";
+export { fn } from "https://deno.land/x/ddu_vim@v4.0.0/deps.ts";
+export { type ConfigArguments } from "https://deno.land/x/ddu_vim@v4.0.0/base/config.ts";
 export { type Params as FfParams } from "https://deno.land/x/ddu_ui_ff@v1.1.0/ff.ts";
 export { type Params as FilerParams } from "https://deno.land/x/ddu_ui_filer@v1.1.0/filer.ts";
 export { type ActionData } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";

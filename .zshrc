@@ -34,6 +34,7 @@ case ${OSTYPE} in
     export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
     export FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:${HOME}/.local/share/zsh/site-functions:${FPATH}"
     # [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+    export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
     ;;
   linux*)
     if [[ -e /etc/debian_version ]]; then
@@ -133,12 +134,10 @@ export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # neovim
-export PATH="$PATH:$HOME/.local/nvim/bin"
 export XDG_CONFIG_HOME="$HOME/.config"
-export NVIM_CACHE_HOME="$HOME/.vim/bundles"
-export PATH="$PATH:$HOME/.local/nvim/bin"
 export EDITOR=nvim
 export LANG=ja_JP.UTF-8
+export PATH="$HOME/.local/bin:$HOME/dotfiles/bin:$PATH"
 
 # man
 export MANPAGER='nvim -c ASMANPAGER -'

@@ -1,1 +1,1 @@
-autocmd BufRead,BufNewFile *.tfbackend set filetype=terraform-vars
+autocmd BufRead,BufNewFile *.tfvars* set filetype=terraform-vars

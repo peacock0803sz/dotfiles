@@ -94,11 +94,12 @@ local function config()
               ignore = { "*" },
             },
           },
-        }
+        },
       })
-    end
+    end,
   }
   lspconfig.denols.setup({
+    cmd = { "/Users/peacock/.local/bin/deno", "lsp" },
     filetypes = { "typescript" },
     root_dir = lspconfig.util.root_pattern({ "deno.json", "deno.jsonc", "deps.ts" }),
     single_file_support = false,

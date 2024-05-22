@@ -1,6 +1,7 @@
 local function config()
   local config_dir = vim.fn.stdpath("config")
   local path = config_dir .. "/ts/ddu/ui/ff.ts"
+  local key_options = { nowait = true, buffer = true, silent = true, remap = false }
 
   vim.fn["ddu#custom#load_config"](path)
   local group = vim.api.nvim_create_augroup("plug-ddu-ui-ff", { clear = true })
@@ -9,7 +10,7 @@ local function config()
     pattern = "ddu-ff",
     callback = function()
       local nmap = function(lh, rh)
-        vim.keymap.set("n", lh, rh, { nowait = true, buffer = true, silent = true, remap = false })
+        vim.keymap.set("n", lh, rh, key_options)
       end
       -- nmap("<c-w>", "<nop>")
       nmap("<c-o>", "<nop>")
@@ -34,6 +35,7 @@ local function config()
       map_action("n", "+", "chooseAction")
       map_action("n", "l", "expandItem")
       map_action("n", "h", "collapseItem")
+      nmap("<Tab>", '<Cmd>call ddu#ui#do_action("toggleSelectItem")<CR>')
 
       local file_name = vim.b.ddu_ui_name
       if file_name == "git_status" then

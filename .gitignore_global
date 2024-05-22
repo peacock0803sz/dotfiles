@@ -200,4 +200,4 @@ repro.*
 **/.terraform.lock.hcl
 **/.terraform-relay.yml
 
-deno.*
+deno.json

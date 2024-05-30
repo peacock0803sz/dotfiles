@@ -106,6 +106,20 @@ local function config()
   })
   lspconfig.sourcekit.setup({})
   lspconfig.nixd.setup({})
+  -- local configs = require("lspconfig.configs")
+
+  -- if not configs.fish_lsp then
+  --   configs.fish_lsp = {
+  --     default_config = {
+  --       name = "fish_lsp",
+  --       filetypes = { "fish" },
+  --       autostart = true,
+  --       single_file_support = true,
+  --       cmd = { "fish-lsp", "start" },
+  --     },
+  --   }
+  -- end
+  -- lspconfig.fish_lsp.setup({})
 
   require("mason").setup()
   require("mason-lspconfig").setup({

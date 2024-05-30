@@ -68,6 +68,7 @@ local spec = {
     "https://github.com/Shougo/ddu-ui-ff",
     config = config,
     dependencies = "https://github.com/Shougo/ddu.vim",
+    commit = "003c2fa86145a3d4a40d5fe76166aa6fb1558794",
   },
 }
 return spec

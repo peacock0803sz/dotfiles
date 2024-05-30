@@ -222,23 +222,6 @@ hash -d github=$HOME/ghq/github.com
 hash -d work=$HOME/ghq/github.com/topgate
 hash -d personal=$HOME/ghq/github.com/peacock0803sz
 
-# source $(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh
-# export ZENO_ROOT="$(ghq root)/github.com/peacock0803sz/zeno.zsh/zeno.zsh"
-zinit ice lucid depth"1" blockf
-zinit light yuki-yano/zeno.zsh
-
-# export ZENO_ENABLE_FZF_TMUX=1
-export ZENO_ENABLE_SOCK=1
-export ZENO_FZF_TMUX_OPTIONS="-p 90%,90%"
-export ZENO_GIT_CAT="bat -p --color=always"
-export ZENO_GIT_TREE="exa --tree"
-if [[ -n $ZENO_LOADED ]]; then
-  bindkey ' '  zeno-auto-snippet
-  bindkey '^m' zeno-auto-snippet-and-accept-line
-  bindkey '^x^s' zeno-insert-snippet
-  bindkey '^i' zeno-completion
-fi
-
 function ghq-fzf() {
   local dir
 

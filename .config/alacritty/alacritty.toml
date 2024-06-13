@@ -2,13 +2,14 @@ import = ["~/.config/alacritty/catppuccin-latte.toml"]
 
 [env]
 TERM = "xterm-256color"
-NVIM_GHOST = "1"
+NVIM_APPNAME = "obsidian.nvim"
 
-# [shell]
-# program = "/bin/zsh"
-# args = ["-c", "~/.local/nvim/bin/nvim"]
+[shell]
+program = "/opt/homebrew/bin/fish"
+args = ["-c", "cd $HOME/Documents/obsidian/work/ && nvim"]
 
 [window]
+dimensions = { columns = 120, lines = 30 }
 padding = { x = 2, y = 4 }
 decorations = "buttonless"
 opacity = 0.8

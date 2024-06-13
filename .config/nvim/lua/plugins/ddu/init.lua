@@ -5,7 +5,7 @@ local function config()
 
   vim.keymap.set(
     "n",
-    "<Space>R",
+    "<C-R>",
     "<Cmd>call ddu#ui#do_action('redraw', #{ method: 'refreshItems' })<CR>"
   )
 end

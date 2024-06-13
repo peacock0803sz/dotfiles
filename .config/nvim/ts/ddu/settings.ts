@@ -28,6 +28,16 @@ async function getSettings(denops: Denops): Promise<UiParams> {
     winCol: 5,
     previewWidth: mayVSplit ? Math.floor(winWidth / 2) : winWidth,
     previewHeight: mayVSplit ? winHeight : Math.floor(winHeight / 2),
+    exprParams: [
+      "previewHeight",
+      "previewWidth",
+      "previewCol",
+      "previewRow",
+      "winHeight",
+      "winWidth",
+      "winCol",
+      "winRow",
+    ]
   } satisfies UiParams;
 }
 

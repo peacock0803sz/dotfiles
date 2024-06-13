@@ -17,7 +17,6 @@ local spec = {
   config = config,
   lazy = false,
   priority = 1000,
-  dependencies = { "https://github.com/rktjmp/lush.nvim" },
 }
 
 return spec

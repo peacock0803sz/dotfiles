@@ -12,18 +12,18 @@ switch (uname -s)
         # Homebrew
         switch (uname -m)
             case x86_64
-                set --global HOMEBREW_PREFIX /usr/local
+                set --export --global HOMEBREW_PREFIX /usr/local
             case arm64
-                set --global HOMEBREW_PREFIX /opt/homebrew
+                set --export --global HOMEBREW_PREFIX /opt/homebrew
         end
 
         eval ($HOMEBREW_PREFIX/bin/brew shellenv)
-        set --append --path PATH "$HOMEBREW_PREFIX/sbin"
+        fish_add_path "$HOMEBREW_PREFIX/sbin"
 end
 # }}}
 
-set --append --path PATH $HOME/.local/bin
-set --append --path PATH $HOME/dotfiles/bin
+fish_add_path $HOME/.local/bin
+fish_add_path $HOME/dotfiles/bin
 
 function mkcd
     mkdir -p $1 && cd $1
@@ -70,8 +70,8 @@ set --global --export EDITOR nvim
 set --global --export LANG en_US.UTF-8
 
 # VS Code
-switch $OSTYPE
-    case darwin
+switch (uname -s)
+    case Darwin
         alias code "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
 end
 
@@ -81,23 +81,23 @@ set -xg MANPAGER 'nvim -c ASMANPAGER -'
 # Language specific settings {{{
 # Java with OpenJDK
 switch (uname -s)
-    case "Darwin"
-        set --append --path PATH "$HOMEBREW_PREFIX/opt/openjdk/bin"
+    case Darwin
+        fish_add_path "$HOMEBREW_PREFIX/opt/openjdk/bin"
 end
 
 # MySQL and PostgreSQL
 switch (uname -s)
-    case "Darwin"
-        set --append --path PATH "$HOMEBREW_PREFIX/opt/mysql-client/bin/"
-        set --append --path PATH "$HOMEBREW_PREFIX/opt/libpq/bin"
+    case Darwin
+        fish_add_path "$HOMEBREW_PREFIX/opt/mysql-client/bin"
+        fish_add_path "$HOMEBREW_PREFIX/opt/libpq/bin"
 end
 
 # Go
-set --global --export GOPATH $HOME/ghq
-set --append --path PATH $GOPATH/bin
+set --append --export --global GOPATH $HOME/ghq
+fish_add_path $GOPATH/bin
 
 # Rust
-set --append --path PATH $HOME/.cargo/bin
+fish_add_path $HOME/.cargo/bin
 
 # Python
 set --global --export PIP_REQUIRE_VIRTUALENV 1

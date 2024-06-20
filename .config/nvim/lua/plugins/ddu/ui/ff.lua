@@ -36,6 +36,7 @@ local function config()
       map_action("n", "l", "expandItem")
       map_action("n", "h", "collapseItem")
       nmap("<Tab>", '<Cmd>call ddu#ui#do_action("toggleSelectItem")<CR>')
+      nmap("<C-R>", '<Cmd>call ddu#ui#do_action("redraw", { method: "refreshItems" })<CR>')
 
       local file_name = vim.b.ddu_ui_name
       if file_name == "git_status" then

@@ -2,12 +2,6 @@ local function config()
   local config_dir = vim.fn.stdpath("config")
   local path = config_dir .. "/ts/ddu/main.ts"
   vim.fn["ddu#custom#load_config"](path)
-
-  vim.keymap.set(
-    "n",
-    "<C-R>",
-    "<Cmd>call ddu#ui#do_action('redraw', #{ method: 'refreshItems' })<CR>"
-  )
 end
 
 ---@type LazySpec[]

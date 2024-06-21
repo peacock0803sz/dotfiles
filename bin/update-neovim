@@ -32,6 +32,7 @@ fi
 ARGS=("$@")
 BUILD_TYPE="${ARGS[0]:-Release}"
 
+make distclean
 echo "Installing neovim to $CMAKE_INSTALL_PREFIX with $CPU_CORES cores and $BUILD_TYPE build type"
 make -j "$CPU_CORES" CMAKE_BUILD_TYPE="$BUILD_TYPE" CMAKE_INSTALL_PREFIX="$CMAKE_INSTALL_PREFIX"
 make install

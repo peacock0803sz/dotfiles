@@ -36,6 +36,9 @@ set_profile("Presentation", {
   font_size = 24.0,
   window_background_opacity = 1.0,
 })
+set_profile("Mobile", {
+  font_size = 14.0,
+})
 set_profile("ScreenShare", {
   font_size = 16.0,
 })

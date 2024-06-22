@@ -19,8 +19,9 @@ local keymaps = {
 
   -- Profiles
   { key = "1", mods = "ALT", action = wezterm.action.EmitEvent("SwitchTo.Default") },
-  { key = "2", mods = "ALT", action = wezterm.action.EmitEvent("SwitchTo.ScreenShare") },
-  { key = "3", mods = "ALT", action = wezterm.action.EmitEvent("SwitchTo.Presentation") },
+  { key = "2", mods = "ALT", action = wezterm.action.EmitEvent("SwitchTo.Mobile") },
+  { key = "3", mods = "ALT", action = wezterm.action.EmitEvent("SwitchTo.ScreenShare") },
+  { key = "4", mods = "ALT", action = wezterm.action.EmitEvent("SwitchTo.Presentation") },
 
   -- Font & Window Sizing
   { key = "+", mods = "ALT|SHIFT", action = "IncreaseFontSize" },

@@ -76,7 +76,7 @@ switch (uname -s)
 end
 
 # man
-set -xg MANPAGER 'nvim -c ASMANPAGER -'
+set --global --export MANPAGER 'nvim -c ASMANPAGER -'
 
 # Language specific settings {{{
 # Java with OpenJDK

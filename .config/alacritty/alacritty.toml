@@ -6,7 +6,7 @@ NVIM_APPNAME = "obsidian.nvim"
 
 [shell]
 program = "/opt/homebrew/bin/fish"
-args = ["-c", "cd $HOME/Documents/obsidian/work/ && nvim"]
+args = ["-c", "cd $HOME/Documents/obsidian/ && nvim"]
 
 [window]
 dimensions = { columns = 120, lines = 30 }

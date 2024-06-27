@@ -85,6 +85,7 @@ local function config()
     end,
     pyright = function()
       lspconfig.pyright.setup({
+        single_file_support = true,
         settings = {
           pyright = {
             disableOrganizeImports = true,
@@ -102,7 +103,7 @@ local function config()
     cmd = { "/Users/peacock/.local/bin/deno", "lsp" },
     filetypes = { "typescript" },
     root_dir = lspconfig.util.root_pattern({ "deno.json", "deno.jsonc", "deps.ts" }),
-    single_file_support = false,
+    single_file_support = true,
   })
   lspconfig.sourcekit.setup({})
   lspconfig.nixd.setup({})

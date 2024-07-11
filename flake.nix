@@ -2,11 +2,13 @@
   description = "Peacock's Nix Configuration";
 
   inputs = {
+    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.inputs.system.follows = "systems";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = { nixpkgs, neovim-nightly-overlay, ... }:
+  outputs = { nixpkgs, neovim-nightly-overlay, flake-utils, ... }:
     let
       system = "aarch64-darwin";
       pkgs = import nixpkgs {
@@ -56,11 +58,11 @@
         terraform-ls
       ];
     in
-    {
-      formatter.${system} = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
-      packages.${system}.default = pkgs.buildEnv {
+    flake-utils.lib.eachDefaultSystem (system: {
+      formatter = pkgs.nixpkgs-fmt;
+      packages.default = pkgs.buildEnv {
         name = "default-packages";
         paths = [ neovim-nightly-overlay.packages.${system}.default ] ++ packages;
       };
-    };
+    });
 }

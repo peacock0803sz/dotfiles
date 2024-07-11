@@ -60,7 +60,7 @@
       formatter.${system} = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
       packages.${system}.default = pkgs.buildEnv {
         name = "default-packages";
-        paths = packages;
+        paths = [ neovim-nightly-overlay.packages.${system}.default ] ++ packages;
       };
     };
 }

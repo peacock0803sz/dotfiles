@@ -8,8 +8,9 @@
 
   outputs = { nixpkgs, neovim-nightly-overlay, ... }:
     let
+      system = "aarch64-darwin";
       pkgs = import nixpkgs {
-        system = "aarch64-darwin";
+        inherit system;
         config.allowUnfree = true;
         overlays = [ neovim-nightly-overlay.overlays.default ];
       };
@@ -56,8 +57,8 @@
       ];
     in
     {
-      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
-      packages.aarch64-darwin.default = pkgs.buildEnv {
+      formatter.${system} = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
+      packages.${system}.default = pkgs.buildEnv {
         name = "default-packages";
         paths = packages;
       };

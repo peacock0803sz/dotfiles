@@ -40,65 +40,50 @@ local function config()
 
   local rtp = vim.api.nvim_get_runtime_file("", true)
   local lspconfig = require("lspconfig")
-  ---@type { [1]: fun(name: string), [string]: fun() }
-  local mason_handlers = {
-    function(name)
-      lspconfig[name].setup({ capabilities = require("cmp_nvim_lsp").default_capabilities() })
-    end,
-    bashls = function()
-      lspconfig.bashls.setup({
-        filetypes = { "sh", "bash", "zsh" },
-      })
-    end,
-    lua_ls = function()
-      table.insert(rtp, "${3rd}/luv/library")
-      table.insert(rtp, "${3rd}/luassert/library")
 
-      lspconfig.lua_ls.setup({
-        -- capabilities = capabilities,
-        settings = {
-          Lua = {
-            hint = { enable = true },
-            format = { enable = true },
-            runtime = {
-              version = "LuaJIT",
-              checkThirdParty = true,
-            },
-            diagnostics = {
-              globals = { "vim", "wezterm" },
-            },
-            workspace = {
-              library = rtp,
-            },
-            telemetry = {
-              enable = false,
-            },
-          },
+  lspconfig.tsserver.setup({
+    root_dir = lspconfig.util.root_pattern({ "package.json", "node_modules" }),
+    single_file_support = false,
+  })
+  lspconfig.pyright.setup({
+    single_file_support = true,
+    settings = {
+      pyright = {
+        disableOrganizeImports = true,
+      },
+      python = {
+        analysis = {
+          ignore = { "*" },
         },
-      })
-    end,
-    tsserver = function()
-      lspconfig.tsserver.setup({
-        root_dir = lspconfig.util.root_pattern({ "package.json", "node_modules" }),
-        single_file_support = false,
-      })
-    end,
-    pyright = function()
-      lspconfig.pyright.setup({
-        single_file_support = true,
-        settings = {
-          pyright = {
-            disableOrganizeImports = true,
-          },
-          python = {
-            analysis = {
-              ignore = { "*" },
-            },
-          },
+      },
+    },
+  })
+  table.insert(rtp, "${3rd}/luv/library")
+  table.insert(rtp, "${3rd}/luassert/library")
+
+  lspconfig.lua_ls.setup({
+    cmd = { "lua-lsp" },
+    capabilities = capabilities,
+    settings = {
+      Lua = {
+        hint = { enable = true },
+        format = { enable = true },
+        runtime = {
+          version = "LuaJIT",
+          checkThirdParty = true,
         },
-      })
-    end,
-  }
+        diagnostics = {
+          globals = { "vim", "wezterm" },
+        },
+        workspace = {
+          library = rtp,
+        },
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
+  })
   lspconfig.denols.setup({
     cmd = { "/Users/peacock/.local/bin/deno", "lsp" },
     filetypes = { "typescript" },
@@ -106,7 +91,10 @@ local function config()
     single_file_support = true,
   })
   lspconfig.sourcekit.setup({})
-  lspconfig.nixd.setup({})
+  lspconfig.nixd.setup({
+    root_dir = lspconfig.util.root_pattern({ "flake.nix" }),
+    single_file_support = true,
+  })
   -- local configs = require("lspconfig.configs")
 
   -- if not configs.fish_lsp then
@@ -121,22 +109,12 @@ local function config()
   --   }
   -- end
   -- lspconfig.fish_lsp.setup({})
-
-  require("mason").setup()
-  require("mason-lspconfig").setup({
-    handlers = mason_handlers,
-  })
   setup_keymaps()
 end
 
 ---@type LazySpec
 local spec = {
-  "https://github.com/williamboman/mason-lspconfig.nvim",
+  "https://github.com/neovim/nvim-lspconfig",
   config = config,
-  dependencies = {
-    "https://github.com/williamboman/mason.nvim",
-    "https://github.com/neovim/nvim-lspconfig",
-    -- "https://github.com/folke/neodev.nvim"
-  },
 }
 return spec

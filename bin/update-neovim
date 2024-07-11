@@ -23,7 +23,8 @@ else
   CPU_CORES=$(nproc)
 fi
 
-CMAKE_INSTALL_PREFIX="$HOME/.local/nvim/revisions/$GIT_SHA"
+TIMESTAMP="$(date +%Y%m%d-%H%M%S)"
+CMAKE_INSTALL_PREFIX="$HOME/.local/nvim/revisions/${TIMESTAMP}_${GIT_SHA}"
 if [ ! -d "$CMAKE_INSTALL_PREFIX" ]; then
   echo "Creating install directory to $CMAKE_INSTALL_PREFIX"
   mkdir -p "$CMAKE_INSTALL_PREFIX"

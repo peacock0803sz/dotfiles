@@ -5,3 +5,7 @@
 .config/*nvim/lazy-lock.json
 .luarc.json
 deno.lock
+
+# nix
+result
+flake.lock

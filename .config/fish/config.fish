@@ -79,18 +79,6 @@ end
 set --global --export MANPAGER 'nvim -c ASMANPAGER -'
 
 # Language specific settings {{{
-# Java with OpenJDK
-switch (uname -s)
-    case Darwin
-        fish_add_path "$HOMEBREW_PREFIX/opt/openjdk/bin"
-end
-
-# MySQL and PostgreSQL
-switch (uname -s)
-    case Darwin
-        fish_add_path "$HOMEBREW_PREFIX/opt/mysql-client/bin"
-        fish_add_path "$HOMEBREW_PREFIX/opt/libpq/bin"
-end
 
 # Go
 set --append --export --global GOPATH $HOME/ghq
@@ -108,3 +96,8 @@ set --global --export PIP_REQUIRE_VIRTUALENV 1
 abbr --add yq gojq # yq to gojq
 abbr --add tf terraform
 # }}}
+
+# Nix
+if test -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish"
+    . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish"
+end

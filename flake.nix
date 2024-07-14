@@ -56,6 +56,7 @@
         ruff-lsp
         stylua
         terraform-ls
+        yaml-language-server
       ];
     in
     flake-utils.lib.eachDefaultSystem (system: {

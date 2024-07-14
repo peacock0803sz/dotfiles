@@ -85,7 +85,6 @@ local function config()
     },
   })
   lspconfig.denols.setup({
-    cmd = { "/Users/peacock/.local/bin/deno", "lsp" },
     filetypes = { "typescript" },
     root_dir = lspconfig.util.root_pattern({ "deno.json", "deno.jsonc", "deps.ts" }),
     single_file_support = true,
@@ -93,6 +92,9 @@ local function config()
   lspconfig.sourcekit.setup({})
   lspconfig.nixd.setup({
     root_dir = lspconfig.util.root_pattern({ "flake.nix" }),
+    single_file_support = true,
+  })
+  lspconfig.yamlls.setup({
     single_file_support = true,
   })
   -- local configs = require("lspconfig.configs")

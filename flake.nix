@@ -18,6 +18,7 @@
       };
       packages = with pkgs; [
         direnv
+        nix-direnv
         eza
         fd
         ffmpeg

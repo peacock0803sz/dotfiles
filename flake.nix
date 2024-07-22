@@ -17,6 +17,7 @@
         overlays = [ neovim-nightly-overlay.overlays.default ];
       };
       packages = with pkgs; [
+        _1password
         direnv
         nix-direnv
         eza
@@ -36,7 +37,6 @@
         cargo
         deno
         go
-        nodejs_20
         python3
         rustc
         terraform

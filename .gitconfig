@@ -1,6 +1,8 @@
 [core]
 	excludesFile = ~/dotfiles/.gitignore.global
-[includeIf "gitdir:~/ghq/github.com/peacock0803sb/"]
+
+[includeIf "gitdir:~/ghq/github.com/peacock0803sz"]
+[core]
   excludesFile = ~/dotfiles/.gitignore.personal
 
 [user]

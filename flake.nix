@@ -37,6 +37,7 @@
         cargo
         deno
         go
+        nodejs_20
         python3
         rustc
         terraform

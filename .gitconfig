@@ -1,5 +1,8 @@
 [core]
-	excludesFile = ~/dotfiles/.gitignore_global
+	excludesFile = ~/dotfiles/.gitignore.global
+[includeIf "gitdir:~/ghq/github.com/peacock0803sb/"]
+  excludesFile = ~/dotfiles/.gitignore.personal
+
 [user]
 	name = Peacock
 	email = me@p3ac0ck.net

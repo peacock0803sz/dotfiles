@@ -28,6 +28,7 @@
           gojq
           gh
           ghq
+          helix
           jq
           openjdk
           imagemagick

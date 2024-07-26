@@ -41,23 +41,6 @@ local function config()
   local rtp = vim.api.nvim_get_runtime_file("", true)
   local lspconfig = require("lspconfig")
 
-  lspconfig.tsserver.setup({
-    root_dir = lspconfig.util.root_pattern({ "package.json", "node_modules" }),
-    single_file_support = false,
-  })
-  lspconfig.pyright.setup({
-    single_file_support = true,
-    settings = {
-      pyright = {
-        disableOrganizeImports = true,
-      },
-      python = {
-        analysis = {
-          ignore = { "*" },
-        },
-      },
-    },
-  })
   table.insert(rtp, "${3rd}/luv/library")
   table.insert(rtp, "${3rd}/luassert/library")
 
@@ -84,14 +67,60 @@ local function config()
       },
     },
   })
+  lspconfig.cssls.setup({})
   lspconfig.denols.setup({
     filetypes = { "typescript" },
     root_dir = lspconfig.util.root_pattern({ "deno.json", "deno.jsonc", "deps.ts" }),
     single_file_support = true,
   })
-  lspconfig.sourcekit.setup({})
+  lspconfig.dockerls.setup({})
+  lspconfig.html.setup({})
   lspconfig.nixd.setup({
     root_dir = lspconfig.util.root_pattern({ "flake.nix" }),
+    single_file_support = true,
+  })
+  lspconfig.pyright.setup({
+    single_file_support = true,
+    settings = {
+      pyright = {
+        disableOrganizeImports = true,
+      },
+      python = {
+        analysis = {
+          ignore = { "*" },
+        },
+      },
+    },
+  })
+  lspconfig.sourcekit.setup({})
+  lspconfig.tailwindcss.setup({})
+  lspconfig.taplo.setup({
+    single_file_support = true,
+  })
+  lspconfig.tsserver.setup({
+    filetypes = {
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "vue",
+    },
+    root_dir = lspconfig.util.root_pattern({ "package.json", "node_modules" }),
+    init_options = {
+      typescript = {
+        tsdk = "",
+      },
+      --   plugins = {
+      --     {
+      --       name = "@vue/typescript-plugin",
+      --       languages = { "javascript", "typescript", "vue" },
+      --     },
+      --   },
+    },
+    single_file_support = false,
+  })
+  lspconfig.volar.setup({
+    root_dir = lspconfig.util.root_pattern({ "package.json" }),
     single_file_support = true,
   })
   lspconfig.yamlls.setup({

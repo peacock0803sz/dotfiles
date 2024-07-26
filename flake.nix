@@ -32,9 +32,11 @@
           jq
           openjdk
           imagemagick
+          nodePackages.prettier
           ripgrep
 
           # Language Runtime
+          bun
           cargo
           deno
           go
@@ -42,6 +44,7 @@
           python3
           rustc
           terraform
+          typescript
 
           # Database
           postgresql
@@ -54,11 +57,19 @@
 
           # LSP/Formatter
           luajitPackages.lua-lsp
+          dockerfile-language-server-nodejs
           nixd
+          nodePackages.vls
           pyright
           ruff-lsp
           stylua
+          taplo
+          tailwindcss-language-server
           terraform-ls
+          typescript-language-server
+          vim-language-server
+          vscode-langservers-extracted
+          vue-language-server
           yaml-language-server
         ];
       in

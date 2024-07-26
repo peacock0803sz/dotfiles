@@ -107,21 +107,27 @@ local function config()
     },
     root_dir = lspconfig.util.root_pattern({ "package.json", "node_modules" }),
     init_options = {
-      typescript = {
-        tsdk = "",
-      },
-      --   plugins = {
-      --     {
-      --       name = "@vue/typescript-plugin",
-      --       languages = { "javascript", "typescript", "vue" },
-      --     },
-      --   },
+        plugins = {
+          {
+            name = "@vue/typescript-plugin",
+            location = vim.env.HOME .. "/.nix-profile/lib/node_modules/@vue/language-server",
+            languages = { "javascript", "typescript", "vue" },
+          },
+        },
     },
     single_file_support = false,
   })
   lspconfig.volar.setup({
     root_dir = lspconfig.util.root_pattern({ "package.json" }),
     single_file_support = true,
+    init_options = {
+      typescript = {
+        tsdk = vim.env.HOME .. "/.nix-profile/lib/node_modules/typescript/lib",
+      },
+      vue = {
+        hybridMode = false,
+      },
+    },
   })
   lspconfig.yamlls.setup({
     single_file_support = true,

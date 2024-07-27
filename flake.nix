@@ -56,7 +56,7 @@
           google-cloud-sdk
 
           # LSP/Formatter
-          luajitPackages.lua-lsp
+          lua-language-server
           dockerfile-language-server-nodejs
           nixd
           nodePackages.vls

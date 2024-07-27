@@ -45,8 +45,6 @@ local function config()
   table.insert(rtp, "${3rd}/luassert/library")
 
   lspconfig.lua_ls.setup({
-    cmd = { "lua-lsp" },
-    capabilities = capabilities,
     settings = {
       Lua = {
         hint = { enable = true },

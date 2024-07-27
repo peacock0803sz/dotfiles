@@ -95,6 +95,7 @@ set --global --export PIP_REQUIRE_VIRTUALENV 1
 # Aliases / Abbreviations {{{
 abbr --add yq gojq # yq to gojq
 abbr --add tf terraform
+abbr --add zenn "bunx zenn-cli@latest"
 # }}}
 
 # Nix

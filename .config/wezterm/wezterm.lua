@@ -6,7 +6,7 @@ local config = {
   -- Window
   initial_cols = 180,
   initial_rows = 60,
-  window_background_opacity = 0.9,
+  window_background_opacity = 0.8,
   macos_window_background_blur = 10,
   -- enable_csi_u_key_encoding = true,
   window_decorations = "NONE | RESIZE",
@@ -34,13 +34,15 @@ wezterm.on("SwitchTo.Default", function(window)
 end)
 set_profile("Presentation", {
   font_size = 24.0,
-  window_background_opacity = 1.0,
+  window_background_opacity = 0.8,
 })
 set_profile("Mobile", {
   font_size = 14.0,
+  window_background_opacity = 0.8,
 })
 set_profile("ScreenShare", {
   font_size = 16.0,
+  window_background_opacity = 0.8,
 })
 
 return config

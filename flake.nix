@@ -59,7 +59,6 @@
           lua-language-server
           dockerfile-language-server-nodejs
           nixd
-          nodePackages.vls
           pyright
           ruff-lsp
           stylua

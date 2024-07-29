@@ -1,0 +1,7 @@
+["local function"]
+prefix = "lf"
+body = """
+local function $1($2)
+  $0
+end\
+"""

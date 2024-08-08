@@ -1,10 +1,6 @@
 [core]
 	excludesFile = ~/dotfiles/.gitignore.global
 
-[includeIf "gitdir:~/ghq/github.com/peacock0803sz"]
-[core]
-  excludesFile = ~/dotfiles/.gitignore.personal
-
 [user]
 	name = Peacock
 	email = me@p3ac0ck.net
@@ -33,3 +29,7 @@
 [delta]
 	light = true
   syntax-theme = "Catppuccin-latte"
+
+# [includeIf "gitdir:~/ghq/github.com/peacock0803sz"]
+# [core]
+#   excludesFile = ~/dotfiles/.gitignore.personal

@@ -200,5 +200,8 @@ repro.*
 **/.terraform.lock.hcl
 **/.terraform-relay.yml
 
-flake.*
-.*nix
+.direnv/
+default.nix
+shell.nix
+*.nix
+result

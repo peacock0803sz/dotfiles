@@ -1,1 +1,1 @@
-.config/nvim/lua/plugins/dial.lua
+/Users/peacock/.config/nvim/lua/plugins/dial.lua

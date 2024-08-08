@@ -13,7 +13,7 @@ local function config()
   })
 
   vim.keymap.set("n", "<Space>ff", "<Cmd>ObsidianQuickSwitch<CR>", {})
-  vim.keymap.set("n", "<Space>fg", "<Cmd>ObsidiianSearch<CR>", {})
+  vim.keymap.set("n", "<Space>fg", "<Cmd>ObsidianSearch<CR>", {})
 end
 
 ---@type LazySpec

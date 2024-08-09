@@ -11,5 +11,5 @@ export { fn } from "https://deno.land/x/ddu_vim@v5.0.0/deps.ts";
 export { type ConfigArguments } from "https://deno.land/x/ddu_vim@v5.0.0/base/config.ts";
 export { type Params as FfParams } from "https://deno.land/x/ddu_ui_ff@v1.2.0/ff.ts";
 export { type Params as FilerParams } from "https://deno.land/x/ddu_ui_filer@v1.2.0/filer.ts";
-export { type ActionData } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
+export { type ActionData } from "https://deno.land/x/ddu_kind_file@v0.8.0/file.ts";
 export * as u from "https://deno.land/x/unknownutil@v3.18.1/mod.ts";

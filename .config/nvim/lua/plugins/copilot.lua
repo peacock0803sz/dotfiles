@@ -29,7 +29,7 @@ local function config()
       },
     },
     filetypes = {
-      markdown = true,
+      markdown = false,
       gitcommit = true,
       gitrebase = false,
       hgcommit = true,

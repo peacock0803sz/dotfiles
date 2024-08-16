@@ -203,5 +203,4 @@ repro.*
 .direnv/
 default.nix
 shell.nix
-*.nix
 result

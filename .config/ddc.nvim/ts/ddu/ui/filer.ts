@@ -16,7 +16,9 @@ export class Config extends BaseConfig {
       },
       sourceOptions: {
         file: {
-          converters: ["converter_hl_dir"],
+          converters: ["converter_hl_dir", "converter_devicon"],
+          matchers: ["matcher_fzf"],
+          sorters: ["sorter_fzf"],
           columns: ["icon_filename"],
         },
       },

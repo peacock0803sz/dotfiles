@@ -90,6 +90,7 @@ local function config()
       },
     },
   })
+  lspconfig.ruff_lsp.setup({})
   lspconfig.sourcekit.setup({})
   lspconfig.tailwindcss.setup({})
   lspconfig.taplo.setup({

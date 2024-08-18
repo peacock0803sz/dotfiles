@@ -5,8 +5,20 @@ set -U fish_greeting
 # OS specific settings {{{
 switch (uname -s)
     case Darwin
+        set --export --global HOMEBREW_NO_AUTO_UPDATE 1
         alias tailscale "/Applications/Tailscale.app/Contents/MacOS/Tailscale"
         alias rosetta "arch -x86_64 $(which fish)"
+
+        # Homebrew
+        switch (uname -m)
+            case x86_64
+                set --export --global HOMEBREW_PREFIX /usr/local
+            case arm64
+                set --export --global HOMEBREW_PREFIX /opt/homebrew
+        end
+
+        eval ($HOMEBREW_PREFIX/bin/brew shellenv)
+        fish_add_path "$HOMEBREW_PREFIX/sbin"
 end
 # }}}
 

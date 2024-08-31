@@ -72,6 +72,7 @@ local function config()
     single_file_support = true,
   })
   lspconfig.dockerls.setup({})
+  lspconfig.gopls.setup({})
   lspconfig.html.setup({})
   lspconfig.nixd.setup({
     root_dir = lspconfig.util.root_pattern({ "flake.nix" }),

@@ -37,7 +37,7 @@ async function getSettings(denops: Denops): Promise<UiParams> {
       "winWidth",
       "winCol",
       "winRow",
-    ]
+    ],
   } satisfies UiParams;
 }
 

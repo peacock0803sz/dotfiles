@@ -35,7 +35,7 @@ export class Config extends BaseConfig {
             "--color",
             "never",
             "--hidden",
-            "--glob=!.git"
+            "--glob=!.git",
           ],
         },
         file_external: {

@@ -36,7 +36,7 @@ local function setup_keymaps()
 end
 
 local function config()
-  -- require("neodev").setup({})
+  require("ddc_source_lsp_setup").setup()
 
   local rtp = vim.api.nvim_get_runtime_file("", true)
   local lspconfig = require("lspconfig")
@@ -105,13 +105,13 @@ local function config()
     },
     root_dir = lspconfig.util.root_pattern({ "package.json", "node_modules" }),
     init_options = {
-        plugins = {
-          {
-            name = "@vue/typescript-plugin",
-            location = vim.env.HOME .. "/.nix-profile/lib/node_modules/@vue/language-server",
-            languages = { "javascript", "typescript", "vue" },
-          },
+      plugins = {
+        {
+          name = "@vue/typescript-plugin",
+          location = vim.env.HOME .. "/.nix-profile/lib/node_modules/@vue/language-server",
+          languages = { "javascript", "typescript", "vue" },
         },
+      },
     },
     single_file_support = false,
   })
@@ -137,5 +137,6 @@ end
 local spec = {
   "https://github.com/neovim/nvim-lspconfig",
   config = config,
+  dependencies = { "https://github.com/uga-rosa/ddc-source-lsp-setup" },
 }
 return spec

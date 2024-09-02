@@ -72,6 +72,7 @@
           google-cloud-sdk
 
           # LSP/Formatter
+          astro-language-server
           lua-language-server
           bash-language-server
           dockerfile-language-server-nodejs

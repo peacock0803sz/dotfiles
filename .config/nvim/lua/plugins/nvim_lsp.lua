@@ -65,6 +65,7 @@ local function config()
       },
     },
   })
+  lspconfig.astro.setup({})
   lspconfig.cssls.setup({})
   lspconfig.denols.setup({
     filetypes = { "typescript" },

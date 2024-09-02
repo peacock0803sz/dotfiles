@@ -31,7 +31,7 @@
           direnv
           nix-direnv
           eza
-          # delta
+          delta
           fd
           ffmpeg
           fish
@@ -68,7 +68,7 @@
 
           # Public Cloud
           act
-          # awscli2
+          awscli2
           google-cloud-sdk
 
           # LSP/Formatter

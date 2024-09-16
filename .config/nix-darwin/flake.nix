@@ -99,12 +99,12 @@
   in
   {
     # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#nocturne
-    darwinConfigurations."nocturne" = nix-darwin.lib.darwinSystem {
+    # $ darwin-rebuild build --flake .#toccata
+    darwinConfigurations."toccata" = nix-darwin.lib.darwinSystem {
       modules = [ configuration ];
     };
 
     # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."nocturne".pkgs;
+    darwinPackages = self.darwinConfigurations."toccata".pkgs;
   };
 }

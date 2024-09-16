@@ -1,72 +1,73 @@
-{pkgs, ...}: {
-    home.packages = with pkgs; [
-          # GUI Apps
-          # wezterm
-          # alacritty
-          # raycast
+{ pkgs, ... }: {
+  home.packages = with pkgs; [
+    # GUI Apps
+    # wezterm
+    # alacritty
+    # raycast
+    neovim
 
-          _1password
-          direnv
-          nix-direnv
-          eza
-          delta
-          fd
-          ffmpeg
-          fish
-          fzf
-          gibo
-          gojq
-          gh
-          ghq
-          helix
-          jq
-          openjdk
-          imagemagick
-          nodePackages.prettier
-          ripgrep
-          tmux
-          wget
+    _1password
+    direnv
+    nix-direnv
+    eza
+    delta
+    fd
+    ffmpeg
+    fish
+    fzf
+    gibo
+    gojq
+    gh
+    ghq
+    helix
+    jq
+    openjdk
+    imagemagick
+    nodePackages.prettier
+    ripgrep
+    tmux
+    wget
 
-          # Language Runtime
-          bun
-          cargo
-          deno
-          go
-          nodejs_20
-          python3
-          uv
-          rustc
-          terraform
-          typescript
+    # Language Runtime
+    bun
+    cargo
+    deno
+    go
+    nodejs_20
+    python3
+    uv
+    rustc
+    terraform
+    typescript
 
-          # Database
-          postgresql
-          mysql84
-          sqlite
+    # Database
+    postgresql
+    mysql84
+    sqlite
 
-          # Public Cloud
-          act
-          awscli2
-          google-cloud-sdk
+    # Public Cloud
+    act
+    awscli2
+    google-cloud-sdk
 
-          # LSP/Formatter
-          astro-language-server
-          lua-language-server
-          bash-language-server
-          dockerfile-language-server-nodejs
-          gopls
-          nixd
-          pyright
-          ruff-lsp
-          stylua
-          taplo
-          tailwindcss-language-server
-          terraform-ls
-          typescript-language-server
-          vim-language-server
-          vscode-langservers-extracted
-          vue-language-server
-          yaml-language-server
-        ];
+    # LSP/Formatter
+    astro-language-server
+    lua-language-server
+    bash-language-server
+    dockerfile-language-server-nodejs
+    gopls
+    nixd
+    nixpkgs-fmt
+    pyright
+    ruff-lsp
+    stylua
+    taplo
+    tailwindcss-language-server
+    terraform-ls
+    typescript-language-server
+    vim-language-server
+    vscode-langservers-extracted
+    vue-language-server
+    yaml-language-server
+  ];
 }
-

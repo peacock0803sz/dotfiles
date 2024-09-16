@@ -9,4 +9,3 @@ deno.lock
 # nix
 result
 !flake.nix
-flake.lock

@@ -204,6 +204,26 @@
         "type": "github"
       }
     },
+    "nix-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1726188813,
+        "narHash": "sha256-Vop/VRi6uCiScg/Ic+YlwsdIrLabWUJc57dNczp0eBc=",
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "rev": "21fe31f26473c180390cfa81e3ea81aca0204c80",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1726206720,
@@ -240,6 +260,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
+        "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs_2"
       }
     }

@@ -18,10 +18,10 @@
     # };
   };
 
-  outputs = { nixpkgs, neovim-nightly-overlay, nix-darwin, home-manager, ... }: {
+  outputs = { self, nixpkgs, neovim-nightly-overlay, nix-darwin, home-manager, ... }: {
     darwinConfigurations = (
       import ./.config/nix/hosts/darwin/dafault.nix {
-        inherit nixpkgs nix-darwin home-manager neovim-nightly-overlay;
+        inherit self nixpkgs nix-darwin home-manager neovim-nightly-overlay;
       }
     );
   };

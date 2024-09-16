@@ -8,6 +8,7 @@ local function config()
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.fish_indent,
     null_ls.builtins.diagnostics.fish,
+    null_ls.builtins.formatting.nixpkgs_fmt,
   }
   null_ls.setup({
     -- debug = true,

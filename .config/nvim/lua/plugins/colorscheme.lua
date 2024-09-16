@@ -5,6 +5,9 @@ local function config()
       light = "latte",
       dark = "mocha",
     },
+    styles = {
+      comments = {},
+    },
     transparent_background = true,
   })
   vim.cmd.colorscheme("catppuccin")

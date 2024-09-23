@@ -20,7 +20,7 @@
 
   outputs = { self, nixpkgs, neovim-nightly-overlay, nix-darwin, home-manager, ... }: {
     darwinConfigurations = (
-      import ./.config/nix/hosts/darwin/dafault.nix {
+      import ./.config/nix/hosts/darwin/default.nix {
         inherit self nixpkgs nix-darwin home-manager neovim-nightly-overlay;
       }
     );

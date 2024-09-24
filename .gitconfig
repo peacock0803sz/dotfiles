@@ -22,10 +22,10 @@
 	template = /Users/peacock/dotfiles/.commit_template
 [credential "https://github.com"]
 	helper = 
-	helper = !~/.nix-profile/bin/gh auth git-credential
+	helper = !/etc/profiles/per-user/peacock/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !~/.nix-profile/bin/gh auth git-credential
+	helper = !/etc/profiles/per-user/peacock/bin/gh auth git-credential
 [delta]
 	light = true
   syntax-theme = "Catppuccin-latte"

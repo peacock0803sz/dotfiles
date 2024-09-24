@@ -201,6 +201,5 @@ repro.*
 **/.terraform-relay.yml
 
 .direnv/
-default.nix
 shell.nix
 result

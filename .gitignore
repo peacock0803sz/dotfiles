@@ -8,4 +8,4 @@ deno.lock
 
 # nix
 result
-!flake.nix
+.config/direnv

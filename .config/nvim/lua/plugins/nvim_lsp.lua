@@ -75,7 +75,7 @@ local function config()
   lspconfig.dockerls.setup({})
   lspconfig.gopls.setup({})
   lspconfig.html.setup({})
-  lspconfig.nixd.setup({
+  lspconfig.nil_ls.setup({
     root_dir = lspconfig.util.root_pattern({ "flake.nix" }),
     single_file_support = true,
   })

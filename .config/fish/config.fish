@@ -36,32 +36,32 @@ end
 bind \cg fzf-ghq
 
 ### tide prompts {{{
-set --global tide_character_icon '$'
-set --global tide_character_color green
+set --universal tide_character_icon '$'
+set --universal tide_character_color green
 
-set --global tide_status_color green
-set --global tide_status_color_failure red
+set --universal tide_status_color green
+set --universal tide_status_color_failure red
 
-set --global tide_pwd_color_anchors blue
-set --global tide_pwd_color_dirs blue
-set --global tide_pwd_color_truncated_dirs blue
+set --universal tide_pwd_color_anchors blue
+set --universal tide_pwd_color_dirs blue
+set --universal tide_pwd_color_truncated_dirs blue
 
-set --global tide_git_color_branch green
-set --global tide_git_color_conflicted red
-set --global tide_git_color_operation red
-set --global tide_git_color_stash green
-set --global tide_git_color_dirty yellow
-set --global tide_git_color_staged yellow
-set --global tide_git_color_untracked blue
-set --global tide_git_color_modified yellow
+set --universal tide_git_color_branch green
+set --universal tide_git_color_conflicted red
+set --universal tide_git_color_operation red
+set --universal tide_git_color_stash green
+set --universal tide_git_color_dirty yellow
+set --universal tide_git_color_staged yellow
+set --universal tide_git_color_untracked blue
+set --universal tide_git_color_modified yellow
 
-set --global tide_kubectl_color blue
-set --global tide_docker_color blue
-set --global tide_node_color green
-set --global tide_ruby_color red
-set --global tide_rust_color yellow
-set --global tide_python_color blue
-set --global tide_terraform_color blue
+set --universal tide_kubectl_color blue
+set --universal tide_docker_color blue
+set --universal tide_node_color green
+set --universal tide_ruby_color red
+set --universal tide_rust_color yellow
+set --universal tide_python_color blue
+set --universal tide_terraform_color blue
 #  }}}
 
 # neovim
@@ -97,12 +97,3 @@ abbr --add yq gojq # yq to gojq
 abbr --add tf terraform
 abbr --add zenn "bunx zenn-cli@latest"
 # }}}
-
-# Nix
-if test -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish"
-    . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish"
-end
-
-# direnv {{{
-direnv hook fish | source
-#   }}}

@@ -18,32 +18,15 @@
     # };
   };
 
-  outputs = { self, nixpkgs, neovim-nightly-overlay, nix-darwin, home-manager, ... }: {
-    darwinConfigurations = (
-      import ./.config/nix/hosts/darwin/default.nix {
-        inherit self nixpkgs nix-darwin home-manager neovim-nightly-overlay;
-      }
-    );
-  };
-  # outputs = { nixpkgs, vim-src, neovim-nightly-overlay, flake-utils, ... }:
-  # outputs = { nixpkgs, neovim-nightly-overlay, home-manager, ... }:
-  #   let
-  #     defaltPkgs = { system }:
-  #       import nixpkgs {
-  #         system = system;
-  #         config.allowUnfree = true;
-  #         overlays = [ neovim-nightly-overlay.overlays.default ];
-  #       };
-  #   in
-  #   {
-  #     homeConfigurations = {
-  #       # macOS (for private/work)
-  #       darwin = home-manager.lib.homeManagerConfiguration {
-  #         modules = [ ./.config/nix/hosts/darwin.nix ];
-  #         pkgs = defaltPkgs {
-  #           system = "aarch64-darwin";
-  #         };
-  #       };
-  #     };
-  #   };
+  outputs = { self, nixpkgs, neovim-nightly-overlay, nix-darwin, home-manager, ... }:
+    let
+      username = "peacock";
+    in
+    {
+      darwinConfigurations = (
+        import ./.config/nix/hosts/darwin.nix {
+          inherit self username nixpkgs nix-darwin home-manager neovim-nightly-overlay;
+        }
+      );
+    };
 }

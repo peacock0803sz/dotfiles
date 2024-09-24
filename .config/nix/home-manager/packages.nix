@@ -13,6 +13,7 @@ with pkgs; [
   fd
   ffmpeg
   fish
+  fishPlugins.tide
   fzf
   gibo
   gojq
@@ -56,7 +57,7 @@ with pkgs; [
   bash-language-server
   dockerfile-language-server-nodejs
   gopls
-  nixd
+  nil
   nixpkgs-fmt
   pyright
   ruff-lsp

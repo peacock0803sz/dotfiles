@@ -1,7 +1,15 @@
-{ self, pkgs, system, username, ... }: {
+{ self, system, username, pkgs, ... }: {
   services.nix-daemon.enable = true;
   nix.settings.experimental-features = "nix-command flakes";
-  users.users.${username}.home = "/Users/${username}";
+  nixpkgs.hostPlatform = system;
+  users.users.${username} = {
+    home = "/Users/${username}";
+    shell = pkgs.fish;
+  };
+  environment = {
+    shells = [ pkgs.fish ];
+  };
+  programs.fish.enable = true;
 
   homebrew = {
     enable = true;
@@ -18,9 +26,11 @@
     stateVersion = 5;
 
     activationScripts.extraActivation.text = ''
-      chsh -s ${pkgs.fish}/bin/fish
-      softwareupdate --all --install
+      chsh -s /run/current-system/sw/bin/fish
     '';
+    # + nixpkgs.lib.optionalString (
+    #  nixpkgs.stdenv.isAarch64 ''softwareupdate --install-rosetta --agree-to-license''
+    # );
 
     defaults = {
       SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
@@ -50,6 +60,4 @@
     '';
     pam.enableSudoTouchIdAuth = true;
   };
-  nixpkgs.hostPlatform = system;
-
 }

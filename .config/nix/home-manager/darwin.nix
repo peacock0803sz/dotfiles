@@ -1,6 +1,6 @@
-{ pkgs, ... }: {
+{ pkgs, specialArgs }: {
   home.stateVersion = "24.05";
-  home.packages = import ./packages.nix { inherit pkgs; };
+  home.packages = import ./packages.nix { inherit pkgs specialArgs; };
   programs = {
     fish = {
       enable = true;

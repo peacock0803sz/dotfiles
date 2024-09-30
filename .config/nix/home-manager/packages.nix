@@ -1,9 +1,27 @@
-{ pkgs, ... }:
+{ pkgs, specialArgs }:
+let
+  vim = pkgs.vim.overrideAttrs
+    (old: {
+      version = "latest";
+      src = specialArgs.vim-src;
+      buildInputs = old.buildInputs ++ (with pkgs; [ gettext lua libiconv ]);
+      configureFlags = old.configureFlags ++
+        [
+          "--enable-terminal"
+          "--with-compiledby=Peaocck (Yoichi Takai)"
+          "--enable-luainterp"
+          "--with-lua-prefix=${pkgs.lua}"
+          "--enable-fail-if-missing"
+        ];
+    });
+  neovim = pkgs.neovim.overrideAttrs
+    (old: {
+      version = "latest";
+      src = specialArgs.neovim-src;
+    });
+in
 with pkgs; [
-  # GUI Apps
-  # wezterm
-  # alacritty
-  # raycast
+  vim
   neovim
 
   _1password

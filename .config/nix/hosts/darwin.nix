@@ -1,10 +1,9 @@
-{ self, username, nixpkgs, nix-darwin, home-manager, neovim-nightly-overlay, ... }:
+{ self, username, nixpkgs, nix-darwin, home-manager, specialArgs, ... }:
 let
   system = "aarch64-darwin";
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
-    overlays = [ neovim-nightly-overlay.overlays.default ];
   };
 in
 {
@@ -16,7 +15,7 @@ in
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.users.${username} = import ../home-manager/darwin.nix {
-          inherit pkgs system;
+          inherit pkgs specialArgs;
         };
       }
     ];

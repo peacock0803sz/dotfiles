@@ -1,17 +1,14 @@
-{ config, ... }: {
+{ config, ... }:
+let
+  mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
+in
+{
   home.file = {
-    # ".config/fish/config.fish".source = lib.file.mkOutOfStoreSymlink ../../fish/config.fish;
-    ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink ../../wezterm;
-  };
-
-  programs = {
-    fish = {
-      enable = true;
-    };
-    direnv = {
-      enable = true;
-      # enableFishIntegration = true;
-      nix-direnv.enable = true;
-    };
+    ".gitconfig".source = mkOutOfStoreSymlink ~/dotfiles/.gitconfig;
+    ".config/alacritty".source = mkOutOfStoreSymlink ~/dotfiles/.config/alacritty;
+    ".config/bat".source = mkOutOfStoreSymlink ~/dotfiles/.config/bat;
+    ".config/nvim".source = mkOutOfStoreSymlink ~/dotfiles/.config/nvim;
+    ".config/obsidian.nvim".source = mkOutOfStoreSymlink ~/.config/obsidian.nvim;
+    ".config/wezterm".source = mkOutOfStoreSymlink ~/dotfiles/.config/wezterm;
   };
 }

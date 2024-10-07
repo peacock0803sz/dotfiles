@@ -24,11 +24,12 @@
   outputs = { self, nixpkgs, nix-darwin, home-manager, vim-src, neovim-src }:
     let
       username = "peacock";
+      homeManagerStateVersion = "24.05";
     in
     {
       darwinConfigurations = (
         import ./.config/nix/hosts/darwin.nix {
-          specialArgs = { inherit vim-src neovim-src; };
+          specialArgs = { inherit  vim-src neovim-src homeManagerStateVersion; };
           inherit self username nixpkgs nix-darwin home-manager;
         }
       );

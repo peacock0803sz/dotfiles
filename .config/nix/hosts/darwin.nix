@@ -14,8 +14,16 @@ in
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.users.${username} = import ../home-manager/darwin.nix {
-          inherit pkgs specialArgs;
+        home-manager.users.${username} = {
+          imports = [
+            ../home-manager/defaults.nix
+            ../home-manager/headed.nix
+          ];
+
+          home.stateVersion = specialArgs.homeManagerStateVersion;
+          home.packages =
+            import ../home-manager/packages.nix { inherit pkgs specialArgs; }
+            ++ [ pkgs._1password ];
         };
       }
     ];

@@ -24,7 +24,6 @@ with pkgs; [
   vim
   neovim
 
-  _1password
   direnv
   eza
   delta

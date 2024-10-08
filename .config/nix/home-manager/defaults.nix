@@ -7,7 +7,7 @@ in
     ".gitconfig".source = mkOutOfStoreSymlink ~/dotfiles/.gitconfig;
     ".config/bat".source = mkOutOfStoreSymlink ~/dotfiles/.config/bat;
     ".config/nvim".source = mkOutOfStoreSymlink ~/dotfiles/.config/nvim;
-    ".config/obsidian.nvim".source = mkOutOfStoreSymlink ~/.config/obsidian.nvim;
+    ".config/obsidian.nvim".source = mkOutOfStoreSymlink ~/dotfiles/.config/obsidian.nvim;
   };
 
   programs = {

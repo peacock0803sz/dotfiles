@@ -98,6 +98,7 @@ local function config()
   lspconfig.taplo.setup({
     single_file_support = true,
   })
+  lspconfig.terraformls.setup{}
   lspconfig.ts_ls.setup({
     filetypes = {
       "javascript",

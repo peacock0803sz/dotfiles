@@ -8,6 +8,7 @@
   "cleanshot"
   "datagrip"
   "dataspell"
+  "deskpad"
   "discord"
   "elgato-stream-deck"
   "fantastical"

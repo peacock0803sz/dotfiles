@@ -18,7 +18,7 @@
 # (windows: C:\Users\USER\AppData\Local\rio\themes\dracula.toml)
 #
 # Example:
-# theme = "catppuccin-latte"
+theme = "catppuccin-latte"
 
 # Padding-x
 #
@@ -34,6 +34,9 @@
 #
 # Example:
 # padding-y = [30, 10]
+
+padding-x = 4
+padding-y = [0, 2]
 
 # Option as Alt
 #

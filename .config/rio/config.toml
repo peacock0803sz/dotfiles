@@ -76,12 +76,12 @@ option-as-alt = 'both'
 # Linux/BSD: fork processes
 #
 # Example:
-use-fork = true
+# use-fork = true
 
 # Confirm before exiting Rio
 # Default is `true`
 #
-# confirm-before-quit = false
+confirm-before-quit = false
 
 # Cursor
 #
@@ -127,13 +127,17 @@ args = []
 # • decorations - Set window decorations, options: "Enabled", "Disabled", "Transparent", "Buttonless"
 #
 # Example:
-# [window]
+[window]
 # width = 600
 # height = 400
-# mode = "windowed"
+mode = "Windowed"
 # opacity = 1.0
 # blur = false
-# decorations = "enabled"
+decorations = "Buttonless"
+
+[window.background-image]
+path = "/Users/peacock/Pictures/wallpapaers/mewtwo.png"
+opacity = 0.1
 
 # Renderer
 #
@@ -203,22 +207,22 @@ size = 14
 
 [fonts.regular]
 family = "UDEV Gothic NF"
-style = "normal"
+style = "Normal"
 weight = 400
 
 [fonts.bold]
 family = "UDEV Gothic NF"
-style = "bold"
+style = "Normal"
 weight = 800
 
 [fonts.italic]
 family = "UDEV Gothic NF"
-style = "italic"
+style = "Italic"
 weight = 400
 
 [fonts.bold-italic]
 family = "UDEV Gothic NF"
-style = "bold italic"
+style = "Italic"
 weight = 800
 
 # Scroll
@@ -252,10 +256,10 @@ weight = 800
 # "color-automation" - Set a specific color for the tab whenever a specific program is running, or in a specific directory.
 #
 # Example:
-# [navigation]
-# mode = "bookmark"
+[navigation]
+mode = "TopTab"
 # clickable = false
-# hide-if-single = true
+hide-if-single = false
 # use-current-path = false
 # color-automation = []
 
@@ -316,12 +320,12 @@ weight = 800
 # More information in: https://raphamorim.io/rio/docs/key-bindings#custom-key-bindings
 #
 # Example:
-# [bindings]
-# keys = [
-#   { key = "q", with = "super", action = "Quit" },
-#   # Bytes[27, 91, 53, 126] is equivalent to "\x1b[5~"
-#   { key = "home", with = "super | shift", bytes = [27, 91, 53, 126] }
-# ]
+[bindings]
+keys = [
+  { key = "q", with = "super", action = "Quit" },
+  # Bytes[27, 91, 53, 126] is equivalent to "\x1b[5~"
+  # { key = "home", with = "super | shift", bytes = [27, 91, 53, 126] }
+]
 
 # Log level
 #

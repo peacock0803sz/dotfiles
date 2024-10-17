@@ -4,6 +4,11 @@ let
 in
 {
   home.file = {
+    "Pictures/wallpapaers/mewtwo.png".source = pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/klaudiosinani/hyper-pokemon/refs/heads/master/backgrounds/mewtwo.png";
+      hash = "sha256-VKjW8NBMXSsx6H07AmaRJ4U1skIs5Ld8S+VtLTHGw8w=";
+    };
+
     ".config/alacritty".source = mkOutOfStoreSymlink ~/dotfiles/.config/alacritty;
     ".config/wezterm".source = mkOutOfStoreSymlink ~/dotfiles/.config/wezterm;
     ".config/rio/config.toml".source = mkOutOfStoreSymlink ~/dotfiles/.config/rio/config.toml;

@@ -12,10 +12,10 @@ export class Config extends BaseConfig {
           ignoreCase: true,
           matchers: ["matcher_fzf"],
           sorters: ["sorter_fzf"],
-          converters: ["converter_hl_dir", "converter_devicon"],
+          converters: ["converter_hl_dir"],
         },
         git_status: {
-          converters: ["converter_git_status", "converter_devicon"],
+          converters: ["converter_git_status",],
         },
         git_diff: {
           converters: [],
@@ -24,7 +24,6 @@ export class Config extends BaseConfig {
           volatile: true,
           matchers: ["matcher_fzf"],
           sorters: ["sorter_fzf"],
-          converters: ["converter_devicon"],
         },
       },
       sourceParams: {
@@ -55,7 +54,7 @@ export class Config extends BaseConfig {
         },
       },
       filterParams: {
-        matcher_fzf: { highlightMatched: "DduSearchMatched" },
+        // matcher_fzf: { highlightMatched: "DduSearchMatched" },
         matcher_substring: { highlightMatched: "Search" },
       },
       kindOptions: {

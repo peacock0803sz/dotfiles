@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 
 ---@type { key: string, mods?: string, action: string }[]
 local keymaps = {
+  -- LEADER = C-s
   -- QuickSelect
   { key = "v", mods = "LEADER", action = "ActivateCopyMode" },
   -- Reload
@@ -39,6 +40,8 @@ local keymaps = {
   { key = "l", mods = "ALT", action = wezterm.action({ SwitchWorkspaceRelative = 1 }) },
   { key = "h", mods = "ALT", action = wezterm.action({ SwitchWorkspaceRelative = -1 }) },
 
+  -- Mux
+  -- { key = "1", mods = "LEADER", action = wezterm.action({}) },
   -- Tabs
   {
     key = "w",

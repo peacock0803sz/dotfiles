@@ -26,6 +26,9 @@ local config = {
   disable_default_key_bindings = true,
   leader = { key = "s", mods = "CTRL", timeout_milliseconds = 1000 },
   keys = keymaps,
+
+  -- default_gui_startup_args = { "connect", "unix" },
+  unix_domains = { { name = "unix" } },
 }
 
 -- Config Overrides

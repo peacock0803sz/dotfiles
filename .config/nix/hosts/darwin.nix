@@ -23,7 +23,7 @@ in
           home.stateVersion = specialArgs.homeManagerStateVersion;
           home.packages =
             import ../home-manager/packages.nix { inherit pkgs specialArgs; }
-            ++ [ pkgs._1password ];
+            ++ [ pkgs._1password pkgs.tmux ];
         };
       }
     ];

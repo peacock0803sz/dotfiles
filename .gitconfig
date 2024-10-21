@@ -1,3 +1,5 @@
+; vim:filetype=gitconfig
+
 [core]
 	excludesFile = ~/dotfiles/.gitignore.global
 
@@ -29,7 +31,3 @@
 [delta]
 	light = true
   syntax-theme = "Catppuccin-latte"
-
-# [includeIf "gitdir:~/ghq/github.com/peacock0803sz"]
-# [core]
-#   excludesFile = ~/dotfiles/.gitignore.personal

@@ -1,3 +1,5 @@
+# vim:filetype=gitignore
+
 # jupyter notebooks
 
 *.ipynb

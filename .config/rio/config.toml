@@ -135,10 +135,6 @@ mode = "Windowed"
 # blur = false
 decorations = "Buttonless"
 
-[window.background-image]
-path = "/Users/peacock/Pictures/wallpapaers/mewtwo.png"
-opacity = 0.1
-
 # Renderer
 #
 # • Performance: Set WGPU rendering performance

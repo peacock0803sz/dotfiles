@@ -27,6 +27,7 @@
   "orbstack"
   "obs"
   "raycast"
+  "rio"
   "slack"
   "tailscale"
   "utm"

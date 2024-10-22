@@ -29,7 +29,7 @@
     {
       darwinConfigurations = (
         import ./.config/nix/hosts/darwin.nix {
-          specialArgs = { inherit  vim-src neovim-src homeManagerStateVersion; };
+          specialArgs = { inherit vim-src neovim-src homeManagerStateVersion; };
           inherit self username nixpkgs nix-darwin home-manager;
         }
       );

@@ -25,9 +25,9 @@ end
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/dotfiles/bin
 
-function mkcd
-    mkdir -p $1 && cd $1
-end
+# function mkcd
+#     mkdir -p $1 && cd $1
+# end
 
 function fzf-ghq
     set --function _dir $(ghq list -p | fzf --preview 'bat {}/README.md' --bind 'ctrl-d:preview-down,ctrl-u:preview-up')

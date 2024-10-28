@@ -1,0 +1,437 @@
+#!/usr/bin/env deno run -EINRW --allow-run
+
+// vim:filetype=typescript
+
+import $ from "jsr:@david/dax";
+import { assert, is, PredicateType } from "jsr:@core/unknownutil";
+import { Command, EnumType } from "jsr:@cliffy/command@1.0.0-rc.7";
+
+const PRESETS = ["home", "mobile", "single"] as const;
+const isPreset = is.LiteralOneOf(PRESETS);
+type Preset = PredicateType<typeof isPreset>;
+
+const HOSTS = ["nocturne", "toccata"] as const;
+const isHost = is.LiteralOneOf(HOSTS);
+type Host = PredicateType<typeof isHost>;
+
+const MONITOR_NAMES = [
+  "Built-in Retina Display",
+  "Mi monitor",
+  "LCD-MQ271XD",
+  "133LR",
+] as const;
+const isMonitorName = is.LiteralOneOf(MONITOR_NAMES);
+
+const FIXED_RESOLUTIONS = [
+  // common resolutions
+  "HD",
+  "HD+",
+  "FHD",
+  "WUXGA",
+  "QHD",
+  "WQHD",
+  "UWQHD",
+  "4K",
+
+  // MacBooks
+  "MacBook Air 13-inch",
+  "MacBook Pro 14-inch",
+] as const;
+const isFixedResolutions = is.RecordOf(
+  is.ObjectOf({ width: is.Number, height: is.Number }),
+  is.LiteralOneOf(FIXED_RESOLUTIONS),
+);
+type FixedResolutions = PredicateType<typeof isFixedResolutions>;
+const fixedResolutions: FixedResolutions = {
+  HD: { width: 1280, height: 720 },
+  "HD+": { width: 1600, height: 900 },
+  FHD: { width: 1920, height: 1080 },
+  WUXGA: { width: 1920, height: 1200 },
+  QHD: { width: 2560, height: 1440 },
+  WQHD: { width: 2560, height: 1440 },
+  UWQHD: { width: 3440, height: 1440 },
+  "4K": { width: 3840, height: 2160 },
+  "MacBook Air 13-inch": { width: 2560, height: 1600 },
+  "MacBook Pro 14-inch": { width: 1800, height: 1169 },
+};
+
+const isConfigLayoutValue = is.ObjectOf({
+  workspace: is.UnionOf([is.Number, is.LiteralOf("ALL")]),
+  monitor: isMonitorName,
+  size: is.ObjectOf({
+    width: is.Number,
+    height: is.Number,
+  }),
+  // Offset from the top-left corner of the monitor
+  offset: is.ObjectOf({
+    x: is.Number,
+    y: is.Number,
+  }),
+});
+const isConfigValue = is.ObjectOf({
+  bundleIdentifier: is.String,
+  path: is.String,
+  layouts: is.RecordOf(
+    is.RecordOf(
+      is.UnionOf([isConfigLayoutValue, is.LiteralOf(false)]),
+      isPreset,
+    ),
+    isHost,
+  ),
+});
+const isConfig = is.RecordOf(isConfigValue, is.String);
+type Config = PredicateType<typeof isConfig>;
+
+const config: Config = {
+  WezTerm: {
+    bundleIdentifier: "com.github.wez.wezterm",
+    path: "/Applications/WezTerm.app",
+    layouts: {
+      toccata: {
+        home: {
+          workspace: 1,
+          monitor: "Mi monitor",
+          size: {
+            width: fixedResolutions.FHD.width,
+            height: fixedResolutions.UWQHD.height,
+          },
+          offset: { x: 0, y: 0 },
+        },
+        mobile: {
+          workspace: 1,
+          monitor: "133LR",
+          size: {
+            width: fixedResolutions.FHD.width,
+            height: fixedResolutions.FHD.height,
+          },
+          offset: { x: 0, y: 0 },
+        },
+        single: {
+          workspace: 1,
+          monitor: "Built-in Retina Display",
+          size: {
+            width: fixedResolutions["MacBook Pro 14-inch"].width,
+            height: fixedResolutions["MacBook Pro 14-inch"].height,
+          },
+          offset: { x: 0, y: 0 },
+        },
+      },
+      nocturne: {
+        home: {
+          workspace: 1,
+          monitor: "Mi monitor",
+          size: {
+            width: fixedResolutions.FHD.width,
+            height: fixedResolutions.UWQHD.height,
+          },
+          offset: { x: 0, y: 0 },
+        },
+        mobile: {
+          workspace: 1,
+          monitor: "133LR",
+          size: {
+            width: fixedResolutions.FHD.width,
+            height: fixedResolutions.FHD.height,
+          },
+          offset: { x: 0, y: 0 },
+        },
+        single: {
+          workspace: 1,
+          monitor: "Built-in Retina Display",
+          size: {
+            width: fixedResolutions["MacBook Air 13-inch"].width,
+            height: fixedResolutions["MacBook Air 13-inch"].height,
+          },
+          offset: { x: 0, y: 0 },
+        },
+      },
+    },
+  },
+  Vivaldi: {
+    bundleIdentifier: "com.vivaldi.Vivaldi",
+    path: "/Applications/Vivaldi.app",
+    layouts: {
+      toccata: {
+        home: {
+          workspace: "ALL",
+          monitor: "Mi monitor",
+          size: {
+            width: fixedResolutions.UWQHD.width - fixedResolutions.FHD.width,
+            height: fixedResolutions.UWQHD.height,
+          },
+          offset: { x: fixedResolutions.FHD.width, y: 0 },
+        },
+        mobile: {
+          workspace: "ALL",
+          monitor: "133LR",
+          size: {
+            width: fixedResolutions.FHD.width,
+            height: fixedResolutions.FHD.height,
+          },
+          offset: { x: 0, y: 0 },
+        },
+        single: {
+          workspace: "ALL",
+          monitor: "Built-in Retina Display",
+          size: {
+            width: fixedResolutions["MacBook Pro 14-inch"].width,
+            height: fixedResolutions["MacBook Pro 14-inch"].height,
+          },
+          offset: { x: 0, y: 0 },
+        },
+      },
+      nocturne: {
+        home: {
+          workspace: "ALL",
+          monitor: "Mi monitor",
+          size: {
+            width: fixedResolutions.UWQHD.width - fixedResolutions.FHD.width,
+            height: fixedResolutions.UWQHD.height,
+          },
+          offset: { x: 0, y: 0 },
+        },
+        mobile: {
+          workspace: "ALL",
+          monitor: "133LR",
+          size: {
+            width: fixedResolutions.FHD.width,
+            height: fixedResolutions.FHD.height,
+          },
+          offset: { x: 0, y: 0 },
+        },
+        single: {
+          workspace: "ALL",
+          monitor: "Built-in Retina Display",
+          size: {
+            width: fixedResolutions["MacBook Pro 14-inch"].width,
+            height: fixedResolutions["MacBook Pro 14-inch"].height,
+          },
+          offset: { x: 0, y: 0 },
+        },
+      },
+    },
+  },
+  Firefox: {
+    bundleIdentifier: "org.mozilla.firefox",
+    path: "/Applications/Firefox.app",
+    layouts: {
+      toccata: {
+        home: {
+          workspace: 2,
+          monitor: "Mi monitor",
+          size: { width: 1920, height: 1440 },
+          offset: { x: 0, y: 0 },
+        },
+        mobile: {
+          workspace: 2,
+          monitor: "133LR",
+          size: { width: 1920, height: 1440 },
+          offset: { x: 0, y: 0 },
+        },
+        single: {
+          workspace: 2,
+          monitor: "Built-in Retina Display",
+          size: { width: 1800, height: 1169 },
+          offset: { x: 0, y: 0 },
+        },
+      },
+      nocturne: {
+        home: {
+          workspace: 2,
+          monitor: "Mi monitor",
+          size: { width: 1920, height: 1440 },
+          offset: { x: 0, y: 0 },
+        },
+        mobile: {
+          workspace: 2,
+          monitor: "133LR",
+          size: { width: 1920, height: 1440 },
+          offset: { x: 0, y: 0 },
+        },
+        single: false,
+      },
+    },
+  },
+  Alacritty: {
+    bundleIdentifier: "org.alacritty",
+    path: "/Applications/Alacritty.app",
+    layouts: {
+      toccata: {
+        home: false,
+        mobile: false,
+        single: false,
+      },
+      nocturne: {
+        home: false,
+        mobile: false,
+        single: false,
+      },
+    },
+  },
+};
+
+const isMonitor = is.ObjectOf({
+  "monitor-id": is.Number,
+  "monitor-name": isMonitorName,
+});
+async function listMonitors() {
+  const result = await $`aerospace list-monitors --json`.json();
+  assert(result, is.ArrayOf(isMonitor));
+  return result;
+}
+
+const isWorkspace = is.ObjectOf({
+  workspace: is.String,
+});
+async function listWorkspaces() {
+  const result = await $`aerospace list-workspaces --all --json`.json();
+  assert(result, is.ArrayOf(isWorkspace));
+  return result;
+}
+
+const isWindow = is.ObjectOf({
+  "window-id": is.Number,
+  "window-title": is.String,
+  "app-name": is.String,
+});
+async function listWindows() {
+  const result = await $`aerospace list-windows --all --json`.json();
+  assert(result, is.ArrayOf(isWindow));
+  return result;
+}
+
+const isApps = is.ObjectOf({
+  "app-name": is.String,
+  "app-bundle-id": is.String,
+  "app-pid": is.Number,
+});
+async function listApps() {
+  const result = await $`aerospace list-apps --json`.json();
+  assert(result, is.ArrayOf(isApps));
+  return result;
+}
+
+async function getHost() {
+  const result = await $`uname -n`.text();
+  const host = result.replace(/\.local$/, "");
+  assert(host, isHost, { message: `Unknown hostname: ${result}` });
+  return host;
+}
+
+type State = {
+  monitors: PredicateType<typeof isMonitor>[];
+  workspaces: PredicateType<typeof isWorkspace>[];
+  apps: PredicateType<typeof isApps>[];
+};
+
+async function applyConfig(
+  appName: string,
+  host: Host,
+  preset: Preset,
+  state: State,
+) {
+  const appConfig = config[appName];
+  const appLayout = appConfig.layouts[host][preset];
+  const { monitors, workspaces, apps } = state;
+
+  if (!appLayout) {
+    console.log(`Skipping ${appName}...`);
+    return;
+  }
+  const hasMonitor = monitors.some(
+    (monitor) => monitor["monitor-name"] === appLayout.monitor,
+  );
+  if (!hasMonitor) {
+    console.error(`Creating monitor ${appLayout.monitor}...`);
+    return;
+  }
+
+  const hasOpendApp = apps.some((app) => app["app-name"] === appName);
+  if (!hasOpendApp) {
+    console.log(`Starting ${appName}...`);
+  }
+  const hasWorkspace = appLayout.workspace === "ALL" ||
+    workspaces.some((workspace) => workspace.workspace === appLayout.workspace);
+  if (!hasWorkspace) {
+    console.log(`Creating workspace ${appLayout.workspace}...`);
+  }
+
+  const windows = await listWindows();
+  const appWindow = windows.find((w) => w["app-name"] === appName);
+  if (!appWindow) {
+    console.error(`Unable to find window for ${appName}...`);
+    return;
+  }
+
+  if (is.LiteralOf("ALL")(appLayout.workspace)) {
+    console.log("Applying layout for ALL workspaces...");
+    return;
+  } else {
+    console.log(`Applying layout for ${appName}...`);
+    const windowId = appWindow["window-id"];
+    await $`aerospace move-node-to-workspace --window-id ${windowId} ${appLayout.workspace}`;
+  }
+}
+
+async function describeCommand(option: GlobalOption, args: [Preset] | unknown) {
+  console.log(option, args);
+  const monitors = await listMonitors();
+  console.log(monitors);
+}
+
+function getPreset(fromArg: Preset | unknown) {
+  const fromEnv = Deno.env.get("AEROSPACE_PRESET");
+  if (isPreset(fromArg)) {
+    return fromArg;
+  } else if (isPreset(fromEnv)) {
+    return fromEnv;
+  } else {
+    console.log(
+      `No preset specified. Use --preset or set AEROSPACE_PRESET environment variable.`,
+    );
+    return "single";
+  }
+}
+
+async function applyCommand(_option: GlobalOption, args: [Preset] | unknown) {
+  const preset = getPreset(args);
+
+  const host = await getHost();
+
+  const monitors = await listMonitors();
+  const workspaces = await listWorkspaces();
+  const apps = await listApps();
+
+  for (const appName in config) {
+    await applyConfig(appName, host, preset, { monitors, workspaces, apps });
+  }
+}
+
+const isGlobalOption = is.ObjectOf({
+  debug: is.Boolean,
+  tty: is.Boolean,
+});
+type GlobalOption = PredicateType<typeof isGlobalOption>;
+
+await new Command()
+  .name("aerospace-layouts")
+  .globalOption("-d, --debug", "Enable debug mode.", { default: false })
+  .globalOption("-t, --tty", "Force TTY mode.", { default: false })
+  .globalType("preset", new EnumType(PRESETS))
+  .command("list", "List available layouts.")
+  .action((option, ...args) => {
+    console.log(option, args);
+  })
+  .command("describe", "Describe a layout.")
+  .arguments("[preset:preset]")
+  .action(async (option, ...args) => {
+    console.log(option, args);
+    await describeCommand(option, args);
+  })
+  .command("apply", "Apply a layout.")
+  .arguments("[preset:preset]")
+  .action(async (option, ...args) => {
+    console.log(option, args);
+    await applyCommand(option, args);
+  })
+  .parse(Deno.args);

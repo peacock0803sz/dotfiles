@@ -13,7 +13,7 @@ local spec = {
   },
   { import = "plugins.ddu.ui" },
   { import = "plugins.ddu.kind" },
-  { import = "plugins.ddu.filter" },
+  { import = "plugins.ddu.filters" },
   { import = "plugins.ddu.source" },
 }
 

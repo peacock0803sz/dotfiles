@@ -11,19 +11,23 @@ export class Config extends BaseConfig {
         _: {
           ignoreCase: true,
           matchers: ["matcher_fzf"],
-          sorters: ["sorter_fzf"],
+          sorters: ["sorter_alpha", "sorter_fzf"],
           converters: ["converter_hl_dir"],
         },
+        file: {
+          sorters: ["sorter_mtime", "sorter_fzf"],
+        },
+        file_external: {
+          sorters: ["sorter_mtime", "sorter_fzf"],
+        },
         git_status: {
-          converters: ["converter_git_status",],
+          converters: ["converter_git_status"],
         },
         git_diff: {
           converters: [],
         },
         rg: {
           volatile: true,
-          matchers: ["matcher_fzf"],
-          sorters: ["sorter_fzf"],
         },
       },
       sourceParams: {

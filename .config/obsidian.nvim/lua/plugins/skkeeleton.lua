@@ -1,1 +1,0 @@
-/Users/peacock/dotfiles/.config/nvim/lua/plugins/skkeleton.lua

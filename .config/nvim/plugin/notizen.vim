@@ -6,9 +6,8 @@ function! s:open_notizen() abort
     " echo s:_cwd .. ' is not the root directory of Notizen, switched to ' .. s:notizen_root
   endif
 
-  call termopen(['goemon', '--'])
+  call termopen(['uv', 'run', 'make', 'livehtml', 'PORT=8080'])
   :setlocal nonumber
-  " echo 'Watching started with goemon...'
 
   if system('hostname') =~? 'toccata.*'
     let s:working_dir = expand('$HOME/Documents/notizen/source/Work/TOPGATE')

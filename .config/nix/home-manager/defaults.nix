@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 let
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
 in
@@ -7,7 +7,10 @@ in
     ".gitconfig".source = mkOutOfStoreSymlink ~/dotfiles/.gitconfig;
     ".config/bat".source = mkOutOfStoreSymlink ~/dotfiles/.config/bat;
     ".config/nvim".source = mkOutOfStoreSymlink ~/dotfiles/.config/nvim;
-    ".config/obsidian.nvim".source = mkOutOfStoreSymlink ~/dotfiles/.config/obsidian.nvim;
+    ".local/share/gh/extensions/gh-fish/gh-copilot-alias.fish".source = (pkgs.fetchgit {
+      url = "https://github.com/DevAtDawn/gh-fish/";
+      hash = "sha256-QNk3FXzmLc8KqP3xpkAJT+otKI6fgwXcYS/TgFElCsg=";
+    }).outPath + "/gh-copilot-alias.fish";
   };
 
   programs = {

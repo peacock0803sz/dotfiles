@@ -93,6 +93,11 @@ set --global --export PIP_REQUIRE_VIRTUALENV 1
 
 # }}}
 
+# {{{ Workaround for GitHub Copilot CLI
+alias github-copilot-cli "gh-copilot"
+source "$HOME/.local/share/gh/extensions/gh-fish/gh-copilot-alias.fish"
+# }}}
+
 # Aliases / Abbreviations {{{
 abbr --add yq gojq # yq to gojq
 abbr --add tf terraform

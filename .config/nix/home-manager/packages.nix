@@ -30,11 +30,13 @@ with pkgs; [
   fd
   ffmpeg
   fish
+  fishPlugins.bass
   fishPlugins.tide
   fzf
   gibo
   gojq
   gh
+  gh-copilot
   ghq
   helix
   jq

@@ -74,6 +74,7 @@ local function config()
   })
   lspconfig.dockerls.setup({})
   lspconfig.gopls.setup({})
+  lspconfig.lemminx.setup({})
   lspconfig.html.setup({})
   lspconfig.nil_ls.setup({
     root_dir = lspconfig.util.root_pattern({ "flake.nix" }),

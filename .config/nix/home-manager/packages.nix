@@ -76,6 +76,7 @@ with pkgs; [
   bash-language-server
   dockerfile-language-server-nodejs
   gopls
+  lemminx
   nil
   nixpkgs-fmt
   pyright

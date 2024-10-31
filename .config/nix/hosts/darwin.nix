@@ -18,6 +18,7 @@ in
           imports = [
             ../home-manager/defaults.nix
             ../home-manager/headed.nix
+            ../home-manager/darwin.nix
           ];
 
           home.stateVersion = specialArgs.homeManagerStateVersion;

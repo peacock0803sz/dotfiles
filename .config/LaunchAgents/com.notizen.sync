@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.notizen.sync</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>deno</string>
+      <string>run</string>
+      <string>/Users/peacock/Documents/notizen/bin/sync.ts</string>
+      <string>--env-file</string>
+      <string>/Users/peacock/Documents/notizen/.env</string>
+      <string>--allow-import</string>
+      <string>--allow-env</string>
+      <string>--allow-read</string>
+      <string>--allow-net</string>
+      <string>--allow-run</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+      <key>Hour</key>
+      <integer>22</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+  </dict>
+</plist>

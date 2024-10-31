@@ -5,9 +5,10 @@ set -U fish_greeting
 # OS specific settings {{{
 switch (uname -s)
     case Darwin
+        set --global --export XDG_CONFIG_HOME $HOME/.config
         set --export --global HOMEBREW_NO_AUTO_UPDATE 1
         alias tailscale "/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-        alias rosetta "arch -x86_64 $(which fish)"
+        # alias rosetta "arch -x86_64 $(which fish)"
 
         # Homebrew
         switch (uname -m)
@@ -26,9 +27,9 @@ end
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/dotfiles/bin
 
-# function mkcd
-#     mkdir -p $1 && cd $1
-# end
+function mkcd
+    mkdir -p $argv[1] && cd $argv[1]
+end
 
 function fzf-ghq
     set --function _dir $(ghq list -p | fzf --preview 'bat {}/README.md' --bind 'ctrl-d:preview-down,ctrl-u:preview-up')
@@ -65,8 +66,12 @@ set --universal tide_python_color blue
 set --universal tide_terraform_color blue
 #  }}}
 
+# vim
+alias vim@bsd /usr/bin/vim
+alias vim@head /etc/profiles/per-user/$(whoami)/bin/vim
+alias vim vim@head
+
 # neovim
-set --global --export XDG_CONFIG_HOME $HOME/.config
 set --global --export EDITOR nvim
 set --global --export LANG en_US.UTF-8
 
@@ -78,23 +83,18 @@ end
 
 # man
 set --global --export MANPAGER 'nvim -c ASMANPAGER -'
+set --global --export PAGER 'nvim -c PAGER -'
 
 # Language specific settings {{{
-
 # Go
 set --append --export --global GOPATH $HOME/ghq
-fish_add_path $GOPATH/bin
-
-# Rust
-fish_add_path $HOME/.cargo/bin
 
 # Python
 set --global --export PIP_REQUIRE_VIRTUALENV 1
-
 # }}}
 
 # {{{ Workaround for GitHub Copilot CLI
-alias github-copilot-cli "gh-copilot"
+alias github-copilot-cli gh-copilot
 source "$HOME/.local/share/gh/extensions/gh-fish/gh-copilot-alias.fish"
 # }}}
 

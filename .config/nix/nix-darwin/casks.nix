@@ -23,6 +23,7 @@
   "karabiner-elements"
   "keycastr"
   "lasso"
+  "mtgto/macskk/macskk"
   "obsidian"
   "orbstack"
   "obs"

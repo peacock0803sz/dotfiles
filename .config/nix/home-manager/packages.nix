@@ -24,10 +24,10 @@ with pkgs; [
   vim
   neovim
 
-  _1password-cli
   direnv
   eza
   delta
+  fastfetch
   fd
   ffmpeg
   fish
@@ -54,7 +54,7 @@ with pkgs; [
   cargo
   deno
   go
-  nodejs_20
+  nodejs
   python3
   uv
   rustc

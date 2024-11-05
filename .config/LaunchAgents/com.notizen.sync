@@ -6,16 +6,11 @@
     <string>com.notizen.sync</string>
     <key>ProgramArguments</key>
     <array>
-      <string>deno</string>
+      <string>/etc/profiles/per-user/peacock/bin/uv</string>
       <string>run</string>
-      <string>/Users/peacock/Documents/notizen/bin/sync.ts</string>
-      <string>--env-file</string>
-      <string>/Users/peacock/Documents/notizen/.env</string>
-      <string>--allow-import</string>
-      <string>--allow-env</string>
-      <string>--allow-read</string>
-      <string>--allow-net</string>
-      <string>--allow-run</string>
+      <string>/Users/peacock/Documents/notizen/notizen/s3sync.py</string>
+      <string>>push</string>
+      <string>>all</string>
     </array>
     <key>StartCalendarInterval</key>
     <dict>

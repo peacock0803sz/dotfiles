@@ -23,6 +23,7 @@ in
 with pkgs; [
   vim
   neovim
+  emacs
 
   direnv
   eza
@@ -42,6 +43,8 @@ with pkgs; [
   helix
   jq
   openjdk
+  pandoc
+  texliveFull
   imagemagick
   nodePackages.prettier
   ripgrep

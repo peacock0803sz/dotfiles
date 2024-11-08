@@ -1,3 +1,22 @@
+" function! s:reload_glance() abort
+"   let s:filepath = expand('%:p')
+"   if s:filepath !~# 'ddu\-.*\:'
+"     echo 'Not a Notizen file, skipped.'
+"   endif
+" 
+"   if exists('g:glance#server_port')
+"     let s:glance#opend = system('lsof i:'.. s:glance#default_port)
+"   else
+"     let s:glance#opend = system('lsof i:8765')
+"   endif
+"   echo s:glance#opend
+" endfunction
+" 
+" augroup AutoGlance
+"   autocmd!
+"   autocmd BufWinEnter *.md ++once call s:reload_glance()
+" augroup END
+
 function! s:open_notizen() abort
   let s:notizen_root = expand('$HOME/Documents/notizen')
   let s:_cwd = getcwd()

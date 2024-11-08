@@ -1,13 +1,11 @@
 local function config()
+  vim.g["glance#server_open"] = 0
   vim.g["glance#markdown_breaks"] = 1
   vim.g["glance#markdown_html"] = 1
   vim.g["glance#stylesheet"] = [[
 html, body, #viewer {
   border: none;
-  margin: 1rem;
-  height: 100%;
-  width: 100%;
-  font-famiiy: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji !important;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
 }
   ]]
   -- vim.g["glance#stylesheet"] =

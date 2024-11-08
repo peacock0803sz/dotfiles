@@ -58,8 +58,8 @@ with pkgs; [
   deno
   go
   nodejs
-  python3
   uv
+  ruff
   rustc
   terraform
   typescript
@@ -84,7 +84,6 @@ with pkgs; [
   nil
   nixpkgs-fmt
   pyright
-  ruff-lsp
   stylua
   taplo
   tailwindcss-language-server

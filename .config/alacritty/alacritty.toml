@@ -9,7 +9,7 @@ program = "/run/current-system/sw/bin/fish"
 args = ["-l", "-c", "nvim +NotizenOpen"]
 
 [window]
-dimensions = { columns = 120, lines = 30 }
+dimensions = { columns = 120, lines = 58 }
 padding = { x = 2, y = 4 }
 decorations = "buttonless"
 opacity = 0.8

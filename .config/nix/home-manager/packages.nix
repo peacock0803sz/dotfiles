@@ -47,6 +47,7 @@ with pkgs; [
   texliveFull
   imagemagick
   nodePackages.prettier
+  nodePackages.prisma
   ripgrep
   tmux
   wget

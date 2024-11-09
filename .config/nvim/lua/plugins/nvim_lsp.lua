@@ -81,6 +81,7 @@ local function config()
     root_dir = lspconfig.util.root_pattern({ "flake.nix" }),
     single_file_support = true,
   })
+  lspconfig.prismals.setup({})
   lspconfig.pyright.setup({
     single_file_support = true,
     settings = {
@@ -100,7 +101,7 @@ local function config()
   lspconfig.taplo.setup({
     single_file_support = true,
   })
-  lspconfig.terraformls.setup{}
+  lspconfig.terraformls.setup({})
   lspconfig.ts_ls.setup({
     filetypes = {
       "javascript",
@@ -111,13 +112,13 @@ local function config()
     },
     root_dir = lspconfig.util.root_pattern({ "package.json", "node_modules" }),
     init_options = {
-        plugins = {
-          {
-            name = "@vue/typescript-plugin",
-            location = vim.env.HOME .. "/.nix-profile/lib/node_modules/@vue/language-server",
-            languages = { "javascript", "typescript", "vue" },
-          },
+      plugins = {
+        {
+          name = "@vue/typescript-plugin",
+          location = vim.env.HOME .. "/.nix-profile/lib/node_modules/@vue/language-server",
+          languages = { "javascript", "typescript", "vue" },
         },
+      },
     },
     single_file_support = false,
   })

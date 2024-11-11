@@ -85,6 +85,9 @@ end
 set --global --export MANPAGER 'nvim -c ASMANPAGER -'
 set --global --export PAGER 'nvim -c PAGER -'
 
+# devenv
+direnv hook fish | source
+
 # Language specific settings {{{
 # Go
 set --append --export --global GOPATH $HOME/ghq

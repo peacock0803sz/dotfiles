@@ -25,6 +25,7 @@ with pkgs; [
   neovim
   emacs
 
+  devenv
   direnv
   eza
   delta

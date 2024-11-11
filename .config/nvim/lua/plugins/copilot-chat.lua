@@ -6,6 +6,11 @@ local function config()
         insert = "",
       },
     },
+    prompts = {
+      Refactor = {
+        "/COPILOT_REVIEW Please Refactor the selected code."
+      }
+    },
   })
 end
 

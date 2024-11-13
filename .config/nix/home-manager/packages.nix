@@ -56,13 +56,8 @@ with pkgs; [
 
   # Language Runtime
   bun
-  cargo
   deno
-  go
   nodejs
-  uv
-  ruff
-  rustc
   terraform
   typescript
 

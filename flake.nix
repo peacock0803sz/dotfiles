@@ -10,7 +10,8 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     neovim-src = {
       url = "github:neovim/neovim";
       flake = false;
@@ -21,17 +22,15 @@
     };
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, vim-src, neovim-src }:
-    let
-      username = "peacock";
-      homeManagerStateVersion = "24.05";
-    in
-    {
-      darwinConfigurations = (
-        import ./.config/nix/hosts/darwin.nix {
-          specialArgs = { inherit vim-src neovim-src homeManagerStateVersion; };
-          inherit self username nixpkgs nix-darwin home-manager;
-        }
-      );
+  outputs = { flake-parts, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" "aarch64-darwin" ];
+      flake = {
+        darwinConfigurations = {
+          noctune = import ./.config/nix/hosts/noctune { inherit inputs; };
+          toccata = import ./.config/nix/hosts/toccata { inherit inputs; };
+        };
+      };
+      perSystem = { ... }: { };
     };
 }

@@ -3,6 +3,7 @@ let
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
 in
 {
+  home.stateVersion = "24.11";
   home.file = {
     ".gitconfig".source = mkOutOfStoreSymlink ~/dotfiles/.gitconfig;
     ".config/bat".source = mkOutOfStoreSymlink ~/dotfiles/.config/bat;

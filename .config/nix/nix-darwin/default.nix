@@ -1,6 +1,10 @@
-{ self, system, username, pkgs, ... }: {
+{ system, username, pkgs, ... }: {
   services.nix-daemon.enable = true;
-  nix.settings.experimental-features = "nix-command flakes";
+  nix.settings = {
+    experimental-features = "nix-command flakes";
+    trusted-users = [ "root" "${username}" ];
+  };
+
   nixpkgs.hostPlatform = system;
   users.users.${username} = {
     home = "/Users/${username}";
@@ -22,7 +26,6 @@
   };
 
   system = {
-    configurationRevision = self.rev or self.dirtyRev or null;
     stateVersion = 5;
 
     activationScripts.extraActivation.text = ''

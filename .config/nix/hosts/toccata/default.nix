@@ -30,7 +30,6 @@ nix-darwin.lib.darwinSystem {
         home.packages = import ../../packages {
           inherit pkgs;
           inherit (inputs) vim-src neovim-src;
-          # kinds = [ "common" "vim" "neovim" "emacs" "editorTools" "pandoc" "databases" "infra" "media" ];
         };
       };
     }

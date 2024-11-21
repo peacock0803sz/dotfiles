@@ -77,10 +77,7 @@ local function config()
   lspconfig.gopls.setup({})
   lspconfig.lemminx.setup({})
   lspconfig.html.setup({})
-  lspconfig.nil_ls.setup({
-    root_dir = lspconfig.util.root_pattern({ "flake.nix" }),
-    single_file_support = true,
-  })
+  lspconfig.nixd.setup({})
   lspconfig.prismals.setup({})
   lspconfig.pyright.setup({
     single_file_support = true,

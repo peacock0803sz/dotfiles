@@ -152,7 +152,7 @@ with pkgs;
   dockerfile-language-server-nodejs
   gopls
   lemminx
-  nil
+  nixd
   nixpkgs-fmt
   pyright
   stylua

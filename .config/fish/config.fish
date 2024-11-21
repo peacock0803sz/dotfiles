@@ -68,7 +68,7 @@ set --universal tide_terraform_color blue
 
 # vim
 alias vim@bsd /usr/bin/vim
-alias vim@head /etc/profiles/per-user/$(whoami)/bin/vim
+alias vim@head "$HOME/.nix-profile/bin/vim"
 alias vim vim@head
 
 # neovim

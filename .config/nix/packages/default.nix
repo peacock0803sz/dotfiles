@@ -142,6 +142,7 @@ with pkgs;
   neovim
 
   nodejs
+  pnpm
   typescript
   gh-copilot
   nodePackages.prettier

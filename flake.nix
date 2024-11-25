@@ -27,7 +27,7 @@
       systems = [ "x86_64-linux" "aarch64-darwin" ];
       flake = {
         darwinConfigurations = {
-          noctune = import ./.config/nix/hosts/noctune { inherit inputs; };
+          nocturne = import ./.config/nix/hosts/nocturne { inherit inputs; };
           toccata = import ./.config/nix/hosts/toccata { inherit inputs; };
         };
       };

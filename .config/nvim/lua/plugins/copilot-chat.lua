@@ -1,6 +1,6 @@
 local function config()
-  require("CopilotChat.integrations.cmp").setup()
   require("CopilotChat").setup({
+    chat_autocomplete = true,
     mappings = {
       complete = {
         insert = "",

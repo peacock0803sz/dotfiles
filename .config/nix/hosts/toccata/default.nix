@@ -27,10 +27,11 @@ nix-darwin.lib.darwinSystem {
           ./home-manager.nix
         ];
 
-        home.packages = import ../../packages {
-          inherit pkgs;
-          inherit (inputs) vim-src neovim-src;
-        };
+        home.packages = import ../../packages
+          {
+            inherit pkgs;
+            inherit (inputs) vim-src neovim-src;
+          } ++ [ pkgs.emacs ];
       };
     }
   ];

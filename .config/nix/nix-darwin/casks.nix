@@ -19,6 +19,7 @@
   "google-chrome@dev"
   "google-drive"
   "istat-menus"
+  "iterm2"
   "jetbrains-toolbox"
   "karabiner-elements"
   "keycastr"

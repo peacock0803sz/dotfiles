@@ -31,7 +31,7 @@ nix-darwin.lib.darwinSystem {
           {
             inherit pkgs;
             inherit (inputs) vim-src neovim-src;
-          } ++ [ pkgs.emacs ];
+          } ++ [ pkgs.emacs-git ];
       };
     }
   ];

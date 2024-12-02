@@ -118,6 +118,10 @@ in
 # config.lib.flatten (map (kind: packages.${kind}) kinds)
 with pkgs;
 [
+  vim
+  neovim
+
+  _1password-cli
   devenv
   direnv
   eza
@@ -135,11 +139,8 @@ with pkgs;
   ripgrep
   wget
 
-  # Language Runtime
   bun
   deno
-  vim
-  neovim
 
   nodejs
   pnpm

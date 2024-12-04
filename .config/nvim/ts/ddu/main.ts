@@ -2,8 +2,6 @@ import { BaseConfig, ConfigArguments } from "./deps.ts";
 
 export class Config extends BaseConfig {
   override config(args: ConfigArguments): Promise<void> {
-    args.setAlias("action", "tabopen", "open");
-
     args.contextBuilder.patchGlobal({
       resume: true,
       ui: "ff",

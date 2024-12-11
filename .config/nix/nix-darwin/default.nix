@@ -1,4 +1,4 @@
-{ system, username, pkgs, ... }: {
+{ system, username, pkgs, casks, ... }: {
   services.nix-daemon.enable = true;
   nix.settings = {
     experimental-features = "nix-command flakes";
@@ -22,7 +22,7 @@
       upgrade = true;
       cleanup = "uninstall";
     };
-    casks = import ./casks.nix;
+    casks = casks;
   };
 
   system = {

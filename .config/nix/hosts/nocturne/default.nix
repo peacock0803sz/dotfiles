@@ -9,11 +9,48 @@ let
     inherit system;
     config.allowUnfree = true;
   };
+
+  # {{{ Homebrew casks
+  casks = [
+    "adobe-creative-cloud"
+    "alacritty"
+    "bartender"
+    "contexts"
+    "chatgpt"
+    "cleanshot"
+    "deskpad"
+    "discord"
+    "elgato-stream-deck"
+    "fantastical"
+    "firefox"
+    "firefox@nightly"
+    "font-udev-gothic-nf"
+    "google-chrome"
+    "google-chrome@beta"
+    "google-drive"
+    "istat-menus"
+    "jetbrains-toolbox"
+    "karabiner-elements"
+    "keycastr"
+    "lasso"
+    "linear-linear"
+    "obsidian"
+    "orbstack"
+    "obs"
+    "raycast"
+    "slack"
+    "tailscale"
+    "utm"
+    "zoom"
+    "vivaldi"
+    "wezterm"
+  ];
+  # }}}
 in
 nix-darwin.lib.darwinSystem {
   modules = [
     home-manager.darwinModules.home-manager
-    (import ../../nix-darwin { inherit system username pkgs; })
+    (import ../../nix-darwin { inherit system username pkgs casks; })
     {
       home-manager.users.${username} = {
         imports = [
@@ -21,7 +58,7 @@ nix-darwin.lib.darwinSystem {
           ../../home-manager/headed.nix
         ];
 
-        home.packages = import ../../packages {
+        home.packages = import ./packages.nix {
           inherit pkgs;
           inherit (inputs) vim-src neovim-src;
         };

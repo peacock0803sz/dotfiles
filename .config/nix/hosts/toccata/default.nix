@@ -14,11 +14,53 @@ let
       }))
     ];
   };
+
+  # {{{ Homebrew casks
+  casks = [
+    "adobe-creative-cloud"
+    "alacritty"
+    "bartender"
+    "contexts"
+    "chatgpt"
+    "cleanshot"
+    "deskpad"
+    "discord"
+    "elgato-stream-deck"
+    "fantastical"
+    "figma"
+    "firefox"
+    "firefox@nightly"
+    "font-udev-gothic-nf"
+    "google-chrome"
+    "google-chrome@beta"
+    "google-chrome@dev"
+    "google-drive"
+    "istat-menus"
+    "iterm2"
+    "jetbrains-toolbox"
+    "karabiner-elements"
+    "keycastr"
+    "lasso"
+    "linear-linear"
+    "obsidian"
+    "orbstack"
+    "obs"
+    "raycast"
+    "rio"
+    "slack"
+    "tailscale"
+    "utm"
+    "zoom"
+    "vivaldi"
+    "wezterm"
+    "windows-app"
+  ];
+  # }}}
 in
 nix-darwin.lib.darwinSystem {
   modules = [
     home-manager.darwinModules.home-manager
-    (import ../../nix-darwin { inherit system username pkgs; })
+    (import ../../nix-darwin { inherit system username pkgs casks; })
     {
       home-manager.users.${username} = {
         imports = [
@@ -27,11 +69,11 @@ nix-darwin.lib.darwinSystem {
           ./home-manager.nix
         ];
 
-        home.packages = import ../../packages
+        home.packages = import ./packages.nix
           {
             inherit pkgs;
             inherit (inputs) vim-src neovim-src;
-          } ++ [ pkgs.emacs-git ];
+          };
       };
     }
   ];

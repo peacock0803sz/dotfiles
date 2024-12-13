@@ -87,7 +87,7 @@ local function config()
     sources = cmp.config.sources({
       { name = "nvim_lua" },
       { name = "path" },
-      { name = "zsh" },
+      { name = "fish" },
       { name = "skkeleton" },
     }, {
       { name = "cmdline" },

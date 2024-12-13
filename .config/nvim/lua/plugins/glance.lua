@@ -18,9 +18,8 @@ pre > code {
 end
 ---@type LazySpec
 local spec = {
-  "https://github.com/peacock0803sz/vim-glance",
+  "https://github.com/tani/vim-glance",
   dependencies = { "https://github.com/vim-denops/denops.vim" },
-  dev = true,
   config = config,
 }
 return spec

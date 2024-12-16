@@ -30,6 +30,9 @@
           nocturne = import ./.config/nix/hosts/nocturne { inherit inputs; };
           toccata = import ./.config/nix/hosts/toccata { inherit inputs; };
         };
+        nixosConfigurations = {
+          nixos = import ./.config/nix/hosts/nixos { inherit inputs; };
+        };
       };
       perSystem = { ... }: { };
     };

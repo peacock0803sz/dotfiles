@@ -1,4 +1,4 @@
-{ pkgs, vim-src, neovim-src, ... }:
+{ pkgs, vim-src, ... }:
 let
   vim = pkgs.vim.overrideAttrs
     (old: {
@@ -14,17 +14,12 @@ let
           "--enable-fail-if-missing"
         ];
     });
-  neovim = pkgs.neovim.overrideAttrs
-    (old: {
-      version = "latest";
-      src = neovim-src;
-    });
 in
 with pkgs;
 [
   vim
   neovim
-  emacs-git
+  # emacs-git
 
   _1password-cli
   devenv
@@ -67,7 +62,7 @@ with pkgs;
   tailwindcss-language-server
   terraform-ls
   typescript-language-server
-  # vim-language-server
+  vim-language-server
   vscode-langservers-extracted
   vue-language-server
   yaml-language-server

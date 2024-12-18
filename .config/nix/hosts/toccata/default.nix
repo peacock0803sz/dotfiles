@@ -9,9 +9,8 @@ let
     inherit system;
     config.allowUnfree = true;
     overlays = [
-      (import (builtins.fetchTarball {
-        url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-      }))
+      inputs.neovim-overlay.overlays.default
+      inputs.emacs-overlay.overlays.default
     ];
   };
 

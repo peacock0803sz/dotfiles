@@ -8,6 +8,10 @@ let
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
+    overlays = [
+      inputs.neovim-overlay.overlays.default
+      inputs.emacs-overlay.overlays.default
+    ];
   };
 
   # {{{ Homebrew casks
@@ -23,7 +27,6 @@ let
     "elgato-stream-deck"
     "fantastical"
     "firefox"
-    "firefox@nightly"
     "font-udev-gothic-nf"
     "google-chrome"
     "google-chrome@beta"
@@ -60,7 +63,7 @@ nix-darwin.lib.darwinSystem {
 
         home.packages = import ./packages.nix {
           inherit pkgs;
-          inherit (inputs) vim-src neovim-src;
+          inherit (inputs) vim-src;
         };
       };
     }

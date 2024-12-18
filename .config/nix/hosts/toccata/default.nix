@@ -71,7 +71,7 @@ nix-darwin.lib.darwinSystem {
         home.packages = import ./packages.nix
           {
             inherit pkgs;
-            inherit (inputs) vim-src neovim-src;
+            inherit (inputs) vim-src;
           };
       };
     }

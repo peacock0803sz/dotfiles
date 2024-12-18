@@ -12,14 +12,12 @@
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    neovim-src = {
-      url = "github:neovim/neovim";
-      flake = false;
-    };
     vim-src = {
       url = "github:vim/vim";
       flake = false;
     };
+    neovim-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
   outputs = { flake-parts, ... }@inputs:

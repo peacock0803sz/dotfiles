@@ -66,9 +66,11 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGZoZMoFitD0cy5UUiqRdvZqH/1yiE9+8yKo2YC2heiH"
     ];
     packages = [ ];
+    shell = pkgs.fish;
   };
 
   # programs.firefox.enable = true;
+  programs.fish.enable = true;
   programs.vim = {
     enable = true;
     defaultEditor = true;

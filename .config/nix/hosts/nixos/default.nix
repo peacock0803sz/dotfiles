@@ -2,10 +2,13 @@
 let
   inherit (inputs) nixpkgs home-manager;
   username = "peacock";
-  system = "aarch64-linux";
+  system = "x86_64-linux";
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
+    overlays = [
+      inputs.neovim-overlay.overlays.default
+    ];
   };
 in
 nixpkgs.lib.nixosSystem {
@@ -27,7 +30,6 @@ nixpkgs.lib.nixosSystem {
 
         home.packages = import ./packages.nix {
           inherit pkgs;
-          inherit (inputs) neovim-src;
         };
       };
     }

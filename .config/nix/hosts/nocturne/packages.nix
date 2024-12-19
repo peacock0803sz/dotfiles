@@ -1,4 +1,4 @@
-{ pkgs, vim-src, neovim-src, ... }:
+{ pkgs, vim-src, ... }:
 let
   vim = pkgs.vim.overrideAttrs
     (old: {
@@ -13,11 +13,6 @@ let
           "--with-lua-prefix=${pkgs.lua}"
           "--enable-fail-if-missing"
         ];
-    });
-  neovim = pkgs.neovim.overrideAttrs
-    (old: {
-      version = "latest";
-      src = neovim-src;
     });
 in
 with pkgs;

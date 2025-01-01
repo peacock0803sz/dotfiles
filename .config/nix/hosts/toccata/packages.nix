@@ -70,7 +70,7 @@ with pkgs;
   pandoc
   texliveFull
   postgresql
-  mysql84
+  mariadb
   sqlite
   kubectl
   terraform

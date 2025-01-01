@@ -94,7 +94,7 @@ local function config()
   })
   lspconfig.ruff.setup({})
   lspconfig.sourcekit.setup({})
-  lspconfig.tailwindcss.setup({})
+  -- lspconfig.tailwindcss.setup({})
   lspconfig.taplo.setup({
     single_file_support = true,
   })

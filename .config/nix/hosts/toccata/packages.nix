@@ -61,6 +61,7 @@ with pkgs;
   taplo
   tailwindcss-language-server
   terraform-ls
+  tinymist
   typescript-language-server
   vim-language-server
   vscode-langservers-extracted

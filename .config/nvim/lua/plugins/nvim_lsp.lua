@@ -99,6 +99,7 @@ local function config()
     single_file_support = true,
   })
   lspconfig.terraformls.setup({})
+  lspconfig.tinymist.setup({})
   lspconfig.ts_ls.setup({
     filetypes = {
       "javascript",

@@ -30,6 +30,9 @@ local keymaps = {
   { key = "0", mods = "ALT", action = "ResetFontSize" },
   { key = "0", mods = "ALT|SHIFT", action = "ResetFontAndWindowSize" },
 
+  -- Windows
+  { key = "n", mods = "CMD", action = "SpawnWindow" },
+
   -- Workspaces
   {
     key = "w",

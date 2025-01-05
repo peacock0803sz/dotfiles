@@ -57,6 +57,7 @@ set --universal tide_git_color_staged yellow
 set --universal tide_git_color_untracked blue
 set --universal tide_git_color_modified yellow
 
+set --universal tide_right_prompt_items status context jobs direnv node python rustc java php pulumi ruby go gcloud terraform aws nix_shell crystal elixir zig
 set --universal tide_kubectl_color blue
 set --universal tide_docker_color blue
 set --universal tide_node_color green

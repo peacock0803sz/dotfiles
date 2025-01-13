@@ -10,7 +10,7 @@ in
     ".config/rio/themes".source = (pkgs.fetchgit {
       url = "https://github.com/catppuccin/rio";
       sparseCheckout = [ "themes" ];
-      hash = "sha256-EHv3e4QprL82arOBpa/81viXzEKmYjp+IK/9J+T0VL4=";
+      hash = "sha256-c9K3p/6+uQghgQ/Jx++iE2fv4vrUVeKmxce0BqAojOQ=";
     }).outPath + "/themes";
   };
 }

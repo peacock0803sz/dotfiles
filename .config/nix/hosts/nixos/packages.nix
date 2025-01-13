@@ -1,13 +1,5 @@
-{ pkgs, neovim-src, ... }:
-let
-  neovim = pkgs.neovim.overrideAttrs
-    (old: {
-      version = "latest";
-      src = neovim-src;
-    });
-in
-with pkgs;
-[
+{ pkgs, ... }:
+with pkgs; [
   vim
   neovim
 

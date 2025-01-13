@@ -1,22 +1,5 @@
-{ pkgs, vim-src, ... }:
-let
-  vim = pkgs.vim.overrideAttrs
-    (old: {
-      version = "latest";
-      src = vim-src;
-      buildInputs = old.buildInputs ++ (with pkgs; [ gettext lua libiconv ]);
-      configureFlags = old.configureFlags ++
-        [
-          "--enable-terminal"
-          "--with-compiledby=Peaocck (Yoichi Takai)"
-          "--enable-luainterp"
-          "--with-lua-prefix=${pkgs.lua}"
-          "--enable-fail-if-missing"
-        ];
-    });
-in
-with pkgs;
-[
+{ pkgs, ... }:
+with pkgs; [
   vim
   neovim
   # emacs-git
@@ -69,7 +52,7 @@ with pkgs;
   yaml-language-server
 
   pandoc
-  texliveFull
+  # texliveFull
   postgresql
   mariadb
   sqlite

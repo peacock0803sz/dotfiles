@@ -10,6 +10,7 @@ let
     config.allowUnfree = true;
     overlays = [
       inputs.neovim-overlay.overlays.default
+      inputs.vim-overlay.overlays.default
       inputs.emacs-overlay.overlays.default
     ];
   };
@@ -70,11 +71,7 @@ nix-darwin.lib.darwinSystem {
           ./home-manager.nix
         ];
 
-        home.packages = import ./packages.nix
-          {
-            inherit pkgs;
-            inherit (inputs) vim-src;
-          };
+        home.packages = import ./packages.nix { inherit pkgs; };
       };
     }
   ];

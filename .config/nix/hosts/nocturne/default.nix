@@ -61,10 +61,7 @@ nix-darwin.lib.darwinSystem {
           ../../home-manager/headed.nix
         ];
 
-        home.packages = import ./packages.nix {
-          inherit pkgs;
-          inherit (inputs) vim-src;
-        };
+        home.packages = import ./packages.nix { inherit pkgs; };
       };
     }
   ];

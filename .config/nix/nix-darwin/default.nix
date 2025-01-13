@@ -1,8 +1,20 @@
 { system, username, pkgs, casks, ... }: {
   services.nix-daemon.enable = true;
-  nix.settings = {
-    experimental-features = "nix-command flakes";
-    trusted-users = [ "root" "${username}" ];
+  nix = {
+    gc = {
+      automatic = true;
+      interval = {
+        Hour = 9;
+        Minute = 0;
+      };
+      options = "--delete-older-than 7d";
+    };
+    optimise.automatic = true;
+    settings = {
+      experimental-features = "nix-command flakes";
+      max-jobs = 8;
+      trusted-users = [ "root" "${username}" ];
+    };
   };
 
   nixpkgs.hostPlatform = system;

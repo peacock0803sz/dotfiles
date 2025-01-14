@@ -76,12 +76,6 @@ alias vim vim@head
 set --global --export EDITOR nvim
 set --global --export LANG en_US.UTF-8
 
-# VS Code
-switch (uname -s)
-    case Darwin
-        alias code "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
-end
-
 # man
 set --global --export MANPAGER 'nvim -c ASMANPAGER -'
 set --global --export PAGER 'nvim -c PAGER -'

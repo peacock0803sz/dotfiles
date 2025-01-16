@@ -6,6 +6,7 @@ in
   home.file = {
     ".config/alacritty".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/alacritty";
     ".config/wezterm".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/wezterm";
+    ".config/ghostty".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/ghostty";
     ".config/rio/config.toml".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/rio/config.toml";
     ".config/rio/themes".source = (pkgs.fetchgit {
       url = "https://github.com/catppuccin/rio";

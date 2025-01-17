@@ -37,6 +37,7 @@ let
     "keycastr"
     "lasso"
     "linear-linear"
+    "marta"
     "obsidian"
     "orbstack"
     "obs"

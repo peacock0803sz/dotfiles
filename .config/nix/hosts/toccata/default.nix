@@ -31,6 +31,7 @@ let
     "firefox"
     "firefox@nightly"
     "font-udev-gothic-nf"
+    "ghostty"
     "google-chrome"
     "google-chrome@beta"
     "google-chrome@dev"

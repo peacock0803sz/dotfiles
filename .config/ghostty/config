@@ -1,6 +1,6 @@
 theme = catppuccin-latte
 font-family = "UDEV Gothic NF"
-background-opacity = 0.8
+background-opacity = 0.9
 unfocused-split-opacity = 1.0
 window-inherit-working-directory = true
 confirm-close-surface = always
@@ -20,7 +20,7 @@ keybind = super+alt+right=ignore
 keybind = shift+up=adjust_selection:up
 keybind = super+down=jump_to_prompt:1
 keybind = super+enter=toggle_fullscreen
-keybind = super+t=ignore
+# keybind = super+t=ignore
 keybind = super+c=copy_to_clipboard
 keybind = super+shift+right_bracket=next_tab
 keybind = shift+left=adjust_selection:left

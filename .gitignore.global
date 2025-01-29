@@ -177,9 +177,7 @@ flycheck_*.el
 **/pip-wheel-metadata/*
 
 .*-version
-
 .nvmrc
-.envrc
 
 **/.tmp/*
 **/.var/*

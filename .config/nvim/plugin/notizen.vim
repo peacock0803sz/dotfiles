@@ -25,7 +25,7 @@ function! s:open_notizen() abort
     " echo s:_cwd .. ' is not the root directory of Notizen, switched to ' .. s:notizen_root
   endif
 
-  call termopen(['.venv/bin/sphinx-autobuild', '--no-initial', '--port', '8888', 'source', 'build'])
+  call termopen(['./.devenv/state/venv/bin/sphinx-autobuild', '--no-initial', '--port', '8888', 'source', 'build'])
   :setlocal nonumber
 
   if system('hostname') =~? 'toccata.*'

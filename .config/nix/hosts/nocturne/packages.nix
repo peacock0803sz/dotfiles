@@ -14,6 +14,7 @@ with pkgs; [
   fishPlugins.tide
   fzf
   gibo
+  git
   gojq
   gh
   ghq

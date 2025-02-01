@@ -21,7 +21,6 @@ let
     "alacritty"
     "bartender"
     "contexts"
-    "chatgpt"
     "cleanshot"
     "deskpad"
     "discord"

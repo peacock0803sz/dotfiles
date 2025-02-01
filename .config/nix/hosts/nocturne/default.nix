@@ -11,6 +11,7 @@ let
     overlays = [
       inputs.neovim-overlay.overlays.default
       inputs.emacs-overlay.overlays.default
+      inputs.emacs-overlay.overlays.default
     ];
   };
 
@@ -20,7 +21,6 @@ let
     "alacritty"
     "bartender"
     "contexts"
-    "chatgpt"
     "cleanshot"
     "deskpad"
     "discord"
@@ -38,6 +38,7 @@ let
     "lasso"
     "linear-linear"
     "marta"
+    "mtgto/macskk/macskk"
     "obsidian"
     "orbstack"
     "obs"

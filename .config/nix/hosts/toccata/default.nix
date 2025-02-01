@@ -47,7 +47,6 @@ let
     "notion"
     "obsidian"
     "orbstack"
-    "obs"
     "raycast"
     "rio"
     "slack"

@@ -10,8 +10,6 @@ let
     config.allowUnfree = true;
     overlays = [
       inputs.neovim-overlay.overlays.default
-      inputs.emacs-overlay.overlays.default
-      # inputs.emacs-overlay.overlays.default
     ];
   };
 
@@ -38,7 +36,7 @@ let
     "lasso"
     "linear-linear"
     "marta"
-    "mtgto/macskk/macskk"
+    # "mtgto/macskk/macskk"
     "obsidian"
     "orbstack"
     "obs"

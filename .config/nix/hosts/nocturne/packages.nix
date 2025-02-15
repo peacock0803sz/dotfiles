@@ -45,7 +45,7 @@ with pkgs; [
   tailwindcss-language-server
   terraform-ls
   typescript-language-server
-  vim-language-server
+  # vim-language-server
   vscode-langservers-extracted
   vue-language-server
   yaml-language-server

@@ -1,5 +1,6 @@
 { system, username, pkgs, casks, ... }: {
   nix = {
+    enable = false;
     # gc = {
     #   automatic = true;
     #   interval = {

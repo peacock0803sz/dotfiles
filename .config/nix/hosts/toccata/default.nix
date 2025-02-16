@@ -43,7 +43,7 @@ let
     "lasso"
     "linear-linear"
     "marta"
-    "mtgto/macskk/macskk"
+    # "mtgto/macskk/macskk"
     "notion"
     "obsidian"
     "orbstack"

@@ -1,15 +1,14 @@
 { system, username, pkgs, casks, ... }: {
-  services.nix-daemon.enable = true;
   nix = {
-    gc = {
-      automatic = true;
-      interval = {
-        Hour = 9;
-        Minute = 0;
-      };
-      options = "--delete-older-than 7d";
-    };
-    optimise.automatic = true;
+    # gc = {
+    #   automatic = true;
+    #   interval = {
+    #     Hour = 9;
+    #     Minute = 0;
+    #   };
+    #   options = "--delete-older-than 7d";
+    # };
+    # optimise.automatic = true;
     settings = {
       experimental-features = "nix-command flakes";
       max-jobs = 8;

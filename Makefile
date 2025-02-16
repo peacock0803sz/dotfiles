@@ -9,11 +9,19 @@ else
 endif
 
 .PHONY:
+darwin-bootstrap:
+	nix --extra-experimental-features 'nix-command flakes' run nix-darwin/master#darwin-rebuild -- witch --flake .#$(HOST) --impure --cores $(CORES)
+
+.PHONY:
 darwin-upgrade:
 	nix flake update
 	nix run nix-darwin -- switch --flake .#$(HOST) --impure --cores $(CORES)
 	git add ./flake.lock
 	git commit -m "Update flake.lock for $(HOST)"
+
+.PHONY:
+nixos-bootstrap:
+	echo "Please run 'nixos-generate-config' and 'nixos-rebuild switch' manually"
 
 .PHONY:
 nixos-upgrade:

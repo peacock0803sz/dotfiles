@@ -65,7 +65,13 @@ local function config()
       },
     },
   })
-  lspconfig.astro.setup({})
+  lspconfig.astro.setup({
+    init_options = {
+      typescript = {
+        tsdk = vim.env.HOME .. "/.nix-profile/lib/node_modules/typescript/lib",
+      },
+    },
+  })
   lspconfig.cssls.setup({})
   lspconfig.denols.setup({
     filetypes = { "typescript" },
@@ -107,6 +113,7 @@ local function config()
       "typescript",
       "typescriptreact",
       "vue",
+      "astro",
     },
     root_dir = lspconfig.util.root_pattern({ "package.json", "node_modules" }),
     init_options = {

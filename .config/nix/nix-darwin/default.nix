@@ -1,19 +1,9 @@
 { system, username, pkgs, casks, ... }: {
   nix = {
     enable = false;
-    # gc = {
-    #   automatic = true;
-    #   interval = {
-    #     Hour = 9;
-    #     Minute = 0;
-    #   };
-    #   options = "--delete-older-than 7d";
-    # };
-    # optimise.automatic = true;
     settings = {
       experimental-features = "nix-command flakes";
-      max-jobs = 8;
-      trusted-users = [ "root" "${username}" ];
+      trusted-users = "root ${username}";
     };
   };
 

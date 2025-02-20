@@ -16,6 +16,7 @@ export class Config extends BaseConfig {
       },
       sourceOptions: {
         file: {
+          sorters: ["sorter_alpha"],
           converters: ["converter_hl_dir"],
           columns: ["icon_filename"],
         },

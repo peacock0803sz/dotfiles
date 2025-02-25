@@ -20,6 +20,6 @@ end
 local spec = {
   "https://github.com/nvimtools/none-ls.nvim",
   config = config,
-  dependencies = { "https://github.com/williamboman/mason.nvim" },
+  cond =false
 }
 return spec

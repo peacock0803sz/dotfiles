@@ -14,7 +14,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     vim-overlay.url = "github:kawarimidoll/vim-overlay";
     neovim-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    # emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
   outputs = { flake-parts, ... }@inputs:

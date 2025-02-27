@@ -6,11 +6,11 @@ export * as fn from "jsr:@denops/std@7.1.1/function";
 export {
   type ActionArguments,
   ActionFlags,
-} from "jsr:@shougo/ddu-vim@6.1.0/types";
+} from "jsr:@shougo/ddu-vim@10.0.0/types";
 export {
   BaseConfig,
   type ConfigArguments,
-} from "jsr:@shougo/ddu-vim@6.1.0/config";
+} from "jsr:@shougo/ddu-vim@10.0.0/config";
 export { type Params as FfParams } from "jsr:@shougo/ddu-ui-ff@1.4.0";
 export { type Params as FilerParams } from "jsr:@shougo/ddu-ui-filer@1.4.0";
 export { type ActionData } from "jsr:@shougo/ddu-kind-file@0.9.0";

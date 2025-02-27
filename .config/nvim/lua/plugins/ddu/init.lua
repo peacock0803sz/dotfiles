@@ -10,6 +10,7 @@ local spec = {
     "https://github.com/Shougo/ddu.vim",
     config = config,
     dependencies = { "https://github.com/vim-denops/denops.vim" },
+    commit = "v10.0.0"
   },
   { import = "plugins.ddu.ui" },
   { import = "plugins.ddu.kind" },

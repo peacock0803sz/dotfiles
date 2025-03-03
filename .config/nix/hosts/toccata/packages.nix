@@ -47,13 +47,13 @@ with pkgs; [
   terraform-ls
   tinymist
   typescript-language-server
-  # vim-language-server
+  vim-language-server
   vscode-langservers-extracted
   vue-language-server
   yaml-language-server
 
   pandoc
-  # texliveFull
+  texliveFull
   postgresql
   mariadb
   sqlite

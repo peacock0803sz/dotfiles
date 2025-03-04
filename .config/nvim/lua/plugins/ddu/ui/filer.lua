@@ -80,6 +80,6 @@ local spec = {
     config = config,
     dependencies = "https://github.com/Shougo/ddu.vim",
   },
-  { "https://github.com/ryota2357/ddu-column-icon_filename" },
+  { "https://github.com/Shougo/ddu-column-filename" },
 }
 return spec

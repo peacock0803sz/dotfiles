@@ -1,0 +1,6 @@
+; vim:filetype=gitconfig
+
+[user]
+	name = Yoichi Takai
+	email = y.takai@g-gen.co.jp
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE7yJuCvJjgXFUbV6bpybv7oUQh2Q3RHKMVh/0EvTe7E

@@ -31,3 +31,9 @@
 [delta]
 	light = true
   syntax-theme = "Catppuccin-latte"
+
+[includeIf "gitdir:~/ghq/github.com/G-gen-Co-Ltd/"]
+  path = ~/dotfiles/.config/git/.gitconfig.g-gen
+
+[includeIf "gitdir:~/ghq/github.com/G-gen-Tech-Blog/"]
+  path = ~/dotfiles/.config/git/.gitconfig.g-gen

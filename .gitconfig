@@ -1,7 +1,7 @@
 ; vim:filetype=gitconfig
 
 [core]
-	excludesFile = ~/dotfiles/.gitignore.global
+	excludesFile = ~/dotfiles/.config/.gitignore.global
 
 [user]
 	name = Peacock
@@ -21,7 +21,7 @@
 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 [commit]
 	gpgsign = true
-	template = ~/dotfiles/.commit_template
+	template = ~/dotfiles/.config/git/commit-template
 [credential "https://github.com"]
 	helper = 
 	helper = !~/.nix-profile/bin/gh auth git-credential

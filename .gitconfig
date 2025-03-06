@@ -1,7 +1,7 @@
 ; vim:filetype=gitconfig
 
 [core]
-	excludesFile = ~/dotfiles/.config/.gitignore.global
+	excludesFile = ~/dotfiles/.config/git/.gitignore.global
 
 [user]
 	name = Peacock

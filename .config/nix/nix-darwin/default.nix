@@ -1,9 +1,14 @@
 { system, username, pkgs, casks, ... }: {
   nix = {
-    enable = false;
+    enable = true;
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 7d";
+    };
+    optimise.automatic = true;
     settings = {
       experimental-features = "nix-command flakes";
-      trusted-users = "root ${username}";
+      trusted-users = [ "root" "${username}" ];
     };
   };
 
@@ -63,6 +68,6 @@
     sudo.extraConfig = ''
       ${username} ALL=(ALL) NOPASSWD: ALL
     '';
-    pam.services.sudo_local.touchIdAuth = true; 
+    pam.services.sudo_local.touchIdAuth = true;
   };
 }

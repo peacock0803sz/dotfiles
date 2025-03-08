@@ -11,7 +11,6 @@ let
     overlays = [
       inputs.neovim-overlay.overlays.default
       inputs.vim-overlay.overlays.default
-      inputs.emacs-overlay.overlays.default
     ];
   };
 

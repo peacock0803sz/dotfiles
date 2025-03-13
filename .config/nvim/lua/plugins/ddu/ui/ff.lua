@@ -47,20 +47,20 @@ local function config()
     end,
   })
 
-  vim.api.nvim_create_autocmd("FileType", {
-    -- group = group,
-    pattern = "ddu-ff-filter",
-    callback = function()
-      vim.opt_local.cursorline = false
-      local o = { buffer = true, silent = true }
+  -- vim.api.nvim_create_autocmd("FileType", {
+  --   -- group = group,
+  --   pattern = "ddu-ff-filter",
+  --   callback = function()
+  --     vim.opt_local.cursorline = false
+  --     local o = { buffer = true, silent = true }
 
-      vim.keymap.set("n", "q", '<Cmd>call ddu#ui#do_action("closeFilterWindow")<CR>', o)
-      vim.keymap.set("i", "<CR>", '<ESC><Cmd>call ddu#ui#do_action("leaveFilterWindow")<cr>', o)
-      vim.keymap.set("i", "<bs>", function()
-        return vim.fn.col(".") <= 1 and "" or "<bs>"
-      end, { buffer = true, silent = true, expr = true })
-    end,
-  })
+  --     vim.keymap.set("n", "q", '<Cmd>call ddu#ui#do_action("closeFilterWindow")<CR>', o)
+  --     vim.keymap.set("i", "<CR>", '<ESC><Cmd>call ddu#ui#do_action("leaveFilterWindow")<cr>', o)
+  --     vim.keymap.set("i", "<bs>", function()
+  --       return vim.fn.col(".") <= 1 and "" or "<bs>"
+  --     end, { buffer = true, silent = true, expr = true })
+  --   end,
+  -- })
 end
 
 ---@type LazySpec

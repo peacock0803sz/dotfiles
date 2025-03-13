@@ -1,6 +1,6 @@
 { inputs, ... }:
 let
-  inherit (inputs) nixpkgs home-manager;
+  inherit (inputs) nixpkgs home-manager disko;
   username = "peacock";
   system = "x86_64-linux";
   pkgs = import nixpkgs {
@@ -15,8 +15,8 @@ nixpkgs.lib.nixosSystem {
   system = system;
   specialArgs = inputs;
   modules = [
+    disko.nixosModules.disko
     ../../nixos
-    ./hardware-configuration.nix
 
     home-manager.nixosModules.home-manager
     {

@@ -12,6 +12,10 @@
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     vim-overlay.url = "github:kawarimidoll/vim-overlay";
     neovim-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };

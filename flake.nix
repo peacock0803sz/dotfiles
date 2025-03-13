@@ -29,7 +29,7 @@
           toccata = import ./.config/nix/hosts/toccata { inherit inputs; };
         };
         nixosConfigurations = {
-          nixos = import ./.config/nix/hosts/nixos { inherit inputs; };
+          lied = import ./.config/nix/hosts/lied { inherit inputs; };
         };
       };
       perSystem = { ... }: { };

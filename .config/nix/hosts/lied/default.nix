@@ -17,6 +17,7 @@ nixpkgs.lib.nixosSystem {
   modules = [
     disko.nixosModules.disko
     ../../nixos
+    ./hardware-configuration.nix
 
     home-manager.nixosModules.home-manager
     {

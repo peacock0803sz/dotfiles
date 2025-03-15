@@ -2,14 +2,20 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, ... }:
+{ modulesPath, pkgs, ... }:
 
 {
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub = {
+    # no need to set devices, disko will add all devices that have a EF02 partition to the list already
+    # devices = [ ];
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+  };
 
-  # networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "lied"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
@@ -18,21 +24,21 @@
   time.timeZone = "Asia/Tokyo";
 
   # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
+  networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+    useXkbConfig = true; # use xkb.options in tty.
+  };
 
   security.sudo = {
     enable = true;
     extraRules = [{
-      users = [ "peacock" ]; # peacock ALL=(ALL) NOPASSWD: ALL
+      users = [ "wheel" "peacock" ]; # peacock ALL=(ALL) NOPASSWD: ALL
       commands = [{ command = "ALL"; options = [ "NOPASSWD" ]; }];
     }];
   };
@@ -67,6 +73,14 @@
     ];
     packages = [ ];
     shell = pkgs.fish;
+  };
+  users.users.root = {
+    extraGroups = [ "wheel" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGZoZMoFitD0cy5UUiqRdvZqH/1yiE9+8yKo2YC2heiH"
+    ];
+    packages = [ ];
+    shell = pkgs.bashInteractive;
   };
 
   # programs.firefox.enable = true;

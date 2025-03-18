@@ -17,7 +17,7 @@ darwin-upgrade:
 	nix flake update
 	nix run nix-darwin -- switch --flake .#$(HOST) --impure --cores $(CORES)
 	git add ./flake.lock
-	git commit -m "Update flake.lock for $(HOST)"
+	git commit -m "Update flake.lock for darwin"
 
 .PHONY:
 nixos-bootstrap:
@@ -28,4 +28,4 @@ nixos-upgrade:
 	nix flake update
 	sudo nixos-rebuild switch --flake .#$(HOST) --impure
 	git add ./flake.lock
-	git commit -m "Update flake.lock for $(HOST)"
+	git commit -m "Update flake.lock for NixOS"

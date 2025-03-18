@@ -20,6 +20,7 @@ with pkgs; [
   gh
   ghq
   jq
+  inetutils
   ripgrep
   wget
 

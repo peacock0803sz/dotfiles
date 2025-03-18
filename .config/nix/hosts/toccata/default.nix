@@ -20,6 +20,7 @@ let
     "alacritty"
     "bartender"
     "contexts"
+    "cursor"
     "cleanshot"
     "deskpad"
     "discord"
@@ -52,6 +53,7 @@ let
     "tailscale"
     "utm"
     "zoom"
+    "visual-studio-code"
     "vivaldi"
     "wezterm"
     "windows-app"
@@ -63,11 +65,11 @@ nix-darwin.lib.darwinSystem {
     home-manager.darwinModules.home-manager
     (import ../../nix-darwin { inherit system username pkgs casks; })
     {
+      home-manager.backupFileExtension = "bk.nix";
       home-manager.users.${username} = {
         imports = [
           ../../home-manager/base.nix
           ../../home-manager/headed.nix
-          ./home-manager.nix
         ];
 
         home.packages = import ./packages.nix { inherit pkgs; };

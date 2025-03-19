@@ -1,0 +1,18 @@
+; vim:filetype=gitconfig
+
+[include]
+  path = ~/dotfiles/.config/git/.gitconfig.base
+
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+
+[includeIf "gitdir:~/ghq/github.com/G-gen-Co-Ltd/"]
+  path = ~/dotfiles/.config/git/.gitconfig.g-gen
+
+[includeIf "gitdir:~/ghq/github.com/G-gen-Tech-Blog/"]
+  path = ~/dotfiles/.config/git/.gitconfig.g-gen

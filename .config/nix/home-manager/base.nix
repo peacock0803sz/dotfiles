@@ -5,7 +5,6 @@ in
 {
   home.stateVersion = "24.11";
   home.file = {
-    ".gitconfig".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.gitconfig";
     ".config/bat".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/bat";
     ".config/nvim".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/nvim";
     ".local/share/gh/extensions/gh-fish/gh-copilot-alias.fish".source = (pkgs.fetchgit {

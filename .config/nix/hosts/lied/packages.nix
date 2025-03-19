@@ -8,6 +8,7 @@ with pkgs; [
   fish
   fishPlugins.bass
   fishPlugins.tide
+  fzf
   gojq
   gh
   jq
@@ -16,4 +17,9 @@ with pkgs; [
 
   bun
   deno
+  nodejs
+
+  lua-language-server
+  nixd
+  nixpkgs-fmt
 ]

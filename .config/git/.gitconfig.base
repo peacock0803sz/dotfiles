@@ -1,0 +1,22 @@
+; vim:filetype=gitconfig
+
+[core]
+	excludesFile = ~/dotfiles/.config/git/.gitignore.global
+
+[user]
+	name = Peacock
+	email = me@p3ac0ck.net
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGZoZMoFitD0cy5UUiqRdvZqH/1yiE9+8yKo2YC2heiH
+[push]
+	autoSetupRemote = true
+[init]
+	defaultBranch = main
+[merge]
+	tool = nvimdiff
+[pull]
+	rebase = false
+[commit]
+	template = ~/dotfiles/.config/git/commit-template
+[delta]
+	light = true
+  syntax-theme = "Catppuccin-latte"

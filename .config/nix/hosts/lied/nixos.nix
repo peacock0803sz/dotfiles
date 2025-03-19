@@ -1,54 +1,49 @@
-{ modulePath, pkgs, ... }:
-
+{ wodulePath, pkgs, ... }:
+let
+  username = "peacock";
+in
 {
   programs = {
-    hyprland.enable = true;
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
   };
 
   services = {
     xserver.enable = true;
-    greetd = {
-      enable = true;
-      package = pkgs.greetd.tuigreet;
-      settings = {
-        default_session = {
-          command = "${pkgs.lib.getExe pkgs.greetd.tuigreet} --time --remember --remember-session --cmd niri";
-          user = "greeter";
+    displayManager = {
+      autoLogin = {
+        enable = true;
+        user = username;
+      };
+      defaultSession = "hyprland";
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+        settings = {
+          AutoLogin = {
+            Session = "hyprland";
+            User = username;
+          };
         };
       };
     };
-    gnome.gnome-keyring.enable = true;
-  };
-
-  systemd.services.greetd.serviceConfig = {
-    Type = "Idle";
-    StandardInputs = "tty";
-    StandardOutput = "tty";
-    StandardError = "journal";
-    TTYReset = true;
-    TTYVHangup = true;
-    TTYVTDisallocate = true;
   };
 
   fonts.packages = with pkgs; [
-    moralerspace-hwnf
     noto-fonts-cjk-sans
     noto-fonts-emoji
-    liga-hackgen-nf-font
+    jetbrains-mono
   ];
 
   environment.systemPackages = with pkgs; [
-    sddm
     x11basic
-    pixman
-    cairo
-    pango
-    libinput
-    libliftoff
-    cpio
     wayland
     wayland-protocols
+    xwayland
     wl-clipboard
+    lemonade
     wtype
     hyprland
     hyprland-protocols

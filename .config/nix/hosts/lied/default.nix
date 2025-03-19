@@ -21,6 +21,7 @@ nixpkgs.lib.nixosSystem {
     ../../nixos
     ./hardware-configuration.nix
     ./disk-config.nix
+    ./nixos.nix
 
     home-manager.nixosModules.home-manager
     {

@@ -22,6 +22,8 @@ with pkgs; [
   jq
   inetutils
   ripgrep
+  tmux
+  tmuxPlugins.catppuccin
   wget
 
   bun

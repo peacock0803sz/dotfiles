@@ -253,9 +253,9 @@ weight = 800
 #
 # Example:
 [navigation]
-mode = "TopTab"
+mode = "Plain"
 # clickable = false
-hide-if-single = false
+# hide-if-single = false
 # use-current-path = false
 # color-automation = []
 

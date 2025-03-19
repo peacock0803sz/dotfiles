@@ -4,9 +4,17 @@ let
 in
 {
   home.file = {
-    ".config/alacritty".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/alacritty";
+    ".tmux.conf".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.tmux.conf";
+    ".config/tmux/plugins/catppuccin".source = (pkgs.fetchgit {
+      url = "https://github.com/catppuccin/tmux";
+      hash = "sha256-rd3f6Q8xQJg9llwpUeDoRuuCwP3BhqwyIjlSg13c9YU=";
+    }).outPath;
+    ".config/alacritty/alacritty.toml".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/alacritty/alacritty.toml";
+    ".config/alacritty/catppuccin-latte.toml".source = (pkgs.fetchgit {
+      url = "https://github.com/catppuccin/alacritty";
+      hash = "sha256-H8bouVCS46h0DgQ+oYY8JitahQDj0V9p2cOoD4cQX+Q=";
+    }).outPath + "/catppuccin-latte.toml";
     ".config/wezterm".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/wezterm";
-    ".config/ghostty".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/ghostty";
     ".config/rio/config.toml".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/rio/config.toml";
     ".config/rio/themes".source = (pkgs.fetchgit {
       url = "https://github.com/catppuccin/rio";

@@ -59,6 +59,7 @@ nix-darwin.lib.darwinSystem {
         imports = [
           ../../home-manager/base.nix
           ../../home-manager/headed.nix
+          ../../home-manager/darwin.nix
         ];
 
         home.packages = import ./packages.nix { inherit pkgs; };

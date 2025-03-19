@@ -19,6 +19,7 @@ with pkgs; [
   deno
   nodejs
 
+  hyprls
   lua-language-server
   nixd
   nixpkgs-fmt

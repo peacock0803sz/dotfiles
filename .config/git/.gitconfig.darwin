@@ -11,6 +11,13 @@
 [gpg "ssh"]
 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 
+[credential "https://github.com"]
+	helper = 
+	helper = !~/.nix-profile/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !~/.nix-profile/bin/gh auth git-credential
+
 [includeIf "gitdir:~/ghq/github.com/G-gen-Co-Ltd/"]
   path = ~/dotfiles/.config/git/.gitconfig.g-gen
 

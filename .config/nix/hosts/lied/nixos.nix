@@ -7,34 +7,50 @@ in
     hyprland = {
       enable = true;
       xwayland.enable = true;
+      withUWSM = true;
     };
-  };
-
-  services = {
-    xserver.enable = true;
-    displayManager = {
-      autoLogin = {
-        enable = true;
-        user = username;
-      };
-      defaultSession = "hyprland";
-      sddm = {
-        enable = true;
-        wayland.enable = true;
-        settings = {
-          AutoLogin = {
-            Session = "hyprland";
-            User = username;
-          };
+    uwsm = {
+      enable = true;
+      waylandCompositors = {
+        hyprland = {
+          prettyName = "Hyprland";
+          comment = "Hyprland compositor managed by UWSM";
+          binPath = "/run/current-system/sw/bin/Hyprland";
         };
       };
     };
   };
 
+  services = {
+    displayManager = {
+      autoLogin = {
+        enable = true;
+        user = username;
+      };
+      defaultSession = "hyprland-uwsm";
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+        theme = "where_is_my_sddm_theme";
+        settings = {
+          AutoLogin = {
+            Session = "hyprland-uwsm";
+            User = username;
+          };
+        };
+      };
+    };
+    gnome.gnome-keyring.enable = true;
+    xserver.enable = true;
+  };
+
+  systemd.services = { };
+
   fonts.packages = with pkgs; [
     noto-fonts-cjk-sans
     noto-fonts-emoji
     jetbrains-mono
+    udev-gothic-nf
   ];
 
   environment.systemPackages = with pkgs; [
@@ -43,7 +59,9 @@ in
     wayland-protocols
     xwayland
     wl-clipboard
-    lemonade
+    # lemonade
+    where-is-my-sddm-theme
+    pipewire
     wtype
     hyprland
     hyprland-protocols
@@ -57,6 +75,7 @@ in
     rofi-file-browser
     rofi-emoji-wayland
     rofi-calc
+    mako
     wezterm
   ];
 }

@@ -8,3 +8,5 @@ deno.lock
 # nix
 result
 .config/direnv
+
+.tmp/

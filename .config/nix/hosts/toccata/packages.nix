@@ -20,7 +20,7 @@ with pkgs; [
   gh
   ghq
   jq
-  inetutils
+  iproute2mac
   ripgrep
   tmux
   tmuxPlugins.catppuccin

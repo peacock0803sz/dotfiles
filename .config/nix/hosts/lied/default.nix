@@ -32,6 +32,7 @@ nixpkgs.lib.nixosSystem {
           ../../home-manager/base.nix
           ../../home-manager/headed.nix
           ../../home-manager/nixos.nix
+          ./home.nix
         ];
 
         home.packages = import ./packages.nix {

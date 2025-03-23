@@ -18,6 +18,8 @@ with pkgs; [
   bun
   deno
   nodejs
+  playwright-test
+  playwright-driver.browsers-chromium
 
   hyprls
   lua-language-server

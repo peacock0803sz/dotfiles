@@ -122,8 +122,10 @@
     openssh = {
       enable = true;
       ports = [ 2083 ];
-      permitRootLogin = "no";
-      passwordAuthentication = false;
+      settings = {
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
+      };
     };
     tailscale.enable = true;
   };

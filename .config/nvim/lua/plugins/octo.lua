@@ -8,6 +8,7 @@ end
 local spec = {
   "https://github.com/pwntester/octo.nvim",
   config = config,
+  cond = false,
   dependencies = {
     "https://github.com/nvim-lua/plenary.nvim",
     "https://github.com/ibhagwan/fzf-lua",

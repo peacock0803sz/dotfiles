@@ -30,6 +30,7 @@ local function config()
     },
     filetypes = {
       markdown = false,
+      lsp_markdown = false,
       gitcommit = true,
       gitrebase = false,
       hgcommit = true,
@@ -48,5 +49,6 @@ local spec = {
   cmd = "Copilot",
   event = "InsertEnter",
   config = config,
+  cond = false,
 }
 return spec

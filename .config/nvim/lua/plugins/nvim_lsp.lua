@@ -128,6 +128,7 @@ local function config()
     },
     single_file_support = false,
   })
+  lspconfig.unocss.setup({})
   lspconfig.vimls.setup({})
   lspconfig.volar.setup({
     root_dir = lspconfig.util.root_pattern({ "package.json" }),

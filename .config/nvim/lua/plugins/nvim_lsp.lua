@@ -76,6 +76,19 @@ local function config()
   lspconfig.denols.setup({
     filetypes = { "typescript" },
     root_dir = lspconfig.util.root_pattern({ "deno.json", "deno.jsonc", "deps.ts" }),
+    settings = {
+      deno = {
+        enable = true,
+        suggest = {
+          imports = {
+            hosts = {
+              ["https://deno.land"] = true,
+              ["https://npmjs.com"] = true,
+            },
+          },
+        },
+      },
+    },
     single_file_support = true,
     autostart = false,
   })
@@ -127,6 +140,7 @@ local function config()
       },
     },
     single_file_support = false,
+    autostart = false,
   })
   lspconfig.unocss.setup({})
   lspconfig.vimls.setup({})

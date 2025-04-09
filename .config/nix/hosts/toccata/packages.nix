@@ -2,7 +2,7 @@
 with pkgs; [
   vim
   neovim
-  emacs
+  # emacs
 
   _1password-cli
   devenv

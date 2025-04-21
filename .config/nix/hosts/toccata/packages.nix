@@ -5,6 +5,7 @@ with pkgs; [
   # emacs
 
   _1password-cli
+  aider-chat-with-playwright
   devenv
   direnv
   eza

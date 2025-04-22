@@ -1,5 +1,6 @@
 { pkgs, ... }:
 with pkgs; [
+  vim
   neovim
 
   _1password-cli

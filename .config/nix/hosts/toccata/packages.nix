@@ -35,7 +35,6 @@ with pkgs; [
   pnpm
   uv
   typescript
-  gh-copilot
   nodePackages.prettier
 
   astro-language-server

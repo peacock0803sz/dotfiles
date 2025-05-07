@@ -25,8 +25,6 @@ with pkgs; [
   ripgrep
   tmux
   tmuxPlugins.catppuccin
-  tmuxPlugins.battery
-  tmuxPlugins.cpu
   wget
 
   bun

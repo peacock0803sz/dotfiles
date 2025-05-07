@@ -3,6 +3,8 @@ local function config()
 
   require("gitsigns").setup({
     on_attach = function(_)
+      vim.keymap.set("v", "<Space>ga", "<Cmd>Gitsigns stage_hunk<CR>")
+      vim.keymap.set("v", "<Space>gr", "<Cmd>Gitsigns reset_hunk<CR>")
       -- next hunk
       vim.keymap.set("n", "]c", function()
         if vim.wo.diff then

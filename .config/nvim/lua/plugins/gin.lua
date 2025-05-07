@@ -1,4 +1,5 @@
 local function config()
+  vim.keymap.set("n", "<Space>gc", "<Cmd>Gin commit<CR>")
   vim.fn["altercmd#define"]("GinDiff", [[GinDiff ++processor=delta\\ --color-only HEAD]])
 end
 

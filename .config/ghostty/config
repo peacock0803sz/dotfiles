@@ -4,9 +4,10 @@ font-style = "Bold"
 font-size = 14
 background-opacity = 0.85
 confirm-close-surface = false
-macos-option-as-alt = true
 term = "xterm-256color"
+shell-integration = fish
 
+macos-option-as-alt = true
 keybind = clear
 keybind = all:super+q=quit
 keybind = performable:super+shift+i=inspector:toggle

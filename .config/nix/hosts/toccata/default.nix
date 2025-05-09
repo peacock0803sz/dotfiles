@@ -43,6 +43,7 @@ let
     "macskk"
     "notion"
     "obsidian"
+    "obs"
     "orbstack"
     "raycast"
     "slack"

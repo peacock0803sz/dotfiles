@@ -2,17 +2,24 @@ theme = catppuccin-latte.conf
 font-family = "UDEV Gothic NF"
 font-style = "Bold"
 font-size = 14
-background-opacity = 0.85
+background-opacity = 0.8
 confirm-close-surface = false
 term = "xterm-256color"
-shell-integration = fish
-
+title = " "
+macos-titlebar-proxy-icon = "hidden"
 macos-option-as-alt = true
+mouse-scroll-multiplier = "0.5"
+shell-integration = fish
+window-padding-x = 4,4
+window-height = 60
+window-width = 120
+
 keybind = clear
 keybind = all:super+q=quit
 keybind = performable:super+shift+i=inspector:toggle
 keybind = performable:super+c=copy_to_clipboard
 keybind = performable:super+v=paste_from_clipboard
+keybind = all:super+r=reload_config
 keybind = all:super+zero=reset_font_size
 keybind = all:super+shift+plus=increase_font_size:2
 keybind = all:super+minus=decrease_font_size:2

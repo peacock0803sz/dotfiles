@@ -20,6 +20,8 @@ with pkgs; [
   ghq
   jq
   ripgrep
+  tmux
+  tmuxPlugins.catppuccin
   wget
 
   bun

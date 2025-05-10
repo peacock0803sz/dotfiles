@@ -26,6 +26,7 @@ let
     "fantastical"
     "firefox"
     "font-udev-gothic-nf"
+    "ghostty"
     "google-chrome"
     "google-chrome@beta"
     "google-drive"

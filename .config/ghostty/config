@@ -3,7 +3,7 @@ font-family = "UDEV Gothic NF"
 font-feature = "-calt, -liga, -dlig"
 font-style = "Bold"
 font-size = 14
-background-opacity = 0.8
+background-opacity = 0.9
 confirm-close-surface = false
 term = "xterm-256color"
 title = " "
@@ -20,6 +20,7 @@ keybind = all:super+q=quit
 keybind = performable:super+shift+i=inspector:toggle
 keybind = performable:super+c=copy_to_clipboard
 keybind = performable:super+v=paste_from_clipboard
+keybind = performable:super+n=new_window
 keybind = all:super+r=reload_config
 keybind = all:super+zero=reset_font_size
 keybind = all:super+shift+plus=increase_font_size:2

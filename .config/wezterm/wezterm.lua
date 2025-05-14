@@ -36,7 +36,7 @@ local config = {
     { family = "UDEV Gothic NF", weight = "Bold" },
     "Noto Color Emoji",
   }),
-  font_size = 12.0,
+  font_size = 14.0,
 
   color_scheme = color_scheme_name,
 
@@ -63,7 +63,7 @@ set_profile("Presentation", {
   }
 })
 set_profile("Mobile", {
-  font_size = 14.0,
+  font_size = 16.0,
 })
 set_profile("ScreenShare", {
   font_size = 16.0,

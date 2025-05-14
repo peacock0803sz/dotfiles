@@ -22,6 +22,7 @@ with pkgs; [
   ghq
   jq
   iproute2mac
+  lnav
   ripgrep
   tmux
   tmuxPlugins.catppuccin

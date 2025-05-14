@@ -6,6 +6,7 @@ in
   home.stateVersion = "24.11";
   home.file = {
     ".config/bat".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/bat";
+    ".config/lnav/config.json".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/lnav/config.json";
     ".config/nvim".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/nvim";
     ".local/share/gh/extensions/gh-fish/gh-copilot-alias.fish".source = (pkgs.fetchgit {
       url = "https://github.com/DevAtDawn/gh-fish/";

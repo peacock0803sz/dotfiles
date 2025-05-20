@@ -35,6 +35,7 @@
   system = {
     stateVersion = 5;
 
+    primaryUser = username;
     activationScripts.extraActivation.text = ''
       chsh -s /run/current-system/sw/bin/fish
     '';

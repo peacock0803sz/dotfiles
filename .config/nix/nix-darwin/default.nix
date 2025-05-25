@@ -6,6 +6,7 @@
       options = "--delete-older-than 7d";
     };
     optimise.automatic = true;
+    package = inputs.nix-monitored.packages.${inputs.pkgs.system}.default;
     settings = {
       experimental-features = "nix-command flakes";
       trusted-users = [ "root" "${inputs.username}" ];

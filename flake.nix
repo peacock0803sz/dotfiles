@@ -11,6 +11,7 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-monitored.url = "github:ners/nix-monitored";
     flake-parts.url = "github:hercules-ci/flake-parts";
     vim-overlay.url = "github:kawarimidoll/vim-overlay";
     neovim-overlay.url = "github:nix-community/neovim-nightly-overlay";

@@ -1,6 +1,6 @@
 { inputs }:
 let
-  inherit (inputs) nix-darwin home-manager nixpkgs;
+  inherit (inputs) nix-darwin home-manager nixpkgs nix-monitored;
 
   system = "aarch64-darwin";
   username = "peacock";
@@ -62,7 +62,7 @@ in
 nix-darwin.lib.darwinSystem {
   modules = [
     home-manager.darwinModules.home-manager
-    (import ../../nix-darwin { inherit system username pkgs casks; })
+    (import ../../nix-darwin { inherit system username pkgs casks nix-monitored; })
     {
       home-manager.backupFileExtension = "bk.nix";
       home-manager.users.${username} = {

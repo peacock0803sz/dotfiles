@@ -1,4 +1,4 @@
-{ system, username, pkgs, casks, ... }: {
+{ system, username, pkgs, casks, nix-monitored, ... }: {
   nix = {
     enable = true;
     gc = {
@@ -6,6 +6,7 @@
       options = "--delete-older-than 7d";
     };
     optimise.automatic = true;
+    package = nix-monitored.packages.${pkgs.system}.default;
     settings = {
       experimental-features = "nix-command flakes";
       trusted-users = [ "root" "${username}" ];

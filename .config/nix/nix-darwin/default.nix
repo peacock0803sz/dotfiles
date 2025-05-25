@@ -51,6 +51,7 @@
       finder = {
         AppleShowAllFiles = true;
         AppleShowAllExtensions = true;
+        FXPreferredViewStyle = "Nlsv";
         _FXShowPosixPathInTitle = true;
       };
       dock = {

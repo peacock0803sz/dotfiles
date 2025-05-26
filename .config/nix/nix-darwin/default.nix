@@ -1,4 +1,4 @@
-{ system, username, pkgs, casks, ... }: {
+{ ... }@inputs: {
   nix = {
     enable = true;
     gc = {
@@ -8,17 +8,17 @@
     optimise.automatic = true;
     settings = {
       experimental-features = "nix-command flakes";
-      trusted-users = [ "root" "${username}" ];
+      trusted-users = [ "root" "${inputs.username}" ];
     };
   };
 
-  nixpkgs.hostPlatform = system;
-  users.users.${username} = {
-    home = "/Users/${username}";
-    shell = pkgs.fish;
+  nixpkgs.hostPlatform = inputs.system;
+  users.users.${inputs.username} = {
+    home = "/Users/${inputs.username}";
+    shell = inputs.pkgs.fish;
   };
   environment = {
-    shells = [ pkgs.fish ];
+    shells = [ inputs.pkgs.fish ];
   };
   programs.fish.enable = true;
 
@@ -29,13 +29,13 @@
       upgrade = true;
       cleanup = "uninstall";
     };
-    casks = casks;
+    casks = inputs.casks;
   };
 
   system = {
     stateVersion = 5;
 
-    primaryUser = username;
+    primaryUser = inputs.username;
     activationScripts.extraActivation.text = ''
       chsh -s /run/current-system/sw/bin/fish
     '';
@@ -68,7 +68,7 @@
 
   security = {
     sudo.extraConfig = ''
-      ${username} ALL=(ALL) NOPASSWD: ALL
+      ${inputs.username} ALL=(ALL) NOPASSWD: ALL
     '';
     pam.services.sudo_local.touchIdAuth = true;
   };

@@ -28,6 +28,12 @@ if vim.g.neovide then
   vim.g.neovide_position_animation_length = 0
   vim.g.neovide_scroll_animation_far_lines = 0
   vim.g.neovide_input_macos_option_key_is_meta = "both"
+
+  vim.keymap.set("v", "<D-c>", '"+y')
+  vim.keymap.set("n", "<D-v>", '"+P')
+  vim.keymap.set("v", "<D-v>", '"+P')
+  vim.keymap.set("c", "<D-v>", "<C-R>+")
+  vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli')
 end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

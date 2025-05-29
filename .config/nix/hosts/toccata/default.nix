@@ -41,6 +41,7 @@ let
     "linear-linear"
     "marta"
     "macskk"
+    "neovide"
     "notion"
     "obsidian"
     "obs"

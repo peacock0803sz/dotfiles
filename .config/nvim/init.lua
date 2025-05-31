@@ -53,6 +53,7 @@ require("lazy").setup("plugins", opts)
 
 require("keymaps")
 require("autocommands")
+require("lsp")
 
 vim.api.nvim_create_user_command("PluginList", function()
   local plugins = require("lazy").plugins()

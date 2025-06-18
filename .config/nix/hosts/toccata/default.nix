@@ -20,6 +20,7 @@ let
     "alacritty"
     "bartender"
     "contexts"
+    "coteditor"
     "cleanshot"
     "deskpad"
     "discord"

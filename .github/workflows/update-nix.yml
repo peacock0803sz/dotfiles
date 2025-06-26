@@ -1,0 +1,26 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 10 * * * # everyday 01:00 JST
+
+jobs:
+  update-nix:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: update-node2nix
+        run: |
+          cd .config/nix/node2nix
+          nix-shell -p nodePackages.node2nix --command "node2nix -i ./node-packages.json -o node-packages.nix"
+      - name: update-flake
+        run: nix flake update
+      - name: git-commit
+        run: |
+          git add flake.lock
+          git commit -m "Update flake.lock"
+          git push origin HEAD

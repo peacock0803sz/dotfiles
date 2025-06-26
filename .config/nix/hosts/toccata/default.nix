@@ -14,6 +14,8 @@ let
     ];
   };
 
+  npmPkgs = pkgs.callPackage ../../node2nix { inherit pkgs; };
+
   # {{{ Homebrew casks
   casks = [
     "adobe-creative-cloud"
@@ -70,7 +72,7 @@ nix-darwin.lib.darwinSystem {
           ../../home-manager/darwin.nix
         ];
 
-        home.packages = import ./packages.nix { inherit pkgs; };
+        home.packages = import ./packages.nix { inherit pkgs npmPkgs; };
       };
     }
   ];

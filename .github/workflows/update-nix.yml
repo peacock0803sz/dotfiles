@@ -21,6 +21,11 @@ jobs:
       - name: update-flake
         run: nix flake update
       - name: git-commit
+        env:
+          GIT_AUTHOR_NAME: "github-actions[bot]"
+          GIT_AUTHOR_EMAIL: "github-actions[bot]@users.noreply.github.com"
+          GIT_COMMITTER_NAME: "github-actions[bot]"
+          GIT_COMMITTER_EMAIL: "github-actions[bot]@users.noreply.github.com"
         run: |
           git add flake.lock
           git commit -m "Update flake.lock"

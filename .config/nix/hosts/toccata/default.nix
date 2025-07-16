@@ -15,54 +15,12 @@ let
   };
 
   npmPkgs = pkgs.callPackage ../../node2nix { inherit pkgs; };
-
-  # {{{ Homebrew casks
-  casks = [
-    "adobe-creative-cloud"
-    "alacritty"
-    "bartender"
-    "contexts"
-    "coteditor"
-    "cleanshot"
-    "deskpad"
-    "discord"
-    "elgato-stream-deck"
-    "fantastical"
-    "figma"
-    "firefox"
-    "font-udev-gothic-nf"
-    "ghostty"
-    "google-chrome"
-    "google-chrome@beta"
-    "google-chrome@dev"
-    "google-drive"
-    "istat-menus"
-    "jetbrains-toolbox"
-    "karabiner-elements"
-    "keycastr"
-    "lasso"
-    "linear-linear"
-    "macskk"
-    "neovide"
-    "notion"
-    "obs"
-    "orbstack"
-    "raycast"
-    "slack"
-    "tailscale"
-    "utm"
-    "zoom"
-    "visual-studio-code"
-    "vivaldi"
-    "wezterm"
-    "windows-app"
-  ];
-  # }}}
+  brewCasks = import ./brewCasks.nix;
 in
 nix-darwin.lib.darwinSystem {
   modules = [
     home-manager.darwinModules.home-manager
-    (import ../../nix-darwin { inherit system username pkgs casks nix-monitored; })
+    (import ../../nix-darwin { inherit system username pkgs brewCasks nix-monitored; })
     {
       home-manager.backupFileExtension = "bk.nix";
       home-manager.users.${username} = {

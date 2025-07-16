@@ -13,47 +13,12 @@ let
     ];
   };
 
-  # {{{ Homebrew casks
-  casks = [
-    "adobe-creative-cloud"
-    "alacritty"
-    "bartender"
-    "contexts"
-    "coteditor"
-    "cleanshot"
-    "deskpad"
-    "discord"
-    "elgato-stream-deck"
-    "fantastical"
-    "firefox"
-    "font-udev-gothic-nf"
-    "ghostty"
-    "google-chrome"
-    "google-chrome@beta"
-    "google-drive"
-    "istat-menus"
-    "jetbrains-toolbox"
-    "karabiner-elements"
-    "keycastr"
-    "lasso"
-    "linear-linear"
-    "macskk"
-    "orbstack"
-    "obs"
-    "raycast"
-    "slack"
-    "tailscale"
-    "utm"
-    "zoom"
-    "vivaldi"
-    "wezterm"
-  ];
-  # }}}
+  brewCasks = import ./brewCasks.nix;
 in
 nix-darwin.lib.darwinSystem {
   modules = [
     home-manager.darwinModules.home-manager
-    (import ../../nix-darwin { inherit system username pkgs casks nix-monitored; })
+    (import ../../nix-darwin { inherit system username pkgs brewCasks nix-monitored; })
     {
       home-manager.backupFileExtension = "bk.nix";
       home-manager.users.${username} = {

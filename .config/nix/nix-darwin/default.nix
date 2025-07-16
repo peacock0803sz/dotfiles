@@ -30,7 +30,7 @@
       upgrade = true;
       cleanup = "uninstall";
     };
-    casks = inputs.casks;
+    casks = inputs.brewCasks;
   };
 
   system = {

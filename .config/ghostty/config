@@ -21,6 +21,7 @@ keybind = performable:super+shift+i=inspector:toggle
 keybind = performable:super+c=copy_to_clipboard
 keybind = performable:super+v=paste_from_clipboard
 keybind = performable:super+n=new_window
+keybind = performable:super+t=new_tab
 keybind = all:super+r=reload_config
 keybind = all:super+zero=reset_font_size
 keybind = all:super+shift+plus=increase_font_size:2

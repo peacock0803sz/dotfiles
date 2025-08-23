@@ -13,6 +13,7 @@ let
     ];
   };
 
+  npmPkgs = pkgs.callPackage ../../node2nix { inherit pkgs; };
   brewCasks = import ./brewCasks.nix;
 in
 nix-darwin.lib.darwinSystem {
@@ -28,7 +29,7 @@ nix-darwin.lib.darwinSystem {
           ../../home-manager/darwin.nix
         ];
 
-        home.packages = import ./packages.nix { inherit pkgs; };
+        home.packages = import ./packages.nix { inherit pkgs npmPkgs; };
       };
     }
   ];

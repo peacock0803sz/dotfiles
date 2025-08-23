@@ -26,7 +26,7 @@
   "obs"
   "raycast"
   "slack"
-  "tailscale"
+  # "tailscale"
   "utm"
   "zoom"
   "vivaldi"

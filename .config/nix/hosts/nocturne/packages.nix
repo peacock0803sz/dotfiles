@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, npmPkgs, ... }:
 with pkgs; [
   vim
   neovim
@@ -29,9 +29,14 @@ with pkgs; [
   nodejs
   pnpm
   uv
+  go
   typescript
   gh-copilot
   nodePackages.prettier
+  npmPkgs."@github/copilot-language-server"
+  npmPkgs."@google/gemini-cli"
+  npmPkgs."@anthropic-ai/claude-code"
+  npmPkgs."editprompt"
 
   astro-language-server
   lua-language-server

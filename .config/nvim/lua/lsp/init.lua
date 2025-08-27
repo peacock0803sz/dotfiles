@@ -46,10 +46,10 @@ vim.lsp.enable({
   "nixd",
   "prismals",
   "ruff",
-  "tailwindcss",
+  -- "tailwindcss",
   "terraformls",
   "tinymist",
-  "unocss",
+  -- "unocss",
   "vimls",
   "yamlls",
 })

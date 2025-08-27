@@ -5,7 +5,7 @@ with pkgs; [
   # emacs
 
   _1password-cli
-  aider-chat-with-playwright
+  # aider-chat-with-playwright
   devenv
   direnv
   eza
@@ -35,6 +35,8 @@ with pkgs; [
   uv
   typescript
   nodePackages.prettier
+  npmPkgs."editprompt"
+  npmPkgs."gemistat"
   npmPkgs."@github/copilot-language-server"
   npmPkgs."@google/gemini-cli"
 
@@ -52,7 +54,7 @@ with pkgs; [
   tailwindcss-language-server
   terraform-ls
   tinymist
-  typescript-language-server
+  vtsls
   vim-language-server
   vscode-langservers-extracted
   vue-language-server

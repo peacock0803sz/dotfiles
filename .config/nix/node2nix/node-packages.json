@@ -1,5 +1,6 @@
 [
   "editprompt",
+  "gemistat",
   "@anthropic-ai/claude-code",
   "@github/copilot-language-server",
   "@google/gemini-cli"

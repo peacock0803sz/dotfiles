@@ -35,8 +35,10 @@ with pkgs; [
   uv
   typescript
   nodePackages.prettier
+  npmPkgs."ccusage"
   npmPkgs."editprompt"
   npmPkgs."gemistat"
+  npmPkgs."@anthropic-ai/claude-code"
   npmPkgs."@github/copilot-language-server"
   npmPkgs."@google/gemini-cli"
 

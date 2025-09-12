@@ -37,6 +37,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- {{{ No Config Servers
 vim.lsp.enable({
+  "bashls",
   "cssls",
   "dockerls",
   "gopls",

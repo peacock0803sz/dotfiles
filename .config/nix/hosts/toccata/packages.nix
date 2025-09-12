@@ -33,6 +33,7 @@ with pkgs; [
   nodejs
   pnpm
   uv
+  ruff
   typescript
   nodePackages.prettier
   npmPkgs."ccusage"
@@ -63,7 +64,7 @@ with pkgs; [
   yaml-language-server
 
   pandoc
-  texliveFull
+  # texliveFull
   postgresql
   mariadb
   sqlite

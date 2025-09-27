@@ -29,6 +29,7 @@ with pkgs; [
   nodejs
   pnpm
   uv
+  ruff
   go
   typescript
   gh-copilot
@@ -58,7 +59,7 @@ with pkgs; [
   yaml-language-server
 
   pandoc
-  texliveFull
+  # texliveFull
   postgresql
   sqlite
   kubectl

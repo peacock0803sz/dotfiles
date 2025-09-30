@@ -23,7 +23,7 @@
       flake = {
         darwinConfigurations = {
           nocturne = import ./.config/nix/hosts/nocturne { inherit inputs; };
-          toccata = import ./.config/nix/hosts/toccata { inherit inputs; };
+          arpeggio = import ./.config/nix/hosts/arpeggio { inherit inputs; };
         };
       };
       perSystem = { ... }: { };

@@ -38,7 +38,7 @@
 
     primaryUser = inputs.username;
     activationScripts.extraActivation.text = ''
-      chsh -s /run/current-system/sw/bin/fish
+      chsh -s /Users/${inputs.username}/.nix-profile/bin/fish ${inputs.username}
     '';
     # + nixpkgs.lib.optionalString (
     #  nixpkgs.stdenv.isAarch64 ''softwareupdate --install-rosetta --agree-to-license''

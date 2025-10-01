@@ -8,6 +8,7 @@ in
     ".config/bat".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/bat";
     ".config/lnav/config.json".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/lnav/config.json";
     ".config/nvim".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/nvim";
+    # ".config/fish/config.fish".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/fish/config.fish";
     ".local/share/gh/extensions/gh-fish/gh-copilot-alias.fish".source = (pkgs.fetchgit {
       url = "https://github.com/DevAtDawn/gh-fish/";
       hash = "sha256-QNk3FXzmLc8KqP3xpkAJT+otKI6fgwXcYS/TgFElCsg=";

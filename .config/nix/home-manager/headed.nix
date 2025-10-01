@@ -15,13 +15,13 @@ in
     ".config/rio/themes".source = (pkgs.fetchgit {
       url = "https://github.com/catppuccin/rio";
       sparseCheckout = [ "themes" ];
-      hash = "sha256-c9K3p/6+uQghgQ/Jx++iE2fv4vrUVeKmxce0BqAojOQ=";
+      hash = "sha256-JDHD7P28rKR6MLhENGvBpDzOmtDhPgH8YAnYjwLLGq4=";
     }).outPath + "/themes";
     ".config/ghostty/config".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/ghostty/config";
     ".config/ghostty/themes".source = (pkgs.fetchgit {
       url = "https://github.com/catppuccin/ghostty";
       sparseCheckout = [ "themes" ];
-      hash = "sha256-BdKEYLb/tY3SS+cTu892x2ZubXJbeZzhpJclr4orQMw=";
+      hash = "sha256-PrvKSKnPgeXtlTdWJNyz8EcQDlCHxOH1fgaiHbMec2o=";
     }).outPath + "/themes";
   };
 }

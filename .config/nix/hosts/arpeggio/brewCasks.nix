@@ -21,7 +21,7 @@
   "jetbrains-toolbox"
   "karabiner-elements"
   "keycastr"
-  # "lasso"
+  "lasso-app"
   "linear-linear"
   # "macskk"
   # "neovide"

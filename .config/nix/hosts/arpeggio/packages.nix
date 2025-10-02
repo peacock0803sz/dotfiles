@@ -5,7 +5,6 @@ with pkgs; [
   # emacs
 
   _1password-cli
-  # aider-chat-with-playwright
   devenv
   direnv
   eza
@@ -51,6 +50,7 @@ with pkgs; [
   lemminx
   nixd
   nixpkgs-fmt
+  protols
   pyright
   stylua
   taplo
@@ -64,7 +64,6 @@ with pkgs; [
   yaml-language-server
 
   pandoc
-  # texliveFull
   postgresql
   mariadb
   sqlite

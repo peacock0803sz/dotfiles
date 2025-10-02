@@ -45,6 +45,7 @@ vim.lsp.enable({
   "lemminx",
   "html",
   "nixd",
+  "protols",
   "prismals",
   "ruff",
   -- "tailwindcss",

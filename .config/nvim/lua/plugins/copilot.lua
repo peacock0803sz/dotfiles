@@ -49,6 +49,5 @@ local spec = {
   cmd = "Copilot",
   event = "InsertEnter",
   config = config,
-  cond = false,
 }
 return spec

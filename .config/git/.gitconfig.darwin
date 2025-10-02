@@ -17,9 +17,3 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !~/.nix-profile/bin/gh auth git-credential
-
-[includeIf "gitdir:~/ghq/github.com/G-gen-Co-Ltd/"]
-  path = ~/dotfiles/.config/git/.gitconfig.g-gen
-
-[includeIf "gitdir:~/ghq/github.com/G-gen-Tech-Blog/"]
-  path = ~/dotfiles/.config/git/.gitconfig.g-gen

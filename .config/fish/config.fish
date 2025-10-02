@@ -78,7 +78,6 @@ set --global --export LANG en_US.UTF-8
 
 # man
 set --global --export MANPAGER 'nvim -c ASMANPAGER -'
-set --global --export PAGER 'nvim -c PAGER -'
 
 # devenv
 direnv hook fish | source

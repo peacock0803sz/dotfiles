@@ -10,7 +10,7 @@ endif
 
 .PHONY:
 darwin-bootstrap:
-	nix --extra-experimental-features 'nix-command flakes' run nix-darwin/master#darwin-rebuild -- switch --flake .#$(HOST) --impure --cores $(CORES)
+	sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin/master#darwin-rebuild -- switch --flake .#$(HOST) --impure --cores $(CORES)
 
 .PHONY:
 darwin-upgrade:

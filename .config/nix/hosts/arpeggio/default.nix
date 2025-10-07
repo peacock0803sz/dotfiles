@@ -3,7 +3,7 @@ let
   inherit (inputs) nix-darwin home-manager nixpkgs nix-monitored;
 
   system = "aarch64-darwin";
-  username = "yoichi.takai";
+  username = "peacock";
 
   pkgs = import nixpkgs {
     inherit system;

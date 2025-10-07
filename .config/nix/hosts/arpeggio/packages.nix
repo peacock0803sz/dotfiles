@@ -19,6 +19,7 @@ with pkgs; [
   gojq
   gh
   ghq
+  graphviz
   jq
   iproute2mac
   lnav
@@ -29,12 +30,14 @@ with pkgs; [
 
   bun
   deno
+  go
   nodejs
   pnpm
   uv
   ruff
   typescript
   nodePackages.prettier
+  codex
   npmPkgs."ccusage"
   npmPkgs."editprompt"
   npmPkgs."gemistat"
@@ -45,7 +48,7 @@ with pkgs; [
   astro-language-server
   lua-language-server
   bash-language-server
-  dockerfile-language-server-nodejs
+  dockerfile-language-server
   gopls
   lemminx
   nixd

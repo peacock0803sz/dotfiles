@@ -209,3 +209,4 @@ result
 *.diff
 
 .aider*
+.claude/settings.local.json

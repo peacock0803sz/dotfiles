@@ -13,7 +13,16 @@
 
 [credential "https://github.com"]
 	helper = 
-	helper = !~/.nix-profile/bin/gh auth git-credential
+	helper = !/Users/peacock/.nix-profile/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !~/.nix-profile/bin/gh auth git-credential
+	helper = !/Users/peacock/.nix-profile/bin/gh auth git-credential
+
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
+
+[includeIf "gitdir:~/ghq/github.com/groove-x/"]
+  path = ~/dotfiles/.config/git/.gitconfig.groove-x
+
+[includeIf "gitdir:~/worktrees/github.com/groove-x/"]
+  path = ~/dotfiles/.config/git/.gitconfig.groove-x

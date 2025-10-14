@@ -31,7 +31,7 @@ local function config()
     filetypes = {
       markdown = false,
       lsp_markdown = false,
-      gitcommit = true,
+      gitcommit = false,
       gitrebase = false,
       hgcommit = true,
       svn = false,

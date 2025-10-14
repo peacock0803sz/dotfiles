@@ -7,6 +7,7 @@ with pkgs; [
   _1password-cli
   devenv
   direnv
+  bat
   eza
   delta
   fd
@@ -26,6 +27,7 @@ with pkgs; [
   ripgrep
   tmux
   tmuxPlugins.catppuccin
+  tmuxPlugins.tmux-fzf
   wget
 
   bun
@@ -39,6 +41,7 @@ with pkgs; [
   nodePackages.prettier
   codex
   npmPkgs."ccusage"
+  npmPkgs."@ccusage/codex"
   npmPkgs."editprompt"
   npmPkgs."gemistat"
   npmPkgs."@anthropic-ai/claude-code"
@@ -72,8 +75,10 @@ with pkgs; [
   sqlite
   kubectl
   terraform
+  tflint
+  tflint-plugins.tflint-ruleset-google
   act
-  awscli2
+  # awscli2
   google-cloud-sdk
   ffmpeg
   imagemagick

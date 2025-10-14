@@ -3,6 +3,7 @@
   "editprompt",
   "gemistat",
   "@anthropic-ai/claude-code",
+  "@ccusage/codex",
   "@github/copilot-language-server",
   "@google/gemini-cli"
 ]

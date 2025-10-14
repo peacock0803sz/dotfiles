@@ -50,6 +50,7 @@ vim.lsp.enable({
   "ruff",
   -- "tailwindcss",
   "terraformls",
+  "tflint",
   "tinymist",
   -- "unocss",
   "vimls",

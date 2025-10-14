@@ -37,6 +37,12 @@ function fzf-ghq
 end
 bind \cg fzf-ghq
 
+function fzf-gwq
+  set --function _dir $(gwq list -g --json | jq -r '.[].path' | fzf)
+  commandline "cd $_dir"
+end
+bind \ct fzf-gwq
+
 ### tide prompts {{{
 set --universal tide_character_icon '$'
 set --universal tide_character_color green
@@ -85,6 +91,7 @@ direnv hook fish | source
 # Language specific settings {{{
 # Go
 set --append --export --global GOPATH $HOME/ghq
+fish_add_path $GOPATH/bin
 
 # Python
 set --global --export PIP_REQUIRE_VIRTUALENV 1
@@ -96,6 +103,7 @@ source "$HOME/.local/share/gh/extensions/gh-fish/gh-copilot-alias.fish"
 # }}}
 
 # Aliases / Abbreviations {{{
+alias git-root "git rev-parse --show-toplevel"
 abbr --add yq gojq # yq to gojq
 abbr --add tf terraform
 abbr --add zenn "bunx zenn-cli@latest"

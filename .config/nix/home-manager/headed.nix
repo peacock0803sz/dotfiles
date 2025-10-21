@@ -11,12 +11,6 @@ in
       hash = "sha256-H8bouVCS46h0DgQ+oYY8JitahQDj0V9p2cOoD4cQX+Q=";
     }).outPath + "/catppuccin-latte.toml";
     ".config/wezterm".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/wezterm";
-    ".config/rio/config.toml".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/rio/config.toml";
-    ".config/rio/themes".source = (pkgs.fetchgit {
-      url = "https://github.com/catppuccin/rio";
-      sparseCheckout = [ "themes" ];
-      hash = "sha256-JDHD7P28rKR6MLhENGvBpDzOmtDhPgH8YAnYjwLLGq4=";
-    }).outPath + "/themes";
     ".config/ghostty/config".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/ghostty/config";
     ".config/ghostty/themes".source = (pkgs.fetchgit {
       url = "https://github.com/catppuccin/ghostty";

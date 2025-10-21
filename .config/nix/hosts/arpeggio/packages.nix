@@ -39,8 +39,7 @@ with pkgs; [
   ruff
   typescript
   nodePackages.prettier
-  codex
-  npmPkgs."ccusage"
+  npmPkgs."@openai/codex"
   npmPkgs."@ccusage/codex"
   npmPkgs."editprompt"
   npmPkgs."gemistat"

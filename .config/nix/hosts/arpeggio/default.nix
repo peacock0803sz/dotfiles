@@ -20,7 +20,9 @@ let
     (import ../../home-manager/base.nix)
     (import ../../home-manager/headed.nix)
     (import ../../home-manager/darwin.nix)
-    (import ../../home-manager/agents.nix { inherit pkgs npmPkgs mcp-servers-nix; })
+    (import ../../home-manager/agents/claude.nix { inherit pkgs npmPkgs mcp-servers-nix; })
+    (import ../../home-manager/agents/codex.nix { inherit pkgs npmPkgs mcp-servers-nix; })
+    (import ../../home-manager/agents/gemini.nix { inherit pkgs npmPkgs mcp-servers-nix; })
   ];
 in
 nix-darwin.lib.darwinSystem {

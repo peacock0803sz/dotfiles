@@ -20,10 +20,6 @@ darwin-upgrade:
 nixos-bootstrap:
 	echo "Please run 'nixos-generate-config' and 'nixos-rebuild switch' manually"
 
-.ONESHELL:
-node2nix-update:
-	cd .config/nix/node2nix && nix-shell -p nodePackages.node2nix --command "node2nix -i node-packages.json -o node-packages.nix"
-
 .PHONY:
 nixos-upgrade:
 	sudo nixos-rebuild switch --flake .#$(HOST) --impure

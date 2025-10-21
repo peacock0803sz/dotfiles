@@ -15,6 +15,10 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     vim-overlay.url = "github:kawarimidoll/vim-overlay";
     neovim-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    mcp-servers-nix = {
+      url = "github:natsukium/mcp-servers-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { flake-parts, ... }@inputs:

@@ -1,6 +1,6 @@
 { inputs }:
 let
-  inherit (inputs) nix-darwin home-manager nixpkgs nix-monitored;
+  inherit (inputs) nix-darwin home-manager nixpkgs nix-monitored mcp-servers-nix;
 
   system = "aarch64-darwin";
   username = "peacock";
@@ -14,8 +14,14 @@ let
     ];
   };
 
-  npmPkgs = pkgs.callPackage ../../node2nix { inherit pkgs; };
+  npmPkgs = pkgs.callPackage ./node2nix { inherit pkgs; };
   brewCasks = import ./brewCasks.nix;
+  homeModules = [
+    (import ../../home-manager/base.nix)
+    (import ../../home-manager/headed.nix)
+    (import ../../home-manager/darwin.nix)
+    (import ../../home-manager/agents.nix { inherit pkgs npmPkgs mcp-servers-nix; })
+  ];
 in
 nix-darwin.lib.darwinSystem {
   modules = [
@@ -24,11 +30,7 @@ nix-darwin.lib.darwinSystem {
     {
       home-manager.backupFileExtension = "bk.nix";
       home-manager.users.${username} = {
-        imports = [
-          ../../home-manager/base.nix
-          ../../home-manager/headed.nix
-          ../../home-manager/darwin.nix
-        ];
+        imports = homeModules;
 
         home.packages = import ./packages.nix { inherit pkgs npmPkgs; };
       };

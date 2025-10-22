@@ -42,10 +42,8 @@ with pkgs; [
   npmPkgs."ccusage"
   npmPkgs."editprompt"
   npmPkgs."gemistat"
-  npmPkgs."@openai/codex"
   npmPkgs."@ccusage/codex"
   npmPkgs."@github/copilot-language-server"
-  npmPkgs."@google/gemini-cli"
 
   astro-language-server
   lua-language-server

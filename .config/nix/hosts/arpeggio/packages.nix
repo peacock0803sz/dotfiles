@@ -39,10 +39,11 @@ with pkgs; [
   ruff
   typescript
   nodePackages.prettier
-  npmPkgs."@openai/codex"
-  npmPkgs."@ccusage/codex"
+  npmPkgs."ccusage"
   npmPkgs."editprompt"
   npmPkgs."gemistat"
+  npmPkgs."@openai/codex"
+  npmPkgs."@ccusage/codex"
   npmPkgs."@github/copilot-language-server"
   npmPkgs."@google/gemini-cli"
 

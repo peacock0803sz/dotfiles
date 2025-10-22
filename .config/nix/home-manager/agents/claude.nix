@@ -3,6 +3,7 @@
   programs.claude-code = {
     enable = true;
     package = npmPkgs."@anthropic-ai/claude-code";
+    memory.source = ./AGENTS.md;
     mcpServers = (mcp-servers-nix.lib.evalModule pkgs {
       programs = {
         context7.enable = true;

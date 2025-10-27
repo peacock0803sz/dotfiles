@@ -24,6 +24,10 @@ switch (uname -s)
 end
 # }}}
 
+if test $(uname -n) = 'arpeggio.local'
+    source $HOME/dotfiles/.config/fish/work.fish
+end
+
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/dotfiles/bin
 
@@ -38,8 +42,8 @@ end
 bind \cg fzf-ghq
 
 function fzf-gwq
-  set --function _dir $(gwq list -g --json | jq -r '.[].path' | fzf)
-  commandline "cd $_dir"
+    set --function _dir $(gwq list -g --json | jq -r '.[].path' | fzf)
+    commandline "cd $_dir"
 end
 bind \ct fzf-gwq
 

@@ -75,7 +75,7 @@ with pkgs; [
   tflint
   tflint-plugins.tflint-ruleset-google
   act
-  # awscli2
+  awscli2
   google-cloud-sdk
   ffmpeg
   imagemagick

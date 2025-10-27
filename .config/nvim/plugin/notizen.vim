@@ -28,8 +28,8 @@ function! s:open_notizen() abort
   call termopen(['./.devenv/state/venv/bin/sphinx-autobuild', '--no-initial', '--port', '8888', 'source', 'build'])
   :setlocal nonumber
 
-  if system('hostname') =~? 'toccata.*'
-    let s:working_dir = expand('$HOME/Documents/notizen/source/Work/TOPGATE')
+  if system('hostname') =~? 'arpeggio.*'
+    let s:working_dir = expand('$HOME/Documents/notizen/source/Work/GROOVE-X')
   else
     let s:working_dir = expand('$HOME/Documents/notizen/source/Private')
   endif

@@ -5,6 +5,21 @@ local function config()
 
   local map_source = require("plugins.ddu.map").map_source
   map_source("<Space>F", "file", { ui = "filer", sources = { { name = "file" } } })
+
+  vim.api.nvim_create_user_command("DduFiles", function()
+    vim.fn["ddu#start"]({
+      ui = "filer",
+      uiOptions = { filer = { preview = false } },
+      uiParams = {
+        filer = {
+          split = "no",
+          startAutoAction = false,
+          autoAction = {},
+        },
+      },
+      sources = { { name = "file" } },
+    })
+  end, {})
 end
 
 ---@type LazySpec

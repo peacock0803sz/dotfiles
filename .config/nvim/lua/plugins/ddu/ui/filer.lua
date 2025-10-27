@@ -61,12 +61,12 @@ local function config()
 
   local group_hijack = vim.api.nvim_create_augroup("hijack-netrw", { clear = true })
   vim.api.nvim_create_autocmd("VimEnter", {
-    pattern = "*",
+    pattern = "netrw",
     group = group_hijack,
     callback = suppress_netrw,
   })
   vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "*",
+    pattern = "netrw",
     nested = true,
     group = group_hijack,
     callback = hijack_netrw,

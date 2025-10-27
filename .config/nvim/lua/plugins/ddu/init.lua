@@ -11,6 +11,11 @@ local spec = {
     config = config,
     dependencies = { "https://github.com/vim-denops/denops.vim" },
   },
+  {
+    "https://github.com/Shougo/ddu-commands.vim",
+    config = config,
+    dependencies = { "https://github.com/vim-denops/denops.vim" },
+  },
   { import = "plugins.ddu.ui" },
   { import = "plugins.ddu.kind" },
   { import = "plugins.ddu.filters" },

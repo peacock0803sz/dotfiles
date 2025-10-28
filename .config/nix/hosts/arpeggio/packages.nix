@@ -30,6 +30,7 @@ with pkgs; [
   tmuxPlugins.catppuccin
   tmuxPlugins.tmux-fzf
   wget
+  vhs
 
   bun
   deno

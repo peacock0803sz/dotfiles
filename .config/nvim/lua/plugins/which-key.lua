@@ -1,3 +1,4 @@
+local cond = vim.env.NVIM_KEYCASTR ~= "1"
 local function config()
   require("which-key").setup({})
 
@@ -8,5 +9,5 @@ local function config()
 end
 
 ---@type LazySpec
-local spec = { "https://github.com/folke/which-key.nvim", config = config }
+local spec = { "https://github.com/folke/which-key.nvim", config = config, cond = cond }
 return spec

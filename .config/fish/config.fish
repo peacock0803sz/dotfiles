@@ -101,6 +101,16 @@ fish_add_path $GOPATH/bin
 set --global --export PIP_REQUIRE_VIRTUALENV 1
 # }}}
 
+# https://github.com/yuki-yano/zeno.zsh {{{
+# set --global --export ZENO_ROOT $HOME/.local/share/fish/plugins/zeno.zsh
+# if test "$ZENO_LOADED" = 1
+#     bind ' ' zeno-auto-snippet
+#     bind \r zeno-auto-snippet-and-accept-line
+#     bind \t zeno-completion
+#     bind \cx\x20 zeno-insert-space
+# end
+# }}}
+
 # {{{ Workaround for GitHub Copilot CLI
 alias github-copilot-cli gh-copilot
 source "$HOME/.local/share/gh/extensions/gh-fish/gh-copilot-alias.fish"

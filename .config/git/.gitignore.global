@@ -189,7 +189,7 @@ flycheck_*.el
 
 sandbox*
 *.tmp
-repro.*
+*repro.*
 
 # Git worktree
 

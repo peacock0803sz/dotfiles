@@ -1,5 +1,5 @@
 local function config()
-  vim.keymap.set("c", "<C-M-C>", function()
+  vim.keymap.set("c", "<C-C>", function()
     if vim.fn.getcmdtype() == ":" then
       local cmdline = vim.fn.getcmdline()
       vim.fn.histadd(":", cmdline)
@@ -7,8 +7,8 @@ local function config()
         vim.cmd("Capture " .. cmdline)
       end)
     end
-    return "<C-M-C>"
-  end, { expr = true })
+    return "<C-C>"
+  end)
 end
 
 ---@type LazySpec

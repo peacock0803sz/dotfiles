@@ -1,4 +1,6 @@
-let g:mr_mru_disabled=1
-let g:mr_mrw_disabled=1
-let g:mr_mrr_disabled=1
-let g:mr_mrd_disabled=1
+augroup GitCommitMR
+  autocmd! BufEnter * call mr#mru#delete(expand("<cfile>"))
+  autocmd! BufEnter * call mr#mrw#delete(expand("<cfile>"))
+  autocmd! BufEnter * call mr#mrr#delete(expand("<cfile>"))
+  autocmd! BufEnter * call mr#mrd#delete(expand("<cfile>"))
+augroup END

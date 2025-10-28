@@ -4,6 +4,9 @@ let
 in
 {
   home.file = {
-    ".gitconfig".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/git/.gitconfig.darwin";
+    ".gitconfig".source = mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/dotfiles/.config/git/.gitconfig.darwin";
+    ".config/karabiner/karabiner.json".source = mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/dotfiles/.config/karabiner/karabiner.json";
   };
 }

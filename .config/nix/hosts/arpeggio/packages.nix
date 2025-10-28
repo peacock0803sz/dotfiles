@@ -25,6 +25,7 @@ with pkgs; [
   iproute2mac
   lnav
   ripgrep
+  podman
   tmux
   tmuxPlugins.catppuccin
   tmuxPlugins.tmux-fzf

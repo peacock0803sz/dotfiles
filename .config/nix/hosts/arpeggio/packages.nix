@@ -35,6 +35,7 @@ with pkgs; [
   go
   nodejs
   pnpm
+  python3
   uv
   ruff
   typescript

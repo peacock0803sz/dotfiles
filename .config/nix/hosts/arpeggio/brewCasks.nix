@@ -29,6 +29,7 @@
   "obs"
   "raycast"
   "slack"
+  "suzuki-shunsuke/tfcmt/tfcmt"
   "tailscale-app"
   "utm"
   "zoom"

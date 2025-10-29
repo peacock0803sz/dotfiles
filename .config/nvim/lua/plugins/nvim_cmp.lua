@@ -61,16 +61,16 @@ local function config()
     }),
   })
 
-  cmp.setup.filetype("fish", {
-    sources = cmp.config.sources({
-      { name = "fish" },
-    }, {
-      { name = "buffer" },
-      { name = "spell" },
-      { name = "path" },
-      { name = "skkeleton" },
-    }),
-  })
+  -- cmp.setup.filetype("fish", {
+  --   sources = cmp.config.sources({
+  --     { name = "fish" },
+  --   }, {
+  --     { name = "buffer" },
+  --     { name = "spell" },
+  --     { name = "path" },
+  --     { name = "skkeleton" },
+  --   }),
+  -- })
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline("/", {
@@ -120,6 +120,7 @@ local spec = {
   {
     "https://github.com/mtoohey31/cmp-fish",
     dependencies = { "https://github.com/mtoohey31/cmp-fish" },
+    cond = false
   },
   {
     "https://github.com/hrsh7th/cmp-cmdline",

@@ -29,6 +29,9 @@
           nocturne = import ./.config/nix/hosts/nocturne { inherit inputs; };
           arpeggio = import ./.config/nix/hosts/arpeggio { inherit inputs; };
         };
+        nixosConfigurations = {
+          lied = import ./.config/nix/hosts/lied { inherit inputs; };
+        };
       };
       perSystem = { ... }: { };
     };

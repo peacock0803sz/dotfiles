@@ -94,7 +94,6 @@ direnv hook fish | source
 
 # Language specific settings {{{
 # Go
-set --append --export --global GOPATH $HOME/ghq
 fish_add_path $GOPATH/bin
 
 # Python

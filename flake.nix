@@ -11,6 +11,14 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-monitored.url = "github:ners/nix-monitored";
     flake-parts.url = "github:hercules-ci/flake-parts";
     vim-overlay.url = "github:kawarimidoll/vim-overlay";
@@ -30,7 +38,7 @@
           arpeggio = import ./.config/nix/hosts/arpeggio { inherit inputs; };
         };
         nixosConfigurations = {
-          lied = import ./.config/nix/hosts/lied { inherit inputs; };
+          bassoon = import ./.config/nix/hosts/bassoon { inherit inputs; };
         };
       };
       perSystem = { ... }: { };

@@ -6,9 +6,6 @@ let
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
-    overlays = [
-      inputs.neovim-overlay.overlays.default
-    ];
   };
 in
 nixpkgs.lib.nixosSystem {
@@ -16,11 +13,10 @@ nixpkgs.lib.nixosSystem {
   specialArgs = inputs;
   modules = [
     disko.nixosModules.disko
-    nixos-hardware.nixosModules.common-cpu-amd
-    nixos-hardware.nixosModules.common-gpu-amd
+    nixos-hardware.nixosModules.gmktec-nucbox-g3-plus
     ../../nixos
-    ./hardware-configuration.nix
-    ./disk-config.nix
+    ./hardware.nix
+    ./disk.nix
     ./nixos.nix
 
     home-manager.nixosModules.home-manager
@@ -29,15 +25,12 @@ nixpkgs.lib.nixosSystem {
       home-manager.useUserPackages = true;
       home-manager.users."${username}" = {
         imports = [
-          ../../home-manager/base.nix
-          ../../home-manager/headed.nix
           ../../home-manager/nixos.nix
-          ./home.nix
         ];
 
-        home.packages = import ./packages.nix {
-          inherit pkgs;
-        };
+        # home.packages = import ./packages.nix {
+        #   inherit pkgs;
+        # };
       };
     }
   ];

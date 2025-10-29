@@ -85,7 +85,6 @@
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGZoZMoFitD0cy5UUiqRdvZqH/1yiE9+8yKo2YC2heiH" # peacock0803sz
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKp+/AjLV8Q3C2LbxJaDSRcNSe7MNkV1S3N0pA+T2mO0 Shortcuts" # Shortcuts
     ];
     packages = [ ];
     shell = pkgs.bashInteractive;

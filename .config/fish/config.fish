@@ -45,7 +45,7 @@ function fzf-gwq
     set --function _dir $(gwq list --global --json | jq -r ".[].path" | fzf --preview 'bat {}/README.md' --bind 'ctrl-d:preview-down,ctrl-u:preview-up')
     commandline "cd $_dir"
 end
-bind \cG fzf-gwq
+bind \ct fzf-gwq
 
 ### tide prompts {{{
 set --universal tide_character_icon '$'

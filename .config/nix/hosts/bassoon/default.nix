@@ -29,6 +29,7 @@ nixpkgs.lib.nixosSystem {
       home-manager.users."${username}" = {
         imports = [
           ../../home-manager/nixos.nix
+          ./home.nix
         ];
         home.packages = import ./packages.nix { inherit pkgs; };
       };

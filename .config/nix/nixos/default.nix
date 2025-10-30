@@ -121,7 +121,7 @@
   services = {
     openssh = {
       enable = true;
-      ports = [ 2083 ];
+      ports = [ 22 ];
       settings = {
         PermitRootLogin = "no";
         PasswordAuthentication = false;

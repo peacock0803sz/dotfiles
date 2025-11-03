@@ -117,7 +117,6 @@ source "$HOME/.local/share/gh/extensions/gh-fish/gh-copilot-alias.fish"
 
 # Aliases / Abbreviations {{{
 alias git-root "git rev-parse --show-toplevel"
-alias docker podman
 abbr --add yq gojq # yq to gojq
 abbr --add tf terraform
 abbr --add zenn "bunx zenn-cli@latest"

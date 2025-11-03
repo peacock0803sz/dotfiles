@@ -20,7 +20,6 @@ with pkgs; [
   ghq
   jq
   ripgrep
-  podman
   tmux
   tmuxPlugins.catppuccin
   wget

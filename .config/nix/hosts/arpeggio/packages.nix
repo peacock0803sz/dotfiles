@@ -63,7 +63,7 @@ with pkgs; [
   tailwindcss-language-server
   terraform-ls
   tinymist
-  vtsls
+  typescript-language-server
   vim-language-server
   vscode-langservers-extracted
   vue-language-server

@@ -3,7 +3,7 @@ local function config()
 
   -- sources setup
   local sources = {
-    null_ls.builtins.formatting.prettier,
+    -- null_ls.builtins.formatting.prettier,
     -- Lua
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.fish_indent,

@@ -48,7 +48,7 @@ vim.lsp.enable({
   "protols",
   "prismals",
   "ruff",
-  -- "tailwindcss",
+  "tailwindcss",
   "terraformls",
   "tflint",
   "tinymist",

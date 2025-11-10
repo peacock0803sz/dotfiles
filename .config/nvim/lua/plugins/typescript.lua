@@ -14,7 +14,7 @@ local function config()
       expose_as_code_action = {},
       -- string|nil - specify a custom path to `tsserver.js` file, if this is nil or file under path
       -- not exists then standard path resolution strategy is applied
-      tsserver_path = "~/.nix-profile/bin/tsserver",
+      tsserver_path = "~/.nix-profile/bin/vtsls",
       -- specify a list of plugins to load by tsserver, e.g., for support `styled-components`
       -- (see 💅 `styled-components` support section)
       tsserver_plugins = {

@@ -9,12 +9,12 @@
 **子エージェント**
 
 - 詳細指示に基づく実行作業
-  - 調査
-  - ドキュメント作成
-  - コード生成
+    - 調査
+    - ドキュメント作成
+    - コード生成
 - 優先順位：
-  1. カスタムサブエージェント（プロジェクト独自設定）
-  2. 汎用サブエージェント（Task）
+    1. カスタムサブエージェント（プロジェクト独自設定）
+    2. 汎用サブエージェント（Task）
 
 ### Serena MCPメモリ管理（実装作業）
 
@@ -28,14 +28,14 @@
 
 - 重要な実装パターン確立時は`write_memory`で記録
 - 命名規則：
-  - `{project}-conventions` - プロジェクト全体の規約
-  - `{feature}-patterns` - 機能別実装パターン
-  - `{domain}-patterns` - ドメイン固有パターン
-  - `{layer}-conventions` - レイヤー固有の規約
-  - `architecture-{decision}` - アーキテクチャ決定事項
-  - `{service}-api-spec` - 外部サービスAPI仕様
-  - `{issue}-solution` - トラブルシューティング記録
-  - `refactoring-{target}` - リファクタリング方針
+    - `{project}-conventions` - プロジェクト全体の規約
+    - `{feature}-patterns` - 機能別実装パターン
+    - `{domain}-patterns` - ドメイン固有パターン
+    - `{layer}-conventions` - レイヤー固有の規約
+    - `architecture-{decision}` - アーキテクチャ決定事項
+    - `{service}-api-spec` - 外部サービスAPI仕様
+    - `{issue}-solution` - トラブルシューティング記録
+    - `refactoring-{target}` - リファクタリング方針
 
 #### メモリ管理原則
 
@@ -75,6 +75,6 @@
 - **日時記載禁止**: 更新日時等の記載は不要
 - **簡潔性重視**: 工数・後方互換性の考慮は不要
 - **コメント規則**:
-  - 複雑なロジックのみコメント記載
-  - 日本語でのコメント記載
-  - TODOコメントは具体的に記載
+    - 複雑なロジックのみコメント記載
+    - 日本語でのコメント記載
+    - TODOコメントは具体的に記載

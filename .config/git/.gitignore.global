@@ -179,17 +179,15 @@ flycheck_*.el
 .*-version
 .nvmrc
 
-**/.tmp/*
-**/.var/*
-
 **/tmp/*
 **/var/*
 
 .cache
 
-sandbox*
-*.tmp
-*repro.*
+**/sandbox*
+**/*.tmp
+**/tmp.*
+**/*repro.*
 
 # Git worktree
 
@@ -208,5 +206,4 @@ result
 *.patch
 *.diff
 
-.aider*
-.claude/settings.local.json
+**/.claude/settings.local.json

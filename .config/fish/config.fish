@@ -21,6 +21,14 @@ switch (uname -s)
         eval ($HOMEBREW_PREFIX/bin/brew shellenv)
         fish_add_path "$HOMEBREW_PREFIX/sbin"
         source "$HOME/.config/op/plugins.sh"
+
+        # {{{ Workaround for GitHub Copilot CLI
+        alias github-copilot-cli gh-copilot
+        source "$HOME/.local/share/gh/extensions/gh-fish/gh-copilot-alias.fish"
+        # }}}
+
+        # devenv
+        direnv hook fish | source
 end
 # }}}
 
@@ -89,9 +97,6 @@ set --global --export LANG en_US.UTF-8
 # man
 set --global --export MANPAGER 'nvim -c ASMANPAGER -'
 
-# devenv
-direnv hook fish | source
-
 # Language specific settings {{{
 # Go
 fish_add_path $GOPATH/bin
@@ -108,11 +113,6 @@ set --global --export PIP_REQUIRE_VIRTUALENV 1
 #     bind \t zeno-completion
 #     bind \cx\x20 zeno-insert-space
 # end
-# }}}
-
-# {{{ Workaround for GitHub Copilot CLI
-alias github-copilot-cli gh-copilot
-source "$HOME/.local/share/gh/extensions/gh-fish/gh-copilot-alias.fish"
 # }}}
 
 # Aliases / Abbreviations {{{

@@ -24,6 +24,7 @@
   "lasso-app"
   "linear-linear"
   # "macskk"
+  "marta"
   # "neovide"
   "obs"
   "orbstack"

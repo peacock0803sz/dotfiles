@@ -36,6 +36,8 @@ local function config()
       hgcommit = true,
       svn = false,
       cvs = false,
+      text = false,
+      [""] = false,
       ["."] = false,
     },
     copilot_node_command = "node", -- Node.js version must be > 16.x

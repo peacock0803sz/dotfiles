@@ -25,7 +25,7 @@ local spec = {
   },
   {
     "https://github.com/peacock0803sz/ddu-source-git_stash",
-    dev = true,
+    dev = false,
     dependencies = { "https://github.com/Shougo/ddu.vim" },
     config = function()
       map_source("<Space>gS", "git_stash", { sources = { { name = "git_stash" } } }, true)

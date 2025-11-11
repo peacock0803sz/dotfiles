@@ -74,13 +74,22 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.peacock = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "workgroup" ]; # Enable ‘sudo’ for the user.
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGZoZMoFitD0cy5UUiqRdvZqH/1yiE9+8yKo2YC2heiH"
     ];
     packages = [ ];
     shell = pkgs.fish;
+    password = "admin";
   };
+  # users.users.samba = {
+  #   isNormalUser = true;
+  #   group = "samba";
+  #   extraGroups = [ "workgroup" ];
+  #   password = "nixos";
+  # };
+  # users.groups.samba = { };
+  users.groups.workgroup = { };
   users.users.root = {
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = [

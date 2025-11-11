@@ -796,13 +796,13 @@ let
         sha512 = "37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==";
       };
     };
-    "@types/react-19.2.2" = {
+    "@types/react-19.2.3" = {
       name = "_at_types_slash_react";
       packageName = "@types/react";
-      version = "19.2.2";
+      version = "19.2.3";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@types/react/-/react-19.2.2.tgz";
-        sha512 = "6mDvHUFSjyT2B2yeNx2nUgMxh9LtOWvkhIU3uePn2I2oyNymUAX1NIsdgviM4CH+JSrp2D2hsMvJOkxY+0wNRA==";
+        url = "https://registry.npmjs.org/@types/react/-/react-19.2.3.tgz";
+        sha512 = "k5dJVszUiNr1DSe8Cs+knKR6IrqhqdhpUwzqhkS8ecQTSf3THNtbfIp/umqHMpX2bv+9dkx3fwDv/86LcSfvSg==";
       };
     };
     "@types/request-2.48.13" = {
@@ -4672,10 +4672,10 @@ in
   editprompt = nodeEnv.buildNodePackage {
     name = "editprompt";
     packageName = "editprompt";
-    version = "0.6.0";
+    version = "0.7.0";
     src = fetchurl {
-      url = "https://registry.npmjs.org/editprompt/-/editprompt-0.6.0.tgz";
-      sha512 = "ApzwKzDS2frf3wNgfCsRuxBS4d3lx8ea+f87hupNBwhn8afrsj3PZe3eNpaiBNuFQQvKQB+tfEiYfDn1MKGoZA==";
+      url = "https://registry.npmjs.org/editprompt/-/editprompt-0.7.0.tgz";
+      sha512 = "PCwe1VZxVaahRL9RIi05EK5KU4tL6JCDas3pZjPr9GpJ7brAUEHMZbYc3eeeCoiskTGFmVRmYd0gsIDkCBV6uQ==";
     };
     dependencies = [
       sources."ajv-8.17.1"
@@ -4759,10 +4759,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.0.36";
+    version = "2.0.37";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.36.tgz";
-      sha512 = "xsdZk/OKakTUNVokA6nCYKA/pJ5xwVLr7bTnnqSmIuz8+OaGe+msew543Mo2hHLecOtl8yxi0XnJmviZKpNqTQ==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.37.tgz";
+      sha512 = "8d4qRGY9/LGqEbYNfno00wg0tprDC0dPNBBZHk8CVvl5vlB8PX2HVwlI6kok3ZNFBMDL+Hqjbp26xXC1hTL6Hw==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -4925,7 +4925,7 @@ in
       sources."@types/minimatch-5.1.2"
       sources."@types/node-24.10.0"
       sources."@types/normalize-package-data-2.4.4"
-      sources."@types/react-19.2.2"
+      sources."@types/react-19.2.3"
       sources."@types/request-2.48.13"
       sources."@types/tinycolor2-1.4.6"
       sources."@types/tough-cookie-4.0.5"

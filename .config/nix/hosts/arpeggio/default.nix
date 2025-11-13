@@ -17,6 +17,7 @@ let
   npmPkgs = pkgs.callPackage ./node2nix { inherit pkgs; };
   brewCasks = import ./brewCasks.nix;
   homeModules = [
+    (import ./home.nix)
     (import ../../home-manager/base.nix)
     (import ../../home-manager/headed.nix)
     (import ../../home-manager/darwin.nix)

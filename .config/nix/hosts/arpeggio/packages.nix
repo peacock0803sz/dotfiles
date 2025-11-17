@@ -3,6 +3,7 @@ with pkgs; [
   vim
   neovim
   # emacs
+  cachix
 
   _1password-cli
   devenv

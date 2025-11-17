@@ -23,3 +23,8 @@ nixos-bootstrap:
 .PHONY:
 nixos-upgrade:
 	sudo nixos-rebuild switch --flake .#$(HOST) --impure
+
+.PHONY:
+.ONESHELL:
+node2nix-upgrade:
+	cd ./.config/nix/hosts/$(HOST)/node2nix && nix-shell -p nodePackages.node2nix --command 'node2nix -i ./node-packages.json -o node-packages.nix'

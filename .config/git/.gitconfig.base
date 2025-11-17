@@ -2,6 +2,7 @@
 
 [core]
 	excludesFile = ~/dotfiles/.config/git/.gitignore.global
+  editor = nvim -U NONE
 
 [user]
 	name = Peacock

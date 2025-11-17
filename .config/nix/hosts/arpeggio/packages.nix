@@ -4,6 +4,7 @@ with pkgs; [
   neovim
   # emacs
   cachix
+  tree-sitter
 
   _1password-cli
   devenv

@@ -50,7 +50,7 @@ end
 bind \cg fzf-ghq
 
 function fzf-gwq
-    set --function _dir $(gwq list --global --json | jq -r ".[].path" | fzf --preview 'bat {}/README.md' --bind 'ctrl-d:preview-down,ctrl-u:preview-up')
+    set --function _dir $(gwq list --json | jq -r ".[].path" | fzf --preview 'bat {}/README.md' --bind 'ctrl-d:preview-down,ctrl-u:preview-up')
     commandline "cd $_dir"
 end
 bind \ct fzf-gwq

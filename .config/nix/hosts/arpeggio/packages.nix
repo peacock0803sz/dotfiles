@@ -59,6 +59,7 @@ with pkgs; [
   protols
   pyright
   stylua
+  sqls
   taplo
   tailwindcss-language-server
   terraform-ls

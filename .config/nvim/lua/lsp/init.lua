@@ -47,6 +47,7 @@ vim.lsp.enable({
   "nixd",
   "protols",
   "prismals",
+  "sqls",
   "ruff",
   "tailwindcss",
   "terraformls",

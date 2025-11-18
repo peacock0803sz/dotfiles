@@ -121,13 +121,13 @@ let
         sha512 = "Orxzlfb9c67A15cq2JQEyVc7wEsmFBmHjZWZYQMUyJ1qivXyMwdyNOs9odi79hze+2zqdTtu1E19IM/FtqZ10g==";
       };
     };
-    "@google/gemini-cli-core-0.15.3" = {
+    "@google/gemini-cli-core-0.16.0" = {
       name = "_at_google_slash_gemini-cli-core";
       packageName = "@google/gemini-cli-core";
-      version = "0.15.3";
+      version = "0.16.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.15.3.tgz";
-        sha512 = "kCEGfSU4ShM/P1tYzg+4UVNOAaDaQjpKdkOpcY1Rw0EZgLN+E4Hf7bYRySTFxBj2wW231mRxGdxgkPJI0LiLLA==";
+        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.16.0.tgz";
+        sha512 = "EYzcAUcIcfkLJQGHabS96Y47A9ofEapzgJwLtbzpUwYFBuAegQcnl3xhbdxfj6kCygVHq2rPoa/udEVfqryOjQ==";
       };
     };
     "@google/genai-1.16.0" = {
@@ -796,13 +796,13 @@ let
         sha512 = "37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==";
       };
     };
-    "@types/react-19.2.5" = {
+    "@types/react-19.2.6" = {
       name = "_at_types_slash_react";
       packageName = "@types/react";
-      version = "19.2.5";
+      version = "19.2.6";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@types/react/-/react-19.2.5.tgz";
-        sha512 = "keKxkZMqnDicuvFoJbzrhbtdLSPhj/rZThDlKWCDbgXmUg0rEUFtRssDXKYmtXluZlIqiC5VqkCgRwzuyLHKHw==";
+        url = "https://registry.npmjs.org/@types/react/-/react-19.2.6.tgz";
+        sha512 = "p/jUvulfgU7oKtj6Xpk8cA2Y1xKTtICGpJYeJXz2YVO2UcvjQgeRMLDGfDeqeRW2Ta+0QNFwcc8X3GH8SxZz6w==";
       };
     };
     "@types/request-2.48.13" = {
@@ -1390,13 +1390,13 @@ let
         sha512 = "qj+f8APARXHrM0hraqXYb2/bOVSV4PvJQlNZ/DVj0QrmNM2q2euizkeuVckQ57J+W0mRH6Hvi+k50M4Jul2VRQ==";
       };
     };
-    "content-disposition-1.0.0" = {
+    "content-disposition-1.0.1" = {
       name = "content-disposition";
       packageName = "content-disposition";
-      version = "1.0.0";
+      version = "1.0.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/content-disposition/-/content-disposition-1.0.0.tgz";
-        sha512 = "Au9nRL8VNUut/XSzbQA38+M78dzP4D+eqg3gfJHMIHHYa3bg067xj1KxMUWj+VULbiZMowKngFFbKczUrNJ1mg==";
+        url = "https://registry.npmjs.org/content-disposition/-/content-disposition-1.0.1.tgz";
+        sha512 = "oIXISMynqSqm241k6kcQ5UwttDILMK4BiurCfGEREw6+X9jkkpEe5T9FZaApyLGGOnFuyMWZpdolTXMtvEJ08Q==";
       };
     };
     "content-type-1.0.5" = {
@@ -2200,13 +2200,13 @@ let
         sha512 = "kVCxPF3vQM/N0B1PmoqVUqgHP+EeVjmZSQn+1oCRPxd2P21P2F19lIgbR3HBosbB1PUhOAoctJnfEn2GbN2eZA==";
       };
     };
-    "glob-10.4.5" = {
+    "glob-10.5.0" = {
       name = "glob";
       packageName = "glob";
-      version = "10.4.5";
+      version = "10.5.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/glob/-/glob-10.4.5.tgz";
-        sha512 = "7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==";
+        url = "https://registry.npmjs.org/glob/-/glob-10.5.0.tgz";
+        sha512 = "DfXN8DfhJ7NH3Oe7cFmu3NCu1wKbkReJ8TorzSAFbSKrlNaQSKfIzqYqVY8zlbs2NLBbWpRiU52GX2PbaBVNkg==";
       };
     };
     "google-auth-library-9.15.1" = {
@@ -2758,13 +2758,13 @@ let
         sha512 = "NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==";
       };
     };
-    "json-schema-typed-8.0.1" = {
+    "json-schema-typed-8.0.2" = {
       name = "json-schema-typed";
       packageName = "json-schema-typed";
-      version = "8.0.1";
+      version = "8.0.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/json-schema-typed/-/json-schema-typed-8.0.1.tgz";
-        sha512 = "XQmWYj2Sm4kn4WeTYvmpKEbyPsL7nBsb647c7pMe6l02/yx2+Jfc4dT6UZkEXnIUb5LhD55r2HPsJ1milQ4rDg==";
+        url = "https://registry.npmjs.org/json-schema-typed/-/json-schema-typed-8.0.2.tgz";
+        sha512 = "fQhoXdcvc3V28x7C7BMs4P5+kNlgUURe2jmUT1T//oBRMDrqy1QPelJimwZGo7Hg9VPV3EQV5Bnq4hbFy2vetA==";
       };
     };
     "jsonfile-6.2.0" = {
@@ -4654,10 +4654,10 @@ in
   ccusage = nodeEnv.buildNodePackage {
     name = "ccusage";
     packageName = "ccusage";
-    version = "17.1.5";
+    version = "17.1.6";
     src = fetchurl {
-      url = "https://registry.npmjs.org/ccusage/-/ccusage-17.1.5.tgz";
-      sha512 = "ljzdAffDSxKbIMcn2/Nmi4lOWMiRmeB+U9oG+4aMAUjSs2Fg7K7onYTJBbdxa6yTxcX7KHq/VaW2o9faQD4o+A==";
+      url = "https://registry.npmjs.org/ccusage/-/ccusage-17.1.6.tgz";
+      sha512 = "hWeOpAQi4lPEbI7XYXNHabFMAmSUhT3Sv3GB9v1sPAX3FOAj3NLZaiq2K6wspdg0ShsbjhChQdzJ4bYzsyu2aA==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -4701,7 +4701,7 @@ in
       sources."is64bit-2.0.0"
       sources."isexe-2.0.0"
       sources."json-schema-traverse-1.0.0"
-      sources."json-schema-typed-8.0.1"
+      sources."json-schema-typed-8.0.2"
       sources."merge-stream-2.0.0"
       sources."mimic-fn-4.0.0"
       sources."mimic-function-5.0.1"
@@ -4759,10 +4759,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.0.42";
+    version = "2.0.44";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.42.tgz";
-      sha512 = "poK4Z+mviehjjCIQe+KTU40kSTgnUitxROg79rAwN3L3A7FyvQE8v6jdakvtxYb452/8qBSf+FbvImHvuXn0rw==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.44.tgz";
+      sha512 = "718uXiZCd0TZQwR6CAM4IacEyVIQuzKZcuF6LB1Jl4yKWU6xO54t84163isGztKhxfPf0MCtW8t+rf1QH/tkzg==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -4777,10 +4777,10 @@ in
   "@ccusage/codex" = nodeEnv.buildNodePackage {
     name = "_at_ccusage_slash_codex";
     packageName = "@ccusage/codex";
-    version = "17.1.5";
+    version = "17.1.6";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@ccusage/codex/-/codex-17.1.5.tgz";
-      sha512 = "cI4ozyfTTymjHC5/bMScOg7o3WISKQLceI2vnCVAqhX5JbEq/1JrKz3xYM3XaVVA0sxu5dcYApxegOvpgCPGSQ==";
+      url = "https://registry.npmjs.org/@ccusage/codex/-/codex-17.1.6.tgz";
+      sha512 = "1jWD/YMLqkU1s/OWUPUztbwdL1iWLYxURA9MX8tD9PGHJhlvetVaB9EMEvAN4rbORZ/owm4+B2zffM7Qj4YFVA==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -4795,10 +4795,10 @@ in
   "@github/copilot-language-server" = nodeEnv.buildNodePackage {
     name = "_at_github_slash_copilot-language-server";
     packageName = "@github/copilot-language-server";
-    version = "1.396.0";
+    version = "1.397.0";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@github/copilot-language-server/-/copilot-language-server-1.396.0.tgz";
-      sha512 = "oFV45nKDQsUO+2jftBddoRQm28olQNlE4L2ixVdMnUry7SLc/mYGw20hfpgpP6/rSK11YmrWmbfAE4tKqeGLkQ==";
+      url = "https://registry.npmjs.org/@github/copilot-language-server/-/copilot-language-server-1.397.0.tgz";
+      sha512 = "W4tyfELe+a52hsDSPD+FpgWY94Gaho6GQp/wt3yvnHwaUwm1rGX6NsCLN1Co2kmXiUkO6iEdqgGHOYsHEbSwZw==";
     };
     dependencies = [
       sources."vscode-jsonrpc-8.2.0"
@@ -4818,10 +4818,10 @@ in
   "@google/gemini-cli" = nodeEnv.buildNodePackage {
     name = "_at_google_slash_gemini-cli";
     packageName = "@google/gemini-cli";
-    version = "0.15.3";
+    version = "0.16.0";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.15.3.tgz";
-      sha512 = "Lxc/2WkJiDfpDCm3RkIw4YYkFPUv8TIaZaTXpy4N536HorKYfnSJc66xhQO1OT8rzE8PWyEO94BH3nMundanYQ==";
+      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.16.0.tgz";
+      sha512 = "qko3Bs8Va2NJAcbA5Hb0zfgy8ouNaQ9YwWq1wz8ekqbPdbsF0t0r3f8kokvveQzT968ePxjLO5/Wp2W1UUJAwQ==";
     };
     dependencies = [
       sources."@alcalzone/ansi-tokenize-0.2.2"
@@ -4841,7 +4841,7 @@ in
       sources."@google-cloud/precise-date-4.0.0"
       sources."@google-cloud/projectify-4.0.0"
       sources."@google-cloud/promisify-4.0.0"
-      sources."@google/gemini-cli-core-0.15.3"
+      sources."@google/gemini-cli-core-0.16.0"
       sources."@google/genai-1.16.0"
       (sources."@grpc/grpc-js-1.14.1" // {
         dependencies = [
@@ -4925,7 +4925,7 @@ in
       sources."@types/minimatch-5.1.2"
       sources."@types/node-24.10.1"
       sources."@types/normalize-package-data-2.4.4"
-      sources."@types/react-19.2.5"
+      sources."@types/react-19.2.6"
       sources."@types/request-2.48.13"
       sources."@types/tinycolor2-1.4.6"
       sources."@types/tough-cookie-4.0.5"
@@ -5024,7 +5024,7 @@ in
       sources."command-exists-1.2.9"
       sources."comment-json-4.4.1"
       sources."config-chain-1.1.13"
-      sources."content-disposition-1.0.0"
+      sources."content-disposition-1.0.1"
       sources."content-type-1.0.5"
       sources."convert-to-spaces-2.0.1"
       sources."cookie-0.7.2"
@@ -5125,7 +5125,7 @@ in
       sources."get-intrinsic-1.3.1"
       sources."get-proto-1.0.1"
       sources."get-stream-5.2.0"
-      sources."glob-10.4.5"
+      sources."glob-10.5.0"
       sources."google-auth-library-9.15.1"
       sources."google-gax-4.6.1"
       sources."google-logging-utils-0.0.2"

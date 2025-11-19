@@ -4639,13 +4639,13 @@ let
         sha512 = "gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==";
       };
     };
-    "zod-to-json-schema-3.24.6" = {
+    "zod-to-json-schema-3.25.0" = {
       name = "zod-to-json-schema";
       packageName = "zod-to-json-schema";
-      version = "3.24.6";
+      version = "3.25.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/zod-to-json-schema/-/zod-to-json-schema-3.24.6.tgz";
-        sha512 = "h/z3PKvcTcTetyjl1fkj79MHNEjm+HpD6NXheWjzOekY7kV+lwDYnHw+ivHkijnCSMz1yJaWBD9vu/Fcmk+vEg==";
+        url = "https://registry.npmjs.org/zod-to-json-schema/-/zod-to-json-schema-3.25.0.tgz";
+        sha512 = "HvWtU2UG41LALjajJrML6uQejQhNJx+JBO9IflpSja4R03iNWfKXrj6W2h7ljuLyc1nKS+9yDyL/9tD1U/yBnQ==";
       };
     };
   };
@@ -4672,10 +4672,10 @@ in
   editprompt = nodeEnv.buildNodePackage {
     name = "editprompt";
     packageName = "editprompt";
-    version = "0.8.0";
+    version = "0.8.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/editprompt/-/editprompt-0.8.0.tgz";
-      sha512 = "jrcsgXRKPYRq52XZDiY+46ncJLLry9E3NYurfiScdbAozkj3vju7p5AHjXT4MwlHEESNXnuq3gTFTqWirUsTkw==";
+      url = "https://registry.npmjs.org/editprompt/-/editprompt-0.8.1.tgz";
+      sha512 = "phc2s1PXb5gLII1q361Hi+uUMJpmJF0/oxkAYhyED/QIwo4p8sqUEOjuMzrwbEi2ibghY6HlCnh7pXS1cIlVVg==";
     };
     dependencies = [
       sources."ajv-8.17.1"
@@ -4759,10 +4759,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.0.44";
+    version = "2.0.46";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.44.tgz";
-      sha512 = "718uXiZCd0TZQwR6CAM4IacEyVIQuzKZcuF6LB1Jl4yKWU6xO54t84163isGztKhxfPf0MCtW8t+rf1QH/tkzg==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.46.tgz";
+      sha512 = "twAhU4tzDoQZ6pjXW9imzthrqU2WI5L8fMPXgQAxl9K61TGHX412NJSdgytcLGpl9zgETuEvMJ3eYHlNE/aMyQ==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -5434,7 +5434,7 @@ in
       sources."yoctocolors-2.1.2"
       sources."yoga-layout-3.2.1"
       sources."zod-3.25.76"
-      sources."zod-to-json-schema-3.24.6"
+      sources."zod-to-json-schema-3.25.0"
     ];
     buildInputs = globalBuildInputs;
     meta = {

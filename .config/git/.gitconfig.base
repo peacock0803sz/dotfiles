@@ -6,7 +6,7 @@
 
 [user]
 	name = Peacock
-	email = me@p3ac0ck.net
+	email = 33555487+peacock0803sz@users.noreply.github.com
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGZoZMoFitD0cy5UUiqRdvZqH/1yiE9+8yKo2YC2heiH
 [push]
 	autoSetupRemote = true

@@ -2,6 +2,7 @@ local function config()
   require("typescript-tools").setup({
     -- on_attach = function() ... end,
     -- handlers = {  },
+    -- filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
     settings = {
       -- spawn additional tsserver instance to calculate diagnostics on it
       separate_diagnostic_server = true,
@@ -18,11 +19,11 @@ local function config()
       -- specify a list of plugins to load by tsserver, e.g., for support `styled-components`
       -- (see 💅 `styled-components` support section)
       tsserver_plugins = {
+        -- "@vue/typescript-plugin",
         -- {
         --   name = "@vue/typescript-plugin",
-        --   location = vim.env.HOME .. "/.nix-profile/lib/node_modules/@vue/language-server",
-        --   languages = { "vue" },
-        --   configNamespace = "typescript",
+        --   path = vim.env.HOME .. "/.nix-profile/lib/node_modules/@vue/language-server",
+        --   filetypes = { "vue" },
         -- },
       },
       -- this value is passed to: https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
@@ -31,6 +32,7 @@ local function config()
       -- described below
       tsserver_format_options = {},
       tsserver_file_preferences = {},
+      -- tsserver_log_level = "verbose",
       -- locale of all tsserver messages, supported locales you can find here:
       -- https://github.com/microsoft/TypeScript/blob/3c221fc086be52b19801f6e8d82596d04607ede6/src/compiler/utilitiesPublic.ts#L620
       tsserver_locale = "en",
@@ -55,7 +57,7 @@ local function config()
   })
 end
 local spec = {
-  "pmizio/typescript-tools.nvim",
+  "https://github.com/pmizio/typescript-tools.nvim",
   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   config = config,
 }

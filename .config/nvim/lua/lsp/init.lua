@@ -2,6 +2,10 @@ vim.lsp.config("*", {
   capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
 
+if vim.env.NVIM_LSP_DEBUG == "1" then
+  vim.lsp.log.set_level(vim.log.levels.TRACE)
+end
+
 -- {{{ Keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("LspConfig", {}),
@@ -51,8 +55,10 @@ vim.lsp.enable({
   "ruff",
   "tailwindcss",
   "terraformls",
+  "tombi",
   "tflint",
   "tinymist",
+  -- "tsgo",
   -- "unocss",
   "vimls",
   "yamlls",
@@ -71,7 +77,12 @@ local lsp_names = {}
 -- 同一ディレクトリのファイルをループ
 for file, ftype in vim.fs.dir(dirname) do
   -- `.lua`で終わるファイルを処理（init.luaは除く）
-  if ftype == "file" and vim.endswith(file, ".lua") and file ~= "init.lua" then
+  if
+    ftype == "file"
+    and vim.endswith(file, ".lua")
+    and vim.startswith(file, "_")
+    and file ~= "init.lua"
+  then
     -- 拡張子を除いてlsp名を作る
     local lsp_name = file:sub(1, -5) -- fname without '.lua'
     -- 読み込む

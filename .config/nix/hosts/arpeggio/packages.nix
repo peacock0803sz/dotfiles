@@ -80,9 +80,11 @@ with pkgs; [
   sqlite
   kubectl
   terraform
+  # nur.repos.peacock0803sz.tfcmt
   tflint
   tflint-plugins.tflint-ruleset-google
   act
+  pinact
   awscli2
   google-cloud-sdk
   ffmpeg

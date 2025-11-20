@@ -6,14 +6,17 @@
       options = "--delete-older-than 7d";
     };
     optimise.automatic = true;
-    package = inputs.nix-monitored.packages.${inputs.pkgs.system}.default;
+    package = inputs.nix-monitored.packages.${inputs.system}.default;
     settings = {
       experimental-features = "nix-command flakes";
       trusted-users = [ "root" "${inputs.username}" ];
     };
   };
 
-  nixpkgs.hostPlatform = inputs.system;
+  nixpkgs = {
+    hostPlatform = inputs.system;
+    config.allowUnfree = true;
+  };
   users.users.${inputs.username} = {
     home = "/Users/${inputs.username}";
     shell = inputs.pkgs.fish;
@@ -33,6 +36,7 @@
     casks = inputs.brewCasks;
   };
 
+  networking.hostName = inputs.hostName;
   system = {
     stateVersion = 5;
 

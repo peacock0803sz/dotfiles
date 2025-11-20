@@ -2,7 +2,8 @@
   description = "Peacock's Nix Configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs?rev=64b84bf07dda5b88c18530ce14c5edee7a0905d7";  # pin for mcp-servers-nix
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,7 +26,8 @@
     neovim-overlay.url = "github:nix-community/neovim-nightly-overlay";
     mcp-servers-nix = {
       url = "github:natsukium/mcp-servers-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.url = "github:NixOS/nixpkgs?rev=64b84bf07dda5b88c18530ce14c5edee7a0905d7";
     };
   };
 

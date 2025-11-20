@@ -55,22 +55,25 @@ with pkgs; [
   dockerfile-language-server
   gopls
   lemminx
+  npmPkgs."@typescript/native-preview"
+  npmPkgs."@vue/language-server"
   nixd
   nixpkgs-fmt
   protols
   pyright
   stylua
   sqls
-  taplo
+  tombi
   tailwindcss-language-server
+  typescript-language-server
   terraform-ls
   tinymist
   vtsls
   vim-language-server
   vscode-langservers-extracted
-  vue-language-server
   yaml-language-server
 
+  google-cloud-sql-proxy
   pandoc
   postgresql
   mariadb

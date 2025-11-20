@@ -6,5 +6,7 @@
   "@ccusage/codex",
   "@github/copilot-language-server",
   "@google/gemini-cli",
-  "@openai/codex"
+  "@openai/codex",
+  "@typescript/native-preview",
+  "@vue/language-server"
 ]

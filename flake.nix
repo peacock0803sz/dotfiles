@@ -3,7 +3,7 @@
 
   inputs = {
     # nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs.url = "github:NixOS/nixpkgs?rev=64b84bf07dda5b88c18530ce14c5edee7a0905d7";  # pin for mcp-servers-nix
+    nixpkgs.url = "github:NixOS/nixpkgs?rev=64b84bf07dda5b88c18530ce14c5edee7a0905d7"; # pin for mcp-servers-nix
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -12,18 +12,24 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-hardware = {
-      url = "github:NixOS/nixos-hardware/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     disko = {
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-monitored.url = "github:ners/nix-monitored";
+    nix-monitored = {
+      url = "github:ners/nix-monitored";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
-    vim-overlay.url = "github:kawarimidoll/vim-overlay";
-    neovim-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    vim-overlay = {
+      url = "github:kawarimidoll/vim-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    neovim-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     mcp-servers-nix = {
       url = "github:natsukium/mcp-servers-nix";
       # inputs.nixpkgs.follows = "nixpkgs";

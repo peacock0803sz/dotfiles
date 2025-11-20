@@ -2974,13 +2974,13 @@ let
         sha512 = "ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==";
       };
     };
-    "mime-types-3.0.1" = {
+    "mime-types-3.0.2" = {
       name = "mime-types";
       packageName = "mime-types";
-      version = "3.0.1";
+      version = "3.0.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/mime-types/-/mime-types-3.0.1.tgz";
-        sha512 = "xRc4oEhT6eaBpU1XF7AjpOFD+xQmXNB5OVKwp4tqCuBpHLS/ZbBDrc07mYTDqVMg6PfxUjjNp85O6Cd2Z/5HWA==";
+        url = "https://registry.npmjs.org/mime-types/-/mime-types-3.0.2.tgz";
+        sha512 = "Lbgzdk0h4juoQ9fCKXW4by0UJqj+nOOrI9MJ1sSj4nI8aI2eo1qmvQEie4VD1glsS250n15LsWsYtCugiStS5A==";
       };
     };
     "mimic-fn-2.1.0" = {
@@ -4732,10 +4732,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.0.46";
+    version = "2.0.47";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.46.tgz";
-      sha512 = "twAhU4tzDoQZ6pjXW9imzthrqU2WI5L8fMPXgQAxl9K61TGHX412NJSdgytcLGpl9zgETuEvMJ3eYHlNE/aMyQ==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.47.tgz";
+      sha512 = "mF9J8zZkgzlMXHDtHnQciMjswrP+GxvNLTm4IVKs8cIbbHZqEJonIwHDkh3QeZd2bDso+1/DO41RcVm6ghsmNA==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -4869,7 +4869,7 @@ in
       (sources."accepts-2.0.0" // {
         dependencies = [
           sources."mime-db-1.54.0"
-          sources."mime-types-3.0.1"
+          sources."mime-types-3.0.2"
         ];
       })
       sources."acorn-8.15.0"
@@ -5022,7 +5022,7 @@ in
       (sources."express-5.1.0" // {
         dependencies = [
           sources."mime-db-1.54.0"
-          sources."mime-types-3.0.1"
+          sources."mime-types-3.0.2"
         ];
       })
       sources."express-rate-limit-7.5.1"
@@ -5245,7 +5245,7 @@ in
       (sources."send-1.2.0" // {
         dependencies = [
           sources."mime-db-1.54.0"
-          sources."mime-types-3.0.1"
+          sources."mime-types-3.0.2"
         ];
       })
       sources."serve-static-2.2.0"
@@ -5307,7 +5307,7 @@ in
       (sources."type-is-2.0.1" // {
         dependencies = [
           sources."mime-db-1.54.0"
-          sources."mime-types-3.0.1"
+          sources."mime-types-3.0.2"
         ];
       })
       sources."undici-7.16.0"

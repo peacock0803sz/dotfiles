@@ -31,7 +31,7 @@ in
       postBuild = ''
         wrapProgram $out/bin/codex "--add-flags" "-c '$(cat ${config})'"
       '';
-      custom-instructions = builtins.readFile ./AGENTS.md;
+      custom-instructions = builtins.readFile ../AGENTS.md;
     };
     settings = {
       model_reasoning_summary = "auto";

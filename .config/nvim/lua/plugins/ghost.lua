@@ -3,7 +3,7 @@ local function config()
 
   local group = vim.api.nvim_create_augroup("nvim_ghost_user_autocommands", { clear = false })
   local filetypes = {
-    markdown = { "*github.com" }
+    markdown = { "*github.com", "*esa.io" }
   }
   for ft, pattern in pairs(filetypes) do
     vim.api.nvim_create_autocmd(

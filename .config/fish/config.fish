@@ -88,7 +88,6 @@ set --universal tide_terraform_color blue
 # vim
 alias vim@bsd /usr/bin/vim
 alias vim@head "$HOME/.nix-profile/bin/vim"
-alias vim vim@head
 
 # neovim
 set --global --export EDITOR nvim
@@ -119,5 +118,4 @@ set --global --export PIP_REQUIRE_VIRTUALENV 1
 alias git-root "git rev-parse --show-toplevel"
 abbr --add yq gojq # yq to gojq
 abbr --add tf terraform
-abbr --add zenn "bunx zenn-cli@latest"
 # }}}

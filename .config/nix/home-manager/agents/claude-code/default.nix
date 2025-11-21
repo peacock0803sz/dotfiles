@@ -1,4 +1,8 @@
 { pkgs, npmPkgs, mcp-servers-nix, ... }:
+let
+  enableCodex = true;
+  mcp-servers = import ../../mcp-servers { inherit pkgs mcp-servers-nix enableCodex; };
+in
 {
   programs.claude-code = {
     enable = true;
@@ -11,16 +15,14 @@
       includeCoAuthoredBy = false;
       autoCompactEnabled = false;
       enableAllProjectMcpServers = true;
-      feedbackSurveyState.lastShownTime = 1754089004345;
       outputStyle = "Explanatory";
 
       permissions = {
         deny = [
           "Bash(rm -rf /*)"
           "Bash(rm -rf /)"
-          "Bash(sudo rm -:*)"
-          "Bash(chmod 777 /*)"
-          "Bash(chmod -R 777 /*)"
+          "Bash(sudo -:*)"
+          "Bash(chmod -:*)"
           "Bash(dd if=:*)"
           "Bash(mkfs.:*)"
           "Bash(fdisk -:*)"
@@ -31,37 +33,16 @@
           "Bash(poweroff -:*)"
           "Bash(killall -:*)"
           "Bash(pkill -:*)"
+          "Bash(ps -:*)"
           "Bash(nc -l -:*)"
           "Bash(ncat -l -:*)"
           "Bash(netcat -l -:*)"
-          "Bash(rm -rf ~:*)"
-          "Bash(rm -rf $HOME:*)"
-          "Bash(rm -rf ~/.ssh*)"
-          "Bash(rm -rf ~/.config*)"
-          "Bash(npm)"
-          "Bash(uv)"
+          "Bash(docker -:*)"
+          "Bash(npm -:*)"
+          "Bash(uv -:*)"
         ];
       };
     };
-
-    mcpServers = (mcp-servers-nix.lib.evalModule pkgs {
-      programs = {
-        codex.enable = true;
-        # gemini.enable = true;
-        serena = {
-          enable = true;
-          args = [
-            "--context"
-            "ide-assistant"
-            "--enable-web-dashboard"
-            "False"
-          ];
-        };
-        context7.enable = true;
-        playwright.enable = true;
-        terraform.enable = true;
-        nixos.enable = true;
-      };
-    }).config.settings.servers;
+    mcpServers = mcp-servers // { zen = (import ../../mcp-servers/zen { inherit pkgs; }); };
   };
 }

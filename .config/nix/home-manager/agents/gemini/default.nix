@@ -1,10 +1,21 @@
-# { pkgs, npmPkgs, mcp-servers-nix, ... }:
-{ pkgs, ... }:
+{ pkgs, mcp-servers-nix, ... }:
+let
+  enableCodex = false;
+in
 {
   programs.gemini-cli = {
     enable = true;
-    # package = npmPkgs."@google/gemini-cli";
     package = pkgs.gemini-cli-bin;
     context = { GEMINI = "../AGENTS.md"; };
+    settings = {
+      theme = "light";
+      preferredEditor = "nvim";
+      selectedAuthType = "oauth-personal";
+      general = {
+        disableAutoUpdate = true;
+        disableUpdateNag = true;
+      };
+      mcpServers = import ../../mcp-servers { inherit pkgs mcp-servers-nix enableCodex; };
+    };
   };
 }

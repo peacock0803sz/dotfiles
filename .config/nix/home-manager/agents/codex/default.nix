@@ -1,24 +1,11 @@
 { pkgs, npmPkgs, mcp-servers-nix, ... }:
 let
+  enableCodex = false;
   config = mcp-servers-nix.lib.mkConfig pkgs {
     flavor = "codex";
     format = "toml-inline";
     fileName = ".mcp.toml";
-    programs = {
-      context7.enable = true;
-      playwright.enable = true;
-      terraform.enable = true;
-      nixos.enable = true;
-      serena = {
-        enable = true;
-        args = [
-          "--context"
-          "ide-assistant"
-          "--enable-web-dashboard"
-          "False"
-        ];
-      };
-    };
+    programs = import ../../mcp-servers/programs.nix { inherit pkgs mcp-servers-nix enableCodex; };
   };
 in
 {

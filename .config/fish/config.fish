@@ -2,39 +2,15 @@
 fish_default_key_bindings
 set -U fish_greeting
 
-# OS specific settings {{{
+# Host/OS specific settings {{{
 switch (uname -s)
     case Darwin
-        set --global --export XDG_CONFIG_HOME $HOME/.config
-        set --export --global HOMEBREW_NO_AUTO_UPDATE 1
-        alias tailscale "/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-        # alias rosetta "arch -x86_64 $(which fish)"
-
-        # Homebrew
-        switch (uname -m)
-            case x86_64
-                set --export --global HOMEBREW_PREFIX /usr/local
-            case arm64
-                set --export --global HOMEBREW_PREFIX /opt/homebrew
+        source $HOME/dotfiles/.config/fish/darwin.fish
+        if test $(uname -n) = 'arpeggio.local'
+            source $HOME/dotfiles/.config/fish/work.fish
         end
-
-        eval ($HOMEBREW_PREFIX/bin/brew shellenv)
-        fish_add_path "$HOMEBREW_PREFIX/sbin"
-        source "$HOME/.config/op/plugins.sh"
-
-        # {{{ Workaround for GitHub Copilot CLI
-        alias github-copilot-cli gh-copilot
-        source "$HOME/.local/share/gh/extensions/gh-fish/gh-copilot-alias.fish"
-        # }}}
-
-        # devenv
-        direnv hook fish | source
 end
 # }}}
-
-if test $(uname -n) = 'arpeggio.local'
-    source $HOME/dotfiles/.config/fish/work.fish
-end
 
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/dotfiles/bin
@@ -55,39 +31,11 @@ function fzf-gwq
 end
 bind \ct fzf-gwq
 
-### tide prompts {{{
-set --universal tide_character_icon '$'
-set --universal tide_character_color green
+# tide prompts
+source $HOME/dotfiles/.config/fish/tide.fish
 
-set --universal tide_status_color green
-set --universal tide_status_color_failure red
-
-set --universal tide_pwd_color_anchors blue
-set --universal tide_pwd_color_dirs blue
-set --universal tide_pwd_color_truncated_dirs blue
-
-set --universal tide_git_color_branch green
-set --universal tide_git_color_conflicted red
-set --universal tide_git_color_operation red
-set --universal tide_git_color_stash green
-set --universal tide_git_color_dirty yellow
-set --universal tide_git_color_staged yellow
-set --universal tide_git_color_untracked blue
-set --universal tide_git_color_modified yellow
-
-set --universal tide_right_prompt_items status context jobs direnv node python rustc java php pulumi ruby go gcloud terraform aws nix_shell crystal elixir zig
-set --universal tide_kubectl_color blue
-set --universal tide_docker_color blue
-set --universal tide_node_color green
-set --universal tide_ruby_color red
-set --universal tide_rust_color yellow
-set --universal tide_python_color blue
-set --universal tide_terraform_color blue
-#  }}}
-
-# vim
-alias vim@bsd /usr/bin/vim
-alias vim@head "$HOME/.nix-profile/bin/vim"
+# devenv
+direnv hook fish | source
 
 # neovim
 set --global --export EDITOR nvim

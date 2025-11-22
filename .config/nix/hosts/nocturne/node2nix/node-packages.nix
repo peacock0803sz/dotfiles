@@ -121,13 +121,13 @@ let
         sha512 = "Orxzlfb9c67A15cq2JQEyVc7wEsmFBmHjZWZYQMUyJ1qivXyMwdyNOs9odi79hze+2zqdTtu1E19IM/FtqZ10g==";
       };
     };
-    "@google/gemini-cli-core-0.17.0" = {
+    "@google/gemini-cli-core-0.17.1" = {
       name = "_at_google_slash_gemini-cli-core";
       packageName = "@google/gemini-cli-core";
-      version = "0.17.0";
+      version = "0.17.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.17.0.tgz";
-        sha512 = "WDpBYZiHeJyurZMmB9iYq5t3TsZnhmq1sCtX5ZIrRN7pvrhfVAkCAjQs7FHVFOQYYX4lvsIm7Epox1pgMb0ivw==";
+        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.17.1.tgz";
+        sha512 = "XL6cw7iksZGG36Na2dwI7rRtdpI+cHRbr2I3mcel5ApXkeIhcSzH6ojbk69bK/f2DUSB/OrJJDlonh5+sPTzOg==";
       };
     };
     "@google/genai-1.16.0" = {
@@ -1012,13 +1012,13 @@ let
         sha512 = "4Dj6M28JB+oAH8kFkTLUo+a2jwOFkuqb3yucU0CANcRRUbxS0cP0nZYCGjcc3BNXwRIsUVmDGgzawme7zvJHvg==";
       };
     };
-    "args-tokens-0.20.1" = {
+    "args-tokens-0.23.0" = {
       name = "args-tokens";
       packageName = "args-tokens";
-      version = "0.20.1";
+      version = "0.23.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/args-tokens/-/args-tokens-0.20.1.tgz";
-        sha512 = "pQ5R5TsJyx94zsgSCCQ9kzOgUfMmI4bkqNjgSSt2C92mzPCvovoUMMW6HqR+35mHZ0cb1++MD2uAOLm62sGC+Q==";
+        url = "https://registry.npmjs.org/args-tokens/-/args-tokens-0.23.0.tgz";
+        sha512 = "VZETsQmpEGO7A9adjfIOTyZuxKzurUas9kh1Hm0WGhFq8dOyw50P6OjiTwKyURwnmDabw0DbFjI+BUucJfCtnQ==";
       };
     };
     "array-timsort-1.0.3" = {
@@ -2272,13 +2272,13 @@ let
         sha512 = "ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==";
       };
     };
-    "got-14.6.4" = {
+    "got-14.6.5" = {
       name = "got";
       packageName = "got";
-      version = "14.6.4";
+      version = "14.6.5";
       src = fetchurl {
-        url = "https://registry.npmjs.org/got/-/got-14.6.4.tgz";
-        sha512 = "DjsLab39NUMf5iYlK9asVCkHMhaA2hEhrlmf+qXRhjEivuuBHWYbjmty9DA3OORUwZgENTB+6vSmY2ZW8gFHVw==";
+        url = "https://registry.npmjs.org/got/-/got-14.6.5.tgz";
+        sha512 = "Su87c0NNeg97de1sO02gy9I8EmE7DCJ1gzcFLcgGpYeq2PnLg4xz73MWrp6HjqbSsjb6Glf4UBDW6JNyZA6uSg==";
       };
     };
     "graceful-fs-4.2.10" = {
@@ -2308,13 +2308,13 @@ let
         sha512 = "pCcEwRi+TKpMlxAQObHDQ56KawURgyAf6jtIY046fJ5tIv3zDe/LEIubckAO8fj6JnAxLdmWkUfNyulQ2iKdEw==";
       };
     };
-    "gunshi-0.26.3" = {
+    "gunshi-0.27.0-beta.3" = {
       name = "gunshi";
       packageName = "gunshi";
-      version = "0.26.3";
+      version = "0.27.0-beta.3";
       src = fetchurl {
-        url = "https://registry.npmjs.org/gunshi/-/gunshi-0.26.3.tgz";
-        sha512 = "x/CaxovzDA3KMkrjqow7M1dnsO1CxGMNabBaeGTGdVNtjOMN1G/eK7vjKeJ+zHdFIsWHmo47YQ2DQIESUut2+A==";
+        url = "https://registry.npmjs.org/gunshi/-/gunshi-0.27.0-beta.3.tgz";
+        sha512 = "9WaE803OQlLjJUVMNOj0qohTzIdvo0y70fN2I4tWzNLBqpg8dM48ikEzhmULEZwH8EfQ6FpWfbppGZ7exUNmPg==";
       };
     };
     "has-flag-4.0.0" = {
@@ -2405,15 +2405,6 @@ let
       src = fetchurl {
         url = "https://registry.npmjs.org/http-cache-semantics/-/http-cache-semantics-4.2.0.tgz";
         sha512 = "dTxcvPXqPvXBQpq5dUr6mEMJX4oIEFv6bwom3FDwKRDsuIjjJGANqhBuoAn9c1RQJIdAKav33ED65E2ys+87QQ==";
-      };
-    };
-    "http-errors-2.0.0" = {
-      name = "http-errors";
-      packageName = "http-errors";
-      version = "2.0.0";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/http-errors/-/http-errors-2.0.0.tgz";
-        sha512 = "FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==";
       };
     };
     "http-errors-2.0.1" = {
@@ -3550,13 +3541,13 @@ let
         sha512 = "Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==";
       };
     };
-    "raw-body-3.0.1" = {
+    "raw-body-3.0.2" = {
       name = "raw-body";
       packageName = "raw-body";
-      version = "3.0.1";
+      version = "3.0.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/raw-body/-/raw-body-3.0.1.tgz";
-        sha512 = "9G8cA+tuMS75+6G/TzW8OtLzmBDMo8p1JRxN5AZ+LAp8uxGA8V8GZm4GQ4/N5QNQEnLmg6SS7wyuSmbKepiKqA==";
+        url = "https://registry.npmjs.org/raw-body/-/raw-body-3.0.2.tgz";
+        sha512 = "K5zQjDllxWkf7Z5xJdV0/B0WTNqx6vxG70zJE4N0kBs4LovmEYWJzQGxC9bS9RAKu3bgM40lrd5zoLJ12MQ5BA==";
       };
     };
     "rc-1.2.8" = {
@@ -3971,15 +3962,6 @@ let
       src = fetchurl {
         url = "https://registry.npmjs.org/stack-utils/-/stack-utils-2.0.6.tgz";
         sha512 = "XlkWvfIm6RmsWtNJx+uqtKLS8eqFbxUg0ZzLXqY0caEy9l7hruX8IpiDnjsLavoBgqCCR71TqWO8MaXYheJ3RQ==";
-      };
-    };
-    "statuses-2.0.1" = {
-      name = "statuses";
-      packageName = "statuses";
-      version = "2.0.1";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/statuses/-/statuses-2.0.1.tgz";
-        sha512 = "RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==";
       };
     };
     "statuses-2.0.2" = {
@@ -4681,15 +4663,15 @@ in
   editprompt = nodeEnv.buildNodePackage {
     name = "editprompt";
     packageName = "editprompt";
-    version = "0.8.1";
+    version = "1.0.0";
     src = fetchurl {
-      url = "https://registry.npmjs.org/editprompt/-/editprompt-0.8.1.tgz";
-      sha512 = "phc2s1PXb5gLII1q361Hi+uUMJpmJF0/oxkAYhyED/QIwo4p8sqUEOjuMzrwbEi2ibghY6HlCnh7pXS1cIlVVg==";
+      url = "https://registry.npmjs.org/editprompt/-/editprompt-1.0.0.tgz";
+      sha512 = "yhM0niroqqX0tetWbcaPZUnvb7yw23RJuRJXsxktJ39iOoKlxlbMZ758NUIU2msFMeEL3WW5us/cQW5A/yXI0w==";
     };
     dependencies = [
       sources."ajv-8.17.1"
       sources."ajv-formats-3.0.1"
-      sources."args-tokens-0.20.1"
+      sources."args-tokens-0.23.0"
       sources."atomically-2.1.0"
       sources."clipboardy-4.0.0"
       sources."conf-15.0.2"
@@ -4701,7 +4683,7 @@ in
       sources."fast-deep-equal-3.1.3"
       sources."fast-uri-3.1.0"
       sources."get-stream-8.0.1"
-      sources."gunshi-0.26.3"
+      sources."gunshi-0.27.0-beta.3"
       sources."human-signals-5.0.0"
       sources."is-docker-3.0.0"
       sources."is-inside-container-1.0.0"
@@ -4768,10 +4750,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.0.49";
+    version = "2.0.50";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.49.tgz";
-      sha512 = "/b017LXSxY+6Epo6p6FRz6vCpuZseFbSLs6V7cObtsciPzR382JqBTsyOM8s9Fom6Se/P3JZGlvxbrE54/bwrQ==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.50.tgz";
+      sha512 = "zT4vSFr3wSY1XuQHTBbtMyxcv87Al25Icrv7ASnpJTgmXR2MoIcs3dyfoQGUzAHnnAymEVSSQxeX+DgnTvOUDg==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -4786,10 +4768,10 @@ in
   "@google/gemini-cli" = nodeEnv.buildNodePackage {
     name = "_at_google_slash_gemini-cli";
     packageName = "@google/gemini-cli";
-    version = "0.17.0";
+    version = "0.17.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.17.0.tgz";
-      sha512 = "11tcJFv7sKxjLYCdQiy3CymsQ9xwvxGlkWLH6VTny1Bo1GRWhmnzmFcKyFnM97WEbQMX3KnVXiV8jxll7vGVYw==";
+      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.17.1.tgz";
+      sha512 = "1+BINhv56JG+tYSpzeh8ZGkI6L7h+dBXAgBNrHWEeVKzv802iDzuHr4p4+s8fDFxuvT2xiqlMW3hOC+/OXWrlA==";
     };
     dependencies = [
       sources."@alcalzone/ansi-tokenize-0.2.2"
@@ -4809,7 +4791,7 @@ in
       sources."@google-cloud/precise-date-4.0.0"
       sources."@google-cloud/projectify-4.0.0"
       sources."@google-cloud/promisify-4.0.0"
-      sources."@google/gemini-cli-core-0.17.0"
+      sources."@google/gemini-cli-core-0.17.1"
       sources."@google/genai-1.16.0"
       (sources."@grpc/grpc-js-1.14.1" // {
         dependencies = [
@@ -5102,7 +5084,7 @@ in
       sources."googleapis-137.1.0"
       sources."googleapis-common-7.2.0"
       sources."gopd-1.2.0"
-      sources."got-14.6.4"
+      sources."got-14.6.5"
       sources."graceful-fs-4.2.10"
       (sources."gradient-string-2.0.2" // {
         dependencies = [
@@ -5242,11 +5224,9 @@ in
       sources."qs-6.14.0"
       sources."quick-lru-5.1.1"
       sources."range-parser-1.2.1"
-      (sources."raw-body-3.0.1" // {
+      (sources."raw-body-3.0.2" // {
         dependencies = [
-          sources."http-errors-2.0.0"
           sources."iconv-lite-0.7.0"
-          sources."statuses-2.0.1"
         ];
       })
       (sources."rc-1.2.8" // {

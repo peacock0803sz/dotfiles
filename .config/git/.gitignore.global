@@ -211,3 +211,5 @@ result
 # docker compose override
 **/docker-compose.override.yml
 **/compose.override.yml
+
+**/.serena

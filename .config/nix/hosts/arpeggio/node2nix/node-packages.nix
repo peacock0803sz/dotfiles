@@ -1057,22 +1057,22 @@ let
         sha512 = "1QHGAvs53gXkWdd3ZMGYuvQFXHW4ksKWPG8HP8/2BscrbZ0brw183q2oNWjMrSWImYLHxHrx1ItBQr50I/q2zw==";
       };
     };
-    "@vue/language-core-3.1.4" = {
+    "@vue/language-core-3.1.5" = {
       name = "_at_vue_slash_language-core";
       packageName = "@vue/language-core";
-      version = "3.1.4";
+      version = "3.1.5";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@vue/language-core/-/language-core-3.1.4.tgz";
-        sha512 = "n/58wm8SkmoxMWkUNUH/PwoovWe4hmdyPJU2ouldr3EPi1MLoS7iDN46je8CsP95SnVBs2axInzRglPNKvqMcg==";
+        url = "https://registry.npmjs.org/@vue/language-core/-/language-core-3.1.5.tgz";
+        sha512 = "FMcqyzWN+sYBeqRMWPGT2QY0mUasZMVIuHvmb5NT3eeqPrbHBYtCP8JWEUCDCgM+Zr62uuWY/qoeBrPrzfa78w==";
       };
     };
-    "@vue/language-service-3.1.4" = {
+    "@vue/language-service-3.1.5" = {
       name = "_at_vue_slash_language-service";
       packageName = "@vue/language-service";
-      version = "3.1.4";
+      version = "3.1.5";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@vue/language-service/-/language-service-3.1.4.tgz";
-        sha512 = "LFaAN5o5n7kpzBeHbKj4haUV59/FLe9xdVj8fKcLKrY+l/sJcGfY7MZSN2f48CgDLTrg+CP2BiiJH8z9T5kujg==";
+        url = "https://registry.npmjs.org/@vue/language-service/-/language-service-3.1.5.tgz";
+        sha512 = "tSbHGh+Kl8r6crkfQMj80NDlL7X0bAGSwXBw0VfE1SYcROaoog55wKim/hpZCSTbN+SkZ9gY6FQ6/y0KJN4xEA==";
       };
     };
     "@vue/shared-3.5.24" = {
@@ -1084,13 +1084,13 @@ let
         sha512 = "9cwHL2EsJBdi8NY22pngYYWzkTDhld6fAD6jlaeloNGciNSJL6bLpbxVgXl96X00Jtc6YWQv96YA/0sxex/k1A==";
       };
     };
-    "@vue/typescript-plugin-3.1.4" = {
+    "@vue/typescript-plugin-3.1.5" = {
       name = "_at_vue_slash_typescript-plugin";
       packageName = "@vue/typescript-plugin";
-      version = "3.1.4";
+      version = "3.1.5";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@vue/typescript-plugin/-/typescript-plugin-3.1.4.tgz";
-        sha512 = "30gOQK4k9VwLFxoLxcymsGqjXAOhn1wEls4TZuKSJbCVLSAZHsUhyRBZiWzKZNoMk/smzJguMbAgh1UbksQZ9w==";
+        url = "https://registry.npmjs.org/@vue/typescript-plugin/-/typescript-plugin-3.1.5.tgz";
+        sha512 = "jZU02lOiq74nX/PlxqJpLzX3EH52uAkInM7w6yAIs8hXAzs+UmWyeE78Gig8/5NM/t/qK9dgRsv1jQWveEK9JQ==";
       };
     };
     "@xterm/headless-5.5.0" = {
@@ -3739,13 +3739,13 @@ let
         sha512 = "5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==";
       };
     };
-    "pkce-challenge-5.0.0" = {
+    "pkce-challenge-5.0.1" = {
       name = "pkce-challenge";
       packageName = "pkce-challenge";
-      version = "5.0.0";
+      version = "5.0.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/pkce-challenge/-/pkce-challenge-5.0.0.tgz";
-        sha512 = "ueGLflrrnvwB3xuo/uGob5pd5FN7l0MsLf0Z87o/UQmRtwjvfylfc9MurIxRAWywCYTgrvpXBcqjV4OfCYGCIQ==";
+        url = "https://registry.npmjs.org/pkce-challenge/-/pkce-challenge-5.0.1.tgz";
+        sha512 = "wQ0b/W4Fr01qtpHlqSqspcj3EhBvimsdh0KlHhH8HRZnMsEa0ea2fTULOXOS9ccQr3om+GcGRk4e+isrZWV8qQ==";
       };
     };
     "pretty-ms-9.3.0" = {
@@ -5783,7 +5783,7 @@ in
       sources."pend-1.2.0"
       sources."picocolors-1.1.1"
       sources."picomatch-4.0.3"
-      sources."pkce-challenge-5.0.0"
+      sources."pkce-challenge-5.0.1"
       sources."pretty-ms-9.3.0"
       sources."prompts-2.4.2"
       sources."prop-types-15.8.1"
@@ -5996,10 +5996,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20251122.1";
+    version = "7.0.0-dev.20251123.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251122.1.tgz";
-      sha512 = "5JofzSZ1T6WnmRCUMtteMAyAaIcvQMNKlJfSkleJTHuCSUn0pxGUG64CMt0KNVVtuOgCIPscqg4tfr90PuH+Ww==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251123.1.tgz";
+      sha512 = "6RhDqHTom3N4QMxZYiWXxaye2bDdsVgbsPcW7J3bMCp5LVATi3KP2zYk2SZpZLJVQ0es5E/6FHLk5Gyjeb0Jzw==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -6014,10 +6014,10 @@ in
   "@vue/language-server" = nodeEnv.buildNodePackage {
     name = "_at_vue_slash_language-server";
     packageName = "@vue/language-server";
-    version = "3.1.4";
+    version = "3.1.5";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@vue/language-server/-/language-server-3.1.4.tgz";
-      sha512 = "xPi3cIwTSFrDaWWg518XeaFukwyCXFb5aAxFDO1xLX1DbpSUPYonFGdD0xPApPwJI1QO9tlroFAxFm9PRFexkQ==";
+      url = "https://registry.npmjs.org/@vue/language-server/-/language-server-3.1.5.tgz";
+      sha512 = "JhcikpL5hPbFKlhM1Cijj99cmPx1LNffzpMZIZc9AXiDhpXACHVasN8wX2o76m3LlJZhpK97PLNOjLK8eD4Swg==";
     };
     dependencies = [
       sources."@babel/helper-string-parser-7.27.1"
@@ -6041,10 +6041,10 @@ in
       sources."@vscode/l10n-0.0.18"
       sources."@vue/compiler-core-3.5.24"
       sources."@vue/compiler-dom-3.5.24"
-      sources."@vue/language-core-3.1.4"
-      sources."@vue/language-service-3.1.4"
+      sources."@vue/language-core-3.1.5"
+      sources."@vue/language-service-3.1.5"
       sources."@vue/shared-3.5.24"
-      sources."@vue/typescript-plugin-3.1.4"
+      sources."@vue/typescript-plugin-3.1.5"
       sources."acorn-7.4.1"
       sources."alien-signals-3.1.0"
       sources."async-function-1.0.0"

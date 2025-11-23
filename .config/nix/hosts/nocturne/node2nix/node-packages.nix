@@ -3424,13 +3424,13 @@ let
         sha512 = "5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==";
       };
     };
-    "pkce-challenge-5.0.0" = {
+    "pkce-challenge-5.0.1" = {
       name = "pkce-challenge";
       packageName = "pkce-challenge";
-      version = "5.0.0";
+      version = "5.0.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/pkce-challenge/-/pkce-challenge-5.0.0.tgz";
-        sha512 = "ueGLflrrnvwB3xuo/uGob5pd5FN7l0MsLf0Z87o/UQmRtwjvfylfc9MurIxRAWywCYTgrvpXBcqjV4OfCYGCIQ==";
+        url = "https://registry.npmjs.org/pkce-challenge/-/pkce-challenge-5.0.1.tgz";
+        sha512 = "wQ0b/W4Fr01qtpHlqSqspcj3EhBvimsdh0KlHhH8HRZnMsEa0ea2fTULOXOS9ccQr3om+GcGRk4e+isrZWV8qQ==";
       };
     };
     "pretty-ms-9.3.0" = {
@@ -5211,7 +5211,7 @@ in
       sources."pend-1.2.0"
       sources."picocolors-1.1.1"
       sources."picomatch-4.0.3"
-      sources."pkce-challenge-5.0.0"
+      sources."pkce-challenge-5.0.1"
       sources."pretty-ms-9.3.0"
       sources."prompts-2.4.2"
       sources."prop-types-15.8.1"

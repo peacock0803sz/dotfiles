@@ -913,13 +913,13 @@ let
         sha512 = "37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==";
       };
     };
-    "@types/react-19.2.6" = {
+    "@types/react-19.2.7" = {
       name = "_at_types_slash_react";
       packageName = "@types/react";
-      version = "19.2.6";
+      version = "19.2.7";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@types/react/-/react-19.2.6.tgz";
-        sha512 = "p/jUvulfgU7oKtj6Xpk8cA2Y1xKTtICGpJYeJXz2YVO2UcvjQgeRMLDGfDeqeRW2Ta+0QNFwcc8X3GH8SxZz6w==";
+        url = "https://registry.npmjs.org/@types/react/-/react-19.2.7.tgz";
+        sha512 = "MWtvHrGZLFttgeEj28VXHxpmwYbor/ATPYbBfSFZEIRK0ecCFLl2Qo55z52Hss+UV9CRN7trSeq1zbgx7YDWWg==";
       };
     };
     "@types/request-2.48.13" = {
@@ -1039,22 +1039,22 @@ let
         sha512 = "KYSIHVmslkaCDyw013pphY+d7x1qV8IZupYfeIfzNA+nsaWHbn5uPuQRvdRFsa9zFzGeudPuoGoZ1Op4jrJXIQ==";
       };
     };
-    "@vue/compiler-core-3.5.24" = {
+    "@vue/compiler-core-3.5.25" = {
       name = "_at_vue_slash_compiler-core";
       packageName = "@vue/compiler-core";
-      version = "3.5.24";
+      version = "3.5.25";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@vue/compiler-core/-/compiler-core-3.5.24.tgz";
-        sha512 = "eDl5H57AOpNakGNAkFDH+y7kTqrQpJkZFXhWZQGyx/5Wh7B1uQYvcWkvZi11BDhscPgj8N7XV3oRwiPnx1Vrig==";
+        url = "https://registry.npmjs.org/@vue/compiler-core/-/compiler-core-3.5.25.tgz";
+        sha512 = "vay5/oQJdsNHmliWoZfHPoVZZRmnSWhug0BYT34njkYTPqClh3DNWLkZNJBVSjsNMrg0CCrBfoKkjZQPM/QVUw==";
       };
     };
-    "@vue/compiler-dom-3.5.24" = {
+    "@vue/compiler-dom-3.5.25" = {
       name = "_at_vue_slash_compiler-dom";
       packageName = "@vue/compiler-dom";
-      version = "3.5.24";
+      version = "3.5.25";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@vue/compiler-dom/-/compiler-dom-3.5.24.tgz";
-        sha512 = "1QHGAvs53gXkWdd3ZMGYuvQFXHW4ksKWPG8HP8/2BscrbZ0brw183q2oNWjMrSWImYLHxHrx1ItBQr50I/q2zw==";
+        url = "https://registry.npmjs.org/@vue/compiler-dom/-/compiler-dom-3.5.25.tgz";
+        sha512 = "4We0OAcMZsKgYoGlMjzYvaoErltdFI2/25wqanuTu+S4gismOTRTBPi4IASOjxWdzIwrYSjnqONfKvuqkXzE2Q==";
       };
     };
     "@vue/language-core-3.1.5" = {
@@ -1075,13 +1075,13 @@ let
         sha512 = "tSbHGh+Kl8r6crkfQMj80NDlL7X0bAGSwXBw0VfE1SYcROaoog55wKim/hpZCSTbN+SkZ9gY6FQ6/y0KJN4xEA==";
       };
     };
-    "@vue/shared-3.5.24" = {
+    "@vue/shared-3.5.25" = {
       name = "_at_vue_slash_shared";
       packageName = "@vue/shared";
-      version = "3.5.24";
+      version = "3.5.25";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@vue/shared/-/shared-3.5.24.tgz";
-        sha512 = "9cwHL2EsJBdi8NY22pngYYWzkTDhld6fAD6jlaeloNGciNSJL6bLpbxVgXl96X00Jtc6YWQv96YA/0sxex/k1A==";
+        url = "https://registry.npmjs.org/@vue/shared/-/shared-3.5.25.tgz";
+        sha512 = "AbOPdQQnAnzs58H2FrrDxYj/TJfmeS2jdfEEhgiKINy+bnOANmVizIEgq1r+C5zsbs6l1CCQxtcj71rwNQ4jWg==";
       };
     };
     "@vue/typescript-plugin-3.1.5" = {
@@ -5449,7 +5449,7 @@ in
       sources."@types/minimatch-5.1.2"
       sources."@types/node-24.10.1"
       sources."@types/normalize-package-data-2.4.4"
-      sources."@types/react-19.2.6"
+      sources."@types/react-19.2.7"
       sources."@types/request-2.48.13"
       sources."@types/tinycolor2-1.4.6"
       sources."@types/tough-cookie-4.0.5"
@@ -5996,10 +5996,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20251123.1";
+    version = "7.0.0-dev.20251124.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251123.1.tgz";
-      sha512 = "6RhDqHTom3N4QMxZYiWXxaye2bDdsVgbsPcW7J3bMCp5LVATi3KP2zYk2SZpZLJVQ0es5E/6FHLk5Gyjeb0Jzw==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251124.1.tgz";
+      sha512 = "mDdN4nVZJy6n4P9Z7LnLhBnQ8MibQKtZ2LnLz7ggv9TFTTAIuCquoJdWIp636i9MmVmbaYEKKeK+7w4F/7dvzw==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -6039,11 +6039,11 @@ in
       sources."@volar/typescript-2.4.23"
       sources."@vscode/emmet-helper-2.11.0"
       sources."@vscode/l10n-0.0.18"
-      sources."@vue/compiler-core-3.5.24"
-      sources."@vue/compiler-dom-3.5.24"
+      sources."@vue/compiler-core-3.5.25"
+      sources."@vue/compiler-dom-3.5.25"
       sources."@vue/language-core-3.1.5"
       sources."@vue/language-service-3.1.5"
-      sources."@vue/shared-3.5.24"
+      sources."@vue/shared-3.5.25"
       sources."@vue/typescript-plugin-3.1.5"
       sources."acorn-7.4.1"
       sources."alien-signals-3.1.0"

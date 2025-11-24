@@ -4,6 +4,7 @@ let
 
   system = "aarch64-darwin";
   username = "peacock";
+  hostName = "nocturne";
 
   pkgs = import nixpkgs {
     inherit system;
@@ -13,17 +14,18 @@ let
     ];
   };
 
-  npmPkgs = pkgs.callPackage ../../node2nix { inherit pkgs; };
+  npmPkgs = pkgs.callPackage ./node2nix { inherit pkgs; };
   brewCasks = import ./brewCasks.nix;
 in
 nix-darwin.lib.darwinSystem {
   modules = [
     home-manager.darwinModules.home-manager
-    (import ../../nix-darwin { inherit system username pkgs brewCasks nix-monitored; })
+    (import ../../nix-darwin { inherit system username hostName pkgs brewCasks nix-monitored; })
     {
       home-manager.backupFileExtension = "bk.nix";
       home-manager.users.${username} = {
         imports = [
+          ./home.nix
           ../../home-manager/base.nix
           ../../home-manager/headed.nix
           ../../home-manager/darwin.nix

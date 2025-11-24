@@ -34,15 +34,15 @@ with pkgs; [
   typescript
   gh-copilot
   nodePackages.prettier
-  npmPkgs."@github/copilot-language-server"
-  npmPkgs."@google/gemini-cli"
+  # npmPkgs."@github/copilot-language-server"
+  # npmPkgs."@google/gemini-cli"
   npmPkgs."@anthropic-ai/claude-code"
-  npmPkgs."editprompt"
+  # npmPkgs."editprompt"
 
   astro-language-server
   lua-language-server
   bash-language-server
-  dockerfile-language-server-nodejs
+  dockerfile-language-server
   gopls
   lemminx
   nixd
@@ -52,13 +52,16 @@ with pkgs; [
   taplo
   tailwindcss-language-server
   terraform-ls
+  tree-sitter
   typescript-language-server
+  vtsls
   vim-language-server
   vscode-langservers-extracted
   vue-language-server
   yaml-language-server
 
   pandoc
+  yt-dlp
   # texliveFull
   postgresql
   sqlite

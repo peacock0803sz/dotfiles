@@ -45,6 +45,7 @@ vim.lsp.enable({
   "cssls",
   "dockerls",
   "gopls",
+  "fish_lsp",
   "jsonls",
   "lemminx",
   "html",

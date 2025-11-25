@@ -54,6 +54,7 @@ with pkgs; [
   bash-language-server
   dockerfile-language-server
   gopls
+  fish-lsp
   lemminx
   npmPkgs."@typescript/native-preview"
   npmPkgs."@vue/language-server"

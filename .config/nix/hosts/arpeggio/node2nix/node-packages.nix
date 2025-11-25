@@ -1183,13 +1183,13 @@ let
         sha512 = "8iUql50EUR+uUcdRQ3HDqa6EVyo3docL8g5WJ3FNcWmu62IbkGUue/pEyLBW8VGKKucTPgqeks4fIU1DA4yowQ==";
       };
     };
-    "alien-signals-3.1.0" = {
+    "alien-signals-3.1.1" = {
       name = "alien-signals";
       packageName = "alien-signals";
-      version = "3.1.0";
+      version = "3.1.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/alien-signals/-/alien-signals-3.1.0.tgz";
-        sha512 = "yufC6VpSy8tK3I0lO67pjumo5JvDQVQyr38+3OHqe6CHl1t2VZekKZ7EKKZSqk0cRmE7U7tfZbpXiKNzuc+ckg==";
+        url = "https://registry.npmjs.org/alien-signals/-/alien-signals-3.1.1.tgz";
+        sha512 = "ogkIWbVrLwKtHY6oOAXaYkAxP+cTH7V5FZ5+Tm4NZFd8VDZ6uNMDrfzqctTZ42eTMCSR3ne3otpcxmqSnFfPYA==";
       };
     };
     "ansi-align-3.0.1" = {
@@ -1336,13 +1336,13 @@ let
         sha512 = "Ko0uX15oIUS7wJ3Rb30Fs6SkVbLmPBAKdlm7q9+ak9bbIeFf0MwuBsQV6z7+X768/cHsfg+WlysDWJcmthjsjQ==";
       };
     };
-    "body-parser-2.2.0" = {
+    "body-parser-2.2.1" = {
       name = "body-parser";
       packageName = "body-parser";
-      version = "2.2.0";
+      version = "2.2.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/body-parser/-/body-parser-2.2.0.tgz";
-        sha512 = "02qvAaxv8tp7fBa/mw1ga98OGm+eCbqzJOKoRt70sLmfEEi+jyBYVTDGfCL/k06/4EMk/z01gCe7HoCH/f2LTg==";
+        url = "https://registry.npmjs.org/body-parser/-/body-parser-2.2.1.tgz";
+        sha512 = "nfDwkulwiZYQIGwxdy0RUmowMhKcFVcYXUU7m4QlKYim1rUtg83xm2yjZ40QjDuc291AJjjeSc9b++AWHSgSHw==";
       };
     };
     "boxen-7.1.1" = {
@@ -5281,10 +5281,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.0.50";
+    version = "2.0.53";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.50.tgz";
-      sha512 = "zT4vSFr3wSY1XuQHTBbtMyxcv87Al25Icrv7ASnpJTgmXR2MoIcs3dyfoQGUzAHnnAymEVSSQxeX+DgnTvOUDg==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.53.tgz";
+      sha512 = "a2Z0aNPLvWeK+ckVJMATiLOFrNzRJDQQsSKHl04dpvLnM/QSPaFwLvBaJGl1tMogeq6Ahx+7NKCDVb+8d+2FXQ==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -5489,7 +5489,11 @@ in
       sources."auto-bind-5.0.1"
       sources."base64-js-1.5.1"
       sources."bignumber.js-9.3.1"
-      sources."body-parser-2.2.0"
+      (sources."body-parser-2.2.1" // {
+        dependencies = [
+          sources."iconv-lite-0.7.0"
+        ];
+      })
       (sources."boxen-7.1.1" // {
         dependencies = [
           sources."emoji-regex-9.2.2"
@@ -5996,10 +6000,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20251124.1";
+    version = "7.0.0-dev.20251125.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251124.1.tgz";
-      sha512 = "mDdN4nVZJy6n4P9Z7LnLhBnQ8MibQKtZ2LnLz7ggv9TFTTAIuCquoJdWIp636i9MmVmbaYEKKeK+7w4F/7dvzw==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251125.1.tgz";
+      sha512 = "E1EboijTfMS99duAYDzPiIHzJDXA1xEj4UHvpjarlniYYmCFO/Rla4boiRBMns4eXNNkyEkvU4WSkjpOl0fzTg==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -6046,7 +6050,7 @@ in
       sources."@vue/shared-3.5.25"
       sources."@vue/typescript-plugin-3.1.5"
       sources."acorn-7.4.1"
-      sources."alien-signals-3.1.0"
+      sources."alien-signals-3.1.1"
       sources."async-function-1.0.0"
       sources."async-generator-function-1.0.0"
       sources."call-bind-apply-helpers-1.0.2"

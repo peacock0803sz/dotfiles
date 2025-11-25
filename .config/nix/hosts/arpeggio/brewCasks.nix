@@ -1,4 +1,5 @@
 [
+  "1password"
   "adobe-creative-cloud"
   "alacritty"
   "bartender"

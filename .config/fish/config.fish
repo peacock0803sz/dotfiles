@@ -35,7 +35,9 @@ bind \ct fzf-gwq
 source $HOME/dotfiles/.config/fish/tide.fish
 
 # devenv
-direnv hook fish | source
+if command -v direnv
+    direnv hook fish | source
+end
 
 # neovim
 set --global --export EDITOR nvim

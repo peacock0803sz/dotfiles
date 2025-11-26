@@ -2,7 +2,7 @@
 let
   inherit (inputs) nixos-hardware nixpkgs home-manager disko;
   username = "peacock";
-  system = "x86_64-linux";
+  system = "aarch64-linux";
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
@@ -16,7 +16,7 @@ nixpkgs.lib.nixosSystem {
   specialArgs = inputs;
   modules = [
     disko.nixosModules.disko
-    nixos-hardware.nixosModules.gmktec-nucbox-g3-plus
+    nixos-hardware.nixosModules.raspberry-pi-4
     ../../nixos
     ./hardware.nix
     ./disk.nix

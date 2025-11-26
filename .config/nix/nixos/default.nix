@@ -12,15 +12,15 @@
   # Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader = {
-    timeout = 1;
-    grub = {
-      # no need to set devices, disko will add all devices that have a EF02 partition to the list already
-      # devices = [ ];
-      efiSupport = true;
-      efiInstallAsRemovable = true;
-    };
-  };
+  # boot.loader = {
+  #   timeout = 1;
+  #   grub = {
+  #     # no need to set devices, disko will add all devices that have a EF02 partition to the list already
+  #     # devices = [ ];
+  #     efiSupport = true;
+  #     efiInstallAsRemovable = true;
+  #   };
+  # };
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.

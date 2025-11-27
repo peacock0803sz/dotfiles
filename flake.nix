@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs?rev=64b84bf07dda5b88c18530ce14c5edee7a0905d7"; # pin for mcp-servers-nix (2025-11-09)
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,7 +31,7 @@
     };
     mcp-servers-nix = {
       url = "github:natsukium/mcp-servers-nix";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

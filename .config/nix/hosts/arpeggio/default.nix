@@ -1,7 +1,6 @@
 { inputs }:
 let
-  inherit (inputs) nix-darwin home-manager nixpkgs nixpkgs-stable nix-monitored mcp-servers-nix;
-  # inherit (inputs) nix-darwin home-manager nixpkgs nix-monitored mcp-servers-nix;
+  inherit (inputs) nix-darwin home-manager nixpkgs nix-monitored mcp-servers-nix;
 
   system = "aarch64-darwin";
   username = "peacock";
@@ -17,11 +16,6 @@ let
     ];
   };
 
-  pkgsStable = import nixpkgs-stable {
-    inherit system;
-    config.allowUnfree = true;
-  };
-
   npmPkgs = pkgs.callPackage ./node2nix { inherit pkgs; };
   brewCasks = import ./brewCasks.nix;
   homeModules = [
@@ -29,12 +23,9 @@ let
     (import ../../home-manager/base.nix)
     (import ../../home-manager/headed.nix)
     (import ../../home-manager/darwin.nix)
-    (import ../../home-manager/agents/claude-code { inherit npmPkgs mcp-servers-nix; pkgs = pkgsStable; })
-    (import ../../home-manager/agents/codex { inherit npmPkgs mcp-servers-nix; pkgs = pkgsStable; })
-    (import ../../home-manager/agents/gemini { inherit npmPkgs mcp-servers-nix; pkgs = pkgsStable; })
-    # (import ../../home-manager/agents/claude-code { inherit pkgs npmPkgs mcp-servers-nix; })
-    # (import ../../home-manager/agents/codex { inherit pkgs npmPkgs mcp-servers-nix; })
-    # (import ../../home-manager/agents/gemini { inherit pkgs npmPkgs mcp-servers-nix; })
+    (import ../../home-manager/agents/claude-code { inherit pkgs npmPkgs mcp-servers-nix; })
+    (import ../../home-manager/agents/codex { inherit pkgs npmPkgs mcp-servers-nix; })
+    (import ../../home-manager/agents/gemini { inherit pkgs npmPkgs mcp-servers-nix; })
   ];
 in
 nix-darwin.lib.darwinSystem {

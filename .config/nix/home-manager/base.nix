@@ -3,7 +3,7 @@ let
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
 in
 {
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.11";
   home.file = {
     ".config/bat".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/bat";
     ".config/lnav/config.json".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/lnav/config.json";

@@ -5479,10 +5479,10 @@ in
   "@github/copilot-language-server" = nodeEnv.buildNodePackage {
     name = "_at_github_slash_copilot-language-server";
     packageName = "@github/copilot-language-server";
-    version = "1.397.0";
+    version = "1.398.0";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@github/copilot-language-server/-/copilot-language-server-1.397.0.tgz";
-      sha512 = "W4tyfELe+a52hsDSPD+FpgWY94Gaho6GQp/wt3yvnHwaUwm1rGX6NsCLN1Co2kmXiUkO6iEdqgGHOYsHEbSwZw==";
+      url = "https://registry.npmjs.org/@github/copilot-language-server/-/copilot-language-server-1.398.0.tgz";
+      sha512 = "jxPSQTZ2cQtno5xKPpFN24XePcjr4PrN3YraZvADhaA2FFlEkKi0SRakq1bTEblXqZ3h5TMm/8AWQyZZ3NaMOQ==";
     };
     dependencies = [
       sources."vscode-jsonrpc-8.2.0"
@@ -6268,10 +6268,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20251127.1";
+    version = "7.0.0-dev.20251128.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251127.1.tgz";
-      sha512 = "R39glwtGz5GPX9LmwIJ7EtK1VVGzhIRTrApiFvupi1+sPdYPbWqANrwOMX0529AogVfUnk6X64LVq52zLi7GKQ==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251128.1.tgz";
+      sha512 = "VCrCHJ+TWWDwjGlZIQbcx5sg+IkNmRYviDf+9gjXvNNrK6PSnCoOSHuWDBIpGUdCWUg9uq4Mn2H5y3CvTQCriQ==";
     };
     buildInputs = globalBuildInputs;
     meta = {

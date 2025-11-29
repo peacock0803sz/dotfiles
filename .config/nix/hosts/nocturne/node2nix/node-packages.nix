@@ -4825,10 +4825,10 @@ in
   editprompt = nodeEnv.buildNodePackage {
     name = "editprompt";
     packageName = "editprompt";
-    version = "1.1.0";
+    version = "1.1.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/editprompt/-/editprompt-1.1.0.tgz";
-      sha512 = "B+nUTTyb/zzmoN9ua+4001elaTMYbens/y9y8xITYYBm2c1b63hAuZ6biVh9REAi8QQoFNVpKUZFeBYk97OiGQ==";
+      url = "https://registry.npmjs.org/editprompt/-/editprompt-1.1.1.tgz";
+      sha512 = "daCi0qSbkCDfR2Gp3+5ZSAV7ZRwXzOv3MClwIh9QxD1AfkA8N5n7Fypum5TZeQ9oOAlAGsWkvJsDmw3POdEk7Q==";
     };
     dependencies = [
       sources."ajv-8.17.1"

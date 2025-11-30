@@ -35,7 +35,7 @@ bind \ct fzf-gwq
 source $HOME/dotfiles/.config/fish/tide.fish
 
 # devenv
-if test -e $(command -v direnv)
+if test $(command -v direnv)
     direnv hook fish | source
 end
 

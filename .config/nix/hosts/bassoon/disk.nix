@@ -44,7 +44,7 @@
               content = {
                 type = "filesystem";
                 format = "ext4";
-                mountpoint = "/mnt/HDD1_6902-531A";
+                mountpoint = "/mnt/Eggplants/6902-531A";
               };
             };
           };

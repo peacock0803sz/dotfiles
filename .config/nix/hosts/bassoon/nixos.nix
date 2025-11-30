@@ -18,7 +18,7 @@
           security = "user";
         };
         public = {
-          "path" = "/mnt/HDD1_6902-531A/";
+          "path" = "/mnt/Eggplants";
           "browseable" = "yes";
           "writable" = "yes";
           "create mask" = "0775";

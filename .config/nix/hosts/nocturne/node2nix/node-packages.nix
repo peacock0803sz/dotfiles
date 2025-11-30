@@ -1948,13 +1948,13 @@ let
         sha512 = "VyhnebXciFV2DESc+p6B+y0LjSm0krU4OgJN44qFAhBY0TJ+1V61tYD2+wHusZ6F9n5K+vl8k0sTy7PEfV4qpg==";
       };
     };
-    "execa-9.6.0" = {
+    "execa-9.6.1" = {
       name = "execa";
       packageName = "execa";
-      version = "9.6.0";
+      version = "9.6.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/execa/-/execa-9.6.0.tgz";
-        sha512 = "jpWzZ1ZhwUmeWRhS7Qv3mhpOhLfwI+uAX4e5fOcXqwMR7EcJ0pj2kV1CVzHVMX/LphnKWD3LObjZCoJ71lKpHw==";
+        url = "https://registry.npmjs.org/execa/-/execa-9.6.1.tgz";
+        sha512 = "9Be3ZoN4LmYR90tUoVu2te2BsbzHfhJyfEiAVfz7N5/zv+jduIfLrV2xdQXOHbaD6KgpGdO9PRPM1Y4Q9QkPkA==";
       };
     };
     "express-5.1.0" = {
@@ -5258,7 +5258,7 @@ in
       })
       sources."eventsource-3.0.7"
       sources."eventsource-parser-3.0.6"
-      (sources."execa-9.6.0" // {
+      (sources."execa-9.6.1" // {
         dependencies = [
           sources."signal-exit-4.1.0"
         ];

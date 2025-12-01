@@ -17,6 +17,7 @@ local config = {
       },
     },
     vtsls = {
+      settings = { typescript = { tsserver = { maxTsServerMemory = 2048 } } },
       tsserver = {
         globalPlugins = {
           name = "@vue/typescript-plugin",

@@ -9,6 +9,7 @@ local spec = {
   { "https://github.com/machakann/vim-sandwich" },
   { "https://github.com/lambdalisue/vim-suda" },
   { "https://github.com/lambdalisue/vim-pager" },
+  { "https://github.com/lambdalisue/vim-fern" },
   { "https://github.com/lambdalisue/vim-manpager" },
   { "https://github.com/mattn/emmet-vim" },
   { "https://github.com/rhysd/committia.vim" },

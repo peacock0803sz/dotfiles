@@ -21,8 +21,8 @@
           "path" = "/home/peacock";
           "browseable" = "yes";
           "writable" = "yes";
-          "create mask" = "0775";
-          "directory mask" = "0775";
+          "create mask" = "0644";
+          "directory mask" = "0755";
           "force user" = "peacock";
           "force group" = "wheel";
         };
@@ -30,8 +30,8 @@
           "path" = "/mnt/Eggplants";
           "browseable" = "yes";
           "writable" = "yes";
-          "create mask" = "0775";
-          "directory mask" = "0775";
+          "create mask" = "0644";
+          "directory mask" = "0755";
           "force user" = "peacock";
           "force group" = "wheel";
         };
@@ -45,5 +45,7 @@
     udev-gothic-nf
   ];
 
-  # environment.systemPackages = with pkgs; [  ];
+  environment.systemPackages = with pkgs; [
+    cron
+  ];
 }

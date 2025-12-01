@@ -2317,13 +2317,13 @@ let
         sha512 = "d+l3qxjSesT4V7v2fh+QnmFnUWv9lSpjarhShNTgBOfA0ttejbQUAlHLitbjkoRiDulW0OPoQPYIGhIC8ohejg==";
       };
     };
-    "finalhandler-2.1.0" = {
+    "finalhandler-2.1.1" = {
       name = "finalhandler";
       packageName = "finalhandler";
-      version = "2.1.0";
+      version = "2.1.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/finalhandler/-/finalhandler-2.1.0.tgz";
-        sha512 = "/t88Ty3d5JWQbWYgaOGCCYfXRwV1+be02WqYYlL6h0lEiUAMPM8o8qKGO01YIkOHzka2up08wvgYD0mDiI+q3Q==";
+        url = "https://registry.npmjs.org/finalhandler/-/finalhandler-2.1.1.tgz";
+        sha512 = "S8KoZgRZN+a5rNwqTxlZZePjT/4cnm0ROV70LedRHZ0p8u9fRID0hJUZQpkKLzro8LfmC8sx23bY6tVNxv8pQA==";
       };
     };
     "find-up-simple-1.0.1" = {
@@ -3316,13 +3316,13 @@ let
         sha512 = "JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==";
       };
     };
-    "lru-cache-11.2.2" = {
+    "lru-cache-11.2.4" = {
       name = "lru-cache";
       packageName = "lru-cache";
-      version = "11.2.2";
+      version = "11.2.4";
       src = fetchurl {
-        url = "https://registry.npmjs.org/lru-cache/-/lru-cache-11.2.2.tgz";
-        sha512 = "F9ODfyqML2coTIsQpSkRHnLSZMtkU8Q+mSfcaIyKwy58u+8k5nvAYeiNhsyMARvzNcXJ9QfWVrcPsC9e9rAxtg==";
+        url = "https://registry.npmjs.org/lru-cache/-/lru-cache-11.2.4.tgz";
+        sha512 = "B5Y16Jr9LB9dHVkh6ZevG+vAbOsNOYCX+sXvFWFu7B3Iz5mijW3zdbMyhsh8ANd2mSWBYdJgnqi+mL7/LrOPYg==";
       };
     };
     "marked-15.0.12" = {
@@ -5855,7 +5855,7 @@ in
       sources."fdir-6.5.0"
       sources."fetch-blob-3.2.0"
       sources."figures-6.1.0"
-      sources."finalhandler-2.1.0"
+      sources."finalhandler-2.1.1"
       sources."find-up-simple-1.0.1"
       (sources."foreground-child-3.3.1" // {
         dependencies = [
@@ -5990,7 +5990,7 @@ in
       sources."loose-envify-1.4.0"
       sources."lowercase-keys-3.0.0"
       sources."lowlight-3.3.0"
-      sources."lru-cache-11.2.2"
+      sources."lru-cache-11.2.4"
       sources."marked-15.0.12"
       sources."math-intrinsics-1.1.0"
       sources."media-typer-1.1.0"
@@ -6268,10 +6268,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20251130.1";
+    version = "7.0.0-dev.20251201.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251130.1.tgz";
-      sha512 = "0DcbBJM5xMvbUWl5ZNprFno6ZlGmkI1RHN4hW1jJza7D5Um0kSs4CU0fx2Z4uNxhY7a37Y6px5LkM3WF6gePQg==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251201.1.tgz";
+      sha512 = "EiPEgGwNa2uHyyKgeoWTL6wWHKUBmF3xsfZ3OHofk7TxUuxb2mpLG5igEuaBe8iUwkCUl9uZgJvOu6o0wE5NSA==";
     };
     buildInputs = globalBuildInputs;
     meta = {

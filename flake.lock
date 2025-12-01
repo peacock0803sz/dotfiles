@@ -264,6 +264,26 @@
         "type": "github"
       }
     },
+    "paneru": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1764193920,
+        "narHash": "sha256-aUZBCAR19xYgqhPiiDftEiLOSYZZJuiwemyO0Qun1rQ=",
+        "owner": "karinushka",
+        "repo": "paneru",
+        "rev": "ba03f9e4bd7c05582a5b13883a2648f08b305ab9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "karinushka",
+        "repo": "paneru",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -298,6 +318,7 @@
         "nix-monitored": "nix-monitored",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "paneru": "paneru",
         "vim-overlay": "vim-overlay"
       }
     },

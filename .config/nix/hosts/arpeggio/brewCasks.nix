@@ -34,6 +34,7 @@
   "tailscale-app"
   "utm"
   "zoom"
+  "vlc"
   "visual-studio-code"
   "vivaldi"
   "wrike"

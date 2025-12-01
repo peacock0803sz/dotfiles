@@ -17,7 +17,16 @@
           "passwd program" = "/run/wrappers/bin/passwd %u";
           security = "user";
         };
-        public = {
+        peacock = {
+          "path" = "/home/peacock";
+          "browseable" = "yes";
+          "writable" = "yes";
+          "create mask" = "0775";
+          "directory mask" = "0775";
+          "force user" = "peacock";
+          "force group" = "wheel";
+        };
+        eggplants = {
           "path" = "/mnt/Eggplants";
           "browseable" = "yes";
           "writable" = "yes";

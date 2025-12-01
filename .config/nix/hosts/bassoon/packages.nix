@@ -17,6 +17,7 @@ with pkgs; [
   nixpkgs-fmt
   vim-language-server
 
+  yt-dlp
   ffmpeg
   imagemagick
 ]

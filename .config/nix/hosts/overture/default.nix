@@ -17,6 +17,7 @@ nixpkgs.lib.nixosSystem {
   modules = [
     disko.nixosModules.disko
     nixos-hardware.nixosModules.raspberry-pi-4
+    ./disk.nix
     ./hardware.nix
     ./nixos.nix
 

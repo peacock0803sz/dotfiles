@@ -23,7 +23,6 @@ let
     (import ../../home-manager/base.nix)
     (import ../../home-manager/headed.nix)
     (import ../../home-manager/darwin.nix)
-    (import ../../home-manager/paneru.nix { inherit (inputs) paneru; })
     (import ../../home-manager/agents/claude-code { inherit pkgs npmPkgs mcp-servers-nix; })
     (import ../../home-manager/agents/codex { inherit pkgs npmPkgs mcp-servers-nix; })
     (import ../../home-manager/agents/gemini { inherit pkgs npmPkgs mcp-servers-nix; })

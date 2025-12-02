@@ -20,6 +20,9 @@
 
   hardware.enableRedistributableFirmware = true;
 
+  networking.useDHCP = lib.mkDefault true;
+  networking.hostName = "overture";
+
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";

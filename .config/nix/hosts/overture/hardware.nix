@@ -4,34 +4,25 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  # boot.initrd.kernelModules = [ "xhci_pci" "usbhid" "usb_storage" "vc4" ];
-  boot.initrd.kernelModules = [ "vc4" ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
+
   boot.loader.grub.enable = false;
-  # boot.loader.generic-extlinux-compatible.enable = true;
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
+  # Enables the generation of /boot/extlinux/extlinux.conf
+  boot.loader.generic-extlinux-compatible.enable = true;
 
-  swapDevices = [ ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "usbhid" ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ ];
+  boot.extraModulePackages = [ ];
 
-  console.enable = false;
-  hardware = {
-    raspberry-pi."4" = {
-      apply-overlays-dtmerge.enable = true;
-      # fkms-3d.enable = true;
-    };
-    deviceTree = {
-      enable = true;
-      # filter = "*bcm2837-rpi-3-b*.dtb";
-      filter = "*rpi-4-*.dtb";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
+    fsType = "ext4";
   };
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  # networking.useDHCP = lib.mkDefault true;
-  networking.hostName = "overture"; # Define your hostname.
-  # networking.interfaces.enp2s0.useDHCP = lib.mkDefault true;
+  swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 }

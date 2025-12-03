@@ -16,4 +16,16 @@ function M.join_table(...)
   return result
 end
 
+---@param cfg table<string, boolean>
+function M.check_enable(cfg)
+  ---@type hostname string
+  local hostname = vim.loop.os_gethostname()
+
+  for k, v in pairs(cfg) do
+    if hostname == k then
+      return v
+    end
+  end
+end
+
 return M

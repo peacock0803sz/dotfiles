@@ -3,7 +3,7 @@ local function config()
 
   local group = vim.api.nvim_create_augroup("nvim_ghost_user_autocommands", { clear = false })
   local filetypes = {
-    markdown = { "*github.com", "*esa.io" }
+    markdown = { "*github.com", "*esa.io" },
   }
   for ft, pattern in pairs(filetypes) do
     vim.api.nvim_create_autocmd(
@@ -14,5 +14,14 @@ local function config()
 end
 
 ---@type LazySpec
-local spec = { "https://github.com/subnut/nvim-ghost.nvim", config = config() }
+local spec = {
+  "https://github.com/subnut/nvim-ghost.nvim",
+  config = config(),
+  cond = require("utils").check_enable({
+    nocturne = true,
+    arpeggio = true,
+    overture = false,
+    bassoon = false,
+  }),
+}
 return spec

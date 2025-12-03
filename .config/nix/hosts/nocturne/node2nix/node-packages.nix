@@ -121,13 +121,13 @@ let
         sha512 = "Orxzlfb9c67A15cq2JQEyVc7wEsmFBmHjZWZYQMUyJ1qivXyMwdyNOs9odi79hze+2zqdTtu1E19IM/FtqZ10g==";
       };
     };
-    "@google/gemini-cli-core-0.18.4" = {
+    "@google/gemini-cli-core-0.19.1" = {
       name = "_at_google_slash_gemini-cli-core";
       packageName = "@google/gemini-cli-core";
-      version = "0.18.4";
+      version = "0.19.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.18.4.tgz";
-        sha512 = "nXYxwnllYlpIXMtESJNAoyCpykUbviBdRixpfn0eVC3aIeY7Z7GN3IYzOiz0sdVXjdTLsU0MePSfuaUjkpEE2A==";
+        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.19.1.tgz";
+        sha512 = "21GNDFGAZeuFHX4ugoIm05Qvuq1S2gNs9SKlPMI4sGdAJZ8PsF4p6i8Nk3DyEI5oGwLHhfNXclUBD866NeTXkw==";
       };
     };
     "@google/genai-1.30.0" = {
@@ -265,13 +265,13 @@ let
         sha512 = "+LGuAEIC2L7pbvkyAQVWM2Go0dAy+UWEui28g07zNtZsCBhm+gusBK8PNwLJLV5Jay+TyUYuwLIbJdjLLzqEBg==";
       };
     };
-    "@modelcontextprotocol/sdk-1.24.0" = {
+    "@modelcontextprotocol/sdk-1.24.2" = {
       name = "_at_modelcontextprotocol_slash_sdk";
       packageName = "@modelcontextprotocol/sdk";
-      version = "1.24.0";
+      version = "1.24.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@modelcontextprotocol/sdk/-/sdk-1.24.0.tgz";
-        sha512 = "D8h5KXY2vHFW8zTuxn2vuZGN0HGrQ5No6LkHwlEA9trVgNdPL3TF1dSqKA7Dny6BbBYKSW/rOBDXdC8KJAjUCg==";
+        url = "https://registry.npmjs.org/@modelcontextprotocol/sdk/-/sdk-1.24.2.tgz";
+        sha512 = "hS/kzSfchqzvUeJUsdiDHi84/kNhLIZaZ6coGQVwbYIelOBbcAwUohUfaQTLa1MvFOK/jbTnGFzraHSFwB7pjQ==";
       };
     };
     "@opentelemetry/api-1.9.0" = {
@@ -2641,13 +2641,13 @@ let
         sha512 = "JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==";
       };
     };
-    "ink-6.4.5" = {
+    "ink-6.4.6" = {
       name = "ink";
       packageName = "ink";
-      version = "6.4.5";
+      version = "6.4.6";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@jrichman/ink/-/ink-6.4.5.tgz";
-        sha512 = "mIDkZqtJbedL9XDOoqoJt3S8aGQVqEJYnCnSeLlYzkpUWCsSWC0hW40yJ0DLH86lcl8k5R5lv/9C2i/3746nWw==";
+        url = "https://registry.npmjs.org/@jrichman/ink/-/ink-6.4.6.tgz";
+        sha512 = "QHl6l1cl3zPCaRMzt9TUbTX6Q5SzvkGEZDDad0DmSf5SPmT1/90k6pGPejEvDCJprkitwObXpPaTWGHItqsy4g==";
       };
     };
     "ink-gradient-3.0.0" = {
@@ -3712,13 +3712,13 @@ let
         sha512 = "y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==";
       };
     };
-    "react-19.2.0" = {
+    "react-19.2.1" = {
       name = "react";
       packageName = "react";
-      version = "19.2.0";
+      version = "19.2.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/react/-/react-19.2.0.tgz";
-        sha512 = "tmbWg6W31tQLeB5cdIBOicJDJRR2KzXsV7uSK9iNfLWQ5bIZfxuPEHp7M8wiHyHnn0DD1i7w3Zmin0FtkrwoCQ==";
+        url = "https://registry.npmjs.org/react/-/react-19.2.1.tgz";
+        sha512 = "DGrYcCWK7tvYMnWh79yrPHt+vdx9tY+1gPZa7nJQtO/p8bLTDaHp4dzwEhQB7pZ4Xe3ok4XKuEPrVuc+wlpkmw==";
       };
     };
     "react-devtools-core-6.1.5" = {
@@ -4396,13 +4396,13 @@ let
         sha512 = "PGZZzFW63eElZJDe/b/R/LbsjDDYJa5UEjLZJB59RQsMX+fo0j54fqBPn1MGKav/QNa0JR0zBiVaikYDWCj5KQ==";
       };
     };
-    "tree-sitter-bash-0.25.0" = {
+    "tree-sitter-bash-0.25.1" = {
       name = "tree-sitter-bash";
       packageName = "tree-sitter-bash";
-      version = "0.25.0";
+      version = "0.25.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/tree-sitter-bash/-/tree-sitter-bash-0.25.0.tgz";
-        sha512 = "gZtlj9+qFS81qKxpLfD6H0UssQ3QBc/F0nKkPsiFDyfQF2YBqYvglFJUzchrPpVhZe9kLZTrJ9n2J6lmka69Vg==";
+        url = "https://registry.npmjs.org/tree-sitter-bash/-/tree-sitter-bash-0.25.1.tgz";
+        sha512 = "7hMytuYIMoXOq24yRulgIxthE9YmggZIOHCyPTTuJcu6EU54tYD+4G39cUb28kxC6jMf/AbPfWGLQtgPTdh3xw==";
       };
     };
     "type-fest-2.19.0" = {
@@ -4921,10 +4921,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.0.56";
+    version = "2.0.57";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.56.tgz";
-      sha512 = "MD97AVZ86D6NJnUY9KpXmGw/DK6wausYR8ITZkaLsz33Trrw48ug1pQze2vRAOTvhcne58y2jQfRLQzDVFkFYw==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.57.tgz";
+      sha512 = "wxI5KTnNRu7D8PBeM3YmrPSDSMQwIc0ReLPSse0NFfQeh4PJoi1s6juqtccXifzVfidtE839qu1iY+nyqCO3gQ==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -4939,10 +4939,10 @@ in
   "@google/gemini-cli" = nodeEnv.buildNodePackage {
     name = "_at_google_slash_gemini-cli";
     packageName = "@google/gemini-cli";
-    version = "0.18.4";
+    version = "0.19.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.18.4.tgz";
-      sha512 = "oEqmq3UuPtC5tuAX8iuJDjXpvmN73Hjb0ufzL/+Xqb3H+Vj0Uk3MxDKCOe3Jloq3uDkS2Xrp00XRwZ8Ocy4XLQ==";
+      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.19.1.tgz";
+      sha512 = "m+t3EVs24LmnNgLQLgs8fujmfae/PfB0UGffig16ZWq9afxSUGRV24JIm4/UM+oqn6eqlwgnqzLnzzuFv/McPg==";
     };
     dependencies = [
       sources."@alcalzone/ansi-tokenize-0.2.2"
@@ -5007,7 +5007,7 @@ in
       sources."@google-cloud/precise-date-4.0.0"
       sources."@google-cloud/projectify-4.0.0"
       sources."@google-cloud/promisify-4.0.0"
-      (sources."@google/gemini-cli-core-0.18.4" // {
+      (sources."@google/gemini-cli-core-0.19.1" // {
         dependencies = [
           sources."gaxios-6.7.1"
           sources."gcp-metadata-6.1.1"
@@ -5042,7 +5042,7 @@ in
       sources."@kwsites/file-exists-1.1.1"
       sources."@kwsites/promise-deferred-1.1.1"
       sources."@lvce-editor/verror-1.7.0"
-      sources."@modelcontextprotocol/sdk-1.24.0"
+      sources."@modelcontextprotocol/sdk-1.24.2"
       sources."@opentelemetry/api-1.9.0"
       sources."@opentelemetry/api-logs-0.203.0"
       sources."@opentelemetry/context-async-hooks-2.0.1"
@@ -5392,7 +5392,7 @@ in
       sources."index-to-position-1.2.0"
       sources."inherits-2.0.4"
       sources."ini-1.3.8"
-      sources."ink-6.4.5"
+      sources."ink-6.4.6"
       sources."ink-gradient-3.0.0"
       sources."ink-spinner-5.0.0"
       sources."ipaddr.js-1.9.1"
@@ -5505,7 +5505,7 @@ in
           sources."strip-json-comments-2.0.1"
         ];
       })
-      sources."react-19.2.0"
+      sources."react-19.2.1"
       (sources."react-devtools-core-6.1.5" // {
         dependencies = [
           sources."utf-8-validate-5.0.10"
@@ -5609,7 +5609,7 @@ in
       sources."toidentifier-1.0.1"
       sources."tr46-0.0.3"
       sources."tree-sitter-0.25.0"
-      sources."tree-sitter-bash-0.25.0"
+      sources."tree-sitter-bash-0.25.1"
       sources."type-fest-4.41.0"
       (sources."type-is-2.0.1" // {
         dependencies = [

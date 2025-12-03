@@ -136,6 +136,10 @@
         PasswordAuthentication = false;
       };
     };
+    squid = {
+      enable = true;
+      configText = "include /home/peacock/.config/squid/squid.conf";
+    };
     tailscale.enable = true;
   };
 

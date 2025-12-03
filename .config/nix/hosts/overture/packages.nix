@@ -6,6 +6,8 @@ with pkgs; [
   fishPlugins.bass
   fishPlugins.tide
 
+  squid
+
   gh
   ghq
   jq

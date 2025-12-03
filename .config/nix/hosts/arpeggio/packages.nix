@@ -5,6 +5,8 @@ with pkgs; [
   # emacs
   cachix
   tree-sitter
+  sops
+  age
 
   _1password-cli
   devenv

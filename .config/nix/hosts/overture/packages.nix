@@ -6,6 +6,9 @@ with pkgs; [
   fishPlugins.bass
   fishPlugins.tide
 
+  sops
+  age
+
   squid
 
   gh
@@ -15,6 +18,7 @@ with pkgs; [
   deno
   nodejs
 
+  tree-sitter
   nixd
   nixpkgs-fmt
   vim-language-server

@@ -364,13 +364,13 @@ let
         sha512 = "+LGuAEIC2L7pbvkyAQVWM2Go0dAy+UWEui28g07zNtZsCBhm+gusBK8PNwLJLV5Jay+TyUYuwLIbJdjLLzqEBg==";
       };
     };
-    "@modelcontextprotocol/sdk-1.24.2" = {
+    "@modelcontextprotocol/sdk-1.24.3" = {
       name = "_at_modelcontextprotocol_slash_sdk";
       packageName = "@modelcontextprotocol/sdk";
-      version = "1.24.2";
+      version = "1.24.3";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@modelcontextprotocol/sdk/-/sdk-1.24.2.tgz";
-        sha512 = "hS/kzSfchqzvUeJUsdiDHi84/kNhLIZaZ6coGQVwbYIelOBbcAwUohUfaQTLa1MvFOK/jbTnGFzraHSFwB7pjQ==";
+        url = "https://registry.npmjs.org/@modelcontextprotocol/sdk/-/sdk-1.24.3.tgz";
+        sha512 = "YgSHW29fuzKKAHTGe9zjNoo+yF8KaQPzDC2W9Pv41E7/57IfY+AMGJ/aDFlgTLcVVELoggKE4syABCE75u3NCw==";
       };
     };
     "@opentelemetry/api-1.9.0" = {
@@ -3217,22 +3217,22 @@ let
         sha512 = "hRF04fqJIP8Abbkq5NKGN0Bbr3JxlQ+qhZufXVr0DvujKy93ZCbXZMHDL4EOtodSbCWxOqR8MS1tXA5hwqCXDg==";
       };
     };
-    "jws-4.0.0" = {
+    "jws-4.0.1" = {
       name = "jws";
       packageName = "jws";
-      version = "4.0.0";
+      version = "4.0.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/jws/-/jws-4.0.0.tgz";
-        sha512 = "KDncfTmOZoOMTFG4mBlG0qUIOlc03fmzH+ru6RgYVZhPkyiy/92Owlt/8UEN+a4TXR1FQetfIpJE8ApdvdVxTg==";
+        url = "https://registry.npmjs.org/jws/-/jws-4.0.1.tgz";
+        sha512 = "EKI/M/yqPncGUUh44xz0PxSidXFr/+r0pA70+gIYhjv+et7yxM+s29Y+VGDkovRofQem0fs7Uvf4+YmAdyRduA==";
       };
     };
-    "keyv-5.5.4" = {
+    "keyv-5.5.5" = {
       name = "keyv";
       packageName = "keyv";
-      version = "5.5.4";
+      version = "5.5.5";
       src = fetchurl {
-        url = "https://registry.npmjs.org/keyv/-/keyv-5.5.4.tgz";
-        sha512 = "eohl3hKTiVyD1ilYdw9T0OiB4hnjef89e3dMYKz+mVKDzj+5IteTseASUsOB+EU9Tf6VNTCjDePcP6wkDGmLKQ==";
+        url = "https://registry.npmjs.org/keyv/-/keyv-5.5.5.tgz";
+        sha512 = "FA5LmZVF1VziNc0bIdCSA1IoSVnDCqE8HJIZZv2/W8YmoAM50+tnUgJR/gQZwEeIMleuIOnRnHA/UaZRNeV4iQ==";
       };
     };
     "kleur-3.0.3" = {
@@ -5452,10 +5452,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.0.57";
+    version = "2.0.58";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.57.tgz";
-      sha512 = "wxI5KTnNRu7D8PBeM3YmrPSDSMQwIc0ReLPSse0NFfQeh4PJoi1s6juqtccXifzVfidtE839qu1iY+nyqCO3gQ==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.58.tgz";
+      sha512 = "6/n+PrMrU6QuA0rV23oimJK6R3BxefXeBLnxTumVabmzRX5oYjZLGLIdP0PCTA6rKuSeXUjjGd1yb55B0clO+w==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -5614,7 +5614,7 @@ in
       sources."@kwsites/file-exists-1.1.1"
       sources."@kwsites/promise-deferred-1.1.1"
       sources."@lvce-editor/verror-1.7.0"
-      sources."@modelcontextprotocol/sdk-1.24.2"
+      sources."@modelcontextprotocol/sdk-1.24.3"
       sources."@opentelemetry/api-1.9.0"
       sources."@opentelemetry/api-logs-0.203.0"
       sources."@opentelemetry/context-async-hooks-2.0.1"
@@ -5989,8 +5989,8 @@ in
       sources."json-schema-traverse-1.0.0"
       sources."jsonfile-6.2.0"
       sources."jwa-2.0.1"
-      sources."jws-4.0.0"
-      sources."keyv-5.5.4"
+      sources."jws-4.0.1"
+      sources."keyv-5.5.5"
       sources."kleur-3.0.3"
       sources."ky-1.14.0"
       sources."latest-version-9.0.0"
@@ -6278,10 +6278,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20251203.1";
+    version = "7.0.0-dev.20251204.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251203.1.tgz";
-      sha512 = "u6kHGmbkB4WQ2XjQUVq6PixV92biRclTBAq8r09L/MGzsiVREdYzf/Bf1W4aTDcDSu6UQ3hjtBR6hROQRPrMXQ==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251204.1.tgz";
+      sha512 = "nyMp0ybgJVZFtDOWmcKDqaRqtj8dOg65+fDxbjIrnZuMWIqlOUGH+imFwofqlW+KndAA7KtAio2YSZMMZB25WA==";
     };
     buildInputs = globalBuildInputs;
     meta = {

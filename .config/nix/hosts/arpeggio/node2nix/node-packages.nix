@@ -211,13 +211,13 @@ let
         sha512 = "Orxzlfb9c67A15cq2JQEyVc7wEsmFBmHjZWZYQMUyJ1qivXyMwdyNOs9odi79hze+2zqdTtu1E19IM/FtqZ10g==";
       };
     };
-    "@google/gemini-cli-core-0.19.1" = {
+    "@google/gemini-cli-core-0.19.3" = {
       name = "_at_google_slash_gemini-cli-core";
       packageName = "@google/gemini-cli-core";
-      version = "0.19.1";
+      version = "0.19.3";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.19.1.tgz";
-        sha512 = "21GNDFGAZeuFHX4ugoIm05Qvuq1S2gNs9SKlPMI4sGdAJZ8PsF4p6i8Nk3DyEI5oGwLHhfNXclUBD866NeTXkw==";
+        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.19.3.tgz";
+        sha512 = "G+kDNi6gDrs9LjDkSKI6nu6F8ABo5BKzY4Z6VjshTT6vmeBNN+W/F9GJLStlAuSzdhr+7RrsNQVrO+gaKS+m6A==";
       };
     };
     "@google/genai-1.30.0" = {
@@ -5452,10 +5452,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.0.58";
+    version = "2.0.59";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.58.tgz";
-      sha512 = "6/n+PrMrU6QuA0rV23oimJK6R3BxefXeBLnxTumVabmzRX5oYjZLGLIdP0PCTA6rKuSeXUjjGd1yb55B0clO+w==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.59.tgz";
+      sha512 = "QCOtahWfU8WkAUoM4IzA01L57pScOj8WehYEzVSlF6sVKXILrpC+hZSKgOh+0ZR/Zj7IYesc6rbKoKJVxpF9Vg==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -5488,10 +5488,10 @@ in
   "@github/copilot-language-server" = nodeEnv.buildNodePackage {
     name = "_at_github_slash_copilot-language-server";
     packageName = "@github/copilot-language-server";
-    version = "1.399.0";
+    version = "1.400.0";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@github/copilot-language-server/-/copilot-language-server-1.399.0.tgz";
-      sha512 = "ZRB8Xw/d3n9VrC4iWKqVT0WTEGkuFrq1nA8QuON4JribDxDjVRlNjxx4n65t+kIKpP1W51flH/w2PRjHFs2bDA==";
+      url = "https://registry.npmjs.org/@github/copilot-language-server/-/copilot-language-server-1.400.0.tgz";
+      sha512 = "yFA3lMqIrRzOfWrU22VClfiUb4v09IzUyzH5sdmJOHTYrHsiS5tDbNOq79QzSGrMiL8LRoBJUUqrhY+SwO34qQ==";
     };
     dependencies = [
       sources."vscode-jsonrpc-8.2.0"
@@ -5511,10 +5511,10 @@ in
   "@google/gemini-cli" = nodeEnv.buildNodePackage {
     name = "_at_google_slash_gemini-cli";
     packageName = "@google/gemini-cli";
-    version = "0.19.1";
+    version = "0.19.3";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.19.1.tgz";
-      sha512 = "m+t3EVs24LmnNgLQLgs8fujmfae/PfB0UGffig16ZWq9afxSUGRV24JIm4/UM+oqn6eqlwgnqzLnzzuFv/McPg==";
+      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.19.3.tgz";
+      sha512 = "a/4gPM4lNNIYI16A4x78ZFvM8UMkzptINu+8ftZC/y+PuSgZFbT3EFlqKcS5unF2XvJMajEVYAn6kLtZj4mp8g==";
     };
     dependencies = [
       sources."@alcalzone/ansi-tokenize-0.2.2"
@@ -5579,7 +5579,7 @@ in
       sources."@google-cloud/precise-date-4.0.0"
       sources."@google-cloud/projectify-4.0.0"
       sources."@google-cloud/promisify-4.0.0"
-      (sources."@google/gemini-cli-core-0.19.1" // {
+      (sources."@google/gemini-cli-core-0.19.3" // {
         dependencies = [
           sources."gaxios-6.7.1"
           sources."gcp-metadata-6.1.1"
@@ -6260,10 +6260,10 @@ in
   "@openai/codex" = nodeEnv.buildNodePackage {
     name = "_at_openai_slash_codex";
     packageName = "@openai/codex";
-    version = "0.64.0";
+    version = "0.65.0";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@openai/codex/-/codex-0.64.0.tgz";
-      sha512 = "mO3CJiH9eoQRxRQrlBxht4SM5qYaqjToWxidEFDVa+et1ZdQpt7X3XbNIRdSohorU78E50u864MIwB32Hj3gRQ==";
+      url = "https://registry.npmjs.org/@openai/codex/-/codex-0.65.0.tgz";
+      sha512 = "Rfac4ytxRKiJXIIOJxp/6tOSYc7CDwhbmccbcgsQDN26J9ToKRram0Z//dAHdqeVj8laP+elTJO7ZsHBg7QoLg==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -6278,10 +6278,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20251204.1";
+    version = "7.0.0-dev.20251205.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251204.1.tgz";
-      sha512 = "nyMp0ybgJVZFtDOWmcKDqaRqtj8dOg65+fDxbjIrnZuMWIqlOUGH+imFwofqlW+KndAA7KtAio2YSZMMZB25WA==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251205.1.tgz";
+      sha512 = "4nae7v1KJNga2zHEak87PNF2KZjwYpueaPtBnNEU7Sb8Lh+oIWG5Iqia9lXuvpjOKd0mign9SNUO+fgj/VB3CA==";
     };
     buildInputs = globalBuildInputs;
     meta = {

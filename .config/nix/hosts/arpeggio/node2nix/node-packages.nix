@@ -1435,13 +1435,13 @@ let
         sha512 = "+qJyx4xiKra8mZrcwhjMRMUhD5NR1R8esPkzIYxX96JiecFoxAXFuz/GpR3+ev4PE1WamHip78wV0vcmPQtp8w==";
       };
     };
-    "cacheable-request-13.0.15" = {
+    "cacheable-request-13.0.16" = {
       name = "cacheable-request";
       packageName = "cacheable-request";
-      version = "13.0.15";
+      version = "13.0.16";
       src = fetchurl {
-        url = "https://registry.npmjs.org/cacheable-request/-/cacheable-request-13.0.15.tgz";
-        sha512 = "NjiSrjv37X73FmGGU5ec/M83vWQ6q1Ae3BFe+ABfdeeMy4LOMKYTpfEjrBnLedu43clKZtsYbKrHTIQE7vKq+A==";
+        url = "https://registry.npmjs.org/cacheable-request/-/cacheable-request-13.0.16.tgz";
+        sha512 = "qwRRfUu3bPhPEgKoLAXpYJfm1E2VuHT4DCzl579k2ODyFG+43jv3iMi2wbHlreIZR3+9Sp1lp4fsaXZ9VIlmzA==";
       };
     };
     "call-bind-apply-helpers-1.0.2" = {
@@ -3226,6 +3226,15 @@ let
         sha512 = "EKI/M/yqPncGUUh44xz0PxSidXFr/+r0pA70+gIYhjv+et7yxM+s29Y+VGDkovRofQem0fs7Uvf4+YmAdyRduA==";
       };
     };
+    "keyv-5.5.4" = {
+      name = "keyv";
+      packageName = "keyv";
+      version = "5.5.4";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/keyv/-/keyv-5.5.4.tgz";
+        sha512 = "eohl3hKTiVyD1ilYdw9T0OiB4hnjef89e3dMYKz+mVKDzj+5IteTseASUsOB+EU9Tf6VNTCjDePcP6wkDGmLKQ==";
+      };
+    };
     "keyv-5.5.5" = {
       name = "keyv";
       packageName = "keyv";
@@ -3244,13 +3253,13 @@ let
         sha512 = "eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==";
       };
     };
-    "ky-1.14.0" = {
+    "ky-1.14.1" = {
       name = "ky";
       packageName = "ky";
-      version = "1.14.0";
+      version = "1.14.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/ky/-/ky-1.14.0.tgz";
-        sha512 = "Rczb6FMM6JT0lvrOlP5WUOCB7s9XKxzwgErzhKlKde1bEV90FXplV1o87fpt4PU/asJFiqjYJxAJyzJhcrxOsQ==";
+        url = "https://registry.npmjs.org/ky/-/ky-1.14.1.tgz";
+        sha512 = "hYje4L9JCmpEQBtudo+v52X5X8tgWXUYyPcxKSuxQNboqufecl9VMWjGiucAFH060AwPXHZuH+WB2rrqfkmafw==";
       };
     };
     "latest-version-9.0.0" = {
@@ -4792,13 +4801,13 @@ let
         sha512 = "TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==";
       };
     };
-    "type-fest-5.3.0" = {
+    "type-fest-5.3.1" = {
       name = "type-fest";
       packageName = "type-fest";
-      version = "5.3.0";
+      version = "5.3.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/type-fest/-/type-fest-5.3.0.tgz";
-        sha512 = "d9CwU93nN0IA1QL+GSNDdwLAu1Ew5ZjTwupvedwg3WdfoH6pIDvYQ2hV0Uc2nKBLPq7NB5apCx57MLS5qlmO5g==";
+        url = "https://registry.npmjs.org/type-fest/-/type-fest-5.3.1.tgz";
+        sha512 = "VCn+LMHbd4t6sF3wfU/+HKT63C9OoyrSIf4b+vtWHpt2U7/4InZG467YDNMFMR70DdHjAdpPWmw2lzRdg0Xqqg==";
       };
     };
     "type-is-2.0.1" = {
@@ -5415,7 +5424,7 @@ in
       sources."stubborn-utils-1.0.2"
       sources."system-architecture-0.1.0"
       sources."tagged-tag-1.0.0"
-      sources."type-fest-5.3.0"
+      sources."type-fest-5.3.1"
       sources."typescript-5.9.3"
       sources."uint8array-extras-1.5.0"
       sources."when-exit-2.1.5"
@@ -5452,10 +5461,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.0.60";
+    version = "2.0.61";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.60.tgz";
-      sha512 = "hy2VGi/tYs93BcH2v0AuBsA6n3Hc48XskBbgQMd7QAOJYhA0v2/wIYFWH+y1vZAWB/Gf3n6v2xBKSZIsP1i8sQ==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.61.tgz";
+      sha512 = "3Hkb1J6J52uykcH/UnnmkYFkBbvVET0HvF6K3A4J2aZWdzLo9agJber9AM5yePpompjmwDacgBMCn/SoJYsnNQ==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -5745,7 +5754,11 @@ in
       sources."byte-counter-0.1.0"
       sources."bytes-3.1.2"
       sources."cacheable-lookup-7.0.0"
-      sources."cacheable-request-13.0.15"
+      (sources."cacheable-request-13.0.16" // {
+        dependencies = [
+          sources."keyv-5.5.4"
+        ];
+      })
       sources."call-bind-apply-helpers-1.0.2"
       sources."call-bound-1.0.4"
       sources."camelcase-7.0.1"
@@ -5992,7 +6005,7 @@ in
       sources."jws-4.0.1"
       sources."keyv-5.5.5"
       sources."kleur-3.0.3"
-      sources."ky-1.14.0"
+      sources."ky-1.14.1"
       sources."latest-version-9.0.0"
       sources."leac-0.6.0"
       sources."lodash.camelcase-4.3.0"
@@ -6278,10 +6291,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20251206.1";
+    version = "7.0.0-dev.20251207.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251206.1.tgz";
-      sha512 = "wog5hWVS+bYjFTpxtr+8qxqjhTKpAvlDCivvW592zctOcO+e9iLbBBLU3nDZdXW06rEA2zwjOqEPbsUcM/mcEw==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251207.1.tgz";
+      sha512 = "4QcRnzB0pi9rS0AOvg8kWbmuwHv5X7B2EXHbgcms9+56hsZ8SZrZjNgBJb2rUIodJ4kU5mrkj/xlTTT4r9VcpQ==";
     };
     buildInputs = globalBuildInputs;
     meta = {

@@ -7,45 +7,17 @@
         content = {
           type = "gpt";
           partitions = {
-            boot = {
-              name = "boot";
-              size = "1M";
-              type = "EF02";
-            };
+            boot = { name = "boot"; size = "1M"; type = "EF02"; };
             esp = {
               name = "ESP";
               size = "512M";
               type = "EF00";
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
-              };
+              content = { type = "filesystem"; format = "vfat"; mountpoint = "/boot"; };
             };
             root = {
               name = "root";
               size = "100%";
-              content = {
-                type = "lvm_pv";
-                vg = "pool";
-              };
-            };
-          };
-        };
-      };
-      hdd1 = {
-        device = "/dev/disk/by-id/ata-ST4000VN006-3CW104_WW687YWG";
-        type = "disk";
-        content = {
-          type = "gpt";
-          partitions = {
-            main = {
-              size = "100%";
-              content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/mnt/Eggplants/hdd1";
-              };
+              content = { type = "lvm_pv"; vg = "pool"; };
             };
           };
         };
@@ -61,9 +33,7 @@
               type = "filesystem";
               format = "ext4";
               mountpoint = "/";
-              mountOptions = [
-                "defaults"
-              ];
+              mountOptions = [ "defaults" ];
             };
           };
         };

@@ -34,7 +34,7 @@
         };
       };
       hdd1 = {
-        device = "/dev/disk/by-id/usb-Logitec_LGB_USB_Device_9800000095CF-0:0";
+        device = "/dev/disk/by-id/ata-ST4000VN006-3CW104_WW687YWG";
         type = "disk";
         content = {
           type = "gpt";
@@ -44,7 +44,7 @@
               content = {
                 type = "filesystem";
                 format = "ext4";
-                mountpoint = "/mnt/Eggplants/6902-531A";
+                mountpoint = "/mnt/Eggplants/hdd1";
               };
             };
           };

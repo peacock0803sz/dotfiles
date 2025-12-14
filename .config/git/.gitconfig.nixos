@@ -1,7 +1,10 @@
 ; vim:filetype=gitconfig
 
 [include]
-  path = ~/dotfiles/.config/git/.gitconfig.base
+	path = ~/dotfiles/.config/git/.gitconfig.base
+
+[core]
+	editor = vim
 
 [credential "https://github.com"]
 	helper = 

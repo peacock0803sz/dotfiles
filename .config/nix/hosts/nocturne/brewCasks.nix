@@ -23,6 +23,7 @@
   "lasso-app"
   "linear-linear"
   "macskk"
+  "musescore"
   "orbstack"
   "obs"
   "raycast"

@@ -20,6 +20,17 @@ alias github-copilot-cli gh-copilot
 source "$HOME/.local/share/gh/extensions/gh-fish/gh-copilot-alias.fish"
 # }}}
 
+function aibo
+    if not set -q NVIM_APPNAME
+        set --export NVIM_APPNAME 'nvim.aibo'
+    end
+
+    if not set -q argv[1]
+        set argv claude
+    end
+    nvim "+:Aibo $argv[1]"
+end
+
 # vim
 alias vim@bsd /usr/bin/vim
 alias vim@head "$HOME/.nix-profile/bin/vim"

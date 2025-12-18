@@ -211,13 +211,13 @@ let
         sha512 = "Orxzlfb9c67A15cq2JQEyVc7wEsmFBmHjZWZYQMUyJ1qivXyMwdyNOs9odi79hze+2zqdTtu1E19IM/FtqZ10g==";
       };
     };
-    "@google/gemini-cli-core-0.21.1" = {
+    "@google/gemini-cli-core-0.21.2" = {
       name = "_at_google_slash_gemini-cli-core";
       packageName = "@google/gemini-cli-core";
-      version = "0.21.1";
+      version = "0.21.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.21.1.tgz";
-        sha512 = "BMNr6sGuAmst/NHe/SUD53gPRhMovFpiPPLemgyywmsStoB8dCq1dFNeDQAGCx9Sxmbv13ZPRdSRdYLOh3esew==";
+        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.21.2.tgz";
+        sha512 = "nzhzy0QbcJjeOLVMiQhcOB8vX+gQ1zF6mAypGCwGdRB75Cn3NtIfAwAILbEZGN61IuwScfTaGIpqZG/GQCNUcQ==";
       };
     };
     "@google/genai-1.30.0" = {
@@ -1048,22 +1048,22 @@ let
         sha512 = "KYSIHVmslkaCDyw013pphY+d7x1qV8IZupYfeIfzNA+nsaWHbn5uPuQRvdRFsa9zFzGeudPuoGoZ1Op4jrJXIQ==";
       };
     };
-    "@vue/compiler-core-3.5.25" = {
+    "@vue/compiler-core-3.5.26" = {
       name = "_at_vue_slash_compiler-core";
       packageName = "@vue/compiler-core";
-      version = "3.5.25";
+      version = "3.5.26";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@vue/compiler-core/-/compiler-core-3.5.25.tgz";
-        sha512 = "vay5/oQJdsNHmliWoZfHPoVZZRmnSWhug0BYT34njkYTPqClh3DNWLkZNJBVSjsNMrg0CCrBfoKkjZQPM/QVUw==";
+        url = "https://registry.npmjs.org/@vue/compiler-core/-/compiler-core-3.5.26.tgz";
+        sha512 = "vXyI5GMfuoBCnv5ucIT7jhHKl55Y477yxP6fc4eUswjP8FG3FFVFd41eNDArR+Uk3QKn2Z85NavjaxLxOC19/w==";
       };
     };
-    "@vue/compiler-dom-3.5.25" = {
+    "@vue/compiler-dom-3.5.26" = {
       name = "_at_vue_slash_compiler-dom";
       packageName = "@vue/compiler-dom";
-      version = "3.5.25";
+      version = "3.5.26";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@vue/compiler-dom/-/compiler-dom-3.5.25.tgz";
-        sha512 = "4We0OAcMZsKgYoGlMjzYvaoErltdFI2/25wqanuTu+S4gismOTRTBPi4IASOjxWdzIwrYSjnqONfKvuqkXzE2Q==";
+        url = "https://registry.npmjs.org/@vue/compiler-dom/-/compiler-dom-3.5.26.tgz";
+        sha512 = "y1Tcd3eXs834QjswshSilCBnKGeQjQXB6PqFn/1nxcQw4pmG42G8lwz+FZPAZAby6gZeHSt/8LMPfZ4Rb+Bd/A==";
       };
     };
     "@vue/language-core-3.1.8" = {
@@ -1084,13 +1084,13 @@ let
         sha512 = "/dcZn/hSOlv4njHqvti+lH/txyC2BPs60Ih96Z2RsJ4iCu4NBCe9wYxqLhdtYSBZaDHxDcI2O7cI4fREO7brIw==";
       };
     };
-    "@vue/shared-3.5.25" = {
+    "@vue/shared-3.5.26" = {
       name = "_at_vue_slash_shared";
       packageName = "@vue/shared";
-      version = "3.5.25";
+      version = "3.5.26";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@vue/shared/-/shared-3.5.25.tgz";
-        sha512 = "AbOPdQQnAnzs58H2FrrDxYj/TJfmeS2jdfEEhgiKINy+bnOANmVizIEgq1r+C5zsbs6l1CCQxtcj71rwNQ4jWg==";
+        url = "https://registry.npmjs.org/@vue/shared/-/shared-3.5.26.tgz";
+        sha512 = "7Z6/y3uFI5PRoKeorTOSXKcDj0MSasfNNltcslbFrPpcw6aXRUALq4IfJlaTRspiWIUOEZbrpM+iQGmCOiWe4A==";
       };
     };
     "@vue/typescript-plugin-3.1.8" = {
@@ -2054,6 +2054,15 @@ let
       src = fetchurl {
         url = "https://registry.npmjs.org/entities/-/entities-4.5.0.tgz";
         sha512 = "V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==";
+      };
+    };
+    "entities-7.0.0" = {
+      name = "entities";
+      packageName = "entities";
+      version = "7.0.0";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/entities/-/entities-7.0.0.tgz";
+        sha512 = "FDWG5cmEYf2Z00IkYRhbFrwIwvdFKH07uV8dvNy0omp/Qb1xcyCWp2UDtcwJF4QZZvk0sLudP6/hAu42TaqVhQ==";
       };
     };
     "env-paths-3.0.0" = {
@@ -5470,10 +5479,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.0.71";
+    version = "2.0.72";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.71.tgz";
-      sha512 = "3Fmawv2dapRd7jXDkrbx7HCTSJ4q7kelAPTwpul0yihzLBjCaqXwy7P2laBoS7SuIzixnyb/AfnlgdqxkDcfyQ==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.0.72.tgz";
+      sha512 = "ysJYyeyqePMUUL2/6j6yOpowk+9qhL7AaW9Betmt4K+MrK42tvNdOXLUlvxdMs05CCbvuCRqzVll4SNVQealmg==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -5529,10 +5538,10 @@ in
   "@google/gemini-cli" = nodeEnv.buildNodePackage {
     name = "_at_google_slash_gemini-cli";
     packageName = "@google/gemini-cli";
-    version = "0.21.1";
+    version = "0.21.2";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.21.1.tgz";
-      sha512 = "lVROkDaA4dB3Ji+lGqpvnAOHRXvG5gZOPeHotk2XmK13qJhhJMLIz0QbUz+vnf6XFEXs0lO2kzQC17odtdPD3w==";
+      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.21.2.tgz";
+      sha512 = "NbSPuZbFwb9EFAEOFbTa8OpK/r/N29EgkQqw593t0YvVfkfu4zQJtkfjEn+e3nw8nG8TWjoBTNl0pFqppe64Pg==";
     };
     dependencies = [
       sources."@alcalzone/ansi-tokenize-0.2.2"
@@ -5597,7 +5606,7 @@ in
       sources."@google-cloud/precise-date-4.0.0"
       sources."@google-cloud/projectify-4.0.0"
       sources."@google-cloud/promisify-4.0.0"
-      (sources."@google/gemini-cli-core-0.21.1" // {
+      (sources."@google/gemini-cli-core-0.21.2" // {
         dependencies = [
           sources."gaxios-6.7.1"
           sources."gcp-metadata-6.1.1"
@@ -6299,10 +6308,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20251217.1";
+    version = "7.0.0-dev.20251218.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251217.1.tgz";
-      sha512 = "J5hMelK6JeuTOJy4lpH8oBijYAYVoKUW4BWd1++QRINKeyR41W8glA7spQRvox53Z2TB9U3PuVVSTEr8Kz558Q==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251218.1.tgz";
+      sha512 = "rrJtVtvIpdphQQYErmLZktwJu8TI+R8qrnwd0UPgB7c3Z5Y/nSJkJ6bMo2Zw17iy15Gwv5wf9vJPh8VqIc5u0A==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -6342,11 +6351,11 @@ in
       sources."@volar/typescript-2.4.26"
       sources."@vscode/emmet-helper-2.11.0"
       sources."@vscode/l10n-0.0.18"
-      sources."@vue/compiler-core-3.5.25"
-      sources."@vue/compiler-dom-3.5.25"
+      sources."@vue/compiler-core-3.5.26"
+      sources."@vue/compiler-dom-3.5.26"
       sources."@vue/language-core-3.1.8"
       sources."@vue/language-service-3.1.8"
-      sources."@vue/shared-3.5.25"
+      sources."@vue/shared-3.5.26"
       sources."@vue/typescript-plugin-3.1.8"
       sources."acorn-7.4.1"
       sources."alien-signals-3.1.1"
@@ -6357,7 +6366,7 @@ in
       sources."character-parser-2.2.0"
       sources."dunder-proto-1.0.1"
       sources."emmet-2.4.11"
-      sources."entities-4.5.0"
+      sources."entities-7.0.0"
       sources."es-define-property-1.0.1"
       sources."es-errors-1.3.0"
       sources."es-object-atoms-1.1.1"

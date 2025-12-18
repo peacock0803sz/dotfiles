@@ -15,5 +15,10 @@ in
       enable = true;
       interactiveShellInit = ''source $HOME/dotfiles/.config/fish/config.fish'';
     };
+    direnv = {
+      enable = true;
+      # enableFishIntegration = true;
+      nix-direnv.enable = true;
+    };
   };
 }

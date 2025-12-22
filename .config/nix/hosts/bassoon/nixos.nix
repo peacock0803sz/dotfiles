@@ -43,6 +43,7 @@
         acmeRoot = null;
         forceSSL = true;
         useACMEHost = "notizen.p3ac0ck.net";
+        # enableACME = true;
         listenAddresses = [ "0.0.0.0" "[::1]" ];
         locations."/" = {
           root = "/home/peacock/Documents/notizen/build/html";
@@ -60,13 +61,15 @@
       dnsProvider = "cloudflare";
       group = config.services.nginx.group;
       environmentFile = "/var/lib/acme/cloudflare.env";
-      # credentialsFile = "/var/lib/acme/cloudflare.env";
     };
   };
   systemd.services.nginx.serviceConfig.ProtectHome = "read-only";
   systemd.tmpfiles.rules = [
-    "a+ /home/peacock - - - - u:nginx:--x"
-    "A+ /home/peacock/Documents/notizen/build/html - - - - u:nginx:rX"
+    # /home/peacock を nginx が通過できるように + mask も通す
+    "a /home/peacock - - - - u:nginx:--x,m::--x"
+
+    # 公開ディレクトリ配下は読めるように + mask も広げる（保険）
+    "A /home/peacock/Documents/notizen/build/html - - - - u:nginx:rX,m::rX"
   ];
   systemd.services = { };
 

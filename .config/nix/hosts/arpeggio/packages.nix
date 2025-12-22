@@ -59,7 +59,7 @@ with pkgs; [
   fish-lsp
   lemminx
   npmPkgs."@typescript/native-preview"
-  npmPkgs."@vue/language-server"
+  # npmPkgs."@vue/language-server"
   nixd
   nixpkgs-fmt
   protols
@@ -83,7 +83,8 @@ with pkgs; [
   sqlite
   kubectl
   terraform
-  # nur.repos.peacock0803sz.tfcmt
+  nur.repos.peacock0803sz.tfcmt
+  nur.repos.peacock0803sz.gwq
   tflint
   tflint-plugins.tflint-ruleset-google
   act

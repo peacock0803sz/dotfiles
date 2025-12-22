@@ -10,7 +10,7 @@ let
     inherit system;
     config.allowUnfree = true;
     overlays = [
-      # inputs.nur.overlays.default
+      inputs.nur.overlays.default
       inputs.neovim-overlay.overlays.default
       inputs.vim-overlay.overlays.default
     ];

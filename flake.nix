@@ -21,6 +21,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     vim-overlay = {
       url = "github:kawarimidoll/vim-overlay";
       inputs.nixpkgs.follows = "nixpkgs";

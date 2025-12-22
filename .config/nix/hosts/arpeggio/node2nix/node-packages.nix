@@ -1066,22 +1066,22 @@ let
         sha512 = "y1Tcd3eXs834QjswshSilCBnKGeQjQXB6PqFn/1nxcQw4pmG42G8lwz+FZPAZAby6gZeHSt/8LMPfZ4Rb+Bd/A==";
       };
     };
-    "@vue/language-core-3.2.0" = {
+    "@vue/language-core-3.2.1" = {
       name = "_at_vue_slash_language-core";
       packageName = "@vue/language-core";
-      version = "3.2.0";
+      version = "3.2.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@vue/language-core/-/language-core-3.2.0.tgz";
-        sha512 = "CHIuDtZ04CIElAgEuLbwmq3p7QcmYoVPmBPqtdvWJCflZE5W3KHT/5DRBvDv1r2TteCjN02uYHiaAEWq9hQNiA==";
+        url = "https://registry.npmjs.org/@vue/language-core/-/language-core-3.2.1.tgz";
+        sha512 = "g6oSenpnGMtpxHGAwKuu7HJJkNZpemK/zg3vZzZbJ6cnnXq1ssxuNrXSsAHYM3NvH8p4IkTw+NLmuxyeYz4r8A==";
       };
     };
-    "@vue/language-service-3.2.0" = {
+    "@vue/language-service-3.2.1" = {
       name = "_at_vue_slash_language-service";
       packageName = "@vue/language-service";
-      version = "3.2.0";
+      version = "3.2.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@vue/language-service/-/language-service-3.2.0.tgz";
-        sha512 = "Sg0y2mi0oT2oCu12x51kcwyhlF+/Tv/c1YCEWIsoBYQW0P9JSKAeTtk7VnlRX8m/RyL4AkeRejz3m4Imv0+tOA==";
+        url = "https://registry.npmjs.org/@vue/language-service/-/language-service-3.2.1.tgz";
+        sha512 = "bOu57znZr4i9YLzaJVS1iDGUzGhMEz5XYqJpvwM69u/Ea+obGDWpgLSHWudC170l4u2fvJRum/b3m93eKBzaow==";
       };
     };
     "@vue/shared-3.5.26" = {
@@ -1093,13 +1093,13 @@ let
         sha512 = "7Z6/y3uFI5PRoKeorTOSXKcDj0MSasfNNltcslbFrPpcw6aXRUALq4IfJlaTRspiWIUOEZbrpM+iQGmCOiWe4A==";
       };
     };
-    "@vue/typescript-plugin-3.2.0" = {
+    "@vue/typescript-plugin-3.2.1" = {
       name = "_at_vue_slash_typescript-plugin";
       packageName = "@vue/typescript-plugin";
-      version = "3.2.0";
+      version = "3.2.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@vue/typescript-plugin/-/typescript-plugin-3.2.0.tgz";
-        sha512 = "DLFqvbCPlIOvGLJRTZQsizADyfPgiN/qaHCcrshsk0IcL1Uu9Hpp065eaquz8CxK6irxUIANQdyjfRNLAo6Qlg==";
+        url = "https://registry.npmjs.org/@vue/typescript-plugin/-/typescript-plugin-3.2.1.tgz";
+        sha512 = "+hIJMOyexG+F9CDz8rns04PZc8Gx7N9MvyjH6VV77rHUhfbvtqF8iyVUYyiO7FtA/2mTYpR98ke4tRXKLSNhlQ==";
       };
     };
     "@xterm/headless-5.5.0" = {
@@ -5143,13 +5143,13 @@ let
         sha512 = "/BpdSx+yCQGnCvecbyXdxHDkuk55/G3xwnC0GqY4gmQ3j+A+g8kzzgB4Nk/SINjqn6+waqw3EgbVF2QKExkRxQ==";
       };
     };
-    "vue-component-meta-3.2.0" = {
+    "vue-component-meta-3.2.1" = {
       name = "vue-component-meta";
       packageName = "vue-component-meta";
-      version = "3.2.0";
+      version = "3.2.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/vue-component-meta/-/vue-component-meta-3.2.0.tgz";
-        sha512 = "HU1A//MXRUfNXzQj6RktgCXAL0uXF39tGSlCRoyvXOZPhn8L0GaIFt9AYzZsFi+r17X+xVrdeRwITLkVAvjPmw==";
+        url = "https://registry.npmjs.org/vue-component-meta/-/vue-component-meta-3.2.1.tgz";
+        sha512 = "LmiIxCeyazn4w9Te6rg2uj59/HO7OCWkoQWrixtGin/LrrazGSYlScM68kpXUDIIUa7dfBqNzMUEL3516bpgPQ==";
       };
     };
     "web-streams-polyfill-3.3.3" = {
@@ -6317,10 +6317,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20251221.1";
+    version = "7.0.0-dev.20251222.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251221.1.tgz";
-      sha512 = "MZdOju//ONcl4vSozTsAa89zOuSZ1EL9FRrQnG1u5k8g+do8PHAB/OvCXm3JsT/C9Q8UMth40aakfmn/j2fGrQ==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251222.1.tgz";
+      sha512 = "/9Xrcwb1vkJX+Wdj57ckixQBgF+I1DwEi1PEwgu13i/q5gs1AWVxOGg318sibuZu/33ZfvxRZZXOS24UzqDwWw==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -6335,10 +6335,10 @@ in
   "@vue/language-server" = nodeEnv.buildNodePackage {
     name = "_at_vue_slash_language-server";
     packageName = "@vue/language-server";
-    version = "3.2.0";
+    version = "3.2.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@vue/language-server/-/language-server-3.2.0.tgz";
-      sha512 = "Vm0OA67J9p3v8etTaeCzZmr8DOHvs+D+Gc21Sbf30Oe4nKMyPKb8Aa1tqR1vWKIQZK6YCVLk++S/czYdXyzPOg==";
+      url = "https://registry.npmjs.org/@vue/language-server/-/language-server-3.2.1.tgz";
+      sha512 = "MvwQ9zdpbrJFeJTgOqkgCtFzbd6oShvBud+Q82J8ZPVarN1ApBaRzy8I/DpBFOj4fvqiPH+y0buQ3JO5S+ZfIQ==";
     };
     dependencies = [
       sources."@babel/helper-string-parser-7.27.1"
@@ -6358,18 +6358,14 @@ in
       sources."@volar/language-service-2.4.27"
       sources."@volar/source-map-2.4.27"
       sources."@volar/typescript-2.4.27"
-      (sources."@vscode/emmet-helper-2.11.0" // {
-        dependencies = [
-          sources."jsonc-parser-2.3.1"
-        ];
-      })
+      sources."@vscode/emmet-helper-2.11.0"
       sources."@vscode/l10n-0.0.18"
       sources."@vue/compiler-core-3.5.26"
       sources."@vue/compiler-dom-3.5.26"
-      sources."@vue/language-core-3.2.0"
-      sources."@vue/language-service-3.2.0"
+      sources."@vue/language-core-3.2.1"
+      sources."@vue/language-service-3.2.1"
       sources."@vue/shared-3.5.26"
-      sources."@vue/typescript-plugin-3.2.0"
+      sources."@vue/typescript-plugin-3.2.1"
       sources."acorn-7.4.1"
       sources."alien-signals-3.1.1"
       sources."async-function-1.0.0"
@@ -6394,7 +6390,7 @@ in
       sources."hasown-2.0.2"
       sources."is-expression-4.0.0"
       sources."is-regex-1.2.1"
-      sources."jsonc-parser-3.3.1"
+      sources."jsonc-parser-2.3.1"
       sources."math-intrinsics-1.1.0"
       sources."muggle-string-0.4.1"
       sources."object-assign-4.1.1"
@@ -6418,7 +6414,11 @@ in
       sources."volar-service-typescript-0.0.68"
       sources."vscode-css-languageservice-6.3.9"
       sources."vscode-html-languageservice-5.6.1"
-      sources."vscode-json-languageservice-5.6.4"
+      (sources."vscode-json-languageservice-5.6.4" // {
+        dependencies = [
+          sources."jsonc-parser-3.3.1"
+        ];
+      })
       sources."vscode-jsonrpc-8.2.0"
       sources."vscode-languageserver-9.0.1"
       sources."vscode-languageserver-protocol-3.17.5"
@@ -6426,7 +6426,7 @@ in
       sources."vscode-languageserver-types-3.17.5"
       sources."vscode-nls-5.2.0"
       sources."vscode-uri-3.1.0"
-      sources."vue-component-meta-3.2.0"
+      sources."vue-component-meta-3.2.1"
     ];
     buildInputs = globalBuildInputs;
     meta = {

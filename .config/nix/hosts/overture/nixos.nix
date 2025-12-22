@@ -137,13 +137,6 @@
       };
     };
     tailscale.enable = true;
-    nginx = {
-      enable = true;
-      virtualHosts."notizen.p3ac0ck.net" = {
-        root = "/home/peacock/Documents/notizen";
-        listenAddresses = [ "0.0.0.0" "[::1]" ];
-      };
-    };
   };
 
   # Open ports in the firewall.

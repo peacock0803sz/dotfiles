@@ -1192,13 +1192,13 @@ let
         sha512 = "8iUql50EUR+uUcdRQ3HDqa6EVyo3docL8g5WJ3FNcWmu62IbkGUue/pEyLBW8VGKKucTPgqeks4fIU1DA4yowQ==";
       };
     };
-    "alien-signals-3.1.1" = {
+    "alien-signals-3.1.2" = {
       name = "alien-signals";
       packageName = "alien-signals";
-      version = "3.1.1";
+      version = "3.1.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/alien-signals/-/alien-signals-3.1.1.tgz";
-        sha512 = "ogkIWbVrLwKtHY6oOAXaYkAxP+cTH7V5FZ5+Tm4NZFd8VDZ6uNMDrfzqctTZ42eTMCSR3ne3otpcxmqSnFfPYA==";
+        url = "https://registry.npmjs.org/alien-signals/-/alien-signals-3.1.2.tgz";
+        sha512 = "d9dYqZTS90WLiU0I5c6DHj/HcKkF8ZyGN3G5x8wSbslulz70KOxaqCT0hQCo9KOyhVqzqGojvNdJXoTumZOtcw==";
       };
     };
     "ansi-align-3.0.1" = {
@@ -6368,7 +6368,7 @@ in
       sources."@vue/shared-3.5.26"
       sources."@vue/typescript-plugin-3.2.1"
       sources."acorn-7.4.1"
-      sources."alien-signals-3.1.1"
+      sources."alien-signals-3.1.2"
       sources."async-function-1.0.0"
       sources."async-generator-function-1.0.0"
       sources."call-bind-apply-helpers-1.0.2"

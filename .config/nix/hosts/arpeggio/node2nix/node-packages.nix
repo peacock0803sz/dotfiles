@@ -2740,13 +2740,13 @@ let
         sha512 = "Xwwo44whKBVCYoliBQwaPvtd/2tYFkRQtXDWj1nackaV2JPXx3L0+Jvd8/qCJ2p+ML0/XVkJ2q+Mr+UVdpJK5w==";
       };
     };
-    "hono-4.11.1" = {
+    "hono-4.11.2" = {
       name = "hono";
       packageName = "hono";
-      version = "4.11.1";
+      version = "4.11.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/hono/-/hono-4.11.1.tgz";
-        sha512 = "KsFcH0xxHes0J4zaQgWbYwmz3UPOOskdqZmItstUG93+Wk1ePBLkLGwbP9zlmh1BFUiL8Qp+Xfu9P7feJWpGNg==";
+        url = "https://registry.npmjs.org/hono/-/hono-4.11.2.tgz";
+        sha512 = "o+avdUAD1v94oHkjGBhiMhBV4WBHxhbu0+CUVH78hhphKy/OKQLxtKjkmmNcrMlbYAhAbsM/9F+l3KnYxyD3Lg==";
       };
     };
     "hosted-git-info-7.0.2" = {
@@ -5976,7 +5976,7 @@ in
       sources."has-tostringtag-1.0.2"
       sources."hasown-2.0.2"
       sources."highlight.js-11.11.1"
-      sources."hono-4.11.1"
+      sources."hono-4.11.2"
       (sources."hosted-git-info-7.0.2" // {
         dependencies = [
           sources."lru-cache-10.4.3"
@@ -6318,10 +6318,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20251223.1";
+    version = "7.0.0-dev.20251225.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251223.1.tgz";
-      sha512 = "o9v1DubNQ60Jmx4GECdPbRQQUxFqpkDt4RG0k9etGoPuiiA9RVIz8W4KmCyqidB0oHZtasGJo07KBbMas0zuog==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20251225.1.tgz";
+      sha512 = "vb+1x8j1uRG6hxKWJ3I8XDuq8FvQw0qTDPOQK/DtBZOdoWDFDWdmvFgGQwJ6h2se/W0x31Y4r+SFxj9B/uzgTA==";
     };
     buildInputs = globalBuildInputs;
     meta = {

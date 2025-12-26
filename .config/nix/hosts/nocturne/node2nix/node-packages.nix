@@ -1399,13 +1399,13 @@ let
         sha512 = "LTQ/SGc+s0Xc0Fu5WaKnR0YiygZkm9eKFvyS+fRsU7/ZWFF8ykFM6Pc9aCVf1+xasOOZpO3BAVgVrKvsqKHV7w==";
       };
     };
-    "comment-json-4.5.0" = {
+    "comment-json-4.5.1" = {
       name = "comment-json";
       packageName = "comment-json";
-      version = "4.5.0";
+      version = "4.5.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/comment-json/-/comment-json-4.5.0.tgz";
-        sha512 = "aKl8CwoMKxVTfAK4dFN4v54AEvuUh9pzmgVIBeK6gBomLwMgceQUKKWHzJdW1u1VQXQuwnJ7nJGWYYMTl5U4yg==";
+        url = "https://registry.npmjs.org/comment-json/-/comment-json-4.5.1.tgz";
+        sha512 = "taEtr3ozUmOB7it68Jll7s0Pwm+aoiHyXKrEC8SEodL4rNpdfDLqa7PfBlrgFoCNNdR8ImL+muti5IGvktJAAg==";
       };
     };
     "conf-15.0.2" = {
@@ -2470,13 +2470,13 @@ let
         sha512 = "Xwwo44whKBVCYoliBQwaPvtd/2tYFkRQtXDWj1nackaV2JPXx3L0+Jvd8/qCJ2p+ML0/XVkJ2q+Mr+UVdpJK5w==";
       };
     };
-    "hono-4.11.2" = {
+    "hono-4.11.3" = {
       name = "hono";
       packageName = "hono";
-      version = "4.11.2";
+      version = "4.11.3";
       src = fetchurl {
-        url = "https://registry.npmjs.org/hono/-/hono-4.11.2.tgz";
-        sha512 = "o+avdUAD1v94oHkjGBhiMhBV4WBHxhbu0+CUVH78hhphKy/OKQLxtKjkmmNcrMlbYAhAbsM/9F+l3KnYxyD3Lg==";
+        url = "https://registry.npmjs.org/hono/-/hono-4.11.3.tgz";
+        sha512 = "PmQi306+M/ct/m5s66Hrg+adPnkD5jiO6IjA7WhWw0gSBSo1EcRegwuI1deZ+wd5pzCGynCcn2DprnE4/yEV4w==";
       };
     };
     "hosted-git-info-7.0.2" = {
@@ -2965,13 +2965,13 @@ let
         sha512 = "eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==";
       };
     };
-    "ky-1.14.1" = {
+    "ky-1.14.2" = {
       name = "ky";
       packageName = "ky";
-      version = "1.14.1";
+      version = "1.14.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/ky/-/ky-1.14.1.tgz";
-        sha512 = "hYje4L9JCmpEQBtudo+v52X5X8tgWXUYyPcxKSuxQNboqufecl9VMWjGiucAFH060AwPXHZuH+WB2rrqfkmafw==";
+        url = "https://registry.npmjs.org/ky/-/ky-1.14.2.tgz";
+        sha512 = "q3RBbsO5A5zrPhB6CaCS8ZUv+NWCXv6JJT4Em0i264G9W0fdPB8YRfnnEi7Dm7X7omAkBIPojzYJ2D1oHTHqug==";
       };
     };
     "latest-version-9.0.0" = {
@@ -5227,7 +5227,7 @@ in
       sources."color-name-1.1.4"
       sources."combined-stream-1.0.8"
       sources."command-exists-1.2.9"
-      sources."comment-json-4.5.0"
+      sources."comment-json-4.5.1"
       sources."config-chain-1.1.13"
       sources."content-disposition-1.0.1"
       sources."content-type-1.0.5"
@@ -5386,7 +5386,7 @@ in
       sources."has-tostringtag-1.0.2"
       sources."hasown-2.0.2"
       sources."highlight.js-11.11.1"
-      sources."hono-4.11.2"
+      sources."hono-4.11.3"
       (sources."hosted-git-info-7.0.2" // {
         dependencies = [
           sources."lru-cache-10.4.3"
@@ -5441,7 +5441,7 @@ in
       sources."jws-4.0.1"
       sources."keyv-5.5.5"
       sources."kleur-3.0.3"
-      sources."ky-1.14.1"
+      sources."ky-1.14.2"
       sources."latest-version-9.0.0"
       sources."leac-0.6.0"
       sources."lodash.camelcase-4.3.0"

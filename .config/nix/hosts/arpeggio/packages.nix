@@ -37,12 +37,14 @@ with pkgs; [
 
   bun
   deno
+  cargo
   go
   nodejs
   pnpm
   python3
   uv
   ruff
+  rustc
   typescript
   nodePackages.prettier
   npmPkgs."ccusage"

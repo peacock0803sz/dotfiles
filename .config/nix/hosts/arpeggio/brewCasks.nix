@@ -14,6 +14,7 @@
   "figma"
   "firefox"
   "font-udev-gothic-nf"
+  "font-jetbrains-mono-nerd-font"
   "ghostty"
   "google-chrome"
   "google-chrome@beta"

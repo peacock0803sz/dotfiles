@@ -22,7 +22,7 @@
           };
         };
       };
-      hdd1 = {
+      WW687YWG = {
         device = "usb-TerraMas_TDAS_WW687YWG-0:0";
         type = "disk";
         content = {
@@ -31,7 +31,7 @@
             root = {
               name = "root";
               size = "100%";
-              content = { type = "filesystem"; format = "ext4"; mountpoint = "/"; };
+              content = { type = "filesystem"; format = "ext4"; mountpoint = "/mnt/Eggplants/WW687YWG"; };
             };
           };
         };

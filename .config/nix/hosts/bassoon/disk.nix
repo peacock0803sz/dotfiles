@@ -29,7 +29,7 @@
           type = "gpt";
           partitions = {
             root = {
-              name = "root";
+              name = "WW687YWG";
               size = "100%";
               content = { type = "filesystem"; format = "ext4"; mountpoint = "/mnt/Eggplants/WW687YWG"; };
             };

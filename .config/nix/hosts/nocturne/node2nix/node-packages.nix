@@ -121,13 +121,13 @@ let
         sha512 = "Orxzlfb9c67A15cq2JQEyVc7wEsmFBmHjZWZYQMUyJ1qivXyMwdyNOs9odi79hze+2zqdTtu1E19IM/FtqZ10g==";
       };
     };
-    "@google/gemini-cli-core-0.22.2" = {
+    "@google/gemini-cli-core-0.22.4" = {
       name = "_at_google_slash_gemini-cli-core";
       packageName = "@google/gemini-cli-core";
-      version = "0.22.2";
+      version = "0.22.4";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.22.2.tgz";
-        sha512 = "UrzBV9VTlZa3vliN5REqvYjqoX4zSSJACQDuWIcmIRQgJeBVyIbeiDVZ0wUaVDtm5NMuorqKKQ3m4dzDA4p5tA==";
+        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.22.4.tgz";
+        sha512 = "tJXajzxWXkSU8jVfwPG6rEFtUg9Bi3I+YAcTUzLEeaNITHJX+1IV0cVvi3/qguz6dWAnYM0mQ3U9jXvfyvIDPg==";
       };
     };
     "@google/genai-1.30.0" = {
@@ -688,13 +688,13 @@ let
         sha512 = "P33hHGdldxGabLFjPPpaTxVolMrzrcegejx+0GxjrIb9Zv48D8yAIA/QTDR2dFl7Uz7urX8aX6+5bCZslr+gWQ==";
       };
     };
-    "@sindresorhus/is-7.1.1" = {
+    "@sindresorhus/is-7.2.0" = {
       name = "_at_sindresorhus_slash_is";
       packageName = "@sindresorhus/is";
-      version = "7.1.1";
+      version = "7.2.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@sindresorhus/is/-/is-7.1.1.tgz";
-        sha512 = "rO92VvpgMc3kfiTjGT52LEtJ8Yc5kCWhZjLQ3LwlA4pSgPpQO7bVpYXParOD8Jwf+cVQECJo3yP/4I8aZtUQTQ==";
+        url = "https://registry.npmjs.org/@sindresorhus/is/-/is-7.2.0.tgz";
+        sha512 = "P1Cz1dWaFfR4IR+U13mqqiGsLFf1KbayybWwdd2vfctdV6hDpUkgCY0nKOLLTMSoRd/jJNjtbqzf13K8DCCXQw==";
       };
     };
     "@sindresorhus/merge-streams-4.0.0" = {
@@ -4819,13 +4819,13 @@ let
         sha512 = "gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==";
       };
     };
-    "zod-to-json-schema-3.25.0" = {
+    "zod-to-json-schema-3.25.1" = {
       name = "zod-to-json-schema";
       packageName = "zod-to-json-schema";
-      version = "3.25.0";
+      version = "3.25.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/zod-to-json-schema/-/zod-to-json-schema-3.25.0.tgz";
-        sha512 = "HvWtU2UG41LALjajJrML6uQejQhNJx+JBO9IflpSja4R03iNWfKXrj6W2h7ljuLyc1nKS+9yDyL/9tD1U/yBnQ==";
+        url = "https://registry.npmjs.org/zod-to-json-schema/-/zod-to-json-schema-3.25.1.tgz";
+        sha512 = "pM/SU9d3YAggzi6MtR4h7ruuQlqKtad8e9S0fmxcMi+ueAK5Korys/aWcV9LIIHTVbj01NdzxcnXSN+O74ZIVA==";
       };
     };
   };
@@ -4957,10 +4957,10 @@ in
   "@google/gemini-cli" = nodeEnv.buildNodePackage {
     name = "_at_google_slash_gemini-cli";
     packageName = "@google/gemini-cli";
-    version = "0.22.2";
+    version = "0.22.4";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.22.2.tgz";
-      sha512 = "OBMvMuag1QJXOJRUfJ1BD6hAYeaIlVAFik6yVvf2ez+rctd5rWoqs6/KNjKytUuZDV59kuwRo/tv2U6IObAOIg==";
+      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.22.4.tgz";
+      sha512 = "U7Z1WZoPxWZ21oO6PSkVARHb/9AaKDjhBlvYnUMSCkNoNTjHTNqqMj1NmMEjQGqUI2p+8OF0j0bCY50T9Sc2og==";
     };
     dependencies = [
       sources."@alcalzone/ansi-tokenize-0.2.2"
@@ -5025,7 +5025,7 @@ in
       sources."@google-cloud/precise-date-4.0.0"
       sources."@google-cloud/projectify-4.0.0"
       sources."@google-cloud/promisify-4.0.0"
-      (sources."@google/gemini-cli-core-0.22.2" // {
+      (sources."@google/gemini-cli-core-0.22.4" // {
         dependencies = [
           sources."gaxios-6.7.1"
           sources."gcp-metadata-6.1.1"
@@ -5115,7 +5115,7 @@ in
       sources."@protobufjs/utf8-1.1.0"
       sources."@sec-ant/readable-stream-0.4.1"
       sources."@selderee/plugin-htmlparser2-0.11.0"
-      sources."@sindresorhus/is-7.1.1"
+      sources."@sindresorhus/is-7.2.0"
       sources."@sindresorhus/merge-streams-4.0.0"
       sources."@tootallnate/once-2.0.0"
       sources."@types/caseless-0.12.5"
@@ -5695,7 +5695,7 @@ in
       sources."yoctocolors-2.1.2"
       sources."yoga-layout-3.2.1"
       sources."zod-3.25.76"
-      sources."zod-to-json-schema-3.25.0"
+      sources."zod-to-json-schema-3.25.1"
     ];
     buildInputs = globalBuildInputs;
     meta = {

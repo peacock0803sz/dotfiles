@@ -22,16 +22,16 @@
           };
         };
       };
-      WW687YWG = {
-        device = "/dev/disk/by-id/usb-TerraMas_TDAS_WW687YWG-0:0";
+      ST4000VN006 = {
+        device = "/dev/disk/by-id/ata-ST4000VN006-3CW104_WW687YWG";
         type = "disk";
         content = {
           type = "gpt";
           partitions = {
             all = {
-              name = "WW687YWG";
+              name = "all";
               size = "100%";
-              content = { type = "filesystem"; format = "ext4"; mountpoint = "/mnt/Eggplants/WW687YWG"; };
+              content = { type = "filesystem"; format = "ext4"; mountpoint = "/mnt/Eggplants/ST4000VN006";  mountOptions = [ "defaults" ];};
             };
           };
         };

@@ -23,12 +23,12 @@
         };
       };
       WW687YWG = {
-        device = "usb-TerraMas_TDAS_WW687YWG-0:0";
+        device = "/dev/disk/by-id/usb-TerraMas_TDAS_WW687YWG-0:0";
         type = "disk";
         content = {
           type = "gpt";
           partitions = {
-            root = {
+            all = {
               name = "WW687YWG";
               size = "100%";
               content = { type = "filesystem"; format = "ext4"; mountpoint = "/mnt/Eggplants/WW687YWG"; };

@@ -31,7 +31,7 @@
             all = {
               name = "all";
               size = "100%";
-              content = { type = "filesystem"; format = "ext4"; mountpoint = "/mnt/Eggplants/ST4000VN006";  mountOptions = [ "defaults" ];};
+              content = { type = "filesystem"; format = "ext4"; mountpoint = "/mnt/Eggplants/ST4000VN006"; mountOptions = [ "defaults" "nofail" ]; };
             };
           };
         };

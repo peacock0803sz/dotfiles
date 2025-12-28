@@ -1,6 +1,6 @@
 { inputs, ... }:
 let
-  inherit (inputs) nixos-hardware nixpkgs home-manager disko;
+  inherit (inputs) nixos-hardware nixpkgs home-manager disko nix-monitored;
   username = "peacock";
   system = "x86_64-linux";
   pkgs = import nixpkgs {
@@ -8,6 +8,11 @@ let
     config.allowUnfree = true;
     overlays = [
       inputs.neovim-overlay.overlays.default
+      # (self: super: {
+      #   nixos-rebuild = super.nixos-rebuild.override {
+      #     nix = nix-monitored;
+      #   };
+      # })
     ];
   };
 in
@@ -20,7 +25,7 @@ nixpkgs.lib.nixosSystem {
     ../../nixos
     ./hardware.nix
     ./disk.nix
-    ./nixos.nix
+    ./nixos.nix { inherit pkgs nix-monitored; }
 
     home-manager.nixosModules.home-manager
     {

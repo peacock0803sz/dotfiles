@@ -8,18 +8,21 @@ let
     config.allowUnfree = true;
     overlays = [
       inputs.neovim-overlay.overlays.default
+      # (self: super: {
+      #   nixos-rebuild = super.nixos-rebuild.override {
+      #     nix = nix-monitored;
+      #   };
+      # })
     ];
   };
 in
 nixpkgs.lib.nixosSystem {
   system = system;
-  specialArgs = inputs // { inherit system; };
+  specialArgs = inputs // { inherit system pkgs; };
   modules = [
     disko.nixosModules.disko
     nix-monitored.nixosModules.default
     nixos-hardware.nixosModules.gmktec-nucbox-g3-plus
-    (nixpkgs + "/nixos/modules/misc/nixpkgs/read-only.nix")
-    { nixpkgs.pkgs = pkgs; }
     ../../nixos
     ./hardware.nix
     ./disk.nix

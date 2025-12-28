@@ -2,13 +2,13 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ modulesPath, pkgs, nix-monitored, ... }:
+{ modulesPath, system, pkgs, nix-monitored, ... }:
 
 {
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
-  nix.package = nix-monitored;
+  nix.package = nix-monitored.packages.${system}.default;
 
   # Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;

@@ -25,7 +25,7 @@ nixpkgs.lib.nixosSystem {
     ../../nixos
     ./hardware.nix
     ./disk.nix
-    ./nixos.nix { inherit pkgs nix-monitored; }
+    ./nixos.nix { inherit system pkgs nix-monitored; }
 
     home-manager.nixosModules.home-manager
     {

@@ -18,14 +18,15 @@ let
 in
 nixpkgs.lib.nixosSystem {
   system = system;
-  specialArgs = inputs;
+  specialArgs = inputs // { inherit system pkgs; };
   modules = [
     disko.nixosModules.disko
+    nix-monitored.nixosModules.default
     nixos-hardware.nixosModules.gmktec-nucbox-g3-plus
     ../../nixos
     ./hardware.nix
     ./disk.nix
-    ./nixos.nix { inherit system pkgs nix-monitored; }
+    ./nixos.nix
 
     home-manager.nixosModules.home-manager
     {

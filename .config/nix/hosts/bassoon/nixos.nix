@@ -17,15 +17,6 @@
           "passwd program" = "/run/wrappers/bin/passwd %u";
           security = "user";
         };
-        peacock = {
-          "path" = "/home/peacock";
-          "browseable" = "yes";
-          "writable" = "yes";
-          "create mask" = "0644";
-          "directory mask" = "0755";
-          "force user" = "peacock";
-          "force group" = "wheel";
-        };
         eggplants = {
           "path" = "/mnt/Eggplants";
           "browseable" = "yes";
@@ -46,7 +37,7 @@
         # enableACME = true;
         listenAddresses = [ "0.0.0.0" "[::1]" ];
         locations."/" = {
-          root = "/home/peacock/Documents/notizen/build/html";
+          root = "/var/www/notizen/";
           index = "index.html";
         };
       };

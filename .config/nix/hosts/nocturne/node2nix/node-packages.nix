@@ -4,13 +4,13 @@
 
 let
   sources = {
-    "@alcalzone/ansi-tokenize-0.2.2" = {
+    "@alcalzone/ansi-tokenize-0.2.3" = {
       name = "_at_alcalzone_slash_ansi-tokenize";
       packageName = "@alcalzone/ansi-tokenize";
-      version = "0.2.2";
+      version = "0.2.3";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@alcalzone/ansi-tokenize/-/ansi-tokenize-0.2.2.tgz";
-        sha512 = "mkOh+Wwawzuf5wa30bvc4nA+Qb6DIrGWgBhRR/Pw4T9nsgYait8izvXkNyU78D6Wcu3Z+KUdwCmLCxlWjEotYA==";
+        url = "https://registry.npmjs.org/@alcalzone/ansi-tokenize/-/ansi-tokenize-0.2.3.tgz";
+        sha512 = "jsElTJ0sQ4wHRz+C45tfect76BwbTbgkgKByOzpCN9xG61N5V6u/glvg1CsNJhq2xJIFpKHSwG3D2wPPuEYOrQ==";
       };
     };
     "@babel/code-frame-7.27.1" = {
@@ -3316,13 +3316,13 @@ let
         sha512 = "V6gygoYb/5EmNI+MEGrWkC+e6+Rr7mTmfHrxDbLzxQogBkgzo76rkok0Am6thgSF7Mv2nLOajAJj5vDJZEFn7g==";
       };
     };
-    "normalize-url-8.1.0" = {
+    "normalize-url-8.1.1" = {
       name = "normalize-url";
       packageName = "normalize-url";
-      version = "8.1.0";
+      version = "8.1.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/normalize-url/-/normalize-url-8.1.0.tgz";
-        sha512 = "X06Mfd/5aKsRHc0O0J5CUedwnPmnDtLF2+nq+KN9KSDlJHkPuh0JUviWjEWMe0SW/9TDdSLVPuk7L5gGTIA1/w==";
+        url = "https://registry.npmjs.org/normalize-url/-/normalize-url-8.1.1.tgz";
+        sha512 = "JYc0DPlpGWB40kH5g07gGTrYuMqV653k3uBKY6uITPWds3M0ov3GaWGp9lbE3Bzngx8+XkfzgvASb9vk9JDFXQ==";
       };
     };
     "npm-run-path-5.3.0" = {
@@ -4963,7 +4963,7 @@ in
       sha512 = "k9uoWCt0mhwlCc+JNwQ6VxOBmYQm2pEg4rO9nu3ueWBNok2tFScCd+iEkpeK8eEOIwk153/ZoBNvuUo3sAV98g==";
     };
     dependencies = [
-      sources."@alcalzone/ansi-tokenize-0.2.2"
+      sources."@alcalzone/ansi-tokenize-0.2.3"
       sources."@babel/code-frame-7.27.1"
       sources."@babel/helper-validator-identifier-7.28.5"
       sources."@cfworker/json-schema-4.1.1"
@@ -5472,7 +5472,7 @@ in
       sources."node-fetch-3.3.2"
       sources."node-gyp-build-4.8.4"
       sources."normalize-package-data-6.0.2"
-      sources."normalize-url-8.1.0"
+      sources."normalize-url-8.1.1"
       (sources."npm-run-path-6.0.0" // {
         dependencies = [
           sources."path-key-4.0.0"

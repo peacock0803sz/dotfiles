@@ -37,7 +37,7 @@ with pkgs; [
   # npmPkgs."@github/copilot-language-server"
   # npmPkgs."@google/gemini-cli"
   npmPkgs."@anthropic-ai/claude-code"
-  # npmPkgs."editprompt"
+  npmPkgs."editprompt"
 
   astro-language-server
   lua-language-server

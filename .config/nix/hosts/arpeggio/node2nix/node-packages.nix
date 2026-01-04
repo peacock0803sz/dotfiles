@@ -5383,10 +5383,10 @@ in
   ccusage = nodeEnv.buildNodePackage {
     name = "ccusage";
     packageName = "ccusage";
-    version = "17.2.0";
+    version = "17.2.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/ccusage/-/ccusage-17.2.0.tgz";
-      sha512 = "drWnQz/V27w00eHsEKD1DMKhWPTS2S+gPGynteKvdrcvSHeilzcN4d7uOPADR4c32oBlciBaBKSG5zWD1zha1A==";
+      url = "https://registry.npmjs.org/ccusage/-/ccusage-17.2.1.tgz";
+      sha512 = "++F9rwk7EHsNyuCfs0D2vHyT/G0kaS3GVHhyh4BJ+dVKm0W4a/Mkld9lXGesgQzMnI6uE0V5RgmB/2Jf8zR7yg==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -5506,10 +5506,10 @@ in
   "@ccusage/codex" = nodeEnv.buildNodePackage {
     name = "_at_ccusage_slash_codex";
     packageName = "@ccusage/codex";
-    version = "17.2.0";
+    version = "17.2.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@ccusage/codex/-/codex-17.2.0.tgz";
-      sha512 = "Gl0XuL35bdyzBJQJQSY2abiTNndCn+JARM9ZbMHN1R6fB31p41cm50zXIGAWBRwSLN4QQgNhiSnha8fHehXUsA==";
+      url = "https://registry.npmjs.org/@ccusage/codex/-/codex-17.2.1.tgz";
+      sha512 = "czkux1pMhojrV7vZ4wih9F9OCtZkdSgfWr/AIEvfUt9KgNkpRZpWHG2VK1TSZppXdHnVNJjYLSqGK9kLEA5tCQ==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -6318,10 +6318,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20260103.1";
+    version = "7.0.0-dev.20260104.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260103.1.tgz";
-      sha512 = "gx+q8yi8GgvbKpQYJB2EBI0jHk8OJOySJ4xnVn019R6t5UhNkj6xcuArp+y1BJ3Mx8PigpURb+6WVGbSwuLWXQ==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260104.1.tgz";
+      sha512 = "uUf3nybwgHpDpzPFjreMb6aDnyp1vcVdWqp7Ac4bmiOAtE0TlmvoSI7KTJeTZ8xozFVyHyCoFch5bNyDQr3uHQ==";
     };
     buildInputs = globalBuildInputs;
     meta = {

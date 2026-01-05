@@ -4864,13 +4864,13 @@ let
         sha512 = "rvKSBiC5zqCCiDZ9kAOszZcDvdAHwwIKJG33Ykj43OKcWsnmcBRL09YTU4nOeHZ8Y2a7l1MgTd08SBe9A8Qj6A==";
       };
     };
-    "undici-7.16.0" = {
+    "undici-7.18.0" = {
       name = "undici";
       packageName = "undici";
-      version = "7.16.0";
+      version = "7.18.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/undici/-/undici-7.16.0.tgz";
-        sha512 = "QEg3HPMll0o3t2ourKwOeUAZ159Kn9mx5pnzHRQO8+Wixmh88YdZRiIwat0iNzNNXn0yoEtXJqFpyW7eM8BV7g==";
+        url = "https://registry.npmjs.org/undici/-/undici-7.18.0.tgz";
+        sha512 = "CfPufgPFHCYu0W4h1NiKW9+tNJ39o3kWm7Cm29ET1enSJx+AERfz7A2wAr26aY0SZbYzZlTBQtcHy15o60VZfQ==";
       };
     };
     "undici-types-7.16.0" = {
@@ -6228,7 +6228,7 @@ in
           sources."mime-types-3.0.2"
         ];
       })
-      sources."undici-7.16.0"
+      sources."undici-7.18.0"
       sources."undici-types-7.16.0"
       sources."unicorn-magic-0.3.0"
       sources."universalify-2.0.1"
@@ -6318,10 +6318,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20260104.1";
+    version = "7.0.0-dev.20260105.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260104.1.tgz";
-      sha512 = "uUf3nybwgHpDpzPFjreMb6aDnyp1vcVdWqp7Ac4bmiOAtE0TlmvoSI7KTJeTZ8xozFVyHyCoFch5bNyDQr3uHQ==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260105.1.tgz";
+      sha512 = "PjmhqnN/jRDLxG/5EuCe8AlW1QUEOjcDJQsxarQmMbrdW5DbSDnYUvWbYbJescXefeK0v3FUQmp7HAOCFQ7I/w==";
     };
     buildInputs = globalBuildInputs;
     meta = {

@@ -4477,13 +4477,13 @@ let
         sha512 = "rvKSBiC5zqCCiDZ9kAOszZcDvdAHwwIKJG33Ykj43OKcWsnmcBRL09YTU4nOeHZ8Y2a7l1MgTd08SBe9A8Qj6A==";
       };
     };
-    "undici-7.16.0" = {
+    "undici-7.18.0" = {
       name = "undici";
       packageName = "undici";
-      version = "7.16.0";
+      version = "7.18.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/undici/-/undici-7.16.0.tgz";
-        sha512 = "QEg3HPMll0o3t2ourKwOeUAZ159Kn9mx5pnzHRQO8+Wixmh88YdZRiIwat0iNzNNXn0yoEtXJqFpyW7eM8BV7g==";
+        url = "https://registry.npmjs.org/undici/-/undici-7.18.0.tgz";
+        sha512 = "CfPufgPFHCYu0W4h1NiKW9+tNJ39o3kWm7Cm29ET1enSJx+AERfz7A2wAr26aY0SZbYzZlTBQtcHy15o60VZfQ==";
       };
     };
     "undici-types-7.16.0" = {
@@ -5638,7 +5638,7 @@ in
           sources."mime-types-3.0.2"
         ];
       })
-      sources."undici-7.16.0"
+      sources."undici-7.18.0"
       sources."undici-types-7.16.0"
       sources."unicorn-magic-0.3.0"
       sources."universalify-2.0.1"

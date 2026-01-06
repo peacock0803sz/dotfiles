@@ -1,6 +1,6 @@
 { inputs, ... }:
 let
-  inherit (inputs) nixos-hardware nixpkgs home-manager disko;
+  inherit (inputs) nixos-hardware nixpkgs home-manager disko nix-monitored;
   username = "peacock";
   system = "aarch64-linux";
   pkgs = import nixpkgs {
@@ -16,6 +16,7 @@ nixpkgs.lib.nixosSystem {
   specialArgs = inputs;
   modules = [
     disko.nixosModules.disko
+    nix-monitored.nixosModules.default
     nixos-hardware.nixosModules.raspberry-pi-4
     ./disk.nix
     ./hardware.nix

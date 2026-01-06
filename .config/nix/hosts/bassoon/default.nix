@@ -8,11 +8,6 @@ let
     config.allowUnfree = true;
     overlays = [
       inputs.neovim-overlay.overlays.default
-      # (self: super: {
-      #   nixos-rebuild = super.nixos-rebuild.override {
-      #     nix = nix-monitored;
-      #   };
-      # })
     ];
   };
 in

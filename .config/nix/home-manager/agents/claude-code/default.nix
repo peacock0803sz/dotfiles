@@ -16,6 +16,10 @@ in
       autoCompactEnabled = false;
       enableAllProjectMcpServers = true;
       outputStyle = "Explanatory";
+      statusLine = {
+        type = "command";
+        command = "echo $(cat) | ccusage statusline";
+      };
 
       permissions = {
         deny = [

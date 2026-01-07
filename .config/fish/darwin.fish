@@ -1,4 +1,3 @@
-set --global --export XDG_CONFIG_HOME $HOME/.config
 set --export --global HOMEBREW_NO_AUTO_UPDATE 1
 alias tailscale "/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 # alias rosetta "arch -x86_64 $(which fish)"
@@ -34,3 +33,17 @@ end
 # vim
 alias vim@bsd /usr/bin/vim
 alias vim@head "$HOME/.nix-profile/bin/vim"
+
+# neovim
+set --global --export EDITOR nvim
+
+# man
+set --global --export MANPAGER 'nvim -c ASMANPAGER -'
+
+# Language specific settings {{{
+# Go
+fish_add_path $GOPATH/bin
+
+# Python
+set --global --export PIP_REQUIRE_VIRTUALENV 1
+# }}}

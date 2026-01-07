@@ -1,6 +1,8 @@
 # vim:foldmethod=marker
 fish_default_key_bindings
 set -U fish_greeting
+set --global --export LANG en_US.UTF-8
+set --global --export XDG_CONFIG_HOME $HOME/.config
 
 # Host/OS specific settings {{{
 switch (uname -s)
@@ -9,6 +11,8 @@ switch (uname -s)
         if test $(uname -n) = 'arpeggio.local'
             source $HOME/dotfiles/.config/fish/work.fish
         end
+    case Linux
+        source $HOME/dotfiles/.config/fish/linux.fish
 end
 # }}}
 
@@ -38,21 +42,6 @@ source $HOME/dotfiles/.config/fish/tide.fish
 if test $(command -v direnv)
     direnv hook fish | source
 end
-
-# neovim
-set --global --export EDITOR nvim
-set --global --export LANG en_US.UTF-8
-
-# man
-set --global --export MANPAGER 'nvim -c ASMANPAGER -'
-
-# Language specific settings {{{
-# Go
-fish_add_path $GOPATH/bin
-
-# Python
-set --global --export PIP_REQUIRE_VIRTUALENV 1
-# }}}
 
 # https://github.com/yuki-yano/zeno.zsh {{{
 # set --global --export ZENO_ROOT $HOME/.local/share/fish/plugins/zeno.zsh

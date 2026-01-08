@@ -28,40 +28,8 @@
         };
       };
     };
-    nginx = {
-      enable = true;
-      virtualHosts."notizen.p3ac0ck.net" = {
-        acmeRoot = null;
-        forceSSL = true;
-        useACMEHost = "notizen.p3ac0ck.net";
-        # enableACME = true;
-        listenAddresses = [ "0.0.0.0" "[::1]" ];
-        locations."/" = {
-          root = "/var/www/notizen/";
-          index = "index.html";
-        };
-      };
-    };
   };
 
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "me@p3ac0ck.net";
-
-    certs."notizen.p3ac0ck.net" = {
-      dnsProvider = "cloudflare";
-      group = config.services.nginx.group;
-      environmentFile = "/var/lib/acme/cloudflare.env";
-    };
-  };
-  systemd.services.nginx.serviceConfig.ProtectHome = "read-only";
-  systemd.tmpfiles.rules = [
-    # /home/peacock を nginx が通過できるように + mask も通す
-    "a /home/peacock - - - - u:nginx:--x,m::--x"
-
-    # 公開ディレクトリ配下は読めるように + mask も広げる（保険）
-    "A /home/peacock/Documents/notizen/build/html - - - - u:nginx:rX,m::rX"
-  ];
   systemd.services = { };
 
   fonts.packages = with pkgs; [

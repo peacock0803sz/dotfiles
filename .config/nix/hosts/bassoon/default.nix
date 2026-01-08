@@ -6,9 +6,6 @@ let
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
-    overlays = [
-      inputs.neovim-overlay.overlays.default
-    ];
   };
 in
 nixpkgs.lib.nixosSystem {

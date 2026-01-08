@@ -1,5 +1,7 @@
 { pkgs, ... }:
 with pkgs; [
+  neovim
+
   fishPlugins.bass
   fishPlugins.tide
   direnv
@@ -9,8 +11,11 @@ with pkgs; [
   jq
   lnav
   deno
+  nodejs
 
   yt-dlp
   ffmpeg
   imagemagick
+
+  nixd
 ]

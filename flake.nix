@@ -54,6 +54,7 @@
         nixosConfigurations = {
           bassoon = import ./.config/nix/hosts/bassoon { inherit inputs; };
           overture = import ./.config/nix/hosts/overture { inherit inputs; };
+          enigma = import ./.config/nix/hosts/enigma { inherit inputs; };
         };
       };
       perSystem = { ... }: { };

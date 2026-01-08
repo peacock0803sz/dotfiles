@@ -2,7 +2,7 @@
   disko.devices = {
     disk = {
       builtin = {
-        device = "/dev/disk/by-id/ata-256GB_SSD_MP31B70706114";
+        device = "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3YBNB0NA09026R";
         type = "disk";
         content = {
           type = "gpt";

@@ -17,7 +17,6 @@ nixpkgs.lib.nixosSystem {
   modules = [
     disko.nixosModules.disko
     nix-monitored.nixosModules.default
-    nixos-hardware.nixosModules.gmktec-nucbox-g3-plus
     ../../nixos
     ./hardware.nix
     ./disk.nix

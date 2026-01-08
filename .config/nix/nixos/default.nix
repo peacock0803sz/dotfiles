@@ -81,7 +81,6 @@
     ];
     packages = [ ];
     shell = pkgs.fish;
-    password = "admin";
   };
   # users.users.samba = {
   #   isNormalUser = true;
@@ -93,9 +92,6 @@
   users.groups.workgroup = { };
   users.users.root = {
     extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGZoZMoFitD0cy5UUiqRdvZqH/1yiE9+8yKo2YC2heiH" # peacock0803sz
-    ];
     packages = [ ];
     shell = pkgs.bashInteractive;
   };

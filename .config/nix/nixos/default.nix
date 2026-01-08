@@ -82,13 +82,6 @@
     packages = [ ];
     shell = pkgs.fish;
   };
-  # users.users.samba = {
-  #   isNormalUser = true;
-  #   group = "samba";
-  #   extraGroups = [ "workgroup" ];
-  #   password = "nixos";
-  # };
-  # users.groups.samba = { };
   users.groups.workgroup = { };
   users.users.root = {
     extraGroups = [ "wheel" ];
@@ -164,5 +157,5 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "26.05"; # Did you read the comment?
 }

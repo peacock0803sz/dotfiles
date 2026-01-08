@@ -3,12 +3,10 @@ with pkgs; [
   vim
   neovim
   # emacs
-  cachix
   tree-sitter
-  sops
-  age
 
   _1password-cli
+  cachix
   devenv
   direnv
   bat

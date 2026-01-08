@@ -89,11 +89,13 @@
     shell = pkgs.bashInteractive;
   };
 
-  # programs.firefox.enable = true;
-  programs.fish.enable = true;
-  programs.vim = {
-    enable = true;
-    defaultEditor = true;
+  programs = {
+    fish.enable = true;
+    nix-ld.enable = true;
+    vim = {
+      enable = true;
+      defaultEditor = true;
+    };
   };
 
   # List packages installed in system profile. To search, run:

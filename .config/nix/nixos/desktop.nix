@@ -5,5 +5,16 @@
 { modulesPath, system, pkgs, nix-monitored, ... }:
 
 {
-  services = {};
+  environment.systemPackages = with pkgs; [
+    ghostty
+  ];
+
+  programs = {
+    niri.enable = true;
+    sway.enable = true;
+    waybar.enable = true;
+  };
+  services = { };
+
+  virtualisation.docker.enable = true;
 }

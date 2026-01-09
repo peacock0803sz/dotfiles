@@ -175,13 +175,13 @@ let
         sha512 = "rc1hOQtjIWGxcxpb9aHAfLpIctjEnsDehj0DAiVfBlmT84uvR0uUtN2hEi/ecvWVjXUGf5qPF4qEgiLOx1YIMQ==";
       };
     };
-    "@hono/node-server-1.19.7" = {
+    "@hono/node-server-1.19.8" = {
       name = "_at_hono_slash_node-server";
       packageName = "@hono/node-server";
-      version = "1.19.7";
+      version = "1.19.8";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@hono/node-server/-/node-server-1.19.7.tgz";
-        sha512 = "vUcD0uauS7EU2caukW8z5lJKtoGMokxNbJtBiwHgpqxEXokaHCBkQUmCHhjFB1VUTWdqj25QoMkMKzgjq+uhrw==";
+        url = "https://registry.npmjs.org/@hono/node-server/-/node-server-1.19.8.tgz";
+        sha512 = "0/g2lIOPzX8f3vzW1ggQgvG5mjtFBDBHFAzI5SFAi2DzSqS9luJwqg9T6O/gKYLi+inS7eNxBeIFkkghIPvrMA==";
       };
     };
     "@iarna/toml-2.2.5" = {
@@ -2605,13 +2605,13 @@ let
         sha512 = "4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==";
       };
     };
-    "iconv-lite-0.7.1" = {
+    "iconv-lite-0.7.2" = {
       name = "iconv-lite";
       packageName = "iconv-lite";
-      version = "0.7.1";
+      version = "0.7.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.7.1.tgz";
-        sha512 = "2Tth85cXwGFHfvRgZWszZSvdo+0Xsqmw8k8ZwxScfcBneNUraK+dxRxRm24nszx80Y0TVio8kKLt5sLE7ZCLlw==";
+        url = "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.7.2.tgz";
+        sha512 = "im9DjEDQ55s9fL4EYzOAv0yMqmMBSZp6G0VvFyTMPKWxiSBHUj9NW/qqLmXUwXrrM7AvqSlTCfvqRb0cM8yYqw==";
       };
     };
     "ignore-7.0.5" = {
@@ -4843,10 +4843,10 @@ in
   ccusage = nodeEnv.buildNodePackage {
     name = "ccusage";
     packageName = "ccusage";
-    version = "17.2.1";
+    version = "18.0.5";
     src = fetchurl {
-      url = "https://registry.npmjs.org/ccusage/-/ccusage-17.2.1.tgz";
-      sha512 = "++F9rwk7EHsNyuCfs0D2vHyT/G0kaS3GVHhyh4BJ+dVKm0W4a/Mkld9lXGesgQzMnI6uE0V5RgmB/2Jf8zR7yg==";
+      url = "https://registry.npmjs.org/ccusage/-/ccusage-18.0.5.tgz";
+      sha512 = "bnZrVbGm5h7hIIOH3FZFaDxKgJLLHhWDWIv7/9M6/O373YM6RAwsG9hxZXA1ep+C2ISiNEX6MYVoXgkoSuFf9Q==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -4948,10 +4948,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.1.1";
+    version = "2.1.2";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.1.tgz";
-      sha512 = "pZReZIcb4ZFNOlZaAeQxm5O0cTrz6YJeb1kpugqbBjIQC6vVavT1nGSw/9Dk+ti+QEMXap0ibXa1T5i4NgXeqg==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.2.tgz";
+      sha512 = "3hrHlSMkEbIjuDPLtwtZJeodP+KYNrPAB1yhnjyfpI522r7ug7jQypfdzUxfoREbxfvsJgKJhmlkOq+K3UJBRw==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -5053,7 +5053,7 @@ in
         ];
       })
       sources."@grpc/proto-loader-0.7.15"
-      sources."@hono/node-server-1.19.7"
+      sources."@hono/node-server-1.19.8"
       sources."@iarna/toml-2.2.5"
       sources."@isaacs/balanced-match-4.0.1"
       sources."@isaacs/brace-expansion-5.0.0"
@@ -5183,7 +5183,7 @@ in
       sources."bignumber.js-9.3.1"
       (sources."body-parser-2.2.2" // {
         dependencies = [
-          sources."iconv-lite-0.7.1"
+          sources."iconv-lite-0.7.2"
         ];
       })
       (sources."boxen-7.1.1" // {
@@ -5528,7 +5528,7 @@ in
       sources."range-parser-1.2.1"
       (sources."raw-body-3.0.2" // {
         dependencies = [
-          sources."iconv-lite-0.7.1"
+          sources."iconv-lite-0.7.2"
         ];
       })
       (sources."rc-1.2.8" // {

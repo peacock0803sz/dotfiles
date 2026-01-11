@@ -913,13 +913,13 @@ let
         sha512 = "K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==";
       };
     };
-    "@types/node-25.0.5" = {
+    "@types/node-25.0.6" = {
       name = "_at_types_slash_node";
       packageName = "@types/node";
-      version = "25.0.5";
+      version = "25.0.6";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@types/node/-/node-25.0.5.tgz";
-        sha512 = "FuLxeLuSVOqHPxSN1fkcD8DLU21gAP7nCKqGRJ/FglbCUBs0NYN6TpHcdmyLeh8C0KwGIaZQJSv+OYG+KZz+Gw==";
+        url = "https://registry.npmjs.org/@types/node/-/node-25.0.6.tgz";
+        sha512 = "NNu0sjyNxpoiW3YuVFfNz7mxSQ+S4X2G28uqg2s+CzoqoQjLPsWSbsFFyztIAqt2vb8kfEAsJNepMGPTxFDx3Q==";
       };
     };
     "@types/normalize-package-data-2.4.4" = {
@@ -5497,10 +5497,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.1.3";
+    version = "2.1.4";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.3.tgz";
-      sha512 = "HZ6krENkT+4DhxsrTPxJMnmMWjL0lY4OuVK/s86ujn3GVmhgkDctOvjEcYMjfi0ZKMrFBRkWmH97Gr0PKiIXpA==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.4.tgz";
+      sha512 = "6kkQe7t4RbyYmX0us8iWW6OTo59k1mHI7UycOIsGuB17rq0VVKof0QWIFDIsTYd9zFP+eTM5TosAajfyycN4iA==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -5728,7 +5728,7 @@ in
       sources."@types/http-cache-semantics-4.0.4"
       sources."@types/long-4.0.2"
       sources."@types/minimatch-5.1.2"
-      sources."@types/node-25.0.5"
+      sources."@types/node-25.0.6"
       sources."@types/normalize-package-data-2.4.4"
       sources."@types/react-19.2.8"
       sources."@types/request-2.48.13"
@@ -6328,10 +6328,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20260109.1";
+    version = "7.0.0-dev.20260111.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260109.1.tgz";
-      sha512 = "27XQhOQWcGp7/nOS1NbEoC4vA2dZOmG5X+OP4e5KX2uAUc2cjE1Scn1Nnv9D7wU2ZBA+/wrqqvJqidCPFRlq+A==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260111.1.tgz";
+      sha512 = "nfSxvmTUZSSIyaO1qCP0iyy59UnEu24wXqq6xG5qpAN3HKh6UKfB1XJowzmHsO8k3MOO41QbLwvzWk6MA65HvA==";
     };
     buildInputs = globalBuildInputs;
     meta = {

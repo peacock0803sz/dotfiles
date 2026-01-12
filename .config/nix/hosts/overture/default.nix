@@ -10,14 +10,14 @@ let
 in
 nixpkgs.lib.nixosSystem {
   system = system;
-  specialArgs = inputs;
+  specialArgs = inputs // { inherit system pkgs; };
   modules = [
     disko.nixosModules.disko
     nix-monitored.nixosModules.default
     nixos-hardware.nixosModules.raspberry-pi-4
     ./disk.nix
     ./hardware.nix
-    ./nixos.nix
+    ../../nixos
 
     home-manager.nixosModules.home-manager
     {

@@ -5497,10 +5497,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.1.4";
+    version = "2.1.5";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.4.tgz";
-      sha512 = "6kkQe7t4RbyYmX0us8iWW6OTo59k1mHI7UycOIsGuB17rq0VVKof0QWIFDIsTYd9zFP+eTM5TosAajfyycN4iA==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.5.tgz";
+      sha512 = "OSd96R9W91JK9W+5AaF4bZ44l+PJqNYYXHSFDxSPifjeWd3Hu41n0XItvT/Fu3K87YXhQu0cjo4GE+/qouEHdg==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -5533,10 +5533,10 @@ in
   "@github/copilot-language-server" = nodeEnv.buildNodePackage {
     name = "_at_github_slash_copilot-language-server";
     packageName = "@github/copilot-language-server";
-    version = "1.408.0";
+    version = "1.409.0";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@github/copilot-language-server/-/copilot-language-server-1.408.0.tgz";
-      sha512 = "VJMTy9lrnwR81TOhF75t/+sob0IRHUdTIfRY6XbBrGrRbBdsSV39pD/7rFcCSACOwchV8+QRh/tdKIU8FRhz8g==";
+      url = "https://registry.npmjs.org/@github/copilot-language-server/-/copilot-language-server-1.409.0.tgz";
+      sha512 = "96b6z+DdJjYbA6ARC1mXkUXOEDoVYU4zBLFhJEZVxtdZlVhZsAYlAYMcgcJSdhKRy4o8ChtSTi9wfTm/wPOF0A==";
     };
     dependencies = [
       sources."vscode-jsonrpc-8.2.0"
@@ -6328,10 +6328,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20260111.1";
+    version = "7.0.0-dev.20260112.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260111.1.tgz";
-      sha512 = "nfSxvmTUZSSIyaO1qCP0iyy59UnEu24wXqq6xG5qpAN3HKh6UKfB1XJowzmHsO8k3MOO41QbLwvzWk6MA65HvA==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260112.1.tgz";
+      sha512 = "DvUmkkJ5BePLmZbQ9OecQr6wRVUlWbNz/bNEYmTcl7+0qwF8KtgPGriWiyuIzs+TiIhjf3HM1tt5OC/uBHNJsw==";
     };
     buildInputs = globalBuildInputs;
     meta = {

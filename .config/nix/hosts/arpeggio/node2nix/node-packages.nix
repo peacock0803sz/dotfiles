@@ -4,13 +4,13 @@
 
 let
   sources = {
-    "@a2a-js/sdk-0.3.7" = {
+    "@a2a-js/sdk-0.3.8" = {
       name = "_at_a2a-js_slash_sdk";
       packageName = "@a2a-js/sdk";
-      version = "0.3.7";
+      version = "0.3.8";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@a2a-js/sdk/-/sdk-0.3.7.tgz";
-        sha512 = "1WBghkOjgiKt4rPNje8jlB9VateVQXqyjlc887bY/H8yM82Hlf0+5JW8zB98BPExKAplI5XqtXVH980J6vqi+w==";
+        url = "https://registry.npmjs.org/@a2a-js/sdk/-/sdk-0.3.8.tgz";
+        sha512 = "vAg6JQbhOnHTzApsB7nGzCQ9r7PuY4GMr8gt88dIR8Wc8G8RSqVTyTmFeMurgzcYrtHYXS3ru2rnDoGj9UDeSw==";
       };
     };
     "@agentclientprotocol/sdk-0.11.0" = {
@@ -5607,7 +5607,7 @@ in
       sha512 = "LFIKs6AXsxCtpWsk2oWz55OYgHDMgEbPiOue7j0LxmMVX7ZYSclw1FB/XcckqbJwxF4fcQpdZlT+BNzODuPZ7A==";
     };
     dependencies = [
-      (sources."@a2a-js/sdk-0.3.7" // {
+      (sources."@a2a-js/sdk-0.3.8" // {
         dependencies = [
           sources."uuid-11.1.0"
         ];
@@ -6357,10 +6357,10 @@ in
   "@openai/codex" = nodeEnv.buildNodePackage {
     name = "_at_openai_slash_codex";
     packageName = "@openai/codex";
-    version = "0.80.0";
+    version = "0.84.0";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@openai/codex/-/codex-0.80.0.tgz";
-      sha512 = "U1DWDy7eTjx+SF32Wx9oO6cyX1dd9WiRvIW4XCP3FVcv7Xq7CSCvDrFAdzpFxPNPg6CLz9a4qtO42yntpcJpDw==";
+      url = "https://registry.npmjs.org/@openai/codex/-/codex-0.84.0.tgz";
+      sha512 = "1reR4CV3Lqfm0iYSZM8Ka1XSuYEep1xpOfySGBWZU6+NTcHRH960pfIbGENL3GKsbrCyavcEM8Gz2XQEolp+uA==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -6375,10 +6375,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20260114.1";
+    version = "7.0.0-dev.20260115.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260114.1.tgz";
-      sha512 = "s7G8VkqtBB8I/VX/EUfknefv+R4zIjjKpDZbyjkAozydwYvPXQlkvEz7Gs819Z28p+agcs5+tTNECJFqjK8DPg==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260115.1.tgz";
+      sha512 = "wCW5A5Olb/Iyzr6azx1lrS42DEmkUvzLqrtL+0mzKDov4l3sdxKsO5q/m8Mdqcx9WBTY07e+WgHZ6IIfjSOWrQ==";
     };
     buildInputs = globalBuildInputs;
     meta = {

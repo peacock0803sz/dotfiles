@@ -4,13 +4,13 @@
 
 let
   sources = {
-    "@a2a-js/sdk-0.3.7" = {
+    "@a2a-js/sdk-0.3.8" = {
       name = "_at_a2a-js_slash_sdk";
       packageName = "@a2a-js/sdk";
-      version = "0.3.7";
+      version = "0.3.8";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@a2a-js/sdk/-/sdk-0.3.7.tgz";
-        sha512 = "1WBghkOjgiKt4rPNje8jlB9VateVQXqyjlc887bY/H8yM82Hlf0+5JW8zB98BPExKAplI5XqtXVH980J6vqi+w==";
+        url = "https://registry.npmjs.org/@a2a-js/sdk/-/sdk-0.3.8.tgz";
+        sha512 = "vAg6JQbhOnHTzApsB7nGzCQ9r7PuY4GMr8gt88dIR8Wc8G8RSqVTyTmFeMurgzcYrtHYXS3ru2rnDoGj9UDeSw==";
       };
     };
     "@agentclientprotocol/sdk-0.11.0" = {
@@ -5017,7 +5017,7 @@ in
       sha512 = "LFIKs6AXsxCtpWsk2oWz55OYgHDMgEbPiOue7j0LxmMVX7ZYSclw1FB/XcckqbJwxF4fcQpdZlT+BNzODuPZ7A==";
     };
     dependencies = [
-      (sources."@a2a-js/sdk-0.3.7" // {
+      (sources."@a2a-js/sdk-0.3.8" // {
         dependencies = [
           sources."uuid-11.1.0"
         ];

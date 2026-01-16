@@ -589,13 +589,13 @@ let
         sha512 = "YcPQ8a0jwYU9bTdJDpXjMi7Brhkr1mXsXrUJvjqM2mQDgkRiz8jFaQGOdaLxgjtUfQgZhKy/O3cG/YwmgKaxLA==";
       };
     };
-    "@pnpm/npm-conf-2.3.1" = {
+    "@pnpm/npm-conf-3.0.2" = {
       name = "_at_pnpm_slash_npm-conf";
       packageName = "@pnpm/npm-conf";
-      version = "2.3.1";
+      version = "3.0.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@pnpm/npm-conf/-/npm-conf-2.3.1.tgz";
-        sha512 = "c83qWb22rNRuB0UaVCI0uRPNRr8Z0FWnEIvT47jiHAmOIUHbBOg5XvV7pM5x+rKn9HRpjxquDbXYSXr3fAKFcw==";
+        url = "https://registry.npmjs.org/@pnpm/npm-conf/-/npm-conf-3.0.2.tgz";
+        sha512 = "h104Kh26rR8tm+a3Qkc5S4VLYint3FE48as7+/5oCEcKR2idC/pF1G6AhIXKI+eHPJa/3J9i5z0Al47IeGHPkA==";
       };
     };
     "@protobufjs/aspromise-1.1.2" = {
@@ -823,13 +823,13 @@ let
         sha512 = "K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==";
       };
     };
-    "@types/node-25.0.8" = {
+    "@types/node-25.0.9" = {
       name = "_at_types_slash_node";
       packageName = "@types/node";
-      version = "25.0.8";
+      version = "25.0.9";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@types/node/-/node-25.0.8.tgz";
-        sha512 = "powIePYMmC3ibL0UJ2i2s0WIbq6cg6UyVFQxSCpaPxxzAaziRfimGivjdF943sSGV6RADVbk0Nvlm5P/FB44Zg==";
+        url = "https://registry.npmjs.org/@types/node/-/node-25.0.9.tgz";
+        sha512 = "/rpCXHlCWeqClNBwUhDcusJxXYDjZTyE8v5oTO7WbL8eij2nKhUeU89/6xgjU7N4/Vh3He0BtyhJdQbDyhiXAw==";
       };
     };
     "@types/normalize-package-data-2.4.4" = {
@@ -1885,13 +1885,13 @@ let
         sha512 = "j6vWzfrGVfyXxge+O0x5sh6cvxAog0a/4Rdd2K36zCMV5eJ+/+tOAngRO8cODMNWbVRdVlmGZQL2YS3yR8bIUA==";
       };
     };
-    "es-toolkit-1.43.0" = {
+    "es-toolkit-1.44.0" = {
       name = "es-toolkit";
       packageName = "es-toolkit";
-      version = "1.43.0";
+      version = "1.44.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/es-toolkit/-/es-toolkit-1.43.0.tgz";
-        sha512 = "SKCT8AsWvYzBBuUqMk4NPwFlSdqLpJwmy6AP322ERn8W2YLIB6JBXnwMI2Qsh2gfphT3q7EKAxKb23cvFHFwKA==";
+        url = "https://registry.npmjs.org/es-toolkit/-/es-toolkit-1.44.0.tgz";
+        sha512 = "6penXeZalaV88MM3cGkFZZfOoLGWshWWfdy0tWw/RlVVyhvMaWSBTOvXNeiW3e5FwdS5ePW0LGEu17zT139ktg==";
       };
     };
     "escalade-3.2.0" = {
@@ -3829,13 +3829,13 @@ let
         sha512 = "9u/sniCrY3D5WdsERHzHE4G2YCXqoG5FTHUiCC4SIbr6XcLZBY05ya9EKjYek9O5xOAwjGq+1JdGBAS7Q9ScoA==";
       };
     };
-    "registry-auth-token-5.1.0" = {
+    "registry-auth-token-5.1.1" = {
       name = "registry-auth-token";
       packageName = "registry-auth-token";
-      version = "5.1.0";
+      version = "5.1.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/registry-auth-token/-/registry-auth-token-5.1.0.tgz";
-        sha512 = "GdekYuwLXLxMuFTwAPg5UKGLW/UXzQrZvH/Zj791BQif5T05T0RsaLfHc9q3ZOKi7n+BoprPD9mJ0O0k4xzUlw==";
+        url = "https://registry.npmjs.org/registry-auth-token/-/registry-auth-token-5.1.1.tgz";
+        sha512 = "P7B4+jq8DeD2nMsAcdfaqHbssgHtZ7Z5+++a5ask90fvmJ8p5je4mOa+wzu+DB4vQ5tdJV/xywY+UnVFeQLV5Q==";
       };
     };
     "registry-url-6.0.1" = {
@@ -4993,10 +4993,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.1.7";
+    version = "2.1.9";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.7.tgz";
-      sha512 = "nETDGeuXk/pwUpja/dlVY8dch4doTtue381BjaNqWiMPSqpY4PPg8dDbTqAYpbkIi1sgli7met+okAeDsXVTpg==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.9.tgz";
+      sha512 = "ViGb9RoAQ8l+X5e0egsH64xGi7zHvlNgwx/Lwxez24XgfJSYa+cyjpVX7cSDlBfMb1uXXTDNbpo2RicmvP/BKg==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -5172,7 +5172,7 @@ in
       sources."@opentelemetry/semantic-conventions-1.38.0"
       sources."@pnpm/config.env-replace-1.1.0"
       sources."@pnpm/network.ca-file-1.0.2"
-      sources."@pnpm/npm-conf-2.3.1"
+      sources."@pnpm/npm-conf-3.0.2"
       sources."@protobufjs/aspromise-1.1.2"
       sources."@protobufjs/base64-1.1.2"
       sources."@protobufjs/codegen-2.0.4"
@@ -5198,7 +5198,7 @@ in
       sources."@types/http-cache-semantics-4.0.4"
       sources."@types/long-4.0.2"
       sources."@types/minimatch-5.1.2"
-      sources."@types/node-25.0.8"
+      sources."@types/node-25.0.9"
       sources."@types/normalize-package-data-2.4.4"
       sources."@types/react-19.2.8"
       sources."@types/request-2.48.13"
@@ -5338,7 +5338,7 @@ in
       sources."es-errors-1.3.0"
       sources."es-object-atoms-1.1.1"
       sources."es-set-tostringtag-2.1.0"
-      sources."es-toolkit-1.43.0"
+      sources."es-toolkit-1.44.0"
       sources."escalade-3.2.0"
       sources."escape-html-1.0.3"
       sources."escape-string-regexp-2.0.0"
@@ -5608,7 +5608,7 @@ in
         ];
       })
       sources."readable-stream-3.6.2"
-      sources."registry-auth-token-5.1.0"
+      sources."registry-auth-token-5.1.1"
       sources."registry-url-6.0.1"
       sources."require-directory-2.1.1"
       sources."require-from-string-2.0.2"

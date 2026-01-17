@@ -3,5 +3,6 @@
   "editprompt",
   "gemistat",
   "@anthropic-ai/claude-code",
-  "@google/gemini-cli"
+  "@google/gemini-cli",
+  "@vue/language-server"
 ]

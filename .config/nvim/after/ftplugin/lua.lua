@@ -68,4 +68,5 @@ local config = {
     },
   },
 }
-return config
+
+vim.lsp.config("lua_ls", config)

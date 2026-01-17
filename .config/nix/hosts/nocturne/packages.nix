@@ -40,25 +40,25 @@ with pkgs; [
   npmPkgs."editprompt"
 
   astro-language-server
-  lua-language-server
   bash-language-server
   dockerfile-language-server
   gopls
   lemminx
+  lua-language-server
   nixd
   nixpkgs-fmt
+  npmPkgs."@vue/language-server"
   pyright
   stylua
+  yaml-language-server
   taplo
   tailwindcss-language-server
   terraform-ls
   tree-sitter
-  typescript-language-server
   vtsls
   vim-language-server
   vscode-langservers-extracted
-  vue-language-server
-  yaml-language-server
+  typescript-language-server
 
   pandoc
   yt-dlp

@@ -1,5 +1,4 @@
----@type vim.lsp.Config
-local config = {
+vim.lsp.config("pyright", {
   single_file_support = true,
   settings = {
     pyright = {
@@ -11,5 +10,6 @@ local config = {
       },
     },
   },
-}
-return config
+})
+
+vim.lsp.enable({"pyright", "ruff"})

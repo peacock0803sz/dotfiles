@@ -12,16 +12,17 @@ local function config()
     )
   end
 end
+local cond = require("utils").check_enable({
+    nocturne = true,
+    arpeggio = true,
+    overture = false,
+    bassoon = false,
+  })
 
 ---@type LazySpec
 local spec = {
   "https://github.com/subnut/nvim-ghost.nvim",
   config = config(),
-  cond = require("utils").check_enable({
-    nocturne = true,
-    arpeggio = true,
-    overture = false,
-    bassoon = false,
-  }),
+  cond = cond and vim.env.NVIM_GHOST,
 }
 return spec

@@ -661,13 +661,13 @@ let
         sha512 = "UhdbPF19pMpBtCWYP5lHbTogLWx9N0EBxtdagvkn5YtsAnCBZzL7SjktG+ZmupRgifsHMjwUaCCaVmqGfSADmA==";
       };
     };
-    "@opentelemetry/semantic-conventions-1.38.0" = {
+    "@opentelemetry/semantic-conventions-1.39.0" = {
       name = "_at_opentelemetry_slash_semantic-conventions";
       packageName = "@opentelemetry/semantic-conventions";
-      version = "1.38.0";
+      version = "1.39.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@opentelemetry/semantic-conventions/-/semantic-conventions-1.38.0.tgz";
-        sha512 = "kocjix+/sSggfJhwXqClZ3i9Y/MI0fp7b+g7kCRm6psy2dsf8uApTRclwG18h8Avm7C9+fnt+O36PspJ/OzoWg==";
+        url = "https://registry.npmjs.org/@opentelemetry/semantic-conventions/-/semantic-conventions-1.39.0.tgz";
+        sha512 = "R5R9tb2AXs2IRLNKLBJDynhkfmx7mX0vi8NkhZb3gUkPWHn6HXk5J8iQ/dql0U3ApfWym4kXXmBDRGO+oeOfjg==";
       };
     };
     "@pnpm/config.env-replace-1.1.0" = {
@@ -4756,13 +4756,13 @@ let
         sha512 = "yEFYrVhod+hdNyx7g5Bnkkb0G6si8HJurOoOEgC8B/O0uXLHlaey/65KRv6cuWBNhBgHKAROVpc7QyYqE5gFng==";
       };
     };
-    "tar-7.5.2" = {
+    "tar-7.5.3" = {
       name = "tar";
       packageName = "tar";
-      version = "7.5.2";
+      version = "7.5.3";
       src = fetchurl {
-        url = "https://registry.npmjs.org/tar/-/tar-7.5.2.tgz";
-        sha512 = "7NyxrTE4Anh8km8iEy7o0QYPs+0JKBTj5ZaqHg6B39erLg0qYXN3BijtShwbsNSvQ+LN75+KV+C4QR/f6Gwnpg==";
+        url = "https://registry.npmjs.org/tar/-/tar-7.5.3.tgz";
+        sha512 = "ENg5JUHUm2rDD7IvKNFGzyElLXNjachNLp6RaGf4+JOgxXHkqA+gq81ZAMCUmtMtqBsoU62lcp6S27g1LCYGGQ==";
       };
     };
     "teeny-request-9.0.0" = {
@@ -5542,10 +5542,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.1.9";
+    version = "2.1.11";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.9.tgz";
-      sha512 = "ViGb9RoAQ8l+X5e0egsH64xGi7zHvlNgwx/Lwxez24XgfJSYa+cyjpVX7cSDlBfMb1uXXTDNbpo2RicmvP/BKg==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.11.tgz";
+      sha512 = "xzvec3UloduvaCK5zfvtkIYaJHQk508enF2d8+T9+w148cyMU/ZZ0+Izj77oSan8MR4lXKTghflYQBWhf+FEfg==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -5759,7 +5759,7 @@ in
       sources."@opentelemetry/sdk-node-0.203.0"
       sources."@opentelemetry/sdk-trace-base-2.0.1"
       sources."@opentelemetry/sdk-trace-node-2.0.1"
-      sources."@opentelemetry/semantic-conventions-1.38.0"
+      sources."@opentelemetry/semantic-conventions-1.39.0"
       sources."@pnpm/config.env-replace-1.1.0"
       sources."@pnpm/network.ca-file-1.0.2"
       sources."@pnpm/npm-conf-3.0.2"
@@ -6268,7 +6268,7 @@ in
       sources."supports-color-7.2.0"
       sources."supports-preserve-symlinks-flag-1.0.0"
       sources."system-architecture-0.1.0"
-      sources."tar-7.5.2"
+      sources."tar-7.5.3"
       (sources."teeny-request-9.0.0" // {
         dependencies = [
           sources."agent-base-6.0.2"
@@ -6375,10 +6375,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20260116.1";
+    version = "7.0.0-dev.20260117.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260116.1.tgz";
-      sha512 = "9N2Sa3Ap8E5+V4K+eTs5y8//dW77qFKzo+OfmYpL4f/Vb6WEoo6SDhjaSB2eNtgeiCKkNQySLO3pz3/QEpuVXg==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260117.1.tgz";
+      sha512 = "5peFvGyf+TOlU6KYMLzfPiPJdxYwG0O/oQN4Z+EzDOzrN8tbY/H58+QOQww4Lo8m4b7+4o/0r+zopD/sYR6uMw==";
     };
     buildInputs = globalBuildInputs;
     meta = {

@@ -5455,10 +5455,10 @@ in
   editprompt = nodeEnv.buildNodePackage {
     name = "editprompt";
     packageName = "editprompt";
-    version = "1.1.1";
+    version = "1.2.0";
     src = fetchurl {
-      url = "https://registry.npmjs.org/editprompt/-/editprompt-1.1.1.tgz";
-      sha512 = "daCi0qSbkCDfR2Gp3+5ZSAV7ZRwXzOv3MClwIh9QxD1AfkA8N5n7Fypum5TZeQ9oOAlAGsWkvJsDmw3POdEk7Q==";
+      url = "https://registry.npmjs.org/editprompt/-/editprompt-1.2.0.tgz";
+      sha512 = "2FZSrHlt05yvI091QY6QEGWtPwt5jrh7v7RnOx651aZMjie1VufUCIIv4GNFzgvp3TcXwsS0infJLaFIM465Mg==";
     };
     dependencies = [
       sources."ajv-8.17.1"
@@ -5542,10 +5542,10 @@ in
   "@anthropic-ai/claude-code" = nodeEnv.buildNodePackage {
     name = "_at_anthropic-ai_slash_claude-code";
     packageName = "@anthropic-ai/claude-code";
-    version = "2.1.11";
+    version = "2.1.12";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.11.tgz";
-      sha512 = "xzvec3UloduvaCK5zfvtkIYaJHQk508enF2d8+T9+w148cyMU/ZZ0+Izj77oSan8MR4lXKTghflYQBWhf+FEfg==";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.12.tgz";
+      sha512 = "oJlbUJc6iyuTA6X1z+Wsli4cYWqSHT9Ttc/jBXArrrBQcILPLb5lBOKfbVJJgcH3bNLxsXwnAkZjtmmM5SqtsQ==";
     };
     buildInputs = globalBuildInputs;
     meta = {

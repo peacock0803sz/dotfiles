@@ -1,14 +1,16 @@
-{ pkgs, npmPkgs, mcp-servers-nix, ... }:
+{ pkgs, config, npmPkgs, mcp-servers-nix, ... }:
 let
-  # mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
-  # homeDirectory = config.home.homeDirectory;
+  mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
+  homeDirectory = config.home.homeDirectory;
   enableCodex = true;
   mcp-servers = import ../mcp-servers { inherit pkgs mcp-servers-nix enableCodex; };
 in
 {
-  # home.file = {
-  #   ".claude/rules".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/rules";
-  # };
+  home.file = {
+    ".claude/skills".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/skills";
+    ".claude/rules".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/rules";
+    ".claude/commands".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/commands";
+  };
 
   programs.claude-code = {
     enable = true;

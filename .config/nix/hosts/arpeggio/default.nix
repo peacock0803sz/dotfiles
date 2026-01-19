@@ -20,26 +20,26 @@ let
   brewCasks = import ./brewCasks.nix;
 in
 nix-darwin.lib.darwinSystem {
-  # specialArgs = inputs // { inherit system pkgs npmPkgs; };
   modules = [
     home-manager.darwinModules.home-manager
     (import ../../nix-darwin { inherit system username hostName pkgs brewCasks nix-monitored; })
     {
       home-manager.backupFileExtension = "bk.nix";
+      home-manager.extraSpecialArgs = { inherit npmPkgs mcp-servers-nix; };
       home-manager.users.${username} = {
         imports = [
-          (import ./home.nix)
-          (import ../../home-manager)
-          (import ../../home-manager/platforms/darwin.nix)
-          (import ../../home-manager/programs/alacritty.nix)
-          (import ../../home-manager/programs/claude-code { inherit pkgs npmPkgs mcp-servers-nix; })
-          (import ../../home-manager/programs/codex { inherit pkgs npmPkgs mcp-servers-nix; })
-          (import ../../home-manager/programs/direnv.nix)
-          (import ../../home-manager/programs/gemini { inherit pkgs npmPkgs mcp-servers-nix; })
-          (import ../../home-manager/programs/ghostty.nix)
-          (import ../../home-manager/programs/neovim.nix)
-          (import ../../home-manager/programs/tmux.nix)
-          (import ../../home-manager/programs/wezterm.nix)
+          ./home.nix
+          ../../home-manager
+          ../../home-manager/platforms/darwin.nix
+          ../../home-manager/programs/alacritty.nix
+          ../../home-manager/programs/direnv.nix
+          ../../home-manager/programs/ghostty.nix
+          ../../home-manager/programs/neovim.nix
+          ../../home-manager/programs/tmux.nix
+          ../../home-manager/programs/wezterm.nix
+          ../../home-manager/programs/claude-code
+          ../../home-manager/programs/codex
+          ../../home-manager/programs/gemini
         ];
 
         home.packages = import ./packages.nix { inherit pkgs npmPkgs; };

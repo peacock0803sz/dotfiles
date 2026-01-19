@@ -1,4 +1,8 @@
-local util = require("vim.lsp.util")
+local ok, util = pcall(require, "lspconfig.util")
+if not ok then
+  return
+end
+
 
 ---@type { [string]: vim.lsp.Config }
 local servers = {

@@ -229,13 +229,13 @@ let
         sha512 = "Orxzlfb9c67A15cq2JQEyVc7wEsmFBmHjZWZYQMUyJ1qivXyMwdyNOs9odi79hze+2zqdTtu1E19IM/FtqZ10g==";
       };
     };
-    "@google/gemini-cli-core-0.24.0" = {
+    "@google/gemini-cli-core-0.24.4" = {
       name = "_at_google_slash_gemini-cli-core";
       packageName = "@google/gemini-cli-core";
-      version = "0.24.0";
+      version = "0.24.4";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.24.0.tgz";
-        sha512 = "Uf/SHopiGA68N6580gqLuA1+dfB25edh/jN6+5nGCnrCkfHr4KqKx7mSH/NBI0FjGItBsxFSfBNXcBHeAk327g==";
+        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.24.4.tgz";
+        sha512 = "SuS6JJLx0Seed6EmZOJZr072RV918jMU7uP7ZOYzZX0HzLB330X+/qD1hgr8m/wCz8FXrw6u6tmzfyefkFSQwQ==";
       };
     };
     "@google/genai-1.30.0" = {
@@ -1066,22 +1066,22 @@ let
         sha512 = "KYSIHVmslkaCDyw013pphY+d7x1qV8IZupYfeIfzNA+nsaWHbn5uPuQRvdRFsa9zFzGeudPuoGoZ1Op4jrJXIQ==";
       };
     };
-    "@vue/compiler-core-3.5.26" = {
+    "@vue/compiler-core-3.5.27" = {
       name = "_at_vue_slash_compiler-core";
       packageName = "@vue/compiler-core";
-      version = "3.5.26";
+      version = "3.5.27";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@vue/compiler-core/-/compiler-core-3.5.26.tgz";
-        sha512 = "vXyI5GMfuoBCnv5ucIT7jhHKl55Y477yxP6fc4eUswjP8FG3FFVFd41eNDArR+Uk3QKn2Z85NavjaxLxOC19/w==";
+        url = "https://registry.npmjs.org/@vue/compiler-core/-/compiler-core-3.5.27.tgz";
+        sha512 = "gnSBQjZA+//qDZen+6a2EdHqJ68Z7uybrMf3SPjEGgG4dicklwDVmMC1AeIHxtLVPT7sn6sH1KOO+tS6gwOUeQ==";
       };
     };
-    "@vue/compiler-dom-3.5.26" = {
+    "@vue/compiler-dom-3.5.27" = {
       name = "_at_vue_slash_compiler-dom";
       packageName = "@vue/compiler-dom";
-      version = "3.5.26";
+      version = "3.5.27";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@vue/compiler-dom/-/compiler-dom-3.5.26.tgz";
-        sha512 = "y1Tcd3eXs834QjswshSilCBnKGeQjQXB6PqFn/1nxcQw4pmG42G8lwz+FZPAZAby6gZeHSt/8LMPfZ4Rb+Bd/A==";
+        url = "https://registry.npmjs.org/@vue/compiler-dom/-/compiler-dom-3.5.27.tgz";
+        sha512 = "oAFea8dZgCtVVVTEC7fv3T5CbZW9BxpFzGGxC79xakTr6ooeEqmRuvQydIiDAkglZEAd09LgVf1RoDnL54fu5w==";
       };
     };
     "@vue/language-core-3.2.2" = {
@@ -1102,13 +1102,13 @@ let
         sha512 = "sv6mug6j1GsJSIOsYS+3x2Lq69VS7BXUUP1qD6tBxr7WlENwU8rXSk3a/FJAVw807AMQIPi+U1LkqdxHQkCzjw==";
       };
     };
-    "@vue/shared-3.5.26" = {
+    "@vue/shared-3.5.27" = {
       name = "_at_vue_slash_shared";
       packageName = "@vue/shared";
-      version = "3.5.26";
+      version = "3.5.27";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@vue/shared/-/shared-3.5.26.tgz";
-        sha512 = "7Z6/y3uFI5PRoKeorTOSXKcDj0MSasfNNltcslbFrPpcw6aXRUALq4IfJlaTRspiWIUOEZbrpM+iQGmCOiWe4A==";
+        url = "https://registry.npmjs.org/@vue/shared/-/shared-3.5.27.tgz";
+        sha512 = "dXr/3CgqXsJkZ0n9F3I4elY8wM9jMJpP3pvRG52r6m0tu/MsAFIe6JpXVGeNMd/D9F4hQynWT8Rfuj0bdm9kFQ==";
       };
     };
     "@vue/typescript-plugin-3.2.2" = {
@@ -5601,10 +5601,10 @@ in
   "@google/gemini-cli" = nodeEnv.buildNodePackage {
     name = "_at_google_slash_gemini-cli";
     packageName = "@google/gemini-cli";
-    version = "0.24.0";
+    version = "0.24.4";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.24.0.tgz";
-      sha512 = "LFIKs6AXsxCtpWsk2oWz55OYgHDMgEbPiOue7j0LxmMVX7ZYSclw1FB/XcckqbJwxF4fcQpdZlT+BNzODuPZ7A==";
+      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.24.4.tgz";
+      sha512 = "IIfsfQgjkkTKYEaHe++Xgf+kud0PbLnTwChMOdVkIA8mnx4w8a4Slj8/3RMS3ep/3PZCKnT6Tn2A4b11mte2Hw==";
     };
     dependencies = [
       (sources."@a2a-js/sdk-0.3.8" // {
@@ -5680,7 +5680,7 @@ in
       sources."@google-cloud/precise-date-4.0.0"
       sources."@google-cloud/projectify-4.0.0"
       sources."@google-cloud/promisify-4.0.0"
-      (sources."@google/gemini-cli-core-0.24.0" // {
+      (sources."@google/gemini-cli-core-0.24.4" // {
         dependencies = [
           (sources."gaxios-6.7.1" // {
             dependencies = [
@@ -6375,10 +6375,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20260118.1";
+    version = "7.0.0-dev.20260119.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260118.1.tgz";
-      sha512 = "A+anwzt5RsbCWglYUCAgrolHO9iWLFl2NtRIwDU2IaIxTt0GsFcvaDe+IjswJGHknE0nJ7TS6DeAwjkDD/14og==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260119.1.tgz";
+      sha512 = "Tf74TdJVJlLRMN0W9VXK8jc0Gor9+wFRm40qTLt2JeHiPpSF5TEN/pHPjlf4Id1wDSJXH9p5/U1wFS3s5TS2PQ==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -6418,11 +6418,11 @@ in
       sources."@volar/typescript-2.4.27"
       sources."@vscode/emmet-helper-2.11.0"
       sources."@vscode/l10n-0.0.18"
-      sources."@vue/compiler-core-3.5.26"
-      sources."@vue/compiler-dom-3.5.26"
+      sources."@vue/compiler-core-3.5.27"
+      sources."@vue/compiler-dom-3.5.27"
       sources."@vue/language-core-3.2.2"
       sources."@vue/language-service-3.2.2"
-      sources."@vue/shared-3.5.26"
+      sources."@vue/shared-3.5.27"
       sources."@vue/typescript-plugin-3.2.2"
       sources."acorn-7.4.1"
       sources."alien-signals-3.1.2"

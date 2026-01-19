@@ -9,6 +9,7 @@ in
     ".config/bat".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/bat";
     ".config/lnav/config.json".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/lnav/config.json";
     ".config/nvim".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/nvim";
+    ".config/nvim.aibo".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/nvim.aibo";
   };
 
   programs = {

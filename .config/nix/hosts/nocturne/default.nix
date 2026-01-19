@@ -21,12 +21,12 @@ let
     (import ../../home-manager )
     (import ../../home-manager/platforms/darwin.nix )
     (import ../../home-manager/programs/alacritty.nix )
+    (import ../../home-manager/programs/claude-code { inherit pkgs npmPkgs mcp-servers-nix; })
     (import ../../home-manager/programs/direnv.nix )
     (import ../../home-manager/programs/ghostty.nix )
     (import ../../home-manager/programs/neovim.nix )
     (import ../../home-manager/programs/tmux.nix )
     (import ../../home-manager/programs/wezterm.nix )
-    (import ../../home-manager/programs/agents/claude-code { inherit pkgs npmPkgs mcp-servers-nix; })
   ];
 in
 nix-darwin.lib.darwinSystem {

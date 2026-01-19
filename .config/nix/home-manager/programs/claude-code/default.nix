@@ -1,13 +1,19 @@
 { pkgs, npmPkgs, mcp-servers-nix, ... }:
 let
+  # mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
+  # homeDirectory = config.home.homeDirectory;
   enableCodex = true;
-  mcp-servers = import ../../mcp-servers { inherit pkgs mcp-servers-nix enableCodex; };
+  mcp-servers = import ../mcp-servers { inherit pkgs mcp-servers-nix enableCodex; };
 in
 {
+  # home.file = {
+  #   ".claude/rules".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/rules";
+  # };
+
   programs.claude-code = {
     enable = true;
     package = npmPkgs."@anthropic-ai/claude-code";
-    memory.source = ../AGENTS.md;
+    memory.source = ../../../../agents/AGENTS.md;
 
     settings = {
       theme = "dark";
@@ -53,6 +59,6 @@ in
         ];
       };
     };
-    mcpServers = mcp-servers // { zen = (import ../../mcp-servers/zen { inherit pkgs; }); };
+    mcpServers = mcp-servers // { zen = (import ../mcp-servers/zen { inherit pkgs; }); };
   };
 }

@@ -2,7 +2,6 @@
   "1password"
   "adobe-creative-cloud"
   "alacritty"
-  "arto-app/arto/arto"
   "bartender"
   "contexts"
   "coteditor"

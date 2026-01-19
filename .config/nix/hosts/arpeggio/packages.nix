@@ -1,8 +1,12 @@
 { pkgs, npmPkgs, ... }:
 with pkgs; [
+  nextdns
+
   vim
   neovim
   # emacs
+  cachix
+  lorri
   tree-sitter
 
   _1password-cli

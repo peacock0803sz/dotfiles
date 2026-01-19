@@ -14,11 +14,6 @@ eval ($HOMEBREW_PREFIX/bin/brew shellenv)
 fish_add_path "$HOMEBREW_PREFIX/sbin"
 source "$HOME/.config/op/plugins.sh"
 
-# {{{ Workaround for GitHub Copilot CLI
-alias github-copilot-cli gh-copilot
-source "$HOME/.local/share/gh/extensions/gh-fish/gh-copilot-alias.fish"
-# }}}
-
 function aibo
     if not set -q NVIM_APPNAME
         set --export NVIM_APPNAME 'nvim.aibo'

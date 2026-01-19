@@ -32,7 +32,6 @@ with pkgs; [
   ruff
   go
   typescript
-  gh-copilot
   nodePackages.prettier
   # npmPkgs."@github/copilot-language-server"
   # npmPkgs."@google/gemini-cli"

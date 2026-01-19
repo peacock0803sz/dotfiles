@@ -1,4 +1,4 @@
-local util = require("lspconfig.util")
+local util = require("vim.lsp.util")
 
 ---@type { [string]: vim.lsp.Config }
 local servers = {

@@ -1,9 +1,8 @@
-local ok, servers = pcall(require, "lsp._nodejs")
-if ok then
-  vim.lsp.config("ts_ls", servers.ts_ls)
-  vim.lsp.config("cssls", servers.cssls)
-end
+local servers = require("lsp.nodejs")
+vim.lsp.config("ts_ls", servers.ts_ls)
+vim.lsp.config("cssls", servers.cssls)
 
+---@type vim.lsp.Config
 local vue_ls = {
   on_init = function(client)
     client.handlers["tsserver/request"] = function(_, result, context)
@@ -28,10 +27,7 @@ local vue_ls = {
       ts_client:exec_cmd({
         title = "vue_request_forward", -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
         command = "typescript.tsserverRequest",
-        arguments = {
-          command,
-          payload,
-        },
+        arguments = { command, payload },
       }, { bufnr = context.bufnr }, function(_, r)
         local response = r and r.body
         -- TODO: handle error or response nil here, e.g. logging

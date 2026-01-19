@@ -95,7 +95,7 @@ with pkgs; [
   pinact
   awscli2
   google-cloud-sdk
-  firebase-tools
+  # firebase-tools
   yt-dlp
   ffmpeg
   imagemagick

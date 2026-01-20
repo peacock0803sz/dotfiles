@@ -229,13 +229,13 @@ let
         sha512 = "Orxzlfb9c67A15cq2JQEyVc7wEsmFBmHjZWZYQMUyJ1qivXyMwdyNOs9odi79hze+2zqdTtu1E19IM/FtqZ10g==";
       };
     };
-    "@google/gemini-cli-core-0.24.4" = {
+    "@google/gemini-cli-core-0.24.5" = {
       name = "_at_google_slash_gemini-cli-core";
       packageName = "@google/gemini-cli-core";
-      version = "0.24.4";
+      version = "0.24.5";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.24.4.tgz";
-        sha512 = "SuS6JJLx0Seed6EmZOJZr072RV918jMU7uP7ZOYzZX0HzLB330X+/qD1hgr8m/wCz8FXrw6u6tmzfyefkFSQwQ==";
+        url = "https://registry.npmjs.org/@google/gemini-cli-core/-/gemini-cli-core-0.24.5.tgz";
+        sha512 = "qr0HPGZJWsXfPCqLyrSaIrq2LNj5snbnFONRG4ne9Nq0d7oI6QDPWf2MBIs3QAn9n+wAWImxrPTcuUJ+OK6W/w==";
       };
     };
     "@google/genai-1.30.0" = {
@@ -391,13 +391,13 @@ let
         sha512 = "+LGuAEIC2L7pbvkyAQVWM2Go0dAy+UWEui28g07zNtZsCBhm+gusBK8PNwLJLV5Jay+TyUYuwLIbJdjLLzqEBg==";
       };
     };
-    "@modelcontextprotocol/sdk-1.25.2" = {
+    "@modelcontextprotocol/sdk-1.25.3" = {
       name = "_at_modelcontextprotocol_slash_sdk";
       packageName = "@modelcontextprotocol/sdk";
-      version = "1.25.2";
+      version = "1.25.3";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@modelcontextprotocol/sdk/-/sdk-1.25.2.tgz";
-        sha512 = "LZFeo4F9M5qOhC/Uc1aQSrBHxMrvxett+9KLHt7OhcExtoiRN9DKgbZffMP/nxjutWDQpfMDfP3nkHI4X9ijww==";
+        url = "https://registry.npmjs.org/@modelcontextprotocol/sdk/-/sdk-1.25.3.tgz";
+        sha512 = "vsAMBMERybvYgKbg/l4L1rhS7VXV1c0CtyJg72vwxONVX0l4ZfKVAnZEWTQixJGTzKnELjQ59e4NbdFDALRiAQ==";
       };
     };
     "@opentelemetry/api-1.9.0" = {
@@ -940,13 +940,13 @@ let
         sha512 = "37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==";
       };
     };
-    "@types/react-19.2.8" = {
+    "@types/react-19.2.9" = {
       name = "_at_types_slash_react";
       packageName = "@types/react";
-      version = "19.2.8";
+      version = "19.2.9";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@types/react/-/react-19.2.8.tgz";
-        sha512 = "3MbSL37jEchWZz2p2mjntRZtPt837ij10ApxKfgmXCTuHWagYg7iA5bqPw6C8BMPfwidlvfPI/fxOc42HLhcyg==";
+        url = "https://registry.npmjs.org/@types/react/-/react-19.2.9.tgz";
+        sha512 = "Lpo8kgb/igvMIPeNV2rsYKTgaORYdO1XGVZ4Qz3akwOj0ySGYMPlQWa8BaLn0G63D1aSaAQ5ldR06wCpChQCjA==";
       };
     };
     "@types/request-2.48.13" = {
@@ -4756,13 +4756,13 @@ let
         sha512 = "yEFYrVhod+hdNyx7g5Bnkkb0G6si8HJurOoOEgC8B/O0uXLHlaey/65KRv6cuWBNhBgHKAROVpc7QyYqE5gFng==";
       };
     };
-    "tar-7.5.3" = {
+    "tar-7.5.4" = {
       name = "tar";
       packageName = "tar";
-      version = "7.5.3";
+      version = "7.5.4";
       src = fetchurl {
-        url = "https://registry.npmjs.org/tar/-/tar-7.5.3.tgz";
-        sha512 = "ENg5JUHUm2rDD7IvKNFGzyElLXNjachNLp6RaGf4+JOgxXHkqA+gq81ZAMCUmtMtqBsoU62lcp6S27g1LCYGGQ==";
+        url = "https://registry.npmjs.org/tar/-/tar-7.5.4.tgz";
+        sha512 = "AN04xbWGrSTDmVwlI4/GTlIIwMFk/XEv7uL8aa57zuvRy6s4hdBed+lVq2fAZ89XDa7Us3ANXcE3Tvqvja1kTA==";
       };
     };
     "teeny-request-9.0.0" = {
@@ -5601,10 +5601,10 @@ in
   "@google/gemini-cli" = nodeEnv.buildNodePackage {
     name = "_at_google_slash_gemini-cli";
     packageName = "@google/gemini-cli";
-    version = "0.24.4";
+    version = "0.24.5";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.24.4.tgz";
-      sha512 = "IIfsfQgjkkTKYEaHe++Xgf+kud0PbLnTwChMOdVkIA8mnx4w8a4Slj8/3RMS3ep/3PZCKnT6Tn2A4b11mte2Hw==";
+      url = "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.24.5.tgz";
+      sha512 = "vK+fqFYD5RtV4vZrciwMIzkX7uqiIXxiYoDbb6+mic1bcslEqSTt+GYBwATDjmZlorlzAGUYePn68y4Hu5o11g==";
     };
     dependencies = [
       (sources."@a2a-js/sdk-0.3.8" // {
@@ -5680,7 +5680,7 @@ in
       sources."@google-cloud/precise-date-4.0.0"
       sources."@google-cloud/projectify-4.0.0"
       sources."@google-cloud/promisify-4.0.0"
-      (sources."@google/gemini-cli-core-0.24.4" // {
+      (sources."@google/gemini-cli-core-0.24.5" // {
         dependencies = [
           (sources."gaxios-6.7.1" // {
             dependencies = [
@@ -5720,7 +5720,7 @@ in
       sources."@kwsites/file-exists-1.1.1"
       sources."@kwsites/promise-deferred-1.1.1"
       sources."@lvce-editor/verror-1.7.0"
-      sources."@modelcontextprotocol/sdk-1.25.2"
+      sources."@modelcontextprotocol/sdk-1.25.3"
       sources."@opentelemetry/api-1.9.0"
       sources."@opentelemetry/api-logs-0.203.0"
       sources."@opentelemetry/context-async-hooks-2.0.1"
@@ -5790,7 +5790,7 @@ in
       sources."@types/minimatch-5.1.2"
       sources."@types/node-25.0.9"
       sources."@types/normalize-package-data-2.4.4"
-      sources."@types/react-19.2.8"
+      sources."@types/react-19.2.9"
       sources."@types/request-2.48.13"
       sources."@types/tinycolor2-1.4.6"
       sources."@types/tough-cookie-4.0.5"
@@ -6268,7 +6268,7 @@ in
       sources."supports-color-7.2.0"
       sources."supports-preserve-symlinks-flag-1.0.0"
       sources."system-architecture-0.1.0"
-      sources."tar-7.5.3"
+      sources."tar-7.5.4"
       (sources."teeny-request-9.0.0" // {
         dependencies = [
           sources."agent-base-6.0.2"
@@ -6375,10 +6375,10 @@ in
   "@typescript/native-preview" = nodeEnv.buildNodePackage {
     name = "_at_typescript_slash_native-preview";
     packageName = "@typescript/native-preview";
-    version = "7.0.0-dev.20260119.1";
+    version = "7.0.0-dev.20260120.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260119.1.tgz";
-      sha512 = "Tf74TdJVJlLRMN0W9VXK8jc0Gor9+wFRm40qTLt2JeHiPpSF5TEN/pHPjlf4Id1wDSJXH9p5/U1wFS3s5TS2PQ==";
+      url = "https://registry.npmjs.org/@typescript/native-preview/-/native-preview-7.0.0-dev.20260120.1.tgz";
+      sha512 = "nnEf37C9ue7OBRnF2zmV/OCBmV5Y7T/K4mCHa+nxgiXcF/1w8sA0cgdFl+gHQ0mysqUJ+Bu5btAMeWgpLyjrgg==";
     };
     buildInputs = globalBuildInputs;
     meta = {

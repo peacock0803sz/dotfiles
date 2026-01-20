@@ -8,6 +8,7 @@ with pkgs; [
   ghq
   jq
   lnav
+  lemonade
   deno
 
   yt-dlp

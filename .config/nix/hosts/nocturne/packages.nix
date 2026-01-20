@@ -19,6 +19,7 @@ with pkgs; [
   gh
   ghq
   jq
+  lemonade
   ripgrep
   tmux
   tmuxPlugins.catppuccin

@@ -8,5 +8,7 @@ with pkgs; [
   ghq
   jq
   lnav
+  lemonade
+
   deno
 ]

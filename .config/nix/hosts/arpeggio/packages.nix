@@ -30,6 +30,7 @@ with pkgs; [
   jq
   iproute2mac
   lnav
+  lemonade
   ripgrep
   tmux
   tmuxPlugins.catppuccin

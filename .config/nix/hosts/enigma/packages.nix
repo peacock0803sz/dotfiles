@@ -22,6 +22,7 @@ with pkgs; [
   graphviz
   jq
   lnav
+  lemonade
   ripgrep
   tmux
   tmuxPlugins.catppuccin

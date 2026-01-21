@@ -40,7 +40,7 @@ nixpkgs.lib.nixosSystem {
           ../../home-manager/programs/neovim.nix
           ../../home-manager/programs/claude-code
         ];
-        home.packages = import ./packages.nix { inherit pkgs; };
+        home.packages = import ./packages.nix { inherit pkgs npmPkgs; };
       };
     }
   ];

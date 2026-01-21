@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, npmPkgs, ... }:
 with pkgs; [
   neovim
   tree-sitter
@@ -37,6 +37,8 @@ with pkgs; [
   go
   nodejs
   typescript
+
+  npmPkgs."ccusage"
 
   bash-language-server
   dockerfile-language-server

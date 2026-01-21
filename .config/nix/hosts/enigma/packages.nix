@@ -8,6 +8,7 @@ with pkgs; [
   cachix
   eza
   delta
+  devenv
   direnv
   fd
   fish

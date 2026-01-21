@@ -38,4 +38,5 @@
   environment.systemPackages = with pkgs; [
     cron
   ];
+  virtualisation.docker.enable = true;
 }

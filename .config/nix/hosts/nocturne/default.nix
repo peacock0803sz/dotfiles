@@ -11,10 +11,10 @@ let
     config.allowUnfree = true;
     overlays = [
       inputs.neovim-overlay.overlays.default
+      inputs.llm-agents.overlays.default
     ];
   };
 
-  npmPkgs = pkgs.callPackage ./node2nix { inherit pkgs; };
   brewCasks = import ./brewCasks.nix;
 in
 nix-darwin.lib.darwinSystem {
@@ -24,7 +24,7 @@ nix-darwin.lib.darwinSystem {
     (import ../../nix-darwin/lemonade.nix { inherit pkgs; })
     {
       home-manager.backupFileExtension = "bk.nix";
-      home-manager.extraSpecialArgs = { inherit npmPkgs mcp-servers-nix; };
+      home-manager.extraSpecialArgs = { inherit pkgs mcp-servers-nix; };
       home-manager.users.${username} = {
         imports = [
           ./home.nix
@@ -40,7 +40,7 @@ nix-darwin.lib.darwinSystem {
           ../../home-manager/programs/wezterm.nix
         ];
 
-        home.packages = import ./packages.nix { inherit pkgs npmPkgs; };
+        home.packages = import ./packages.nix { inherit pkgs; };
       };
     }
   ];

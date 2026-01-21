@@ -8,9 +8,9 @@ let
     config.allowUnfree = true;
     overlays = [
       inputs.neovim-overlay.overlays.default
+      inputs.llm-agents.overlays.default
     ];
   };
-  npmPkgs = pkgs.callPackage ./node2nix { inherit pkgs; };
 in
 nixpkgs.lib.nixosSystem {
   system = system;
@@ -29,7 +29,7 @@ nixpkgs.lib.nixosSystem {
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.extraSpecialArgs = { inherit npmPkgs mcp-servers-nix; };
+      home-manager.extraSpecialArgs = { inherit pkgs mcp-servers-nix; };
       home-manager.users."${username}" = {
         imports = [
           ../../home-manager
@@ -40,7 +40,7 @@ nixpkgs.lib.nixosSystem {
           ../../home-manager/programs/neovim.nix
           ../../home-manager/programs/claude-code
         ];
-        home.packages = import ./packages.nix { inherit pkgs npmPkgs; };
+        home.packages = import ./packages.nix { inherit pkgs; };
       };
     }
   ];

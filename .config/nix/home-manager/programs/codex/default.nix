@@ -1,4 +1,4 @@
-{ pkgs, npmPkgs, mcp-servers-nix, ... }:
+{ pkgs, mcp-servers-nix, ... }:
 let
   enableCodex = false;
   config = mcp-servers-nix.lib.mkConfig pkgs {
@@ -13,7 +13,7 @@ in
     enable = true;
     package = pkgs.symlinkJoin {
       name = "codex";
-      paths = [ npmPkgs."@openai/codex" ];
+      paths = [ pkgs.llm-agents.codex ];
       nativeBuildInputs = [ pkgs.makeWrapper ];
       postBuild = ''
         wrapProgram $out/bin/codex "--add-flags" "-c '$(cat ${config})'"

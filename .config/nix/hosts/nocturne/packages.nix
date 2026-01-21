@@ -1,4 +1,4 @@
-{ pkgs, npmPkgs, ... }:
+{ pkgs, ... }:
 with pkgs; [
   vim
   neovim
@@ -34,10 +34,9 @@ with pkgs; [
   go
   typescript
   nodePackages.prettier
-  # npmPkgs."@github/copilot-language-server"
-  # npmPkgs."@google/gemini-cli"
-  npmPkgs."@anthropic-ai/claude-code"
-  npmPkgs."editprompt"
+
+  llm-agents.ccusage
+  llm-agents.copilot-language-server
 
   astro-language-server
   bash-language-server
@@ -47,7 +46,7 @@ with pkgs; [
   lua-language-server
   nixd
   nixpkgs-fmt
-  npmPkgs."@vue/language-server"
+  vue-language-server
   pyright
   stylua
   yaml-language-server

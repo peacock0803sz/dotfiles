@@ -1,4 +1,4 @@
-{ pkgs, npmPkgs, ... }:
+{ pkgs, ... }:
 with pkgs; [
   nextdns
 
@@ -50,11 +50,10 @@ with pkgs; [
   rustc
   typescript
   nodePackages.prettier
-  npmPkgs."ccusage"
-  npmPkgs."editprompt"
-  npmPkgs."gemistat"
-  npmPkgs."@ccusage/codex"
-  npmPkgs."@github/copilot-language-server"
+
+  llm-agents.ccusage
+  llm-agents.ccusage-codex
+  llm-agents.copilot-language-server
 
   astro-language-server
   lua-language-server
@@ -63,8 +62,7 @@ with pkgs; [
   gopls
   fish-lsp
   lemminx
-  npmPkgs."@typescript/native-preview"
-  # npmPkgs."@vue/language-server"
+  vue-language-server
   nixd
   nixpkgs-fmt
   protols

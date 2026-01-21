@@ -1,4 +1,4 @@
-{ pkgs, config, npmPkgs, mcp-servers-nix, ... }:
+{ pkgs, config, mcp-servers-nix, ... }:
 let
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
   homeDirectory = config.home.homeDirectory;
@@ -14,7 +14,7 @@ in
 
   programs.claude-code = {
     enable = true;
-    package = npmPkgs."@anthropic-ai/claude-code";
+    package = pkgs.llm-agents.claude-code;
     memory.source = ../../../../agents/AGENTS.md;
 
     settings = {

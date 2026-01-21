@@ -1,1 +1,0 @@
-../../../node2nix/default.nix

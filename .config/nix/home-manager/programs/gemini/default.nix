@@ -5,7 +5,7 @@ in
 {
   programs.gemini-cli = {
     enable = true;
-    package = pkgs.gemini-cli-bin;
+    package = pkgs.llm-agents.gemini-cli;
     context = { GEMINI = "../../../../agents/AGENTS.md"; };
     settings = {
       theme = "light";

@@ -19,15 +19,6 @@ jobs:
         shell: bash
         run: nix flake update
 
-      - name: update-node2nix
-        shell: bash
-        run: |
-          for dir in $(find .config/nix/hosts/ -type d -maxdepth 2 -mindepth 2 | grep 'node2nix'); do
-            cd $dir
-            nix-shell -p nodePackages.node2nix --command 'node2nix -i ./node-packages.json -o node-packages.nix'
-            cd $GITHUB_WORKSPACE
-          done
-
       - name: git-commit
         shell: bash
         env:

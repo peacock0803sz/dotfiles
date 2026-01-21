@@ -35,7 +35,7 @@ function fzf-gwq
 end
 bind \ct fzf-gwq
 
-# neovim
+# neovim {{{
 if test (command -v nvim)
     # neovim
     set --global --export EDITOR nvim
@@ -51,11 +51,11 @@ if test (command -v nvim)
         if not set -q argv[1]
             set argv claude
         end
-    nvim "+:Aibo $argv[1]"
-    # }}}
+        nvim "+:Aibo $argv[1]"
+        # }}}
+    end
 end
-
-end
+# }}}
 
 # tide prompts
 source $HOME/dotfiles/.config/fish/tide.fish
@@ -77,7 +77,7 @@ end
 
 # Aliases / Abbreviations {{{
 alias git-root "git rev-parse --show-toplevel"
-abbr --add lemonade "lemonade --host=$(echo $SSH_CLIENT | cut -d ' '  -f 1) copy"
+abbr --add lemonade "lemonade --host=$(echo $SSH_CLIENT | cut -d ' '  -f 1)"
 abbr --add yq gojq # yq to gojq
 abbr --add tf terraform
 # }}}

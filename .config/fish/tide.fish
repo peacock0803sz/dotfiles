@@ -1,5 +1,10 @@
 set tide_character_icon '$'
 set tide_character_color green
+set tide_character_vi_icon_default '$'
+set tide_character_vi_icon_insert '$'
+set tide_character_vi_icon_replace '$'
+set tide_character_vi_icon_replace_one '$'
+set tide_character_vi_icon_visual '$'
 
 set tide_status_color green
 set tide_status_color_failure red

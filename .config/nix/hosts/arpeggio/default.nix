@@ -33,8 +33,11 @@ nix-darwin.lib.darwinSystem {
           ../../home-manager
           ../../home-manager/platforms/darwin.nix
           ../../home-manager/programs/alacritty.nix
+          ../../home-manager/programs/aibo.nix
+          ../../home-manager/programs/bat.nix
           ../../home-manager/programs/direnv.nix
           ../../home-manager/programs/ghostty.nix
+          ../../home-manager/programs/lnav.nix
           ../../home-manager/programs/neovim.nix
           ../../home-manager/programs/tmux.nix
           ../../home-manager/programs/wezterm.nix

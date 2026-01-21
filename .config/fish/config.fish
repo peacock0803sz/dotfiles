@@ -41,6 +41,20 @@ if test (command -v nvim)
     set --global --export EDITOR nvim
     # man
     set --global --export MANPAGER 'nvim -c ASMANPAGER -'
+
+    # aibo.nvim {{{
+    function aibo
+        if not set -q NVIM_APPNAME
+            set --export NVIM_APPNAME 'nvim.aibo'
+        end
+
+        if not set -q argv[1]
+            set argv claude
+        end
+    nvim "+:Aibo $argv[1]"
+    # }}}
+end
+
 end
 
 # tide prompts
@@ -63,6 +77,7 @@ end
 
 # Aliases / Abbreviations {{{
 alias git-root "git rev-parse --show-toplevel"
+abbr --add lemonade "lemonade --host=$(echo $SSH_CLIENT | cut -d ' '  -f 1) copy"
 abbr --add yq gojq # yq to gojq
 abbr --add tf terraform
 # }}}

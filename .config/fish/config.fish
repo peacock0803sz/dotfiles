@@ -35,6 +35,14 @@ function fzf-gwq
 end
 bind \ct fzf-gwq
 
+# neovim
+if test (command -v nvim)
+    # neovim
+    set --global --export EDITOR nvim
+    # man
+    set --global --export MANPAGER 'nvim -c ASMANPAGER -'
+end
+
 # tide prompts
 source $HOME/dotfiles/.config/fish/tide.fish
 

@@ -29,12 +29,6 @@ end
 alias vim@bsd /usr/bin/vim
 alias vim@head "$HOME/.nix-profile/bin/vim"
 
-# neovim
-set --global --export EDITOR nvim
-
-# man
-set --global --export MANPAGER 'nvim -c ASMANPAGER -'
-
 # Language specific settings {{{
 # Go
 fish_add_path $GOPATH/bin

@@ -81,12 +81,12 @@ with pkgs; [
   vscode-langservers-extracted
   yaml-language-server
 
-  google-cloud-sql-proxy
   pandoc
   postgresql
   mariadb
   sqlite
   kubectl
+  kustomize
   terraform
   nur.repos.peacock0803sz.tfcmt
   nur.repos.peacock0803sz.gwq
@@ -95,7 +95,18 @@ with pkgs; [
   act
   pinact
   awscli2
-  google-cloud-sdk
+  (google-cloud-sdk.withExtraComponents [
+    google-cloud-sdk.components.alpha
+    google-cloud-sdk.components.beta
+    google-cloud-sdk.components.cloud-datastore-emulator
+    google-cloud-sdk.components.cloud-firestore-emulator
+    # google-cloud-sdk.components.cloud-spanner-emulator
+    google-cloud-sdk.components.cloud-run-proxy
+    google-cloud-sdk.components.cloud-sql-proxy
+    google-cloud-sdk.components.gke-gcloud-auth-plugin
+    google-cloud-sdk.components.log-streaming
+    google-cloud-sdk.components.pubsub-emulator
+  ])
   # firebase-tools
   yt-dlp
   ffmpeg

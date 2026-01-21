@@ -1,5 +1,6 @@
 local function config()
-  vim.g["nvim_ghost_server_port"] = 14001
+  vim.g.nvim_ghost_server_port = 14001
+  vim.g.nvim_ghost_autostart = 0
 
   local group = vim.api.nvim_create_augroup("nvim_ghost_user_autocommands", { clear = false })
   local filetypes = {

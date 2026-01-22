@@ -10,11 +10,13 @@ description: Git commitの作成。pre-commit検査遵守、意味のある最�
 - pre-commit設定時は検査が通る状態でコミット (バイパス禁止)
 - 意味のある最小単位でコミット
 - メッセージが複数の意味を示す時は分割
+- Push操作はユーザーが実行するので実施しない
 
 ## コミットメッセージ規則
 
 - 本文は大文字で始め、変更の理由を明確にする
 - 個人リポジトリ (`$HOME/ghq/github.com/peacock0803sz/` 配下) ではEmoji Prefixを採用
+    - ただしdotfiles, notizenリポジトリはEmoji Prefixを採用していない
 
 ### Emoji Prefix一覧
 

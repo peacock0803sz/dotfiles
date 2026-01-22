@@ -24,6 +24,7 @@ nix-darwin.lib.darwinSystem {
     home-manager.darwinModules.home-manager
     (import ../../nix-darwin { inherit system username hostName pkgs brewCasks nix-monitored; })
     (import ../../nix-darwin/lemonade.nix { inherit pkgs; })
+    (import ../../nix-darwin/notizen.nix { inherit username; })
     {
       home-manager.backupFileExtension = "bk.nix";
       home-manager.extraSpecialArgs = { inherit pkgs mcp-servers-nix; };

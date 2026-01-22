@@ -14,7 +14,7 @@ python3 ~/dotfiles/.config/agents/scripts/plan-timestamp.py --archive
 ## 処理内容
 
 1. `~/.claude/plans/` 内の全 `.md` ファイルを検出
-2. `~/Documents/notizen/source/Agents/YYYY/MM/DD/` に移動
+2. `~/notizen/source/Agents/YYYY/MM/DD/` に移動
    - ファイル名: `HHMMSS_元のファイル名.md`
    - H1 見出しの先頭に時刻 (HH:MM:SS) を追加
 3. 各階層に `index.md` を生成/更新 (MyST toctree 形式)
@@ -25,7 +25,7 @@ python3 ~/dotfiles/.config/agents/scripts/plan-timestamp.py --archive
 スクリプト出力で新しいパスを確認:
 
 ```
-Archived: plan.md -> ~/Documents/notizen/source/Agents/2026/01/22/143052_plan.md
+Archived: plan.md -> ~/notizen/source/Agents/2026/01/22/143052_plan.md
 ```
 
 ## 注意事項

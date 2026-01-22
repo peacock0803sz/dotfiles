@@ -38,7 +38,7 @@
     serviceConfig = {
       Type = "oneshot";
       User = inputs.username;
-      WorkingDirectory = "/home/${inputs.username}/Documents/notizen";
+      WorkingDirectory = "/home/${inputs.username}/notizen";
       ExecStart = "${inputs.pkgs.writeShellScript "notizen-build" ''
         ${inputs.pkgs.gnumake}/bin/make html
         ${inputs.pkgs.rsync}/bin/rsync -av --delete build/html/ /var/www/notizen/

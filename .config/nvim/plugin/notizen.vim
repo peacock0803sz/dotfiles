@@ -18,7 +18,7 @@
 " augroup END
 
 function! s:open_notizen() abort
-  let s:notizen_root = expand('$HOME/Documents/notizen')
+  let s:notizen_root = expand('$HOME/notizen')
   let s:_cwd = getcwd()
   if s:_cwd !=# s:notizen_root
     execute 'cd' .. s:notizen_root
@@ -29,9 +29,9 @@ function! s:open_notizen() abort
   :setlocal nonumber
 
   if system('hostname') =~? 'arpeggio.*'
-    let s:working_dir = expand('$HOME/Documents/notizen/source/Work/GROOVE-X')
+    let s:working_dir = expand('$HOME/notizen/source/Work/GROOVE-X')
   else
-    let s:working_dir = expand('$HOME/Documents/notizen/source/Private')
+    let s:working_dir = expand('$HOME/notizen/source/Private')
   endif
   execute 'cd' .. s:working_dir
   echo 'Switched to Notizen Workspace; ' .. s:working_dir

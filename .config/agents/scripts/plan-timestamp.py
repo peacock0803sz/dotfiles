@@ -8,7 +8,7 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-BASE_DIR = Path.home() / "Documents" / "notizen" / "source" / "Agents"
+BASE_DIR = Path.home() / "notizen" / "source" / "Agents"
 
 
 def write_index_md(

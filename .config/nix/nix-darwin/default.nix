@@ -39,6 +39,7 @@
     };
     casks = inputs.brewCasks;
   };
+  launchd.labelPrefix = "net.p3ac0ck.nix";
 
   networking.hostName = inputs.hostName;
   system = {

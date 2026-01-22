@@ -1,5 +1,4 @@
 { ... }@inputs: {
-  launchd.labelPrefix = "net.p3ac0ck.nix";
   launchd.user.agents = {
     lemonade = {
       serviceConfig = {

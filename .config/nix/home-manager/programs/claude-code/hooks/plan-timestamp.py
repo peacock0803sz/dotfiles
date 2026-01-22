@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """計画ファイルの処理と index.md 生成（Agents → YYYY → MM → DD → leaf を toctree で連結）"""
 
+import argparse
 import json
 import sys
 import re
@@ -137,17 +138,66 @@ def process_plan_file(file_path: str) -> Path | None:
     return dest_path
 
 
-if __name__ == "__main__":
-    # 引数なし or --generate-all: 全ディレクトリの index.md を生成
-    if len(sys.argv) > 1 and sys.argv[1] == "--generate-all":
-        generate_all_indexes()
-    elif sys.stdin.isatty():
-        # 標準入力がない場合も全生成
-        generate_all_indexes()
-    else:
-        # Claude Code フックとして実行
-        input_data = json.load(sys.stdin)
-        file_path = input_data.get("tool_input", {}).get("file_path", "")
-        dest = process_plan_file(file_path) if file_path else None
+def archive_all_plans() -> list[Path]:
+    """~/.claude/plans/ 内の全計画ファイルを処理"""
+    plans_dir = Path.home() / ".claude" / "plans"
+    if not plans_dir.exists():
+        print(f"Plans directory not found: {plans_dir}")
+        return []
+
+    results = []
+    for plan_file in plans_dir.glob("*.md"):
+        dest = process_plan_file(str(plan_file))
         if dest:
-            print(f"Moved to: {dest}", file=sys.stderr)
+            results.append(dest)
+            print(f"Archived: {plan_file.name} -> {dest}")
+
+    if not results:
+        print("No plan files to archive")
+
+    return results
+
+
+def run_as_hook() -> None:
+    """Claude Code Hook として標準入力から実行"""
+    input_data = json.load(sys.stdin)
+    file_path = input_data.get("tool_input", {}).get("file_path", "")
+    dest = process_plan_file(file_path) if file_path else None
+    if dest:
+        print(f"Moved to: {dest}", file=sys.stderr)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="計画ファイルの処理と index.md 生成")
+    parser.add_argument(
+        "--archive",
+        action="store_true",
+        help="~/.claude/plans/ 内の全計画ファイルを notizen に移動",
+    )
+    parser.add_argument(
+        "--generate-all",
+        action="store_true",
+        help="全ディレクトリの index.md を再生成",
+    )
+    parser.add_argument(
+        "--hook",
+        action="store_true",
+        help="Claude Code Hook として標準入力から実行",
+    )
+
+    args = parser.parse_args()
+
+    if args.archive:
+        archive_all_plans()
+    elif args.generate_all:
+        generate_all_indexes()
+    elif args.hook or not sys.stdin.isatty():
+        # 明示的に --hook 指定、または標準入力がある場合
+        run_as_hook()
+    else:
+        # 引数なしの場合はヘルプを表示
+        parser.print_help()
+
+
+if __name__ == "__main__":
+    main()

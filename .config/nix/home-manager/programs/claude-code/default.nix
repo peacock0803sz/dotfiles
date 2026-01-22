@@ -53,11 +53,6 @@ in
         ];
       };
 
-      hooks = {
-        PostToolUse = [
-          { matcher = "Write"; hooks = [{ type = "command"; command = "${./hooks/plan-timestamp.py}"; }]; }
-        ];
-      };
     };
     mcpServers = mcp-servers // { zen = (import ../mcp-servers/zen { inherit pkgs; }); };
   };

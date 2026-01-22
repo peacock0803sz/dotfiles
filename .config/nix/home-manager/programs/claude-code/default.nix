@@ -50,8 +50,6 @@ in
           "Bash(ncat -l -:*)"
           "Bash(netcat -l -:*)"
           "Bash(docker -:*)"
-          "Bash(npm -:*)"
-          "Bash(uv -:*)"
         ];
       };
 

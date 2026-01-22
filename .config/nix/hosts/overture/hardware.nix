@@ -11,6 +11,7 @@
   boot.loader.grub.enable = false;
   # Enables the generation of /boot/extlinux/extlinux.conf
   boot.loader.generic-extlinux-compatible.enable = true;
+  boot.loader.generic-extlinux-compatible.configurationLimit = 5;
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "usbhid" ];
   boot.initrd.kernelModules = [ ];

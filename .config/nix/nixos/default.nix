@@ -10,6 +10,9 @@
   '';
   nix.package = nix-monitored.packages.${system}.default;
 
+  # Limit the number of boot configurations to prevent /boot from filling up
+  boot.loader.grub.configurationLimit = 5;
+
   # Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;

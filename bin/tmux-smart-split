@@ -1,0 +1,141 @@
+#!/usr/bin/env python3
+"""
+tmux-smart-split: SSH-aware tmux pane/window creation.
+
+When in an SSH session, new panes/windows will SSH to the same host and directory.
+When local, uses pane_current_path as usual.
+
+Usage: tmux-smart-split <new-window|split-h|split-v>
+"""
+
+import os
+import re
+import socket
+import subprocess
+import sys
+from urllib.parse import urlparse
+
+
+def run(args: list[str]) -> str:
+    """Run command and return stdout."""
+    result = subprocess.run(args, capture_output=True, text=True)
+    return result.stdout.strip()
+
+
+def tmux_display(fmt: str) -> str:
+    """Get tmux display-message output."""
+    return run(["tmux", "display-message", "-p", fmt])
+
+
+def get_child_processes(ppid: str) -> list[tuple[str, str]]:
+    """Get child processes of given PID. Returns list of (pid, command)."""
+    if sys.platform == "darwin":
+        # macOS: get all processes and filter by ppid
+        output = run(["ps", "-axo", "ppid=,pid=,command="])
+        results = []
+        for line in output.splitlines():
+            parts = line.split(None, 2)
+            if len(parts) >= 3 and parts[0] == ppid:
+                results.append((parts[1], parts[2]))
+        return results
+    else:
+        # Linux: use --ppid
+        output = run(["ps", "-o", "pid=,command=", "--ppid", ppid])
+        results = []
+        for line in output.splitlines():
+            parts = line.split(None, 1)
+            if len(parts) >= 2:
+                results.append((parts[0], parts[1]))
+        return results
+
+
+def find_ssh_command() -> str | None:
+    """Find SSH command running in current pane."""
+    pane_pid = tmux_display("#{pane_pid}")
+    if not pane_pid:
+        return None
+
+    for _pid, cmd in get_child_processes(pane_pid):
+        # Match ssh/autossh, skip scp/sftp/git
+        if re.match(r"^(ssh|autossh|.*/ssh|.*/autossh)\s", cmd):
+            if not re.search(r"git-(upload|receive|send)-pack|sftp|scp|-W\s", cmd):
+                return cmd
+    return None
+
+
+def get_remote_directory() -> str | None:
+    """Extract remote directory from pane_path (OSC 7)."""
+    pane_path = tmux_display("#{pane_path}")
+    if not pane_path:
+        return None
+
+    # Parse file://hostname/path
+    parsed = urlparse(pane_path)
+    if parsed.scheme != "file" or not parsed.path:
+        return None
+
+    # Check if it's a remote path (hostname differs from local)
+    local_host = socket.gethostname().split(".")[0]
+    if parsed.netloc and parsed.netloc != local_host:
+        return parsed.path
+    return None
+
+
+def extract_ssh_base(ssh_cmd: str) -> str:
+    """Extract base SSH command (ssh + options + host) without remote command."""
+    # Remove -t and everything after it (the remote command part)
+    # Pattern: ssh [options] host [-t 'command']
+    cleaned = re.sub(r"\s+-t\s+.*$", "", ssh_cmd).strip()
+    return cleaned
+
+
+def build_ssh_with_directory(ssh_cmd: str, remote_dir: str | None) -> str:
+    """Build SSH command that changes to the remote directory."""
+    # First, extract just the base SSH command (without any existing -t command)
+    base_cmd = extract_ssh_base(ssh_cmd)
+
+    if not remote_dir:
+        return base_cmd
+
+    # Build command with directory change and shell exec
+    # Use double quotes inside single quotes for paths
+    parent_dir = os.path.dirname(remote_dir)
+    # Use exec $SHELL without -l (fish doesn't need it, and it can cause issues)
+    remote_cmd = (
+        f'cd "{remote_dir}" 2>/dev/null || cd "{parent_dir}" 2>/dev/null; exec $SHELL'
+    )
+    return f"{base_cmd} -t '{remote_cmd}'"
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: tmux-smart-split <new-window|split-h|split-v>", file=sys.stderr)
+        sys.exit(1)
+
+    action = sys.argv[1]
+    tmux_cmds = {
+        "new-window": ["new-window"],
+        "split-h": ["split-window", "-h"],
+        "split-v": ["split-window", "-v"],
+    }
+
+    if action not in tmux_cmds:
+        print(f"Unknown action: {action}", file=sys.stderr)
+        sys.exit(1)
+
+    tmux_args = tmux_cmds[action]
+
+    # Check for SSH session
+    ssh_cmd = find_ssh_command()
+    if ssh_cmd:
+        remote_dir = get_remote_directory()
+        final_cmd = build_ssh_with_directory(ssh_cmd, remote_dir)
+        os.execvp("tmux", ["tmux", *tmux_args, final_cmd])
+    else:
+        # Local: use pane_current_path
+        current_path = tmux_display("#{pane_current_path}")
+        os.execvp("tmux", ["tmux", *tmux_args, "-c", current_path])
+
+
+if __name__ == "__main__":
+    main()

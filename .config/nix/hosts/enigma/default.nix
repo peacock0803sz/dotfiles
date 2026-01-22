@@ -20,6 +20,7 @@ nixpkgs.lib.nixosSystem {
     nix-monitored.nixosModules.default
     ../../nixos/default.nix
     ../../nixos/desktop.nix
+    ../../nixos/notizen.nix
 
     ./hardware.nix
     ./disk.nix

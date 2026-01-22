@@ -39,6 +39,7 @@
       Type = "oneshot";
       User = inputs.username;
       WorkingDirectory = "/home/${inputs.username}/notizen";
+      ExecStartPre = "+${inputs.pkgs.coreutils}/bin/chown -R ${inputs.username}:nginx /var/www/notizen";
       ExecStart = "${inputs.pkgs.writeShellScript "notizen-build" ''
         ${inputs.pkgs.gnumake}/bin/make html
         ${inputs.pkgs.rsync}/bin/rsync -av --delete build/html/ /var/www/notizen/

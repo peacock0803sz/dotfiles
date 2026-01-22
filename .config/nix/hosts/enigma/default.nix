@@ -14,7 +14,7 @@ let
 in
 nixpkgs.lib.nixosSystem {
   system = system;
-  specialArgs = inputs // { inherit system pkgs; };
+  specialArgs = inputs // { inherit system pkgs username; };
   modules = [
     disko.nixosModules.disko
     nix-monitored.nixosModules.default

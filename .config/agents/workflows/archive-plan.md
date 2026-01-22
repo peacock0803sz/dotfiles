@@ -7,7 +7,7 @@
 ## 実行コマンド
 
 ```bash
-python3 ~/.config/nix/home-manager/programs/claude-code/hooks/plan-timestamp.py --archive
+python3 ~/dotfiles/.config/agents/scripts/plan-timestamp.py --archive
 ```
 
 ## 処理内容

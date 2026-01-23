@@ -60,6 +60,10 @@ end
 # tide prompts
 source $HOME/dotfiles/.config/fish/tide.fish
 
+if test -f $HOME/dotfiles/.config/fish/secrets.fish
+    source $HOME/dotfiles/.config/fish/secrets.fish
+end
+
 # devenv
 if test $(command -v direnv)
     direnv hook fish | source

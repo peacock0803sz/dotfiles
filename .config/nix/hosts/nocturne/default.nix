@@ -1,6 +1,6 @@
 { inputs }:
 let
-  inherit (inputs) nix-darwin home-manager nixpkgs nix-monitored mcp-servers-nix;
+  inherit (inputs) nixpkgs nix-monitored mcp-servers-nix;
 
   system = "aarch64-darwin";
   username = "peacock";
@@ -17,9 +17,10 @@ let
 
   brewCasks = import ./brewCasks.nix;
 in
-nix-darwin.lib.darwinSystem {
+inputs.nix-darwin.lib.darwinSystem {
   modules = [
-    home-manager.darwinModules.home-manager
+    inputs.home-manager.darwinModules.home-manager
+    inputs.nix-index-database.darwinModules.nix-index
     (import ../../nix-darwin { inherit system username hostName pkgs brewCasks nix-monitored; })
     (import ../../nix-darwin/lemonade.nix { inherit pkgs; })
     {

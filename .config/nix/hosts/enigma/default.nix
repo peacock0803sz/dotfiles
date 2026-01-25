@@ -1,6 +1,6 @@
 { inputs, ... }:
 let
-  inherit (inputs) nixpkgs home-manager disko nix-monitored mcp-servers-nix;
+  inherit (inputs) nixpkgs mcp-servers-nix;
   username = "peacock";
   system = "x86_64-linux";
   pkgs = import nixpkgs {
@@ -16,8 +16,9 @@ nixpkgs.lib.nixosSystem {
   system = system;
   specialArgs = inputs // { inherit system pkgs username; };
   modules = [
-    disko.nixosModules.disko
-    nix-monitored.nixosModules.default
+    inputs.disko.nixosModules.disko
+    inputs.nix-index-database.nixosModules.nix-index
+    inputs.nix-monitored.nixosModules.default
     ../../nixos/default.nix
     ../../nixos/desktop.nix
     ../../nixos/notizen.nix
@@ -26,7 +27,7 @@ nixpkgs.lib.nixosSystem {
     ./disk.nix
     ./nixos.nix
 
-    home-manager.nixosModules.home-manager
+    inputs.home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;

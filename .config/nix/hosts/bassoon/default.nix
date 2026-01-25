@@ -1,6 +1,6 @@
 { inputs, ... }:
 let
-  inherit (inputs) nixos-hardware nixpkgs home-manager disko nix-monitored;
+  inherit (inputs) nixpkgs;
   username = "peacock";
   system = "x86_64-linux";
   pkgs = import nixpkgs {
@@ -12,15 +12,16 @@ nixpkgs.lib.nixosSystem {
   system = system;
   specialArgs = inputs // { inherit system pkgs username; };
   modules = [
-    disko.nixosModules.disko
-    nix-monitored.nixosModules.default
-    nixos-hardware.nixosModules.gmktec-nucbox-g3-plus
+    inputs.disko.nixosModules.disko
+    inputs.nix-index-database.nixosModules.nix-index
+    inputs.nix-monitored.nixosModules.default
+    inputs.nixos-hardware.nixosModules.gmktec-nucbox-g3-plus
     ../../nixos
     ./hardware.nix
     ./disk.nix
     ./nixos.nix
 
-    home-manager.nixosModules.home-manager
+    inputs.home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;

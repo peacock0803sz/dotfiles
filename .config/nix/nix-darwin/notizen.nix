@@ -14,7 +14,7 @@
           "sync"
           "--src=/Users/${inputs.username}/notizen/source"
         ];
-        StartInterval = 3600;
+        StartInterval = 300; # every 5 minutes
         WorkingDirectory = "/Users/${inputs.username}/notizen";
         StandardErrorPath = "/tmp/notizen.err.log";
         StandardOutPath = "/tmp/notizen.out.log";

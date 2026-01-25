@@ -10,7 +10,7 @@ let
 in
 nixpkgs.lib.nixosSystem {
   system = system;
-  specialArgs = inputs // { inherit system pkgs; };
+  specialArgs = inputs // { inherit system pkgs username; };
   modules = [
     disko.nixosModules.disko
     nix-monitored.nixosModules.default
@@ -28,9 +28,8 @@ nixpkgs.lib.nixosSystem {
         imports = [
           ../../home-manager
           ../../home-manager/platforms/nixos.nix
-          ../../home-manager/programs/direnv.nix
+          ../../home-manager/presets/small.nix
         ];
-        home.packages = import ./packages.nix { inherit pkgs; };
       };
     }
   ];

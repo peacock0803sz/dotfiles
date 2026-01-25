@@ -30,17 +30,9 @@ nix-darwin.lib.darwinSystem {
           ./home.nix
           ../../home-manager
           ../../home-manager/platforms/darwin.nix
-          ../../home-manager/programs/alacritty.nix
-          ../../home-manager/programs/aibo.nix
-          ../../home-manager/programs/claude-code
-          ../../home-manager/programs/direnv.nix
-          ../../home-manager/programs/ghostty.nix
-          ../../home-manager/programs/neovim.nix
-          ../../home-manager/programs/tmux.nix
-          ../../home-manager/programs/wezterm.nix
+          ../../home-manager/presets/huge.nix
         ];
 
-        home.packages = import ./packages.nix { inherit pkgs; };
       };
     }
   ];

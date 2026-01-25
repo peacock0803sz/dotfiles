@@ -3,9 +3,13 @@ let
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
   homeDirectory = config.home.homeDirectory;
   enableCodex = true;
-  mcp-servers = import ../mcp-servers { inherit pkgs mcp-servers-nix enableCodex; };
+  mcp-servers = import ./mcp-servers { inherit pkgs mcp-servers-nix enableCodex; };
 in
 {
+  home.packages = with pkgs; [
+    llm-agents.ccusage
+  ];
+
   home.file = {
     ".claude/skills".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/skills";
     ".claude/rules".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/rules";
@@ -15,7 +19,7 @@ in
   programs.claude-code = {
     enable = true;
     package = pkgs.llm-agents.claude-code;
-    memory.source = ../../../../agents/AGENTS.md;
+    memory.source = ../../../agents/AGENTS.md;
 
     settings = {
       theme = "dark";
@@ -54,6 +58,6 @@ in
       };
 
     };
-    mcpServers = mcp-servers // { zen = (import ../mcp-servers/zen { inherit pkgs; }); };
+    mcpServers = mcp-servers // { zen = (import ./mcp-servers/zen { inherit pkgs; }); };
   };
 }

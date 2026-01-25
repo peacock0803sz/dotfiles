@@ -72,6 +72,33 @@
     };
   };
 
+  systemd.services.notizen-commit = {
+    description = "Commit & push notizen";
+    serviceConfig = {
+      Type = "oneshot";
+      User = inputs.username;
+      WorkingDirectory = "/home/${inputs.username}/notizen";
+      ExecStart = inputs.pkgs.writeShellScript "notizen-commit" ''
+        set -euo pipefall
+        git pull
+        git add source/
+        git commit -m "Sync source/ at $(${inputs.pkgs.coreutils}/bin/date '+%Y-%m-%d %H:%M')"
+        git push origin main
+      '';
+    };
+    path = [ inputs.pkgs.coreutils inputs.pkgs.git ];
+  };
+
+  systemd.timers.notizen-commit = {
+    description = "Timer for notizen commit";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "daily";
+      AccuracySec = "1min";
+      Persistent = true;
+    };
+  };
+
   systemd.tmpfiles.rules = [
     "d /var/www/notizen 0755 ${inputs.username} nginx -"
   ];

@@ -6,7 +6,7 @@ in
   programs.gemini-cli = {
     enable = true;
     package = pkgs.llm-agents.gemini-cli;
-    context = { GEMINI = "../../../../agents/AGENTS.md"; };
+    context = { GEMINI = "../../../agents/AGENTS.md"; };
     settings = {
       theme = "light";
       preferredEditor = "nvim";
@@ -15,7 +15,7 @@ in
         disableAutoUpdate = true;
         disableUpdateNag = true;
       };
-      mcpServers = import ../mcp-servers { inherit pkgs mcp-servers-nix enableCodex; };
+      mcpServers = import ./mcp-servers { inherit pkgs mcp-servers-nix enableCodex; };
     };
   };
 }

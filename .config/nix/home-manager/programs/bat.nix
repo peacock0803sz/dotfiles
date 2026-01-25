@@ -4,6 +4,10 @@ let
   homeDirectory = inputs.config.home.homeDirectory;
 in
 {
+  home.packages = with inputs.pkgs; [
+    bat
+  ];
+
   home.file = {
     ".config/bat".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/bat";
   };

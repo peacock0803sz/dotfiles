@@ -4,7 +4,11 @@ let
   homeDirectory = inputs.config.home.homeDirectory;
 in
 {
+  home.packages = with inputs.pkgs; [
+    lnav
+  ];
+
   home.file = {
-    ".config/bat".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/bat";
+    ".config/lnav".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/lnav";
   };
 }

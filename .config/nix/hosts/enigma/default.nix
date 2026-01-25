@@ -35,13 +35,8 @@ nixpkgs.lib.nixosSystem {
         imports = [
           ../../home-manager
           ../../home-manager/platforms/nixos.nix
-          ../../home-manager/programs/aibo.nix
-          ../../home-manager/programs/bat.nix
-          ../../home-manager/programs/direnv.nix
-          ../../home-manager/programs/neovim.nix
-          ../../home-manager/programs/claude-code
+          ../../home-manager/presets/large.nix
         ];
-        home.packages = import ./packages.nix { inherit pkgs; };
       };
     }
   ];

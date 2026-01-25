@@ -25,10 +25,10 @@ nixpkgs.lib.nixosSystem {
       home-manager.useUserPackages = true;
       home-manager.users."${username}" = {
         imports = [
-          ../../home-manager/
+          ../../home-manager
           ../../home-manager/platforms/nixos.nix
+          ../../home-manager/presets/tiny.nix
         ];
-        home.packages = import ./packages.nix { inherit pkgs; };
       };
     }
   ];

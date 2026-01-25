@@ -3,6 +3,17 @@ let
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
 in
 {
+  imports = [
+    ../programs/alacritty.nix
+    ../programs/ghostty.nix
+    ../programs/tmux.nix
+    ../programs/wezterm.nix
+  ];
+
+  home.packages = with pkgs; [
+    _1password-cli
+  ];
+
   home.file = {
     ".gitconfig".source = mkOutOfStoreSymlink
       "${config.home.homeDirectory}/dotfiles/.config/git/.gitconfig.darwin";

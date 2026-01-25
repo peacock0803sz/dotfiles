@@ -28,9 +28,8 @@ nixpkgs.lib.nixosSystem {
         imports = [
           ../../home-manager
           ../../home-manager/platforms/nixos.nix
-          ../../home-manager/programs/direnv.nix
+          ../../home-manager/presets/small.nix
         ];
-        home.packages = import ./packages.nix { inherit pkgs; };
       };
     }
   ];

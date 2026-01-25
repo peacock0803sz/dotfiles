@@ -40,7 +40,9 @@
       User = inputs.username;
       WorkingDirectory = "/home/${inputs.username}/notizen";
       ExecStartPre = "+${inputs.pkgs.coreutils}/bin/chown -R ${inputs.username}:nginx /var/www/notizen";
-      ExecStart = "${inputs.pkgs.writeShellScript "notizen-build" ''
+      # flock で重複実行を防止（タイマーとwatchexecの同時トリガー対策）
+      ExecStart = "${inputs.pkgs.flock}/bin/flock -n /tmp/notizen-build.lock ${inputs.pkgs.writeShellScript "notizen-build" ''
+        set -e
         ${inputs.pkgs.gnumake}/bin/make html
         ${inputs.pkgs.rsync}/bin/rsync -av --delete build/html/ /var/www/notizen/
       ''}";
@@ -54,6 +56,19 @@
     timerConfig = {
       OnCalendar = "hourly";
       Persistent = true;
+    };
+  };
+
+  systemd.services.notizen-watch = {
+    description = "Watch notizen source for changes and trigger build";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    serviceConfig = {
+      Type = "simple";
+      User = inputs.username;
+      Restart = "always";
+      RestartSec = 5;
+      ExecStart = "${inputs.pkgs.watchexec}/bin/watchexec -w /home/${inputs.username}/notizen/source --no-vcs-ignore -- sudo systemctl start --no-block notizen-build.service";
     };
   };
 

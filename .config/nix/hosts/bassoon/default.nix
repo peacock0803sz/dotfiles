@@ -10,7 +10,7 @@ let
 in
 nixpkgs.lib.nixosSystem {
   system = system;
-  specialArgs = inputs // { inherit system pkgs; };
+  specialArgs = inputs // { inherit system pkgs username; };
   modules = [
     disko.nixosModules.disko
     nix-monitored.nixosModules.default
@@ -24,6 +24,7 @@ nixpkgs.lib.nixosSystem {
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
+      home-manager.extraSpecialArgs = { inherit pkgs; };
       home-manager.users."${username}" = {
         imports = [
           ../../home-manager

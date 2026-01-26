@@ -34,20 +34,31 @@
 
   # Periodic build and deploy for notizen documentation
   systemd.services.notizen-build = {
-    description = "Build notizen and deploy to web server";
+    description = "Build notizen documentation";
+    wants = [ "notizen-deploy.service" ];
+    before = [ "notizen-deploy.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+      User = inputs.username;
+      WorkingDirectory = "/home/${inputs.username}/notizen";
+      # flock で重複実行を防止（タイマーとwatchexecの同時トリガー対策）
+      ExecStart = "${inputs.pkgs.flock}/bin/flock -n /tmp/notizen-build.lock ${inputs.pkgs.gnumake}/bin/make html";
+    };
+    path = [ inputs.pkgs.bash inputs.pkgs.gnumake  ];
+  };
+
+  systemd.services.notizen-deploy = {
+    description = "Deploy notizen to web server";
+    after = [ "notizen-build.service" ];
+    bindsTo = [ "notizen-build.service" ];
     serviceConfig = {
       Type = "oneshot";
       User = inputs.username;
       WorkingDirectory = "/home/${inputs.username}/notizen";
       ExecStartPre = "+${inputs.pkgs.coreutils}/bin/chown -R ${inputs.username}:nginx /var/www/notizen";
-      # flock で重複実行を防止（タイマーとwatchexecの同時トリガー対策）
-      ExecStart = "${inputs.pkgs.flock}/bin/flock -n /tmp/notizen-build.lock ${inputs.pkgs.writeShellScript "notizen-build" ''
-        set -e
-        ${inputs.pkgs.gnumake}/bin/make html
-        ${inputs.pkgs.rsync}/bin/rsync -av --delete build/html/ /var/www/notizen/
-      ''}";
+      ExecStart = "${inputs.pkgs.rsync}/bin/rsync -av --delete build/html/ /var/www/notizen/";
     };
-    path = [ inputs.pkgs.gnumake inputs.pkgs.rsync ];
+    path = [ inputs.pkgs.rsync ];
   };
 
   systemd.timers.notizen-build = {
@@ -68,7 +79,10 @@
       User = inputs.username;
       Restart = "always";
       RestartSec = 5;
-      ExecStart = "${inputs.pkgs.watchexec}/bin/watchexec -w /home/${inputs.username}/notizen/source --no-vcs-ignore -- sudo systemctl start --no-block notizen-build.service";
+      ExecStart = inputs.pkgs.writeShellScript "notizen-watch" ''
+        ${inputs.pkgs.watchexec}/bin/watchexec -w /home/${inputs.username}/notizen/source --no-vcs-ignore -- \
+            sudo systemctl start --no-block notizen-build.service
+      '';
     };
   };
 

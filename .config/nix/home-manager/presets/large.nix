@@ -2,12 +2,15 @@
   imports = [
     ./small.nix
 
+    ../programs/aibo.nix
     ../programs/claude-code.nix
     ../programs/gemini.nix
     ../programs/neovim.nix
   ];
 
   home.packages = with inputs.pkgs; [
+    devenv
+
     cargo
     go
     nodejs
@@ -38,5 +41,11 @@
 
     pandoc
     vhs
+
+    pinact
+
+    postgresql
+    mariadb
+    sqlite
   ];
 }

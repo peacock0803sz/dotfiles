@@ -22,6 +22,7 @@ nixpkgs.lib.nixosSystem {
     ../../nixos/default.nix
     ../../nixos/desktop.nix
     ../../nixos/notizen.nix
+    ../../nixos/lemonade.nix
 
     ./hardware.nix
     ./disk.nix

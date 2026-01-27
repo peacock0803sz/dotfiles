@@ -42,15 +42,15 @@
       User = inputs.username;
       WorkingDirectory = "/home/${inputs.username}/notizen";
       # flock で重複実行を防止（タイマーとwatchexecの同時トリガー対策）
-      ExecStart = "${inputs.pkgs.flock}/bin/flock -n /tmp/notizen-build.lock ${inputs.pkgs.gnumake}/bin/make html";
+      ExecStart = "${inputs.pkgs.flock}/bin/flock -n /tmp/notizen-build.lock -c 'source .venv/bin/activate.fish && ${inputs.pkgs.gnumake}/bin/make html'";
     };
-    path = [ inputs.pkgs.bash inputs.pkgs.gnumake  ];
+    path = [ inputs.pkgs.bash inputs.pkgs.gnumake ];
   };
 
   systemd.services.notizen-deploy = {
     description = "Deploy notizen to web server";
     after = [ "notizen-build.service" ];
-    bindsTo = [ "notizen-build.service" ];
+    requires = [ "notizen-build.service" ];
     serviceConfig = {
       Type = "oneshot";
       User = inputs.username;

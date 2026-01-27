@@ -5,7 +5,6 @@
 
   home.packages = with inputs.pkgs; [
     nur.repos.peacock0803sz.tfcmt
-    nur.repos.peacock0803sz.gwq
 
     kubectl
     terraform

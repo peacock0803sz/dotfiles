@@ -10,6 +10,7 @@
 
   home.packages = with inputs.pkgs; [
     devenv
+    nur.repos.peacock0803sz.gwq
 
     cargo
     go

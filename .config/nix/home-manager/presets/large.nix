@@ -17,6 +17,8 @@
     ruff
     typescript
 
+    llm-agents.spec-kit
+
     astro-language-server
     bash-language-server
     dockerfile-language-server

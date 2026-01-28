@@ -37,7 +37,17 @@
       upgrade = true;
       cleanup = "uninstall";
     };
-    casks = inputs.brewCasks;
+    casks = [
+      "1password"
+      "adobe-creative-cloud"
+      "font-udev-gothic-nf"
+      "font-jetbrains-mono-nerd-font"
+      "google-drive"
+      "karabiner-elements"
+      "tailscale-app"
+      "vivaldi"
+      "zoom"
+    ];
   };
   launchd.labelPrefix = "net.p3ac0ck.nix";
 

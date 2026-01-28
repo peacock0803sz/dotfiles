@@ -10,19 +10,18 @@ let
     inherit system;
     config.allowUnfree = true;
     overlays = [
+      inputs.brew-nix.overlays.default
       inputs.neovim-overlay.overlays.default
       inputs.nur.overlays.default
       inputs.llm-agents.overlays.default
     ];
   };
-
-  brewCasks = import ./brewCasks.nix;
 in
 inputs.nix-darwin.lib.darwinSystem {
   modules = [
     inputs.home-manager.darwinModules.home-manager
     inputs.nix-index-database.darwinModules.nix-index
-    (import ../../nix-darwin { inherit system username hostName pkgs brewCasks nix-monitored; })
+    (import ../../nix-darwin { inherit system username hostName pkgs nix-monitored; })
     (import ../../nix-darwin/lemonade.nix { inherit pkgs; })
     {
       home-manager.backupFileExtension = "bk.nix";

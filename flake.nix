@@ -15,6 +15,14 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    brew-nix = {
+      url = "github:BatteredBunny/brew-nix";
+      inputs.brew-api.follows = "brew-api";
+    };
+    brew-api = {
+      url = "github:BatteredBunny/brew-api";
+      flake = false;
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     disko = {
       url = "github:nix-community/disko/latest";

@@ -6,4 +6,5 @@
       hash = "sha256-6w8+zIrXaOQZLF71VIiU55xMsrzupnzkGDUmAefpMqg=";
     }).outPath + "/themes";
   };
+  home.packages = if pkgs.stdenv.isDarwin then [ pkgs.brewCasks.ghostty ] else [ pkgs.ghostty ];
 }

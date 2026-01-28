@@ -11,6 +11,7 @@ let
     config.allowUnfree = true;
     overlays = [
       inputs.neovim-overlay.overlays.default
+      inputs.nur.overlays.default
       inputs.llm-agents.overlays.default
     ];
   };

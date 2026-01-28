@@ -28,7 +28,7 @@ inputs.nix-darwin.lib.darwinSystem {
     (import ../../nix-darwin/notizen.nix { inherit username; })
     {
       home-manager.backupFileExtension = "bk.nix";
-      home-manager.extraSpecialArgs = { inherit pkgs mcp-servers-nix; };
+      home-manager.extraSpecialArgs = { inherit pkgs hostName mcp-servers-nix; };
       home-manager.users.${username} = {
         imports = [
           ./home.nix

@@ -1,4 +1,5 @@
-{ pkgs }: {
+{ pkgs, hostName }:
+if hostName == "arpeggio" then {
   command = "${pkgs.lib.getExe' pkgs.nodejs "npx"}";
   args = [
     "mcp-remote"
@@ -7,4 +8,4 @@
     "Authorization:Bearer \${WRIKE_API_TOKEN}"
   ];
   passwordCommand = "echo WRIKE_API_TOKEN=$WRIKE_API_TOKEN";
-}
+} else { enable = false; }

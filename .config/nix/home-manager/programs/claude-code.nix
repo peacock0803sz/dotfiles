@@ -1,4 +1,4 @@
-{ pkgs, config, mcp-servers-nix, ... }:
+{ pkgs, config, hostName, mcp-servers-nix, ... }:
 let
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
   homeDirectory = config.home.homeDirectory;
@@ -60,7 +60,7 @@ in
     };
     mcpServers = mcp-servers // {
       # zen = (import ./mcp-servers/zen { inherit pkgs; });
-      wrike = (import ./mcp-servers/wrike { inherit pkgs; });
+      wrike = (import ./mcp-servers/wrike { inherit pkgs hostName; });
     };
   };
 }

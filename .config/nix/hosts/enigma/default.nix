@@ -3,6 +3,7 @@ let
   inherit (inputs) nixpkgs mcp-servers-nix;
   username = "peacock";
   system = "x86_64-linux";
+  hostName = "enigma";
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
@@ -33,7 +34,7 @@ nixpkgs.lib.nixosSystem {
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.extraSpecialArgs = { inherit pkgs mcp-servers-nix; };
+      home-manager.extraSpecialArgs = { inherit pkgs hostName mcp-servers-nix; };
       home-manager.users."${username}" = {
         imports = [
           ../../home-manager

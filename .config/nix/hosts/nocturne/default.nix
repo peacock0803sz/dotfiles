@@ -25,7 +25,7 @@ inputs.nix-darwin.lib.darwinSystem {
     (import ../../nix-darwin/lemonade.nix { inherit pkgs; })
     {
       home-manager.backupFileExtension = "bk.nix";
-      home-manager.extraSpecialArgs = { inherit pkgs mcp-servers-nix; };
+      home-manager.extraSpecialArgs = { inherit pkgs hostName mcp-servers-nix; };
       home-manager.users.${username} = {
         imports = [
           ./home.nix

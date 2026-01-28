@@ -17,7 +17,10 @@ in
     enable = true;
     executable = playwrightExecutable;
   };
-  github.enable = true;
+  github = {
+    enable = true;
+    passwordCommand = "echo \"GITHUB_PERSONAL_ACCESS_TOKEN=$(gh auth token)\"";
+  };
   terraform.enable = true;
   nixos.enable = true;
   time = {

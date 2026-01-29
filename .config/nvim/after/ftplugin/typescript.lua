@@ -1,5 +1,5 @@
 local servers = require("lsp.nodejs")
-vim.lsp.config("ts_ls", servers.ts_ls)
+vim.lsp.config("vtsls", servers.vtsls)
 vim.lsp.config("cssls", servers.cssls)
 
 -- local ok, util = pcall(require, "lspconfig.util")

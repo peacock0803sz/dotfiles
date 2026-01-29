@@ -3,9 +3,9 @@ if not ok then
   return
 end
 
-
 ---@type { [string]: vim.lsp.Config }
 local servers = {
+  cssls = { filetypes = { "astro", "css", "scss", "less", "vue" } },
   ts_ls = {
     cmd = { "typescript-language-server", "--stdio" },
     filetypes = { "astro", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
@@ -36,6 +36,19 @@ local servers = {
     },
     single_file_support = true,
   },
-  cssls = { filetypes = { "astro", "css", "scss", "less", "vue" } },
+  vtsls = {
+    settings = {
+      tsserver = {
+        globalPlugins = {
+          {
+            name = "@vue/typescript-plugin",
+            location = vim.env.HOME .. "/.nix-profile/lib/node_modules/@vue/language-server",
+            languages = { "vue" },
+            configNamespace = "typescript",
+          },
+        },
+      },
+    },
+  },
 }
 return servers

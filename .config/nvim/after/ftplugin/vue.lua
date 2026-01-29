@@ -1,12 +1,12 @@
 local servers = require("lsp.nodejs")
-vim.lsp.config("ts_ls", servers.ts_ls)
+vim.lsp.config("vtsls", servers.vtsls)
 vim.lsp.config("cssls", servers.cssls)
 
 ---@type vim.lsp.Config
 local vue_ls = {
   on_init = function(client)
     client.handlers["tsserver/request"] = function(_, result, context)
-      local ts_clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "ts_ls" })
+      local ts_clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
       -- local vtsls_clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
       local clients = {}
 
@@ -15,7 +15,7 @@ local vue_ls = {
 
       if #clients == 0 then
         vim.notify(
-          "Could not find `vtsls` or `ts_ls` lsp client, `vue_ls` would not work without it.",
+          "Could not find `vtsls` or `vtsls` lsp client, `vue_ls` would not work without it.",
           vim.log.levels.ERROR
         )
         return
@@ -42,4 +42,4 @@ local vue_ls = {
 }
 vim.lsp.config("vue_ls", vue_ls)
 
-vim.lsp.enable({ "cssls", "tailwindcss", "ts_ls", "unocss", "vue_ls" })
+vim.lsp.enable({ "cssls", "tailwindcss", "vtsls", "unocss", "vue_ls" })

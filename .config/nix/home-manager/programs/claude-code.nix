@@ -8,6 +8,7 @@ in
 {
   home.packages = with pkgs; [
     llm-agents.ccusage
+    llm-agents.claude-code-acp
   ];
 
   home.file = {

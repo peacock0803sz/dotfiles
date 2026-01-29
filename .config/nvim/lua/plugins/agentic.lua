@@ -9,7 +9,7 @@ local config = {
   -- these are just suggested keymaps; customize as desired
   keys = {
     {
-      "<C-\\>",
+      "<Space>at",
       function()
         require("agentic").toggle()
       end,
@@ -17,7 +17,7 @@ local config = {
       desc = "Toggle Agentic Chat",
     },
     {
-      "<C-'>",
+      "<Space>as",
       function()
         require("agentic").add_selection_or_file_to_context()
       end,
@@ -25,7 +25,7 @@ local config = {
       desc = "Add file or selection to Agentic to Context",
     },
     {
-      "<C-,>",
+      "<Space>an",
       function()
         require("agentic").new_session()
       end,

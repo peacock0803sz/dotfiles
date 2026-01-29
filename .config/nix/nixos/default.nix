@@ -108,9 +108,11 @@
     cmake
     gnumake
     git
+    nix-ld
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
   ];
+  environment.etc."ssl/cert.pem".source = "/etc/ssl/certs/ca-certificates.crt";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -138,7 +140,7 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

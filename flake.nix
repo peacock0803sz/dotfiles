@@ -37,10 +37,10 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    vim-overlay = {
-      url = "github:kawarimidoll/vim-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # vim-overlay = {
+    #   url = "github:kawarimidoll/vim-overlay";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     neovim-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";

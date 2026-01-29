@@ -13,7 +13,6 @@ let
       inputs.brew-nix.overlays.default
       inputs.nur.overlays.default
       inputs.neovim-overlay.overlays.default
-      inputs.vim-overlay.overlays.default
       inputs.llm-agents.overlays.default
     ];
   };

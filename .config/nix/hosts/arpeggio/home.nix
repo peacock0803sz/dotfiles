@@ -6,6 +6,7 @@ in
   home.packages = with pkgs; [
     brewCasks.figma
     brewCasks.wrike
+    brewCasks.appvolume
 
     (brewCasks."google-chrome@canary".overrideAttrs (oldAttrs: {
       src = pkgs.fetchurl {

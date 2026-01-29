@@ -58,7 +58,14 @@ in
         ];
       };
 
+      enabledPlugins = {
+        "gopls-lsp@claude-plugins-official" = true;
+        "lua-lsp@claude-plugins-official" = true;
+        "pyright-lsp@claude-plugins-official" = true;
+        "typescript-lsp@claude-plugins-official" = true;
+      };
     };
+
     mcpServers = mcp-servers // (if hostName == "arpeggio" then {
       wrike = (import ./mcp-servers/wrike { inherit pkgs; });
     } else { });

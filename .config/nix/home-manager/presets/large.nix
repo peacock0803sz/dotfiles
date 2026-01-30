@@ -46,6 +46,7 @@
     vhs
 
     pinact
+    cloudflared
 
     postgresql
     mariadb

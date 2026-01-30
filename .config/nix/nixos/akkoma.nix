@@ -19,7 +19,7 @@ in
         ":instance" = {
           name = "Peacock's Social";
           description = "Personal Akkoma instance";
-          email = "admin@${domain}";
+          email = "me@${domain}";
           registrations_open = false;
           invites_enabled = false;
           federating = true;
@@ -38,7 +38,7 @@ in
         # Upload configuration
         "Pleroma.Upload" = {
           base_url = "https://${domain}/media";
-          uploader = "Pleroma.Uploaders.Local";
+          uploader = (pkgs.formats.elixirConf { }).lib.mkRaw "Pleroma.Uploaders.Local";
         };
 
         "Pleroma.Uploaders.Local" = {

@@ -22,7 +22,8 @@ nixpkgs.lib.nixosSystem {
     inputs.nix-index-database.nixosModules.nix-index
     inputs.nix-monitored.nixosModules.default
     ../../nixos/default.nix
-    ../../nixos/desktop.nix
+    # ../../nixos/desktop.nix
+    ../../nixos/akkoma.nix
     ../../nixos/notizen.nix
     ../../nixos/lemonade.nix
 

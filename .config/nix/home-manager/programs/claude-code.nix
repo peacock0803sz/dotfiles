@@ -67,6 +67,7 @@ in
     };
 
     mcpServers = mcp-servers // (if hostName == "arpeggio" then {
+      esa = (import ./mcp-servers/esa { inherit pkgs; });
       wrike = (import ./mcp-servers/wrike { inherit pkgs; });
     } else { });
   };

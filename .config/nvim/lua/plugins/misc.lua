@@ -1,6 +1,7 @@
 ---@type LazySpec[]
 local spec = {
   { "https://github.com/vim-jp/vimdoc-ja" },
+  { "https://github.com/y0za/vim-reading-vimrc" },
   { "https://github.com/neovim/nvim-lspconfig" },
   { "https://github.com/nvim-lua/plenary.nvim", lazy = true },
   { "https://github.com/lambdalisue/vim-nerdfont" },

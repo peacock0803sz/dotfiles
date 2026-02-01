@@ -1,12 +1,4 @@
-{ pkgs, enableCodex, ... }:
-let
-  # macOS (darwin) ではシステムの Chrome を使用、NixOS では nixpkgs の chromium を使用
-  playwrightExecutable =
-    if pkgs.stdenv.isDarwin
-    then "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-    else "${pkgs.chromium}/bin/chromium";
-in
-{
+{ pkgs, enableCodex, ... }: {
   codex.enable = enableCodex;
   serena = {
     enable = true;
@@ -15,7 +7,11 @@ in
   context7.enable = true;
   playwright = {
     enable = true;
-    executable = playwrightExecutable;
+    # macOS (darwin) ではシステムの Chrome を使用、NixOS では nixpkgs の chromium を使用
+    executable =
+      if pkgs.stdenv.isDarwin
+      then "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+      else "${pkgs.chromium}/bin/chromium";
   };
   github = {
     enable = true;

@@ -1,4 +1,4 @@
-{ ... }@inputs: {
+{ pkgs, ... }: {
   imports = [
     ./tiny.nix
 
@@ -6,7 +6,7 @@
     ../programs/lnav.nix
   ];
 
-  home.packages = with inputs.pkgs; [
+  home.packages = with pkgs; [
     yt-dlp
     ffmpeg
     imagemagick

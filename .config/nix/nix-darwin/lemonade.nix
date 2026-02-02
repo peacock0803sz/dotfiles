@@ -1,4 +1,4 @@
-{ ... }@inputs: {
+{ pkgs, ... }: {
   launchd.user.agents.lemonade = {
     serviceConfig = {
       EnvironmentVariables = {
@@ -6,7 +6,7 @@
         LC_ALL = "ja_JP.UTF-8";
       };
       ProgramArguments = [
-        "${inputs.pkgs.lemonade}/bin/lemonade"
+        "${pkgs.lemonade}/bin/lemonade"
         "server"
         "--allow=0.0.0.0/0"
       ];

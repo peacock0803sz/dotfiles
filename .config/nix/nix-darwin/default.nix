@@ -1,4 +1,4 @@
-{ ... }@inputs: {
+{ pkgs, system, username, hostName, nix-monitored, ... }: {
   nix = {
     enable = true;
     gc = {
@@ -6,10 +6,10 @@
       options = "--delete-older-than 7d";
     };
     optimise.automatic = true;
-    package = inputs.nix-monitored.packages.${inputs.system}.default;
+    package = nix-monitored.packages.${system}.default;
     settings = {
       experimental-features = "nix-command flakes";
-      trusted-users = [ "root" "${inputs.username}" ];
+      trusted-users = [ "root" "${username}" ];
       extra-substituters = [ "https://cache.numtide.com" ];
       extra-trusted-public-keys = [
         "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
@@ -18,15 +18,15 @@
   };
 
   nixpkgs = {
-    hostPlatform = inputs.system;
+    hostPlatform = system;
     config.allowUnfree = true;
   };
-  users.users.${inputs.username} = {
-    home = "/Users/${inputs.username}";
-    shell = inputs.pkgs.fish;
+  users.users.${username} = {
+    home = "/Users/${username}";
+    shell = pkgs.fish;
   };
   environment = {
-    shells = [ inputs.pkgs.fish ];
+    shells = [ pkgs.fish ];
   };
   programs.fish.enable = true;
 
@@ -51,13 +51,13 @@
   };
   launchd.labelPrefix = "net.p3ac0ck.nix";
 
-  networking.hostName = inputs.hostName;
+  networking.hostName = hostName;
   system = {
     stateVersion = 5;
 
-    primaryUser = inputs.username;
+    primaryUser = username;
     activationScripts.extraActivation.text = ''
-      chsh -s /Users/${inputs.username}/.nix-profile/bin/fish ${inputs.username}
+      chsh -s /Users/${username}/.nix-profile/bin/fish ${username}
     '';
     # + nixpkgs.lib.optionalString (
     #  nixpkgs.stdenv.isAarch64 ''softwareupdate --install-rosetta --agree-to-license''
@@ -88,7 +88,7 @@
 
   security = {
     sudo.extraConfig = ''
-      ${inputs.username} ALL=(ALL) NOPASSWD: ALL
+      ${username} ALL=(ALL) NOPASSWD: ALL
     '';
     pam.services.sudo_local.touchIdAuth = true;
   };

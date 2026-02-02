@@ -18,14 +18,16 @@ let
   };
 in
 inputs.nix-darwin.lib.darwinSystem {
+  specialArgs = { inherit system username hostName pkgs nix-monitored mcp-servers-nix; };
   modules = [
     inputs.home-manager.darwinModules.home-manager
     inputs.nix-index-database.darwinModules.nix-index
-    (import ../../nix-darwin { inherit system username hostName pkgs nix-monitored; })
-    (import ../../nix-darwin/lemonade.nix { inherit pkgs; })
+    ../../nix-darwin
+    ../../nix-darwin/lemonade.nix
     {
       home-manager.backupFileExtension = "bk.nix";
-      home-manager.extraSpecialArgs = { inherit pkgs hostName mcp-servers-nix; };
+      home-manager.useGlobalPkgs = true;
+      home-manager.extraSpecialArgs = { inherit hostName mcp-servers-nix; };
       home-manager.users.${username} = {
         imports = [
           ./home.nix
@@ -33,7 +35,6 @@ inputs.nix-darwin.lib.darwinSystem {
           ../../home-manager/platforms/darwin.nix
           ../../home-manager/presets/huge.nix
         ];
-
       };
     }
   ];

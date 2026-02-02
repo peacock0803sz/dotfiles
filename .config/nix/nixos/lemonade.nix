@@ -1,4 +1,4 @@
-{ ... }@inputs:
+{ pkgs, ... }@inputs:
 {
   systemd.services.lemonade = {
     description = "Lemonade clipboard server";
@@ -11,7 +11,7 @@
         "LANG=ja_JP.UTF-8"
         "LC_ALL=ja_JP.UTF-8"
       ];
-      ExecStart = "${inputs.pkgs.lemonade}/bin/lemonade server --allow=0.0.0.0/0";
+      ExecStart = "${pkgs.lemonade}/bin/lemonade server --allow=0.0.0.0/0";
       Restart = "always";
       RestartSec = 5;
       StandardOutput = "append:/tmp/lemonade.out.log";

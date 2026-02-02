@@ -1,4 +1,4 @@
-{ ... }@inputs: {
+{ pkgs, ... }: {
   imports = [
     ./small.nix
 
@@ -8,7 +8,7 @@
     ../programs/neovim.nix
   ];
 
-  home.packages = with inputs.pkgs; [
+  home.packages = with pkgs; [
     devenv
     nur.repos.peacock0803sz.gwq
 

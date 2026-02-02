@@ -1,10 +1,10 @@
-{ ... }@inputs:
+{ pkgs, config, ... }:
 let
-  mkOutOfStoreSymlink = inputs.config.lib.file.mkOutOfStoreSymlink;
-  homeDirectory = inputs.config.home.homeDirectory;
+  mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
+  homeDirectory = config.home.homeDirectory;
 in
 {
-  home.packages = with inputs.pkgs; [
+  home.packages = with pkgs; [
     lnav
   ];
 

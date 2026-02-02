@@ -1,10 +1,10 @@
-{ ... }@inputs: {
+{ pkgs, ... }: {
   imports = [
     ../programs/bat.nix
     ../programs/fish.nix
   ];
 
-  home.packages = with inputs.pkgs; [
+  home.packages = with pkgs; [
     cachix
     comma
     eza

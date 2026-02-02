@@ -1,5 +1,5 @@
-{ ... }@inputs: {
-  home.packages = with inputs.pkgs; [
+{ pkgs, ... }: {
+  home.packages = with pkgs; [
     fish
     fishPlugins.bass
     fishPlugins.tide

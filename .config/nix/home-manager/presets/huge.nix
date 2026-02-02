@@ -1,9 +1,9 @@
-{ ... }@inputs: {
+{ pkgs, ... }: {
   imports = [
     ./large.nix
   ];
 
-  home.packages = with inputs.pkgs; [
+  home.packages = with pkgs; [
     nur.repos.peacock0803sz.tfcmt
 
     kubectl

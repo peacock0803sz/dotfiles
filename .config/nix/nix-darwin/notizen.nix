@@ -1,21 +1,21 @@
-{ ... }@inputs: {
+{ username, ... }: {
   launchd.user.agents = {
     notizen = {
       serviceConfig = {
         EnvironmentVariables = {
-          HOME = "/Users/${inputs.username}";
+          HOME = "/Users/${username}";
           NOTIZEN_REMOTE_HOST = "enigma.tail2121a.ts.net";
-          NOTIZEN_REMOTE_USER = "${inputs.username}";
-          NOTIZEN_REMOTE_KEY = "/Users/${inputs.username}/.ssh/id_ed25519";
-          NOTIZEN_REMOTE_PATH = "/home/${inputs.username}/notizen/source/";
+          NOTIZEN_REMOTE_USER = "${username}";
+          NOTIZEN_REMOTE_KEY = "/Users/${username}/.ssh/id_ed25519";
+          NOTIZEN_REMOTE_PATH = "/home/${username}/notizen/source/";
         };
         ProgramArguments = [
-          "/Users/${inputs.username}/notizen/.venv/bin/notizen"
+          "/Users/${username}/notizen/.venv/bin/notizen"
           "sync"
-          "--src=/Users/${inputs.username}/notizen/source"
+          "--src=/Users/${username}/notizen/source"
         ];
         StartInterval = 300; # every 5 minutes
-        WorkingDirectory = "/Users/${inputs.username}/notizen";
+        WorkingDirectory = "/Users/${username}/notizen";
         StandardErrorPath = "/tmp/notizen.err.log";
         StandardOutPath = "/tmp/notizen.out.log";
       };

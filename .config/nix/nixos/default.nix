@@ -42,7 +42,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     enable = true;
-    font = "UDEV Gothic NF";
+    font = "udev-gothic-nf";
     # keyMap = "us";
     useXkbConfig = true; # use xkb.options in tty.
   };
@@ -115,6 +115,11 @@
     wget
   ];
   environment.etc."ssl/cert.pem".source = "/etc/ssl/certs/ca-certificates.crt";
+
+  fonts.packages = with pkgs; [
+    jetbrains-mono
+    udev-gothic-nf
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

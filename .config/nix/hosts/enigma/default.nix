@@ -22,14 +22,12 @@ nixpkgs.lib.nixosSystem {
     inputs.nix-index-database.nixosModules.nix-index
     inputs.nix-monitored.nixosModules.default
     ../../nixos/default.nix
-    # ../../nixos/desktop.nix
     ../../nixos/akkoma.nix
     ../../nixos/notizen.nix
     ../../nixos/lemonade.nix
 
     ./hardware.nix
     ./disk.nix
-    ./nixos.nix
 
     inputs.home-manager.nixosModules.home-manager
     {

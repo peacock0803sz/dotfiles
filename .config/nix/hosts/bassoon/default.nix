@@ -17,9 +17,9 @@ nixpkgs.lib.nixosSystem {
     inputs.nix-monitored.nixosModules.default
     inputs.nixos-hardware.nixosModules.gmktec-nucbox-g3-plus
     ../../nixos
+    ../../nixos/samba.nix
     ./hardware.nix
     ./disk.nix
-    ./nixos.nix
 
     inputs.home-manager.nixosModules.home-manager
     {

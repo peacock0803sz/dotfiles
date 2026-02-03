@@ -6,7 +6,6 @@ in
   imports = [
     ../programs/alacritty.nix
     ../programs/ghostty.nix
-    ../programs/tmux.nix
     ../programs/wezterm.nix
   ];
 

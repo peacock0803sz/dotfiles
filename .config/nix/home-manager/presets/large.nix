@@ -6,6 +6,7 @@
     ../programs/claude-code.nix
     ../programs/gemini.nix
     ../programs/neovim.nix
+    ../programs/tmux.nix
   ];
 
   home.packages = with pkgs; [

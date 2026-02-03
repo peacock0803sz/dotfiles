@@ -11,6 +11,6 @@ in
   ];
 
   home.file = {
-    ".tmux.conf".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.tmux.conf";
+    ".tmux.conf".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/tmux/conf";
   };
 }

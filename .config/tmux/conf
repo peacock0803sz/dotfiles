@@ -1,4 +1,4 @@
-set -g default-shell ~/.nix-profile/bin/fish
+# vim: ft=tmux
 set -g default-terminal "xterm-256color"
 set -sg escape-time 10
 

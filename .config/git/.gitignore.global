@@ -194,10 +194,6 @@ flycheck_*.el
 *.git-worktree
 *.git-worktrees/
 
-## terraform lock
-**/.terraform.lock.hcl
-**/.terraform-relay.yml
-
 .direnv/
 shell.nix
 result

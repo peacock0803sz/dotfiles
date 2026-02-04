@@ -37,7 +37,7 @@ in
     (brewCasks.google-chrome.overrideAttrs (oldAttrs: {
       src = pkgs.fetchurl {
         url = builtins.head oldAttrs.src.urls;
-        hash = "sha256-+1bfrMyoEnKTYUOpx19c20AAY/cOTN118wW9syu2IAE=";
+        hash = "sha256-P1TxSLJRp8hmnHWPk3dLR4frHTWS9JOS+kAVxVEyaWA=";
       };
     }))
     (brewCasks."google-chrome@beta".overrideAttrs (oldAttrs: {

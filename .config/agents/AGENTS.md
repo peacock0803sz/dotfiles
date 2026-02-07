@@ -24,6 +24,7 @@
 
 ## 利用可能なスキル
 
-- `serena-workflow` - Serena MCPを使った実装作業フロー (メモリ管理/シンボル操作)
-- `git-commit` - コミット作成 (Emoji Prefix対応)
-- `archive-plan` - 計画ファイルを notizen/Agents にアーカイブ
+- `commit` - コミット作成 (Emoji Prefix対応)
+- `ghpr` - GitHub Pull Request 作成
+- `post-plan` - 計画ファイルを notizen/Agents にアーカイブ
+- `serena` - Serena MCPを使った実装作業フロー (メモリ管理/シンボル操作)

@@ -40,6 +40,8 @@ nixpkgs.lib.nixosSystem {
           ../../home-manager
           ../../home-manager/platforms/nixos.nix
           ../../home-manager/presets/large.nix
+          inputs.agent-skills.homeManagerModules.upstream
+          inputs.agent-skills.homeManagerModules.config
         ];
       };
     }

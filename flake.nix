@@ -50,6 +50,7 @@
       url = "github:natsukium/mcp-servers-nix";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+    agent-skills.url = "path:./.config/nix/home-manager/programs/agent-skills";
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
       # inputs.nixpkgs.follows = "nixpkgs";

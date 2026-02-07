@@ -3,7 +3,7 @@
     enable = true;
     gc = {
       automatic = true;
-      options = "--delete-older-than 7d";
+      options = "--delete-older-than 1d";
     };
     optimise.automatic = true;
     package = nix-monitored.packages.${system}.default;

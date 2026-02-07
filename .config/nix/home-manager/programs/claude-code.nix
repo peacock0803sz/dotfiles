@@ -12,9 +12,8 @@ in
   ];
 
   home.file = {
-    ".claude/skills".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/skills";
+    # ".claude/skills".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/skills";
     ".claude/rules".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/rules";
-    ".claude/commands".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/commands";
   };
 
   programs.claude-code = {
@@ -55,6 +54,7 @@ in
           "Bash(ncat -l -:*)"
           "Bash(netcat -l -:*)"
           "Bash(docker -:*)"
+          "Bash(git -C -:*)"
         ];
       };
 

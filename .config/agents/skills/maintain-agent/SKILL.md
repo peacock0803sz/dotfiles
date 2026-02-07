@@ -1,3 +1,8 @@
+---
+name: maintain-agent
+description: Claude Code設定ファイルのメンテナンス。コンテキスト最適化原則に基づく構成レビュー。
+---
+
 # Claude Code Configuration Maintenance Guide
 
 When creating or modifying Claude Code configuration files, follow these context-optimization principles.

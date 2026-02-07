@@ -1,5 +1,5 @@
 ---
-name: github-pr
+name: ghpr
 description: GitHub Pull Request 作成ワークフロー
 ---
 

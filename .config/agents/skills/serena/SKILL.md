@@ -1,5 +1,5 @@
 ---
-name: serena-workflow
+name: serena
 description: Serena MCPを使った実装作業フロー。コード実装/修正タスク時に自動適用。メモリ管理とシンボルレベル操作を含む。
 ---
 

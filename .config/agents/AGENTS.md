@@ -26,4 +26,4 @@
 
 - `serena-workflow` - Serena MCPを使った実装作業フロー (メモリ管理/シンボル操作)
 - `git-commit` - コミット作成 (Emoji Prefix対応)
-- `archive-plan` - 計画ファイルを notizen/Agents にアーカイブ (詳細: workflows/archive-plan.md)
+- `archive-plan` - 計画ファイルを notizen/Agents にアーカイブ

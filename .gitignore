@@ -7,5 +7,6 @@ deno.lock
 # nix
 result
 .config/direnv
+.config/agents/skills/
 
 .tmp/

@@ -30,7 +30,7 @@
             subdir = "skills";
           };
           local = {
-            path = "${config.home.homeDirectory}/dotfiles/.config/agents/skills";
+            path = "${config.home.homeDirectory}/dotfiles/.config/agents/local-skills";
           };
         };
 

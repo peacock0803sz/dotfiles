@@ -29,10 +29,8 @@ bind -r -T prefix K resize-pane -U 5
 bind -T prefix q   kill-window
 bind -T prefix s   run-shell '~/dotfiles/bin/tmux-smart-split new-window'
 bind -n M-s        run-shell '~/dotfiles/bin/tmux-smart-split new-window'
-bind -T prefix n   next-window
-bind -T prefix p   previous-window
-bind -n M-j        next-window
-bind -n M-k        previous-window
+bind -n M-J        next-window
+bind -n M-K        previous-window
 
 bind -T prefix v run-shell '~/dotfiles/bin/tmux-smart-split split-h'
 bind -T prefix x run-shell '~/dotfiles/bin/tmux-smart-split split-v'
@@ -45,15 +43,15 @@ bind -T prefix X split-window -fv -c "#{pane_current_path}"
 bind -T prefix Q kill-session
 bind -T prefix S new-session -c '~/'
 bind -n M-S new-session -c '~/'
-bind -n M-l switch-client -n
-bind -n M-h switch-client -p
+bind -n M-L switch-client -n
+bind -n M-H switch-client -p
 
 ## Copy mode
 bind-key -T copy-mode-vi v send-keys -X begin-selection
 bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
 
 ## editprompt
-bind -n M-E run-shell 'tmux display-popup -E -d "#{pane_current_path}" -w 70% -h 30% "editprompt open --editor nvim --target-pane #{pane_id}"'
+# bind -n M-E run-shell 'tmux display-popup -E -d "#{pane_current_path}" -w 70% -h 30% "editprompt open --editor nvim --target-pane #{pane_id}"'
 # }}}
 
 # Catppuccin theme {{{

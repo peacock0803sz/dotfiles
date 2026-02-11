@@ -26,7 +26,6 @@ in
     brewCasks.keycastr
     brewCasks.linear-linear
     brewCasks.marta
-    brewCasks.musescore
     brewCasks.obs
     brewCasks.orbstack
     brewCasks.raycast

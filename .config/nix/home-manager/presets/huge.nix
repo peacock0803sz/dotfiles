@@ -14,7 +14,7 @@
 
     act
     awscli2
-    firebase-tools
+    # firebase-tools
     (google-cloud-sdk.withExtraComponents [
       google-cloud-sdk.components.alpha
       google-cloud-sdk.components.beta

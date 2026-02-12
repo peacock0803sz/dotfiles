@@ -4,6 +4,7 @@
 
     ../programs/aibo.nix
     ../programs/claude-code.nix
+    ../programs/codex.nix
     ../programs/gemini.nix
     ../programs/neovim.nix
     ../programs/tmux.nix

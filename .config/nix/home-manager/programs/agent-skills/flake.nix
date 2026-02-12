@@ -50,6 +50,10 @@
             dest = ".claude/skills";
             structure = "link";
           };
+          codex = {
+            dest = ".codex/skills";
+            structure = "link";
+          };
         };
       };
     };

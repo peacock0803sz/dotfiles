@@ -2,6 +2,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: 0 16 * * * # everyday 01:00 JST
+defaults:
+  run:
+    shell: bash
 
 jobs:
   update-nix:
@@ -16,11 +19,9 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: update-flake
-        shell: bash
         run: nix flake update
 
       - name: git-commit
-        shell: bash
         env:
           GIT_AUTHOR_NAME: "peaock0803sz"
           GIT_AUTHOR_EMAIL: "33555487+peacock0803sz@users.noreply.github.com"

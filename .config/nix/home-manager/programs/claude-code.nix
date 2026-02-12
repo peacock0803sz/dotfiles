@@ -12,7 +12,6 @@ in
   ];
 
   home.file = {
-    # ".claude/skills".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/skills";
     ".claude/rules".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/rules";
   };
 
@@ -22,7 +21,7 @@ in
     memory.source = ../../../agents/AGENTS.md;
 
     settings = {
-      theme = "dark";
+      theme = "light";
       autoUpdates = false;
       includeCoAuthoredBy = false;
       autoCompactEnabled = false;

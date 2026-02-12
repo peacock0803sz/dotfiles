@@ -18,8 +18,10 @@ jobs:
           nix_path: nixpkgs=channel:nixpkgs-unstable
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: update-flake
-        run: nix flake update
+      - name: update-flakes
+        run: |
+          nix flake update
+          cd ./.config/nix/home-manager/programs/agent-skills/ && nix flake update
 
       - name: git-commit
         env:

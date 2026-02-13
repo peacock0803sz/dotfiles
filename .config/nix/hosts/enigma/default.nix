@@ -7,6 +7,7 @@ let
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
+    config.cudaSupport = true;
     overlays = [
       inputs.neovim-overlay.overlays.default
       inputs.nur.overlays.default

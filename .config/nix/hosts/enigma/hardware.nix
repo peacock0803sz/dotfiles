@@ -9,9 +9,42 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
+  # NVIDIA CUDA {{{
+  environment.sessionVariables = {
+    LD_LIBRARY_PATH = "/run/opengl-driver/lib";
+    TORCH_CUDA_ARCH_LIST = "6.1";
+    CUDA_HOME = "${pkgs.cudaPackages.cudatoolkit}";
+  };
+  environment.systemPackages = with pkgs; [
+    cudaPackages.cudatoolkit
+    cudaPackages.cudnn
+    cmake
+    ninja
+    gcc
+    lshw
+    pciutils
+  ];
+
+  hardware.graphics.enable = true;
+  hardware.nvidia.open = false;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.nvidia.prime = {
+    sync.enable = true;
+    nvidiaBusId = "PCI:1:0:0";
+    intelBusId = "PCI:0:2:0";
+  };
+
+  nix.settings = {
+    substituters = [ "https://cache.nixos-cuda.org" ];
+    trusted-public-keys = [ "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=" ];
+  };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+  # }}}
+
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   swapDevices = [ ];

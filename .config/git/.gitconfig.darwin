@@ -18,8 +18,8 @@
 	helper = 
 	helper = !/Users/peacock/.nix-profile/bin/gh auth git-credential
 
-[url "git@github.com:groove-x/"]
-	insteadOf = https://github.com/groove-x/
+# [url "git@github.com:groove-x/"]
+# 	insteadOf = https://github.com/groove-x/
 
 [includeIf "gitdir:~/ghq/github.com/groove-x/"]
   path = ~/dotfiles/.config/git/.gitconfig.groove-x

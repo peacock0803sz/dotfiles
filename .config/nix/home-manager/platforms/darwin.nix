@@ -19,6 +19,7 @@ in
     brewCasks.dataspell
     brewCasks.deskpad
     brewCasks.discord
+    brewCasks.element
     brewCasks.elgato-stream-deck
     brewCasks.fantastical
     brewCasks.firefox

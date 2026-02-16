@@ -35,22 +35,6 @@
         "type": "github"
       }
     },
-    "gx-agent-recipes": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1771221072,
-        "narHash": "sha256-SAqnfFGulGlkWMguDzo+PvD4jdxpEf5kBEDgvUMQIzE=",
-        "owner": "groove-x",
-        "repo": "gx-agent-recipes",
-        "rev": "5711e0f24fe5467c1425cfdc4a06e19f1bf8a543",
-        "type": "github"
-      },
-      "original": {
-        "owner": "groove-x",
-        "repo": "gx-agent-recipes",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -92,7 +76,6 @@
       "inputs": {
         "agent-skills-nix": "agent-skills-nix",
         "anthropic": "anthropic",
-        "gx-agent-recipes": "gx-agent-recipes",
         "vercel": "vercel"
       }
     },

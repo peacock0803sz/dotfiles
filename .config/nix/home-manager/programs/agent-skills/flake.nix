@@ -11,17 +11,12 @@
       url = "github:vercel-labs/agent-skills";
       flake = false;
     };
-    gx-agent-recipes = {
-      # url = "git+ssh://git@github.com/groove-x/gx-agent-recipes";
-      url = "github:groove-x/gx-agent-recipes";
-      flake = false;
-    };
   };
 
   outputs = { agent-skills-nix, ... }@inputs: {
     homeManagerModules.upstream = agent-skills-nix.homeManagerModules.default;
 
-    homeManagerModules.config = { config, ... }: {
+    homeManagerModules.config = { config, lib, hostName, ... }: {
       programs.agent-skills = {
         enable = true;
 
@@ -37,14 +32,15 @@
           local = {
             path = "${config.home.homeDirectory}/dotfiles/.config/agents/local-skills";
           };
+        } // lib.optionalAttrs (hostName == "arpeggio") {
           gx-agent-recipes = {
-            # path = "${config.home.homeDirectory}/ghq/github.com/groove-x/gx-agent-recipes";
-            path = inputs.gx-agent-recipes.outPath;
+            path = "${config.home.homeDirectory}/ghq/github.com/groove-x/gx-agent-recipes";
             subdir = "skills";
           };
         };
 
-        skills.enableAll = [ "local" "gx-agent-recipes" ];
+        skills.enableAll = [ "local" ]
+          ++ lib.optional (hostName == "arpeggio") "gx-agent-recipes";
         skills.enable = [
           "frontend-design"
           "skill-creator"

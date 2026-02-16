@@ -14,6 +14,9 @@ darwin-bootstrap:
 
 .PHONY:
 darwin-upgrade:
+ifeq ($(HOST),arpeggio)
+	git -C $(HOME)/ghq/github.com/groove-x/gx-agent-recipes pull || true
+endif
 	sudo nix run nix-darwin -- switch --flake .#$(HOST) --impure --cores $(CORES)
 
 .PHONY:

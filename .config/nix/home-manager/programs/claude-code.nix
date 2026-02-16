@@ -62,6 +62,7 @@ in
         "lua-lsp@claude-plugins-official" = true;
         "pyright-lsp@claude-plugins-official" = true;
         "typescript-lsp@claude-plugins-official" = true;
+        "atlassian@claude-plugins-official" = if hostName == "arpeggio" then true else false;
         "pr-review-toolkit@claude-plugins-official" = true;
         "feature-dev@claude-plugins-official" = true;
       };

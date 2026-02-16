@@ -11,6 +11,11 @@
       url = "github:vercel-labs/agent-skills";
       flake = false;
     };
+    gx-agent-recipes = {
+      # url = "git+ssh://git@github.com/groove-x/gx-agent-recipes";
+      url = "github:groove-x/gx-agent-recipes";
+      flake = false;
+    };
   };
 
   outputs = { agent-skills-nix, ... }@inputs: {
@@ -32,9 +37,14 @@
           local = {
             path = "${config.home.homeDirectory}/dotfiles/.config/agents/local-skills";
           };
+          gx-agent-recipes = {
+            # path = "${config.home.homeDirectory}/ghq/github.com/groove-x/gx-agent-recipes";
+            path = inputs.gx-agent-recipes.outPath;
+            subdir = "skills";
+          };
         };
 
-        skills.enableAll = [ "local" ];
+        skills.enableAll = [ "local" "gx-agent-recipes" ];
         skills.enable = [
           "frontend-design"
           "skill-creator"

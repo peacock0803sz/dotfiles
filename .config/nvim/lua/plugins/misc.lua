@@ -1,5 +1,6 @@
 ---@type LazySpec[]
 local spec = {
+  { "https://github.com/cocopon/inspecthi.vim" },
   { "https://github.com/vim-jp/vimdoc-ja" },
   { "https://github.com/y0za/vim-reading-vimrc" },
   { "https://github.com/neovim/nvim-lspconfig" },

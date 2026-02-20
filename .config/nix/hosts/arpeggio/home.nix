@@ -4,8 +4,9 @@ let
 in
 {
   home.packages = with pkgs; [
-    brewCasks.figma
-    brewCasks.wrike
+    keto
+    kratos
+    ory
   ];
 
   home.file = {

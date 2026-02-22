@@ -47,8 +47,9 @@
     pandoc
     vhs
 
-    pinact
     cloudflared
+    octorus
+    pinact
 
     postgresql
     mariadb

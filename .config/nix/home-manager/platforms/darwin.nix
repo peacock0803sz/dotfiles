@@ -35,24 +35,6 @@ in
     brewCasks.visual-studio-code
     brewCasks.vlc
 
-    (brewCasks.google-chrome.overrideAttrs (oldAttrs: {
-      src = pkgs.fetchurl {
-        url = builtins.head oldAttrs.src.urls;
-        hash = "sha256-+B22PmRdySDsBuTxzd5fry4+w/vWa7r7+97pM1K6zKA=";
-      };
-    }))
-    (brewCasks."google-chrome@beta".overrideAttrs (oldAttrs: {
-      src = pkgs.fetchurl {
-        url = builtins.head oldAttrs.src.urls;
-        hash = "sha256-mgnNaLxsH5ax73UQT2m58vYX3ubyx+ZhqhevENe1uLY=";
-      };
-    }))
-    (brewCasks."google-chrome@dev".overrideAttrs (oldAttrs: {
-      src = pkgs.fetchurl {
-        url = builtins.head oldAttrs.src.urls;
-        hash = "sha256-qISondoANSRxLCXItMV1ynXOHKX52X4wBD2rbzVKgzk=";
-      };
-    }))
     (brewCasks.istat-menus.overrideAttrs (oldAttrs: {
       src = pkgs.fetchurl {
         url = builtins.head oldAttrs.src.urls;

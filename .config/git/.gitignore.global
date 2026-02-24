@@ -1,13 +1,6 @@
 # vim:filetype=gitignore
 
-# jupyter notebooks
-
-*.ipynb
-
-.vim/
-.idea/
-
-### https://raw.github.com/github/gitignore/18aa6d83774d514da479d73a4beb864cd4220231/Global/macOS.gitignore
+### https://raw.github.com/github/gitignore/18aa6d83774d514da479d73a4beb864cd4220231/Global/macOS.gitignore {{{
 
 # General
 .DS_Store
@@ -36,9 +29,9 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+# }}}
 
-
-### https://raw.github.com/github/gitignore/18aa6d83774d514da479d73a4beb864cd4220231/Global/Linux.gitignore
+### https://raw.github.com/github/gitignore/18aa6d83774d514da479d73a4beb864cd4220231/Global/Linux.gitignore {{{
 
 *~
 
@@ -53,9 +46,9 @@ Temporary Items
 
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
+# }}}
 
-
-### https://raw.github.com/github/gitignore/18aa6d83774d514da479d73a4beb864cd4220231/Global/Windows.gitignore
+### https://raw.github.com/github/gitignore/18aa6d83774d514da479d73a4beb864cd4220231/Global/Windows.gitignore {{{
 
 # Windows thumbnail cache files
 Thumbs.db
@@ -81,9 +74,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+# }}}
 
-
-### https://raw.github.com/github/gitignore/18aa6d83774d514da479d73a4beb864cd4220231/Global/Vim.gitignore
+### https://raw.github.com/github/gitignore/18aa6d83774d514da479d73a4beb864cd4220231/Global/Vim.gitignore {{{
 
 **/.vim/
 
@@ -106,9 +99,9 @@ Sessionx.vim
 tags
 # Persistent undo
 [._]*.un~
+# }}}
 
-
-### https://raw.github.com/github/gitignore/18aa6d83774d514da479d73a4beb864cd4220231/Global/Emacs.gitignore
+### https://raw.github.com/github/gitignore/18aa6d83774d514da479d73a4beb864cd4220231/Global/Emacs.gitignore {{{
 
 # -*- mode: gitignore; -*-
 *~
@@ -161,8 +154,9 @@ flycheck_*.el
 .idea/vcs.xml
 .idea/*.iml
 .idea/misc.xml
+# }}}
 
-### https://raw.github.com/github/gitignore/18aa6d83774d514da479d73a4beb864cd4220231/Global/VisualStudioCode.gitignore
+### https://raw.github.com/github/gitignore/18aa6d83774d514da479d73a4beb864cd4220231/Global/VisualStudioCode.gitignore {{{
 
 **/.vscode/*
 # !.vscode/settings.json
@@ -173,12 +167,14 @@ flycheck_*.el
 
 # Local History for Visual Studio Code
 .history/
+# }}}
 
-**/pip-wheel-metadata/*
-
+# tool versions {{{
 .*-version
 .nvmrc
+# }}}
 
+# Temporary files {{{
 **/tmp/*
 **/var/*
 
@@ -188,24 +184,43 @@ flycheck_*.el
 **/*.tmp
 **/tmp.*
 **/*repro.*
+# }}}
 
-# Git worktree
+# jupyter notebooks {{{
+*.ipynb
 
+.vim/
+.idea/
+**/pip-wheel-metadata/*
+# }}}
+
+# Git worktree {{{
 *.git-worktree
 *.git-worktrees/
+# }}}
 
+# Nix / direnv {{{
 .direnv/
 shell.nix
 result
+# }}}
 
-# Diff/Patch
+# Diff/Patch {{{
 *.patch
 *.diff
+# }}}
 
-**/.claude/settings.local.json
-
-# docker compose override
+# docker compose override {{{
 **/docker-compose.override.yml
 **/compose.override.yml
+# }}}
 
+# AI Agents {{{
 **/.serena
+**/.claude/settings.local.json
+
+# Speckit
+.specify/*
+.claude/commands/speckit.*
+specs/*
+# }}}

@@ -24,7 +24,7 @@
       url = "github:BatteredBunny/brew-api";
       flake = false;
     };
-    # darwin-vz-nix.url = "github:takeokunn/darwin-vz-nix";
+    darwin-vz-nix.url = "github:takeokunn/darwin-vz-nix";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     disko = {
       url = "github:nix-community/disko/latest";

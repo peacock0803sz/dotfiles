@@ -2,7 +2,8 @@
   description = "Peacock's Nix Configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs?rev=d1c15b7d5806069da59e819999d70e1cec0760bf";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,6 +24,7 @@
       url = "github:BatteredBunny/brew-api";
       flake = false;
     };
+    # darwin-vz-nix.url = "github:takeokunn/darwin-vz-nix";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     disko = {
       url = "github:nix-community/disko/latest";
@@ -54,6 +56,7 @@
       url = "github:numtide/llm-agents.nix";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+    arto.url = "github:arto-app/Arto";
   };
 
   outputs = { flake-parts, ... }@inputs:

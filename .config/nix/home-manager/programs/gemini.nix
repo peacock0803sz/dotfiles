@@ -1,5 +1,6 @@
-{ pkgs, mcp-servers-nix, ... }:
+{ pkgs, inputs, ... }:
 let
+  inherit (inputs) mcp-servers-nix;
   enableCodex = false;
 in
 {

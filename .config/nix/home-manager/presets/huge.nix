@@ -1,10 +1,11 @@
-{ pkgs, ... }: {
+{ pkgs, system, inputs, ... }: {
   imports = [
     ./large.nix
   ];
 
   home.packages = with pkgs; [
     nur.repos.peacock0803sz.tfcmt
+    inputs.arto.packages.${system}.default
 
     kubectl
     terraform

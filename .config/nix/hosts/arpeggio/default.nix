@@ -1,6 +1,6 @@
 { inputs }:
 let
-  inherit (inputs) nixpkgs nix-monitored mcp-servers-nix;
+  inherit (inputs) nixpkgs;
 
   system = "aarch64-darwin";
   username = "peacock";
@@ -18,7 +18,7 @@ let
   };
 in
 inputs.nix-darwin.lib.darwinSystem {
-  specialArgs = { inherit system username hostName pkgs nix-monitored mcp-servers-nix; };
+  specialArgs = { inherit system username hostName pkgs inputs; };
   modules = [
     inputs.home-manager.darwinModules.home-manager
     inputs.nix-index-database.darwinModules.nix-index
@@ -28,7 +28,7 @@ inputs.nix-darwin.lib.darwinSystem {
     {
       home-manager.backupFileExtension = "bk.nix";
       home-manager.useGlobalPkgs = true;
-      home-manager.extraSpecialArgs = { inherit hostName mcp-servers-nix; };
+      home-manager.extraSpecialArgs = { inherit hostName system inputs; };
       home-manager.users.${username} = {
         imports = [
           ./home.nix

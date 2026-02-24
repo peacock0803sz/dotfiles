@@ -1,6 +1,6 @@
 { inputs, ... }:
 let
-  inherit (inputs) nixpkgs mcp-servers-nix;
+  inherit (inputs) nixpkgs;
   username = "peacock";
   system = "x86_64-linux";
   hostName = "enigma";
@@ -35,7 +35,7 @@ nixpkgs.lib.nixosSystem {
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.extraSpecialArgs = { inherit hostName mcp-servers-nix; };
+      home-manager.extraSpecialArgs = { inherit hostName inputs; };
       home-manager.users."${username}" = {
         imports = [
           ../../home-manager

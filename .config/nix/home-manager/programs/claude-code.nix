@@ -1,5 +1,6 @@
-{ pkgs, config, hostName, mcp-servers-nix, ... }:
+{ pkgs, config, hostName, inputs, ... }:
 let
+  inherit (inputs) mcp-servers-nix;
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
   homeDirectory = config.home.homeDirectory;
   enableCodex = true;

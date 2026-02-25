@@ -40,7 +40,7 @@
     casks = [
       "1password"
       "adobe-creative-cloud"
-      "font-udev-gothic-nf"
+      # "font-udev-gothic-nf"
       "font-jetbrains-mono-nerd-font"
       "google-chrome"
       "google-chrome@beta"

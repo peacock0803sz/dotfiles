@@ -61,19 +61,32 @@ bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
 # }}}
 
 # Catppuccin theme {{{
-set -g @catppuccin_flavor "latte"
-set -g @catppuccin_window_flags "none"
-set -g @catppuccin_window_status_style "basic"
-
-set -g @catppuccin_status_left_separator ""
-set -g @catppuccin_status_middle_separator ""
-set -g @catppuccin_status_right_separator " "
-
-set -g @catppuccin_session_icon " # "
-set -g @catppuccin_host_icon ""
-
-run ~/.nix-profile/share/tmux-plugins/catppuccin/catppuccin.tmux
+# set -g @catppuccin_flavor "latte"
+# set -g @catppuccin_window_flags "none"
+# set -g @catppuccin_window_status_style "basic"
+# 
+# set -g @catppuccin_status_left_separator ""
+# set -g @catppuccin_status_middle_separator ""
+# set -g @catppuccin_status_right_separator " "
+# 
+# set -g @catppuccin_session_icon " # "
+# set -g @catppuccin_host_icon ""
+# 
+# run ~/.nix-profile/share/tmux-plugins/catppuccin/catppuccin.tmux
 # }}}
+
+set -g @peafowl_flavor "latte"
+set -g @peafowl_window_flags "none"
+set -g @peafowl_window_status_style "basic"
+
+set -g @peafowl_status_left_separator ""
+set -g @peafowl_status_middle_separator ""
+set -g @peafowl_status_right_separator " "
+
+set -g @peafowl_session_icon " # "
+set -g @peafowl_host_icon ""
+
+run ~/ghq/github.com/peacock0803sz/peafowl-colors/tmux/peafowl.sh
 
 # Status lines {{{
 set -g status "on"

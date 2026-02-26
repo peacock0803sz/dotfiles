@@ -180,7 +180,6 @@ flycheck_*.el
 
 .cache
 
-**/sandbox*
 **/*.tmp
 **/tmp.*
 **/*repro.*

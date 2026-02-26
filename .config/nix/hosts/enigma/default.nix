@@ -27,6 +27,7 @@ nixpkgs.lib.nixosSystem {
     ../../nixos/akkoma.nix
     ../../nixos/notizen.nix
     ../../nixos/lemonade.nix
+    ../../nixos/vibra.nix
 
     ./hardware.nix
     ./disk.nix

@@ -4,6 +4,7 @@
   ];
 
   home.packages = with pkgs; [
+    nur.repos.peacock0803sz.mado
     nur.repos.peacock0803sz.tfcmt
     inputs.arto.packages.${system}.default
 

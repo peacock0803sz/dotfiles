@@ -18,6 +18,9 @@ source "$HOME/.config/op/plugins.sh"
 alias vim@bsd /usr/bin/vim
 alias vim@head "$HOME/.nix-profile/bin/vim"
 
+alias octorus $HOME/.nix-profile/bin/or
+abbr vz "nix run github:takeokunn/darwin-vz-nix#darwin-vz-nix --"
+
 # Language specific settings {{{
 # Go
 fish_add_path $GOPATH/bin

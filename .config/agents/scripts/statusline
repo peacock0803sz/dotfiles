@@ -9,6 +9,7 @@ import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
+from datetime import datetime
 from enum import Enum
 from typing import Self
 
@@ -65,6 +66,7 @@ class StatusInput:
 class Usage:
     session: float | None = None
     week: float | None = None
+    session_resets_at: str | None = None
 
 
 CACHE_PATH = pathlib.Path.home() / ".claude" / ".statusline-usage-cache.json"
@@ -80,7 +82,11 @@ def _load_cache() -> Usage:
         data = json.loads(text)
     except json.JSONDecodeError:
         return Usage()
-    return Usage(session=data.get("five_hour"), week=data.get("seven_day"))
+    return Usage(
+        session=data.get("five_hour"),
+        week=data.get("seven_day"),
+        session_resets_at=data.get("session_resets_at"),
+    )
 
 
 def _save_cache(usage: Usage) -> None:
@@ -92,6 +98,7 @@ def _save_cache(usage: Usage) -> None:
                     "fetched_at": time.time(),
                     "five_hour": usage.session,
                     "seven_day": usage.week,
+                    "session_resets_at": usage.session_resets_at,
                 }
             )
         )
@@ -148,11 +155,14 @@ def _fetch_usage(token: str) -> Usage | None:
         return None
 
     data = json.loads(body)
-    five_hour = (data.get("five_hour") or {}).get("utilization")
-    seven_day = (data.get("seven_day") or {}).get("utilization")
+    five_hour_obj = data.get("five_hour") or {}
+    seven_day_obj = data.get("seven_day") or {}
+    five_hour = five_hour_obj.get("utilization")
+    seven_day = seven_day_obj.get("utilization")
     return Usage(
         session=float(five_hour) if five_hour is not None else None,
         week=float(seven_day) if seven_day is not None else None,
+        session_resets_at=five_hour_obj.get("resets_at"),
     )
 
 
@@ -209,6 +219,9 @@ def main():
     if usage.session:
         _usage = f"{usage.session:.0f}% / {usage.week:.0f}%"
         parts.append(to_ansi("Usage:", _usage, Color.GREEN))
+    if usage.session_resets_at:
+        resets_at_local = datetime.fromisoformat(usage.session_resets_at)
+        parts.append(to_ansi("Reset:", resets_at_local.strftime("%H:%M"), Color.BLACK))
     if data.context_window.used:
         parts.append(to_ansi("Ctx:", f"{data.context_window.used:.0f}%", Color.YELLOW))
 

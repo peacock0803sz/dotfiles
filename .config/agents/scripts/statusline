@@ -205,7 +205,7 @@ def main():
 
     parts = []
     if data.model.display_name:
-        parts.append(to_ansi("Model:", data.model.display_name, Color.BLUE))
+        parts.append(to_ansi("Model:", data.model.display_name, Color.CYAN))
     if usage.session:
         _usage = f"{usage.session:.0f}% / {usage.week:.0f}%"
         parts.append(to_ansi("Usage (5h / Wkly)", _usage, Color.GREEN))

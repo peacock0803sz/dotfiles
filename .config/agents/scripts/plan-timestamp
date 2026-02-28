@@ -1,5 +1,6 @@
-#!/usr/bin/env python3
-"""計画ファイルの処理と index.md 生成（Agents → YYYY → MM → DD → leaf を toctree で連結）"""
+#!/usr/bin/env -S uv run --script
+# vim: set filetype=python:
+# 計画ファイルの処理と index.md 生成（Agents → YYYY → MM → DD → leaf を toctree で連結）
 
 import argparse
 import json

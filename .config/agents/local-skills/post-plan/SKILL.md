@@ -1,6 +1,7 @@
 ---
 name: post-plan
 description: 計画ファイルを notizen/Agents にアーカイブ。日付階層で整理し index.md を生成。
+model: haiku
 ---
 
 # 計画ファイルアーカイブ
@@ -8,7 +9,7 @@ description: 計画ファイルを notizen/Agents にアーカイブ。日付階
 ## 実行コマンド
 
 ```bash
-python3 ~/dotfiles/.config/agents/scripts/plan-timestamp.py --archive
+$HOME/dotfiles/.config/agents/scripts/plan-timestamp.py --archive
 ```
 
 ## 処理内容

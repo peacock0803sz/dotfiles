@@ -14,6 +14,7 @@ in
 
   home.file = {
     ".claude/rules".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/rules";
+    ".claude/statusline".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/scripts/statusline";
   };
 
   programs.claude-code = {
@@ -30,7 +31,7 @@ in
       outputStyle = "Explanatory";
       statusLine = {
         type = "command";
-        command = "echo $(cat) | ccusage statusline";
+        command = "~/.claude/statusline";
       };
 
       permissions = {
@@ -53,7 +54,9 @@ in
           "Bash(nc -l -:*)"
           "Bash(ncat -l -:*)"
           "Bash(netcat -l -:*)"
-          "Bash(docker *)"
+          "Bash(docker kill *)"
+          "Bash(docker stop *)"
+          "Bash(docker compose down)"
           "Bash(git -C *)"
         ];
       };

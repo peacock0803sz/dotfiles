@@ -1,0 +1,219 @@
+#!/usr/bin/env -S uv run --script -p 3.14
+# vim: set filetype=python:
+
+import json
+import pathlib
+import subprocess
+import sys
+import time
+import urllib.error
+import urllib.request
+from dataclasses import dataclass, field
+from enum import Enum
+from typing import Self
+
+
+@dataclass
+class Workspace:
+    current_dir: pathlib.Path = field(default_factory=pathlib.Path)
+
+    @classmethod
+    def from_dict(cls, d: dict | None) -> Self:
+        return cls(current_dir=(d or {}).get("current_dir", ""))
+
+
+@dataclass
+class Model:
+    display_name: str = ""
+
+    @classmethod
+    def from_dict(cls, d: dict | None) -> Self:
+        return cls(display_name=(d or {}).get("display_name", ""))
+
+
+@dataclass
+class ContextWindow:
+    used: float | None = None
+
+    @classmethod
+    def from_dict(cls, d: dict | None) -> Self:
+        return cls(used_percentage=(d or {}).get("used_percentage"))
+
+
+@dataclass
+class StatusInput:
+    workspace: Workspace = field(default_factory=Workspace)
+    cwd: pathlib.Path = field(default_factory=pathlib.Path)
+    model: Model = field(default_factory=Model)
+    context_window: ContextWindow = field(default_factory=ContextWindow)
+
+    @classmethod
+    def from_dict(cls, d: dict) -> Self:
+        return cls(
+            workspace=Workspace.from_dict(d.get("workspace")),
+            cwd=d.get("cwd", ""),
+            model=Model.from_dict(d.get("model")),
+            context_window=ContextWindow.from_dict(d.get("context_window")),
+        )
+
+    @property
+    def current_dir(self) -> str:
+        return self.workspace.current_dir or self.cwd
+
+
+@dataclass
+class Usage:
+    session: float | None = None
+    week: float | None = None
+
+
+CACHE_PATH = pathlib.Path.home() / ".claude" / ".statusline-usage-cache.json"
+CACHE_TTL = 30
+
+
+def _load_cache() -> Usage:
+    try:
+        text = CACHE_PATH.read_text()
+    except OSError:
+        return Usage()
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError:
+        return Usage()
+    return Usage(session=data.get("five_hour"), week=data.get("seven_day"))
+
+
+def _save_cache(usage: Usage) -> None:
+    try:
+        CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+        CACHE_PATH.write_text(
+            json.dumps(
+                {
+                    "fetched_at": time.time(),
+                    "five_hour": usage.session,
+                    "seven_day": usage.week,
+                }
+            )
+        )
+    except OSError:
+        pass
+
+
+def _cache_is_fresh() -> bool:
+    try:
+        text = CACHE_PATH.read_text()
+    except OSError:
+        return False
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError:
+        return False
+    return (time.time() - data.get("fetched_at", 0)) < CACHE_TTL
+
+
+def _get_access_token() -> str | None:
+    try:
+        raw = subprocess.check_output(
+            [
+                "security",
+                "find-generic-password",
+                "-s",
+                "Claude Code-credentials",
+                "-w",
+            ],
+            stderr=subprocess.DEVNULL,
+            text=True,
+        ).strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return None
+    try:
+        creds = json.loads(raw)
+    except json.JSONDecodeError:
+        return None
+    return creds.get("claudeAiOauth", {}).get("accessToken")
+
+
+def _fetch_usage(token: str) -> Usage | None:
+    req = urllib.request.Request(
+        "https://api.anthropic.com/api/oauth/usage",
+        headers={
+            "Authorization": f"Bearer {token}",
+            "anthropic-beta": "oauth-2025-04-20",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=3) as resp:
+            body = resp.read()
+    except (urllib.error.URLError, TimeoutError):
+        return None
+
+    data = json.loads(body)
+    five_hour = (data.get("five_hour") or {}).get("utilization")
+    seven_day = (data.get("seven_day") or {}).get("utilization")
+    return Usage(
+        session=float(five_hour) if five_hour is not None else None,
+        week=float(seven_day) if seven_day is not None else None,
+    )
+
+
+def get_usage() -> Usage:
+    if _cache_is_fresh():
+        return _load_cache()
+
+    token = _get_access_token()
+    if token is None:
+        return _load_cache()
+
+    usage = _fetch_usage(token)
+    if usage is None:
+        return _load_cache()
+
+    _save_cache(usage)
+    return usage
+
+
+class Color(Enum, str):
+    RESET = "\033[0m"
+    BLACK = "\033[30m"
+    RED = "\033[31m"
+    GREEN = "\033[32m"
+    YELLOW = "\033[33m"
+    BLUE = "\033[34m"
+    PURPLE = "\033[35m"
+    CYAN = "\033[36m"
+    WHITE = "\033[37m"
+    BRIGHT_BLACK = "\033[90m"
+    BRIGHT_RED = "\033[91m"
+    BRIGHT_GREEN = "\033[92m"
+    BRIGHT_YELLOW = "\033[93m"
+    BRIGHT_BLUE = "\033[94m"
+    BRIGHT_PURPLE = "\033[95m"
+    BRIGHT_CYAN = "\033[96m"
+    BRIGHT_WHITE = "\033[97m"
+
+    def __call__(self, text: str):
+        return f"{self.value}{text}{Color.RESET.value}"
+
+
+def to_ansi(prefix: str, text: str, color: Color):
+    return f"{Color.BLACK(prefix)} {color(text)}"
+
+
+def main():
+    data = StatusInput.from_dict(json.loads(sys.stdin.read()))
+    usage = get_usage()
+
+    parts = []
+    if data.model.display_name:
+        parts.append(to_ansi("Model: ", data.model.display_name, Color.BLUE))
+    if usage.session:
+        _usage = f"{usage.session:.0f}% / {usage.week:.0f}%"
+        parts.append(to_ansi("Usage (5h / Wkly): ", _usage, Color.GREEN))
+    if data.context_window.used:
+        parts.append(to_ansi("Ctx: ", f"{data.context_window.used:.0f}%", Color.YELLOW))
+
+    sys.stdout.write(" | ".join(parts))
+
+
+if __name__ == "__main__":
+    main()

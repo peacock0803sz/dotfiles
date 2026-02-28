@@ -220,7 +220,7 @@ def main():
         _usage = f"{usage.session:.0f}% / {usage.week:.0f}%"
         parts.append(to_ansi("Usage:", _usage, Color.GREEN))
     if usage.session_resets_at:
-        resets_at_local = datetime.fromisoformat(usage.session_resets_at)
+        resets_at_local = datetime.fromisoformat(usage.session_resets_at).astimezone()
         parts.append(to_ansi("Reset:", resets_at_local.strftime("%H:%M"), Color.BLACK))
     if data.context_window.used:
         parts.append(to_ansi("Ctx:", f"{data.context_window.used:.0f}%", Color.YELLOW))

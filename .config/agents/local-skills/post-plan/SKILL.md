@@ -9,7 +9,7 @@ model: haiku
 ## 実行コマンド
 
 ```bash
-$HOME/dotfiles/.config/agents/scripts/plan-timestamp.py --archive
+$HOME/dotfiles/.config/agents/scripts/plan-timestamp --archive
 ```
 
 ## 処理内容

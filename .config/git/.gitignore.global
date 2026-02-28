@@ -222,4 +222,5 @@ result
 .specify/*
 .claude/commands/speckit.*
 specs/*
+specs
 # }}}

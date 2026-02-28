@@ -18,7 +18,7 @@ description: Git commitの作成。pre-commit検査遵守、意味のある最�
 
 - 本文は大文字で始め、変更の理由を明確にする
 - 個人リポジトリ (`$HOME/ghq/github.com/peacock0803sz/` 配下) ではEmoji Prefixを採用
-    - ただしdotfiles, notizenリポジトリはEmoji Prefixを採用していない
+    - ただしdotfilesリポジトリ(`$HOME/dotfiles`)はEmoji Prefixを採用していない
 
 ### Emoji Prefix一覧
 

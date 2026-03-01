@@ -50,7 +50,6 @@ in
           "Bash(poweroff *)"
           "Bash(killall *)"
           "Bash(pkill *)"
-          "Bash(ps *)"
           "Bash(nc -l -:*)"
           "Bash(ncat -l -:*)"
           "Bash(netcat -l -:*)"
@@ -58,6 +57,17 @@ in
           "Bash(docker stop *)"
           "Bash(docker compose down)"
           "Bash(git -C *)"
+          "Bash(git add .)"
+        ];
+        allow = [
+          "Bash(git log *)"
+          "Bash(git diff *)"
+          "Bash(git show *)"
+          "Bash(git status --short --untracked-files)"
+          "Bash(git add .*)"
+          "Bash(git commit -m *)"
+          "Bash(docker ps :*)"
+          "Bash(docker compose ps :*)"
         ];
       };
 

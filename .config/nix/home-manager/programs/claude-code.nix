@@ -68,12 +68,13 @@ in
           "Bash(git commit -m *)"
           "Bash(docker ps :*)"
           "Bash(docker compose ps :*)"
+          "Bash(gh pr view *)"
+          "Bash(gh run view *)"
         ];
       };
 
       enabledPlugins = {
         "gopls-lsp@claude-plugins-official" = true;
-        "lua-lsp@claude-plugins-official" = true;
         "pyright-lsp@claude-plugins-official" = true;
         "typescript-lsp@claude-plugins-official" = true;
         "atlassian@claude-plugins-official" = if hostName == "arpeggio" then true else false;

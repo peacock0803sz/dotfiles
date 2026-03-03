@@ -13,6 +13,7 @@
   home.packages = with pkgs; [
     devenv
     nur.repos.peacock0803sz.gwq
+    nur.repos.peacock0803sz.notizen
 
     cargo
     go

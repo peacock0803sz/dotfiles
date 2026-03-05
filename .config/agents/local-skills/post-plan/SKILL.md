@@ -1,7 +1,7 @@
 ---
 name: post-plan
 description: 計画ファイルを notizen/Agents にアーカイブ。日付階層で整理し index.md を生成。
-model: haiku
+model: sonnet
 ---
 
 # 計画ファイルアーカイブ

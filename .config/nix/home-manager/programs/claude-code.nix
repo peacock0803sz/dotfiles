@@ -58,6 +58,7 @@ in
           "Bash(docker compose down)"
           "Bash(git -C *)"
           "Bash(git add .)"
+          "Bash(git push -:*)"
           "Bash(git status --untracked-files=no -:*)"
         ];
         allow = [

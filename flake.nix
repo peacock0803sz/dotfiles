@@ -2,8 +2,7 @@
   description = "Peacock's Nix Configuration";
 
   inputs = {
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs.url = "github:NixOS/nixpkgs?rev=d1c15b7d5806069da59e819999d70e1cec0760bf";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -1,4 +1,29 @@
 local function config()
+  require("cmp_coding_agent").setup({
+    agent = "both",
+    max_items = 200,
+    paths = {
+      preserve_at_prefix = true,
+      show_hidden = true,
+      preview_lines = 20,
+      deep_search = false,
+      root = "git",
+    },
+    skills = {
+      include = {
+        repo_agents = true,
+        repo_claude = true,
+        repo_codex = true,
+        user_agents = true,
+        user_claude = true,
+        user_codex = true,
+      },
+      include_non_user_invocable = false,
+    },
+    commands = { include_builtins = { claude = true, codex = true } },
+    prompts = { codex = { enabled = true } },
+  })
+
   local cmp = require("cmp")
 
   cmp.setup({
@@ -46,6 +71,34 @@ local function config()
   --     { name = "skkeleton" },
   --   }),
   -- })
+
+  -- For Aibo prompt (Claude)
+  cmp.setup.filetype("aibo-prompt.aibo-tool-claude", {
+    sources = cmp.config.sources({
+      { name = "skkeleton" },
+      { name = "buffer" },
+      { name = "spell" },
+      { name = "path" },
+      -- coding agent sources
+      { name = "coding_agent_slash" },
+      { name = "coding_agent_dollar" },
+      { name = "coding_agent_at" },
+    }),
+  })
+
+  -- For Aibo prompt (Codex)
+  cmp.setup.filetype("aibo-prompt.aibo-tool-codex", {
+    sources = cmp.config.sources({
+      { name = "skkeleton" },
+      { name = "buffer" },
+      { name = "spell" },
+      { name = "path" },
+      -- coding agent sources
+      { name = "coding_agent_slash" },
+      { name = "coding_agent_dollar" },
+      { name = "coding_agent_at" },
+    }),
+  })
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline("/", {
@@ -109,6 +162,10 @@ local spec = {
   },
   {
     "https://github.com/f3fora/cmp-spell",
+    dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
+  },
+  {
+    "https://github.com/yuki-yano/cmp-coding-agent",
     dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
   },
   {

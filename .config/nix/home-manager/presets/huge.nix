@@ -5,7 +5,6 @@
 
   home.packages = with pkgs; [
     nur.repos.peacock0803sz.deck
-    nur.repos.peacock0803sz.gws
     nur.repos.peacock0803sz.mado
     nur.repos.peacock0803sz.tfcmt
     inputs.arto.packages.${system}.default
@@ -31,5 +30,6 @@
       google-cloud-sdk.components.log-streaming
       google-cloud-sdk.components.pubsub-emulator
     ])
+    gws
   ];
 }

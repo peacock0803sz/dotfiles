@@ -8,7 +8,7 @@ set --global --export XDG_CONFIG_HOME $HOME/.config
 switch (uname -s)
     case Darwin
         source $HOME/dotfiles/.config/fish/darwin.fish
-        if test $(uname -n) = 'arpeggio.local'
+        if test $(hostname) = 'arpeggio'
             source $HOME/dotfiles/.config/fish/work.fish
         end
     case Linux

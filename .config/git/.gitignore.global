@@ -183,6 +183,8 @@ flycheck_*.el
 **/*.tmp
 **/tmp.*
 **/*repro.*
+p3ac0ck/
+p3ac0ck.*
 # }}}
 
 # jupyter notebooks {{{

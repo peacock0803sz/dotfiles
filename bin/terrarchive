@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# vim: set filetype=bash:
+set -euo pipefail
+
+_terrarchive() {
+  if [[ "$1" == "help" ]]; then
+    echo "Usage: $0 <plan|apply> [terraform-args...]"
+    exit 0
+  fi
+
+  if [[ ! -f "$(pwd)/.terraform.lock.hcl" ]]; then
+    echo "No .terraform.lock.hcl found in $(pwd)"
+    exit 1
+  fi
+
+  if [[ -z $(gh auth token) ]]; then
+    echo "No GitHub token found. Please authenticate with 'gh auth login'."
+    exit 1
+  fi
+
+  local _results_root # Worktree root + "../tfcmt-results"
+  _results_root="$(git rev-parse --show-toplevel)/../tfcmt-results"
+  if [[ -z "$_results_root" ]]; then
+    if [[ $(mkdir -p "$_results_root") -ne 0 ]]; then
+      echo "Failed to create results directory at $_results_root"
+      exit 1
+    fi
+  fi
+
+  local _cmd
+  _cmd="$1"
+
+  local _env
+  _env=$(basename "$(pwd)")
+
+  local _output
+  _output="${_results_root}/${_env}_${_cmd}_$(date '+%Y%m%dT%H%M%S').md"
+
+  GITHUB_TOKEN=$(gh auth token) tfcmt --output "$_output" "$_cmd" -- terraform "$@"
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  _terrarchive "$@"
+else
+  export -f _terrarchive
+fi

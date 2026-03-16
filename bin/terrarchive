@@ -34,7 +34,7 @@ _terrarchive() {
   _env=$(basename "$(pwd)")
 
   local _output
-  _output="${_results_root}/${_env}_${_cmd}_$(date '+%Y%m%dT%H%M%S').md"
+  _output="${_results_root}/${_env}_${_cmd}_$(date '+%Y-%m-%d_%H-%M').md"
 
   GITHUB_TOKEN=$(gh auth token) tfcmt --output "$_output" "$_cmd" -- terraform "$@"
 }

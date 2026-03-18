@@ -25,6 +25,7 @@ nixpkgs.lib.nixosSystem {
     inputs.nix-monitored.nixosModules.default
     ../../nixos/default.nix
     ../../nixos/akkoma.nix
+    ../../nixos/docker.nix
     ../../nixos/notizen.nix
     ../../nixos/lemonade.nix
     ../../nixos/vibra.nix

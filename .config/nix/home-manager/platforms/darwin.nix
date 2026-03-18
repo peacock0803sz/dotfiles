@@ -29,6 +29,7 @@ in
     brewCasks.linear-linear
     brewCasks.marta
     brewCasks.obs
+    brewCasks.obsidian
     brewCasks.orbstack
     brewCasks.raycast
     brewCasks.slack

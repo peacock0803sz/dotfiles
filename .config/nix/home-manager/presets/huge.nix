@@ -1,6 +1,8 @@
 { pkgs, system, inputs, ... }: {
   imports = [
     ./large.nix
+
+    ../programs/emacs.nix
   ];
 
   home.packages = with pkgs; [

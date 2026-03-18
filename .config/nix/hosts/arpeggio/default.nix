@@ -13,6 +13,7 @@ let
       inputs.brew-nix.overlays.default
       inputs.nur.overlays.default
       inputs.neovim-overlay.overlays.default
+      inputs.emacs-overlay.overlays.default
       inputs.llm-agents.overlays.default
     ];
   };

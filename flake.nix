@@ -46,6 +46,10 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     mcp-servers-nix = {
       url = "github:natsukium/mcp-servers-nix";
       # inputs.nixpkgs.follows = "nixpkgs";

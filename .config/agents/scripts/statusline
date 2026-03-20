@@ -264,7 +264,8 @@ def main():
 
     parts = []
     if data.model.display_name:
-        parts.append(to_ansi(None, data.model.display_name, Color.CYAN))
+        _model = data.model.display_name.split()[0]
+        parts.append(to_ansi("Model:", _model, Color.CYAN))
     if usage.session:
         _usage = f"{usage.session:.0f}% / {usage.week:.0f}%"
         parts.append(to_ansi("Usage:", _usage, Color.GREEN))

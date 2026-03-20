@@ -1,0 +1,60 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 17 * * * # everyday 01:00 JST
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  find:
+    runs-on: ubuntu-latest
+    outputs:
+      dirs: ${{ steps.find.outputs.dirs }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: find
+        run: |
+          dirs=$(find . -name deno.jsonc -printf '%h\n' | sort | jq -R -s -c 'split("\n") | map(select(. != ""))')
+          echo "dirs=$dirs" >> "$GITHUB_OUTPUT"
+
+  update:
+    needs: find
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      matrix:
+        dir: ${{ fromJSON(needs.find.outputs.dirs) }}
+    permissions:
+      contents: write
+    env:
+      GIT_AUTHOR_NAME: "peaock0803sz"
+      GIT_AUTHOR_EMAIL: "33555487+peacock0803sz@users.noreply.github.com"
+      GIT_COMMITTER_NAME: "github-actions[bot]"
+      GIT_COMMITTER_EMAIL: "github-actions[bot]@users.noreply.github.com"
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: denoland/setup-deno@667a34cdef165d8d2b2e98dde39547c9daac7282 # v2.0.4
+        with:
+          cache: true
+          deno-version: latest
+
+      - name: update deno - ${{ matrix.dir }}
+        working-directory: ${{ matrix.dir }}
+        run: |
+          deno install
+          deno update --latest
+
+          if [[ $(git status --untracked-files --short) ]]; then
+            dir="${{ matrix.dir }}"
+            label="${dir#./}"
+            if [[ "$label" == "." ]]; then
+              label="root"
+            fi
+            git add deno.*
+            git commit -m "Update ${label} deno.lock"
+            git pull --rebase origin master
+            git push origin HEAD
+          else
+            echo "Nothing to commit"
+          fi

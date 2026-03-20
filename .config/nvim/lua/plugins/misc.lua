@@ -15,9 +15,5 @@ local spec = {
   { "https://github.com/lambdalisue/vim-manpager" },
   { "https://github.com/mattn/emmet-vim" },
   { "https://github.com/rhysd/committia.vim" },
-  {
-    "https://github.com/skanehira/denops-docker.vim",
-    dependencies = "https://github.com/vim-denops/denops.vim",
-  },
 }
 return spec

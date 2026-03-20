@@ -7,8 +7,24 @@ defaults:
     shell: bash
 
 jobs:
-  update-nix:
+  find:
     runs-on: ubuntu-latest
+    outputs:
+      dirs: ${{ steps.find.outputs.dirs }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: find
+        run: |
+          dirs=$(find . -name flake.nix -printf '%h\n' | sort | jq -R -s -c 'split("\n") | map(select(. != ""))')
+          echo "dirs=$dirs" >> "$GITHUB_OUTPUT"
+
+  update:
+    needs: find
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      matrix:
+        dir: ${{ fromJSON(needs.find.outputs.dirs) }}
     permissions:
       contents: write
     env:
@@ -24,26 +40,20 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           extra_nix_config: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-      - name: update sub-flake / agent-skills
-        working-directory: ./.config/nix/home-manager/programs/agent-skills/
+      - name: update flake - ${{ matrix.dir }}
+        working-directory: ${{ matrix.dir }}
         run: |
           nix flake update
 
           if [[ $(git status --untracked-files --short) ]]; then
-            git add .
-            git commit -m "Update agent-skills flake.lock"
-            git push origin HEAD
-          else
-            echo "Nothing to commit"
-          fi
-
-      - name: update root flake
-        run: |
-          nix flake update
-
-          if [[ $(git status --untracked-files --short) ]]; then
-            git add .
-            git commit -m "Update flake.lock"
+            dir="${{ matrix.dir }}"
+            label="${dir#./}"
+            if [[ "$label" == "." ]]; then
+              label="root"
+            fi
+            git add flake.lock
+            git commit -m "Update ${label} flake.lock"
+            git pull --rebase origin master
             git push origin HEAD
           else
             echo "Nothing to commit"

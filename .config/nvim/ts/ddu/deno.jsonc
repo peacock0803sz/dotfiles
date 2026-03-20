@@ -2,12 +2,12 @@
   "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
   "imports": {
     "#settings": "./settings.ts",
-    "@std/path": "jsr:@std/path@~1.0.9",
-    "@core/unknownutil": "jsr:@core/unknownutil@~4.0.3",
-    "@denops/std": "jsr:@denops/std@~8.0.0",
-    "@shougo/ddu-vim": "jsr:@shougo/ddu-vim@~11.0.0",
-    "@shougo/ddu-ui-ff": "jsr:@shougo/ddu-ui-ff@~3.0.0",
-    "@shougo/ddu-ui-filer": "jsr:@shougo/ddu-ui-filer@~3.0.0",
+    "@std/path": "jsr:@std/path@~1.1.4",
+    "@core/unknownutil": "jsr:@core/unknownutil@~4.4.0-pre.1",
+    "@denops/std": "jsr:@denops/std@~8.2.0",
+    "@shougo/ddu-vim": "jsr:@shougo/ddu-vim@~11.3.0",
+    "@shougo/ddu-ui-ff": "jsr:@shougo/ddu-ui-ff@~3.2.0",
+    "@shougo/ddu-ui-filer": "jsr:@shougo/ddu-ui-filer@~3.2.0",
     "@shougo/ddu-kind-file": "jsr:@shougo/ddu-kind-file@~1.0.0"
   }
 }

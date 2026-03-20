@@ -6,7 +6,9 @@
     "jsr:@core/unknownutil@^4.3.0": "4.3.0",
     "jsr:@core/unknownutil@~4.4.0-pre.1": "4.4.0-pre.1",
     "jsr:@deno/cache-dir@~0.13.2": "0.13.2",
+    "jsr:@deno/graph@~0.73.1": "0.73.1",
     "jsr:@deno/graph@~0.96.2": "0.96.2",
+    "jsr:@denops/core@8": "8.0.1",
     "jsr:@denops/core@^8.0.1": "8.0.1",
     "jsr:@denops/std@8.0": "8.0.0",
     "jsr:@denops/std@8.2": "8.2.0",
@@ -56,11 +58,15 @@
     "@deno/cache-dir@0.13.2": {
       "integrity": "c22419dfe27ab85f345bee487aaaadba498b005cce3644e9d2528db035c5454d",
       "dependencies": [
+        "jsr:@deno/graph@~0.73.1",
         "jsr:@std/fmt",
         "jsr:@std/fs@0.223",
         "jsr:@std/io",
         "jsr:@std/path@0.223"
       ]
+    },
+    "@deno/graph@0.73.1": {
+      "integrity": "cd69639d2709d479037d5ce191a422eabe8d71bb68b0098344f6b07411c84d41"
     },
     "@deno/graph@0.96.2": {
       "integrity": "db21e52fc5b2850cc5fe92528f4f84dd460c5e40678a6bd23ece5c9c53193090"
@@ -72,6 +78,7 @@
       "integrity": "1a3e4ba4fab7d88da0de1c5330b6b87b5c959037d55542edb18c51cda054caa2",
       "dependencies": [
         "jsr:@core/unknownutil@^4.3.0",
+        "jsr:@denops/core@8",
         "jsr:@std/semver",
         "jsr:@std/ulid"
       ]
@@ -80,7 +87,7 @@
       "integrity": "6b473515c30a15b3ffe88accf11eabb7ed6210a1042311b563875bb10882f729",
       "dependencies": [
         "jsr:@core/unknownutil@^4.3.0",
-        "jsr:@denops/core",
+        "jsr:@denops/core@^8.0.1",
         "jsr:@lambdalisue/errorutil",
         "jsr:@lambdalisue/itertools",
         "jsr:@lambdalisue/unreachable",
@@ -101,7 +108,7 @@
       "dependencies": [
         "jsr:@core/unknownutil@^4.3.0",
         "jsr:@deno/cache-dir",
-        "jsr:@deno/graph",
+        "jsr:@deno/graph@~0.96.2",
         "jsr:@std/crypto",
         "jsr:@std/fs@^1.0.1",
         "jsr:@std/path@^1.0.1"
@@ -147,6 +154,7 @@
     "@shougo/ddu-vim@11.0.0": {
       "integrity": "7dde913385e0cc3eff144d6e9c2e4a7ff02d4c5caaa3cec4c9bdc5732bbdffc2",
       "dependencies": [
+        "jsr:@denops/std@8.0",
         "jsr:@lambdalisue/import-map-importer",
         "jsr:@std/path@1.1"
       ]
@@ -155,6 +163,7 @@
       "integrity": "839d7c51a78ece975e034bacda2bf61a7e334dbf95d1ca2a838630933b0175e6",
       "dependencies": [
         "jsr:@core/unknownutil@4.3",
+        "jsr:@denops/std@8.0",
         "jsr:@lambdalisue/import-map-importer",
         "jsr:@std/path@1.1"
       ]
@@ -163,6 +172,7 @@
       "integrity": "4610589cd79c72b29de341206134eee1f215018f4a7be2474c7949e30181a9a6",
       "dependencies": [
         "jsr:@core/unknownutil@4.3",
+        "jsr:@denops/std@8.2",
         "jsr:@lambdalisue/import-map-importer",
         "jsr:@std/path@1.1"
       ]
@@ -171,6 +181,7 @@
       "integrity": "ec68a3cb3502b42cddc9b560e5a582fa7385479fbc1e1f5243fa8f7a27edd51e",
       "dependencies": [
         "jsr:@core/unknownutil@4.3",
+        "jsr:@denops/std@8.2",
         "jsr:@lambdalisue/import-map-importer",
         "jsr:@std/path@1.1"
       ]

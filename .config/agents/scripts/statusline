@@ -42,11 +42,46 @@ class ContextWindow:
 
 
 @dataclass
+class RateLimitWindow:
+    used_percentage: float | None = None
+    resets_at: str | None = None
+
+    @classmethod
+    def from_dict(cls, d: dict | None) -> Self:
+        return cls(
+            used_percentage=(d or {}).get("used_percentage"),
+            resets_at=(d or {}).get("resets_at"),
+        )
+
+
+@dataclass
+class RateLimits:
+    five_hour: RateLimitWindow = field(default_factory=RateLimitWindow)
+    seven_day: RateLimitWindow = field(default_factory=RateLimitWindow)
+
+    @classmethod
+    def from_dict(cls, d: dict | None) -> Self:
+        d = d or {}
+        return cls(
+            five_hour=RateLimitWindow.from_dict(d.get("5_hour")),
+            seven_day=RateLimitWindow.from_dict(d.get("7_day")),
+        )
+
+    @property
+    def has_data(self) -> bool:
+        return (
+            self.five_hour.used_percentage is not None
+            and self.seven_day.used_percentage is not None
+        )
+
+
+@dataclass
 class StatusInput:
     workspace: Workspace = field(default_factory=Workspace)
     cwd: pathlib.Path = field(default_factory=pathlib.Path)
     model: Model = field(default_factory=Model)
     context_window: ContextWindow = field(default_factory=ContextWindow)
+    rate_limits: RateLimits = field(default_factory=RateLimits)
 
     @classmethod
     def from_dict(cls, d: dict) -> Self:
@@ -55,6 +90,7 @@ class StatusInput:
             cwd=d.get("cwd", ""),
             model=Model.from_dict(d.get("model")),
             context_window=ContextWindow.from_dict(d.get("context_window")),
+            rate_limits=RateLimits.from_dict(d.get("rate_limits")),
         )
 
     @property
@@ -166,7 +202,7 @@ def _fetch_usage(token: str) -> Usage | None:
     )
 
 
-def get_usage() -> Usage:
+def _fetch_usage_from_api() -> Usage:
     if _cache_is_fresh():
         return _load_cache()
 
@@ -180,6 +216,16 @@ def get_usage() -> Usage:
 
     _save_cache(usage)
     return usage
+
+
+def get_usage(rate_limits: RateLimits) -> Usage:
+    if rate_limits.has_data:
+        return Usage(
+            session=rate_limits.five_hour.used_percentage,
+            week=rate_limits.seven_day.used_percentage,
+            session_resets_at=rate_limits.five_hour.resets_at,
+        )
+    return _fetch_usage_from_api()
 
 
 class Color(str, Enum):
@@ -205,17 +251,20 @@ class Color(str, Enum):
         return f"{self.value}{text}{Color.RESET.value}"
 
 
-def to_ansi(prefix: str, text: str, color: Color):
-    return f"{Color.BLACK(prefix)} {color(text)}"
+def to_ansi(prefix: str | None, text: str, color: Color):
+    if prefix is None:
+        return f"{color(text)}"
+    else:
+        return f"{Color.BLACK(prefix)} {color(text)}"
 
 
 def main():
     data = StatusInput.from_dict(json.loads(sys.stdin.read()))
-    usage = get_usage()
+    usage = get_usage(data.rate_limits)
 
     parts = []
     if data.model.display_name:
-        parts.append(to_ansi("Model:", data.model.display_name, Color.CYAN))
+        parts.append(to_ansi(None, data.model.display_name, Color.CYAN))
     if usage.session:
         _usage = f"{usage.session:.0f}% / {usage.week:.0f}%"
         parts.append(to_ansi("Usage:", _usage, Color.GREEN))

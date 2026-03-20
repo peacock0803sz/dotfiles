@@ -54,10 +54,13 @@ local function config()
     },
   })
 end
+
+---@type LazySpec
 local spec = {
-  "pmizio/typescript-tools.nvim",
+  "https://github.com/pmizio/typescript-tools.nvim",
   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   config = config,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+  cond = false,
 }
 return spec

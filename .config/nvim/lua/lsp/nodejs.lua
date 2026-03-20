@@ -1,15 +1,12 @@
-local ok, util = pcall(require, "lspconfig.util")
-if not ok then
-  return
-end
-
 ---@type { [string]: vim.lsp.Config }
 local servers = {
   cssls = { filetypes = { "astro", "css", "scss", "less", "vue" } },
   ts_ls = {
     cmd = { "typescript-language-server", "--stdio" },
     filetypes = { "astro", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-    root_dir = util.root_pattern({ "package.json", "node_modules" }),
+    root_dir = function(bufnr)
+      return vim.fs.root(bufnr, { "package.json", "node_modules" })
+    end,
     init_options = {
       plugins = {
         {

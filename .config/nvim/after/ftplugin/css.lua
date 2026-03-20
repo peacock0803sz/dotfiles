@@ -1,4 +1,4 @@
-local ok, servers = pcall(require, "lsp._nodejs")
+local ok, servers = pcall(require, "lsp.nodejs")
 if ok then
   vim.lsp.config("cssls", servers.cssls)
 end

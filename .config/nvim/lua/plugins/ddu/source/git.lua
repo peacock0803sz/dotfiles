@@ -6,7 +6,7 @@ local spec = {
     dependencies = { "Shougo/ddu.vim" },
     config = function()
       local config_dir = vim.fn.stdpath("config")
-      local path = config_dir .. "/ts/ddu/kindOptions/git_status.ts"
+      local path = config_dir .. "/ts/ddu/kind_git.ts"
       vim.fn["ddu#custom#load_config"](path)
 
       map_source("<Space>gs", "git_status", { sources = { { name = "git_status" } }, resume = true })

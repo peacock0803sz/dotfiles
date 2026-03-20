@@ -1,4 +1,4 @@
-import { BaseConfig, ConfigArguments } from "./deps.ts";
+import { BaseConfig, type ConfigArguments } from "@shougo/ddu-vim/config";
 
 export class Config extends BaseConfig {
   override config(args: ConfigArguments): Promise<void> {

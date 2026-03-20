@@ -1,6 +1,6 @@
 local function config()
   local config_dir = vim.fn.stdpath("config")
-  local path = config_dir .. "/ts/ddu/ui/ff.ts"
+  local path = config_dir .. "/ts/ddu/ui_ff.ts"
   local key_options = { nowait = true, buffer = true, silent = true, remap = false }
 
   vim.fn["ddu#custom#load_config"](path)

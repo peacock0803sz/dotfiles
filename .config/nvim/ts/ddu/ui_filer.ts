@@ -1,6 +1,6 @@
-import { BaseConfig, ConfigArguments, FilerParams } from "../deps.ts";
-
-import getSettings from "../settings.ts";
+import { BaseConfig, type ConfigArguments } from "@shougo/ddu-vim/config";
+import { type Params as FilerParams } from "@shougo/ddu-ui-filer";
+import getSettings from "#settings";
 
 export class Config extends BaseConfig {
   override async config(args: ConfigArguments): Promise<void> {

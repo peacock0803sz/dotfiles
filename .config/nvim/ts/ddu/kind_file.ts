@@ -1,11 +1,10 @@
 import {
-  ActionArguments,
-  ActionData,
+  type ActionArguments,
   ActionFlags,
-  BaseConfig,
-  ConfigArguments,
-  fn,
-} from "../deps.ts";
+} from "@shougo/ddu-vim/types";
+import { BaseConfig, type ConfigArguments } from "@shougo/ddu-vim/config";
+import { type ActionData } from "@shougo/ddu-kind-file";
+import * as fn from "@denops/std/function";
 
 type Params = Record<string, unknown>;
 

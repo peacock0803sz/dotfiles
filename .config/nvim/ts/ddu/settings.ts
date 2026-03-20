@@ -1,4 +1,7 @@
-import { Denops, FfParams, FilerParams, opt } from "./deps.ts";
+import { type Denops } from "@denops/std";
+import * as opt from "@denops/std/option";
+import { type Params as FfParams } from "@shougo/ddu-ui-ff";
+import { type Params as FilerParams } from "@shougo/ddu-ui-filer";
 
 type UiParams = Partial<FfParams | FilerParams>;
 

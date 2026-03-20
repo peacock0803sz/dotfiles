@@ -1,11 +1,10 @@
 import {
-  ActionArguments,
+  type ActionArguments,
   ActionFlags,
-  BaseConfig,
-  ConfigArguments,
-  stdpath,
-  u,
-} from "../deps.ts";
+} from "@shougo/ddu-vim/types";
+import { BaseConfig, type ConfigArguments } from "@shougo/ddu-vim/config";
+import * as path from "@std/path";
+import * as u from "@core/unknownutil";
 
 type GitStatusActionData = {
   status: string;
@@ -26,14 +25,14 @@ export class Config extends BaseConfig {
             },
             diff: async (args: ActionArguments<Record<string, unknown>>) => {
               const action = args.items[0].action as GitStatusActionData;
-              const path = stdpath.join(action.worktree, action.path);
+              const p = path.join(action.worktree, action.path);
               await args.denops.call("ddu#start", {
                 name: "file:git_diff",
                 sources: [
                   {
                     name: "git_diff",
                     options: {
-                      path,
+                      path: p,
                     },
                     params: {
                       ...(u.maybe(args.actionParams, u.isRecord) ?? {}),

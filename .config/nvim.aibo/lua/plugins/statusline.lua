@@ -6,6 +6,7 @@ local function config()
       section_separators = { left = "", right = "" },
       disabled_filetypes = {},
       always_divide_middle = true,
+      theme = "onelight",
     },
     sections = {
       lualine_a = { "mode" },
@@ -51,5 +52,5 @@ local function config()
 end
 
 ---@type LazySpec
-local spec = { "nvim-lualine/lualine.nvim", config = config }
+local spec = { "https://github.com/nvim-lualine/lualine.nvim", config = config }
 return spec

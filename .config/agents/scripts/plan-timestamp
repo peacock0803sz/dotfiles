@@ -109,8 +109,12 @@ def process_plan_file(file_path: str) -> Path | None:
     if re.search(r"^#\s+\d{2}:\d{2}:\d{2}\s", content, re.MULTILINE):
         return None
 
-    now = datetime.now()
-    time_str = now.strftime("%H:%M:%S")
+    timestamp = path.stat().st_mtime
+    if timestamp:
+        time = datetime.fromtimestamp(timestamp)
+    else:
+        time = datetime.now()
+    time_str = time.strftime("%H:%M:%S")
 
     # H1 見出しの先頭に時刻を追加
     new_content = re.sub(
@@ -122,11 +126,11 @@ def process_plan_file(file_path: str) -> Path | None:
     )
 
     # 日付階層のディレクトリ作成
-    dest_dir = BASE_DIR / now.strftime("%Y/%m/%d")
+    dest_dir = BASE_DIR / time.strftime("%Y/%m/%d")
     dest_dir.mkdir(parents=True, exist_ok=True)
 
     # ファイル名にタイムスタンプを追加
-    new_name = f"{now.strftime('%H%M%S')}_{path.name}"
+    new_name = f"{time.strftime('%H%M%S')}_{path.name}"
     dest_path = dest_dir / new_name
     dest_path.write_text(new_content, encoding="utf-8")
 
@@ -134,7 +138,7 @@ def process_plan_file(file_path: str) -> Path | None:
     path.unlink()
 
     # index.md を更新（Agents → YYYY → MM → DD を必ず連結）
-    update_indexes_for_date(now)
+    update_indexes_for_date(time)
 
     return dest_path
 

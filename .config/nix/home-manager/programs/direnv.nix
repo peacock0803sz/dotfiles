@@ -1,5 +1,5 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [
+{ pkgs-staging, ... }: {
+  home.packages = with pkgs-staging; [
     direnv
   ];
 

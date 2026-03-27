@@ -1,6 +1,6 @@
 { inputs }:
 let
-  inherit (inputs) nixpkgs;
+  inherit (inputs) nixpkgs nixpkgs-staging;
 
   system = "aarch64-darwin";
   username = "peacock";
@@ -17,6 +17,10 @@ let
       inputs.llm-agents.overlays.default
     ];
   };
+  pkgs-staging = import nixpkgs-staging {
+    inherit system;
+    config.allowUnfree = true;
+  };
 in
 inputs.nix-darwin.lib.darwinSystem {
   specialArgs = { inherit system username hostName pkgs inputs; };
@@ -31,7 +35,7 @@ inputs.nix-darwin.lib.darwinSystem {
     {
       home-manager.backupFileExtension = "bk.nix";
       home-manager.useGlobalPkgs = true;
-      home-manager.extraSpecialArgs = { inherit hostName system inputs; };
+      home-manager.extraSpecialArgs = { inherit hostName system inputs pkgs-staging; };
       home-manager.users.${username} = {
         imports = [
           ./home.nix

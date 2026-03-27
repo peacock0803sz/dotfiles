@@ -1,6 +1,6 @@
 { inputs, ... }:
 let
-  inherit (inputs) nixpkgs;
+  inherit (inputs) nixpkgs nixpkgs-staging;
   username = "peacock";
   system = "x86_64-linux";
   hostName = "enigma";
@@ -13,6 +13,10 @@ let
       inputs.nur.overlays.default
       inputs.llm-agents.overlays.default
     ];
+  };
+  pkgs-staging = import nixpkgs-staging {
+    inherit system;
+    config.allowUnfree = true;
   };
 in
 nixpkgs.lib.nixosSystem {
@@ -38,7 +42,7 @@ nixpkgs.lib.nixosSystem {
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.extraSpecialArgs = { inherit hostName inputs; };
+      home-manager.extraSpecialArgs = { inherit hostName inputs pkgs-staging; };
       home-manager.users."${username}" = {
         imports = [
           ../../home-manager

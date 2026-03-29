@@ -1,6 +1,5 @@
 ---
 name: commit
-model: sonnet
 description: Git commitの作成。pre-commit検査遵守、意味のある最小単位でのコミット、Emoji Prefix対応。
 ---
 

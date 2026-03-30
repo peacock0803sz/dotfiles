@@ -10,7 +10,7 @@ let
 in
 nixpkgs.lib.nixosSystem {
   system = system;
-  specialArgs = inputs // { inherit system username; };
+  specialArgs = inputs // { inherit system username; name = "overture"; ip = "10.57.0.1"; };
   modules = [
     { nixpkgs.pkgs = pkgs; }
     disko.nixosModules.disko
@@ -19,6 +19,7 @@ nixpkgs.lib.nixosSystem {
     ./disk.nix
     ./hardware.nix
     ../../nixos
+    ../../nixos/gsnet.nix
 
     home-manager.nixosModules.home-manager
     {

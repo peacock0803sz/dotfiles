@@ -10,7 +10,7 @@ let
 in
 nixpkgs.lib.nixosSystem {
   system = system;
-  specialArgs = inputs // { inherit system username; };
+  specialArgs = inputs // { inherit system username; name = "bassoon"; ip = "10.57.0.1"; };
   modules = [
     { nixpkgs.pkgs = pkgs; }
     inputs.disko.nixosModules.disko
@@ -18,6 +18,7 @@ nixpkgs.lib.nixosSystem {
     inputs.nix-monitored.nixosModules.default
     inputs.nixos-hardware.nixosModules.gmktec-nucbox-g3-plus
     ../../nixos
+    ../../nixos/gsnet.nix
     ../../nixos/samba.nix
     ./hardware.nix
     ./disk.nix

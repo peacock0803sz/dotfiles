@@ -10,6 +10,7 @@ let
 in
 nixpkgs.lib.nixosSystem {
   system = system;
+  specialArgs = inputs // { inherit system username; };
   modules = [
     { nixpkgs.pkgs = pkgs; }
     inputs.disko.nixosModules.disko

@@ -185,6 +185,7 @@ flycheck_*.el
 **/*repro.*
 p3ac0ck/
 p3ac0ck.*
+**/.pre-commit-config.yaml
 # }}}
 
 # jupyter notebooks {{{

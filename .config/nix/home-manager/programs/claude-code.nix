@@ -29,6 +29,7 @@ in
       autoCompactEnabled = false;
       enableAllProjectMcpServers = true;
       outputStyle = "Explanatory";
+      teammateMode = "in-process";
       statusLine = {
         type = "command";
         command = "~/.claude/statusline";

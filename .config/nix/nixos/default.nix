@@ -58,7 +58,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     enable = true;
-    font = "udev-gothic-nf";
+    font = pkgs.udev-gothic-nf;
     # keyMap = "us";
     useXkbConfig = true; # use xkb.options in tty.
   };

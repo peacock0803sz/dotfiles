@@ -28,6 +28,7 @@ inputs.nix-darwin.lib.darwinSystem {
     inputs.nix-index-database.darwinModules.nix-index
     ../../nix-darwin
     ../../nix-darwin/lemonade.nix
+    ../../nix-darwin/neovim.nix
     {
       home-manager.backupFileExtension = "bk.nix";
       home-manager.useGlobalPkgs = true;

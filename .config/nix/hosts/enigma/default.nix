@@ -30,6 +30,7 @@ nixpkgs.lib.nixosSystem {
     ../../nixos/default.nix
     # ../../nixos/akkoma.nix
     ../../nixos/docker.nix
+    ../../nixos/neovim.nix
     ../../nixos/notizen.nix
     ../../nixos/lemonade.nix
     ../../nixos/oksskolten.nix

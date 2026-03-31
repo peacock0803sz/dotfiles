@@ -117,7 +117,9 @@ in
       };
     };
 
-    mcpServers = mcp-servers // (if hostName == "arpeggio" then {
+    mcpServers = mcp-servers // {
+      linear = (import ./mcp-servers/linear { inherit pkgs; });
+    } // (if hostName == "arpeggio" then {
       esa = (import ./mcp-servers/esa { inherit pkgs; });
     } else { });
   };

@@ -15,7 +15,9 @@ in
         disableAutoUpdate = true;
         disableUpdateNag = true;
       };
-      mcpServers = import ./mcp-servers { inherit pkgs mcp-servers-nix; };
+      mcpServers = import ./mcp-servers { inherit pkgs mcp-servers-nix; } // {
+        linear = import ./mcp-servers/linear { inherit pkgs; };
+      };
     };
   };
 }

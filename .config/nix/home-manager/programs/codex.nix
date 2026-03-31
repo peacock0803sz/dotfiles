@@ -6,6 +6,7 @@ let
     format = "toml-inline";
     fileName = ".mcp.toml";
     programs = import ./mcp-servers/programs.nix { inherit pkgs mcp-servers-nix; };
+    settings.servers.linear = import ./mcp-servers/linear { inherit pkgs; };
   };
 in
 {

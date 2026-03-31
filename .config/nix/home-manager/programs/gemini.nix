@@ -1,7 +1,6 @@
 { pkgs, inputs, ... }:
 let
   inherit (inputs) mcp-servers-nix;
-  enableCodex = false;
 in
 {
   programs.gemini-cli = {
@@ -16,7 +15,7 @@ in
         disableAutoUpdate = true;
         disableUpdateNag = true;
       };
-      mcpServers = import ./mcp-servers { inherit pkgs mcp-servers-nix enableCodex; };
+      mcpServers = import ./mcp-servers { inherit pkgs mcp-servers-nix; };
     };
   };
 }

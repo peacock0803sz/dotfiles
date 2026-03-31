@@ -1,12 +1,11 @@
 { pkgs, inputs, ... }:
 let
   inherit (inputs) mcp-servers-nix;
-  enableCodex = false;
   config = mcp-servers-nix.lib.mkConfig pkgs {
     flavor = "codex";
     format = "toml-inline";
     fileName = ".mcp.toml";
-    programs = import ./mcp-servers/programs.nix { inherit pkgs mcp-servers-nix enableCodex; };
+    programs = import ./mcp-servers/programs.nix { inherit pkgs mcp-servers-nix; };
   };
 in
 {

@@ -1,5 +1,4 @@
-{ pkgs, enableCodex, ... }: {
-  codex.enable = enableCodex;
+{ pkgs, ... }: {
   serena = {
     enable = true;
     args = [ "--context" "ide-assistant" "--enable-web-dashboard" "False" ];

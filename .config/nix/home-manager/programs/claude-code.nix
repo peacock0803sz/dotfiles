@@ -3,13 +3,11 @@ let
   inherit (inputs) mcp-servers-nix;
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
   homeDirectory = config.home.homeDirectory;
-  enableCodex = true;
-  mcp-servers = import ./mcp-servers { inherit pkgs mcp-servers-nix enableCodex; };
+  mcp-servers = import ./mcp-servers { inherit pkgs mcp-servers-nix; };
 in
 {
   home.packages = with pkgs; [
     llm-agents.ccusage
-    llm-agents.claude-code-acp
   ];
 
   home.file = {
@@ -76,10 +74,19 @@ in
         ];
       };
 
+      extraKnownMarketplaces = {
+        openai-codex = {
+          source = {
+            source = "github";
+            repo = "openai/codex-plugin-cc";
+          };
+        };
+      };
       enabledPlugins = {
         "atlassian@claude-plugins-official" = if hostName == "arpeggio" then true else false;
         "pr-review-toolkit@claude-plugins-official" = true;
         "feature-dev@claude-plugins-official" = true;
+        "codex@openai-codex" = true;
       };
     };
 

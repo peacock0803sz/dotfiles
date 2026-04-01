@@ -1,46 +1,78 @@
-#!/usr/bin/env bash
-# vim: set filetype=bash:
-set -euo pipefail
+#!/usr/bin/env -S uv run --script
+# vim: set filetype=python:
+# terrarchive - Run terraform via tfcmt and archive the results
 
-_terrarchive() {
-  if [[ "$1" == "help" ]]; then
-    echo "Usage: $0 <plan|apply> [terraform-args...]"
-    exit 0
-  fi
+import argparse
+import os
+import subprocess
+import sys
+from datetime import datetime
+from pathlib import Path
 
-  if [[ ! -f "$(pwd)/.terraform.lock.hcl" ]]; then
-    echo "No .terraform.lock.hcl found in $(pwd)"
-    exit 1
-  fi
+_ROOT = os.environ.get("TERRARCHIVE_ROOT")
+ROOT_DIR = Path(_ROOT) if _ROOT else Path.home() / "develop" / "terrarchive"
 
-  if [[ -z $(gh auth token) ]]; then
-    echo "No GitHub token found. Please authenticate with 'gh auth login'."
-    exit 1
-  fi
 
-  local _results_root # Worktree root + "../tfcmt-results"
-  _results_root="$(git rev-parse --show-toplevel)/../tfcmt-results"
-  if [[ -z "$_results_root" ]]; then
-    if [[ $(mkdir -p "$_results_root") -ne 0 ]]; then
-      echo "Failed to create results directory at $_results_root"
-      exit 1
-    fi
-  fi
+def _run(cmd: list[str], cwd: Path | None = None) -> str:
+    result = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"Command '{' '.join(cmd)}' failed with error:\n{result.stderr}")
+        raise subprocess.CalledProcessError(
+            result.returncode, cmd, output=result.stdout, stderr=result.stderr
+        )
 
-  local _cmd
-  _cmd="$1"
+    return result.stdout.strip()
 
-  local _env
-  _env=$(basename "$(pwd)")
 
-  local _output
-  _output="${_results_root}/${_env}_${_cmd}_$(date '+%Y-%m-%d_%H-%M').md"
+def get_repo_tree():
+    """
+    Get the repository name from the git remote URL.
+    {HOST}/{OWNER}/{REPO}
+    """
+    repo = Path(_run(["git", "rev-parse", "--show-toplevel"]))
+    return repo.parent.parent.name, repo.parent.name, repo.name
 
-  GITHUB_TOKEN=$(gh auth token) tfcmt --output "$_output" "$_cmd" -- terraform "$@"
-}
 
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  _terrarchive "$@"
-else
-  export -f _terrarchive
-fi
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Run terraform via tfcmt and archive the results",
+    )
+    parser.add_argument(
+        "cmd", choices=["plan", "apply"], help="Terraform command to run"
+    )
+    parser.add_argument(
+        "args",
+        nargs=argparse.REMAINDER,
+        help="Additional terraform arguments (after --)",
+    )
+    parser.add_argument("--migrate", action="store_true")
+    args = parser.parse_args()
+
+    # REMAINDER captures the leading "--" if present; strip it
+    if args.args and args.args[0] == "--":
+        args.args = args.args[1:]
+
+    cwd = Path.cwd()
+
+    env_name = cwd.stem
+
+    if not (cwd / ".terraform.lock.hcl").exists():
+        print(f"No .terraform.lock.hcl found in {cwd}")
+        sys.exit(1)
+
+    gh_token = _run(["gh", "auth", "token"], cwd=cwd)
+    if not gh_token:
+        print("No GitHub token found. Please authenticate with 'gh auth login'.")
+        sys.exit(1)
+
+    dir = (Path.joinpath(ROOT_DIR, *get_repo_tree()) / env_name / args.cmd).resolve()
+    dir.mkdir(parents=True, exist_ok=True)
+
+    out = (dir / f"{datetime.now().isoformat(timespec='seconds')}.md").resolve()
+    cmd = ["tfcmt", "--output", out, args.cmd, "--", "terraform", args.cmd, *args.args]
+    env = {"GITHUB_TOKEN": gh_token, **os.environ.copy()}
+    subprocess.run(cmd, cwd=cwd, env=env, check=True)
+
+
+if __name__ == "__main__":
+    main()

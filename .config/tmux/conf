@@ -5,6 +5,14 @@ set -sg escape-time 10
 setw -g monitor-activity on
 set -g visual-activity on
 
+# Bell forwarding for agent notifications
+set -g monitor-bell on
+set -g bell-action any
+set -g visual-bell off
+
+# Allow OSC passthrough for Ghostty desktop notifications
+set -g allow-passthrough on
+
 # Keybinds {{{
 setw -g mouse on
 setw -g mode-keys vi

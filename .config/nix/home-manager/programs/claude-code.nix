@@ -13,6 +13,7 @@ in
   home.file = {
     ".claude/rules".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/rules";
     ".claude/statusline".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/scripts/statusline";
+    ".claude/notify".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/agents/scripts/notify";
   };
 
   programs.claude-code = {
@@ -31,6 +32,23 @@ in
       statusLine = {
         type = "command";
         command = "~/.claude/statusline";
+      };
+
+      hooks = {
+        Notification = [
+          {
+            matcher = "permission_prompt";
+            hooks = [{ type = "command"; command = "~/.claude/notify 'Claude Code' 'Permission requested'"; }];
+          }
+          {
+            matcher = "idle_prompt";
+            hooks = [{ type = "command"; command = "~/.claude/notify 'Claude Code' 'Waiting for input'"; }];
+          }
+          {
+            matcher = "elicitation_dialog";
+            hooks = [{ type = "command"; command = "~/.claude/notify 'Claude Code' 'MCP needs input'"; }];
+          }
+        ];
       };
 
       permissions = {

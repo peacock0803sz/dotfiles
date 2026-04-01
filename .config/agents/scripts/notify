@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+TITLE="${1:-Agent}"
+MESSAGE="${2:-Needs your attention}"
+
+if [[ -n "$TMUX" ]]; then
+  CLIENT_TTY=$(tmux display-message -p '#{client_tty}' 2>/dev/null)
+  if [[ -n "$CLIENT_TTY" && -w "$CLIENT_TTY" ]]; then
+    printf '\e]777;notify;%s;%s\a' "$TITLE" "$MESSAGE" > "$CLIENT_TTY"
+  fi
+elif [[ -w /dev/tty ]]; then
+  printf '\e]777;notify;%s;%s\a' "$TITLE" "$MESSAGE" > /dev/tty
+fi

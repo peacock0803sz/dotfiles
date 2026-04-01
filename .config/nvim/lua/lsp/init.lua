@@ -6,27 +6,10 @@ if vim.env.NVIM_LSP_DEBUG == "1" then
   vim.lsp.log.set_level(vim.log.levels.TRACE)
 end
 
--- Set buftype=nofile on ddu buffers early (before bufload triggers BufNewFile/filetype detection)
-vim.api.nvim_create_autocmd("BufNew", {
-  group = vim.api.nvim_create_augroup("LspGuard", { clear = true }),
-  callback = function(args)
-    if vim.api.nvim_buf_get_name(args.buf):find("^ddu%-") then
-      vim.bo[args.buf].buftype = "nofile"
-    end
-  end,
-})
-
 -- {{{ Keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("LspConfig", {}),
   callback = function(ev)
-    -- Detach LSP from ddu-* preview buffers
-    local bufname = vim.api.nvim_buf_get_name(ev.buf)
-    if bufname:find("^ddu%-") then
-      vim.lsp.buf_detach_client(ev.buf, ev.data.client_id)
-      return
-    end
-
     local bufopts = { noremap = true, silent = true, buffer = ev.buf }
     -- diagnostics mappings
     vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)

@@ -82,11 +82,11 @@
     "vercel": {
       "flake": false,
       "locked": {
-        "lastModified": 1774968606,
-        "narHash": "sha256-bB+nO6UdBR06FHrZIE2VyL0gmP+AZxUX+KNg0L9vmwU=",
+        "lastModified": 1775049804,
+        "narHash": "sha256-ZfUf1++6pYQ2rGSpuXIdxoSUXwamq1xn5xJspEhEOUg=",
         "owner": "vercel-labs",
         "repo": "agent-skills",
-        "rev": "55b07c69f22527fbbcf08b4de89a462fed839a51",
+        "rev": "48bda1ca1802207f4f253c60b7259ca3ab6d93e1",
         "type": "github"
       },
       "original": {

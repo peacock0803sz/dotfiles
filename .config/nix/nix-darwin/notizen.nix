@@ -10,7 +10,7 @@
           NOTIZEN_REMOTE_PATH = "/home/${username}/notizen/source/";
         };
         ProgramArguments = [
-          "/Users/${username}/notizen/.venv/bin/notizen"
+          "notizen"
           "sync"
           "--src=/Users/${username}/notizen/source"
         ];

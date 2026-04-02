@@ -139,6 +139,8 @@ in
       linear = (import ./mcp-servers/linear { inherit pkgs; });
     } // (if hostName == "arpeggio" then {
       esa = (import ./mcp-servers/esa { inherit pkgs; });
+      wrike = (import ./mcp-servers/wrike { inherit pkgs; });
+      slack = (import ./mcp-servers/slack { inherit pkgs; });
     } else { });
   };
 }

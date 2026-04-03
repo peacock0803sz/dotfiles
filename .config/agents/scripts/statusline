@@ -103,6 +103,7 @@ class Usage:
     session: float | None = None
     week: float | None = None
     session_resets_at: str | None = None
+    week_resets_at: str | None = None
 
 
 CACHE_PATH = pathlib.Path.home() / ".claude" / ".statusline-usage-cache.json"
@@ -122,6 +123,7 @@ def _load_cache() -> Usage:
         session=data.get("five_hour"),
         week=data.get("seven_day"),
         session_resets_at=data.get("session_resets_at"),
+        week_resets_at=data.get("week_resets_at"),
     )
 
 
@@ -135,6 +137,7 @@ def _save_cache(usage: Usage) -> None:
                     "five_hour": usage.session,
                     "seven_day": usage.week,
                     "session_resets_at": usage.session_resets_at,
+                    "week_resets_at": usage.week_resets_at,
                 }
             )
         )
@@ -199,6 +202,7 @@ def _fetch_usage(token: str) -> Usage | None:
         session=float(five_hour) if five_hour is not None else None,
         week=float(seven_day) if seven_day is not None else None,
         session_resets_at=five_hour_obj.get("resets_at"),
+        week_resets_at=seven_day_obj.get("resets_at"),
     )
 
 
@@ -224,6 +228,7 @@ def get_usage(rate_limits: RateLimits) -> Usage:
             session=rate_limits.five_hour.used_percentage,
             week=rate_limits.seven_day.used_percentage,
             session_resets_at=rate_limits.five_hour.resets_at,
+            week_resets_at=rate_limits.seven_day.resets_at,
         )
     return _fetch_usage_from_api()
 
@@ -258,6 +263,15 @@ def to_ansi(prefix: str | None, text: str, color: Color):
         return f"{Color.BLACK(prefix)} {color(text)}"
 
 
+def _format_reset(iso: str | None, include_date: bool = False) -> str:
+    if iso is None:
+        return ""
+    dt = datetime.fromisoformat(iso).astimezone()
+    if include_date:
+        return f" (@{dt.month}/{dt.day} {dt.hour})"
+    return f" (@{dt.hour})"
+
+
 def main():
     data = StatusInput.from_dict(json.loads(sys.stdin.read()))
     usage = get_usage(data.rate_limits)
@@ -266,12 +280,15 @@ def main():
     if data.model.display_name:
         _model = data.model.display_name.split()[0]
         parts.append(to_ansi("Model:", _model, Color.CYAN))
-    if usage.session:
-        _usage = f"{usage.session:.0f}% / {usage.week:.0f}%"
-        parts.append(to_ansi("Usage:", _usage, Color.GREEN))
-    if usage.session_resets_at:
-        resets_at_local = datetime.fromisoformat(usage.session_resets_at).astimezone()
-        parts.append(to_ansi("Reset:", resets_at_local.strftime("%H:%M"), Color.BLACK))
+    if usage.session is not None:
+        session_str = f"{Color.GREEN(f'{usage.session:.0f}%')}{_format_reset(usage.session_resets_at)}"
+        week_str = (
+            f"{Color.GREEN(f'{usage.week:.0f}%')}{_format_reset(usage.week_resets_at, include_date=True)}"
+            if usage.week is not None
+            else ""
+        )
+        _usage = f"{session_str} / {week_str}" if week_str else session_str
+        parts.append(f"{Color.BLACK('Lim:')} {_usage}")
     if data.context_window.used:
         parts.append(to_ansi("Ctx:", f"{data.context_window.used:.0f}%", Color.YELLOW))
 

@@ -3,6 +3,7 @@
 # terrarchive - Run terraform via tfcmt and archive the results
 
 import argparse
+from collections.abc import Iterable
 import os
 import subprocess
 import sys
@@ -24,13 +25,19 @@ def _run(cmd: list[str], cwd: Path | None = None) -> str:
     return result.stdout.strip()
 
 
-def get_repo_tree():
+def get_repo_tree(cwd: Path | None = None) -> Iterable[str]:
     """
     Get the repository name from the git remote URL.
-    {HOST}/{OWNER}/{REPO}
+    >>> get_repo_tree("/Users/peacock/ghq/github.com/peacock0803sz/nur-packages/")
+    ('github.com', 'peacock0803sz', 'nur-packages')
+    >>> get_repo_tree("/Users/peacock/works/github.com/peacock0803sz/vim-jp-profile-stats/react-router")
+    ('github.com', 'peacock0803sz', 'vim-jp-profile-stats')
     """
     repo = Path(_run(["git", "rev-parse", "--show-toplevel"]))
-    return repo.parent.parent.name, repo.parent.name, repo.name
+    if len(repo.parts) > 6:
+        return repo.parts[4:7]
+    else:
+        return repo.relative_to(Path.home()).parts
 
 
 def main() -> None:

@@ -12,4 +12,4 @@ vim.lsp.config("pyright", {
   },
 })
 
-vim.lsp.enable({"pyright", "ruff"})
+vim.lsp.enable({"pyright", "ruff", "ty"})

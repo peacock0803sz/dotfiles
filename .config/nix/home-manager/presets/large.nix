@@ -15,6 +15,7 @@
     go
     nodejs
     ruff
+    ty
     typescript
 
     llm-agents.spec-kit

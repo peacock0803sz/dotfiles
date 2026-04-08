@@ -48,8 +48,8 @@
     casks = [
       "1password"
       "adobe-creative-cloud"
-      "chatgpt"
-      "claude"
+      # "chatgpt"
+      # "claude"
       "font-udev-gothic-nf"
       "font-jetbrains-mono-nerd-font"
       "google-chrome"

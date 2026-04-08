@@ -8,7 +8,7 @@
 
   home.packages = with pkgs; [
     devenv
-    nur.repos.peacock0803sz.gwq
+    git-wt
     nur.repos.peacock0803sz.notizen
 
     cargo

@@ -8,7 +8,7 @@ set --global --export XDG_CONFIG_HOME $HOME/.config
 switch (uname -s)
     case Darwin
         source $HOME/dotfiles/.config/fish/darwin.fish
-        if test $(hostname) = 'arpeggio'
+        if test $(hostname) = arpeggio
             source $HOME/dotfiles/.config/fish/work.fish
         end
     case Linux
@@ -29,11 +29,11 @@ function fzf-ghq
 end
 bind \cg fzf-ghq
 
-function fzf-gwq
-    set --function _dir $(gwq list --json | jq -r ".[].path" | fzf --preview 'bat {}/README.md' --bind 'ctrl-d:preview-down,ctrl-u:preview-up')
+function fzf-wt
+    cd (git-wt | fzf --header-lines=1 | awk '{if ($1 == "*") print $2; else print $1}')
     commandline "cd $_dir"
 end
-bind \ct fzf-gwq
+bind \ct fzf-wt
 
 # neovim {{{
 if test (command -v nvim)

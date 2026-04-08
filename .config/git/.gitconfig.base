@@ -21,3 +21,5 @@
 [delta]
 	light = true
   syntax-theme = "Catppuccin-latte"
+[wt]
+	basedir = /Users/peacock/works

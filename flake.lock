@@ -7,11 +7,11 @@
         "vercel": "vercel"
       },
       "locked": {
-        "path": "./.config/nix/home-manager/programs/agent-skills",
+        "path": "./dot_config/nix/home-manager/programs/agent-skills",
         "type": "path"
       },
       "original": {
-        "path": "./.config/nix/home-manager/programs/agent-skills",
+        "path": "./dot_config/nix/home-manager/programs/agent-skills",
         "type": "path"
       },
       "parent": []

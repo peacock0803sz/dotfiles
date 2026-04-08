@@ -1,0 +1,28 @@
+; vim:filetype=gitconfig
+
+[include]
+  path = ~/dotfiles/dot_config/git/.gitconfig.base
+
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+
+[credential "https://github.com"]
+	helper = 
+	helper = !/Users/peacock/.nix-profile/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/Users/peacock/.nix-profile/bin/gh auth git-credential
+
+# [url "git@github.com:groove-x/"]
+# 	insteadOf = https://github.com/groove-x/
+
+[includeIf "gitdir:~/ghq/github.com/groove-x/"]
+  path = ~/dotfiles/dot_config/git/.gitconfig.groove-x
+
+[includeIf "gitdir:~/worktrees/github.com/groove-x/"]
+  path = ~/dotfiles/dot_config/git/.gitconfig.groove-x

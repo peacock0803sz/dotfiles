@@ -1,11 +1,11 @@
 .vscode/
 
 **/.DS_Store
-.config/nvim*/lazy-lock.json
+dot_config/nvim*/lazy-lock.json
 
 # nix
 result
-.config/direnv
-.config/agents/skills/
+dot_config/direnv
+dot_config/agents/skills/
 
 .tmp/

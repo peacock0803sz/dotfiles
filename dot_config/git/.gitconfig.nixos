@@ -1,0 +1,14 @@
+; vim:filetype=gitconfig
+
+[include]
+	path = ~/dotfiles/dot_config/git/.gitconfig.base
+
+[core]
+	editor = vim
+
+[credential "https://github.com"]
+	helper = 
+	helper = !/etc/profiles/per-user/peacock/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/etc/profiles/per-user/peacock/bin/gh auth git-credential

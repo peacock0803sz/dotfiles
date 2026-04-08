@@ -1,9 +1,0 @@
-; vim:filetype=gitconfig
-
-[core]
-	excludesFile = ~/dotfiles/.config/git/.gitignore.work
-
-[user]
-	name = Peacock (Yoichi Takai)
-	email = yoichi.takai@groove-x.com
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH7PEt1qiavOUQYldAt6FIxgPnCiifD3xvOg4MUpPZcO yoichi.takai@groove-x.com

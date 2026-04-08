@@ -55,7 +55,7 @@
       url = "github:natsukium/mcp-servers-nix";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
-    agent-skills.url = "path:./.config/nix/home-manager/programs/agent-skills";
+    agent-skills.url = "path:./dot_config/nix/home-manager/programs/agent-skills";
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
       # inputs.nixpkgs.follows = "nixpkgs";
@@ -69,13 +69,13 @@
       systems = [ "x86_64-linux" "aarch64-darwin" ];
       flake = {
         darwinConfigurations = {
-          nocturne = import ./.config/nix/hosts/nocturne { inherit inputs; };
-          arpeggio = import ./.config/nix/hosts/arpeggio { inherit inputs; };
+          nocturne = import ./dot_config/nix/hosts/nocturne { inherit inputs; };
+          arpeggio = import ./dot_config/nix/hosts/arpeggio { inherit inputs; };
         };
         nixosConfigurations = {
-          bassoon = import ./.config/nix/hosts/bassoon { inherit inputs; };
-          overture = import ./.config/nix/hosts/overture { inherit inputs; };
-          enigma = import ./.config/nix/hosts/enigma { inherit inputs; };
+          bassoon = import ./dot_config/nix/hosts/bassoon { inherit inputs; };
+          overture = import ./dot_config/nix/hosts/overture { inherit inputs; };
+          enigma = import ./dot_config/nix/hosts/enigma { inherit inputs; };
         };
       };
       perSystem = { ... }: { };

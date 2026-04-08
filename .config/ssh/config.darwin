@@ -1,6 +1,0 @@
-# vim:filetype=sshconfig
-
-Include ~/dotfiles/.config/ssh/config.base
-
-Host 192.168.8.* 100.* *.tail2121a.ts.net
-	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"

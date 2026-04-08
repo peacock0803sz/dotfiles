@@ -28,12 +28,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
     vim.keymap.set("n", "<space>gr", vim.lsp.buf.references, bufopts)
     vim.keymap.set({ "n", "v" }, "<space>fo", vim.lsp.buf.format, bufopts)
-
-    -- organize imports
-    vim.keymap.set("n", "<space>or", function()
-      for _, client in ipairs(vim.lsp.get_clients()) do
-        local filetype = vim.bo.filetype
-      end
-    end, bufopts)
   end,
 })

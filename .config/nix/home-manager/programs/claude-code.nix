@@ -77,6 +77,9 @@ in
           "Bash(git add .)"
           "Bash(git push -:*)"
           "Bash(git status --untracked-files=no -:*)"
+          "Bash(.venv/bin/python)"
+          "Bash(.venv/bin/python3*)"
+          "Bash(python*)"
         ];
         allow = [
           "Bash(git log *)"
@@ -89,6 +92,8 @@ in
           "Bash(docker compose ps :*)"
           "Bash(gh pr view *)"
           "Bash(gh run view *)"
+          "Bash(jq -r)"
+          "Bash(.venv/bin/*)"
         ];
       };
 

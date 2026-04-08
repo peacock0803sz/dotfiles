@@ -69,6 +69,10 @@ if test $(command -v direnv)
     direnv hook fish | source
 end
 
+# notizen {{{
+set --export NOTIZEN_ROOT "$HOME/notizen/"
+# }}}
+
 # https://github.com/yuki-yano/zeno.zsh {{{
 # set --global --export ZENO_ROOT $HOME/.local/share/fish/plugins/zeno.zsh
 # if test "$ZENO_LOADED" = 1

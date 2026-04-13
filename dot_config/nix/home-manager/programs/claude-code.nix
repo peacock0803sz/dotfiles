@@ -19,7 +19,7 @@ in
   programs.claude-code = {
     enable = true;
     package = pkgs.llm-agents.claude-code;
-    memory.source = ../../../agents/AGENTS.md;
+    context = ../../../agents/AGENTS.md;
 
     settings = {
       theme = "light";

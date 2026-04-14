@@ -9,3 +9,5 @@ dot_config/direnv
 dot_config/agents/skills/
 
 .tmp/
+
+*.bk.nix

@@ -9,6 +9,6 @@ in
   ];
 
   home.file = {
-    ".config/lnav".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/lnav";
+    ".config/lnav/config.json".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/lnav/config.json";
   };
 }

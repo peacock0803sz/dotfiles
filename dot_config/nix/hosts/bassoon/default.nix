@@ -21,6 +21,7 @@ nixpkgs.lib.nixosSystem {
     ../../nixos/samba.nix
     ./hardware.nix
     ./disk.nix
+    ./gitea.nix
 
     inputs.home-manager.nixosModules.home-manager
     {

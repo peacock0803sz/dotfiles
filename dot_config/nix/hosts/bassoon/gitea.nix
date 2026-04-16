@@ -3,7 +3,7 @@ let
   domain = "git.p3ac0ck.net";
   httpPort = 3000;
   nginxPort = 8081;
-  tunnelId = "5ac81ddd-325b-4dab-8fc5-c5e4b381f8ab"; # cloudflared tunnel create gitea 実行後に記入
+  tunnelId = "5ac81ddd-325b-4dab-8fc5-c5e4b381f8ab";
 in
 lib.mkMerge [
   {
@@ -39,7 +39,7 @@ lib.mkMerge [
         };
 
         service = {
-          DISABLE_REGISTRATION = false; # 初回デプロイ後 true に変更
+          DISABLE_REGISTRATION = true;
         };
 
         session = {
@@ -103,6 +103,7 @@ lib.mkMerge [
     systemd.services.gitea = {
       after = [ "mnt-Eggplants-ST4000VN006.mount" ];
       wants = [ "mnt-Eggplants-ST4000VN006.mount" ];
+      serviceConfig.ReadWritePaths = [ "/mnt/Eggplants/ST4000VN006/gitea" ];
     };
 
     systemd.tmpfiles.rules = [

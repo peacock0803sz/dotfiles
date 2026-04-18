@@ -77,9 +77,11 @@ in
           "Bash(git add .)"
           "Bash(git push -:*)"
           "Bash(git status --untracked-files=no -:*)"
-          "Bash(.venv/bin/python)"
-          "Bash(.venv/bin/python3*)"
-          "Bash(python*)"
+          "Bash(.venv/bin/python -c)"
+          "Bash(.venv/bin/python3 -c)"
+          "Bash(python -c *)"
+          "Bash(python3 -c *)"
+          "Bash(uv run *)"
         ];
         allow = [
           "Bash(git log *)"
@@ -93,7 +95,10 @@ in
           "Bash(gh pr view *)"
           "Bash(gh run view *)"
           "Bash(jq -r)"
-          "Bash(.venv/bin/*)"
+          "Bash(.venv/bin/ruff)"
+          "Bash(.venv/bin/ty)"
+          "Bash(.venv/bin/pytest)"
+          "Bash(.venv/bin/python3 -m doctest *)"
         ];
       };
 

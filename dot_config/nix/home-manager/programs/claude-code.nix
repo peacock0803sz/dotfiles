@@ -148,6 +148,7 @@ in
     mcpServers = mcp-servers // {
       linear = (import ./mcp-servers/linear { inherit pkgs; });
     } // (if hostName == "arpeggio" then {
+      gcloud = (import ./mcp-servers/gcloud { inherit pkgs; });
       esa = (import ./mcp-servers/esa { inherit pkgs; });
       wrike = (import ./mcp-servers/wrike { inherit pkgs; });
       slack = (import ./mcp-servers/slack { inherit pkgs; });

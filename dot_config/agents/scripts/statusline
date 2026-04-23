@@ -268,8 +268,8 @@ def _format_reset(iso: str | None, include_date: bool = False) -> str:
         return ""
     dt = datetime.fromisoformat(iso).astimezone()
     if include_date:
-        return f" (@{dt.month}/{dt.day} {dt.hour})"
-    return f" (@{dt.hour})"
+        return f" (@{dt.month}/{dt.day} {dt.hour}:{dt.minute:02d})"
+    return f" (@{dt.hour}:{dt.minute:02d})"
 
 
 def main():

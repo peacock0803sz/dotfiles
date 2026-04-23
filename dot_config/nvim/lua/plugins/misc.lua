@@ -15,5 +15,17 @@ local spec = {
   { "https://github.com/lambdalisue/vim-manpager" },
   { "https://github.com/mattn/emmet-vim" },
   { "https://github.com/rhysd/committia.vim" },
+  {
+    "https://github.com/delphinus/md-render.nvim",
+    dependencies = {
+      { "nvim-tree/nvim-web-devicons" }, -- optional: file type icons in code blocks
+      { "delphinus/budoux.lua" },        -- optional: CJK phrase-level line breaking
+    },
+    keys = {
+      { "<Space>mp", "<Plug>(md-render-preview)",     desc = "Markdown preview (toggle)" },
+      { "<Space>mt", "<Plug>(md-render-preview-tab)", desc = "Markdown preview in tab (toggle)" },
+      { "<Space>md", "<Plug>(md-render-demo)",        desc = "Markdown render demo" },
+    },
+  },
 }
 return spec

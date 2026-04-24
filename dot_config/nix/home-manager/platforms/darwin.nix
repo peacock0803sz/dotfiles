@@ -30,10 +30,14 @@ in
     brewCasks.marta
     brewCasks.obs
     brewCasks.orbstack
-    brewCasks.raycast
+    (brewCasks.raycast.overrideAttrs (oldAttrs: {
+      src = oldAttrs.src.overrideAttrs (_: { name = "raycast.dmg"; });
+    }))
     brewCasks.slack
     brewCasks.utm
-    brewCasks.visual-studio-code
+    (brewCasks.visual-studio-code.overrideAttrs (oldAttrs: {
+      src = oldAttrs.src.overrideAttrs (_: { name = "stable.zip"; });
+    }))
     brewCasks.vlc
 
     (brewCasks.istat-menus.overrideAttrs (oldAttrs: {

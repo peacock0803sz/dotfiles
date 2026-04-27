@@ -1,0 +1,238 @@
+# Reusable workflow: update Nix flake.lock per input.
+#
+# Example caller in another repository:
+#
+# on:
+#   schedule: [{ cron: '0 16 * * *' }]
+#   workflow_dispatch:
+#     inputs:
+#       flake-inputs: { type: string, default: '' }
+# jobs:
+#   update:
+#     uses: peacock0803sz/dotfiles/.github/workflows/update-flake.yml@<sha-or-tag>
+#     permissions:
+#       contents: write
+#       pull-requests: write   # only if create-pr=true
+#     with:
+#       flake-inputs: ${{ inputs.flake-inputs || '' }}
+#       create-pr: true
+#       auto-merge: true
+#       minimum-release-age-days: 3
+
+on:
+  workflow_call:
+    inputs:
+      flake-inputs:
+        description: 'Space-separated input names. Empty = all inputs in every flake.'
+        type: string
+        required: false
+        default: ''
+      git-author-name:
+        description: 'Author name used for commits.'
+        type: string
+        required: false
+        default: 'github-actions[bot]'
+      git-author-email:
+        description: 'Author email used for commits.'
+        type: string
+        required: false
+        default: '41898282+github-actions[bot]@users.noreply.github.com'
+      create-pr:
+        description: 'If true, open one PR per (dir, input). If false, push directly to the default branch.'
+        type: boolean
+        required: false
+        default: false
+      minimum-release-age-days:
+        description: 'Skip an input if its candidate release is younger than this many days.'
+        type: number
+        required: false
+        default: 3
+      auto-merge:
+        description: 'Enable auto-merge on created PRs (create-pr=true only). Requires repo-level auto-merge.'
+        type: boolean
+        required: false
+        default: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.discover.outputs.matrix }}
+      has-updates: ${{ steps.discover.outputs.has-updates }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: discover
+        env:
+          REQUESTED: ${{ inputs.flake-inputs }}
+        run: |
+          set -euo pipefail
+
+          allowed_types='["github","git","gitlab","sourcehut","tarball"]'
+          entries='[]'
+
+          while IFS= read -r dir; do
+            [[ -z "$dir" ]] && continue
+            lock="$dir/flake.lock"
+            [[ -f "$lock" ]] || continue
+
+            names=$(jq -r --argjson allowed "$allowed_types" '
+              .nodes as $nodes
+              | $nodes[.root].inputs
+              | to_entries[]
+              | .key as $name
+              | (if (.value | type) == "string" then .value else .value[-1] end) as $node
+              | select($allowed | index($nodes[$node].original.type))
+              | $name
+            ' "$lock")
+
+            while IFS= read -r name; do
+              [[ -z "$name" ]] && continue
+              if [[ -n "${REQUESTED:-}" ]]; then
+                match=false
+                for r in $REQUESTED; do
+                  [[ "$r" == "$name" ]] && match=true && break
+                done
+                [[ "$match" == "true" ]] || continue
+              fi
+              entry=$(jq -nc --arg dir "$dir" --arg input "$name" '{dir: $dir, input: $input}')
+              entries=$(jq -c --argjson entry "$entry" '. + [$entry]' <<<"$entries")
+            done <<<"$names"
+          done < <(find . -name flake.lock -printf '%h\n' | sort)
+
+          count=$(jq 'length' <<<"$entries")
+          echo "matrix=$entries" >> "$GITHUB_OUTPUT"
+          if (( count > 0 )); then
+            echo "has-updates=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has-updates=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "Discovered $count (dir, input) pairs"
+          jq . <<<"$entries"
+
+  update:
+    needs: discover
+    if: needs.discover.outputs.has-updates == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.discover.outputs.matrix) }}
+    env:
+      GIT_AUTHOR_NAME: ${{ inputs.git-author-name }}
+      GIT_AUTHOR_EMAIL: ${{ inputs.git-author-email }}
+      GIT_COMMITTER_NAME: 'github-actions[bot]'
+      GIT_COMMITTER_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Sync to default branch (direct push mode)
+        if: ${{ !inputs.create-pr }}
+        run: |
+          git fetch origin "${{ github.event.repository.default_branch }}"
+          git reset --hard "origin/${{ github.event.repository.default_branch }}"
+
+      - uses: cachix/install-nix-action@616559265b40713947b9c190a8ff4b507b5df49b # v31.10.4
+        with:
+          nix_path: nixpkgs=channel:nixpkgs-unstable
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          extra_nix_config: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update flake input
+        working-directory: ${{ matrix.dir }}
+        run: |
+          nix flake update "${{ matrix.input }}"
+
+      - name: Release age gate
+        id: gate
+        working-directory: ${{ matrix.dir }}
+        run: |
+          set -euo pipefail
+          if [[ -z "$(git status --untracked-files=no --short flake.lock)" ]]; then
+            echo "no-changes=true" >> "$GITHUB_OUTPUT"
+            echo "No changes after nix flake update"
+            exit 0
+          fi
+
+          new_ts=$(jq -r --arg name "${{ matrix.input }}" '
+            .nodes[.root].inputs[$name] as $nodeRef
+            | (if ($nodeRef | type) == "string" then $nodeRef else $nodeRef[-1] end) as $node
+            | .nodes[$node].locked.lastModified // empty
+          ' flake.lock)
+
+          if [[ -z "$new_ts" ]]; then
+            echo "Could not determine lastModified for ${{ matrix.input }}; skipping age gate"
+            echo "no-changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          age_days=$(( ($(date +%s) - new_ts) / 86400 ))
+          threshold=${{ inputs.minimum-release-age-days }}
+
+          if (( age_days < threshold )); then
+            echo "Skip ${{ matrix.input }}: candidate is ${age_days}d old (< ${threshold}d)"
+            git checkout -- flake.lock
+            echo "no-changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Proceeding with ${{ matrix.input }}: ${age_days}d old (>= ${threshold}d)"
+            echo "no-changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Direct push
+        if: ${{ steps.gate.outputs.no-changes != 'true' && !inputs.create-pr }}
+        working-directory: ${{ matrix.dir }}
+        run: |
+          set -euo pipefail
+          dir="${{ matrix.dir }}"
+          label="${dir#./}"
+          [[ "$label" == "." ]] && label="root"
+          git add flake.lock
+          git commit -m "Update ${label} flake.lock: ${{ matrix.input }}"
+          git push origin "HEAD:${{ github.event.repository.default_branch }}"
+
+      - name: Create or update PR
+        if: ${{ steps.gate.outputs.no-changes != 'true' && inputs.create-pr }}
+        working-directory: ${{ matrix.dir }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          dir="${{ matrix.dir }}"
+          label="${dir#./}"
+          [[ "$label" == "." ]] && label="root"
+          branch_label="${label//\//-}"
+          input_name="${{ matrix.input }}"
+          branch="update-flake/${branch_label}-${input_name}"
+          title="Update ${label} flake.lock: ${input_name}"
+
+          git add flake.lock
+          git commit -m "$title"
+          git push --force origin "HEAD:${branch}"
+
+          existing=$(gh pr list --head "$branch" --state open --json number --jq '.[0].number // ""')
+
+          if [[ -z "$existing" ]]; then
+            body=$(printf 'Automated update of `%s` in `%s`.\n\nGenerated by `update-flake.yml` reusable workflow.' "$input_name" "$label")
+            pr_url=$(gh pr create \
+              --base "${{ github.event.repository.default_branch }}" \
+              --head "$branch" \
+              --title "$title" \
+              --body "$body" \
+              --label dependencies --label automated)
+            pr_number="${pr_url##*/}"
+            echo "Created PR #${pr_number}"
+          else
+            pr_number="$existing"
+            echo "Updated existing PR #${pr_number}"
+          fi
+
+          if [[ "${{ inputs.auto-merge }}" == "true" ]]; then
+            gh pr merge "$pr_number" --auto --squash || \
+              echo "auto-merge enable skipped (repo may not allow auto-merge)"
+          fi

@@ -5,7 +5,7 @@ let
 in
 {
   home.packages = with pkgs; [
-    tmux
+    (tmux.override { withSixel = true; })
     tmuxPlugins.catppuccin
     tmuxPlugins.tmux-fzf
   ];

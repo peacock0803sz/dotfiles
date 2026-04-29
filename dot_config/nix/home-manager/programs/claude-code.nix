@@ -12,7 +12,7 @@ in
 
   home.file = {
     ".claude/rules".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/rules";
-    ".claude/statusline".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/scripts/statusline";
+    ".claude/statusline".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/scripts/cc-statusline";
     ".claude/notify".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/scripts/notify";
   };
 

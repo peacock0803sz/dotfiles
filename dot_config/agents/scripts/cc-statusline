@@ -58,6 +58,7 @@ class RateLimitWindow:
 class RateLimits:
     five_hour: RateLimitWindow = field(default_factory=RateLimitWindow)
     seven_day: RateLimitWindow = field(default_factory=RateLimitWindow)
+    seven_day_sonnet: RateLimitWindow = field(default_factory=RateLimitWindow)
 
     @classmethod
     def from_dict(cls, d: dict | None) -> Self:
@@ -65,6 +66,7 @@ class RateLimits:
         return cls(
             five_hour=RateLimitWindow.from_dict(d.get("5_hour")),
             seven_day=RateLimitWindow.from_dict(d.get("7_day")),
+            seven_day_sonnet=RateLimitWindow.from_dict(d.get("7_day_sonnet")),
         )
 
     @property
@@ -94,7 +96,7 @@ class StatusInput:
         )
 
     @property
-    def current_dir(self) -> str:
+    def current_dir(self) -> pathlib.Path:
         return self.workspace.current_dir or self.cwd
 
 
@@ -102,8 +104,10 @@ class StatusInput:
 class Usage:
     session: float | None = None
     week: float | None = None
+    sonnet: float | None = None
     session_resets_at: str | None = None
     week_resets_at: str | None = None
+    sonnet_resets_at: str | None = None
 
 
 CACHE_PATH = pathlib.Path.home() / ".claude" / ".statusline-usage-cache.json"
@@ -122,8 +126,10 @@ def _load_cache() -> Usage:
     return Usage(
         session=data.get("five_hour"),
         week=data.get("seven_day"),
+        sonnet=data.get("seven_day_sonnet"),
         session_resets_at=data.get("session_resets_at"),
         week_resets_at=data.get("week_resets_at"),
+        sonnet_resets_at=data.get("sonnet_resets_at"),
     )
 
 
@@ -136,8 +142,10 @@ def _save_cache(usage: Usage) -> None:
                     "fetched_at": time.time(),
                     "five_hour": usage.session,
                     "seven_day": usage.week,
+                    "seven_day_sonnet": usage.sonnet,
                     "session_resets_at": usage.session_resets_at,
                     "week_resets_at": usage.week_resets_at,
+                    "sonnet_resets_at": usage.sonnet_resets_at,
                 }
             )
         )
@@ -196,13 +204,17 @@ def _fetch_usage(token: str) -> Usage | None:
     data = json.loads(body)
     five_hour_obj = data.get("five_hour") or {}
     seven_day_obj = data.get("seven_day") or {}
+    seven_day_sonnet_obj = data.get("seven_day_sonnet") or {}
     five_hour = five_hour_obj.get("utilization")
     seven_day = seven_day_obj.get("utilization")
+    seven_day_sonnet = seven_day_sonnet_obj.get("utilization")
     return Usage(
         session=float(five_hour) if five_hour is not None else None,
         week=float(seven_day) if seven_day is not None else None,
+        sonnet=float(seven_day_sonnet) if seven_day_sonnet is not None else None,
         session_resets_at=five_hour_obj.get("resets_at"),
         week_resets_at=seven_day_obj.get("resets_at"),
+        sonnet_resets_at=seven_day_sonnet_obj.get("resets_at"),
     )
 
 
@@ -227,8 +239,10 @@ def get_usage(rate_limits: RateLimits) -> Usage:
         return Usage(
             session=rate_limits.five_hour.used_percentage,
             week=rate_limits.seven_day.used_percentage,
+            sonnet=rate_limits.seven_day_sonnet.used_percentage,
             session_resets_at=rate_limits.five_hour.resets_at,
             week_resets_at=rate_limits.seven_day.resets_at,
+            sonnet_resets_at=rate_limits.seven_day_sonnet.resets_at,
         )
     return _fetch_usage_from_api()
 
@@ -281,14 +295,18 @@ def main():
         _model = data.model.display_name.split()[0]
         parts.append(to_ansi("Model:", _model, Color.CYAN))
     if usage.session is not None:
-        session_str = f"{Color.GREEN(f'{usage.session:.0f}%')}{_format_reset(usage.session_resets_at)}"
-        week_str = (
-            f"{Color.GREEN(f'{usage.week:.0f}%')}{_format_reset(usage.week_resets_at, include_date=True)}"
-            if usage.week is not None
-            else ""
-        )
-        _usage = f"{session_str} / {week_str}" if week_str else session_str
-        parts.append(f"{Color.BLACK('Lim:')} {_usage}")
+        usage_parts = [
+            f"{Color.GREEN(f'{usage.session:.0f}%')}{_format_reset(usage.session_resets_at)}"
+        ]
+        if usage.week is not None:
+            usage_parts.append(
+                f"{Color.GREEN(f'{usage.week:.0f}%')}{_format_reset(usage.week_resets_at, include_date=True)}"
+            )
+        if usage.sonnet is not None:
+            usage_parts.append(
+                f"{Color.BLACK('Sonnet')} {Color.GREEN(f'{usage.sonnet:.0f}%')}"
+            )
+        parts.append(f"{Color.BLACK('Lim:')} {' / '.join(usage_parts)}")
     if data.context_window.used:
         parts.append(to_ansi("Ctx:", f"{data.context_window.used:.0f}%", Color.YELLOW))
 

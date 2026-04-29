@@ -147,6 +147,7 @@ in
 
     mcpServers = mcp-servers // {
       linear = (import ./mcp-servers/linear { inherit pkgs; });
+      kubernetes = (import ./mcp-servers/kubernetes { inherit pkgs; });
     } // (if hostName == "arpeggio" then {
       gcloud = (import ./mcp-servers/gcloud { inherit pkgs; });
       esa = (import ./mcp-servers/esa { inherit pkgs; });

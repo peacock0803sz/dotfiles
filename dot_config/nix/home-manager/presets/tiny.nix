@@ -7,6 +7,8 @@
   home.packages = with pkgs; [
     cachix
     comma
+    nix-sweep
+
     eza
     delta
     fd

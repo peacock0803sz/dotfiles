@@ -20,5 +20,5 @@ jobs:
       git-author-name: 'peacock0803sz'
       git-author-email: '33555487+peacock0803sz@users.noreply.github.com'
       create-pr: false
-      minimum-release-age-days: 3
+      minimum-release-age-days: -1
       # auto-merge: true  # ignored while create-pr=false

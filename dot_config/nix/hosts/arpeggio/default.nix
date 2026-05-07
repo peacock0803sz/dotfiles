@@ -32,7 +32,6 @@ inputs.nix-darwin.lib.darwinSystem {
     ../../nix-darwin/lemonade.nix
     ../../nix-darwin/neovim.nix
     ../../nix-darwin/notizen.nix
-    #../../nix-darwin/vibra.nix
     # ../../nix-darwin/vz.nix
     {
       home-manager.backupFileExtension = "bk.nix";

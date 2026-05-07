@@ -35,7 +35,6 @@ nixpkgs.lib.nixosSystem {
     ../../nixos/notizen.nix
     ../../nixos/lemonade.nix
     ../../nixos/oksskolten.nix
-    # ../../nixos/vibra.nix
 
     ./hardware.nix
     ./disk.nix

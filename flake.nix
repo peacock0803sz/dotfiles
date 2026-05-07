@@ -61,7 +61,6 @@
       # inputs.nixpkgs.follows = "nixpkgs";
     };
     arto.url = "github:arto-app/Arto";
-    vibra.url = "github:peacock0803sz/vibra";
   };
 
   outputs = { flake-parts, ... }@inputs:

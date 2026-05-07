@@ -9,6 +9,7 @@ let
     config.allowUnfree = true;
     config.cudaSupport = true;
     overlays = [
+      inputs.vim-overlay.overlays.default
       inputs.neovim-overlay.overlays.default
       inputs.nur.overlays.default
       inputs.llm-agents.overlays.default

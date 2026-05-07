@@ -12,6 +12,7 @@ let
     overlays = [
       inputs.brew-nix.overlays.default
       inputs.nur.overlays.default
+      inputs.vim-overlay.overlays.default
       inputs.neovim-overlay.overlays.default
       inputs.emacs-overlay.overlays.default
       inputs.llm-agents.overlays.default

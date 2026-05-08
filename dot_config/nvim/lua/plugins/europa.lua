@@ -10,7 +10,9 @@ local function config()
     pattern = { "europa" },
     group = vim.api.nvim_create_augroup("EuropaConfig", { clear = true }),
     callback = function(args)
-      local opts = { silent = true, buffer = true }
+      ---@type vim.api.keyset.keymap
+      local opts = { silent = true }
+
       -- Execution (JupyterLab Shift-Enter / Ctrl-Enter / Alt-Enter).
       vim.api.nvim_buf_set_keymap(args.buf, "n", "<S-CR>", "<Plug>(europa-run-cell)", opts)
       vim.api.nvim_buf_set_keymap(args.buf, "n", "<C-CR>", "<Plug>(europa-run-cell)", opts)

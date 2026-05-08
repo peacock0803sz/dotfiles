@@ -14,6 +14,7 @@ local function config()
       local opts = { silent = true }
 
       -- Execution (JupyterLab Shift-Enter / Ctrl-Enter / Alt-Enter).
+      vim.api.nvim_buf_set_keymap(args.buf, "n", "<Space>", "<localleader>", opts)
       vim.api.nvim_buf_set_keymap(args.buf, "n", "<S-CR>", "<Plug>(europa-run-cell)", opts)
       vim.api.nvim_buf_set_keymap(args.buf, "n", "<C-CR>", "<Plug>(europa-run-cell)", opts)
       vim.api.nvim_buf_set_keymap(

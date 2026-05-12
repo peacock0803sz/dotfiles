@@ -35,6 +35,22 @@
         "type": "github"
       }
     },
+    "google": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778512042,
+        "narHash": "sha256-b07cHjEkOFGncKf9ybZPlg91HKpuISD3HBB5y+RloBo=",
+        "owner": "google",
+        "repo": "skills",
+        "rev": "626910e00d06878d26ead993de0e3296ef7d0a12",
+        "type": "github"
+      },
+      "original": {
+        "owner": "google",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -76,6 +92,7 @@
       "inputs": {
         "agent-skills-nix": "agent-skills-nix",
         "anthropic": "anthropic",
+        "google": "google",
         "vercel": "vercel"
       }
     },

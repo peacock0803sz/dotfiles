@@ -7,6 +7,10 @@
       url = "github:anthropics/skills";
       flake = false;
     };
+    google = {
+      url = "github:google/skills";
+      flake = false;
+    };
     vercel = {
       url = "github:vercel-labs/agent-skills";
       flake = false;
@@ -25,10 +29,16 @@
             path = inputs.anthropic.outPath;
             subdir = "skills";
           };
+          google = {
+            path = inputs.google.outPath;
+            subdir = "skills/cloud";
+          };
+
           vercel-labs = {
             path = inputs.vercel.outPath;
             subdir = "skills";
           };
+
           local = {
             path = "${config.home.homeDirectory}/dotfiles/dot_config/agents/local-skills";
           };
@@ -39,10 +49,16 @@
           };
         };
 
-        skills.enableAll = [ "local" ]
+        skills.enableAll = [ "local" "google" ]
           ++ lib.optional (hostName == "arpeggio") "gx-agent-recipes";
         skills.enable = [
+          "algorithmic-art"
+          "canvas-design"
+          "claude-api"
+          "doc-coauthoring"
           "frontend-design"
+          "mcp-builder"
+          "web-artifacts-builder"
           "skill-creator"
           "webapp-testing"
 

@@ -26,7 +26,7 @@ in
     brewCasks.firefox
     brewCasks.jetbrains-toolbox
     brewCasks.keycastr
-    brewCasks.linear-linear
+    brewCasks.linear
     brewCasks.marta
     brewCasks.obs
     brewCasks.orbstack

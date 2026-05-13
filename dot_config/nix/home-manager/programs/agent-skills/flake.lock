@@ -38,11 +38,11 @@
     "google": {
       "flake": false,
       "locked": {
-        "lastModified": 1778512042,
-        "narHash": "sha256-b07cHjEkOFGncKf9ybZPlg91HKpuISD3HBB5y+RloBo=",
+        "lastModified": 1778677434,
+        "narHash": "sha256-UP2lanY+Y7gzZMrLGr2fzmMgEYig0qm/4zYr6KjLWkM=",
         "owner": "google",
         "repo": "skills",
-        "rev": "626910e00d06878d26ead993de0e3296ef7d0a12",
+        "rev": "caeec93cc14812b7923bbe203ecd179f9aad4f3e",
         "type": "github"
       },
       "original": {

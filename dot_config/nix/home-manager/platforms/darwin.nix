@@ -43,7 +43,7 @@ in
     (brewCasks.istat-menus.overrideAttrs (oldAttrs: {
       src = pkgs.fetchurl {
         url = builtins.head oldAttrs.src.urls;
-        hash = "sha256-yD9gfObD2z2krFKflq/nalAwY8wh0CtCwx+2f2oRRaY=";
+        hash = "sha256-qCgMEUjHUsEP+B+e2nylse9T/Xnt765RzV0WtBSWSPY=";
       };
     }))
     (brewCasks.lasso-app.overrideAttrs (oldAttrs: {
@@ -57,8 +57,6 @@ in
   home.file = {
     ".gitconfig".source = mkOutOfStoreSymlink
       "${config.home.homeDirectory}/dotfiles/dot_config/git/.gitconfig.darwin";
-    ".ssh/config".source = mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/dotfiles/dot_config/ssh/config.darwin";
     ".config/karabiner/karabiner.json".source = mkOutOfStoreSymlink
       "${config.home.homeDirectory}/dotfiles/dot_config/karabiner/karabiner.json";
   };

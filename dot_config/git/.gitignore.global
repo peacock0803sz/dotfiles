@@ -229,3 +229,12 @@ result
 specs/*
 specs
 # }}}
+
+# Secrets / Overrides {{{
+*.env
+*.env.*
+*.secret
+*.secret.*
+*.override
+*.override.*
+# }}}

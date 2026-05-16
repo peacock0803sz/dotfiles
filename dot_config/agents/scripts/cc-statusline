@@ -165,7 +165,19 @@ def _cache_is_fresh() -> bool:
     return (time.time() - data.get("fetched_at", 0)) < CACHE_TTL
 
 
-def _get_access_token() -> str | None:
+def _read_credentials_file() -> dict | None:
+    path = pathlib.Path.home() / ".claude" / ".credentials.json"
+    try:
+        text = path.read_text()
+    except OSError:
+        return None
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        return None
+
+
+def _read_credentials_keychain() -> dict | None:
     try:
         raw = subprocess.check_output(
             [
@@ -181,8 +193,14 @@ def _get_access_token() -> str | None:
     except (subprocess.CalledProcessError, FileNotFoundError):
         return None
     try:
-        creds = json.loads(raw)
+        return json.loads(raw)
     except json.JSONDecodeError:
+        return None
+
+
+def _get_access_token() -> str | None:
+    creds = _read_credentials_file() or _read_credentials_keychain()
+    if creds is None:
         return None
     return creds.get("claudeAiOauth", {}).get("accessToken")
 

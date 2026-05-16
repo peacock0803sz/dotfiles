@@ -226,6 +226,7 @@ result
 .specify/*
 .claude/commands/speckit.*
 .claude/skills/speckit*
+.opencode/
 specs/*
 specs
 # }}}

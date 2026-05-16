@@ -1,0 +1,7 @@
+# vim:filetype=sshconfig
+
+Include ~/dotfiles/dot_config/ssh/config.base
+
+Host github.com
+  IgnoreUnknown UseKeychain
+  IdentityFile ~/.ssh/id_ed25519

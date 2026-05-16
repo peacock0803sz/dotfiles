@@ -46,6 +46,8 @@ nixpkgs.lib.nixosSystem {
       home-manager.extraSpecialArgs = { inherit hostName inputs pkgs-staging; };
       home-manager.users."${username}" = {
         imports = [
+          ./home.nix
+
           ../../home-manager
           ../../home-manager/platforms/nixos.nix
           ../../home-manager/presets/large.nix

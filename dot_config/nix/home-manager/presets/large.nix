@@ -6,7 +6,7 @@
     ../programs/claude-code.nix
     ../programs/codex.nix
     ../programs/emacs.nix
-    ../programs/gemini.nix
+    # ../programs/gemini.nix
     ../programs/neovim.nix
     ../programs/tmux.nix
   ];

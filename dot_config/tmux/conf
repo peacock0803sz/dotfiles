@@ -2,7 +2,7 @@
 set -g default-terminal "xterm-256color"
 set -sg escape-time 10
 
-set -as terminal-features ',xterm*:sixel'                                                                         
+set -as terminal-features ',*:sixel'
 set -ag terminal-overrides ',*:Smulx=\E[4::%p1%dm'          
 
 setw -g monitor-activity on

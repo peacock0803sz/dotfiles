@@ -10,7 +10,6 @@ in
   ];
 
   home.packages = with pkgs; [
-    _1password-cli
     git
 
     brewCasks.bartender

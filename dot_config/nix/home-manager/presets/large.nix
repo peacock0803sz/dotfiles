@@ -12,6 +12,8 @@
   ];
 
   home.packages = with pkgs; [
+    _1password-cli
+
     devenv
     nur.repos.peacock0803sz.gwq
     nur.repos.peacock0803sz.notizen

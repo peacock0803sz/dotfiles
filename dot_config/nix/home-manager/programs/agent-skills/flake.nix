@@ -76,6 +76,10 @@
             dest = ".codex/skills";
             structure = "link";
           };
+          opencode = {
+            dest = ".config/opencode/skills";
+            structure = "link";
+          };
         };
       };
     };

@@ -33,6 +33,7 @@ inputs.nix-darwin.lib.darwinSystem {
     ../../nix-darwin/neovim.nix
     ../../nix-darwin/notizen.nix
     # ../../nix-darwin/vz.nix
+    ./darwin.nix
     {
       home-manager.backupFileExtension = "bk.nix";
       home-manager.useGlobalPkgs = true;

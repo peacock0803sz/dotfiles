@@ -4,7 +4,7 @@
   "share": "disabled",
   "permission": {
     "bash": {
-      "*": "ask",
-    },
-  },
+      "*": "ask"
+    }
+  }
 }

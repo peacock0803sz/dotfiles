@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "adr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778925201,
+        "narHash": "sha256-hw+eiuZKD06VPKOdHJP7R9iR2DsWTe6TfWEO5kCKb5g=",
+        "owner": "drillan",
+        "repo": "adr-skills",
+        "rev": "d049a6925deee30e2dcce92e90db61f421bdb037",
+        "type": "github"
+      },
+      "original": {
+        "owner": "drillan",
+        "repo": "adr-skills",
+        "type": "github"
+      }
+    },
     "agent-skills-nix": {
       "inputs": {
         "home-manager": "home-manager",
@@ -90,6 +106,7 @@
     },
     "root": {
       "inputs": {
+        "adr": "adr",
         "agent-skills-nix": "agent-skills-nix",
         "anthropic": "anthropic",
         "google": "google",

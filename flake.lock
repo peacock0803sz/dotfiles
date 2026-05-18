@@ -1,7 +1,24 @@
 {
   "nodes": {
+    "adr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778925201,
+        "narHash": "sha256-hw+eiuZKD06VPKOdHJP7R9iR2DsWTe6TfWEO5kCKb5g=",
+        "owner": "drillan",
+        "repo": "adr-skills",
+        "rev": "d049a6925deee30e2dcce92e90db61f421bdb037",
+        "type": "github"
+      },
+      "original": {
+        "owner": "drillan",
+        "repo": "adr-skills",
+        "type": "github"
+      }
+    },
     "agent-skills": {
       "inputs": {
+        "adr": "adr",
         "agent-skills-nix": "agent-skills-nix",
         "anthropic": "anthropic",
         "google": "google",
@@ -23,11 +40,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1777875835,
-        "narHash": "sha256-+ghBYIh477YxDPd0sKeD4AwnKJSOXKT0nHuAAGHL1cQ=",
+        "lastModified": 1778976376,
+        "narHash": "sha256-BoLtbQ1OnYDL6yEK99409ZXmIhyhcStoUv9FQgA4pPc=",
         "owner": "Kyure-A",
         "repo": "agent-skills-nix",
-        "rev": "c6cb03f84cda0dc3f5daa05bf4d49f56c182f690",
+        "rev": "e1c086fcb4bc3b5805b87d32d86e9c189eb1f200",
         "type": "github"
       },
       "original": {
@@ -405,11 +422,11 @@
     "google": {
       "flake": false,
       "locked": {
-        "lastModified": 1778512042,
-        "narHash": "sha256-b07cHjEkOFGncKf9ybZPlg91HKpuISD3HBB5y+RloBo=",
+        "lastModified": 1778677434,
+        "narHash": "sha256-UP2lanY+Y7gzZMrLGr2fzmMgEYig0qm/4zYr6KjLWkM=",
         "owner": "google",
         "repo": "skills",
-        "rev": "626910e00d06878d26ead993de0e3296ef7d0a12",
+        "rev": "caeec93cc14812b7923bbe203ecd179f9aad4f3e",
         "type": "github"
       },
       "original": {
@@ -427,11 +444,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777852249,
-        "narHash": "sha256-XdbGWnFlX4McOEG5NioVsp35Ic6XL/rXnp8as71cu6o=",
+        "lastModified": 1778444552,
+        "narHash": "sha256-f18pIiR9q/p1vHY93gmAum7aHhQOG49oGvAB9+lptRo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "c909892de502b4de9e92838a503c09a9c8ebe4aa",
+        "rev": "dcebe66f958673729896eec2de4abfd86ef22d21",
         "type": "github"
       },
       "original": {
@@ -638,11 +655,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1777578337,
-        "narHash": "sha256-Ad49moKWeXtKBJNy2ebiTQUEgdLyvGmTeykAQ9xM+Z4=",
+        "lastModified": 1777954456,
+        "narHash": "sha256-hGdgeU2Nk87RAuZyYjyDjFL6LK7dAZN5RE9+hrDTkDU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "15f4ee454b1dce334612fa6843b3e05cf546efab",
+        "rev": "549bd84d6279f9852cae6225e372cc67fb91a4c1",
         "type": "github"
       },
       "original": {

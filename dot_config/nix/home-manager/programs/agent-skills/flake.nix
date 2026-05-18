@@ -3,6 +3,11 @@
 
   inputs = {
     agent-skills-nix.url = "github:Kyure-A/agent-skills-nix";
+
+    adr = {
+      url = "github:drillan/adr-skills";
+      flake = false;
+    };
     anthropic = {
       url = "github:anthropics/skills";
       flake = false;
@@ -25,6 +30,10 @@
         enable = true;
 
         sources = {
+          adr = {
+            path = inputs.adr.outPath;
+            subdir = "skills";
+          };
           anthropic = {
             path = inputs.anthropic.outPath;
             subdir = "skills";
@@ -33,7 +42,6 @@
             path = inputs.google.outPath;
             subdir = "skills/cloud";
           };
-
           vercel-labs = {
             path = inputs.vercel.outPath;
             subdir = "skills";
@@ -49,7 +57,7 @@
           };
         };
 
-        skills.enableAll = [ "local" "google" ]
+        skills.enableAll = [ "local" "adr" "google" ]
           ++ lib.optional (hostName == "arpeggio") "gx-agent-recipes";
         skills.enable = [
           "algorithmic-art"

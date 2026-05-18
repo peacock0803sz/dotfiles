@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# Sync ~/.claude/plugins/installed_plugins.json with .enabledPlugins from settings.json.
+# Registers plugins that are enabled in settings but missing from the installed registry,
+# using data already present in plugin-catalog-cache.json and the local plugin cache.
+
+set -euo pipefail
+
+CLAUDE_DIR="$HOME/.claude"
+SETTINGS="$CLAUDE_DIR/settings.json"
+INSTALLED="$CLAUDE_DIR/plugins/installed_plugins.json"
+CATALOG="$CLAUDE_DIR/plugins/plugin-catalog-cache.json"
+PLUGIN_CACHE_ROOT="$CLAUDE_DIR/plugins/cache"
+
+[ -e "$SETTINGS" ] || { echo "sync-claude-plugins: settings.json not found, skipping"; exit 0; }
+[ -e "$CATALOG" ] || { echo "sync-claude-plugins: plugin-catalog-cache.json not found (run /reload-plugins once); skipping"; exit 0; }
+
+if [ ! -e "$INSTALLED" ]; then
+  mkdir -p "$(dirname "$INSTALLED")"
+  echo '{"version": 2, "plugins": {}}' > "$INSTALLED"
+fi
+
+now=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
+
+enabled=$(jq -r '(.enabledPlugins // {}) | to_entries | .[] | select(.value == true) | .key' "$SETTINGS")
+
+for plugin_id in $enabled; do
+  if jq -e --arg p "$plugin_id" '(.plugins[$p] // []) | length > 0' "$INSTALLED" > /dev/null; then
+    continue
+  fi
+
+  name="${plugin_id%@*}"
+  marketplace="${plugin_id#*@}"
+
+  meta=$(jq -c --arg p "$plugin_id" '.catalog.plugins[$p] // empty' "$CATALOG")
+  if [ -z "$meta" ] || [ "$meta" = "null" ]; then
+    echo "sync-claude-plugins: WARNING — '$plugin_id' not in plugin-catalog-cache.json. Run /reload-plugins inside Claude Code once to fetch it."
+    continue
+  fi
+
+  version=$(echo "$meta" | jq -r '.version')
+  sha=$(echo "$meta" | jq -r '.sha // .source_sha')
+  install_path="$PLUGIN_CACHE_ROOT/$marketplace/$name/$version"
+
+  if [ ! -d "$install_path" ]; then
+    echo "sync-claude-plugins: WARNING — cache directory missing for '$plugin_id' at $install_path. Run /reload-plugins inside Claude Code once to fetch it."
+    continue
+  fi
+
+  echo "sync-claude-plugins: registering $plugin_id (version=$version)"
+  tmp=$(mktemp)
+  jq --arg p "$plugin_id" \
+     --arg path "$install_path" \
+     --arg ver "$version" \
+     --arg sha "$sha" \
+     --arg now "$now" \
+     '.plugins[$p] = [{
+        scope: "user",
+        installPath: $path,
+        version: $ver,
+        installedAt: $now,
+        lastUpdated: $now,
+        gitCommitSha: $sha
+      }]' "$INSTALLED" > "$tmp"
+  mv "$tmp" "$INSTALLED"
+done

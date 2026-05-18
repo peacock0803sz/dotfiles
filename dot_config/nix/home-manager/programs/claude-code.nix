@@ -1,4 +1,4 @@
-{ pkgs, config, hostName, inputs, ... }:
+{ pkgs, lib, config, hostName, inputs, ... }:
 let
   inherit (inputs) mcp-servers-nix;
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
@@ -15,6 +15,11 @@ in
     ".claude/statusline".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/scripts/cc-statusline";
     ".claude/notify".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/scripts/notify";
   };
+
+  home.activation.syncClaudePlugins = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    PATH="${pkgs.jq}/bin:${pkgs.coreutils}/bin:$PATH" \
+      ${pkgs.bash}/bin/bash ${../../../agents/scripts/sync-claude-plugins}
+  '';
 
   programs.claude-code = {
     enable = true;

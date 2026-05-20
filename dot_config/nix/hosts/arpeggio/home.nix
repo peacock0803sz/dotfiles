@@ -4,6 +4,19 @@ let
 in
 {
   home.packages = with pkgs; [
+    brewCasks.chatgpt
+    (brewCasks.claude.overrideAttrs (oldAttrs: {
+      postFixup = (oldAttrs.postFixup or "") + ''
+        rm -f $out/bin/claude
+      '';
+    }))
+    (brewCasks.google-gemini.overrideAttrs (oldAttrs: {
+      src = pkgs.fetchurl {
+        url = builtins.head oldAttrs.src.urls;
+        hash = "sha256-z8XyaH6XziFsKgyWUwtH8Af6cQ4J/4kT0Fcn7YHt4Zo=";
+      };
+    }))
+
     keto
     kratos
     ory

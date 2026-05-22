@@ -29,7 +29,7 @@ nixpkgs.lib.nixosSystem {
     inputs.nix-index-database.nixosModules.nix-index
     inputs.nix-monitored.nixosModules.default
     ../../nixos/default.nix
-    # ../../nixos/akkoma.nix
+    ../../nixos/anyconnect.nix
     ../../nixos/docker.nix
     ../../nixos/neovim.nix
     ../../nixos/notizen.nix

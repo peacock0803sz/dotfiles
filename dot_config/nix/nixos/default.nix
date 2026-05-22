@@ -123,6 +123,7 @@
     cmake
     gnumake
     git
+    htop
     nix-ld
     openssl
     udev-gothic-nf

@@ -101,7 +101,9 @@ jobs:
               entry=$(jq -nc --arg dir "$dir" --arg input "$name" '{dir: $dir, input: $input}')
               entries=$(jq -c --argjson entry "$entry" '. + [$entry]' <<<"$entries")
             done <<<"$names"
-          done < <(find . -name flake.lock -printf '%h\n' | sort)
+          # Process deepest flake.lock first so child path-inputs are updated and
+          # committed before any parent that consumes them via `path:` references.
+          done < <(find . -name flake.lock -printf '%h\n' | awk -F/ '{print NF, $0}' | sort -k1,1nr -k2 | cut -d' ' -f2-)
 
           count=$(jq 'length' <<<"$entries")
           echo "matrix=$entries" >> "$GITHUB_OUTPUT"

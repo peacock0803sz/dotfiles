@@ -71,7 +71,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          allowed_types='["github","git","gitlab","sourcehut","tarball"]'
+          allowed_types='["github","git","gitlab","sourcehut","tarball","path"]'
           entries='[]'
 
           while IFS= read -r dir; do

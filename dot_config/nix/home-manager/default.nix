@@ -1,5 +1,5 @@
 { ... }: {
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
   nix.registry = {
     templates = {
       from = { type = "indirect"; id = "templa"; };

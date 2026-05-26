@@ -80,7 +80,7 @@ in
           "Bash(docker compose down)"
           "Bash(git -C *)"
           "Bash(git add .)"
-          "Bash(git push -:*)"
+          "Bash(git push *)"
           "Bash(git status --untracked-files=no -:*)"
           "Bash(.venv/bin/python -c)"
           "Bash(.venv/bin/python3 -c)"

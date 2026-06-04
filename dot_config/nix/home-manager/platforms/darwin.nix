@@ -27,6 +27,7 @@ in
     brewCasks.keycastr
     brewCasks.linear
     brewCasks.marta
+    brewCasks.mimestream
     brewCasks.obs
     brewCasks.orbstack
     (brewCasks.raycast.overrideAttrs (oldAttrs: {

@@ -23,6 +23,7 @@
     cargo
     go
     nodejs
+    pnpm
     ruff
     ty
     typescript

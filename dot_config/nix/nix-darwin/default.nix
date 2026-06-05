@@ -44,6 +44,7 @@
       autoUpdate = true;
       upgrade = true;
       cleanup = "uninstall";
+      extraFlags = [ "--force-cleanup" ];
     };
     casks = [
       "1password"

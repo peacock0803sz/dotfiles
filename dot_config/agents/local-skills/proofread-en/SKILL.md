@@ -72,3 +72,4 @@ Erase every trace of AI prose: template phrasing, instruction-manual structure, 
 - Output the rewritten text only. No commentary, no preamble, no checklist.
 - Keep the original paragraph structure roughly intact; tidy into readable paragraphs.
 - Keep total length within roughly ±20% of the original.
+- Do not hard-wrap inside Markdown (one paragraph = one line). Insert no fixed-width line breaks; leave wrapping to soft wrap.

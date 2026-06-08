@@ -78,6 +78,8 @@ in
           "Bash(docker kill *)"
           "Bash(docker stop *)"
           "Bash(docker compose down)"
+          "Bash(gcloud *)"
+          "Bash(kubectl *)"
           "Bash(git -C *)"
           "Bash(git add .)"
           "Bash(git push *)"

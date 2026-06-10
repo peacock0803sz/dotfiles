@@ -5,7 +5,7 @@ let
 in
 {
   home.packages = with pkgs; [
-    emacs
+    # emacs
   ];
 
   home.file = {

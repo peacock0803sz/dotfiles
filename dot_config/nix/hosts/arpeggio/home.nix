@@ -13,7 +13,7 @@ in
     (brewCasks.google-gemini.overrideAttrs (oldAttrs: {
       src = pkgs.fetchurl {
         url = builtins.head oldAttrs.src.urls;
-        hash = "sha256-z8XyaH6XziFsKgyWUwtH8Af6cQ4J/4kT0Fcn7YHt4Zo=";
+        hash = "sha256-kUcAn77RANRb1YMJtQgULnEpbqRKNY1I2nTlyNMF3Oo=";
       };
     }))
 

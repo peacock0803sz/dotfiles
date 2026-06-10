@@ -239,3 +239,17 @@ specs
 *.override
 *.override.*
 # }}}
+
+# Personal files {{{
+**/peacock/*
+peacock.*
+*.peacock
+
+**/p3ac0ck/*
+p3ac0ck.*
+*.p3ac0ck
+
+**/peacock0803sz/*
+peacock0803sz.*
+*.peacock0803sz
+# }}}

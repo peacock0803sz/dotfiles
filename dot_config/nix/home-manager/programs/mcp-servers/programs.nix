@@ -17,7 +17,14 @@
     passwordCommand = "echo \"GITHUB_PERSONAL_ACCESS_TOKEN=$(gh auth token)\"";
   };
   terraform.enable = true;
-  nixos.enable = true;
+  nixos = {
+    enable = true;
+    # mcp-nixos 2.4.3 の test_read_text_file は /nix/store の中身依存で darwin だと flaky。
+    # nixpkgs master では無効化済みなので、nixpkgs 更新後にこの override は削除可
+    package = pkgs.mcp-nixos.overridePythonAttrs (old: {
+      disabledTests = (old.disabledTests or [ ]) ++ [ "test_read_text_file" ];
+    });
+  };
   time = {
     enable = true;
     args = [ "--local-timezone=Asia/Tokyo" ];

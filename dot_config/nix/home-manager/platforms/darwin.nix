@@ -16,14 +16,12 @@ in
     brewCasks.cleanshot
     brewCasks.contexts
     brewCasks.coteditor
-    brewCasks.dataspell
     brewCasks.deskpad
     brewCasks.discord
     brewCasks.element
     brewCasks.elgato-stream-deck
     brewCasks.fantastical
     brewCasks.firefox
-    brewCasks.jetbrains-toolbox
     brewCasks.keycastr
     brewCasks.linear
     brewCasks.marta

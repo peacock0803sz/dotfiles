@@ -31,5 +31,7 @@
       google-cloud-sdk.components.pubsub-emulator
     ])
     gws
+    kubernetes-helm
+    kubernetes-helmPlugins.helm-diff
   ];
 }

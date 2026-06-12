@@ -988,11 +988,11 @@
         "vim-src": "vim-src"
       },
       "locked": {
-        "lastModified": 1781154824,
-        "narHash": "sha256-x1c3/TgmhHydCDTH/GB4uYNGoMBByTlz6ha6yk3bctc=",
+        "lastModified": 1781246490,
+        "narHash": "sha256-SFqpEkPUzO6IfmOTfSvgwFz713IUBMUtBAZUEbQFNFk=",
         "owner": "kawarimidoll",
         "repo": "vim-overlay",
-        "rev": "ac4502d4e0b46c0eb2aae2237b7c9f59f29775d6",
+        "rev": "a41facb35faf793293c08d89b70182d90f797bdc",
         "type": "github"
       },
       "original": {

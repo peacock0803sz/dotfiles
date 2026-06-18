@@ -118,7 +118,6 @@ in
         };
       };
       enabledPlugins = {
-        "atlassian@claude-plugins-official" = if hostName == "arpeggio" then true else false;
         "pr-review-toolkit@claude-plugins-official" = true;
         "feature-dev@claude-plugins-official" = true;
         "codex@openai-codex" = true;

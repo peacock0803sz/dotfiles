@@ -221,12 +221,13 @@ result
 # AI Agents {{{
 **/.serena
 **/.claude/settings.local.json
+.opencode/
+.superpowers/*
 
 # Speckit
 .specify/*
 .claude/commands/speckit.*
 .claude/skills/speckit*
-.opencode/
 specs/*
 specs
 # }}}

@@ -216,10 +216,15 @@ result
 
 # AI Agents {{{
 docs/superpowers/**
+.superpowers/*
+
 **/.serena
 **/.claude/settings.local.json
 
 # Speckit
 .specify/*
 .claude/commands/speckit.*
+
+specs/*
+specs
 # }}}

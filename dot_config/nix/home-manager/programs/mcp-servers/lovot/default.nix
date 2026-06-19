@@ -1,0 +1,1 @@
+{ ... }: { command = "lovot"; args = [ "mcp" ]; }

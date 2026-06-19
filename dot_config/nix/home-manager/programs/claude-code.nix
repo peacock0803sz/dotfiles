@@ -159,6 +159,7 @@ in
       devin = (import ./mcp-servers/devin { inherit pkgs; });
       esa = (import ./mcp-servers/esa { inherit pkgs; });
       gcloud = (import ./mcp-servers/gcloud { inherit pkgs; });
+      lovot = (import ./mcp-servers/lovot { inherit pkgs; });
       wrike = (import ./mcp-servers/wrike { inherit pkgs; });
       slack = (import ./mcp-servers/slack { inherit pkgs; });
     } else { });

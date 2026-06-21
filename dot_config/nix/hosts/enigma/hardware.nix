@@ -27,7 +27,7 @@
 
   hardware.graphics.enable = true;
   hardware.nvidia.open = false;
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
   hardware.nvidia.prime = {
     sync.enable = true;
     nvidiaBusId = "PCI:1:0:0";

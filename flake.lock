@@ -423,11 +423,11 @@
     "google": {
       "flake": false,
       "locked": {
-        "lastModified": 1782212608,
-        "narHash": "sha256-b4gIWZwp3B2Z8Bj51tFLQW7osgFT01Gw9zYKWZz/HAs=",
+        "lastModified": 1782315996,
+        "narHash": "sha256-xK/0AodPkVJS9EV5c7JWsR7VyoXtMEGSDsRbJmcV7Zo=",
         "owner": "google",
         "repo": "skills",
-        "rev": "de09dec682e14c4956c2e8a578c49034ba149f46",
+        "rev": "28d90a333c4d900bcc76e498363e0c835dc69a5c",
         "type": "github"
       },
       "original": {
@@ -912,11 +912,11 @@
     "openai": {
       "flake": false,
       "locked": {
-        "lastModified": 1782160597,
-        "narHash": "sha256-yHrXQudq7pOeLLLAYYrAVL7CK/quyBxUlSp2SG62rt8=",
+        "lastModified": 1782268572,
+        "narHash": "sha256-t4oGnFg0YpxJaQiFpgTiwYhaFoZK6wPDiqvHoG0bXiU=",
         "owner": "openai",
         "repo": "skills",
-        "rev": "778b0e6129cf18cbaee3bf11479f583fadae8d03",
+        "rev": "49f948faa9258a0c61caceaf225e179651397431",
         "type": "github"
       },
       "original": {

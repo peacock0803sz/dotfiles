@@ -107,11 +107,11 @@
     "openai": {
       "flake": false,
       "locked": {
-        "lastModified": 1782160597,
-        "narHash": "sha256-yHrXQudq7pOeLLLAYYrAVL7CK/quyBxUlSp2SG62rt8=",
+        "lastModified": 1782268572,
+        "narHash": "sha256-t4oGnFg0YpxJaQiFpgTiwYhaFoZK6wPDiqvHoG0bXiU=",
         "owner": "openai",
         "repo": "skills",
-        "rev": "778b0e6129cf18cbaee3bf11479f583fadae8d03",
+        "rev": "49f948faa9258a0c61caceaf225e179651397431",
         "type": "github"
       },
       "original": {

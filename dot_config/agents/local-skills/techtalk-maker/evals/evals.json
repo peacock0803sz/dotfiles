@@ -1,0 +1,137 @@
+{
+  "skill_name": "techtalk-maker",
+  "evals": [
+    {
+      "id": 1,
+      "name": "lt-5min-cfp",
+      "prompt": "技術発表の資料を作りたい。\n\nテーマはTypeScriptのテンプレートリテラル型でルーティング型を組む方法。RubyKaigi系の技術カンファレンスのLT枠にCFP応募する想定で、持ち時間は5分。\n\n想定オーディエンスはWebフロントエンドエンジニアで、TypeScriptは普段書くがテンプレートリテラル型は概念しか知らない人。一番持ち帰ってもらいたいことは、テンプレートリテラル型を使うとURLパスから自動的にパラメータ型を抽出できて、ライブラリに頼らず自前で書けるという視点。\n\nabstract(150字以内)、description、motivation、本番スライド(slidev形式)を成果物として用意してほしい。\n\n出力先ディレクトリは {OUTPUT_DIR}。abstract.md, description.md, motivation.md, slides.md の4ファイルに分けて書き出すこと。",
+      "expected_output": "5分LT向けの一式。abstract/description/motivation 3ファイルと、slidev形式のslides.md。10分以下制約に従い、起承転結構成なし、自己紹介専用ページなし、主題スライドが冒頭近くにある。",
+      "assertions": [
+        {
+          "text": "abstract.md, description.md, motivation.md, slides.md の4ファイルがすべて存在する",
+          "category": "deliverable"
+        },
+        {
+          "text": "abstract.md の本文(コードブロック・見出し除く)が150字以下",
+          "category": "constraint"
+        },
+        {
+          "text": "slides.md に slidev frontmatter(theme か title)がある",
+          "category": "format"
+        },
+        {
+          "text": "slides.md のスライドが3〜5枚に収まっている(--- で区切られたスライド数)",
+          "category": "pacing"
+        },
+        {
+          "text": "slides.md に「自己紹介」「Profile」「About me」だけを内容とする独立スライドがない",
+          "category": "short-format-rule"
+        },
+        {
+          "text": "slides.md のスライド見出しに「起」「承」「転」「結」「序」「破」「急」のいずれの単独漢字も使われていない",
+          "category": "short-format-rule"
+        },
+        {
+          "text": "slides.md の冒頭2枚目(タイトルの次)が「主題」「Key takeaway」「持ち帰り」など、一番伝えたいことを示すスライドである",
+          "category": "structure"
+        },
+        {
+          "text": "slides.md の少なくとも2枚のスライドに <!-- ... --> 形式の speaker note があり、speaker note 本文が30文字以上ある",
+          "category": "structure"
+        },
+        {
+          "text": "slides.md に存在する http(s) リンクは、example.comか公式ドメイン(typescriptlang.org, mdn-…, github.com など)に限られ、明らかに架空(qiita.com/users/aaaaaaaa など実在性の薄いハンドル名)が含まれない",
+          "category": "links"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "internal-10min",
+      "prompt": "社内勉強会で発表する資料を作りたい。\n\nテーマはGitHub Actionsのworkflow_callによるcomposite workflowの運用。CFP応募は不要(社内発表で確定済み)、持ち時間は10分。\n\n想定オーディエンスは社内SREチーム10人。GitHub Actionsは日常的に使うがworkflow_callは導入していない。一番持ち帰ってもらいたいことは、workflow_callを使うとPRレビューを通せる共通workflowが組めて、秘密値の継承ルールを覚えれば運用に乗せられるという理解。\n\nスライド形式の指定はなし(あなたのデフォルトでよい)。アウトラインと本番スライドを用意してほしい。\n\n出力先ディレクトリは {OUTPUT_DIR}。outline.md と slides.md の2ファイルに書き出すこと。",
+      "expected_output": "10分の社内発表向け。アウトライン1枚 + slidev形式のslides.md。10分以下制約に従い、起承転結なし、自己紹介ページなし、主題スライドが冒頭近く。",
+      "assertions": [
+        {
+          "text": "outline.md と slides.md の2ファイルが存在する",
+          "category": "deliverable"
+        },
+        {
+          "text": "outline.md にブロック名・狙い・配分時間・想定スライド枚数が並んだ表またはリストがあり、配分時間の合計が10分以内に収まる",
+          "category": "structure"
+        },
+        {
+          "text": "slides.md のスライドが6〜10枚に収まっている",
+          "category": "pacing"
+        },
+        {
+          "text": "slides.md に slidev frontmatter がある",
+          "category": "format"
+        },
+        {
+          "text": "slides.md に「自己紹介」「Profile」「About me」だけを内容とする独立スライドがない",
+          "category": "short-format-rule"
+        },
+        {
+          "text": "slides.md のスライド見出しに「起」「承」「転」「結」「序」「破」「急」のいずれの単独漢字も使われていない",
+          "category": "short-format-rule"
+        },
+        {
+          "text": "slides.md の冒頭2枚目が主題スライドで、workflow_callで共通workflowが組める旨が書かれている",
+          "category": "structure"
+        },
+        {
+          "text": "slides.md の少なくとも3枚のスライドに speaker note があり、各speaker note本文が30文字以上",
+          "category": "structure"
+        },
+        {
+          "text": "slides.md の http(s) リンクは GitHub公式 docs.github.com か github.com のレポジトリ、または明確に実在するURLに限られ、明らかに架空のURLが含まれない",
+          "category": "links"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "conf-30min-cfp",
+      "prompt": "技術カンファレンスで発表する資料を作りたい。\n\nテーマはRustの所有権モデルをPython開発者向けに翻訳する話。CFP応募想定で、持ち時間は30分、別途質疑応答が5分ある。\n\n想定オーディエンスはPython開発者で、Rustを試したが所有権でハマって挫折した経験がある人。一番持ち帰ってもらいたいことは、所有権はPythonの参照カウントと同じ問題(誰がメモリを解放するか)を、コンパイル時に静的に解く設計だと捉え直せる、という視点。\n\nabstract(300字以内)、description、motivation、本番スライド(slidev形式)を用意してほしい。\n\n出力先ディレクトリは {OUTPUT_DIR}。abstract.md, description.md, motivation.md, slides.md の4ファイルに書き出すこと。",
+      "expected_output": "30分発表向けの一式。10分以下制約は適用されない(起承転結を使ってもよい)。主題スライドは冒頭、abstract/description/motivation揃い、slide枚数15〜25枚程度、speaker noteが各スライドに付く。",
+      "assertions": [
+        {
+          "text": "abstract.md, description.md, motivation.md, slides.md の4ファイルがすべて存在する",
+          "category": "deliverable"
+        },
+        {
+          "text": "abstract.md の本文が300字以下",
+          "category": "constraint"
+        },
+        {
+          "text": "abstract.md の本文に「持ち帰ってもらいたいこと(=参照カウントと同じ問題をコンパイル時に静的に解く設計)」の趣旨が含まれる",
+          "category": "content"
+        },
+        {
+          "text": "slides.md のスライドが15〜25枚に収まっている",
+          "category": "pacing"
+        },
+        {
+          "text": "slides.md に slidev frontmatter がある",
+          "category": "format"
+        },
+        {
+          "text": "slides.md の冒頭2枚目が主題スライドで、参照カウントとコンパイル時解決の対比が書かれている",
+          "category": "structure"
+        },
+        {
+          "text": "slides.md の半数以上のスライドに speaker note があり、各speaker note本文が30文字以上",
+          "category": "structure"
+        },
+        {
+          "text": "slides.md の http(s) リンクは doc.rust-lang.org, docs.python.org, MDN, RFC など実在の公式ドメインに限られ、明らかに架空のURLが含まれない",
+          "category": "links"
+        },
+        {
+          "text": "motivation.md に、発表者の動機(何に困った/何を発見した)と聴衆にとっての価値(何が学べる/何が変わる)の両面が含まれる",
+          "category": "content"
+        }
+      ]
+    }
+  ]
+}

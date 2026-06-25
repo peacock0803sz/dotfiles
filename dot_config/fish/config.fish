@@ -51,7 +51,7 @@ if test (command -v nvim)
         if not set -q argv[1]
             set argv claude
         end
-        nvim "+:Aibo $argv[1]"
+        nvim "+:Aibo $argv"
         # }}}
     end
 end

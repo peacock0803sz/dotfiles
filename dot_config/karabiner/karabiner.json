@@ -11,6 +11,7 @@
                   {
                     "bundle_identifiers": [
                       "^org\\.alacritty$",
+                      "^com\\.github.\\wez\\.wezterm$",
                       "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_if"

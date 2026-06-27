@@ -41,11 +41,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1782183570,
-        "narHash": "sha256-4LrewbD02WDf0CosGP/yO1yLneTeeJM39SjFa99kSRQ=",
+        "lastModified": 1782575918,
+        "narHash": "sha256-YzRp956W8ci29lYgsXCBSt8SsIcWBv+67/i9HWSl0Q0=",
         "owner": "Kyure-A",
         "repo": "agent-skills-nix",
-        "rev": "fe867fe7be3a55d939746b278194deee4814fb08",
+        "rev": "79eba8b513730982ab2a00dfbccd4fae84321b9c",
         "type": "github"
       },
       "original": {
@@ -57,11 +57,11 @@
     "anthropic": {
       "flake": false,
       "locked": {
-        "lastModified": 1781037316,
-        "narHash": "sha256-1D9otXxDvmKASBu/vtAEWv6kE+U+jG4OxZpRLZbGEF0=",
+        "lastModified": 1782576476,
+        "narHash": "sha256-7JB/zj2rBFdvbbFuGIFDXnm1TN26E67fRO1deQvzs34=",
         "owner": "anthropics",
         "repo": "skills",
-        "rev": "57546260929473d4e0d1c1bb75297be2fdfa1949",
+        "rev": "35414756ca55738e050562e272a6bbc6273aa926",
         "type": "github"
       },
       "original": {
@@ -423,11 +423,11 @@
     "google": {
       "flake": false,
       "locked": {
-        "lastModified": 1782454618,
-        "narHash": "sha256-V9PPFQSj5h1YyO6rAnSR5DgT6t/fqmtPsUNIt2fTBaE=",
+        "lastModified": 1782565601,
+        "narHash": "sha256-IOaS+LRF7pU8n/KUgynyIbqYJsgoqv0ahkkMrU8S6ZQ=",
         "owner": "google",
         "repo": "skills",
-        "rev": "1c3a24610e16b0832be987812de8ac27a5da7b1a",
+        "rev": "4f2b58c848e15b371ecc5079869a8381d9249fc9",
         "type": "github"
       },
       "original": {

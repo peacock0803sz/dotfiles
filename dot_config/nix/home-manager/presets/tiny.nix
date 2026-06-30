@@ -11,6 +11,7 @@
 
     eza
     delta
+    dust
     fd
     fzf
     gh

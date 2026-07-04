@@ -8,7 +8,7 @@ let
 
   pkgs = import nixpkgs {
     inherit system;
-    config.allowUnfree = true;
+    config = import ../../nixpkgs.nix;
     overlays = [
       inputs.brew-nix.overlays.default
       inputs.nur.overlays.default

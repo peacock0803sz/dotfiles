@@ -6,8 +6,7 @@ let
   hostName = "enigma";
   pkgs = import nixpkgs {
     inherit system;
-    config.allowUnfree = true;
-    config.cudaSupport = true;
+    config = (import ../../nixpkgs.nix) // { cudaSupport = true; };
     overlays = [
       inputs.vim-overlay.overlays.default
       inputs.neovim-overlay.overlays.default

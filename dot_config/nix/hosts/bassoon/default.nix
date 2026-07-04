@@ -5,7 +5,7 @@ let
   system = "x86_64-linux";
   pkgs = import nixpkgs {
     inherit system;
-    config.allowUnfree = true;
+    config = import ../../nixpkgs.nix;
   };
 in
 nixpkgs.lib.nixosSystem {

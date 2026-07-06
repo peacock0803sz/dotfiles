@@ -28,6 +28,7 @@ in
 
     settings = {
       theme = "light";
+      tui = "default";
       autoUpdates = false;
       includeCoAuthoredBy = false;
       autoCompactEnabled = false;

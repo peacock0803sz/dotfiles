@@ -20,6 +20,7 @@
     jq
     lemonade
     ripgrep
+    trash-cli
     wget
 
     bun

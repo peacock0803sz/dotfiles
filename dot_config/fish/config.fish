@@ -1,6 +1,6 @@
 # vim:foldmethod=marker
 fish_default_key_bindings
-set -U fish_greeting
+set --global --export fish_greeting
 set --global --export LANG en_US.UTF-8
 set --global --export XDG_CONFIG_HOME $HOME/.config
 
@@ -8,7 +8,7 @@ set --global --export XDG_CONFIG_HOME $HOME/.config
 switch (uname -s)
     case Darwin
         source $HOME/dotfiles/dot_config/fish/darwin.fish
-        if test $(hostname) = 'arpeggio'
+        if test $(hostname) = arpeggio
             source $HOME/dotfiles/dot_config/fish/work.fish
         end
     case Linux

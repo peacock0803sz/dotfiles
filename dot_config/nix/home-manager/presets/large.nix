@@ -10,7 +10,6 @@
     # ../programs/gemini.nix
     ../programs/neovim.nix
     ../programs/tmux.nix
-    ../programs/zellij.nix
   ];
 
   home.packages = with pkgs; [

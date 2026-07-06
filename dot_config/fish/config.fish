@@ -44,6 +44,7 @@ if test (command -v nvim)
 
     # aibo.nvim {{{
     function aibo
+        set --export CLAUDE_CODE_NO_FLICKER 1
         if not set -q NVIM_APPNAME
             set --export NVIM_APPNAME 'nvim.aibo'
         end

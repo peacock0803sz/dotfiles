@@ -105,11 +105,11 @@ set -g status-justify "left"
 set -g status-position "top"
 set -g status-interval 1
 
-set -g pane-border-status top
+set -g pane-border-status bottom
 set -g pane-border-format ""
 
 set -g status-right-length 120
 set -g status-left-length 120
-set -g status-left "#{E:@catppuccin_status_session}#[fg=#{@thm_fg},bg=#{@thm_bg}] "
-set -g status-right "#{E:@catppuccin_status_host}"
+# set -g status-left "#{E:@peafowl_status_session}#[fg=#{@thm_fg},bg=#{@thm_bg}] "
+set -g status-right ""
 #}}}

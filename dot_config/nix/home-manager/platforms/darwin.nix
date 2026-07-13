@@ -11,6 +11,7 @@ in
 
   home.packages = with pkgs; [
     git
+    defaultbrowser
 
     brewCasks.bartender
     brewCasks.cleanshot

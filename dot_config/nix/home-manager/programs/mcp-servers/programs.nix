@@ -1,7 +1,24 @@
-{ pkgs, ... }: {
+{ pkgs, mcp-servers-nix, ... }: {
   serena = {
     enable = true;
     args = [ "--context" "ide-assistant" "--enable-web-dashboard" "False" ];
+    # qtwebview 6.11.1 が aarch64-darwin でビルド不能 (ld が SIGTRAP でクラッシュ) のため、
+    # pywebview から Qt バックエンド (pyside6/qtpy) を除去。macOS では Cocoa バックエンドで動く。
+    # Hydra も同一エラーで失敗中: https://hydra.nixos.org/build/337046365
+    # (2026-07-13 時点で nixpkgs に issue/PR は未起票)。qtwebview が直ったらこの override は削除可
+    package = pkgs.callPackage "${mcp-servers-nix}/pkgs/official/serena" {
+      python3Packages = pkgs.python3Packages.overrideScope (
+        _final: prev: {
+          pywebview = prev.pywebview.overridePythonAttrs (old: {
+            dependencies = builtins.filter
+              (
+                d: !(builtins.elem (d.pname or "") [ "pyside6" "qtpy" ])
+              )
+              old.dependencies;
+          });
+        }
+      );
+    };
   };
   context7.enable = true;
   playwright = {

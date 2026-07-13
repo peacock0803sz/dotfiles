@@ -1,4 +1,4 @@
-{ pkgs, lib, config, hostName, inputs, ... }:
+{ pkgs, lib, config, hostName, inputs, llm-agents, ... }:
 let
   inherit (inputs) mcp-servers-nix;
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
@@ -6,7 +6,7 @@ let
   mcp-servers = import ./mcp-servers { inherit pkgs mcp-servers-nix; };
 in
 {
-  home.packages = with pkgs; [
+  home.packages = [
     llm-agents.ccusage
   ];
 
@@ -23,7 +23,7 @@ in
 
   programs.claude-code = {
     enable = true;
-    package = pkgs.llm-agents.claude-code;
+    package = llm-agents.claude-code;
     context = ../../../agents/AGENTS.md;
 
     settings = {

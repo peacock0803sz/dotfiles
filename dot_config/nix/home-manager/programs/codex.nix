@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, llm-agents, ... }:
 let
   inherit (inputs) mcp-servers-nix;
   config = mcp-servers-nix.lib.mkConfig pkgs {
@@ -14,7 +14,7 @@ in
     enable = true;
     package = pkgs.symlinkJoin {
       name = "codex";
-      paths = [ pkgs.llm-agents.codex ];
+      paths = [ llm-agents.codex ];
       nativeBuildInputs = [ pkgs.makeWrapper ];
       postBuild = ''
         wrapProgram $out/bin/codex "--add-flags" "-c '$(cat ${config})'"

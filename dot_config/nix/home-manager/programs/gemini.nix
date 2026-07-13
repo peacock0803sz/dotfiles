@@ -1,11 +1,11 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, llm-agents, ... }:
 let
   inherit (inputs) mcp-servers-nix;
 in
 {
   programs.gemini-cli = {
     enable = true;
-    package = pkgs.llm-agents.gemini-cli;
+    package = llm-agents.gemini-cli;
     context = { GEMINI = "../../../agents/AGENTS.md"; };
     settings = {
       theme = "light";

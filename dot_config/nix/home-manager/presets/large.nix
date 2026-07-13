@@ -1,4 +1,10 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }:
+let
+  llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+in
+{
+  _module.args = { inherit llm-agents; };
+
   imports = [
     ./small.nix
 

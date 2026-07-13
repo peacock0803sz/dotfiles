@@ -1,4 +1,4 @@
-{ pkgs, config, inputs, ... }:
+{ pkgs, config, inputs, llm-agents, ... }:
 let
   inherit (inputs) mcp-servers-nix;
   mcp-servers = import ./mcp-servers { inherit pkgs mcp-servers-nix; };
@@ -11,7 +11,7 @@ in
 
   programs.opencode = {
     enable = true;
-    package = pkgs.llm-agents.opencode;
+    package = llm-agents.opencode;
     context = ../../../agents/AGENTS.md;
     enableMcpIntegration = true;
     settings = builtins.fromJSON (builtins.readFile ./opencode/settings.json);

@@ -11,7 +11,6 @@ let
       inputs.vim-overlay.overlays.default
       inputs.neovim-overlay.overlays.default
       inputs.nur.overlays.default
-      inputs.llm-agents.overlays.default
     ];
   };
   pkgs-staging = import nixpkgs-staging {

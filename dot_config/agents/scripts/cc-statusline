@@ -9,7 +9,7 @@ import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Self
 
@@ -48,9 +48,12 @@ class RateLimitWindow:
 
     @classmethod
     def from_dict(cls, d: dict | None) -> Self:
+        resets_at = (d or {}).get("resets_at")
+        if isinstance(resets_at, (int, float)):
+            resets_at = datetime.fromtimestamp(resets_at, tz=timezone.utc).isoformat()
         return cls(
             used_percentage=(d or {}).get("used_percentage"),
-            resets_at=(d or {}).get("resets_at"),
+            resets_at=resets_at,
         )
 
 
@@ -64,9 +67,9 @@ class RateLimits:
     def from_dict(cls, d: dict | None) -> Self:
         d = d or {}
         return cls(
-            five_hour=RateLimitWindow.from_dict(d.get("5_hour")),
-            seven_day=RateLimitWindow.from_dict(d.get("7_day")),
-            seven_day_sonnet=RateLimitWindow.from_dict(d.get("7_day_sonnet")),
+            five_hour=RateLimitWindow.from_dict(d.get("five_hour")),
+            seven_day=RateLimitWindow.from_dict(d.get("seven_day")),
+            seven_day_sonnet=RateLimitWindow.from_dict(d.get("seven_day_sonnet")),
         )
 
     @property

@@ -36,6 +36,30 @@
                 "type": "basic"
               }
             ]
+          },
+          {
+            "description": "Illustrator",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com\\.adobe\\.illustrator$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "backslash"
+                },
+                "to": [
+                  {
+                    "key_code": "non_us_backslash"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
           }
         ]
       },

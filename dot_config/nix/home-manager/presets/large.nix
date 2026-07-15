@@ -24,6 +24,7 @@ in
     devenv
     nur.repos.peacock0803sz.gwq
     nur.repos.peacock0803sz.notizen
+    nur.repos.peacock0803sz.vde-layout
     vim
 
     cargo

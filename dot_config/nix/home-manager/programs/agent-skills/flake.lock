@@ -38,11 +38,11 @@
     "anthropic": {
       "flake": false,
       "locked": {
-        "lastModified": 1782929483,
-        "narHash": "sha256-U7Nt1xrFOSOEm4vuWmy4pVsEyvv+Hj4sv8yXOofmwAw=",
+        "lastModified": 1784256457,
+        "narHash": "sha256-QZ+zJkyLd/42rxgtJEZSUOz9R75Tse6UXW7G0nOkFS8=",
         "owner": "anthropics",
         "repo": "skills",
-        "rev": "9d2f1ae187231d8199c64b5b762e1bdf2244733d",
+        "rev": "fa0fa64bdc967915dc8399e803be67759e1e62b8",
         "type": "github"
       },
       "original": {

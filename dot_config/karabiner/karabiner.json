@@ -54,7 +54,7 @@
                 },
                 "to": [
                   {
-                    "key_code": "non_us_backslash"
+                    "key_code": "non_us_pound"
                   }
                 ],
                 "type": "basic"

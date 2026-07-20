@@ -64,7 +64,7 @@ jobs:
       matrix: ${{ steps.discover.outputs.matrix }}
       has-updates: ${{ steps.discover.outputs.has-updates }}
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - id: discover
         env:
           REQUESTED: ${{ inputs.flake-inputs }}
@@ -130,7 +130,7 @@ jobs:
       GIT_COMMITTER_NAME: 'github-actions[bot]'
       GIT_COMMITTER_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 

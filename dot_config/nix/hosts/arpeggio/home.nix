@@ -10,12 +10,6 @@ in
         rm -f $out/bin/claude
       '';
     }))
-    (brewCasks.google-gemini.overrideAttrs (oldAttrs: {
-      src = pkgs.fetchurl {
-        url = builtins.head oldAttrs.src.urls;
-        hash = "sha256-kUcAn77RANRb1YMJtQgULnEpbqRKNY1I2nTlyNMF3Oo=";
-      };
-    }))
 
     keto
     kratos

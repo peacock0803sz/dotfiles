@@ -11,6 +11,8 @@ in
       '';
     }))
 
+    yarn
+
     keto
     kratos
     ory

@@ -12,6 +12,7 @@ in
     }))
 
     yarn
+    lefthook
 
     keto
     kratos

@@ -10,7 +10,7 @@ end
 local spec = {
   "https://github.com/pwntester/octo.nvim",
   config = config,
-  cond = utils.check_enable({ arpeggio = true }),
+  cond = utils.check_enable({ arpeggio = false }),
   dependencies = {
     "https://github.com/nvim-lua/plenary.nvim",
     "https://github.com/ibhagwan/fzf-lua",

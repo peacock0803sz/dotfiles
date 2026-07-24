@@ -29,7 +29,6 @@ in
     brewCasks.mimestream
     brewCasks.obs
     brewCasks.orbstack
-    brewCasks.plaud
     (brewCasks.raycast.overrideAttrs (oldAttrs: {
       src = oldAttrs.src.overrideAttrs (_: { name = "raycast.dmg"; });
     }))

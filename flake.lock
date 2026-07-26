@@ -198,11 +198,11 @@
         "nur-packages": "nur-packages"
       },
       "locked": {
-        "lastModified": 1783764614,
-        "narHash": "sha256-95i3u+8QIYxKgNorsGtQ7ZodXeFNNjLDZAqQn2nItX4=",
+        "lastModified": 1785069278,
+        "narHash": "sha256-ugzf4xDvfE6XQA436CioqmLVfnOoRksB1JCaWhugnxw=",
         "owner": "takeokunn",
         "repo": "darwin-vz-nix",
-        "rev": "85e258382ef6baacf21496c18fe8ddf43b141704",
+        "rev": "c25e773fd721edeb361a222d31e0723d39c515dc",
         "type": "github"
       },
       "original": {

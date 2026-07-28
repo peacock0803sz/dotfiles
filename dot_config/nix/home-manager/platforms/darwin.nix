@@ -18,7 +18,6 @@ in
     brewCasks.contexts
     brewCasks.coteditor
     brewCasks.deskpad
-    brewCasks.discord
     brewCasks.element
     brewCasks.elgato-stream-deck
     brewCasks.fantastical

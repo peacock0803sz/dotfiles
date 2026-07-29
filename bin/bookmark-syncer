@@ -1,0 +1,778 @@
+#!/usr/bin/env -S uv run --script
+# vim: set filetype=python:
+# bookmark-syncer - Mirror Vivaldi bookmarks into a Firefox profile
+#
+# Vivaldi の Bookmarks (Chromium JSON) を正として、Firefox の特定プロファイルの
+# places.sqlite に直接書き込む一方向ミラー。bookmark_bar はツールバーへ、other は
+# ブックマークメニューへ、フォルダで包まずそのまま反映する。
+# 対象は --source-profile (Vivaldi) と --dest-profile (Firefox) で選ぶ。どちらも
+# 表示名 (Work 等) とディレクトリ名 (Default 等) の両方を受け付ける。
+#
+# 前提と安全策
+# - Firefox 起動中は一切書かない (起動中の直書きは Places のメモリキャッシュと
+#   矛盾して破損リスクがあるため)。スキップして launchd の次回実行に任せる
+# - 書き込み前に places.sqlite をバックアップし、書き込み後は Firefox 自身の
+#   整合性チェック (PlacesDBUtils 相当) をトランザクション内で実行、違反があれば
+#   ロールバックする
+# - url_hash は mozilla::places::HashURL の移植。実 DB の全行と bit-exact 一致を
+#   検証済み (schema 84/86)
+# - Firefox Sync が有効なため、削除は moz_bookmarks_deleted へのトゥームストーン、
+#   変更は syncChangeCounter の加算で Sync エンジンに伝える。差分同期で guid を
+#   保ち、変化のない項目を Sync 上で作り直さない
+
+import argparse
+import json
+import os
+import secrets
+import shutil
+import sqlite3
+import subprocess
+import sys
+import tempfile
+import time
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Any
+from urllib.parse import urlsplit
+
+# 環境変数はパス直指定の上書き (テスト用)。通常はプロファイル名フラグで選ぶ
+_SOURCE = os.environ.get("BOOKMARK_SYNCER_SOURCE")
+_DEST = os.environ.get("BOOKMARK_SYNCER_DEST")
+VIVALDI_DIR = Path.home() / "Library/Application Support/Vivaldi"
+FIREFOX_DIR = Path.home() / "Library/Application Support/Firefox"
+DEFAULT_SOURCE_PROFILE = "Default"
+DEFAULT_DEST_PROFILE = "Work"
+
+# vivaldi:// 等の Firefox で開けない URL は持ち込まない。javascript: の
+# ブックマークレットは places 直書きなら機能するので通す
+ALLOWED_SCHEMES = frozenset({"http", "https", "file", "javascript"})
+
+# Chromium のタイムスタンプは 1601-01-01 起点のマイクロ秒
+WEBKIT_EPOCH_OFFSET_US = 11644473600 * 1_000_000
+
+# 旧方式 (ManagedBookmarks ポリシー) の残骸。見つけたら掃除する
+POLICY_DOMAIN = "org.mozilla.firefox"
+POLICY_KEYS = ("ManagedBookmarks", "EnterprisePoliciesEnabled")
+
+GUID_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
+
+TYPE_BOOKMARK = 1
+TYPE_FOLDER = 2
+SYNC_STATUS_NEW = 1
+SYNC_STATUS_NORMAL = 2
+
+# mozilla::places::HashURL の移植 (Helpers.cpp + mfbt/HashFunctions.h)。
+# 48bit = (先頭50文字内の scheme の 16bit ハッシュ << 32) + spec 先頭1500バイトの
+# 32bit ハッシュ
+_M32 = 0xFFFFFFFF
+_GOLDEN_RATIO = 0x9E3779B9
+
+
+def _hash_bytes(data: bytes) -> int:
+    """mfbt/HashFunctions.h の golden-ratio ハッシュ (32bit)。
+
+    >>> _hash_bytes(b"")
+    0
+    >>> _hash_bytes(b"https") == _hash_bytes(b"https")
+    True
+    >>> _hash_bytes(b"https") != _hash_bytes(b"http")
+    True
+    """
+    h = 0
+    for byte in data:
+        h = (_GOLDEN_RATIO * ((((h << 5) & _M32) | (h >> 27)) ^ byte)) & _M32
+    return h
+
+
+def url_hash(spec: str) -> int:
+    """moz_places.url_hash と bit-exact 一致する 48bit ハッシュ。
+
+    期待値は実プロファイルの places.sqlite に Firefox が保存した値。
+    scheme が違うだけで上位 16bit が変わる。
+    >>> url_hash("https://example.invalid/a")
+    47359684153994
+    >>> url_hash("http://example.invalid/a")
+    125510873928794
+    >>> url_hash("nocolon") == _hash_bytes(b"nocolon")
+    True
+    """
+    raw = spec.encode("utf-8")
+    full = _hash_bytes(raw[:1500])
+    idx = raw[:50].find(b":")
+    if idx < 0:
+        return full
+    return ((_hash_bytes(raw[:idx]) & 0xFFFF) << 32) + full
+
+
+def gen_guid() -> str:
+    """Places の guid 形式 (base64url 12文字) の乱数 ID。
+
+    >>> len(gen_guid())
+    12
+    >>> set(gen_guid()) <= set(GUID_ALPHABET)
+    True
+    """
+    return "".join(secrets.choice(GUID_ALPHABET) for _ in range(12))
+
+
+@dataclass
+class Node:
+    title: str
+    url: str | None = None
+    date_added: int = 0
+    children: list["Node"] = field(default_factory=list)
+
+    @property
+    def is_folder(self) -> bool:
+        """
+        >>> Node(title="dir").is_folder
+        True
+        >>> Node(title="", url="https://example.com/").is_folder
+        False
+        """
+        return self.url is None
+
+
+@dataclass
+class Stats:
+    added: int = 0
+    retitled: int = 0
+    moved: int = 0
+    deleted: int = 0
+    kept: int = 0
+    filtered: int = 0
+
+    @property
+    def changes(self) -> int:
+        """
+        >>> Stats(added=1, moved=2, deleted=3, kept=100).changes
+        6
+        """
+        return self.added + self.retitled + self.moved + self.deleted
+
+    def summary(self) -> str:
+        """
+        >>> Stats(added=1, deleted=2, kept=3).summary()
+        '+1 ~0 moved:0 -2 kept:3 filtered:0'
+        """
+        return (
+            f"+{self.added} ~{self.retitled} moved:{self.moved} -{self.deleted}"
+            f" kept:{self.kept} filtered:{self.filtered}"
+        )
+
+
+def now_us() -> int:
+    return int(time.time() * 1_000_000)
+
+
+# --- Vivaldi 側 (読み取り専用) ---
+
+
+def load_vivaldi(path: Path) -> dict[str, Any]:
+    # Vivaldi は稼働中もこのファイルを書き換えるので、複製してからパースする
+    with tempfile.TemporaryDirectory() as tmpdir:
+        copied = Path(tmpdir) / path.name
+        _ = shutil.copy2(path, copied)
+        return json.loads(copied.read_text(encoding="utf-8"))
+
+
+def convert_children(raw: dict[str, Any], stats: Stats) -> list[Node]:
+    """Chromium のブックマークノードの children を Node の木へ変換する。
+
+    >>> stats = Stats()
+    >>> nodes = convert_children({"children": [
+    ...     {"type": "url", "name": "Example", "url": "https://example.com/",
+    ...      "date_added": "13000000000000000"},
+    ...     {"type": "url", "name": "https://example.com/x",
+    ...      "url": "https://example.com/x", "date_added": "13000000000000000"},
+    ...     {"type": "url", "name": "Speed Dial", "url": "vivaldi://startpage",
+    ...      "date_added": "13000000000000000"},
+    ...     {"type": "folder", "name": "Dir", "date_added": "13000000000000000",
+    ...      "children": []},
+    ... ]}, stats)
+    >>> [(n.title, n.url) for n in nodes]
+    [('Example', 'https://example.com/'), ('', 'https://example.com/x'), ('Dir', None)]
+    >>> stats.filtered
+    1
+
+    Chrome epoch (1601年起点µs) は Unix epoch µs へ変換する。
+    >>> convert_children({"children": [{"type": "url", "name": "a",
+    ...     "url": "https://example.com/", "date_added": "11644473600000001"}]},
+    ...     Stats())[0].date_added
+    1
+    """
+    nodes: list[Node] = []
+    for child in raw.get("children", []):
+        kind = child.get("type")
+        added = int(child.get("date_added", 0)) - WEBKIT_EPOCH_OFFSET_US
+        added = added if added > 0 else now_us()
+        if kind == "url":
+            url = child.get("url", "")
+            try:
+                scheme = urlsplit(url).scheme
+            except ValueError:
+                scheme = ""
+            if scheme not in ALLOWED_SCHEMES:
+                stats.filtered += 1
+                continue
+            # Chromium は無題のブックマークに URL 文字列を name として入れる。
+            # Firefox の流儀は無題 = NULL (表示は URL) なので、name が URL と
+            # 一致するものは無題として扱いタイトルに焼き込まない
+            name = child.get("name") or ""
+            nodes.append(
+                Node(title="" if name == url else name, url=url, date_added=added)
+            )
+        elif kind == "folder":
+            nodes.append(
+                Node(
+                    title=child.get("name", ""),
+                    date_added=added,
+                    children=convert_children(child, stats),
+                )
+            )
+    return nodes
+
+
+# --- Firefox 側 ---
+
+
+def firefox_running() -> bool:
+    return (
+        subprocess.run(["pgrep", "-x", "firefox"], capture_output=True).returncode == 0
+    )
+
+
+def vivaldi_profiles() -> dict[str, str]:
+    """Local State の表示名からディレクトリ名への対応。"""
+    state = json.loads((VIVALDI_DIR / "Local State").read_text(encoding="utf-8"))
+    cache = state.get("profile", {}).get("info_cache", {})
+    return {(meta.get("name") or dirname): dirname for dirname, meta in cache.items()}
+
+
+def resolve_source(profile: str) -> Path:
+    if _SOURCE:
+        return Path(_SOURCE)
+    direct = VIVALDI_DIR / profile / "Bookmarks"
+    if direct.exists():
+        return direct
+    # ディレクトリ名で見つからなければ Local State の表示名から引く
+    profiles = vivaldi_profiles()
+    if profile in profiles:
+        return VIVALDI_DIR / profiles[profile] / "Bookmarks"
+    known = sorted(f"{name} ({dirname})" for name, dirname in profiles.items())
+    raise LookupError(
+        f"vivaldi profile {profile!r} not found (available: {', '.join(known)})"
+    )
+
+
+def firefox_profiles() -> dict[str, str]:
+    """アクティブな (最新の) プロファイルグループの表示名から相対パスへの対応。"""
+    groups = sorted(
+        (FIREFOX_DIR / "Profile Groups").glob("*.sqlite"),
+        key=lambda p: p.stat().st_mtime,
+        reverse=True,
+    )
+    if not groups:
+        return {}
+    con = sqlite3.connect(f"file:{groups[0]}?mode=ro", uri=True)
+    try:
+        return dict(con.execute("SELECT name, path FROM Profiles").fetchall())
+    finally:
+        con.close()
+
+
+def resolve_dest(profile: str) -> Path:
+    if _DEST:
+        return Path(_DEST)
+    # Firefox のプロファイルグループ世代では profiles.ini の Name が実態と
+    # 一致しない。実名は Profile Groups/<StoreID>.sqlite が持つので、最新の
+    # グループ DB から引く。ディレクトリ名の直指定も通す
+    groups = sorted(
+        (FIREFOX_DIR / "Profile Groups").glob("*.sqlite"),
+        key=lambda p: p.stat().st_mtime,
+        reverse=True,
+    )
+    known: list[str] = []
+    for group in groups:
+        con = sqlite3.connect(f"file:{group}?mode=ro", uri=True)
+        try:
+            rows = con.execute("SELECT name, path FROM Profiles").fetchall()
+        finally:
+            con.close()
+        for name, path in rows:
+            if name == profile or Path(path).name == profile:
+                return FIREFOX_DIR / path
+        if not known:
+            known = sorted(f"{name} ({Path(path).name})" for name, path in rows)
+    raise LookupError(
+        f"firefox profile {profile!r} not found (available: {', '.join(known)})"
+    )
+
+
+def origin_of(url: str) -> tuple[str, str]:
+    """moz_origins の (prefix, host) を Firefox 実 DB の格納例に合わせて返す。
+
+    >>> origin_of("https://www.example.com/path")
+    ('https://', 'www.example.com')
+    >>> origin_of("file:///tmp/x.html")
+    ('file://', '')
+    >>> origin_of("javascript:alert(1)")
+    ('javascript:', 'alert(1)')
+    """
+    parts = urlsplit(url)
+    rest = url[len(parts.scheme) + 1 :]
+    if rest.startswith("//"):
+        return f"{parts.scheme}://", parts.netloc
+    # javascript: 等の非階層 URL は Firefox 実 DB の格納例に合わせる
+    return f"{parts.scheme}:", rest
+
+
+def rev_host_of(url: str) -> str:
+    """moz_places.rev_host 形式。ホストを逆順にして末尾へ '.' を付ける。
+
+    >>> rev_host_of("https://www.example.com/path")
+    'moc.elpmaxe.www.'
+    >>> rev_host_of("javascript:alert(1)")
+    '.'
+    """
+    netloc = urlsplit(url).netloc
+    return netloc[::-1] + "." if netloc else "."
+
+
+def ensure_place(con: sqlite3.Connection, node: Node) -> int:
+    assert node.url is not None
+    row = con.execute(
+        "SELECT id FROM moz_places WHERE url_hash = ? AND url = ?",
+        (url_hash(node.url), node.url),
+    ).fetchone()
+    if row:
+        return row[0]
+
+    prefix, host = origin_of(node.url)
+    _ = con.execute(
+        "INSERT INTO moz_origins (prefix, host, frecency, recalc_frecency,"
+        " recalc_alt_frecency) VALUES (?, ?, 0, 1, 1)"
+        " ON CONFLICT (prefix, host) DO NOTHING",
+        (prefix, host),
+    )
+    origin_id = con.execute(
+        "SELECT id FROM moz_origins WHERE prefix = ? AND host = ?", (prefix, host)
+    ).fetchone()[0]
+    cur = con.execute(
+        "INSERT INTO moz_places (url, title, rev_host, visit_count, hidden, typed,"
+        " frecency, guid, foreign_count, url_hash, origin_id, recalc_frecency,"
+        " recalc_alt_frecency) VALUES (?, ?, ?, 0, 0, 0, 0, ?, 0, ?, ?, 1, 1)",
+        (
+            node.url,
+            node.title or None,
+            rev_host_of(node.url),
+            gen_guid(),
+            url_hash(node.url),
+            origin_id,
+        ),
+    )
+    assert cur.lastrowid is not None
+    return cur.lastrowid
+
+
+def insert_item(
+    con: sqlite3.Connection, parent_id: int, node: Node, position: int
+) -> int:
+    now = now_us()
+    guid = gen_guid()
+    place_id = None if node.is_folder else ensure_place(con, node)
+    item_type = TYPE_FOLDER if node.is_folder else TYPE_BOOKMARK
+    cur = con.execute(
+        "INSERT INTO moz_bookmarks (type, fk, parent, position, title, dateAdded,"
+        " lastModified, guid, syncStatus, syncChangeCounter)"
+        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)",
+        (
+            item_type,
+            place_id,
+            parent_id,
+            position,
+            node.title or None,
+            node.date_added,
+            now,
+            guid,
+            SYNC_STATUS_NEW,
+        ),
+    )
+    if place_id is not None:
+        # Firefox の temp trigger 相当。保存済みトリガーは無いので自前で維持する
+        _ = con.execute(
+            "UPDATE moz_places SET foreign_count = foreign_count + 1 WHERE id = ?",
+            (place_id,),
+        )
+    _ = con.execute("DELETE FROM moz_bookmarks_deleted WHERE guid = ?", (guid,))
+    assert cur.lastrowid is not None
+    return cur.lastrowid
+
+
+def delete_subtree(con: sqlite3.Connection, row_id: int, stats: Stats) -> None:
+    for (child_id,) in con.execute(
+        "SELECT id FROM moz_bookmarks WHERE parent = ?", (row_id,)
+    ).fetchall():
+        delete_subtree(con, child_id, stats)
+    item_type, fk, guid, sync_status = con.execute(
+        "SELECT type, fk, guid, syncStatus FROM moz_bookmarks WHERE id = ?", (row_id,)
+    ).fetchone()
+    if item_type == TYPE_BOOKMARK and fk is not None:
+        _ = con.execute(
+            "UPDATE moz_places SET foreign_count = foreign_count - 1 WHERE id = ?",
+            (fk,),
+        )
+    # Sync 済の項目はトゥームストーンを残さないとサーバー側から復活する
+    if sync_status == SYNC_STATUS_NORMAL:
+        _ = con.execute(
+            "INSERT OR REPLACE INTO moz_bookmarks_deleted (guid, dateRemoved)"
+            " VALUES (?, ?)",
+            (guid, now_us()),
+        )
+    _ = con.execute("DELETE FROM moz_bookmarks WHERE id = ?", (row_id,))
+    stats.deleted += 1
+
+
+def count_subtree(con: sqlite3.Connection, row_id: int) -> int:
+    total = 1
+    for (child_id,) in con.execute(
+        "SELECT id FROM moz_bookmarks WHERE parent = ?", (row_id,)
+    ).fetchall():
+        total += count_subtree(con, child_id)
+    return total
+
+
+def count_new(nodes: list[Node], stats: Stats, plan: list[str], path: str) -> None:
+    for node in nodes:
+        plan.append(f"+ {path}{node.title or node.url or '(no title)'}")
+        stats.added += 1
+        if node.is_folder:
+            count_new(node.children, stats, plan, f"{path}{node.title}/")
+
+
+def reconcile(
+    con: sqlite3.Connection,
+    parent_id: int,
+    desired: list[Node],
+    stats: Stats,
+    plan: list[str],
+    path: str,
+    apply: bool,
+) -> None:
+    rows = con.execute(
+        "SELECT b.id, b.type, b.title, b.position, p.url"
+        " FROM moz_bookmarks b LEFT JOIN moz_places p ON p.id = b.fk"
+        " WHERE b.parent = ? ORDER BY b.position",
+        (parent_id,),
+    ).fetchall()
+
+    # URL は url 一致、フォルダはタイトル一致で既存行を対応付け、guid を保つ
+    by_url: dict[str, list[Any]] = {}
+    by_folder: dict[str, list[Any]] = {}
+    for row in rows:
+        bucket = by_url if row[1] == TYPE_BOOKMARK else by_folder
+        key = row[4] if row[1] == TYPE_BOOKMARK else row[2]
+        bucket.setdefault(key or "", []).append(row)
+
+    ordered: list[tuple[Node, Any]] = []
+    for node in desired:
+        bucket = by_folder if node.is_folder else by_url
+        matches = bucket.get((node.title if node.is_folder else node.url) or "")
+        ordered.append((node, matches.pop(0) if matches else None))
+
+    structure_changed = False
+    for leftovers in list(by_url.values()) + list(by_folder.values()):
+        for row in leftovers:
+            structure_changed = True
+            plan.append(f"- {path}{row[2] or row[4] or '(no title)'}")
+            if apply:
+                delete_subtree(con, row[0], stats)
+            else:
+                stats.deleted += count_subtree(con, row[0])
+
+    for position, (node, row) in enumerate(ordered):
+        if row is None:
+            plan.append(f"+ {path}{node.title or node.url or '(no title)'}")
+            stats.added += 1
+            structure_changed = True
+            row_id = insert_item(con, parent_id, node, position) if apply else None
+        else:
+            row_id = row[0]
+            if (row[2] or "") != node.title:
+                plan.append(f"~ {path}{row[2]!r} -> {(node.title or None)!r}")
+                stats.retitled += 1
+                if apply:
+                    _ = con.execute(
+                        "UPDATE moz_bookmarks SET title = ?, lastModified = ?,"
+                        " syncChangeCounter = syncChangeCounter + 1 WHERE id = ?",
+                        (node.title or None, now_us(), row_id),
+                    )
+            else:
+                stats.kept += 1
+            if row[3] != position:
+                stats.moved += 1
+                structure_changed = True
+                if apply:
+                    _ = con.execute(
+                        "UPDATE moz_bookmarks SET position = ?,"
+                        " syncChangeCounter = syncChangeCounter + 1 WHERE id = ?",
+                        (position, row_id),
+                    )
+        if node.is_folder:
+            if row_id is None:
+                # dry run で新規フォルダ配下は全て追加扱い
+                count_new(node.children, stats, plan, f"{path}{node.title}/")
+            else:
+                reconcile(
+                    con,
+                    row_id,
+                    node.children,
+                    stats,
+                    plan,
+                    f"{path}{node.title}/",
+                    apply,
+                )
+
+    if apply and structure_changed:
+        _ = con.execute(
+            "UPDATE moz_bookmarks SET lastModified = ?,"
+            " syncChangeCounter = syncChangeCounter + 1 WHERE id = ?",
+            (now_us(), parent_id),
+        )
+
+
+# Firefox が PlacesDBUtils で検査するのと同じ観点。書き込み後に違反が残るなら
+# コミットせず失敗させる
+INTEGRITY_CHECKS = (
+    (
+        "dangling fk",
+        "SELECT count(*) FROM moz_bookmarks b WHERE b.fk NOT NULL"
+        " AND b.type = 1 AND NOT EXISTS"
+        " (SELECT 1 FROM moz_places h WHERE h.id = b.fk)",
+    ),
+    (
+        "position gap",
+        "SELECT count(*) FROM (WITH p(pos, seq) AS"
+        " (SELECT position, (row_number() OVER (PARTITION BY parent ORDER BY position))"
+        " - 1 FROM moz_bookmarks) SELECT 1 FROM p WHERE seq <> pos)",
+    ),
+    (
+        "foreign_count",
+        "SELECT count(*) FROM moz_places p WHERE p.foreign_count <>"
+        " (SELECT count(*) FROM moz_bookmarks b WHERE b.fk = p.id)"
+        " + (SELECT count(*) FROM moz_keywords k WHERE k.place_id = p.id)",
+    ),
+    ("url_hash=0", "SELECT count(*) FROM moz_places WHERE url_hash = 0"),
+    (
+        "invalid guid",
+        "SELECT count(*) FROM moz_bookmarks WHERE guid IS NULL"
+        " OR length(guid) <> 12 OR guid GLOB '*[^A-Za-z0-9_-]*'",
+    ),
+)
+
+
+def run_integrity_checks(con: sqlite3.Connection) -> list[str]:
+    failures = [
+        f"{name}: {count}"
+        for name, query in INTEGRITY_CHECKS
+        if (count := con.execute(query).fetchone()[0]) != 0
+    ]
+    if (
+        con.execute("SELECT * FROM pragma_integrity_check LIMIT 1").fetchone()[0]
+        != "ok"
+    ):
+        failures.append("pragma integrity_check failed")
+    return failures
+
+
+def cleanup_legacy_policy() -> None:
+    probe = subprocess.run(
+        ["defaults", "read", POLICY_DOMAIN, POLICY_KEYS[0]], capture_output=True
+    )
+    if probe.returncode != 0:
+        return
+    for key in POLICY_KEYS:
+        _ = subprocess.run(
+            ["defaults", "delete", POLICY_DOMAIN, key], capture_output=True
+        )
+    print(f"removed legacy {POLICY_KEYS[0]} policy from {POLICY_DOMAIN}")
+
+
+def root_id(con: sqlite3.Connection, guid: str) -> int:
+    return con.execute(
+        "SELECT id FROM moz_bookmarks WHERE guid = ?", (guid,)
+    ).fetchone()[0]
+
+
+def sync(dry_run: bool, source_profile: str, dest_profile: str) -> int:
+    source = resolve_source(source_profile)
+    if not source.exists():
+        print(f"bookmarks not found: {source}", file=sys.stderr)
+        return 1
+    profile = resolve_dest(dest_profile)
+    places = profile / "places.sqlite"
+    if not places.exists():
+        print(f"places.sqlite not found: {places}", file=sys.stderr)
+        return 1
+
+    stats = Stats()
+    roots = load_vivaldi(source).get("roots", {})
+    targets = [
+        ("toolbar_____", convert_children(roots.get("bookmark_bar", {}), stats)),
+        ("menu________", convert_children(roots.get("other", {}), stats)),
+    ]
+
+    # 1周目は読み取りだけで差分を数え、変更が無ければ一切書かない
+    plan: list[str] = []
+    con = sqlite3.connect(f"file:{places}?mode=ro", uri=True)
+    try:
+        for guid, nodes in targets:
+            reconcile(
+                con,
+                root_id(con, guid),
+                nodes,
+                stats,
+                plan,
+                f"{guid.strip('_')}/",
+                apply=False,
+            )
+    finally:
+        con.close()
+
+    if dry_run:
+        if plan:
+            print("\n".join(plan))
+        print(f"{stats.summary()} (dry run, nothing written)")
+        return 0
+    if stats.changes == 0:
+        print(f"already in sync: {stats.summary()}")
+        cleanup_legacy_policy()
+        return 0
+    # 読み取りは WAL のスナップショット分離で起動中も安全だが、書き込みは
+    # Places のメモリキャッシュと矛盾するため Firefox 停止中に限る
+    if firefox_running():
+        print(
+            f"firefox is running; {stats.changes} changes pending"
+            " (will retry on next launchd tick)"
+        )
+        return 0
+
+    backup = places.with_name("places.sqlite.bookmark-syncer.bak")
+    _ = shutil.copy2(places, backup)
+
+    filtered = stats.filtered
+    stats, plan = Stats(), []
+    stats.filtered = filtered
+    con = sqlite3.connect(places, isolation_level=None)
+    try:
+        _ = con.execute("BEGIN IMMEDIATE")
+        try:
+            for guid, nodes in targets:
+                reconcile(
+                    con,
+                    root_id(con, guid),
+                    nodes,
+                    stats,
+                    plan,
+                    f"{guid.strip('_')}/",
+                    apply=True,
+                )
+            failures = run_integrity_checks(con)
+            if failures:
+                raise RuntimeError("integrity check failed: " + "; ".join(failures))
+            _ = con.execute("COMMIT")
+        except BaseException:
+            _ = con.execute("ROLLBACK")
+            raise
+        _ = con.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+    finally:
+        con.close()
+
+    if plan:
+        print("\n".join(plan))
+    print(
+        f"synced {source.parent.name} -> {profile.name}: {stats.summary()}"
+        f" (visible on next Firefox launch, backup: {backup.name})"
+    )
+    cleanup_legacy_policy()
+    return 0
+
+
+def sync_all(dry_run: bool) -> int:
+    if _SOURCE or _DEST:
+        raise RuntimeError("--all cannot be used with path override env vars")
+    firefox = firefox_profiles()
+    status = 0
+    for name in sorted(vivaldi_profiles()):
+        print(f"[{name}]")
+        if name not in firefox:
+            print(f"no matching firefox profile for {name!r}; skipped")
+            continue
+        try:
+            status = max(status, sync(dry_run, name, name))
+        except (sqlite3.Error, RuntimeError, LookupError, OSError, ValueError) as err:
+            print(f"error: {err}", file=sys.stderr)
+            status = 1
+    return status
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Mirror Vivaldi bookmarks into a Firefox profile"
+        " (toolbar and menu, one-way, Vivaldi wins)."
+    )
+    _ = parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="show the planned changes without writing",
+    )
+    _ = parser.add_argument(
+        "--source-profile",
+        "-s",
+        default=DEFAULT_SOURCE_PROFILE,
+        metavar="NAME",
+        help="Vivaldi profile, by display name or directory name"
+        f" (default: {DEFAULT_SOURCE_PROFILE})",
+    )
+    _ = parser.add_argument(
+        "--dest-profile",
+        "-d",
+        default=DEFAULT_DEST_PROFILE,
+        metavar="NAME",
+        help="Firefox profile, by name in Profile Groups or directory name"
+        f" (default: {DEFAULT_DEST_PROFILE})",
+    )
+    _ = parser.add_argument(
+        "--all",
+        "-a",
+        action="store_true",
+        help="sync every Vivaldi profile to the Firefox profile with the same name",
+    )
+    _ = parser.add_argument(
+        "--doctest", "-t", action="store_true", help="run the module doctests and exit"
+    )
+    args = parser.parse_args()
+    if args.doctest:
+        import doctest
+
+        results = doctest.testmod(verbose=False)
+        print(results)
+        return 1 if results.failed else 0
+    if args.all:
+        if (
+            args.source_profile != DEFAULT_SOURCE_PROFILE
+            or args.dest_profile != DEFAULT_DEST_PROFILE
+        ):
+            parser.error(
+                "--all cannot be combined with --source-profile/--dest-profile"
+            )
+        return sync_all(args.dry_run)
+    return sync(args.dry_run, args.source_profile, args.dest_profile)
+
+
+if __name__ == "__main__":
+    try:
+        sys.exit(main())
+    except (sqlite3.Error, RuntimeError, LookupError, OSError, ValueError) as err:
+        print(f"error: {err}", file=sys.stderr)
+        sys.exit(1)

@@ -3,7 +3,7 @@ local function config()
   vim.g.europa_mime_priority = { "image/png", "image/jpeg", "text/html", "text/plain" }
   vim.g.europa_max_output_lines = 100
   vim.g.europa_cell_border_chars = { "╭", "─", "╮", "╰", "╯" }
-  vim.g.europa_cell_border_padding = 88
+  vim.g.europa_cell_border_padding = 80
   vim.g.europa_lazy_padding = 10
 
   vim.api.nvim_create_autocmd("FileType", {

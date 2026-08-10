@@ -1,29 +1,4 @@
 local function config()
-  require("cmp_coding_agent").setup({
-    agent = "both",
-    max_items = 200,
-    paths = {
-      preserve_at_prefix = true,
-      show_hidden = true,
-      preview_lines = 20,
-      deep_search = false,
-      root = "git",
-    },
-    skills = {
-      include = {
-        repo_agents = true,
-        repo_claude = true,
-        repo_codex = true,
-        user_agents = true,
-        user_claude = true,
-        user_codex = true,
-      },
-      include_non_user_invocable = false,
-    },
-    commands = { include_builtins = { claude = true, codex = true } },
-    prompts = { codex = { enabled = true } },
-  })
-
   local cmp = require("cmp")
 
   cmp.setup({
@@ -40,7 +15,6 @@ local function config()
       ["<CR>"] = cmp.mapping.confirm({ select = true }),
     }),
     sources = cmp.config.sources({
-      { name = "luasnip" }, -- For luasnip users.
       { name = "path" },
       { name = "skkeleton" },
     }, {
@@ -48,56 +22,6 @@ local function config()
       { name = "spell" },
     }),
     view = {},
-  })
-
-  -- Set configuration for specific filetype.
-  cmp.setup.filetype("gitcommit", {
-    sources = cmp.config.sources({
-      { name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
-    }, {
-      { name = "buffer" },
-      { name = "spell" },
-      { name = "skkeleton" },
-    }),
-  })
-
-  -- cmp.setup.filetype("fish", {
-  --   sources = cmp.config.sources({
-  --     { name = "fish" },
-  --   }, {
-  --     { name = "buffer" },
-  --     { name = "spell" },
-  --     { name = "path" },
-  --     { name = "skkeleton" },
-  --   }),
-  -- })
-
-  -- For Aibo prompt (Claude)
-  cmp.setup.filetype("aibo-prompt.aibo-tool-claude", {
-    sources = cmp.config.sources({
-      { name = "skkeleton" },
-      { name = "buffer" },
-      { name = "spell" },
-      { name = "path" },
-      -- coding agent sources
-      { name = "coding_agent_slash" },
-      { name = "coding_agent_dollar" },
-      { name = "coding_agent_at" },
-    }),
-  })
-
-  -- For Aibo prompt (Codex)
-  cmp.setup.filetype("aibo-prompt.aibo-tool-codex", {
-    sources = cmp.config.sources({
-      { name = "skkeleton" },
-      { name = "buffer" },
-      { name = "spell" },
-      { name = "path" },
-      -- coding agent sources
-      { name = "coding_agent_slash" },
-      { name = "coding_agent_dollar" },
-      { name = "coding_agent_at" },
-    }),
   })
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
@@ -113,9 +37,7 @@ local function config()
   cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-      { name = "nvim_lua" },
       { name = "path" },
-      { name = "fish" },
       { name = "skkeleton" },
     }, {
       { name = "cmdline" },
@@ -138,44 +60,17 @@ local spec = {
     dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
   },
   {
-    "https://github.com/tamago324/cmp-zsh",
-    dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
-  },
-  {
-    "https://github.com/mtoohey31/cmp-fish",
-    dependencies = { "https://github.com/mtoohey31/cmp-fish" },
-    cond = false,
-  },
-  {
     "https://github.com/hrsh7th/cmp-cmdline",
     dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
     event = "CmdlineEnter",
-  },
-  {
-    "https://github.com/hrsh7th/cmp-omni",
-    dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
-    event = "InsertEnter",
-  },
-  {
-    "https://github.com/hrsh7th/cmp-nvim-lua",
-    dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
   },
   {
     "https://github.com/f3fora/cmp-spell",
     dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
   },
   {
-    "https://github.com/yuki-yano/cmp-coding-agent",
-    dependencies = { "https://github.com/hrsh7th/nvim-cmp" },
-  },
-  {
     "https://github.com/uga-rosa/cmp-skkeleton",
     dependencies = { "https://github.com/hrsh7th/nvim-cmp", "https://github.com/vim-skk/skkeleton" },
   },
-  {
-    "https://github.com/saadparwaiz1/cmp_luasnip",
-    dependencies = { "https://github.com/L3MON4D3/LuaSnip" },
-  },
-  { "https://github.com/L3MON4D3/LuaSnip", version = "v2.1.*" },
 }
 return spec

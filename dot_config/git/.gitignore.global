@@ -224,6 +224,8 @@ result
 .opencode/
 .superpowers/*
 
+.playwright-mcp/*
+
 # Speckit
 .specify/*
 .claude/commands/speckit.*

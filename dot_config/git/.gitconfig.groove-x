@@ -1,8 +1,5 @@
 ; vim:filetype=gitconfig
 
-[core]
-	excludesFile = ~/dotfiles/dot_config/git/.gitignore.work
-
 [user]
 	name = Peacock (Yoichi Takai)
 	email = yoichi.takai@groove-x.com

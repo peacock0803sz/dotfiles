@@ -58,11 +58,11 @@
     "anthropic": {
       "flake": false,
       "locked": {
-        "lastModified": 1787068925,
-        "narHash": "sha256-0ZtHTJVHeW8jIprKgCo/yU2ZI2cZxUqD3Riet3UWdt8=",
+        "lastModified": 1787332253,
+        "narHash": "sha256-nVid8vENmLDh7ffDqh+bJbEWtXcVltA0qa2rItmniZM=",
         "owner": "anthropics",
         "repo": "skills",
-        "rev": "0a64e398ec6bb34a494f0c347e8ccae53a862f8e",
+        "rev": "3b3fad96af16a10759d930941b4520ba0c40edae",
         "type": "github"
       },
       "original": {
@@ -399,11 +399,11 @@
     "google": {
       "flake": false,
       "locked": {
-        "lastModified": 1787263945,
-        "narHash": "sha256-sU9DpdNuxxa0u+4TzR+gu6SKfxTY/nyvaMk+h7Hc/SI=",
+        "lastModified": 1787344687,
+        "narHash": "sha256-WRIE5SfZbPTnjAacl7ozzHkR/jFGvJWaL1aMV/XO2pQ=",
         "owner": "google",
         "repo": "skills",
-        "rev": "40b3621b297b89861c73431c8468bc2726f7b39d",
+        "rev": "1af77752950126ae12dec176a0a3b27a16b7f5f7",
         "type": "github"
       },
       "original": {
@@ -978,11 +978,11 @@
     "vercel-labs": {
       "flake": false,
       "locked": {
-        "lastModified": 1786536810,
-        "narHash": "sha256-McF7KAswDpkX0FtjFX7vOva8YwQTFwxewjYhueQgtIA=",
+        "lastModified": 1787338525,
+        "narHash": "sha256-fXbWS0+jtRYXdVn1KdqBdU0wEirrg5t/3IxdqPaAs8M=",
         "owner": "vercel-labs",
         "repo": "agent-skills",
-        "rev": "b8caa260a420a73042e35521de4b5c8baf6446cc",
+        "rev": "dd089a8c752c966dee8bf0f27cb625ba193ffd9e",
         "type": "github"
       },
       "original": {

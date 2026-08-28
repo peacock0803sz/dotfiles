@@ -399,11 +399,11 @@
     "google": {
       "flake": false,
       "locked": {
-        "lastModified": 1787758652,
-        "narHash": "sha256-a8OHl8Zxu02/fjDeLSz6BqEPrlGCur/YltLvkkb2DQ0=",
+        "lastModified": 1787870989,
+        "narHash": "sha256-yqy1uSX84/2nots7b3GugOsQZeqo6AbLXtksXGj3a3Q=",
         "owner": "google",
         "repo": "skills",
-        "rev": "18f122444bbe86eab74bc757fdfa1817b44ab612",
+        "rev": "8aec33a22277da3d643f7b0da76ba728149b0c0b",
         "type": "github"
       },
       "original": {
@@ -978,11 +978,11 @@
     "vercel-labs": {
       "flake": false,
       "locked": {
-        "lastModified": 1787338525,
-        "narHash": "sha256-fXbWS0+jtRYXdVn1KdqBdU0wEirrg5t/3IxdqPaAs8M=",
+        "lastModified": 1787833105,
+        "narHash": "sha256-D+agUOd4xDQ3uHft1UjQwzg2BLQhLJoUegLQF+Qr2kg=",
         "owner": "vercel-labs",
         "repo": "agent-skills",
-        "rev": "dd089a8c752c966dee8bf0f27cb625ba193ffd9e",
+        "rev": "20e89cc4bb256eb7b1fcbdc68f7175284709a847",
         "type": "github"
       },
       "original": {

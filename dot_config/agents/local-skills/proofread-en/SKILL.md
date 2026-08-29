@@ -1,5 +1,5 @@
 ---
-name: proofread@en
+name: proofread-en
 description: |
   Rewrite AI-generated English drafts into prose that reads like a human wrote it.
   Triggers: "proofread", "edit this", "rewrite this", "make it sound human", "remove the AI tone", "英文校正", "英語の校正", "英語を直して"

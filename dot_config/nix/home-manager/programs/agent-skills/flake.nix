@@ -163,6 +163,10 @@
               dest = ".config/opencode/skills";
               structure = "link";
             };
+            pi = {
+              dest = ".pi/agent/skills";
+              structure = "link";
+            };
           };
         };
       };

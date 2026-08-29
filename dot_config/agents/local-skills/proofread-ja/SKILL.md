@@ -1,5 +1,5 @@
 ---
-name: proofread@ja
+name: proofread-ja
 description: |
   AIが書いた日本語を、人が書いたように自然で論理の通った文章へ整える。表層の語彙や記号だけでなく、段落構成や論証、冗長も直す。長文の技術原稿(記事や解説、書籍の章など)では`references/technical-writing.md`も読んで適用する。
   トリガー: "proofread", "校正して", "校正", "文章を直して", "推敲して", "AIっぽさを消して"

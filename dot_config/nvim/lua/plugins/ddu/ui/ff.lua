@@ -69,9 +69,6 @@ end
 local spec = {
   {
     "https://github.com/Shougo/ddu-ui-ff",
-    -- E276: `a:winid->nvim_win_is_valid()` (commit 4ca619728 で導入) は
-    -- Neovim 非対応のメソッド構文。上流で修正されたら pin を外す
-    commit = "fcce8a2e55f2dd002ae6edc4fcd8c0b313e518ea",
     config = config,
     dependencies = "https://github.com/Shougo/ddu.vim",
   },

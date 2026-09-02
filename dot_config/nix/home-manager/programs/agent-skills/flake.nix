@@ -4,10 +4,6 @@
   inputs = {
     agent-skills-nix.url = "github:Kyure-A/agent-skills-nix";
 
-    adr = {
-      url = "github:drillan/adr-skills";
-      flake = false;
-    };
     anthropic = {
       url = "github:anthropics/skills";
       flake = false;
@@ -79,7 +75,6 @@
 
         # 全件 enable する source (旧 skills.enableAll 相当)
         discoveredSkills = {
-          adr = discoverSkills inputs.adr.outPath "skills";
           google = discoverSkills inputs.google.outPath "skills/cloud";
         } // lib.optionalAttrs (hostName == "arpeggio") {
           gx-agent-recipes = discoverSkills
@@ -104,10 +99,6 @@
         programs.agent-skills = {
           enable = true;
           sources = {
-            adr = {
-              path = inputs.adr.outPath;
-              subdir = "skills";
-            };
             anthropic = {
               path = inputs.anthropic.outPath;
               subdir = "skills";

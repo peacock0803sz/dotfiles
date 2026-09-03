@@ -41,11 +41,11 @@
     "anthropic": {
       "flake": false,
       "locked": {
-        "lastModified": 1788287438,
-        "narHash": "sha256-xaxkXFpzH4s2OIOcZqPy+HzfRAy2HbKpagjMhY+uinA=",
+        "lastModified": 1788453433,
+        "narHash": "sha256-sjgPv9tZZVTXPxZWaCOc7JwFceNn3C1ghy8mSHqgqB8=",
         "owner": "anthropics",
         "repo": "skills",
-        "rev": "53048666b05b4799081517d00e09e0a2dd688678",
+        "rev": "41bbe19d1a1a7eaab5e7bb9050a417e5c6cffc8f",
         "type": "github"
       },
       "original": {
@@ -383,11 +383,11 @@
     "google": {
       "flake": false,
       "locked": {
-        "lastModified": 1788372494,
-        "narHash": "sha256-N6/YO3devUV8ZWQWhfcPyjD3BKuyf1anz4bDu3oe06g=",
+        "lastModified": 1788448562,
+        "narHash": "sha256-6To0v75EwF9sC6OROWpaeknv+60e5vaSh45/ErhRAd8=",
         "owner": "google",
         "repo": "skills",
-        "rev": "f234cfba096987f3dee291ce6e7c80b048fb20b3",
+        "rev": "81a31a6e4300425598a69fd96c8e843c947ae308",
         "type": "github"
       },
       "original": {

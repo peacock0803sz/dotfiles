@@ -16,6 +16,7 @@
     fzf
     gh
     ghq
+    git-credential-oauth
     gojq
     jq
     lemonade

@@ -17,6 +17,9 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/Users/peacock/.nix-profile/bin/gh auth git-credential
+[credential "https://gitea.groove-x.io"]
+    helper = cache --timeout 21600
+    helper = oauth
 
 # [url "git@github.com:groove-x/"]
 # 	insteadOf = https://github.com/groove-x/

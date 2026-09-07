@@ -8,6 +8,10 @@
 	name = Peacock
 	email = 33555487+peacock0803sz@users.noreply.github.com
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGZoZMoFitD0cy5UUiqRdvZqH/1yiE9+8yKo2YC2heiH
+[credential "https://git.p3ac0ck.net"]
+    helper = cache --timeout 21600
+    helper = oauth
+
 [push]
 	autoSetupRemote = true
 [init]

@@ -60,11 +60,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1788696444,
-        "narHash": "sha256-NIkZU41cuXzYTZb8TFPeGFrncTos0e1a2GH64MWAGDQ=",
+        "lastModified": 1788807211,
+        "narHash": "sha256-vmwpHzMl01DY9iS0fQdkw9GpuWlZqPivLk2INcy8HP0=",
         "owner": "arto-app",
         "repo": "Arto",
-        "rev": "a8a395ecb45600c8b9efafe2a106e49f117f5660",
+        "rev": "d81f48f572ad6e4d1c903d2d7c67f9b20cafd0f6",
         "type": "github"
       },
       "original": {

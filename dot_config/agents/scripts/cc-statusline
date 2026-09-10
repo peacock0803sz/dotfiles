@@ -59,9 +59,14 @@ class RateLimitWindow:
 
 @dataclass
 class RateLimits:
+    """Windows carried by the statusline stdin payload.
+
+    Claude Code only emits five_hour / seven_day here; per-model weekly windows
+    are available from the OAuth usage API alone.
+    """
+
     five_hour: RateLimitWindow = field(default_factory=RateLimitWindow)
     seven_day: RateLimitWindow = field(default_factory=RateLimitWindow)
-    seven_day_sonnet: RateLimitWindow = field(default_factory=RateLimitWindow)
 
     @classmethod
     def from_dict(cls, d: dict | None) -> Self:
@@ -69,7 +74,6 @@ class RateLimits:
         return cls(
             five_hour=RateLimitWindow.from_dict(d.get("five_hour")),
             seven_day=RateLimitWindow.from_dict(d.get("seven_day")),
-            seven_day_sonnet=RateLimitWindow.from_dict(d.get("seven_day_sonnet")),
         )
 
     @property
@@ -104,13 +108,20 @@ class StatusInput:
 
 
 @dataclass
+class ScopedWindow:
+    """A per-model weekly window, e.g. Fable."""
+
+    label: str
+    used: float
+
+
+@dataclass
 class Usage:
     session: float | None = None
     week: float | None = None
-    sonnet: float | None = None
     session_resets_at: str | None = None
     week_resets_at: str | None = None
-    sonnet_resets_at: str | None = None
+    scoped: list[ScopedWindow] = field(default_factory=list)
 
 
 CACHE_PATH = pathlib.Path.home() / ".claude" / ".statusline-usage-cache.json"
@@ -129,10 +140,13 @@ def _load_cache() -> Usage:
     return Usage(
         session=data.get("five_hour"),
         week=data.get("seven_day"),
-        sonnet=data.get("seven_day_sonnet"),
         session_resets_at=data.get("session_resets_at"),
         week_resets_at=data.get("week_resets_at"),
-        sonnet_resets_at=data.get("sonnet_resets_at"),
+        scoped=[
+            ScopedWindow(label=w["label"], used=w["used"])
+            for w in data.get("scoped") or []
+            if isinstance(w, dict) and "label" in w and "used" in w
+        ],
     )
 
 
@@ -145,10 +159,11 @@ def _save_cache(usage: Usage) -> None:
                     "fetched_at": time.time(),
                     "five_hour": usage.session,
                     "seven_day": usage.week,
-                    "seven_day_sonnet": usage.sonnet,
                     "session_resets_at": usage.session_resets_at,
                     "week_resets_at": usage.week_resets_at,
-                    "sonnet_resets_at": usage.sonnet_resets_at,
+                    "scoped": [
+                        {"label": w.label, "used": w.used} for w in usage.scoped
+                    ],
                 }
             )
         )
@@ -208,6 +223,32 @@ def _get_access_token() -> str | None:
     return creds.get("claudeAiOauth", {}).get("accessToken")
 
 
+# Per-model weekly windows the server used to expose as top-level keys, before
+# they moved into the generic limits[] array.
+LEGACY_SCOPED_KEYS = (("seven_day_opus", "Opus"), ("seven_day_sonnet", "Sonnet"))
+
+
+def _parse_scoped(data: dict) -> list[ScopedWindow]:
+    scoped = []
+    for item in data.get("limits") or []:
+        if not isinstance(item, dict) or item.get("kind") != "weekly_scoped":
+            continue
+        label = ((item.get("scope") or {}).get("model") or {}).get("display_name")
+        percent = item.get("percent")
+        if label is None or percent is None:
+            continue
+        scoped.append(ScopedWindow(label=label, used=float(percent)))
+
+    seen = {w.label.lower() for w in scoped}
+    for key, label in LEGACY_SCOPED_KEYS:
+        if label.lower() in seen:
+            continue
+        utilization = (data.get(key) or {}).get("utilization")
+        if utilization is not None:
+            scoped.append(ScopedWindow(label=label, used=float(utilization)))
+    return scoped
+
+
 def _fetch_usage(token: str) -> Usage | None:
     req = urllib.request.Request(
         "https://api.anthropic.com/api/oauth/usage",
@@ -225,17 +266,14 @@ def _fetch_usage(token: str) -> Usage | None:
     data = json.loads(body)
     five_hour_obj = data.get("five_hour") or {}
     seven_day_obj = data.get("seven_day") or {}
-    seven_day_sonnet_obj = data.get("seven_day_sonnet") or {}
     five_hour = five_hour_obj.get("utilization")
     seven_day = seven_day_obj.get("utilization")
-    seven_day_sonnet = seven_day_sonnet_obj.get("utilization")
     return Usage(
         session=float(five_hour) if five_hour is not None else None,
         week=float(seven_day) if seven_day is not None else None,
-        sonnet=float(seven_day_sonnet) if seven_day_sonnet is not None else None,
         session_resets_at=five_hour_obj.get("resets_at"),
         week_resets_at=seven_day_obj.get("resets_at"),
-        sonnet_resets_at=seven_day_sonnet_obj.get("resets_at"),
+        scoped=_parse_scoped(data),
     )
 
 
@@ -256,16 +294,19 @@ def _fetch_usage_from_api() -> Usage:
 
 
 def get_usage(rate_limits: RateLimits) -> Usage:
+    # The API is the only source carrying per-model weekly windows, so prefer it
+    # and fall back to stdin only when it yields nothing (no OAuth credentials).
+    usage = _fetch_usage_from_api()
+    if usage.session is not None:
+        return usage
     if rate_limits.has_data:
         return Usage(
             session=rate_limits.five_hour.used_percentage,
             week=rate_limits.seven_day.used_percentage,
-            sonnet=rate_limits.seven_day_sonnet.used_percentage,
             session_resets_at=rate_limits.five_hour.resets_at,
             week_resets_at=rate_limits.seven_day.resets_at,
-            sonnet_resets_at=rate_limits.seven_day_sonnet.resets_at,
         )
-    return _fetch_usage_from_api()
+    return usage
 
 
 class Color(str, Enum):
@@ -323,9 +364,9 @@ def main():
             usage_parts.append(
                 f"{Color.GREEN(f'{usage.week:.0f}%')}{_format_reset(usage.week_resets_at, include_date=True)}"
             )
-        if usage.sonnet is not None:
+        for window in usage.scoped:
             usage_parts.append(
-                f"{Color.BLACK('Sonnet')} {Color.GREEN(f'{usage.sonnet:.0f}%')}"
+                f"{Color.BLACK(window.label)} {Color.GREEN(f'{window.used:.0f}%')}"
             )
         parts.append(f"{Color.BLACK('Lim:')} {' / '.join(usage_parts)}")
     if data.context_window.used:

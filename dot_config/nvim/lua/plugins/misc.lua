@@ -1,5 +1,11 @@
 ---@type LazySpec[]
 local spec = {
+  {
+    "https://github.com/arto-app/arto.vim",
+    config = function()
+      vim.g.arto_path = vim.env.HOME .. "/Applications/Home Manager Apps/Arto.app"
+    end,
+  },
   { "https://github.com/cocopon/inspecthi.vim" },
   { "https://github.com/vim-jp/vimdoc-ja" },
   { "https://github.com/y0za/vim-reading-vimrc" },
@@ -19,12 +25,12 @@ local spec = {
     "https://github.com/delphinus/md-render.nvim",
     dependencies = {
       { "nvim-tree/nvim-web-devicons" }, -- optional: file type icons in code blocks
-      { "delphinus/budoux.lua" },        -- optional: CJK phrase-level line breaking
+      { "delphinus/budoux.lua" }, -- optional: CJK phrase-level line breaking
     },
     keys = {
-      { "<Space>mp", "<Plug>(md-render-preview)",     desc = "Markdown preview (toggle)" },
+      { "<Space>mp", "<Plug>(md-render-preview)", desc = "Markdown preview (toggle)" },
       { "<Space>mt", "<Plug>(md-render-preview-tab)", desc = "Markdown preview in tab (toggle)" },
-      { "<Space>md", "<Plug>(md-render-demo)",        desc = "Markdown render demo" },
+      { "<Space>md", "<Plug>(md-render-demo)", desc = "Markdown render demo" },
     },
   },
 }

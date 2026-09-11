@@ -85,6 +85,7 @@ set --export NOTIZEN_ROOT "$HOME/notizen/"
 
 # Aliases / Abbreviations {{{
 alias git-root "git rev-parse --show-toplevel"
+abbr --add rm 'gomi'
 abbr --add lemonade "lemonade --host=$(echo $SSH_CLIENT | cut -d ' '  -f 1)"
 abbr --add yq gojq # yq to gojq
 abbr --add tf terraform

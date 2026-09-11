@@ -17,6 +17,7 @@
     gh
     ghq
     git-credential-oauth
+    gomi
     gojq
     jq
     lemonade

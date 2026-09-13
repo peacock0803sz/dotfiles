@@ -1,10 +1,14 @@
-{ lib, pkgs, tunnelId, ... }:
+{ config, pkgs, ... }:
 let
   domain = "grafana.p3ac0ck.net";
   httpPort = 3001; # 3000 は gitea が使用中
-  nginxPort = 8080;
   prometheusPort = 9090;
-  nodeExporterPort = 9100;
+
+  # 収集対象とポートの単一の情報源。被収集ホスト側 (enigma) の
+  # nixos/prometheus-exporters.nix も同じファイルを読んでいる
+  targets = import ./prometheus-targets.nix;
+
+  target = host: port: "${host.address}:${toString port}";
 in
 {
   # Grafana {{{
@@ -15,12 +19,12 @@ in
       server = {
         inherit domain;
         root_url = "https://${domain}/";
-        http_addr = "127.0.0.1"; # 外部への口は cloudflared -> nginx のみ
+        http_addr = "127.0.0.1"; # 外部への口は前段の nginx のみ
         http_port = httpPort;
         enable_gzip = true;
       };
 
-      # TLS は Cloudflare が終端する
+      # TLS は前段の nginx が ACME 証明書で終端する
       security = {
         # 未設定だと Grafana 組み込みの公開された既定鍵が使われてしまう。
         # Nix store に平文で残さないよう file provider で外部ファイルを参照する
@@ -78,19 +82,46 @@ in
 
     exporters.node = {
       enable = true;
-      listenAddress = "127.0.0.1";
-      port = nodeExporterPort;
+      listenAddress = targets.bassoon.address;
+      port = targets.bassoon.ports.node;
       # 既定のコレクタ (cpu/meminfo/diskstats/filesystem/netdev/hwmon 等) への追加分
       enabledCollectors = [ "systemd" "processes" ];
     };
 
+    # enigma へは LAN 経由で引く。enigma 側の exporter は tailscale0 に出さず
+    # LAN IP に bind してある (nixos/prometheus-exporters.nix)
     scrapeConfigs = [
       {
         job_name = "node";
         static_configs = [
           {
-            targets = [ "127.0.0.1:${toString nodeExporterPort}" ];
+            targets = [ (target targets.bassoon targets.bassoon.ports.node) ];
             labels.instance = "bassoon";
+          }
+          {
+            targets = [ (target targets.enigma targets.enigma.ports.node) ];
+            labels.instance = "enigma";
+          }
+        ];
+      }
+      {
+        job_name = "nvidia-gpu";
+        static_configs = [
+          {
+            targets = [ (target targets.enigma targets.enigma.ports.nvidia) ];
+            labels.instance = "enigma";
+          }
+        ];
+      }
+      {
+        job_name = "cadvisor";
+        # コンテナ数 × メトリクス数で系列が増えやすい。
+        # 15s × 90d 保持だと TSDB が膨らむのでこの job だけ間隔を伸ばす
+        scrape_interval = "30s";
+        static_configs = [
+          {
+            targets = [ (target targets.enigma targets.enigma.ports.cadvisor) ];
+            labels.instance = "enigma";
           }
         ];
       }
@@ -120,26 +151,37 @@ in
     recommendedProxySettings = true;
 
     virtualHosts.${domain} = {
-      listen = lib.mkForce [
-        { addr = "127.0.0.1"; port = nginxPort; }
-      ];
+      # tailnet 内から直接叩く。DNS は grafana.p3ac0ck.net -> bassoon.tail2121a.ts.net
+      # の CNAME (DNS only)。git.p3ac0ck.net の vhost は 127.0.0.1:8081 に
+      # listen を固定してあるので、ここで 0.0.0.0 を開いても干渉しない
+      acmeRoot = null;
+      forceSSL = true;
+      useACMEHost = domain;
+      listenAddresses = [ "0.0.0.0" ];
 
       locations."/" = {
+        # X-Forwarded-Proto は recommendedProxySettings が $scheme で入れる
         proxyPass = "http://127.0.0.1:${toString httpPort}";
         proxyWebsockets = true; # Live/Explore のストリーミングに必要
-        extraConfig = ''
-          proxy_set_header X-Forwarded-Proto https;
-        '';
       };
     };
   };
   # }}}
 
-  # Cloudflare Tunnel {{{
-  # tunnels.<id> の credentialsFile / default は gitea.nix 側で定義済み。
-  # ここでは ingress に 1 エントリ足すだけでマージされる
-  services.cloudflared.tunnels.${tunnelId}.ingress.${domain} = {
-    service = "http://127.0.0.1:${toString nginxPort}";
+  # ACME / Let's Encrypt (DNS-01 via Cloudflare) {{{
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "me@p3ac0ck.net";
+
+    certs.${domain} = {
+      dnsProvider = "cloudflare";
+      group = config.services.nginx.group;
+      # 手置き。CF_DNS_API_TOKEN を 1 行入れる
+      environmentFile = "/var/lib/acme/cloudflare.env";
+      # lego の DNS 伝播チェックに Cloudflare DNS を使う
+      # (既定だと Tailscale MagicDNS 100.100.100.100 が使われ、TXT の伝播を検出できない)
+      extraLegoFlags = [ "--dns.resolvers=1.1.1.1:53" ];
+    };
   };
   # }}}
 }

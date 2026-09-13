@@ -19,6 +19,7 @@ nixpkgs.lib.nixosSystem {
     inputs.nixos-hardware.nixosModules.gmktec-nucbox-g3-plus
     ../../nixos
     ../../nixos/anyconnect.nix
+    ../../nixos/grafana.nix
     ../../nixos/samba.nix
     ./hardware.nix
     ./disk.nix

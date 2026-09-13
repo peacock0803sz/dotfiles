@@ -1,0 +1,14 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>peacock0803sz/renovate-config"],
+  "enabledManagers": ["npm"],
+  "includePaths": ["dot_config/agents/pi-extensions/**"],
+  "commitMessagePrefix": "",
+  "packageRules": [
+    {
+      "description": "oxlint と oxfmt は同じ oxc リリース系列なのでまとめて上げる",
+      "matchPackageNames": ["oxlint", "oxfmt"],
+      "groupName": "oxc tools"
+    }
+  ]
+}

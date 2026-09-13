@@ -31,7 +31,7 @@ lib.mkMerge [
         server = {
           DOMAIN = domain;
           ROOT_URL = "https://${domain}/";
-          HTTP_ADDR = "127.0.0.1";
+          HTTP_ADDR = "0.0.0.0"; # LAN の gitea-actions-runner から直接到達させるため
           HTTP_PORT = httpPort;
           PROTOCOL = "http";
           SSH_PORT = 22;

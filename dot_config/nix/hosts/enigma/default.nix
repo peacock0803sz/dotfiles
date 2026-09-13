@@ -28,6 +28,7 @@ nixpkgs.lib.nixosSystem {
     inputs.nix-monitored.nixosModules.default
     ../../nixos/default.nix
     ../../nixos/docker.nix
+    ../../nixos/gitea-actions-runner.nix
     ../../nixos/neovim.nix
     ../../nixos/notizen.nix
     ../../nixos/lemonade.nix

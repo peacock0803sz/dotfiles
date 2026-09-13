@@ -3,6 +3,9 @@
 **/.DS_Store
 dot_config/nvim*/lazy-lock.json
 
+# node
+**/node_modules/
+
 # nix
 result
 dot_config/direnv

@@ -1,14 +1,22 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["github>peacock0803sz/renovate-config"],
-  "enabledManagers": ["npm"],
-  "includePaths": ["dot_config/agents/pi-extensions/**"],
+  "enabledManagers": ["npm", "deno"],
+  "includePaths": [
+    "dot_config/agents/pi-extensions/**",
+    "dot_config/nvim/ts/ddu/**"
+  ],
   "commitMessagePrefix": "",
   "packageRules": [
     {
       "description": "oxlint と oxfmt は同じ oxc リリース系列なのでまとめて上げる",
       "matchPackageNames": ["oxlint", "oxfmt"],
       "groupName": "oxc tools"
+    },
+    {
+      "description": "ddu 本体と UI/kind は互換性が揃っている必要があるためまとめて上げる",
+      "matchPackageNames": ["@shougo/**", "@denops/**"],
+      "groupName": "ddu"
     }
   ]
 }

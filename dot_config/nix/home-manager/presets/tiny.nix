@@ -22,6 +22,7 @@
     jq
     lemonade
     ripgrep
+    tea
     trash-cli
     wget
 

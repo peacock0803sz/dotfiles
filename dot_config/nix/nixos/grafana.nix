@@ -1,12 +1,10 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, tunnelId, ... }:
 let
   domain = "grafana.p3ac0ck.net";
   httpPort = 3001; # 3000 は gitea が使用中
   nginxPort = 8080;
   prometheusPort = 9090;
   nodeExporterPort = 9100;
-  # gitea.nix と同じトンネルに相乗りする。ingress は attrset なのでマージされる
-  tunnelId = "5ac81ddd-325b-4dab-8fc5-c5e4b381f8ab";
 in
 {
   # Grafana {{{

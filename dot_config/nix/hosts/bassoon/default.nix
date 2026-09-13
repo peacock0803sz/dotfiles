@@ -7,10 +7,11 @@ let
     inherit system;
     config = import ../../nixpkgs.nix;
   };
+  tunnelId = "5ac81ddd-325b-4dab-8fc5-c5e4b381f8ab";
 in
 nixpkgs.lib.nixosSystem {
   system = system;
-  specialArgs = inputs // { inherit system username; };
+  specialArgs = inputs // { inherit system username tunnelId; };
   modules = [
     { nixpkgs.pkgs = pkgs; }
     inputs.disko.nixosModules.disko

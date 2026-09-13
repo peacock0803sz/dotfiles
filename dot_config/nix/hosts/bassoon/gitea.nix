@@ -1,9 +1,8 @@
-{ lib, ... }:
+{ lib, tunnelId, ... }:
 let
   domain = "git.p3ac0ck.net";
   httpPort = 3000;
   nginxPort = 8081;
-  tunnelId = "5ac81ddd-325b-4dab-8fc5-c5e4b381f8ab";
 in
 lib.mkMerge [
   {

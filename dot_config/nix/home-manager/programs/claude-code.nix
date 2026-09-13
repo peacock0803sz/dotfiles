@@ -151,10 +151,20 @@ in
     mcpServers = mcp-servers // {
       linear = (import ./mcp-servers/linear { inherit pkgs; });
       kubernetes = (import ./mcp-servers/kubernetes { inherit pkgs; });
+      git_p3ac0ck_net = (import ./mcp-servers/gitea {
+        inherit pkgs;
+        host = "https://git.p3ac0ck.net";
+        tokenSuffix = "git_p3ac0ck_net";
+      });
     } // (if hostName == "arpeggio" then {
       devin = (import ./mcp-servers/devin { inherit pkgs; });
       esa = (import ./mcp-servers/esa { inherit pkgs; });
       gcloud = (import ./mcp-servers/gcloud { inherit pkgs; });
+      gitea_groove-x_io = (import ./mcp-servers/gitea {
+        inherit pkgs;
+        host = "https://gitea.groove-x.io";
+        tokenSuffix = "gitea_groove_x_io";
+      });
       lovot = (import ./mcp-servers/lovot { inherit pkgs; });
       wrike = (import ./mcp-servers/wrike { inherit pkgs; });
       slack = (import ./mcp-servers/slack { inherit pkgs; });

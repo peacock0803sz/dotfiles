@@ -10,5 +10,6 @@
     yt-dlp
     ffmpeg
     imagemagick
+    librsvg
   ];
 }

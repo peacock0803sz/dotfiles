@@ -10,9 +10,9 @@ import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 const notifyScript = `${homedir()}/dotfiles/dot_config/agents/scripts/notify`;
 
 export default function (pi: ExtensionAPI) {
-	// agent_end 後もリトライや queued follow-up で動き続けることがあるため
-	// agent_settled まで待って通知する
-	pi.on("agent_settled", async () => {
-		execFile(notifyScript, ["pi", "Waiting for input"], () => {});
-	});
+  // agent_end 後もリトライや queued follow-up で動き続けることがあるため
+  // agent_settled まで待って通知する
+  pi.on("agent_settled", async () => {
+    execFile(notifyScript, ["pi", "Waiting for input"], () => {});
+  });
 }

@@ -1,7 +1,9 @@
 { lib, tunnelId, ... }:
 let
   domain = "git.p3ac0ck.net";
+  sshDomain = "bassoon"; # Cloudflare Tunnel は HTTP のみのため、SSH は Tailscale 経由で到達させる
   httpPort = 3000;
+  sshPort = 2222;
   nginxPort = 8081;
 in
 lib.mkMerge [
@@ -33,8 +35,13 @@ lib.mkMerge [
           HTTP_ADDR = "0.0.0.0"; # LAN の gitea-actions-runner から直接到達させるため
           HTTP_PORT = httpPort;
           PROTOCOL = "http";
-          SSH_PORT = 22;
-          START_SSH_SERVER = false;
+          # 22 番は Tailscale SSH が占有しており host の sshd に届かないため、
+          # Gitea 内蔵 SSH サーバを別ポートで動かす
+          START_SSH_SERVER = true;
+          SSH_DOMAIN = sshDomain;
+          SSH_LISTEN_PORT = sshPort; # 内蔵サーバの待受ポート
+          SSH_PORT = sshPort; # clone URL に表示されるポート
+          SSH_USER = "gitea";
         };
 
         service = {

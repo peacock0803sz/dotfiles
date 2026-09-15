@@ -11,6 +11,8 @@ in
       '';
     }))
 
+    nur.repos.peacock0803sz.aqua
+
     yarn
     lefthook
 

@@ -38,8 +38,8 @@ bind -r -T prefix K resize-pane -U 5
 
 ## Window
 bind -T prefix q   kill-window
-bind -T prefix s   new-window -c "#{pane_current_path}"
-bind -n M-s        new-window -c "#{pane_current_path}"
+bind -T prefix s   new-window -c "~"
+bind -n M-s        new-window -c "~"
 # bind -T prefix s   run-shell '~/dotfiles/bin/tmux-smart-split new-window'
 # bind -n M-s        run-shell '~/dotfiles/bin/tmux-smart-split new-window'
 bind -n M-J        next-window

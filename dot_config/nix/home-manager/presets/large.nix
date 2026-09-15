@@ -11,10 +11,8 @@ in
     ../programs/aibo.nix
     ../programs/claude-code.nix
     ../programs/codex.nix
-    ../programs/opencode.nix
     ../programs/pi.nix
     ../programs/emacs.nix
-    # ../programs/gemini.nix
     ../programs/neovim.nix
     ../programs/tmux.nix
   ];

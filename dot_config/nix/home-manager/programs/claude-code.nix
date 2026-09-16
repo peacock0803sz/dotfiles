@@ -4,6 +4,12 @@ let
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
   homeDirectory = config.home.homeDirectory;
   mcp-servers = import ./mcp-servers { inherit pkgs mcp-servers-nix; };
+
+  # Top Shelf (Bartender) の AgentStatus ブリッジは macOS でしか動かない
+  notchbarEnabled = pkgs.stdenv.isDarwin;
+  notchbarHook = state: {
+    hooks = [{ type = "command"; command = "~/.claude/notchbar-event Claude ${state}"; }];
+  };
 in
 {
   home.packages = [
@@ -14,6 +20,9 @@ in
     ".claude/rules".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/rules";
     ".claude/statusline".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/scripts/cc-statusline";
     ".claude/notify".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/scripts/notify";
+  } // lib.optionalAttrs notchbarEnabled {
+    ".claude/notchbar-event".source =
+      mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/scripts/notchbar-event";
   };
 
   home.activation.syncClaudePlugins = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -54,7 +63,15 @@ in
             matcher = "elicitation_dialog";
             hooks = [{ type = "command"; command = "~/.claude/notify 'Claude Code' 'MCP needs input'"; }];
           }
-        ];
+        ] ++ lib.optional notchbarEnabled (notchbarHook "Waiting");
+      } // lib.optionalAttrs notchbarEnabled {
+        SessionStart = [ (notchbarHook "Idle") ];
+        UserPromptSubmit = [ (notchbarHook "Working") ];
+        PreToolUse = [ (notchbarHook "Working") ];
+        PostToolUse = [ (notchbarHook "Auto") ];
+        PostToolUseFailure = [ (notchbarHook "ToolFail") ];
+        Stop = [ (notchbarHook "Idle") ];
+        SessionEnd = [ (notchbarHook "Ended") ];
       };
 
       permissions = {

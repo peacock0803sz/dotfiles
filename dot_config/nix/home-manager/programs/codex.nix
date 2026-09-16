@@ -1,7 +1,16 @@
-{ pkgs, inputs, llm-agents, hostName, ... }:
+{ pkgs, lib, config, inputs, llm-agents, hostName, ... }:
 let
   inherit (inputs) mcp-servers-nix;
-  config = mcp-servers-nix.lib.mkConfig pkgs {
+  mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
+  homeDirectory = config.home.homeDirectory;
+
+  # Top Shelf (Bartender) の AgentStatus ブリッジは macOS でしか動かない
+  notchbarEnabled = pkgs.stdenv.isDarwin;
+  notchbarHook = state: [{
+    hooks = [{ type = "command"; command = "~/.codex/notchbar-event Codex ${state}"; }];
+  }];
+
+  mcpConfig = mcp-servers-nix.lib.mkConfig pkgs {
     flavor = "codex";
     format = "toml-inline";
     fileName = ".mcp.toml";
@@ -29,6 +38,22 @@ let
   };
 in
 {
+  home.file = lib.optionalAttrs notchbarEnabled {
+    ".codex/notchbar-event".source =
+      mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/scripts/notchbar-event";
+    ".codex/hooks.json".text = builtins.toJSON {
+      hooks = {
+        SessionStart = notchbarHook "Idle";
+        UserPromptSubmit = notchbarHook "Working";
+        PreToolUse = notchbarHook "Working";
+        PostToolUse = notchbarHook "Auto";
+        PermissionRequest = notchbarHook "Waiting";
+        Stop = notchbarHook "Idle";
+        SessionEnd = notchbarHook "Ended";
+      };
+    };
+  };
+
   programs.codex = {
     enable = true;
     package = pkgs.symlinkJoin {
@@ -36,7 +61,7 @@ in
       paths = [ llm-agents.codex ];
       nativeBuildInputs = [ pkgs.makeWrapper ];
       postBuild = ''
-        wrapProgram $out/bin/codex "--add-flags" "-c '$(cat ${config})'"
+        wrapProgram $out/bin/codex "--add-flags" "-c '$(cat ${mcpConfig})'"
       '';
       custom-instructions = builtins.readFile ../../../agents/AGENTS.md;
     };

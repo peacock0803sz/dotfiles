@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+# Top Shelf (Bartender) の AgentStatus ブリッジへエージェントの状態を送る hook。
+#
+# usage: notchbar-event <Claude|Codex> <Idle|Working|Auto|ToolFail|Waiting|Ended>
+#
+# hook の JSON は stdin から受け取る。VM やコンテナ、SSH 先から Mac 上の Top Shelf
+# へ送る場合は NOTCHBAR_AGENTS_HOST と NOTCHBAR_AGENTS_PORT を指定する。
+set -u
+
+AGENT="${1:-Claude}"
+STATE="${2:-Working}"
+HOST="${NOTCHBAR_AGENTS_HOST:-127.0.0.1}"
+PORT="${NOTCHBAR_AGENTS_PORT:-7823}"
+
+HOOK_JSON="$(cat)"
+[ -n "$HOOK_JSON" ] || HOOK_JSON='{}'
+
+# Top Shelf はセッションを PID で束ねるため、hook プロセスから祖先を辿って
+# エージェント本体の PID を探す。
+find_agent_pid() {
+  local needle="$1"
+  local pid=$PPID
+  local max=6
+  local name
+  while [ "$max" -gt 0 ] && [ -n "$pid" ] && [ "$pid" -gt 1 ]; do
+    name="$(ps -o comm= -p "$pid" 2>/dev/null | tr '[:upper:]' '[:lower:]')"
+    case "$name" in
+      *"$needle"*) echo "$pid"; return 0 ;;
+    esac
+    pid="$(ps -o ppid= -p "$pid" 2>/dev/null | tr -d ' ')"
+    max=$((max - 1))
+  done
+  return 1
+}
+
+AGENT_PID="$(find_agent_pid "$(echo "$AGENT" | tr '[:upper:]' '[:lower:]')" 2>/dev/null || true)"
+
+payload=''
+if command -v jq >/dev/null 2>&1; then
+  payload="$(
+    jq -n -c \
+      --arg agent "$AGENT" \
+      --arg state "$STATE" \
+      --arg term "${TERM_PROGRAM:-}" \
+      --arg pid "${AGENT_PID:-}" \
+      --argjson hook "$HOOK_JSON" '
+      ($hook | if type == "object" then . else {} end) as $d
+      | ($d.hook_event_name // "") as $event
+      | (if $state == "Auto" then "Working"
+         elif $state == "ToolFail" then (if $d.is_interrupt == true then "Idle" else "Working" end)
+         # Claude の Notification は権限要求以外も流れてくるので message で振り分ける。
+         # message を持たない Codex の PermissionRequest はそのまま Waiting にする。
+         elif $state == "Waiting" and ($d | has("message")) then
+           (if ($d.message // "" | ascii_downcase | contains("permission")) then "Waiting" else "Idle" end)
+         else $state end) as $resolved
+      | {
+          "iTerm.app": "iTerm",
+          "Apple_Terminal": "Terminal",
+          "vscode": "VS Code",
+          "WarpTerminal": "Warp",
+          "ghostty": "Ghostty",
+          "Hyper": "Hyper",
+          "WezTerm": "WezTerm",
+          "kitty": "kitty",
+          "tabby": "Tabby",
+          "alacritty": "Alacritty"
+        } as $terminals
+      | {
+          state: $resolved,
+          agent: $agent,
+          event: $event,
+          session_id: ($d.session_id // "default"),
+          cwd: ($d.cwd // ""),
+          title: (($d.prompt // "")
+                  | if type == "string"
+                    then (sub("^\\s+"; "") | sub("\\s+$"; "") | .[0:120])
+                    else "" end),
+          terminal: ($terminals[$term] // $term),
+          pid: (if $pid == "" then null else ($pid | tonumber? // null) end)
+        }' 2>/dev/null
+  )"
+fi
+
+if [ -z "$payload" ]; then
+  payload="{\"state\":\"${STATE}\",\"agent\":\"${AGENT}\"}"
+fi
+
+# 終了通知だけは取りこぼすとセッションが残り続けるので同期で送る。
+if [ "$STATE" = "Ended" ]; then
+  curl -s -m 2 -X POST "http://${HOST}:${PORT}/event" \
+    -H 'Content-Type: application/json' \
+    --data-raw "$payload" >/dev/null 2>&1
+else
+  curl -s -m 1 -X POST "http://${HOST}:${PORT}/event" \
+    -H 'Content-Type: application/json' \
+    --data-raw "$payload" >/dev/null 2>&1 &
+fi
+
+exit 0

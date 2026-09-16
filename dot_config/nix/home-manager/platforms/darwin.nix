@@ -1,6 +1,7 @@
-{ pkgs, config, ... }:
+{ pkgs, lib, config, ... }:
 let
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
+  karabinerConfig = ../../../karabiner/karabiner.json;
 in
 {
   imports = [
@@ -54,7 +55,18 @@ in
   home.file = {
     ".gitconfig".source = mkOutOfStoreSymlink
       "${config.home.homeDirectory}/dotfiles/dot_config/git/.gitconfig.darwin";
-    ".config/karabiner/karabiner.json".source = mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/dotfiles/dot_config/karabiner/karabiner.json";
   };
+
+  # Karabiner-Elements は GUI 操作や起動時の正規化で karabiner.json を書き戻すため、
+  # symlink だと参照先の実体 (リポジトリや store) を壊す。
+  # build 時に store へ取り込んだ内容を実ファイルとしてコピー配置し、nix 側を正として乖離したら上書きする。
+  home.activation.karabinerConfig = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+    run mkdir -p "$HOME/.config/karabiner"
+    if [ -L "$HOME/.config/karabiner/karabiner.json" ]; then
+      run rm -f "$HOME/.config/karabiner/karabiner.json"
+    fi
+    if ! ${pkgs.diffutils}/bin/cmp -s ${karabinerConfig} "$HOME/.config/karabiner/karabiner.json" 2>/dev/null; then
+      run install -m 644 ${karabinerConfig} "$HOME/.config/karabiner/karabiner.json"
+    fi
+  '';
 }

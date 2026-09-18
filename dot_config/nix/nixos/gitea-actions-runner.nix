@@ -8,7 +8,8 @@
 # https://192.168.8.4:8081/... という到達不能な URL が返り artifact が壊れる。
 { config, ... }:
 let
-  giteaUrl = "http://192.168.8.4:3000";
+  target = "192.168.8.4";
+  giteaUrl = "http://${target}:3000";
 
   # 手置き。中身は `TOKEN=<registration token>` の 1 行。
   # StateDirectory (/var/lib/private/gitea-runner) とは別ディレクトリにすること。
@@ -19,6 +20,29 @@ let
   cacheHost = "192.168.8.6";
 in
 {
+  # Renovate service {{
+  # Gitea API tokenはNix storeに入れず、ホスト上に手置きする。
+  # `sudo install -o root -g root -m 0400 /path/to/token /etc/renovate/token`
+  services.renovate = {
+    enable = true;
+    schedule = "daily";
+    credentials = {
+      RENOVATE_TOKEN = "/etc/renovate/token";
+      RENOVATE_GITHUB_COM_TOKEN = "/etc/renovate/github_com_token";
+    };
+    settings = {
+      platform = "gitea";
+      endpoint = "${giteaUrl}/api/v1";
+      autodiscover = true;
+      gitAuthor = "Renovate Bot <renovate@localhost>";
+      autodiscoverNamespaces = [ "pava" ];
+      hostRules = [
+        { hostType = "gitea"; matchHost = target; allowInternal = true; }
+      ];
+    };
+  };
+  # }}
+
   # Runner instance {{{
   # unit: gitea-runner-enigma.service / state: /var/lib/private/gitea-runner/enigma
   services.gitea-actions-runner.instances.${config.networking.hostName} = {

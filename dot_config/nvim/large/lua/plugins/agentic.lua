@@ -1,0 +1,1 @@
+../../../huge/lua/plugins/agentic.lua

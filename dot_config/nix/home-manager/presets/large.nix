@@ -10,12 +10,12 @@ in
 
     ../programs/aibo.nix
     ../programs/claude-code.nix
-    ../programs/codex.nix
     ../programs/pi.nix
     ../programs/emacs.nix
-    ../programs/neovim.nix
     ../programs/tmux.nix
   ];
+
+  profile.levels = [ "large" ];
 
   home.packages = with pkgs; [
     _1password-cli
@@ -55,7 +55,7 @@ in
     vtsls
     vim-language-server
     vscode-langservers-extracted
-    vue-language-server
+    # vue-language-server
     yaml-language-server
 
     pandoc

@@ -1,0 +1,1 @@
+../../huge/plugin/copy_path.vim

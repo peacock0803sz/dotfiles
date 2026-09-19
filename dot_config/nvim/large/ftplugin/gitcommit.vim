@@ -1,0 +1,1 @@
+../../huge/ftplugin/gitcommit.vim

@@ -1,0 +1,1 @@
+../../../huge/lua/plugins/trouble.lua

@@ -1,0 +1,1 @@
+../../huge/ftplugin/sql.vim

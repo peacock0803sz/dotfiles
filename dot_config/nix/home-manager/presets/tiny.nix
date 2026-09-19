@@ -1,8 +1,12 @@
 { pkgs, ... }: {
   imports = [
+    ../profile.nix
+
     ../programs/bat.nix
     ../programs/fish.nix
   ];
+
+  profile.levels = [ "tiny" ];
 
   home.packages = with pkgs; [
     cachix

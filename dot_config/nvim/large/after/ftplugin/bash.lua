@@ -1,0 +1,1 @@
+../../../huge/after/ftplugin/bash.lua

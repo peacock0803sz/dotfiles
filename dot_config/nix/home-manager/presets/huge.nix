@@ -1,7 +1,10 @@
 { pkgs, system, inputs, ... }: {
   imports = [
     ./large.nix
+    ../programs/codex.nix
   ];
+
+  profile.levels = [ "huge" ];
 
   home.packages = with pkgs; [
     nur.repos.peacock0803sz.deck

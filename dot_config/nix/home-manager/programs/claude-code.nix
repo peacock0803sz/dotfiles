@@ -134,7 +134,6 @@ in
         "pr-review-toolkit@claude-plugins-official" = true;
         "feature-dev@claude-plugins-official" = true;
         "codex@openai-codex" = true;
-        "superpowers@claude-plugins-official" = true;
       };
     };
 

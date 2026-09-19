@@ -20,7 +20,6 @@ let
     compaction.enabled = false;
     packages = [
       "npm:pi-mcp-adapter@2.31.0"
-      "git:github.com/obra/superpowers@v6.3.0"
     ];
   });
 in
@@ -46,9 +45,6 @@ in
     fi
     if [ ! -d "$HOME/.pi/agent/npm/pi-mcp-adapter" ]; then
       echo "pi: run once: pi install npm:pi-mcp-adapter@2.31.0"
-    fi
-    if [ ! -d "$HOME/.pi/agent/git/github.com/obra/superpowers" ]; then
-      echo "pi: run once: pi install git:github.com/obra/superpowers@v6.3.0"
     fi
   '';
 }

@@ -16,6 +16,10 @@
       url = "github:openai/skills";
       flake = false;
     };
+    superpowers = {
+      url = "github:obra/superpowers";
+      flake = false;
+    };
     vercel-labs = {
       url = "github:vercel-labs/agent-skills";
       flake = false;
@@ -76,6 +80,7 @@
         # 全件 enable する source (旧 skills.enableAll 相当)
         discoveredSkills = {
           google = discoverSkills inputs.google.outPath "skills/cloud";
+          superpowers = discoverSkills inputs.superpowers.outPath "skills";
         } // lib.optionalAttrs (hostName == "arpeggio") {
           gx-agent-recipes = discoverSkills
             "${config.home.homeDirectory}/ghq/github.com/groove-x/gx-agent-recipes"
@@ -85,11 +90,16 @@
         # skills.explicit 構築用 (curated + discovered)
         prefixedSkills = curatedSkills // discoveredSkills;
 
-        mkPrefixed = source: skillName: lib.nameValuePair "${source}.${skillName}" {
+        mkPrefixed = source: skillName: lib.nameValuePair "${source}.${skillName}" ({
           from = source;
           path = skillName;
           rename = "${source}.${skillName}";
-        };
+        } // lib.optionalAttrs (source == "superpowers") {
+          # 上流は Claude plugin 形式の ID (superpowers:brainstorming) で相互参照するため、
+          # rename 後の配置名 (superpowers.brainstorming) に合わせて書き換える。
+          transform = { original, ... }:
+            builtins.replaceStrings [ "superpowers:" ] [ "superpowers." ] original;
+        });
 
         # 列挙された skill 名のみマッチする正規表現を生成
         # builtins.match は完全一致を要求するためアンカー不要
@@ -112,6 +122,10 @@
               path = inputs.openai.outPath;
               subdir = "skills/.curated";
               filter.nameRegex = toNameRegex curatedSkills.openai;
+            };
+            superpowers = {
+              path = inputs.superpowers.outPath;
+              subdir = "skills";
             };
             vercel-labs = {
               path = inputs.vercel-labs.outPath;

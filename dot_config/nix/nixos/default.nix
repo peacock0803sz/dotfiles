@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ modulesPath, system, pkgs, nix-monitored, ... }:
+{ modulesPath, system, pkgs, lib, nix-monitored, ... }:
 
 {
   nix = {
@@ -156,7 +156,23 @@
         PasswordAuthentication = false;
       };
     };
-    tailscale.enable = true;
+    tailscale = {
+      enable = true;
+      # 手で叩いた `tailscale up` が残した状態を、起動のたびに宣言へ引き戻す。
+      #
+      # 2026-09-19 に enigma で --accept-routes が入り、LAN ルータ (GL-MT6000) が
+      # 広告する 192.168.8.0/24 を掴んでしまった。同じ LAN の bassoon への戻りが
+      # tailscale0 経由になって非対称ルーティングとなり、bassoon からの
+      # exporter 収集 (192.168.8.6) が全部タイムアウトした。
+      # 同じ LAN にいるホスト同士は LAN 直で話させる。
+      #
+      # 意図的にサブネットルータにするホストは anyconnect.nix のように
+      # extraSetFlags を定義すればよい (こちらは mkDefault なので丸ごと負ける)
+      extraSetFlags = lib.mkDefault [
+        "--accept-routes=false"
+        "--advertise-routes="
+      ];
+    };
   };
 
   # Open ports in the firewall.

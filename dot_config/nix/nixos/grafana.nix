@@ -63,6 +63,29 @@ in
           }
         ];
       };
+
+      # ダッシュボードは ./grafana-dashboards/*.json から読む。
+      # Nix store は read-only なので UI からは保存できず、Git が唯一の真実になる
+      dashboards.settings = {
+        apiVersion = 1;
+        providers = [
+          {
+            name = "nix";
+            type = "file";
+            # UI からの上書き保存を拒否する。true にすると UI で保存できてしまうが
+            # 保存先は DB なので、再起動時にここの JSON で黙って巻き戻される
+            allowUiUpdates = false;
+            # JSON を消したら Grafana からも消す。孤児ダッシュボードを残さない
+            disableDeletion = false;
+            options = {
+              path = ./grafana-dashboards;
+              # 枚数が増えたときにサブディレクトリをそのままフォルダにできるようにしておく。
+              # 今はフラットなので全部 General に入る
+              foldersFromFilesStructure = true;
+            };
+          }
+        ];
+      };
     };
   };
   # }}}

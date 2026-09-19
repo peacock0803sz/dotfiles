@@ -32,6 +32,42 @@
   };
   systemd.services.nginx.serviceConfig.ProtectHome = "read-only";
 
+  # mac 側は notizen commit で Gitea へ push するようになったため rsync は廃止した。
+  # ここで定期的に pull して source/ を更新する。source/ が変われば
+  # notizen-watch が拾って notizen-build を起こす
+  systemd.services.notizen-pull = {
+    description = "Pull notizen source from Gitea";
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    environment = {
+      HOME = "/home/${inputs.username}";
+      GIT_SSH_COMMAND =
+        "${inputs.pkgs.openssh}/bin/ssh -i /home/${inputs.username}/.ssh/id_ed25519 -o IdentitiesOnly=yes";
+    };
+    serviceConfig = {
+      Type = "oneshot";
+      User = inputs.username;
+      WorkingDirectory = "/home/${inputs.username}/notizen";
+      # 旧 rsync --delete と同じ意味にする。reset --hard が戻すのは追跡ファイルだけで、
+      # .venv や build/ のような未追跡ディレクトリは消えない
+      ExecStart = [
+        "${inputs.pkgs.git}/bin/git fetch --prune origin main"
+        "${inputs.pkgs.git}/bin/git reset --hard origin/main"
+      ];
+    };
+    path = [ inputs.pkgs.git inputs.pkgs.openssh ];
+  };
+
+  systemd.timers.notizen-pull = {
+    description = "Timer for notizen pull";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      # mac 側 launchd の StartInterval = 300 に合わせる
+      OnCalendar = "*:0/5";
+      Persistent = true;
+    };
+  };
+
   # Periodic build and deploy for notizen documentation
   systemd.services.notizen-build = {
     description = "Build notizen documentation";

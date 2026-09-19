@@ -25,7 +25,7 @@ in
   # `sudo install -o root -g root -m 0400 /path/to/token /etc/renovate/token`
   services.renovate = {
     enable = true;
-    schedule = "daily";
+    schedule = "*:0/10";
     credentials = {
       RENOVATE_TOKEN = "/etc/renovate/token";
       RENOVATE_GITHUB_COM_TOKEN = "/etc/renovate/github_com_token";

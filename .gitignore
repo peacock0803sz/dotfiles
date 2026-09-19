@@ -1,8 +1,7 @@
 .vscode/
 
 **/.DS_Store
-dot_config/nvim*/lazy-lock.json
-
+lazy-lock.json
 # node
 **/node_modules/
 

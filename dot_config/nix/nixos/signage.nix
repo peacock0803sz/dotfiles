@@ -1,18 +1,61 @@
 # bassoon に HDMI ディスプレイを繋いで Grafana を常時表示するサイネージ構成。
 # 表示専用でありサーバ機能ではないので、grafana.nix とは分けてある。
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, kioskDashboardTag, ... }:
 let
   # 同ホストの Grafana をループバックで引く。nginx と TLS と DNS を経由しないので、
-  # 証明書失効や Cloudflare 障害や MagicDNS の不調があっても画面は映り続ける。
-  # kiosk=1 と autofitpanels は grafana-kiosk が KIOSK_MODE と KIOSK_AUTOFIT から
-  # 組み立てるのでここには書かない。それ以外のクエリは GenerateURL が保持するので、
-  # from/to のような表示条件はここに書いてよい
-  url = "http://127.0.0.1:3001/d/kiosk/kiosk?from=now-3h&to=now";
+  # 証明書失効や Cloudflare 障害や MagicDNS の不調があっても画面は映り続ける
+  grafana = "http://127.0.0.1:3001";
 
-  # Grafana の service account token。service account は provisioning に対応しないため
-  # 宣言的に作れない。UI か API で発行して手置きする。
+  # k8s 形式 API では metadata.name がそのまま uid になるので、再生成しても
+  # URL が変わらない。表示時間は各ダッシュボード側に焼いてあるため from/to は付けない
+  playlistUid = "kiosk";
+  url = "${grafana}/playlists/play/${playlistUid}";
+
+  # Grafana の service account token。service account も playlist も provisioning に
+  # 対応しないため宣言的に作れない。UI か API で発行して手置きする。
+  # playlist を書き込むので Viewer では足りず Editor 以上が要る。
   # 存在しないと LoadCredential が失敗し cage-tty1 が起動を繰り返す
   tokenFile = "/var/lib/grafana-kiosk/token";
+
+  # 巡回対象はタグで決まる。ホストを prometheus-targets.nix に足すと
+  # kiosk-dashboards.nix が同じタグ付きのダッシュボードを生成するので、
+  # この定義自体は二度と変更しなくてよい
+  playlistDef = pkgs.writeText "kiosk-playlist.json" (builtins.toJSON {
+    kind = "Playlist";
+    apiVersion = "playlist.grafana.app/v0alpha1";
+    metadata = { name = playlistUid; namespace = "default"; };
+    spec = {
+      title = "Kiosk";
+      interval = "1m";
+      items = [{ type = "dashboard_by_tag"; value = kioskDashboardTag; }];
+    };
+  });
+
+  playlistSync = pkgs.writeShellScript "grafana-playlist-sync" ''
+    set -eu
+    api="${grafana}/apis/playlist.grafana.app/v0alpha1/namespaces/default/playlists"
+    auth="Authorization: Bearer $(cat "$CREDENTIALS_DIRECTORY/token")"
+
+    # After=grafana.service だけでは、プロセスは上がっていても HTTP が
+    # まだ listen していないことがある
+    for _ in $(${pkgs.coreutils}/bin/seq 60); do
+      ${pkgs.curl}/bin/curl -sf -o /dev/null "${grafana}/api/health" && break
+      ${pkgs.coreutils}/bin/sleep 2
+    done
+
+    if cur=$(${pkgs.curl}/bin/curl -sf -H "$auth" "$api/${playlistUid}"); then
+      # k8s 形式の更新は resourceVersion による楽観ロックを要求する
+      rv=$(printf '%s' "$cur" | ${pkgs.jq}/bin/jq -r '.metadata.resourceVersion')
+      ${pkgs.jq}/bin/jq --arg rv "$rv" '.metadata.resourceVersion = $rv' ${playlistDef} \
+        | ${pkgs.curl}/bin/curl -sf -X PUT -H "$auth" -H 'Content-Type: application/json' \
+            -d @- "$api/${playlistUid}" > /dev/null
+      echo "playlist ${playlistUid} updated"
+    else
+      ${pkgs.curl}/bin/curl -sf -X POST -H "$auth" -H 'Content-Type: application/json' \
+        -d @${playlistDef} "$api" > /dev/null
+      echo "playlist ${playlistUid} created"
+    fi
+  '';
 
   # services.cage.program は absolute path 型なので引数付き起動は包む必要がある。
   # トークンを argv に置くと ps で他ユーザから見えるため環境変数に入れる
@@ -51,6 +94,9 @@ in
     environment = {
       KIOSK_URL = url;
       KIOSK_LOGIN_METHOD = "apikey";
+      # プレイリスト URL であることを伝える。inactive=1 が付いて
+      # 操作待ちに落ちず、すぐ巡回が始まる
+      KIOSK_IS_PLAYLIST = "true";
       # full は ?kiosk=1 に対応する。tv だとトップナビが残る
       KIOSK_MODE = "full";
       KIOSK_BROWSER_PATH = "${pkgs.chromium}/bin/chromium";
@@ -61,10 +107,26 @@ in
     };
   };
 
+  # プレイリストは Nix の定義から API 経由で突き合わせる。provisioning が
+  # 対応しないので DB 上の状態になるが、定義は git 側にあり毎回上書きされる
+  systemd.services.grafana-playlist-sync = {
+    description = "Reconcile the Grafana kiosk playlist from its Nix definition";
+    after = [ "grafana.service" ];
+    wants = [ "grafana.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      LoadCredential = [ "token:${tokenFile}" ];
+      ExecStart = playlistSync;
+    };
+  };
+
   systemd.services.cage-tty1 = {
-    # Grafana より先に開くとエラーページを掴んだまま止まる
-    after = [ "grafana.service" "network-online.target" ];
-    wants = [ "network-online.target" ];
+    # Grafana より先に開くとエラーページを掴んだまま止まる。
+    # プレイリスト未作成のまま開くと 404 になるので sync の後に回す
+    after = [ "grafana.service" "grafana-playlist-sync.service" "network-online.target" ];
+    wants = [ "network-online.target" "grafana-playlist-sync.service" ];
     serviceConfig = {
       LoadCredential = [ "token:${tokenFile}" ];
       # モジュール側は Restart を設定しない。無人運用では落ちたら戻す必要がある

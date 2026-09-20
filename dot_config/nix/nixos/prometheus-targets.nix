@@ -24,12 +24,12 @@
     };
   };
 
-  overture = {
-    # Raspberry Pi 4。enigma と同じく tailscale0 には出さず LAN IP に bind する
-    # (DHCP だが 192.168.8.5 で予約済み)
-    address = "192.168.8.5";
-    # docker を入れていないので cadvisor はない。GPU もないので nvidia もない。
-    # ここに port を書いていない exporter は立たず、収集対象にもならない
-    ports.node = 9100;
-  };
+  # overture = {
+  #   # Raspberry Pi 4。enigma と同じく tailscale0 には出さず LAN IP に bind する
+  #   # (DHCP だが 192.168.8.5 で予約済み)
+  #   address = "192.168.8.5";
+  #   # docker を入れていないので cadvisor はない。GPU もないので nvidia もない。
+  #   # ここに port を書いていない exporter は立たず、収集対象にもならない
+  #   ports.node = 9100;
+  # };
 }

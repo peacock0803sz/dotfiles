@@ -19,7 +19,6 @@ nixpkgs.lib.nixosSystem {
     ./disk.nix
     ./hardware.nix
     ../../nixos
-    ../../nixos/gsnet.nix
 
     home-manager.nixosModules.home-manager
     {

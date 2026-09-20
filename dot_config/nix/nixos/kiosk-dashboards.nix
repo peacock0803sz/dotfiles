@@ -149,21 +149,21 @@ let
         id = 1;
         title = "Hostname";
         x = 0;
-        w = 4;
+        w = 3;
         targets = [ (tgt ''group by(instance) (node_uname_info{instance="${host}"})'' "__auto" "A") ];
       })
       (statText {
         id = 2;
         title = "OS";
-        x = 0;
+        x = 3;
         w = 6;
         targets = [ (tgt ''group by(pretty_name) (node_os_info{instance="${host}"})'' "__auto" "A") ];
       })
       (statDur {
         id = 3;
         title = "Uptime";
-        x = 6;
-        w = 4;
+        x = 9;
+        w = 3;
         targets = [ (tgt ''time() - node_boot_time_seconds{instance="${host}"}'' "__auto" "A") ];
       })
       # / と /nix/store は同一デバイスなので / だけに絞る。Samba 用のような
@@ -171,8 +171,8 @@ let
       (statNum {
         id = 4;
         title = "DISK";
-        x = 11;
-        w = 7;
+        x = 12;
+        w = 8;
         unit = "percent";
         steps = pctSteps;
         targets = [ (tgt ''100 - (node_filesystem_avail_bytes{instance="${host}",mountpoint=~"/|/mnt/.*",fstype!~"tmpfs|ramfs"} / node_filesystem_size_bytes{instance="${host}",mountpoint=~"/|/mnt/.*",fstype!~"tmpfs|ramfs"} * 100)'' "{{mountpoint}}" "A") ];
@@ -180,7 +180,7 @@ let
       (statNum {
         id = 5;
         title = "TEMP";
-        x = 18;
+        x = 20;
         w = 4;
         unit = "celsius";
         steps = tempSteps;

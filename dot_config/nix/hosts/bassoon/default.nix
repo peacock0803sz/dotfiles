@@ -21,6 +21,7 @@ nixpkgs.lib.nixosSystem {
     ../../nixos
     ../../nixos/anyconnect.nix
     ../../nixos/grafana.nix
+    ../../nixos/signage.nix
     ../../nixos/samba.nix
     ./hardware.nix
     ./disk.nix

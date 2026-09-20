@@ -29,7 +29,7 @@ let
     { color = "yellow"; value = 65; }
     { color = "red"; value = 80; }
   ];
-  plainSteps = [ { color = "green"; value = null; } ];
+  plainSteps = [{ color = "green"; value = null; }];
 
   statBase = { id, title, x, w, steps }: {
     inherit id title;
@@ -61,7 +61,10 @@ let
         defaults = b.fieldConfig.defaults // { inherit unit; decimals = 0; min = 0; };
       };
       options = b.options // {
-        colorMode = "value"; graphMode = "area"; orientation = "vertical"; textMode = "auto";
+        colorMode = "value";
+        graphMode = "area";
+        orientation = "vertical";
+        textMode = "auto";
       };
       inherit targets;
     };
@@ -71,7 +74,10 @@ let
     let b = statBase { inherit id title x w; steps = plainSteps; }; in
     b // {
       options = b.options // {
-        colorMode = "background"; graphMode = "none"; orientation = "auto"; textMode = "name";
+        colorMode = "background";
+        graphMode = "none";
+        orientation = "auto";
+        textMode = "name";
       };
       inherit targets;
     };
@@ -83,7 +89,10 @@ let
         defaults = b.fieldConfig.defaults // { unit = "dtdurations"; };
       };
       options = b.options // {
-        colorMode = "none"; graphMode = "area"; orientation = "horizontal"; textMode = "value";
+        colorMode = "none";
+        graphMode = "area";
+        orientation = "horizontal";
+        textMode = "value";
       };
       inherit targets;
     };
@@ -98,11 +107,20 @@ let
         inherit unit;
         color.mode = "palette-classic";
         custom = {
-          drawStyle = "line"; lineWidth = 2; fillOpacity = 15; gradientMode = "opacity";
-          showPoints = "never"; pointSize = 5; spanNulls = true;
-          axisPlacement = "auto"; axisLabel = ""; axisBorderShow = false;
-          axisCenteredZero = false; axisColorMode = "text";
-          barAlignment = 0; lineInterpolation = "linear";
+          drawStyle = "line";
+          lineWidth = 2;
+          fillOpacity = 15;
+          gradientMode = "opacity";
+          showPoints = "never";
+          pointSize = 5;
+          spanNulls = true;
+          axisPlacement = "auto";
+          axisLabel = "";
+          axisBorderShow = false;
+          axisCenteredZero = false;
+          axisColorMode = "text";
+          barAlignment = 0;
+          lineInterpolation = "linear";
           scaleDistribution.type = "linear";
           stacking = { group = "A"; mode = "none"; };
           thresholdsStyle.mode = "off";
@@ -111,7 +129,7 @@ let
         };
         thresholds = { mode = "absolute"; steps = plainSteps; };
       } // lib.optionalAttrs (min != null) { inherit min; }
-        // lib.optionalAttrs (max != null) { inherit max; };
+      // lib.optionalAttrs (max != null) { inherit max; };
       inherit overrides;
     };
     options = {
@@ -128,29 +146,63 @@ let
     in
     [
       (statText {
-        id = 1; title = "OS"; x = 0; w = 6;
+        id = 1;
+        title = "Hostname";
+        x = 0;
+        w = 4;
+        targets = [ (tgt ''group by(instance) (node_uname_info{instance="${host}"})'' "__auto" "A") ];
+      })
+      (statText {
+        id = 2;
+        title = "OS";
+        x = 0;
+        w = 6;
         targets = [ (tgt ''group by(pretty_name) (node_os_info{instance="${host}"})'' "__auto" "A") ];
       })
       (statDur {
-        id = 2; title = "Uptime"; x = 6; w = 5;
+        id = 3;
+        title = "Uptime";
+        x = 6;
+        w = 4;
         targets = [ (tgt ''time() - node_boot_time_seconds{instance="${host}"}'' "__auto" "A") ];
       })
       # / と /nix/store は同一デバイスなので / だけに絞る。Samba 用のような
       # 追加マウントは増えたぶんだけ値が並ぶ。埋まったら気付きたいのであえて出す
       (statNum {
-        id = 3; title = "DISK"; x = 11; w = 7; unit = "percent"; steps = pctSteps;
+        id = 4;
+        title = "DISK";
+        x = 11;
+        w = 7;
+        unit = "percent";
+        steps = pctSteps;
         targets = [ (tgt ''100 - (node_filesystem_avail_bytes{instance="${host}",mountpoint=~"/|/mnt/.*",fstype!~"tmpfs|ramfs"} / node_filesystem_size_bytes{instance="${host}",mountpoint=~"/|/mnt/.*",fstype!~"tmpfs|ramfs"} * 100)'' "{{mountpoint}}" "A") ];
       })
       (statNum {
-        id = 4; title = "TEMP"; x = 18; w = 6; unit = "celsius"; steps = tempSteps;
+        id = 5;
+        title = "TEMP";
+        x = 18;
+        w = 4;
+        unit = "celsius";
+        steps = tempSteps;
         targets = [ (tgt ''max by(instance) (node_hwmon_temp_celsius{instance="${host}",chip="platform_coretemp_0"})'' "TEMP" "A") ];
       })
       (ts {
-        id = 5; title = "CPU%"; x = 0; y = 4; w = 12; unit = "percent"; max = 100;
+        id = 6;
+        title = "CPU%";
+        x = 0;
+        y = 4;
+        w = 12;
+        unit = "percent";
+        max = 100;
         targets = [ (tgt ''100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle",instance="${host}"}[2m])) * 100)'' "CPU" "A") ];
       })
       (ts {
-        id = 6; title = "Memory"; x = 12; y = 4; w = 12; unit = "bytes";
+        id = 7;
+        title = "Memory";
+        x = 12;
+        y = 4;
+        w = 12;
+        unit = "bytes";
         targets = [
           (tgt ''node_memory_MemTotal_bytes{instance="${host}"} - node_memory_MemAvailable_bytes{instance="${host}"}'' "Used" "A")
           (tgt ''node_memory_MemTotal_bytes{instance="${host}"}'' "Total" "B")
@@ -167,7 +219,13 @@ let
       # 物理 NIC だけに絞る。VPN の tun0 やブリッジを出しても読めない。
       # tx を負値で描いて rx と上下に分けるので、ここだけ min を外す
       (ts {
-        id = 7; title = "Network I/O"; x = 0; y = 13; w = netWidth; unit = "Bps"; min = null;
+        id = 8;
+        title = "Network I/O";
+        x = 0;
+        y = 13;
+        w = netWidth;
+        unit = "Bps";
+        min = null;
         targets = [
           (tgt ''rate(node_network_receive_bytes_total{instance="${host}",device=~"en.*|wl.*"}[2m])'' "{{device}} rx" "A")
           (tgt ''-rate(node_network_transmit_bytes_total{instance="${host}",device=~"en.*|wl.*"}[2m])'' "{{device}} tx" "B")
@@ -177,7 +235,13 @@ let
     # nvidia exporter を持つホストだけ GPU 段を足す。prometheus-targets.nix の
     # ports に nvidia があるかどうかだけで決まる
     ++ lib.optional hasGpu (ts {
-      id = 8; title = "GPU"; x = 12; y = 13; w = 12; unit = "percent"; max = 100;
+      id = 8;
+      title = "GPU";
+      x = 12;
+      y = 13;
+      w = 12;
+      unit = "percent";
+      max = 100;
       targets = [
         (tgt ''nvidia_smi_utilization_gpu_ratio{instance="${host}"} * 100'' "GPU util" "A")
         (tgt ''nvidia_smi_memory_used_bytes{instance="${host}"} / nvidia_smi_memory_total_bytes{instance="${host}"} * 100'' "GPU mem" "B")

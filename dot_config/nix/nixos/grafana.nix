@@ -1,14 +1,44 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   domain = "grafana.p3ac0ck.net";
   httpPort = 3001; # 3000 は gitea が使用中
   prometheusPort = 9090;
 
-  # 収集対象とポートの単一の情報源。被収集ホスト側 (enigma) の
+  # 収集対象とポートの単一の情報源。被収集ホスト側の
   # nixos/prometheus-exporters.nix も同じファイルを読んでいる
   targets = import ./prometheus-targets.nix;
 
   target = host: port: "${host.address}:${toString port}";
+
+  # job 名と、prometheus-targets.nix の ports のキーの対応。
+  # どのホストを収集するかはハードコードせず、その port を持つホストを拾う。
+  # ホストを1件足せば収集対象に入るので、ここは触らなくてよい
+  jobs = {
+    node.port = "node";
+    nvidia-gpu.port = "nvidia";
+    cadvisor = {
+      port = "cadvisor";
+      # コンテナ数 × メトリクス数で系列が増えやすい。
+      # 15s × 90d 保持だと TSDB が膨らむのでこの job だけ間隔を伸ばす
+      scrapeInterval = "30s";
+    };
+  };
+
+  mkScrapeConfig = jobName: spec:
+    let
+      matched = lib.filterAttrs (_: t: t.ports ? ${spec.port}) targets;
+    in
+    lib.optional (matched != { }) ({
+      job_name = jobName;
+      static_configs = lib.mapAttrsToList
+        (name: t: {
+          targets = [ (target t t.ports.${spec.port}) ];
+          labels.instance = name;
+        })
+        matched;
+    } // lib.optionalAttrs (spec ? scrapeInterval) {
+      scrape_interval = spec.scrapeInterval;
+    });
 in
 {
   # Grafana {{{
@@ -111,44 +141,9 @@ in
       enabledCollectors = [ "systemd" "processes" ];
     };
 
-    # enigma へは LAN 経由で引く。enigma 側の exporter は tailscale0 に出さず
-    # LAN IP に bind してある (nixos/prometheus-exporters.nix)
-    scrapeConfigs = [
-      {
-        job_name = "node";
-        static_configs = [
-          {
-            targets = [ (target targets.bassoon targets.bassoon.ports.node) ];
-            labels.instance = "bassoon";
-          }
-          {
-            targets = [ (target targets.enigma targets.enigma.ports.node) ];
-            labels.instance = "enigma";
-          }
-        ];
-      }
-      {
-        job_name = "nvidia-gpu";
-        static_configs = [
-          {
-            targets = [ (target targets.enigma targets.enigma.ports.nvidia) ];
-            labels.instance = "enigma";
-          }
-        ];
-      }
-      {
-        job_name = "cadvisor";
-        # コンテナ数 × メトリクス数で系列が増えやすい。
-        # 15s × 90d 保持だと TSDB が膨らむのでこの job だけ間隔を伸ばす
-        scrape_interval = "30s";
-        static_configs = [
-          {
-            targets = [ (target targets.enigma targets.enigma.ports.cadvisor) ];
-            labels.instance = "enigma";
-          }
-        ];
-      }
-    ];
+    # 収集先のアドレスは prometheus-targets.nix 側が持つ。firewall が無効なので
+    # bind 先がそのまま露出範囲になり、各ホストがどこに出すかはあちらの判断になる
+    scrapeConfigs = lib.flatten (lib.mapAttrsToList mkScrapeConfig jobs);
   };
   # }}}
 

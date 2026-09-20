@@ -19,6 +19,7 @@ nixpkgs.lib.nixosSystem {
     ./disk.nix
     ./hardware.nix
     ../../nixos
+    ../../nixos/prometheus-exporters.nix
 
     home-manager.nixosModules.home-manager
     {

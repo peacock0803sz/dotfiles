@@ -6,7 +6,7 @@ let
   # 証明書失効や Cloudflare 障害や MagicDNS の不調があっても画面は映り続ける。
   # クエリ文字列は付けない。grafana-kiosk が KIOSK_MODE から ?kiosk=1 を、
   # KIOSK_AUTOFIT から &autofitpanels を自分で組み立てる
-  url = "http://127.0.0.1:3001/d/kiosk/kiosk";
+  url = "http://127.0.0.1:3001/d/kiosk/kiosk?from=now-3h&to=now";
 
   # Grafana の service account token。service account は provisioning に対応しないため
   # 宣言的に作れない。UI か API で発行して手置きする。

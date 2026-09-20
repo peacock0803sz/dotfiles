@@ -4,8 +4,9 @@
 let
   # 同ホストの Grafana をループバックで引く。nginx と TLS と DNS を経由しないので、
   # 証明書失効や Cloudflare 障害や MagicDNS の不調があっても画面は映り続ける。
-  # クエリ文字列は付けない。grafana-kiosk が KIOSK_MODE から ?kiosk=1 を、
-  # KIOSK_AUTOFIT から &autofitpanels を自分で組み立てる
+  # kiosk=1 と autofitpanels は grafana-kiosk が KIOSK_MODE と KIOSK_AUTOFIT から
+  # 組み立てるのでここには書かない。それ以外のクエリは GenerateURL が保持するので、
+  # from/to のような表示条件はここに書いてよい
   url = "http://127.0.0.1:3001/d/kiosk/kiosk?from=now-3h&to=now";
 
   # Grafana の service account token。service account は provisioning に対応しないため

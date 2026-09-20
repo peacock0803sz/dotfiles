@@ -26,22 +26,19 @@
     {
       "id": 101,
       "type": "stat",
-      "title": "bassoon CPU",
+      "title": "bassoon OS",
       "datasource": {
         "type": "prometheus",
         "uid": "prometheus"
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
+        "w": 4,
         "x": 0,
         "y": 0
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "percent",
-          "decimals": 0,
-          "min": 0,
           "mappings": [],
           "color": {
             "mode": "thresholds"
@@ -52,14 +49,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 70
-              },
-              {
-                "color": "red",
-                "value": 85
               }
             ]
           }
@@ -67,11 +56,7 @@
         "overrides": []
       },
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
         "justifyMode": "auto",
-        "orientation": "vertical",
-        "textMode": "auto",
         "wideLayout": true,
         "percentChangeColorMode": "standard",
         "showPercentChange": false,
@@ -81,7 +66,11 @@
           ],
           "fields": "",
           "values": false
-        }
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "orientation": "auto",
+        "textMode": "name"
       },
       "targets": [
         {
@@ -90,8 +79,8 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 - (avg by(instance) (rate(node_cpu_seconds_total{mode=\"idle\",instance=\"bassoon\"}[5m])) * 100)",
-          "legendFormat": "CPU",
+          "expr": "group by(pretty_name) (node_os_info{instance=\"bassoon\"})",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
@@ -100,7 +89,7 @@
     {
       "id": 102,
       "type": "stat",
-      "title": "bassoon MEM",
+      "title": "bassoon Uptime",
       "datasource": {
         "type": "prometheus",
         "uid": "prometheus"
@@ -108,14 +97,12 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 3,
+        "x": 4,
         "y": 0
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "percent",
-          "decimals": 0,
-          "min": 0,
+          "unit": "dtdurations",
           "mappings": [],
           "color": {
             "mode": "thresholds"
@@ -126,14 +113,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 70
-              },
-              {
-                "color": "red",
-                "value": 85
               }
             ]
           }
@@ -141,11 +120,7 @@
         "overrides": []
       },
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
         "justifyMode": "auto",
-        "orientation": "vertical",
-        "textMode": "auto",
         "wideLayout": true,
         "percentChangeColorMode": "standard",
         "showPercentChange": false,
@@ -155,7 +130,11 @@
           ],
           "fields": "",
           "values": false
-        }
+        },
+        "colorMode": "none",
+        "graphMode": "area",
+        "orientation": "horizontal",
+        "textMode": "value"
       },
       "targets": [
         {
@@ -164,8 +143,8 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "(1 - node_memory_MemAvailable_bytes{instance=\"bassoon\"} / node_memory_MemTotal_bytes{instance=\"bassoon\"}) * 100",
-          "legendFormat": "MEM",
+          "expr": "time() - node_boot_time_seconds{instance=\"bassoon\"}",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
@@ -182,14 +161,12 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 6,
+        "x": 7,
         "y": 0
       },
       "fieldConfig": {
         "defaults": {
           "unit": "percent",
-          "decimals": 0,
-          "min": 0,
           "mappings": [],
           "color": {
             "mode": "thresholds"
@@ -210,16 +187,14 @@
                 "value": 85
               }
             ]
-          }
+          },
+          "decimals": 0,
+          "min": 0
         },
         "overrides": []
       },
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
         "justifyMode": "auto",
-        "orientation": "vertical",
-        "textMode": "auto",
         "wideLayout": true,
         "percentChangeColorMode": "standard",
         "showPercentChange": false,
@@ -229,7 +204,11 @@
           ],
           "fields": "",
           "values": false
-        }
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "orientation": "vertical",
+        "textMode": "auto"
       },
       "targets": [
         {
@@ -255,15 +234,13 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
-        "x": 9,
+        "w": 2,
+        "x": 10,
         "y": 0
       },
       "fieldConfig": {
         "defaults": {
           "unit": "celsius",
-          "decimals": 0,
-          "min": 0,
           "mappings": [],
           "color": {
             "mode": "thresholds"
@@ -284,16 +261,14 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "decimals": 0,
+          "min": 0
         },
         "overrides": []
       },
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
         "justifyMode": "auto",
-        "orientation": "vertical",
-        "textMode": "auto",
         "wideLayout": true,
         "percentChangeColorMode": "standard",
         "showPercentChange": false,
@@ -303,7 +278,11 @@
           ],
           "fields": "",
           "values": false
-        }
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "orientation": "vertical",
+        "textMode": "auto"
       },
       "targets": [
         {
@@ -548,22 +527,19 @@
     {
       "id": 201,
       "type": "stat",
-      "title": "enigma CPU",
+      "title": "enigma OS",
       "datasource": {
         "type": "prometheus",
         "uid": "prometheus"
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
+        "w": 4,
         "x": 12,
         "y": 0
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "percent",
-          "decimals": 0,
-          "min": 0,
           "mappings": [],
           "color": {
             "mode": "thresholds"
@@ -574,14 +550,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 70
-              },
-              {
-                "color": "red",
-                "value": 85
               }
             ]
           }
@@ -589,11 +557,7 @@
         "overrides": []
       },
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
         "justifyMode": "auto",
-        "orientation": "vertical",
-        "textMode": "auto",
         "wideLayout": true,
         "percentChangeColorMode": "standard",
         "showPercentChange": false,
@@ -603,7 +567,11 @@
           ],
           "fields": "",
           "values": false
-        }
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "orientation": "auto",
+        "textMode": "name"
       },
       "targets": [
         {
@@ -612,8 +580,8 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 - (avg by(instance) (rate(node_cpu_seconds_total{mode=\"idle\",instance=\"enigma\"}[5m])) * 100)",
-          "legendFormat": "CPU",
+          "expr": "group by(pretty_name) (node_os_info{instance=\"enigma\"})",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
@@ -622,7 +590,7 @@
     {
       "id": 202,
       "type": "stat",
-      "title": "enigma MEM",
+      "title": "enigma Uptime",
       "datasource": {
         "type": "prometheus",
         "uid": "prometheus"
@@ -630,14 +598,12 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 15,
+        "x": 16,
         "y": 0
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "percent",
-          "decimals": 0,
-          "min": 0,
+          "unit": "dtdurations",
           "mappings": [],
           "color": {
             "mode": "thresholds"
@@ -648,14 +614,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 70
-              },
-              {
-                "color": "red",
-                "value": 85
               }
             ]
           }
@@ -663,11 +621,7 @@
         "overrides": []
       },
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
         "justifyMode": "auto",
-        "orientation": "vertical",
-        "textMode": "auto",
         "wideLayout": true,
         "percentChangeColorMode": "standard",
         "showPercentChange": false,
@@ -677,7 +631,11 @@
           ],
           "fields": "",
           "values": false
-        }
+        },
+        "colorMode": "none",
+        "graphMode": "area",
+        "orientation": "horizontal",
+        "textMode": "value"
       },
       "targets": [
         {
@@ -686,8 +644,8 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "(1 - node_memory_MemAvailable_bytes{instance=\"enigma\"} / node_memory_MemTotal_bytes{instance=\"enigma\"}) * 100",
-          "legendFormat": "MEM",
+          "expr": "time() - node_boot_time_seconds{instance=\"enigma\"}",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
@@ -704,14 +662,12 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 18,
+        "x": 19,
         "y": 0
       },
       "fieldConfig": {
         "defaults": {
           "unit": "percent",
-          "decimals": 0,
-          "min": 0,
           "mappings": [],
           "color": {
             "mode": "thresholds"
@@ -732,16 +688,14 @@
                 "value": 85
               }
             ]
-          }
+          },
+          "decimals": 0,
+          "min": 0
         },
         "overrides": []
       },
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
         "justifyMode": "auto",
-        "orientation": "vertical",
-        "textMode": "auto",
         "wideLayout": true,
         "percentChangeColorMode": "standard",
         "showPercentChange": false,
@@ -751,7 +705,11 @@
           ],
           "fields": "",
           "values": false
-        }
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "orientation": "vertical",
+        "textMode": "auto"
       },
       "targets": [
         {
@@ -777,15 +735,13 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
-        "x": 21,
+        "w": 2,
+        "x": 22,
         "y": 0
       },
       "fieldConfig": {
         "defaults": {
           "unit": "celsius",
-          "decimals": 0,
-          "min": 0,
           "mappings": [],
           "color": {
             "mode": "thresholds"
@@ -806,16 +762,14 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "decimals": 0,
+          "min": 0
         },
         "overrides": []
       },
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
         "justifyMode": "auto",
-        "orientation": "vertical",
-        "textMode": "auto",
         "wideLayout": true,
         "percentChangeColorMode": "standard",
         "showPercentChange": false,
@@ -825,7 +779,11 @@
           ],
           "fields": "",
           "values": false
-        }
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "orientation": "vertical",
+        "textMode": "auto"
       },
       "targets": [
         {

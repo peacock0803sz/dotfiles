@@ -118,11 +118,13 @@ let
     };
   };
 
+  # 稼働時間用。dtdurations だと最大単位だけ (3 days 等) になり分が落ちるので、
+  # 分の数値で出して常に分精度にする。長期稼働では大きな数値になる点に注意
   statDur = { id, title, x, y, w, targets }:
     let b = statBase { inherit id title x y w; steps = plainSteps; }; in
     b // {
       fieldConfig = b.fieldConfig // {
-        defaults = b.fieldConfig.defaults // { unit = "dtdurations"; };
+        defaults = b.fieldConfig.defaults // { unit = "m"; decimals = 0; };
       };
       options = b.options // {
         colorMode = "none";
@@ -202,7 +204,7 @@ let
         x = 16;
         y = 0;
         w = 8;
-        targets = [ (tgt ''time() - node_boot_time_seconds{instance="${host}"}'' "__auto" "A") ];
+        targets = [ (tgt ''(time() - node_boot_time_seconds{instance="${host}"}) / 60'' "__auto" "A") ];
       })
       # / と /nix/store は同一デバイスなので / だけに絞る。Samba 用のような
       # 追加マウントは増えたぶんだけ値が並ぶ。埋まったら気付きたいのであえて出す
@@ -234,7 +236,7 @@ let
         w = 24;
         unit = "percent";
         max = 100;
-        targets = [ (tgt ''100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle",instance="${host}"}[2m])) * 100)'' "CPU" "A") ];
+        targets = [ (tgt ''100 - (avg by(instance, cpu) (rate(node_cpu_seconds_total{mode="idle",instance="${host}"}[2m])) * 100)'' "CPU {{cpu}}" "A") ];
       })
       (ts {
         id = 7;
@@ -256,13 +258,28 @@ let
           ];
         }];
       })
+      # ベースデバイスだけに絞る。パーティション (sda1 等) や loop を出すと読めない。
+      # write を負値で描いて read と上下に分けるので、ここだけ min を外す
+      (ts {
+        id = 10;
+        title = "Disk I/O";
+        x = 0;
+        y = 26;
+        w = 24;
+        unit = "Bps";
+        min = null;
+        targets = [
+          (tgt ''rate(node_disk_read_bytes_total{instance="${host}",device=~"sd[a-z]+|nvme[0-9]+n[0-9]+|vd[a-z]+|hd[a-z]+|mmcblk[0-9]+"}[2m])'' "{{device}} read" "A")
+          (tgt ''-rate(node_disk_written_bytes_total{instance="${host}",device=~"sd[a-z]+|nvme[0-9]+n[0-9]+|vd[a-z]+|hd[a-z]+|mmcblk[0-9]+"}[2m])'' "{{device}} write" "B")
+        ];
+      })
       # 物理 NIC だけに絞る。VPN の tun0 やブリッジを出しても読めない。
       # tx を負値で描いて rx と上下に分けるので、ここだけ min を外す
       (ts {
         id = 8;
         title = "Network I/O";
         x = 0;
-        y = 26;
+        y = 35;
         w = 24;
         unit = "Bps";
         min = null;
@@ -278,7 +295,7 @@ let
       id = 9;
       title = "GPU";
       x = 0;
-      y = 35;
+      y = 44;
       w = 24;
       unit = "percent";
       max = 100;

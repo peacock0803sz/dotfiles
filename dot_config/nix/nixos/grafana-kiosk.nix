@@ -187,25 +187,23 @@ let
         title = "Hostname";
         x = 0;
         y = 0;
-        w = 12;
+        w = 4;
         targets = [ (tgt ''group by(instance) (node_uname_info{instance="${host}"})'' "__auto" "A") ];
       })
       (statText {
         id = 2;
         title = "OS";
-        x = 12;
+        x = 4;
         y = 0;
-        w = 12;
+        w = 8;
         targets = [ (tgt ''group by(pretty_name) (node_os_info{instance="${host}"})'' "__auto" "A") ];
       })
-      # Uptime は期間文字列が長いので幅を広めに取る。狭いままだと
-      # 自動縮小で文字が読めなくなる
       (statDur {
         id = 3;
         title = "Uptime";
-        x = 0;
-        y = 4;
-        w = 16;
+        x = 12;
+        y = 0;
+        w = 12;
         targets = [ (tgt ''time() - node_boot_time_seconds{instance="${host}"}'' "__auto" "A") ];
       })
       # / と /nix/store は同一デバイスなので / だけに絞る。Samba 用のような
@@ -214,8 +212,8 @@ let
         id = 4;
         title = "Disk";
         x = 0;
-        y = 8;
-        w = 24;
+        y = 4;
+        w = 16;
         unit = "percent";
         steps = pctSteps;
         targets = [ (tgt ''100 - (node_filesystem_avail_bytes{instance="${host}",mountpoint=~"/|/mnt/.*",fstype!~"tmpfs|ramfs"} / node_filesystem_size_bytes{instance="${host}",mountpoint=~"/|/mnt/.*",fstype!~"tmpfs|ramfs"} * 100)'' "{{mountpoint}}" "A") ];
@@ -234,7 +232,7 @@ let
         id = 6;
         title = "CPU%";
         x = 0;
-        y = 12;
+        y = 8;
         w = 24;
         unit = "percent";
         max = 100;
@@ -244,7 +242,7 @@ let
         id = 7;
         title = "Memory";
         x = 0;
-        y = 21;
+        y = 17;
         w = 24;
         unit = "bytes";
         targets = [
@@ -266,7 +264,7 @@ let
         id = 10;
         title = "Disk I/O";
         x = 0;
-        y = 30;
+        y = 26;
         w = 24;
         unit = "Bps";
         min = null;
@@ -281,7 +279,7 @@ let
         id = 8;
         title = "Network I/O";
         x = 0;
-        y = 39;
+        y = 35;
         w = 24;
         unit = "Bps";
         min = null;
@@ -297,7 +295,7 @@ let
       id = 9;
       title = "GPU";
       x = 0;
-      y = 48;
+      y = 44;
       w = 24;
       unit = "percent";
       max = 100;

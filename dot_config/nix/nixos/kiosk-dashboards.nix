@@ -82,6 +82,39 @@ let
       inherit targets;
     };
 
+  # 横向き棒グラフ。/ と /mnt/* の複数マウントを並べて出す DISK 用。
+  # stat だと値が重なって読めないので bargauge horizontal にする
+  barGauge = { id, title, x, w, unit, steps, targets }: {
+    inherit id title targets;
+    type = "bargauge";
+    datasource = ds;
+    gridPos = { h = 4; inherit w x; y = 0; };
+    fieldConfig = {
+      defaults = {
+        inherit unit;
+        mappings = [ ];
+        min = 0;
+        max = 100;
+        color.mode = "thresholds";
+        thresholds = { mode = "absolute"; steps = steps; };
+      };
+      overrides = [ ];
+    };
+    options = {
+      displayMode = "gradient";
+      legend = { calcs = [ ]; displayMode = "list"; placement = "bottom"; showLegend = false; };
+      maxVizHeight = 300;
+      minVizHeight = 16;
+      minVizWidth = 8;
+      namePlacement = "auto";
+      orientation = "horizontal";
+      reduceOptions = { calcs = [ "lastNotNull" ]; fields = ""; values = false; };
+      showUnfilled = true;
+      sizing = "auto";
+      valueMode = "color";
+    };
+  };
+
   statDur = { id, title, x, w, targets }:
     let b = statBase { inherit id title x w; steps = plainSteps; }; in
     b // {
@@ -168,7 +201,7 @@ let
       })
       # / と /nix/store は同一デバイスなので / だけに絞る。Samba 用のような
       # 追加マウントは増えたぶんだけ値が並ぶ。埋まったら気付きたいのであえて出す
-      (statNum {
+      (barGauge {
         id = 4;
         title = "DISK";
         x = 12;

@@ -14,11 +14,11 @@ let
   # Grafana の service account token。service account も playlist も provisioning に
   # 対応しないため宣言的に作れない。UI か API で発行して手置きする。
   # playlist を書き込むので Viewer では足りず Editor 以上が要る。
-  # 存在しないと LoadCredential が失敗し cage-tty1 が起動を繰り返す
+  # 存在しないと LoadCredential が失敗し sway-kiosk が起動を繰り返す
   tokenFile = "/var/lib/grafana-kiosk/token";
 
   # 巡回対象はタグで決まる。ホストを prometheus-targets.nix に足すと
-  # kiosk-dashboards.nix が同じタグ付きのダッシュボードを生成するので、
+  # grafana-kiosk.nix が同じタグ付きのダッシュボードを生成するので、
   # この定義自体は二度と変更しなくてよい
   playlistDef = pkgs.writeText "kiosk-playlist.json" (builtins.toJSON {
     kind = "Playlist";
@@ -100,14 +100,26 @@ let
     esac
   '';
 
-  # services.cage.program は absolute path 型なので引数付き起動は包む必要がある。
-  # トークンを argv に置くと ps で他ユーザから見えるため環境変数に入れる
-  # (/proc/PID/environ は所有者しか読めない)
+  # 引数付き起動はスクリプトに包む。トークンを argv に置くと ps で他ユーザから
+  # 見えるため環境変数に入れる (/proc/PID/environ は所有者しか読めない)
   kioskRunner = pkgs.writeShellScript "grafana-kiosk-run" ''
     set -eu
     KIOSK_APIKEY_APIKEY="$(cat "$CREDENTIALS_DIRECTORY/token")"
     export KIOSK_APIKEY_APIKEY
     exec ${pkgs.grafana-kiosk}/bin/grafana-kiosk
+  '';
+
+  # sway 用設定。HDMI-A-1 を反時計回り90度で縦置きにする。
+  # 逆に倒れたら transform を 270 に変えること
+  swayConfig = pkgs.writeText "sway-kiosk-config" ''
+    output HDMI-A-1 transform 90
+    exec ${kioskRunner}
+    for_window [app_id=".*"] fullscreen enable
+  '';
+
+  # systemd unit の ExecStart にそのまま置けるよう包む
+  swayRunner = pkgs.writeShellScript "sway-kiosk-start" ''
+    exec ${pkgs.sway}/bin/sway --config ${swayConfig}
   '';
 in
 {
@@ -125,15 +137,22 @@ in
     "d /var/lib/grafana-kiosk 0700 root root -"
   ];
 
-  # cage-tty1.service が生成される。getty@tty1 との Conflicts、nullok な PAM、
-  # hardware.graphics.enable、graphical.target への切り替えはモジュール側が面倒を見る
-  services.cage = {
-    enable = true;
-    user = "kiosk";
-    program = kioskRunner;
-    # 既定は false。URL やフラグを変えて rebuild しても画面が切り替わらず
-    # 原因不明に見えるので、設定変更をそのまま反映させる
-    restartIfChanged = true;
+  # cage 0.3.1 に出力回転がないため sway で回す。cage-tty1 unit と同形の
+  # 自前 unit (tty1 占有・nullok PAM・token の LoadCredential・自動再起動)
+  # programs.sway はラッパー整備用で、デーモン等は起動しない
+  programs.sway.enable = true;
+
+  # cage モジュールが面倒を見ていた分を明示する
+  hardware.graphics.enable = true;
+
+  systemd.services.sway-kiosk = {
+    description = "Sway kiosk for Grafana signage";
+    # Grafana より先に開くとエラーページを掴んだまま止まる。
+    # プレイリスト未作成のまま開くと 404 になるので sync の後に回す
+    after = [ "systemd-user-sessions.service" "systemd-logind.service" "getty@tty1.service" "grafana.service" "grafana-playlist-sync.service" "network-online.target" ];
+    wants = [ "systemd-logind.service" "network-online.target" "grafana-playlist-sync.service" ];
+    conflicts = [ "getty@tty1.service" ];
+    wantedBy = [ "graphical.target" ];
     environment = {
       KIOSK_URL = url;
       KIOSK_LOGIN_METHOD = "apikey";
@@ -143,11 +162,37 @@ in
       # full は ?kiosk=1 に対応する。tv だとトップナビが残る
       KIOSK_MODE = "full";
       KIOSK_BROWSER_PATH = "${pkgs.chromium}/bin/chromium";
-      # Xwayland を経由させず cage に直接描かせる
+      # Xwayland を経由させず sway に直接描かせる
       KIOSK_OZONE_PLATFORM = "wayland";
       # キーボードもマウスも繋がないので、入力デバイス0台でも起動させる
       WLR_LIBINPUT_NO_DEVICES = "1";
     };
+    serviceConfig = {
+      User = "kiosk";
+      PAMName = "sway-kiosk";
+      TTYPath = "/dev/tty1";
+      TTYReset = true;
+      TTYVHangup = true;
+      TTYVTDisallocate = true;
+      StandardInput = "tty-fail";
+      StandardOutput = "journal";
+      StandardError = "journal";
+      UtmpIdentifier = "%n";
+      UtmpMode = "user";
+      LoadCredential = [ "token:${tokenFile}" ];
+      # 無人運用では落ちたら戻す必要がある
+      Restart = "always";
+      RestartSec = 10;
+      # sway も SIGTERM ではすぐ死なないため、switch のたびに待たされないよう短縮する
+      TimeoutStopSec = "15s";
+      ExecStart = swayRunner;
+    };
+  };
+
+  # パスワードなしで kiosk のセッションを開く。cage モジュールが用意していた
+  # PAM サービスの代替
+  security.pam.services.sway-kiosk = {
+    allowNullPassword = true;
   };
 
   # プレイリストは Nix の定義から API 経由で突き合わせる。provisioning が
@@ -165,22 +210,6 @@ in
     };
   };
 
-  systemd.services.cage-tty1 = {
-    # Grafana より先に開くとエラーページを掴んだまま止まる。
-    # プレイリスト未作成のまま開くと 404 になるので sync の後に回す
-    after = [ "grafana.service" "grafana-playlist-sync.service" "network-online.target" ];
-    wants = [ "network-online.target" "grafana-playlist-sync.service" ];
-    serviceConfig = {
-      LoadCredential = [ "token:${tokenFile}" ];
-      # モジュール側は Restart を設定しない。無人運用では落ちたら戻す必要がある
-      Restart = "always";
-      RestartSec = 10;
-      # cage は SIGTERM を無視するので、既定のままだと switch や timer 再起動の
-      # たびに90秒待って SIGKILL 行きになる。結末は同じなので短縮して確定させる
-      TimeoutStopSec = "15s";
-    };
-  };
-
   # Grafana のキオスク表示は数時間から数日で Chrome タブが OOM する既知問題があり、
   # 上流に修正の保証がない。リロードで復旧するので毎日作り直して回収する
   systemd.timers.kiosk-restart = {
@@ -189,14 +218,12 @@ in
   };
   systemd.services.kiosk-restart = {
     serviceConfig.Type = "oneshot";
-    script = "${config.systemd.package}/bin/systemctl restart cage-tty1.service";
+    script = "${config.systemd.package}/bin/systemctl restart sway-kiosk.service";
   };
 
   # カーネルコンソールのブランキングを止める。コンポジタとモニタ DPMS とは
   # 独立した層なので、これを残すと他を潰しても消灯する
-  # ディスプレイを反時計回り90度で縦置きにする。video= の rotate は時計回り基準
-  # なので反時計回り90度 = rotate=270。逆に倒れたら rotate=90 に変えること。
-  # コネクタ名は実機の /sys/class/drm/ で確認する (HDMI-A-1 とは限らない)。
-  # 解像度を固定したい場合は video=HDMI-A-1:1920x1080@60e,rotate=270 の形にする
-  boot.kernelParams = [ "consoleblank=0" "video=HDMI-A-1:rotate=270" ];
+  # 回転は sway 側 (output HDMI-A-1 transform 90) が担う。video= の rotate は
+  # DRM 出力に効かないことが実機で確定したので付けない
+  boot.kernelParams = [ "consoleblank=0" ];
 }

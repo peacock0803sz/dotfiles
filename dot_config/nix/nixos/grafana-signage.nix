@@ -1,6 +1,6 @@
 # bassoon に HDMI ディスプレイを繋いで Grafana を常時表示するサイネージ構成。
 # 表示専用でありサーバ機能ではないので、grafana.nix とは分けてある。
-{ config, pkgs, lib, kioskDashboardTag, ... }:
+{ config, pkgs, lib, ... }:
 let
   # 同ホストの Grafana をループバックで引く。nginx と TLS と DNS を経由しないので、
   # 証明書失効や Cloudflare 障害や MagicDNS の不調があっても画面は映り続ける

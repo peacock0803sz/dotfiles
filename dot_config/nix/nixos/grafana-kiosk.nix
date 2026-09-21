@@ -351,7 +351,4 @@ in
       foldersFromFilesStructure = false;
     };
   }];
-
-  # signage.nix がプレイリスト定義で参照する
-  _module.args.kioskDashboardTag = tag;
 }

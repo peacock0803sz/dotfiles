@@ -10,7 +10,14 @@ let
 in
 nixpkgs.lib.nixosSystem {
   system = system;
-  specialArgs = inputs // { inherit system username; name = "overture"; ip = "10.57.0.1"; };
+  specialArgs = inputs // {
+    inherit system username;
+    name = "overture";
+    ip = "10.57.0.1";
+    # Raspberry Pi 4 のオンボード NIC。predictable naming では end0 になる。
+    # `ip -o link show` で実名を確認し、違えばここを直すこと (anyconnect.nix の NAT が参照する)
+    lanInterface = "end0";
+  };
   modules = [
     { nixpkgs.pkgs = pkgs; }
     disko.nixosModules.disko
@@ -19,6 +26,8 @@ nixpkgs.lib.nixosSystem {
     ./disk.nix
     ./hardware.nix
     ../../nixos
+    ../../nixos/anyconnect.nix
+    ../../nixos/lemonade.nix
     ../../nixos/prometheus-exporters.nix
 
     home-manager.nixosModules.home-manager

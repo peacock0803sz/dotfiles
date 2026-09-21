@@ -1,4 +1,4 @@
-{ wodulePath, pkgs, config, ... }: {
+{ ... }: {
   services.samba = {
     enable = true;
     smbd.enable = true;

@@ -1,11 +1,9 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, lanInterface ? "enp1s0", ... }:
 let
   envFile = "/var/lib/anyconnect/env";
   passwordFile = "/var/lib/anyconnect/password";
 
   corpSubnets = [ "172.21.0.0/16" "172.22.0.0/16" ];
-
-  lanInterface = "enp1s0";
 
   vpncNoDns = pkgs.writeShellScript "vpnc-no-dns" ''
     unset INTERNAL_IP4_DNS INTERNAL_IP6_DNS CISCO_DEF_DOMAIN CISCO_BANNER

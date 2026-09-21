@@ -41,7 +41,6 @@ nixpkgs.lib.nixosSystem {
     ../../nixos/docker.nix
     ../../nixos/gitea-actions-runner.nix
     ../../nixos/neovim.nix
-    ../../nixos/notizen.nix
     ../../nixos/lemonade.nix
     ../../nixos/oksskolten.nix
     ../../nixos/prometheus-exporters.nix

@@ -85,7 +85,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_usage_utilization_percent{instance=\"$instance\",window=\"five_hour\"}",
+          "expr": "claude_usage_utilization_percent{instance=\"$instance\",window=\"five_hour\",job=\"node\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -158,7 +158,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_usage_utilization_percent{instance=\"$instance\",window=\"seven_day\"}",
+          "expr": "claude_usage_utilization_percent{instance=\"$instance\",window=\"seven_day\",job=\"node\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -229,7 +229,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_limit_resets_at_seconds{instance=\"$instance\",kind=\"weekly_all\"} - time()",
+          "expr": "(claude_limit_resets_at_seconds{instance=\"$instance\",kind=\"weekly_all\",job=\"node\"} - time()) > 0",
           "legendFormat": "weekly reset in",
           "range": true,
           "refId": "A"
@@ -240,7 +240,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_usage_resets_at_seconds{instance=\"$instance\",window=\"five_hour\"} - time()",
+          "expr": "(claude_usage_resets_at_seconds{instance=\"$instance\",window=\"five_hour\",job=\"node\"} - time()) > 0",
           "legendFormat": "5h reset in",
           "range": true,
           "refId": "B"
@@ -342,21 +342,10 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_usage_utilization_percent{instance=\"$instance\",window=\"five_hour\"}",
-          "legendFormat": "5-hour",
+          "expr": "max by (window) (claude_usage_utilization_percent{instance=\"$instance\"})",
+          "legendFormat": "{{window}}",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "claude_usage_utilization_percent{instance=\"$instance\",window=\"seven_day\"}",
-          "legendFormat": "7-day",
-          "range": true,
-          "refId": "B"
         }
       ],
       "title": "Utilization history",
@@ -451,7 +440,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_limit_percent{instance=\"$instance\"}",
+          "expr": "max by (kind, group) (claude_limit_percent{instance=\"$instance\"})",
           "legendFormat": "{{kind}} ({{group}})",
           "range": true,
           "refId": "A"

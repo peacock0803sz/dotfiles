@@ -193,7 +193,7 @@ let
       (statText {
         id = 2;
         title = "OS";
-        x = 8;
+        x = 4;
         y = 0;
         w = 8;
         targets = [ (tgt ''group by(pretty_name) (node_os_info{instance="${host}"})'' "__auto" "A") ];
@@ -201,7 +201,7 @@ let
       (statDur {
         id = 3;
         title = "Uptime";
-        x = 16;
+        x = 8;
         y = 0;
         w = 12;
         targets = [ (tgt ''time() - node_boot_time_seconds{instance="${host}"}'' "__auto" "A") ];

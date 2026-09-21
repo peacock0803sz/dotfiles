@@ -6,6 +6,11 @@ let
   pkgs = import nixpkgs {
     inherit system;
     config = import ../../nixpkgs.nix;
+
+    overlays = [
+      inputs.neovim-overlay.overlays.default
+      inputs.nur.overlays.default
+    ];
   };
   tunnelId = "5ac81ddd-325b-4dab-8fc5-c5e4b381f8ab";
 in

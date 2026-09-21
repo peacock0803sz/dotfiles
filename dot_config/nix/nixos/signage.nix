@@ -190,9 +190,24 @@ in
   };
 
   # パスワードなしで kiosk のセッションを開く。cage モジュールが用意していた
-  # PAM サービスの代替
+  # PAM サービスと同内容 (旧世代の /etc/pam.d/cage から転記)。
+  # 特に pam_systemd がないと logind 登録されず XDG_RUNTIME_DIR が付かない
   security.pam.services.sway-kiosk = {
-    allowNullPassword = true;
+    text = ''
+      # Account management.
+      account required ${pkgs.linux-pam}/lib/security/pam_unix.so # unix (order 10100)
+
+      # Authentication management.
+      auth required ${pkgs.linux-pam}/lib/security/pam_unix.so nullok # unix (order 10100)
+
+      # Password management.
+
+
+      # Session management.
+      session required ${pkgs.linux-pam}/lib/security/pam_unix.so # unix (order 10100)
+      session required ${pkgs.linux-pam}/lib/security/pam_env.so conffile=/etc/pam/environment readenv=0 # env (order 10200)
+      session required ${config.systemd.package}/lib/security/pam_systemd.so # systemd (order 10300)
+    '';
   };
 
   # プレイリストは Nix の定義から API 経由で突き合わせる。provisioning が

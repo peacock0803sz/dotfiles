@@ -23,6 +23,23 @@
   "panels": [
     {
       "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 8,
+      "collapsed": false,
+      "panels": [],
+      "title": "Claude",
+      "type": "row"
+    },
+    {
+      "datasource": {
         "type": "prometheus",
         "uid": "prometheus"
       },
@@ -57,7 +74,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 0
+        "y": 1
       },
       "id": 1,
       "options": {
@@ -130,7 +147,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 0
+        "y": 1
       },
       "id": 2,
       "options": {
@@ -203,7 +220,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 0
+        "y": 1
       },
       "id": 3,
       "options": {
@@ -310,7 +327,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 6
+        "y": 7
       },
       "id": 4,
       "options": {
@@ -408,7 +425,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 19
       },
       "id": 5,
       "options": {
@@ -510,7 +527,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 30
+        "y": 31
       },
       "id": 6,
       "options": {
@@ -602,7 +619,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 40
       },
       "id": 7,
       "options": {

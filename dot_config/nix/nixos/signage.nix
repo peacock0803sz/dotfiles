@@ -17,9 +17,16 @@ let
   # 存在しないと LoadCredential が失敗し sway-kiosk が起動を繰り返す
   tokenFile = "/var/lib/grafana-kiosk/token";
 
-  # 巡回対象はタグで決まる。ホストを prometheus-targets.nix に足すと
-  # grafana-kiosk.nix が同じタグ付きのダッシュボードを生成するので、
-  # この定義自体は二度と変更しなくてよい
+  # 巡回対象は下の rotations で明示列挙する。Playlist API に per-item duration は
+  # 無いため、表示時間は回数 (1回 = interval) で調整する。ホストを
+  # prometheus-targets.nix に足したときは kiosk-<host> の追記が必要
+  rotations = [
+    { uid = "kiosk-bassoon"; times = 1; }
+    { uid = "kiosk-enigma"; times = 2; }
+    { uid = "kiosk-overture"; times = 1; }
+    { uid = "claude-usage-kiosk"; times = 2; }
+  ];
+
   playlistDef = pkgs.writeText "kiosk-playlist.json" (builtins.toJSON {
     kind = "Playlist";
     apiVersion = "playlist.grafana.app/v0alpha1";
@@ -27,7 +34,9 @@ let
     spec = {
       title = "Kiosk";
       interval = "1m";
-      items = [{ type = "dashboard_by_tag"; value = kioskDashboardTag; }];
+      items = lib.flatten (map
+        (r: lib.replicate r.times { type = "dashboard_by_uid"; value = r.uid; })
+        rotations);
     };
   });
 

@@ -220,6 +220,7 @@ result
 
 # AI Agents {{{
 **/.serena
+.pi/*
 **/.claude/settings.local.json
 .opencode/
 .superpowers/*

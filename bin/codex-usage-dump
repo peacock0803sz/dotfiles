@@ -1,0 +1,209 @@
+#!/usr/bin/env -S uv run --script
+# vim: set filetype=python:
+# codex-usage-dump - Codex のレート制限ウィンドウを JSON Lines に記録し、
+# node_exporter の textfile collector 用に Prometheus 形式でも書き出す。
+#
+# 取得先は codex CLI (TUI の five-hour-limit / weekly-limit 表示) と同じ
+# `GET {chatgpt_base_url}/wham/usage`。
+# (codex-rs/backend-client の rate_limit_status_url より)
+
+import json
+import os
+import pathlib
+import platform
+import sys
+import urllib.error
+import urllib.request
+from datetime import datetime
+
+AUTH_PATH = pathlib.Path.home() / ".codex" / "auth.json"
+USAGE_URL = "https://chatgpt.com/backend-api/wham/usage"
+# テスト時は CODEX_USAGE_RECORD_DIR / CODEX_USAGE_PROM_DIR で差し替え可能
+RECORD_DIR = pathlib.Path(os.environ.get("CODEX_USAGE_RECORD_DIR", str(pathlib.Path.home() / ".local" / "state" / "codex-usage")))
+PROM_DIR = pathlib.Path(os.environ.get("CODEX_USAGE_PROM_DIR", "/var/lib/node-exporter-textfile"))
+PROM_PATH = PROM_DIR / "codex_usage.prom"
+
+
+def read_auth() -> tuple:
+    data = json.loads(AUTH_PATH.read_text())
+    tokens = data.get("tokens") or {}
+    return tokens["access_token"], tokens.get("account_id")
+
+
+def fetch_usage(token: str, account_id) -> dict:
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/json",
+    }
+    if account_id:
+        headers["chatgpt-account-id"] = str(account_id)
+    req = urllib.request.Request(USAGE_URL, headers=headers)
+    with urllib.request.urlopen(req, timeout=10) as resp:
+        return json.loads(resp.read())
+
+
+def append_record(raw: dict) -> pathlib.Path:
+    now = datetime.now().astimezone()
+    path = RECORD_DIR / f"{now.date().isoformat()}.jsonl"
+    record = {"ts": now.isoformat(), "host": platform.node(), "raw": raw}
+    RECORD_DIR.mkdir(parents=True, exist_ok=True)
+    with path.open("a") as f:
+        f.write(json.dumps(record, ensure_ascii=False) + "\n")
+    return path
+
+
+def window_label(window: dict, fallback: str) -> str:
+    """limit_window_seconds (18000=5h, 604800=7d) から five_hour / seven_day を決める。"""
+    seconds = window.get("limit_window_seconds")
+    if seconds is None:
+        minutes = window.get("window_minutes")
+        seconds = minutes * 60 if isinstance(minutes, (int, float)) else None
+    if seconds is not None:
+        try:
+            seconds = float(seconds)
+        except (TypeError, ValueError):
+            return fallback
+        if abs(seconds - 18000) < 3600:
+            return "five_hour"
+        if abs(seconds - 604800) < 86400:
+            return "seven_day"
+    return fallback
+
+
+def resets_at_epoch(window: dict, now: int) -> int:
+    resets_at = window.get("resets_at")
+    if isinstance(resets_at, bool):
+        return 0
+    if isinstance(resets_at, (int, float)) and resets_at > 0:
+        # epoch 秒 (rollout の記録と同形式)。ミリ秒で来たら秒に直す
+        if resets_at > 1e12:
+            resets_at = resets_at / 1000
+        return int(resets_at)
+    if isinstance(resets_at, str) and resets_at:
+        try:
+            return int(datetime.fromisoformat(resets_at).timestamp())
+        except ValueError:
+            pass
+    reset_after = window.get("reset_after_seconds")
+    if isinstance(reset_after, (int, float)) and reset_after > 0:
+        return now + int(reset_after)
+    return 0
+
+
+def _container(raw: dict) -> dict:
+    container = raw.get("rate_limit")
+    return container if isinstance(container, dict) else raw
+
+
+def primary_windows(raw: dict) -> list:
+    """(window_label, window_dict) の列。生 API 形式と snapshot 形式の両方に耐える。"""
+    out = []
+    container = _container(raw)
+    for key, fallback in (("primary_window", "five_hour"), ("primary", "five_hour"),
+                          ("secondary_window", "seven_day"), ("secondary", "seven_day")):
+        window = container.get(key)
+        if isinstance(window, dict):
+            out.append((window_label(window, fallback), window))
+    return out
+
+
+def additional_windows(raw: dict) -> list:
+    out = []
+    container = _container(raw)
+    extra = container.get("additional_rate_limits")
+    if isinstance(extra, list):
+        for i, item in enumerate(extra):
+            if not isinstance(item, dict):
+                continue
+            details = item.get("details") if isinstance(item.get("details"), dict) else item
+            kind = str(item.get("limit_name") or details.get("limit_name") or f"additional_{i}")
+            out.append((kind, details))
+    return out
+
+
+def render_prom(raw, *, success: bool, now: int) -> str:
+    lines = [
+        "# HELP codex_usage_utilization_percent Codex plan utilization (0-100).",
+        "# TYPE codex_usage_utilization_percent gauge",
+        "# HELP codex_usage_resets_at_seconds Unix time when the usage window resets (0 when unknown).",
+        "# TYPE codex_usage_resets_at_seconds gauge",
+        "# HELP codex_limit_percent Per-limit utilization (0-100).",
+        "# TYPE codex_limit_percent gauge",
+        "# HELP codex_limit_resets_at_seconds Unix time when the limit window resets (0 when unknown).",
+        "# TYPE codex_limit_resets_at_seconds gauge",
+        "# HELP codex_account_info Codex account info (always 1).",
+        "# TYPE codex_account_info gauge",
+        "# HELP codex_scrape_success Whether the last dump successfully fetched the usage API (1/0).",
+        "# TYPE codex_scrape_success gauge",
+        "# HELP codex_scrape_timestamp_seconds Unix time of the last dump attempt.",
+        "# TYPE codex_scrape_timestamp_seconds gauge",
+    ]
+    if success and isinstance(raw, dict):
+        for window_name, window in primary_windows(raw):
+            util = window.get("used_percent")
+            if isinstance(util, bool):
+                pass
+            elif isinstance(util, (int, float)):
+                lines.append(f'codex_usage_utilization_percent{{window="{window_name}"}} {util}')
+            lines.append(
+                f'codex_usage_resets_at_seconds{{window="{window_name}"}} {resets_at_epoch(window, now)}'
+            )
+        for kind, window in additional_windows(raw):
+            percent = window.get("used_percent")
+            if isinstance(percent, (int, float)) and not isinstance(percent, bool):
+                lines.append(f'codex_limit_percent{{kind="{kind}"}} {percent}')
+            lines.append(
+                f'codex_limit_resets_at_seconds{{kind="{kind}"}} {resets_at_epoch(window, now)}'
+            )
+        plan_type = raw.get("plan_type")
+        if not isinstance(plan_type, str):
+            container = raw.get("rate_limit")
+            if isinstance(container, dict):
+                plan_type = container.get("plan_type")
+        if isinstance(plan_type, str) and plan_type:
+            lines.append(f'codex_account_info{{plan_type="{plan_type}"}} 1')
+    lines.append(f"codex_scrape_success {1 if success else 0}")
+    lines.append(f"codex_scrape_timestamp_seconds {now}")
+    return "\n".join(lines) + "\n"
+
+
+def write_prom(raw, *, success: bool) -> None:
+    now = int(datetime.now().astimezone().timestamp())
+    try:
+        PROM_DIR.mkdir(parents=True, exist_ok=True)
+        tmp = PROM_DIR / "codex_usage.prom.tmp"
+        tmp.write_text(render_prom(raw, success=success, now=now), encoding="utf-8")
+        tmp.rename(PROM_PATH)
+    except OSError as e:
+        print(f"cannot write {PROM_PATH}: {e}", file=sys.stderr)
+
+
+def main() -> int:
+    try:
+        token, account_id = read_auth()
+    except (OSError, json.JSONDecodeError, KeyError) as e:
+        print(f"cannot read auth from {AUTH_PATH}: {e}", file=sys.stderr)
+        write_prom(None, success=False)
+        return 1
+
+    try:
+        raw = fetch_usage(token, account_id)
+    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as e:
+        print(f"cannot fetch {USAGE_URL}: {e}", file=sys.stderr)
+        write_prom(None, success=False)
+        return 1
+
+    try:
+        path = append_record(raw)
+    except OSError as e:
+        print(f"cannot write under {RECORD_DIR}: {e}", file=sys.stderr)
+        write_prom(raw, success=False)
+        return 1
+
+    write_prom(raw, success=True)
+    print(path)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

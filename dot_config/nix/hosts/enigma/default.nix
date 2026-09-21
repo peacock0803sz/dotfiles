@@ -45,7 +45,7 @@ nixpkgs.lib.nixosSystem {
     ../../nixos/lemonade.nix
     ../../nixos/oksskolten.nix
     ../../nixos/prometheus-exporters.nix
-    ../../nixos/claude-usage.nix
+    ../../nixos/agent-usage.nix
 
     ./hardware.nix
     ./disk.nix

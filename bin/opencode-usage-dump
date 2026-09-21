@@ -1,0 +1,121 @@
+#!/usr/bin/env -S uv run --script
+# vim: set filetype=python:
+# opencode-usage-dump - OpenCode の利用量 (トークン/コスト) を集計し、
+# node_exporter の textfile collector 用に Prometheus 形式で書き出す。
+#
+# OpenCode にプランlimitの概念はなく、limit% は取れない。利用量のみ対象。
+# ソースは ~/.local/share/opencode/opencode.db (追記のみなので累積カウンタになる)。
+# DB は読み取り専用 (mode=ro) で開く。project ラベルは directory の basename
+# (同名ディレクトリは合算される)。
+
+import os
+import pathlib
+import sqlite3
+import sys
+from datetime import datetime
+
+DB_PATH = pathlib.Path.home() / ".local" / "share" / "opencode" / "opencode.db"
+PROM_DIR = pathlib.Path(os.environ.get("OPENCODE_USAGE_PROM_DIR", "/var/lib/node-exporter-textfile"))
+PROM_PATH = PROM_DIR / "opencode_usage.prom"
+
+QUERY = """
+SELECT
+  s.directory AS dir,
+  SUM(COALESCE(json_extract(p.data, '$.tokens.input'), 0)),
+  SUM(COALESCE(json_extract(p.data, '$.tokens.output'), 0)),
+  SUM(COALESCE(json_extract(p.data, '$.tokens.reasoning'), 0)),
+  SUM(COALESCE(json_extract(p.data, '$.tokens.cache.read'), 0)),
+  SUM(COALESCE(json_extract(p.data, '$.tokens.cache.write'), 0)),
+  SUM(COALESCE(json_extract(p.data, '$.cost'), 0)),
+  MAX(p.time_created)
+FROM part p
+JOIN session s ON s.id = p.session_id
+WHERE json_extract(p.data, '$.type') = 'step-finish'
+GROUP BY s.directory
+"""
+
+
+def project_name(directory) -> str:
+    return str(directory or "unknown").rstrip("/").rsplit("/", 1)[-1] or "unknown"
+
+
+def collect() -> list:
+    con = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
+    try:
+        rows = con.execute(QUERY).fetchall()
+    finally:
+        con.close()
+    return rows
+
+
+def render_prom(rows, *, success: bool, now: int) -> str:
+    lines = [
+        "# HELP opencode_tokens_total Cumulative OpenCode token usage.",
+        "# TYPE opencode_tokens_total counter",
+        "# HELP opencode_cost_dollars_total Cumulative OpenCode cost in dollars.",
+        "# TYPE opencode_cost_dollars_total counter",
+        "# HELP opencode_last_activity_timestamp_seconds Unix time of the latest step-finish (ms field converted).",
+        "# TYPE opencode_last_activity_timestamp_seconds gauge",
+        "# HELP opencode_scrape_success Whether the last dump successfully read the database (1/0).",
+        "# TYPE opencode_scrape_success gauge",
+        "# HELP opencode_scrape_timestamp_seconds Unix time of the last dump attempt.",
+        "# TYPE opencode_scrape_timestamp_seconds gauge",
+    ]
+    if success:
+        latest = 0
+        for row in rows:
+            _, inp, outp, reasoning, cache_read, cache_write, cost, last_ms = row
+            project = project_name(row[0])
+            for kind, value in (("input", inp), ("output", outp), ("reasoning", reasoning),
+                                ("cache_read", cache_read), ("cache_write", cache_write)):
+                try:
+                    value = float(value or 0)
+                except (TypeError, ValueError):
+                    continue
+                lines.append(f'opencode_tokens_total{{kind="{kind}",project="{project}"}} {value:g}')
+            try:
+                cost = float(cost or 0)
+            except (TypeError, ValueError):
+                cost = 0
+            lines.append(f'opencode_cost_dollars_total{{project="{project}"}} {cost}')
+            try:
+                last_ms = int(last_ms or 0)
+            except (TypeError, ValueError):
+                last_ms = 0
+            latest = max(latest, last_ms)
+        if latest > 0:
+            lines.append(f"opencode_last_activity_timestamp_seconds {latest // 1000}")
+    lines.append(f"opencode_scrape_success {1 if success else 0}")
+    lines.append(f"opencode_scrape_timestamp_seconds {now}")
+    return "\n".join(lines) + "\n"
+
+
+def write_prom(rows, *, success: bool) -> None:
+    now = int(datetime.now().astimezone().timestamp())
+    try:
+        PROM_DIR.mkdir(parents=True, exist_ok=True)
+        tmp = PROM_DIR / "opencode_usage.prom.tmp"
+        tmp.write_text(render_prom(rows, success=success, now=now), encoding="utf-8")
+        tmp.rename(PROM_PATH)
+    except OSError as e:
+        print(f"cannot write {PROM_PATH}: {e}", file=sys.stderr)
+
+
+def main() -> int:
+    if not DB_PATH.is_file():
+        print(f"no database: {DB_PATH}", file=sys.stderr)
+        write_prom([], success=False)
+        return 1
+    try:
+        rows = collect()
+    except sqlite3.Error as e:
+        print(f"cannot read {DB_PATH}: {e}", file=sys.stderr)
+        write_prom([], success=False)
+        return 1
+    write_prom(rows, success=True)
+    print(f"{PROM_PATH} ({len(rows)} projects)")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

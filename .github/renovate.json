@@ -3,8 +3,8 @@
   "extends": ["github>peacock0803sz/renovate-config"],
   "enabledManagers": ["npm", "deno"],
   "includePaths": [
-    "dot_config/agents/pi-extensions/**",
-    "dot_config/nvim/ts/ddu/**"
+    "~/dotfiles/dot_config/agents/pi/extensions/",
+    "~/dotfiles/dot_config/nvim/huge/ts/ddu/"
   ],
   "commitMessagePrefix": "",
   "packageRules": [

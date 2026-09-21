@@ -175,6 +175,9 @@ in
       # モジュール側は Restart を設定しない。無人運用では落ちたら戻す必要がある
       Restart = "always";
       RestartSec = 10;
+      # cage は SIGTERM を無視するので、既定のままだと switch や timer 再起動の
+      # たびに90秒待って SIGKILL 行きになる。結末は同じなので短縮して確定させる
+      TimeoutStopSec = "15s";
     };
   };
 

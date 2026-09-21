@@ -29,7 +29,7 @@
       User = username;
       # uv のキャッシュ位置を確定させるため、systemd 任せにせず明示する
       Environment = [ "HOME=/home/${username}" ];
-      ExecStart = "${pkgs.uv}/bin/uv run --script /home/${username}/dotfiles/bin/claude-usage-dump";
+      ExecStart = "${pkgs.uv}/bin/uv run --script /home/${username}/dotfiles/dot_config/agents/scripts/dump-usage/claude";
     };
   };
 
@@ -54,7 +54,7 @@
       Type = "oneshot";
       User = username;
       Environment = [ "HOME=/home/${username}" ];
-      ExecStart = "${pkgs.uv}/bin/uv run --script /home/${username}/dotfiles/bin/codex-usage-dump";
+      ExecStart = "${pkgs.uv}/bin/uv run --script /home/${username}/dotfiles/dot_config/agents/scripts/dump-usage/codex";
     };
   };
 
@@ -77,7 +77,7 @@
       Type = "oneshot";
       User = username;
       Environment = [ "HOME=/home/${username}" ];
-      ExecStart = "${pkgs.uv}/bin/uv run --script /home/${username}/dotfiles/bin/opencode-usage-dump";
+      ExecStart = "${pkgs.uv}/bin/uv run --script /home/${username}/dotfiles/dot_config/agents/scripts/dump-usage/opencode";
     };
   };
 

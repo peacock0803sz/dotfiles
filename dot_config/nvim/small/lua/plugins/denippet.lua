@@ -1,1 +1,0 @@
-../../../huge/lua/plugins/denippet.lua

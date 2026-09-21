@@ -119,12 +119,13 @@ let
   };
 
   # 稼働時間用。dtdurations だと最大単位だけ (3 days 等) になり分が落ちるので、
-  # 分の数値で出して常に分精度にする。長期稼働では大きな数値になる点に注意
+  # 分の数値で出して常に分精度にする。"m" だと SI 接頭辞で 4K min と丸まるため、
+  # スケーリングされないカスタム単位 "min" を使う。長期稼働では大きな数値になる点に注意
   statDur = { id, title, x, y, w, targets }:
     let b = statBase { inherit id title x y w; steps = plainSteps; }; in
     b // {
       fieldConfig = b.fieldConfig // {
-        defaults = b.fieldConfig.defaults // { unit = "m"; decimals = 0; };
+        defaults = b.fieldConfig.defaults // { unit = "min"; decimals = 0; };
       };
       options = b.options // {
         colorMode = "none";

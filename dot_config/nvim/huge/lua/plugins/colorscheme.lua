@@ -35,10 +35,15 @@ local spec = {
   },
   {
     "https://github.com/peacock0803sz/peafowl-colors",
-    init = function(plugin)
-      vim.opt.rtp:append(plugin.dir .. "/nvim")
-    end,
-    config = function()
+    config = function(plugin)
+      local nvim_dir = plugin.dir .. "/nvim"
+      vim.opt.rtp:append(nvim_dir)
+      package.path = table.concat({
+        nvim_dir .. "/lua/?.lua",
+        nvim_dir .. "/lua/?/init.lua",
+        package.path,
+      }, ";")
+
       local palettes = require("peafowl_colors.palettes")
 
       require("peafowl_colors").setup({

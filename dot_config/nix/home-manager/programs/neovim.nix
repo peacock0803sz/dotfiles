@@ -1,7 +1,6 @@
 { pkgs, config, ... }:
 let
   # presetレベル -> dot_config/nvim/ 配下の実ディレクトリ
-  # large と huge は現状同一の内容なので両方 large を指す
   configDir = {
     tiny = "tiny";
     small = "small";

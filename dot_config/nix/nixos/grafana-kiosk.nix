@@ -124,7 +124,7 @@ let
     let b = statBase { inherit id title x y w; steps = plainSteps; }; in
     b // {
       fieldConfig = b.fieldConfig // {
-        defaults = b.fieldConfig.defaults // { unit = "dtdurations"; decimals = 2; };
+        defaults = b.fieldConfig.defaults // { unit = "dtdurations"; };
       };
       options = b.options // {
         colorMode = "none";

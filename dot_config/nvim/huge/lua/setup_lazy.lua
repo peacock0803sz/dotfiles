@@ -35,7 +35,9 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-local opts = { dev = { path = "~/ghq/github.com/peacock0803sz" } }
+
+---@type LazyConfig
+local opts = { dev = { path = "~/ghq/github.com/peacock0803sz", fallback = false } }
 require("lazy").setup("plugins", opts)
 
 vim.api.nvim_create_user_command("PluginList", function()

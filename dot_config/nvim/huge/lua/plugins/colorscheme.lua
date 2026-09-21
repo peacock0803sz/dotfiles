@@ -1,3 +1,16 @@
+local function _dev()
+  if vim.env.NVIM_COLOR_FALLBACK == nil then
+    return false
+  end
+
+  local hostname = vim.fn.hostname()
+  if hostname == "arppegio" then
+    return true
+  else
+    return false
+  end
+end
+
 local function _cond()
   return vim.env.NVIM_COLOR_FALLBACK == nil
 end
@@ -67,6 +80,7 @@ local spec = {
     priority = 1000,
     dir = "~/ghq/github.com/peacock0803sz/peafowl-colors/nvim/",
     cond = _cond,
+    dev = _dev,
   },
 }
 return spec

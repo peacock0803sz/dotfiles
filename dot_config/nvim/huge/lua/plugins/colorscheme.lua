@@ -1,8 +1,4 @@
 local function _dev()
-  if vim.env.NVIM_COLOR_FALLBACK == nil then
-    return false
-  end
-
   local hostname = vim.fn.hostname()
   if hostname == "arppegio" then
     return true

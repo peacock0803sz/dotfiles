@@ -31,6 +31,89 @@
           "color": {
             "mode": "thresholds"
           },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "FAIL"
+                },
+                "1": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "OK"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        }
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "13.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "claude_scrape_success{instance=\"$instance\"}",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Scrape status",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
           "max": 100,
           "min": 0,
           "thresholds": {
@@ -55,8 +138,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 6,
-        "x": 0,
+        "w": 4,
+        "x": 4,
         "y": 0
       },
       "id": 1,
@@ -128,8 +211,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 6,
-        "x": 6,
+        "w": 4,
+        "x": 8,
         "y": 0
       },
       "id": 2,
@@ -177,6 +260,79 @@
           "color": {
             "mode": "thresholds"
           },
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "yellow",
+                "value": 75
+              },
+              {
+                "color": "red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        }
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 13,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "13.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "claude_limit_percent{instance=\"$instance\",kind=\"weekly_scoped\",job=\"node\"}",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Weekly scoped",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -199,7 +355,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 6,
+        "w": 7,
         "x": 12,
         "y": 0
       },
@@ -259,8 +415,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "max": 100,
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -270,27 +424,27 @@
               },
               {
                 "color": "yellow",
-                "value": 75
+                "value": 600
               },
               {
                 "color": "red",
-                "value": 90
+                "value": 1800
               }
             ]
           },
-          "unit": "percent"
+          "unit": "dtdurations"
         }
       },
       "gridPos": {
         "h": 4,
-        "w": 6,
-        "x": 18,
+        "w": 5,
+        "x": 19,
         "y": 0
       },
-      "id": 9,
+      "id": 7,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
+        "colorMode": "none",
+        "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
         "percentChangeColorMode": "standard",
@@ -313,13 +467,13 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_limit_percent{instance=\"$instance\",kind=\"weekly_scoped\",job=\"node\"}",
-          "legendFormat": "__auto",
+          "expr": "time() - claude_scrape_timestamp_seconds{instance=\"$instance\"}",
+          "legendFormat": "since last dump",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Weekly scoped",
+      "title": "Last dump age",
       "type": "stat"
     },
     {
@@ -521,160 +675,6 @@
       ],
       "title": "Limits by kind",
       "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "color": "red",
-                  "index": 0,
-                  "text": "FAIL"
-                },
-                "1": {
-                  "color": "green",
-                  "index": 1,
-                  "text": "OK"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": 0
-              },
-              {
-                "color": "green",
-                "value": 1
-              }
-            ]
-          }
-        }
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 12,
-        "x": 0,
-        "y": 13
-      },
-      "id": 6,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "value",
-        "wideLayout": true
-      },
-      "pluginVersion": "13.1.4",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "claude_scrape_success{instance=\"$instance\"}",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Scrape status",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "yellow",
-                "value": 600
-              },
-              {
-                "color": "red",
-                "value": 1800
-              }
-            ]
-          },
-          "unit": "dtdurations"
-        }
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 12,
-        "x": 12,
-        "y": 13
-      },
-      "id": 7,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "value",
-        "wideLayout": true
-      },
-      "pluginVersion": "13.1.4",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "time() - claude_scrape_timestamp_seconds{instance=\"$instance\"}",
-          "legendFormat": "since last dump",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Last dump age",
-      "type": "stat"
     }
   ],
   "preload": false,

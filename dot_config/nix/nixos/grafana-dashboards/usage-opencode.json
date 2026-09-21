@@ -31,37 +31,27 @@
           "color": {
             "mode": "thresholds"
           },
-          "max": 100,
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": 0
-              },
-              {
-                "color": "yellow",
-                "value": 75
-              },
-              {
-                "color": "red",
-                "value": 90
               }
             ]
           },
-          "unit": "percent"
+          "unit": "currencyUSD"
         }
       },
       "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 0,
+        "h": 4,
+        "w": 5,
+        "x": 4,
         "y": 0
       },
       "id": 1,
       "options": {
-        "colorMode": "background",
+        "colorMode": "none",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
@@ -85,13 +75,13 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_usage_utilization_percent{instance=\"enigma\",window=\"five_hour\",job=\"node\"}",
+          "expr": "sum(opencode_cost_dollars_total{instance=\"$instance\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "5-hour utilization",
+      "title": "Total cost",
       "type": "stat"
     },
     {
@@ -104,37 +94,27 @@
           "color": {
             "mode": "thresholds"
           },
-          "max": 100,
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": 0
-              },
-              {
-                "color": "yellow",
-                "value": 75
-              },
-              {
-                "color": "red",
-                "value": 90
               }
             ]
           },
-          "unit": "percent"
+          "unit": "currencyUSD"
         }
       },
       "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 8,
+        "h": 4,
+        "w": 5,
+        "x": 9,
         "y": 0
       },
       "id": 2,
       "options": {
-        "colorMode": "background",
+        "colorMode": "none",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
@@ -158,13 +138,13 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_usage_utilization_percent{instance=\"enigma\",window=\"seven_day\",job=\"node\"}",
+          "expr": "sum(increase(opencode_cost_dollars_total{instance=\"$instance\"}[24h]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "7-day utilization",
+      "title": "Cost last 24h",
       "type": "stat"
     },
     {
@@ -177,37 +157,27 @@
           "color": {
             "mode": "thresholds"
           },
-          "max": 100,
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": 0
-              },
-              {
-                "color": "yellow",
-                "value": 75
-              },
-              {
-                "color": "red",
-                "value": 90
               }
             ]
           },
-          "unit": "percent"
+          "unit": "short"
         }
       },
       "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 16,
+        "h": 4,
+        "w": 5,
+        "x": 14,
         "y": 0
       },
       "id": 3,
       "options": {
-        "colorMode": "background",
+        "colorMode": "none",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
@@ -231,13 +201,13 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_limit_percent{instance=\"enigma\",kind=\"weekly_scoped\",job=\"node\"}",
+          "expr": "sum(increase(opencode_tokens_total{instance=\"$instance\"}[7d]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Weekly scoped",
+      "title": "Tokens last 7d",
       "type": "stat"
     },
     {
@@ -284,33 +254,23 @@
               "mode": "off"
             }
           },
-          "max": 100,
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": 0
-              },
-              {
-                "color": "yellow",
-                "value": 75
-              },
-              {
-                "color": "red",
-                "value": 90
               }
             ]
           },
-          "unit": "percent"
+          "unit": "currencyUSD"
         }
       },
       "gridPos": {
-        "h": 12,
-        "w": 24,
+        "h": 9,
+        "w": 12,
         "x": 0,
-        "y": 6
+        "y": 4
       },
       "id": 4,
       "options": {
@@ -333,13 +293,13 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "max by (window) (claude_usage_utilization_percent{instance=\"enigma\"})",
-          "legendFormat": "{{window}}",
+          "expr": "opencode_cost_dollars_total{instance=\"$instance\"}",
+          "legendFormat": "{{project}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Utilization history",
+      "title": "Cost by project (cumulative)",
       "type": "timeseries"
     },
     {
@@ -386,29 +346,23 @@
               "mode": "off"
             }
           },
-          "max": 100,
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
-          "unit": "percent"
+          "unit": "short"
         }
       },
       "gridPos": {
-        "h": 12,
-        "w": 24,
-        "x": 0,
-        "y": 18
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 4
       },
       "id": 5,
       "options": {
@@ -431,24 +385,207 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "max by (kind, group) (claude_limit_percent{instance=\"enigma\"})",
-          "legendFormat": "{{kind}} ({{group}})",
+          "expr": "sum by (kind) (opencode_tokens_total{instance=\"$instance\"})",
+          "legendFormat": "{{kind}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Limits by kind",
+      "title": "Tokens by kind (cumulative)",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "FAIL"
+                },
+                "1": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "OK"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        }
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "13.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "opencode_scrape_success{instance=\"$instance\"}",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Scrape status",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "yellow",
+                "value": 86400
+              },
+              {
+                "color": "red",
+                "value": 604800
+              }
+            ]
+          },
+          "unit": "dtdurations"
+        }
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 19,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "13.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "time() - opencode_last_activity_timestamp_seconds{instance=\"$instance\"}",
+          "legendFormat": "since last activity",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Last activity age",
+      "type": "stat"
     }
   ],
   "preload": false,
-  "refresh": "30s",
+  "refresh": "",
   "schemaVersion": 42,
   "tags": [
-    "kiosk-host"
+    "claude"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allowCustomValue": true,
+        "current": {
+          "text": "enigma",
+          "value": "enigma"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "definition": "label_values(opencode_scrape_success,instance)",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "instance",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(opencode_scrape_success,instance)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "regexApplyTo": "value",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
   },
   "time": {
     "from": "now-7d",
@@ -469,6 +606,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Claude Usage Kiosk",
-  "uid": "claude-usage-kiosk"
+  "title": "OpenCode Usage",
+  "uid": "opencode-usage"
 }

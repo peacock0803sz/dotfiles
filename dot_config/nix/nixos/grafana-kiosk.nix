@@ -61,7 +61,7 @@ let
     let b = statBase { inherit id title x y w steps; }; in
     b // {
       fieldConfig = b.fieldConfig // {
-        defaults = b.fieldConfig.defaults // { inherit unit; min = 0; };
+        defaults = b.fieldConfig.defaults // { inherit unit; decimals = 0; min = 0; };
       };
       options = b.options // {
         colorMode = "value";

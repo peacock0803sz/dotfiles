@@ -31,11 +31,14 @@ let
   ];
   plainSteps = [{ color = "green"; value = null; }];
 
-  statBase = { id, title, x, w, steps }: {
+  # 縦置き (1080x1920 相当) 用に w=24 フル幅で縦積みする。横並びを残すと
+  # ポートレートでは1パネルが細長くなり読めないため。y は上から累積
+  # (stat 2段=8 + 時系列 9×4段)。1920px の縦解像度に収まる想定
+  statBase = { id, title, x, y, w, steps }: {
     inherit id title;
     type = "stat";
     datasource = ds;
-    gridPos = { h = 4; inherit w x; y = 0; };
+    gridPos = { h = 4; inherit w x y; };
     fieldConfig = {
       defaults = {
         mappings = [ ];
@@ -54,8 +57,8 @@ let
   };
 
   # しきい値で色が付く数値系。色が出たら見る、という約束を DISK と TEMP に集約する
-  statNum = { id, title, x, w, unit, steps, targets }:
-    let b = statBase { inherit id title x w steps; }; in
+  statNum = { id, title, x, y, w, unit, steps, targets }:
+    let b = statBase { inherit id title x y w steps; }; in
     b // {
       fieldConfig = b.fieldConfig // {
         defaults = b.fieldConfig.defaults // { inherit unit; decimals = 0; min = 0; };
@@ -70,8 +73,8 @@ let
     };
 
   # 値ではなく系列名 (pretty_name) を出す
-  statText = { id, title, x, w, targets }:
-    let b = statBase { inherit id title x w; steps = plainSteps; }; in
+  statText = { id, title, x, y, w, targets }:
+    let b = statBase { inherit id title x y w; steps = plainSteps; }; in
     b // {
       options = b.options // {
         colorMode = "background";
@@ -84,11 +87,11 @@ let
 
   # 横向き棒グラフ。/ と /mnt/* の複数マウントを並べて出す DISK 用。
   # stat だと値が重なって読めないので bargauge horizontal にする
-  barGauge = { id, title, x, w, unit, steps, targets }: {
+  barGauge = { id, title, x, y, w, unit, steps, targets }: {
     inherit id title targets;
     type = "bargauge";
     datasource = ds;
-    gridPos = { h = 4; inherit w x; y = 0; };
+    gridPos = { h = 4; inherit w x y; };
     fieldConfig = {
       defaults = {
         inherit unit;
@@ -115,8 +118,8 @@ let
     };
   };
 
-  statDur = { id, title, x, w, targets }:
-    let b = statBase { inherit id title x w; steps = plainSteps; }; in
+  statDur = { id, title, x, y, w, targets }:
+    let b = statBase { inherit id title x y w; steps = plainSteps; }; in
     b // {
       fieldConfig = b.fieldConfig // {
         defaults = b.fieldConfig.defaults // { unit = "dtdurations"; };
@@ -175,46 +178,50 @@ let
   mkPanels = host: spec:
     let
       hasGpu = spec.ports or { } ? nvidia;
-      netWidth = if hasGpu then 12 else 24;
     in
     [
       (statText {
         id = 1;
         title = "Hostname";
         x = 0;
-        w = 3;
+        y = 0;
+        w = 8;
         targets = [ (tgt ''group by(instance) (node_uname_info{instance="${host}"})'' "__auto" "A") ];
       })
       (statText {
         id = 2;
         title = "OS";
-        x = 3;
-        w = 6;
+        x = 8;
+        y = 0;
+        w = 8;
         targets = [ (tgt ''group by(pretty_name) (node_os_info{instance="${host}"})'' "__auto" "A") ];
       })
       (statDur {
         id = 3;
         title = "Uptime";
-        x = 9;
-        w = 3;
+        x = 16;
+        y = 0;
+        w = 8;
         targets = [ (tgt ''time() - node_boot_time_seconds{instance="${host}"}'' "__auto" "A") ];
       })
       # / と /nix/store は同一デバイスなので / だけに絞る。Samba 用のような
       # 追加マウントは増えたぶんだけ値が並ぶ。埋まったら気付きたいのであえて出す
       (barGauge {
         id = 4;
-        title = "DISK";
-        x = 12;
-        w = 8;
+        title = "Disk";
+        x = 0;
+        y = 4;
+        w = 16;
         unit = "percent";
         steps = pctSteps;
         targets = [ (tgt ''100 - (node_filesystem_avail_bytes{instance="${host}",mountpoint=~"/|/mnt/.*",fstype!~"tmpfs|ramfs"} / node_filesystem_size_bytes{instance="${host}",mountpoint=~"/|/mnt/.*",fstype!~"tmpfs|ramfs"} * 100)'' "{{mountpoint}}" "A") ];
       })
       (statNum {
         id = 5;
-        title = "TEMP";
-        x = 20;
-        w = 4;
+        title = "Temperature";
+        x = 16;
+        y = 4;
+        w = 8;
         unit = "celsius";
         steps = tempSteps;
         targets = [ (tgt ''max by(instance) (node_hwmon_temp_celsius{instance="${host}",chip="platform_coretemp_0"})'' "TEMP" "A") ];
@@ -223,8 +230,8 @@ let
         id = 6;
         title = "CPU%";
         x = 0;
-        y = 4;
-        w = 12;
+        y = 8;
+        w = 24;
         unit = "percent";
         max = 100;
         targets = [ (tgt ''100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle",instance="${host}"}[2m])) * 100)'' "CPU" "A") ];
@@ -232,9 +239,9 @@ let
       (ts {
         id = 7;
         title = "Memory";
-        x = 12;
-        y = 4;
-        w = 12;
+        x = 0;
+        y = 17;
+        w = 24;
         unit = "bytes";
         targets = [
           (tgt ''node_memory_MemTotal_bytes{instance="${host}"} - node_memory_MemAvailable_bytes{instance="${host}"}'' "Used" "A")
@@ -255,8 +262,8 @@ let
         id = 8;
         title = "Network I/O";
         x = 0;
-        y = 13;
-        w = netWidth;
+        y = 26;
+        w = 24;
         unit = "Bps";
         min = null;
         targets = [
@@ -268,11 +275,11 @@ let
     # nvidia exporter を持つホストだけ GPU 段を足す。prometheus-targets.nix の
     # ports に nvidia があるかどうかだけで決まる
     ++ lib.optional hasGpu (ts {
-      id = 8;
+      id = 9;
       title = "GPU";
-      x = 12;
-      y = 13;
-      w = 12;
+      x = 0;
+      y = 35;
+      w = 24;
       unit = "percent";
       max = 100;
       targets = [

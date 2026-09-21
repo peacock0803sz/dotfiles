@@ -191,5 +191,9 @@ in
 
   # カーネルコンソールのブランキングを止める。コンポジタとモニタ DPMS とは
   # 独立した層なので、これを残すと他を潰しても消灯する
-  boot.kernelParams = [ "consoleblank=0" ];
+  # ディスプレイを反時計回り90度で縦置きにする。video= の rotate は時計回り基準
+  # なので反時計回り90度 = rotate=270。逆に倒れたら rotate=90 に変えること。
+  # コネクタ名は実機の /sys/class/drm/ で確認する (HDMI-A-1 とは限らない)。
+  # 解像度を固定したい場合は video=HDMI-A-1:1920x1080@60e,rotate=270 の形にする
+  boot.kernelParams = [ "consoleblank=0" "video=HDMI-A-1:rotate=270" ];
 }

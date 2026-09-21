@@ -1,6 +1,6 @@
 local function _dir()
   if vim.fn.hostname() == "arpeggio" then
-    return "~/ghq/github.com/peacock0803sz/peafowl-colors/nvim/"
+    return "~/ghq/github.com/peacock0803sz/peafowl-colors"
   end
 end
 
@@ -35,6 +35,9 @@ local spec = {
   },
   {
     "https://github.com/peacock0803sz/peafowl-colors",
+    init = function(plugin)
+      vim.opt.rtp:append(plugin.dir .. "/nvim")
+    end,
     config = function()
       local palettes = require("peafowl_colors.palettes")
 

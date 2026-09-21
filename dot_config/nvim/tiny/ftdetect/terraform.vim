@@ -1,1 +1,0 @@
-../../huge/ftdetect/terraform.vim

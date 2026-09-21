@@ -1,1 +1,0 @@
-../../huge/ftplugin/yaml.vim

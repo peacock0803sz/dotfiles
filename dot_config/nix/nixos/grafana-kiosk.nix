@@ -118,14 +118,13 @@ let
     };
   };
 
-  # 稼働時間用。dtdurations だと最大単位だけ (3 days 等) になり分が落ちるので、
-  # 分の数値で出して常に分精度にする。"m" だと SI 接頭辞で 4K min と丸まるため、
-  # スケーリングされないカスタム単位 "min" を使う。長期稼働では大きな数値になる点に注意
+  # 稼働時間用。dtdurations は decimals が成分数になる (0=日のみ、2=日・時・分)。
+  # 常に分まで出すため decimals = 2 にする
   statDur = { id, title, x, y, w, targets }:
     let b = statBase { inherit id title x y w; steps = plainSteps; }; in
     b // {
       fieldConfig = b.fieldConfig // {
-        defaults = b.fieldConfig.defaults // { unit = "min"; decimals = 0; };
+        defaults = b.fieldConfig.defaults // { unit = "dtdurations"; decimals = 2; };
       };
       options = b.options // {
         colorMode = "none";
@@ -205,7 +204,7 @@ let
         x = 16;
         y = 0;
         w = 8;
-        targets = [ (tgt ''(time() - node_boot_time_seconds{instance="${host}"}) / 60'' "__auto" "A") ];
+        targets = [ (tgt ''time() - node_boot_time_seconds{instance="${host}"}'' "__auto" "A") ];
       })
       # / と /nix/store は同一デバイスなので / だけに絞る。Samba 用のような
       # 追加マウントは増えたぶんだけ値が並ぶ。埋まったら気付きたいのであえて出す

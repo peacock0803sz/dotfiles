@@ -633,7 +633,7 @@
           "type": "prometheus",
           "uid": "prometheus"
         },
-        "definition": "label_values(claude_usage_utilization_percent,instance)",
+        "definition": "label_values(claude_scrape_success,instance)",
         "hide": 0,
         "includeAll": false,
         "multi": false,
@@ -641,7 +641,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(claude_usage_utilization_percent,instance)",
+          "query": "label_values(claude_scrape_success,instance)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,

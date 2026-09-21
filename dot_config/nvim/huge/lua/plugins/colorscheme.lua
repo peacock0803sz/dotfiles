@@ -80,7 +80,7 @@ local spec = {
     priority = 1000,
     dir = "~/ghq/github.com/peacock0803sz/peafowl-colors/nvim/",
     cond = _cond,
-    dev = _dev,
+    dev = _dev(),
   },
 }
 return spec

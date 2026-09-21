@@ -201,7 +201,7 @@ let
       (statDur {
         id = 3;
         title = "Uptime";
-        x = 8;
+        x = 12;
         y = 0;
         w = 12;
         targets = [ (tgt ''time() - node_boot_time_seconds{instance="${host}"}'' "__auto" "A") ];

@@ -1,9 +1,6 @@
-local function _dev()
-  local hostname = vim.fn.hostname()
-  if hostname == "arppegio" then
-    return true
-  else
-    return false
+local function _dir()
+  if vim.fn.hostname() == "arppegio" then
+    return "~/ghq/github.com/peacock0803sz/peafowl-colors/nvim/"
   end
 end
 
@@ -74,9 +71,8 @@ local spec = {
     end,
     lazy = false,
     priority = 1000,
-    dir = "~/ghq/github.com/peacock0803sz/peafowl-colors/nvim/",
+    dir = _dir(),
     cond = _cond,
-    dev = _dev(),
   },
 }
 return spec

@@ -148,9 +148,9 @@ in
   # getty との tty1 取り合いを断つ。sway 停止の隙に logind の autovt が
   # getty@tty1 を湧かせ、Conflicts で sway が戻れなくなる構造的競合があった。
   # (cage 時代の停止も同型)。無人サイネージであり本地ログインは使わない
-  services.logind.extraConfig = ''
-    NAutoVTs=0
-  '';
+  services.logind.settings.Login = {
+    NAutoVTs = 0;
+  };
 
   systemd.services.sway-kiosk = {
     description = "Sway kiosk for Grafana signage";

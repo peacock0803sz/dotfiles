@@ -198,9 +198,9 @@ let
         w = 12;
         targets = [ (tgt ''group by(pretty_name) (node_os_info{instance="${host}"})'' "__auto" "A") ];
       })
+      # Uptime は期間文字列が長いので幅を広めに取る。狭いままだと
+      # 自動縮小で文字が読めなくなる
       (statDur {
-        // Uptime は期間文字列が長いので幅を広めに取る。狭いままだと
-        // 自動縮小で文字が読めなくなる
         id = 3;
         title = "Uptime";
         x = 0;

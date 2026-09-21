@@ -1,5 +1,5 @@
 local function _dir()
-  if vim.fn.hostname() == "arppegio" then
+  if vim.fn.hostname() == "arpeggio" then
     return "~/ghq/github.com/peacock0803sz/peafowl-colors/nvim/"
   end
 end

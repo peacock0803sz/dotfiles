@@ -187,7 +187,7 @@ let
         title = "Hostname";
         x = 0;
         y = 0;
-        w = 8;
+        w = 4;
         targets = [ (tgt ''group by(instance) (node_uname_info{instance="${host}"})'' "__auto" "A") ];
       })
       (statText {
@@ -203,7 +203,7 @@ let
         title = "Uptime";
         x = 16;
         y = 0;
-        w = 8;
+        w = 12;
         targets = [ (tgt ''time() - node_boot_time_seconds{instance="${host}"}'' "__auto" "A") ];
       })
       # / と /nix/store は同一デバイスなので / だけに絞る。Samba 用のような

@@ -52,6 +52,12 @@ in
         SessionEnd = notchbarHook "Ended";
       };
     };
+  } // {
+    # `codex app-server daemon` (shared agents) only starts from this fixed path.
+    # Point at the profile link rather than a /nix/store hash so the daemon follows
+    # each Home Manager generation after a `home-manager switch`.
+    ".codex/packages/standalone/current/codex".source =
+      mkOutOfStoreSymlink "${homeDirectory}/.nix-profile/bin/codex";
   };
 
   programs.codex = {

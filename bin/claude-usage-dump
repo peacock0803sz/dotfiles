@@ -1,8 +1,10 @@
 #!/usr/bin/env -S uv run --script
 # vim: set filetype=python:
-# claude-usage-dump - Claude Code のレート制限ウィンドウを JSON Lines に記録する
+# claude-usage-dump - Claude Code のレート制限ウィンドウを JSON Lines に記録し、
+# node_exporter の textfile collector 用に Prometheus 形式でも書き出す
 
 import json
+import os
 import pathlib
 import platform
 import sys
@@ -13,6 +15,10 @@ from datetime import datetime
 CREDENTIALS_PATH = pathlib.Path.home() / ".claude" / ".credentials.json"
 USAGE_URL = "https://api.anthropic.com/api/oauth/usage"
 RECORD_DIR = pathlib.Path.home() / ".local" / "state" / "claude-usage"
+# node_exporter --collector.textfile.directory が読む場所。
+# テスト時は CLAUDE_USAGE_PROM_DIR で差し替え可能
+PROM_DIR = pathlib.Path(os.environ.get("CLAUDE_USAGE_PROM_DIR", "/var/lib/node-exporter-textfile"))
+PROM_PATH = PROM_DIR / "claude_usage.prom"
 
 
 def read_access_token() -> str:
@@ -41,11 +47,78 @@ def append_record(raw: dict) -> pathlib.Path:
     return path
 
 
+def resets_at_epoch(value) -> int:
+    if not value:
+        return 0
+    try:
+        return int(datetime.fromisoformat(value).timestamp())
+    except (ValueError, TypeError):
+        return 0
+
+
+def render_prom(raw, *, success: bool, now: int) -> str:
+    lines = [
+        "# HELP claude_usage_utilization_percent Claude Code plan utilization (0-100).",
+        "# TYPE claude_usage_utilization_percent gauge",
+        "# HELP claude_usage_resets_at_seconds Unix time when the usage window resets (0 when unknown).",
+        "# TYPE claude_usage_resets_at_seconds gauge",
+        "# HELP claude_limit_percent Per-limit utilization (0-100).",
+        "# TYPE claude_limit_percent gauge",
+        "# HELP claude_limit_resets_at_seconds Unix time when the limit window resets (0 when unknown).",
+        "# TYPE claude_limit_resets_at_seconds gauge",
+        "# HELP claude_limit_active Whether the limit window is currently active (1/0).",
+        "# TYPE claude_limit_active gauge",
+        "# HELP claude_scrape_success Whether the last dump successfully fetched the usage API (1/0).",
+        "# TYPE claude_scrape_success gauge",
+        "# HELP claude_scrape_timestamp_seconds Unix time of the last dump attempt.",
+        "# TYPE claude_scrape_timestamp_seconds gauge",
+    ]
+    if success and isinstance(raw, dict):
+        for window in ("five_hour", "seven_day"):
+            section = raw.get(window) or {}
+            util = section.get("utilization")
+            if isinstance(util, (int, float)):
+                lines.append(f'claude_usage_utilization_percent{{window="{window}"}} {util}')
+            lines.append(
+                f'claude_usage_resets_at_seconds{{window="{window}"}} {resets_at_epoch(section.get("resets_at"))}'
+            )
+        for limit in raw.get("limits") or []:
+            if not isinstance(limit, dict):
+                continue
+            kind = str(limit.get("kind", "unknown"))
+            group = str(limit.get("group", "unknown"))
+            percent = limit.get("percent")
+            if isinstance(percent, (int, float)):
+                lines.append(f'claude_limit_percent{{kind="{kind}",group="{group}"}} {percent}')
+            lines.append(
+                f'claude_limit_resets_at_seconds{{kind="{kind}",group="{group}"}} {resets_at_epoch(limit.get("resets_at"))}'
+            )
+            if isinstance(limit.get("is_active"), bool):
+                lines.append(
+                    f'claude_limit_active{{kind="{kind}",group="{group}"}} {1 if limit["is_active"] else 0}'
+                )
+    lines.append(f"claude_scrape_success {1 if success else 0}")
+    lines.append(f"claude_scrape_timestamp_seconds {now}")
+    return "\n".join(lines) + "\n"
+
+
+def write_prom(raw, *, success: bool) -> None:
+    now = int(datetime.now().astimezone().timestamp())
+    try:
+        PROM_DIR.mkdir(parents=True, exist_ok=True)
+        tmp = PROM_DIR / "claude_usage.prom.tmp"
+        tmp.write_text(render_prom(raw, success=success, now=now), encoding="utf-8")
+        tmp.rename(PROM_PATH)
+    except OSError as e:
+        print(f"cannot write {PROM_PATH}: {e}", file=sys.stderr)
+
+
 def main() -> int:
     try:
         token = read_access_token()
     except (OSError, json.JSONDecodeError, KeyError) as e:
         print(f"cannot read access token from {CREDENTIALS_PATH}: {e}", file=sys.stderr)
+        write_prom(None, success=False)
         return 1
 
     # 401 は HTTPError で、HTTPError は URLError のサブクラスなのでここで捕まる
@@ -53,14 +126,17 @@ def main() -> int:
         raw = fetch_usage(token)
     except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as e:
         print(f"cannot fetch {USAGE_URL}: {e}", file=sys.stderr)
+        write_prom(None, success=False)
         return 1
 
     try:
         path = append_record(raw)
     except OSError as e:
         print(f"cannot write under {RECORD_DIR}: {e}", file=sys.stderr)
+        write_prom(raw, success=False)
         return 1
 
+    write_prom(raw, success=True)
     print(path)
     return 0
 

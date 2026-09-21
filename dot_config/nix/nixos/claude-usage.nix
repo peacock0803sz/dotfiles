@@ -1,6 +1,18 @@
 # Claude Code のレート制限を5分ごとに記録する。
 # cc-statusline は全ホストに配られるため触らず、enigma だけがこのファイルを import する。
 { pkgs, username, ... }: {
+  # node_exporter の textfile collector が読む置き場。
+  # 書くのは User=username の dump サービス、読むのは exporter なので world-readable でよい
+  systemd.tmpfiles.rules = [
+    "d /var/lib/node-exporter-textfile 0755 ${username} users -"
+  ];
+
+  # enigma の exporter 定義は prometheus-exporters.nix 側だが、
+  # textfile を読ませる理由はこのファイルなのでフラグはここで足す (NixOS はマージする)
+  services.prometheus.exporters.node.extraFlags = [
+    "--collector.textfile.directory=/var/lib/node-exporter-textfile"
+  ];
+
   systemd.services.claude-usage-dump = {
     description = "Record Claude Code rate limit windows";
 

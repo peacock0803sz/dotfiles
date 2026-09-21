@@ -1,8 +1,9 @@
-{ pkgs, lib, config, hostName, inputs, llm-agents, ... }:
+{ pkgs, lib, config, inputs, llm-agents, ... }:
 let
   inherit (inputs) mcp-servers-nix;
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
   homeDirectory = config.home.homeDirectory;
+  piMcpAdapter = "npm:pi-mcp-adapter@latest";
 
   # pi 本体は MCP 非対応で pi-mcp-adapter 拡張が Claude 形式 ({"mcpServers": ...}) を読むため、
   # claude-code.nix と同じサーバー定義からデフォルト flavor でそのまま生成できる
@@ -19,7 +20,7 @@ let
     theme = "light";
     compaction.enabled = false;
     packages = [
-      "npm:pi-mcp-adapter@2.31.0"
+      piMcpAdapter
     ];
   });
 in
@@ -29,10 +30,9 @@ in
   home.file = {
     ".pi/agent/AGENTS.md".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/AGENTS.md";
     ".pi/agent/mcp.json".source = mcpConfig;
-    ".pi/agent/extensions/notify.ts".source =
-      mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/pi-extensions/notify.ts";
-    ".pi/agent/extensions/permission-gate.ts".source =
-      mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/pi-extensions/permission-gate.ts";
+    ".pi/agent/extensions".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/pi/extensions";
+    ".pi/agent/agents".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/pi/agents";
+    ".pi/agent/prompts".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/pi/prompts";
   };
 
   # pi install や /settings が settings.json へ書き込むため symlink にせず実ファイルで配置し、
@@ -44,7 +44,7 @@ in
       run install -m 644 ${settingsJson} "$HOME/.pi/agent/settings.json"
     fi
     if [ ! -d "$HOME/.pi/agent/npm/pi-mcp-adapter" ]; then
-      echo "pi: run once: pi install npm:pi-mcp-adapter@2.31.0"
+      echo "pi: run once: pi install ${piMcpAdapter}"
     fi
   '';
 }

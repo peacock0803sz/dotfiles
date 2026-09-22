@@ -50,6 +50,22 @@
         "type": "github"
       }
     },
+    "langsmith-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789931239,
+        "narHash": "sha256-7pxumKm4prhccVHMs2wUZifCdkxoo/U1MeE2nSm3flQ=",
+        "owner": "langchain-ai",
+        "repo": "langsmith-skills",
+        "rev": "946f228af62c94264588bdc0c90bcf2cdb59e8c1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "langchain-ai",
+        "repo": "langsmith-skills",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1785571196,
@@ -87,6 +103,7 @@
         "agent-skills-nix": "agent-skills-nix",
         "anthropic": "anthropic",
         "google": "google",
+        "langsmith-skills": "langsmith-skills",
         "openai": "openai",
         "superpowers": "superpowers",
         "vercel-labs": "vercel-labs"

@@ -25,7 +25,9 @@ let
   });
 in
 {
-  home.packages = [ llm-agents.pi ];
+  home.packages = [
+    llm-agents.pi 
+  ];
 
   home.file = {
     ".pi/agent/AGENTS.md".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/AGENTS.md";

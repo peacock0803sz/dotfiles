@@ -9,6 +9,9 @@
     "fmt:check": "oxfmt --check",
     "typecheck": "tsc --noEmit"
   },
+  "dependencies": {
+    "langsmith": "^0.3.0"
+  },
   "devDependencies": {
     "@earendil-works/pi-coding-agent": "0.85.1",
     "@types/node": "^24.13.4",

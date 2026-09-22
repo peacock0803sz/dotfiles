@@ -1,6 +1,7 @@
 { pkgs, system, inputs, ... }: {
   imports = [
     ./large.nix
+    ../programs/codex.nix
   ];
 
   profile.levels = [ "huge" ];

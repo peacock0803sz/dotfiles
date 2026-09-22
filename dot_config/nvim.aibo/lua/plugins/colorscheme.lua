@@ -1,3 +1,9 @@
+local function _dir()
+  if vim.fn.hostname() == "arpeggio" then
+    return "~/ghq/github.com/peacock0803sz/peafowl-colors"
+  end
+end
+
 local function _cond()
   return vim.env.NVIM_COLOR_FALLBACK == nil
 end
@@ -29,7 +35,15 @@ local spec = {
   },
   {
     "https://github.com/peacock0803sz/peafowl-colors",
-    config = function()
+    config = function(plugin)
+      local nvim_dir = plugin.dir .. "/nvim"
+      vim.opt.rtp:append(nvim_dir)
+      package.path = table.concat({
+        nvim_dir .. "/lua/?.lua",
+        nvim_dir .. "/lua/?/init.lua",
+        package.path,
+      }, ";")
+
       local palettes = require("peafowl_colors.palettes")
 
       require("peafowl_colors").setup({
@@ -65,7 +79,7 @@ local spec = {
     end,
     lazy = false,
     priority = 1000,
-    dir = "~/ghq/github.com/peacock0803sz/peafowl-colors/nvim/",
+    dir = _dir(),
     cond = _cond,
   },
 }

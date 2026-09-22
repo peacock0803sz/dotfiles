@@ -25,6 +25,7 @@ in
     nur.repos.peacock0803sz.notizen
     nur.repos.peacock0803sz.vde-layout
     nur.repos.peacock0803sz.vde-monitor
+    nur.repos.peacock0803sz.langsmith-cli
 
     cargo
     go

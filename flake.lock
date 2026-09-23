@@ -5,7 +5,6 @@
         "agent-skills-nix": "agent-skills-nix",
         "anthropic": "anthropic",
         "google": "google",
-        "langsmith-skills": "langsmith-skills",
         "openai": "openai",
         "superpowers": "superpowers",
         "vercel-labs": "vercel-labs"
@@ -369,22 +368,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "langsmith-skills": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1790185483,
-        "narHash": "sha256-WtIIfS9OqZmYN2NuwMFa1O1lNqK+SRRdiRrMG3UrJXo=",
-        "owner": "langchain-ai",
-        "repo": "langsmith-skills",
-        "rev": "bc2f989d8546d6113bb7fb5e94ea9abd730e258c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "langchain-ai",
-        "repo": "langsmith-skills",
         "type": "github"
       }
     },

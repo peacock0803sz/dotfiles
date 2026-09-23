@@ -24,10 +24,6 @@
       url = "github:vercel-labs/agent-skills";
       flake = false;
     };
-    langsmith-skills = {
-      url = "github:langchain-ai/langsmith-skills";
-      flake = false;
-    };
   };
 
   outputs = { agent-skills-nix, ... }@inputs: {
@@ -85,7 +81,6 @@
         discoveredSkills = {
           google = discoverSkills inputs.google.outPath "skills/cloud";
           superpowers = discoverSkills inputs.superpowers.outPath "skills";
-          langsmith = discoverSkills inputs.langsmith-skills.outPath "config/skills";
         } // lib.optionalAttrs (hostName == "arpeggio") {
           gx-agent-recipes = discoverSkills
             "${config.home.homeDirectory}/ghq/github.com/groove-x/gx-agent-recipes"
@@ -136,10 +131,6 @@
               path = inputs.vercel-labs.outPath;
               subdir = "skills";
               filter.nameRegex = toNameRegex curatedSkills.vercel-labs;
-            };
-            langsmith = {
-              path = inputs.langsmith-skills.outPath;
-              subdir = "config/skills";
             };
 
             local = {

@@ -217,7 +217,9 @@ def _read_credentials_keychain() -> dict | None:
 
 
 def _get_access_token() -> str | None:
-    creds = _read_credentials_file() or _read_credentials_keychain()
+    # On macOS Claude Code refreshes the token in the keychain only, so a leftover
+    # credentials file goes stale; the file is the source of truth elsewhere.
+    creds = _read_credentials_keychain() or _read_credentials_file()
     if creds is None:
         return None
     return creds.get("claudeAiOauth", {}).get("accessToken")

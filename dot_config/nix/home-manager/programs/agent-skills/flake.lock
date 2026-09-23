@@ -53,11 +53,11 @@
     "langsmith-skills": {
       "flake": false,
       "locked": {
-        "lastModified": 1789931239,
-        "narHash": "sha256-7pxumKm4prhccVHMs2wUZifCdkxoo/U1MeE2nSm3flQ=",
+        "lastModified": 1790185483,
+        "narHash": "sha256-WtIIfS9OqZmYN2NuwMFa1O1lNqK+SRRdiRrMG3UrJXo=",
         "owner": "langchain-ai",
         "repo": "langsmith-skills",
-        "rev": "946f228af62c94264588bdc0c90bcf2cdb59e8c1",
+        "rev": "bc2f989d8546d6113bb7fb5e94ea9abd730e258c",
         "type": "github"
       },
       "original": {

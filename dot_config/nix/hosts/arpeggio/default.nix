@@ -31,7 +31,7 @@ inputs.nix-darwin.lib.darwinSystem {
     ../../nix-darwin/bookmark-syncer.nix
     ../../nix-darwin/lemonade.nix
     ../../nix-darwin/neovim.nix
-    ../../nix-darwin/notizen.nix
+    ../../nix-darwin/notizen-syncer.nix
     # ../../nix-darwin/vz.nix
     ./darwin.nix
     {

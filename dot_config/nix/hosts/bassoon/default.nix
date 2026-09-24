@@ -28,7 +28,7 @@ nixpkgs.lib.nixosSystem {
     ../../nixos/grafana-kiosk.nix
     ../../nixos/grafana-signage.nix
     ../../nixos/lemonade.nix
-    ../../nixos/notizen.nix
+    ../../nixos/notizen-server.nix
     ../../nixos/samba.nix
     ./hardware.nix
     ./disk.nix

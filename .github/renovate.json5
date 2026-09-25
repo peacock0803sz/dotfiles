@@ -1,10 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["github>peacock0803sz/renovate-config"],
-  "enabledManagers": ["npm", "deno"],
+  "enabledManagers": ["npm", "deno", "github-actions"],
   "includePaths": [
-    "~/dotfiles/dot_config/agents/pi/extensions/",
-    "~/dotfiles/dot_config/nvim/huge/ts/ddu/"
+    ".github/workflows/**",
+    "dot_config/agents/pi/extensions/**",
+    "dot_config/nvim/*/ts/ddu/**"
   ],
   "commitMessagePrefix": "",
   "packageRules": [

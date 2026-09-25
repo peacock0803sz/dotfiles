@@ -118,6 +118,7 @@ in
           "Bash(.venv/bin/ty)"
           "Bash(.venv/bin/pytest)"
           "Bash(.venv/bin/python3 -m doctest *)"
+          "Bash(~/.claude/skills/archviz/scripts/spec2drawio.py *)"
         ];
       };
 

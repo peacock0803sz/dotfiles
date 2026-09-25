@@ -1,0 +1,26 @@
+{
+  "skill_name": "archviz",
+  "evals": [
+    {
+      "id": 1,
+      "name": "codebase-dotfiles-component",
+      "prompt": "~/dotfiles リポジトリの home-manager 構成がどうなっているか、新しく触る人向けにコンポーネント図を描いてほしい。flake.nix から各 programs モジュールやエージェント設定(dot_config/agents 配下)がどう読み込まれて ~/.claude などに配置されるかが分かるように。SVG で {OUTPUT_DIR} に出して。",
+      "expected_output": "リポジトリを実際に読んで、flake → home-manager モジュール → programs/* → 配置先の関係を表したコンポーネント図。ソース(.d2 等)と .svg が出力され、根拠ファイルが報告される。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "iot-deployment-drawio",
+      "prompt": "家庭用ロボットのシステム構成図を drawio で作りたい。ロボット本体は SoC(Linux) 上で行動制御プロセス(Python)とセンサーデーモン(C++)が動いていて、プロセス間は ZeroMQ。ロボットは家庭の Wi-Fi ルーター経由で MQTT over TLS(8883) で AWS IoT Core に繋がる。クラウド側は IoT Core のルールで Kinesis に流して、Lambda で加工して DynamoDB と S3 に保存。スマホアプリ(Flutter)は API Gateway + Lambda の REST API を叩いて、Cognito で認証してる。後で GUI で手直ししたいので .drawio と、ドキュメントに貼る用の SVG の両方を {OUTPUT_DIR} に置いて。",
+      "expected_output": "spec2drawio.py を使って生成した .drawio と、drawio CLI で書き出した .svg。デバイス/家庭内/AWS の境界が入れ子で表現され、エッジにプロトコル・ポートが付く。凡例あり。",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "cli-oauth-sequence",
+      "prompt": "社内CLIツール `gxctl login` の認証フローをシーケンス図にして。OAuth 2.0 Device Authorization Grant で、CLI が認可サーバーに device_code を要求 → ユーザーにURLとコードを表示 → ユーザーがブラウザで開いてSSO(Okta)でログインして承認 → その間CLIはトークンエンドポイントを5秒間隔でポーリング(authorization_pending が返る) → 承認後にアクセストークンとリフレッシュトークンを受け取って OS のキーチェーンに保存。期限切れ(expired_token)のケースも分かるようにしてほしい。成果物は SVG で {OUTPUT_DIR} に。",
+      "expected_output": "D2 のシーケンス図。CLI/ユーザー/ブラウザ/認可サーバー/Okta/キーチェーンのアクター、ポーリングのループと expired_token の分岐が枠で表現され、応答が破線。.d2 と .svg が出力される。",
+      "files": []
+    }
+  ]
+}

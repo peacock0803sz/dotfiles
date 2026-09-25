@@ -7,6 +7,8 @@ set -ag terminal-overrides ',*:Smulx=\E[4::%p1%dm'
 
 setw -g monitor-activity on
 set -g visual-activity on
+set -g extended-keys on
+set -g extended-keys-format csi-u
 
 # Bell forwarding for agent notifications
 set -g monitor-bell on

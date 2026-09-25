@@ -75,11 +75,42 @@
             "react-view-transitions"
             "web-design-guidelines"
           ];
+          google = [
+            "gcloud"
+            "bigquery-basics"
+            "bigquery-ai-ml"
+            "bigquery-bigframes"
+            "bigquery-observability"
+            "bigquery-slot-cost-optimizer"
+            "datalineage-bigquery-asset-impact-analysis"
+            "datalineage-summary"
+            "dbt-sf-to-bq-translator"
+            "gke-basics"
+            "cloud-run-basics"
+            "cloud-logging-query-generation"
+            "cloud-monitoring-promql-query"
+          ];
         };
+
+        # google の残りは skill 一覧の予算 (context の約1%) を超えるため常駐させず、
+        # どの agent も skill として走査しない共通の場所に置き、curated 側から Read で辿らせる。
+        # `.agents/skills` は Codex や opencode が走査するので、別名の `skill-library` にしている。
+        # agent-platform は使わないので置かない。
+        googleLibraryDir = ".agents/skill-library/google";
+        googleLibrary = lib.filter
+          (n: !(lib.elem n curatedSkills.google) && !(lib.hasPrefix "agent-platform-" n))
+          (discoverSkills inputs.google.outPath "skills/cloud");
+        googleLibraryNote = ''
+
+          ## 関連する Google Cloud skill
+
+          本文や description で名前が出てくる他の Google Cloud skill(例: `gke-upgrades`)は Skill ツールでは呼べない。
+          `~/${googleLibraryDir}/<name>/SKILL.md` を Read して、その指示に従う。
+          名前が分からないときは `ls ~/${googleLibraryDir}` で一覧を見る。
+        '';
 
         # 全件 enable する source (旧 skills.enableAll 相当)
         discoveredSkills = {
-          google = discoverSkills inputs.google.outPath "skills/cloud";
           superpowers = discoverSkills inputs.superpowers.outPath "skills";
         } // lib.optionalAttrs (hostName == "arpeggio") {
           gx-agent-recipes = discoverSkills
@@ -99,6 +130,8 @@
           # rename 後の配置名 (superpowers.brainstorming) に合わせて書き換える。
           transform = { original, ... }:
             builtins.replaceStrings [ "superpowers:" ] [ "superpowers." ] original;
+        } // lib.optionalAttrs (source == "google") {
+          transform = { original, ... }: original + googleLibraryNote;
         });
 
         # 列挙された skill 名のみマッチする正規表現を生成
@@ -106,6 +139,12 @@
         toNameRegex = names: "(" + lib.concatStringsSep "|" names + ")";
       in
       {
+        home.file = lib.listToAttrs (map
+          (n: lib.nameValuePair "${googleLibraryDir}/${n}" {
+            source = "${inputs.google.outPath}/skills/cloud/${n}";
+          })
+          googleLibrary);
+
         programs.agent-skills = {
           enable = true;
           sources = {
@@ -117,6 +156,7 @@
             google = {
               path = inputs.google.outPath;
               subdir = "skills/cloud";
+              filter.nameRegex = toNameRegex curatedSkills.google;
             };
             openai = {
               path = inputs.openai.outPath;

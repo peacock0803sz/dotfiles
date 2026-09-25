@@ -42,7 +42,6 @@ in
       includeCoAuthoredBy = false;
       autoCompactEnabled = false;
       enableAllProjectMcpServers = true;
-      outputStyle = "Explanatory";
       teammateMode = "in-process";
       statusLine = {
         type = "command";

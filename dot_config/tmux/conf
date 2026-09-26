@@ -9,6 +9,7 @@ setw -g monitor-activity on
 set -g visual-activity on
 set -g extended-keys on
 set -g extended-keys-format csi-u
+set -g focus-events on
 
 # Bell forwarding for agent notifications
 set -g monitor-bell on

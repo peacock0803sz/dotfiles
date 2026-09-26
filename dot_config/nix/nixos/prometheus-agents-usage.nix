@@ -4,6 +4,7 @@
 # - Codex: ~/.codex の ChatGPT OAuth token で chatgpt.com/backend-api/wham/usage を叩く
 # - OpenCode: ~/.local/share/opencode/opencode.db からトークン/コストを集計する (limit は概念が無いため対象外)
 # どちらも node_exporter の textfile 用に .prom を書き出し、Prometheus が既存の node job で収集する。
+# Claude Code を起動しない間も token が失効しないよう、refresh token での更新も定期実行する。
 { pkgs, username, ... }: {
   # node_exporter の textfile collector が読む置き場。
   # 書くのは User=username の dump サービス、読むのは exporter なので world-readable でよい
@@ -40,6 +41,32 @@
       # 5分ごとの正時に揃えて等間隔の時系列にする
       OnCalendar = "*:0/5";
       # サスペンドから復帰したとき、取りこぼした分を1回だけ実行する
+      Persistent = true;
+    };
+  };
+
+  systemd.services.claude-credentials-refresh = {
+    description = "Refresh Claude Code OAuth access token";
+
+    wants = [ "network-online.target" ];
+    after = [ "network-online.target" ];
+    # 同時刻に起動したとき、dump が期限切れトークンで叩くのを避ける
+    before = [ "claude-usage-dump.service" ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      User = username;
+      Environment = [ "HOME=/home/${username}" ];
+      ExecStart = "${pkgs.uv}/bin/uv run --script /home/${username}/dotfiles/dot_config/agents/scripts/refresh-credentials/claude";
+    };
+  };
+
+  systemd.timers.claude-credentials-refresh = {
+    description = "Timer for Claude Code OAuth token refresh";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      # スクリプトは期限1時間前から更新するので、30分間隔なら取りこぼさない
+      OnCalendar = "*:0/30";
       Persistent = true;
     };
   };

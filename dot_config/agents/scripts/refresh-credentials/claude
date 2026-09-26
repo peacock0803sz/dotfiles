@@ -1,0 +1,108 @@
+#!/usr/bin/env -S uv run --script
+# vim: set filetype=python:
+# claude-credentials-refresh - Claude Code の OAuth アクセストークンを期限前に refresh token で更新する。
+# Claude Code を長時間起動していないと ~/.claude/.credentials.json のトークンが失効し、
+# claude-usage-dump が 401 になり続けるのを防ぐ
+
+import json
+import os
+import pathlib
+import sys
+import time
+import urllib.error
+import urllib.request
+
+CREDENTIALS_PATH = pathlib.Path.home() / ".claude" / ".credentials.json"
+# 非公開仕様。Claude Code 側が変えたら追従が必要
+TOKEN_URL = "https://console.anthropic.com/v1/oauth/token"
+CLIENT_ID = "9d1c250a-e61b-44d9-88ed-5944d1962f5e"
+# 期限までこれ以上残っていれば何もしない。動作中の Claude Code と
+# refresh token のローテーションで衝突する機会を減らすため、ぎりぎりまで待つ。
+# テスト時は CLAUDE_REFRESH_MARGIN_SEC で差し替え可能
+MARGIN_SEC = int(os.environ.get("CLAUDE_REFRESH_MARGIN_SEC", "3600"))
+
+
+def read_credentials() -> dict:
+    return json.loads(CREDENTIALS_PATH.read_text())
+
+
+def refresh(refresh_token: str) -> dict:
+    body = json.dumps(
+        {"grant_type": "refresh_token", "refresh_token": refresh_token, "client_id": CLIENT_ID}
+    ).encode()
+    req = urllib.request.Request(
+        TOKEN_URL,
+        data=body,
+        # 既定の Python-urllib/x.y は Cloudflare に弾かれることがあるので明示する
+        headers={"Content-Type": "application/json", "User-Agent": "claude-credentials-refresh"},
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        return json.loads(resp.read())
+
+
+def write_credentials(creds: dict) -> None:
+    tmp = CREDENTIALS_PATH.with_name(CREDENTIALS_PATH.name + ".tmp")
+    fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, "w", encoding="utf-8") as f:
+        json.dump(creds, f)
+    tmp.rename(CREDENTIALS_PATH)
+
+
+def main() -> int:
+    try:
+        creds = read_credentials()
+        oauth = creds["claudeAiOauth"]
+        refresh_token = oauth["refreshToken"]
+    except (OSError, json.JSONDecodeError, KeyError) as e:
+        print(f"cannot read refresh token from {CREDENTIALS_PATH}: {e}", file=sys.stderr)
+        return 1
+
+    now_ms = int(time.time() * 1000)
+    if oauth.get("expiresAt", 0) > now_ms + MARGIN_SEC * 1000:
+        return 0
+    if oauth.get("refreshTokenExpiresAt", now_ms + 1) <= now_ms:
+        print("refresh token expired; run `claude auth login`", file=sys.stderr)
+        return 1
+
+    # 401/400 は HTTPError で、HTTPError は URLError のサブクラスなのでここで捕まる
+    try:
+        resp = refresh(refresh_token)
+        access_token = resp["access_token"]
+        expires_in = int(resp["expires_in"])
+    except urllib.error.HTTPError as e:
+        # 原因 (invalid_grant / WAF など) は本文にしか出ない
+        detail = e.read().decode(errors="replace")[:500]
+        print(f"cannot refresh via {TOKEN_URL}: {e}: {detail}", file=sys.stderr)
+        return 1
+    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, KeyError, ValueError) as e:
+        print(f"cannot refresh via {TOKEN_URL}: {e}", file=sys.stderr)
+        return 1
+
+    # 通信中に Claude Code が先に更新していたら、そちらの方が新しいので上書きしない
+    try:
+        latest = read_credentials()
+    except (OSError, json.JSONDecodeError) as e:
+        print(f"cannot re-read {CREDENTIALS_PATH}: {e}", file=sys.stderr)
+        return 1
+    if latest.get("claudeAiOauth", {}).get("refreshToken") != refresh_token:
+        print("credentials were updated concurrently; skip writing", file=sys.stderr)
+        return 0
+
+    latest_oauth = latest["claudeAiOauth"]
+    latest_oauth["accessToken"] = access_token
+    latest_oauth["expiresAt"] = int(time.time() * 1000) + expires_in * 1000
+    if resp.get("refresh_token"):
+        latest_oauth["refreshToken"] = resp["refresh_token"]
+    try:
+        write_credentials(latest)
+    except OSError as e:
+        print(f"cannot write {CREDENTIALS_PATH}: {e}", file=sys.stderr)
+        return 1
+
+    print(f"refreshed; expires in {expires_in}s")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

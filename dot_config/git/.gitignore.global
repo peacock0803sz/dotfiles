@@ -230,6 +230,7 @@ docs/superpowers/*
 
 # Speckit
 .specify/*
+.claude/worktrees
 .claude/commands/speckit.*
 .claude/skills/speckit*
 specs/*

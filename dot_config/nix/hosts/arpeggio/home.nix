@@ -16,6 +16,7 @@ in
     yarn
     lefthook
 
+    grpcurl
     keto
     kratos
     ory

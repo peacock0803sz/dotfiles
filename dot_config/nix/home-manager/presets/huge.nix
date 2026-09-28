@@ -10,7 +10,6 @@
     nur.repos.peacock0803sz.deck
     nur.repos.peacock0803sz.mado
     nur.repos.peacock0803sz.tfcmt
-    inputs.arto.packages.${system}.default
 
     kubectl
     terraform

@@ -56,7 +56,6 @@
       url = "github:numtide/llm-agents.nix";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
-    arto.url = "github:arto-app/Arto";
   };
 
   outputs = { flake-parts, ... }@inputs:

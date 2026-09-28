@@ -41,6 +41,7 @@
   homebrew = {
     enable = true;
     taps = [
+      { name = "arto-app/tap"; trusted = true; }
       {
         name = "peacock0803sz/lanterna";
         clone_target = "https://github.com/peacock0803sz/Lanterna";
@@ -56,6 +57,7 @@
     casks = [
       "1password"
       "adobe-creative-cloud"
+      "arto-app/tap/arto"
       # "chatgpt"
       # "claude"
       "font-udev-gothic-nf"

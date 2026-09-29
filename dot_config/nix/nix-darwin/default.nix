@@ -42,11 +42,6 @@
     enable = true;
     taps = [
       { name = "arto-app/tap"; trusted = true; }
-      {
-        name = "peacock0803sz/lanterna";
-        clone_target = "https://github.com/peacock0803sz/Lanterna";
-        trusted = true;
-      }
     ];
     onActivation = {
       autoUpdate = true;
@@ -67,7 +62,6 @@
       "google-chrome@dev"
       "google-drive"
       "karabiner-elements"
-      "peacock0803sz/lanterna/lanterna"
       "tailscale-app"
       "vivaldi"
       "zoom"

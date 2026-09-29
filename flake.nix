@@ -25,6 +25,11 @@
       flake = false;
     };
     darwin-vz-nix.url = "github:takeokunn/darwin-vz-nix";
+    lanterna = {
+      url = "github:peacock0803sz/Lanterna";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     disko = {
       url = "github:nix-community/disko/latest";

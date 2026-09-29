@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, inputs, ... }:
 let
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
   karabinerConfig = ../../../karabiner/karabiner.json;
@@ -13,6 +13,7 @@ in
   home.packages = with pkgs; [
     git
     defaultbrowser
+    inputs.lanterna.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     brewCasks.bartender
     brewCasks.cleanshot

@@ -29,7 +29,7 @@ in
 
   home.file = {
     ".pi/agent/AGENTS.md".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/AGENTS.md";
-    ".pi/agent/mcp.json".source = mcpConfig;
+    ".pi/agent/mcp-adapter.json".source = mcpConfig;
     ".pi/agent/extensions".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/pi/extensions";
     ".pi/agent/agents".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/pi/agents";
     ".pi/agent/prompts".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/pi/prompts";

@@ -13,7 +13,7 @@ let
     settings.servers = {
       linear = import ./mcp-servers/linear { inherit pkgs; };
       kubernetes = import ./mcp-servers/kubernetes { inherit pkgs; };
-    };
+    } // (import ./mcp-servers/pencil { inherit pkgs lib; });
   };
 
   settingsJson = pkgs.writeText "pi-settings.json" (builtins.toJSON {

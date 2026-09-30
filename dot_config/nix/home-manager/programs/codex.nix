@@ -37,7 +37,8 @@ let
         host = "https://git.p3ac0ck.net";
         tokenSuffix = "git_p3ac0ck_net";
       });
-    } // (if hostName == "arpeggio" then {
+    } // (import ./mcp-servers/pencil { inherit pkgs lib; agent = "codexCLI"; })
+    // (if hostName == "arpeggio" then {
       devin = withSecrets "devin" "" (import ./mcp-servers/devin { inherit pkgs; });
       esa = withSecrets "esa" "" (import ./mcp-servers/esa { inherit pkgs; });
       gcloud = (import ./mcp-servers/gcloud { inherit pkgs; });

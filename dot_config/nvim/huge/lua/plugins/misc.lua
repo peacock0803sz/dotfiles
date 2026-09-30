@@ -3,7 +3,7 @@ local spec = {
   {
     "https://github.com/arto-app/arto.vim",
     config = function()
-      vim.g.arto_path = vim.env.HOME .. "/Applications/Home Manager Apps/Arto.app"
+      vim.g.arto_path = "/Applications/Arto.app"
     end,
   },
   { "https://github.com/cocopon/inspecthi.vim" },

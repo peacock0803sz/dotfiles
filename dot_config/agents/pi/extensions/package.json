@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "langsmith": "^0.6.0"
+    "langsmith": "^0.10.5"
   },
   "devDependencies": {
     "@earendil-works/pi-coding-agent": "0.87.1",

@@ -559,6 +559,26 @@
         "type": "github"
       }
     },
+    "nix-mac-app-identity": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790004038,
+        "narHash": "sha256-c5eNvzqDaGHfH/NS0eNZnYPMxXAEVlMy3XIqyCLR5PY=",
+        "owner": "natsukium",
+        "repo": "nix-mac-app-identity",
+        "rev": "ef92c08e661250b481ec459405235f3756433ad5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "natsukium",
+        "repo": "nix-mac-app-identity",
+        "type": "github"
+      }
+    },
     "nix-monitored": {
       "inputs": {
         "nixpkgs": [
@@ -828,6 +848,7 @@
         "neovim-overlay": "neovim-overlay",
         "nix-darwin": "nix-darwin_3",
         "nix-index-database": "nix-index-database",
+        "nix-mac-app-identity": "nix-mac-app-identity",
         "nix-monitored": "nix-monitored",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_7",

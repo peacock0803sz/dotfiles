@@ -56,6 +56,10 @@
       url = "github:natsukium/mcp-servers-nix";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-mac-app-identity = {
+      url = "github:natsukium/nix-mac-app-identity";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     agent-skills.url = "path:./dot_config/nix/home-manager/programs/agent-skills";
     llm-agents = {
       url = "github:numtide/llm-agents.nix";

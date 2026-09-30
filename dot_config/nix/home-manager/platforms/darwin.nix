@@ -8,12 +8,18 @@ in
     ../programs/alacritty.nix
     ../programs/ghostty.nix
     ../programs/wezterm.nix
+    inputs.nix-mac-app-identity.homeManagerModules.default
+  ];
+
+  # ad-hoc 署名のアプリは再ビルドで cdhash が変わり TCC の許可が外れるため、
+  # bundle identifier のみを要件とする署名に差し替えて入れる (home.packages には重複して入れない)
+  targets.darwin.appIdentity.apps = [
+    inputs.lanterna.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   home.packages = with pkgs; [
     git
     defaultbrowser
-    inputs.lanterna.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     brewCasks.bartender
     brewCasks.cleanshot

@@ -37,22 +37,9 @@ jobs:
           - host: bassoon
             config: nixosConfigurations.bassoon
             runner: ubuntu-latest
-          - host: enigma
-            config: nixosConfigurations.enigma
-            runner: ubuntu-latest
-            # CUDA / NVIDIA ドライバは unfree かつ systemPackages 経由でないため判定できず、push しない
-            extra-substituters: https://cache.nixos-cuda.org
-            extra-trusted-public-keys: cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=
-            skip-push: true
           - host: overture
             config: nixosConfigurations.overture
             runner: ubuntu-26.04-arm
-          - host: nocturne
-            config: darwinConfigurations.nocturne
-            runner: macos-26
-          - host: arpeggio
-            config: darwinConfigurations.arpeggio
-            runner: macos-26
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 

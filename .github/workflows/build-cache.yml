@@ -1,11 +1,11 @@
 # 各ホストの system closure をビルドし、peacock0803sz.cachix.org に push する。
-# ホストを足すときは matrix.include に { host, attr, runner } を 1 行追加する。
+# ホストを足すときは matrix.include に { host, config, runner } を 1 行追加する。
+#   config: nixosConfigurations.<host> / darwinConfigurations.<host>
+#   runner: x86_64-linux = ubuntu-latest / aarch64-linux = ubuntu-24.04-arm / aarch64-darwin = macos-15
 # 任意で extra-substituters / extra-trusted-public-keys (ホスト固有キャッシュ) と
 # skip-push (ビルドのみで push しない) を指定できる。
-# push は closure ごと行われ pushFilter では依存を除外できないため、unfree を含むホストは skip-push にする。
-#   NixOS : attr = nixosConfigurations.<host>.config.system.build.toplevel
-#   darwin: attr = darwinConfigurations.<host>.system
-#   runner: x86_64-linux = ubuntu-latest / aarch64-linux = ubuntu-24.04-arm / aarch64-darwin = macos-15
+# push は .github/scripts/push-free-closure が brew cask / unfree を依存に含まない path だけに絞って行う。
+# 依存の奥の unfree (ドライバなど) は判定できないので、そういうホストは skip-push にする。
 # 前提: 対象ホストが --impure なしで評価できること。
 
 on:
@@ -16,6 +16,7 @@ on:
       - flake.lock
       - dot_config/nix/**
       - .github/workflows/build-cache.yml
+      - .github/scripts/**
   # update-nix.yml は GITHUB_TOKEN で push するため push トリガーが発火しない。完了後に拾う
   workflow_run:
     workflows: [.github/workflows/update-nix.yml]
@@ -34,23 +35,23 @@ jobs:
       matrix:
         include:
           - host: bassoon
-            attr: nixosConfigurations.bassoon.config.system.build.toplevel
+            config: nixosConfigurations.bassoon
             runner: ubuntu-latest
           - host: enigma
-            attr: nixosConfigurations.enigma.config.system.build.toplevel
+            config: nixosConfigurations.enigma
             runner: ubuntu-latest
-            # CUDA / NVIDIA ドライバは unfree なので公開キャッシュに push しない
+            # CUDA / NVIDIA ドライバは unfree かつ systemPackages 経由でないため判定できず、push しない
             extra-substituters: https://cache.nixos-cuda.org
             extra-trusted-public-keys: cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=
             skip-push: true
           - host: overture
-            attr: nixosConfigurations.overture.config.system.build.toplevel
+            config: nixosConfigurations.overture
             runner: ubuntu-24.04-arm
           - host: nocturne
-            attr: darwinConfigurations.nocturne.system
+            config: darwinConfigurations.nocturne
             runner: macos-15
           - host: arpeggio
-            attr: darwinConfigurations.arpeggio.system
+            config: darwinConfigurations.arpeggio
             runner: macos-15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -63,11 +64,19 @@ jobs:
             extra-substituters = https://cache.numtide.com https://nix-community.cachix.org ${{ matrix.extra-substituters }}
             extra-trusted-public-keys = niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= ${{ matrix.extra-trusted-public-keys }}
 
+      # substituter の追加と認証だけ行う。ビルド結果の自動 push は closure ごと送ってしまうので切る
       - uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
         with:
           name: peacock0803sz
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          skipPush: ${{ matrix.skip-push == true }}
+          skipPush: true
 
       - name: Build ${{ matrix.host }}
-        run: nix build --print-build-logs --no-link ".#${{ matrix.attr }}"
+        id: build
+        run: |
+          out=$(nix build --print-build-logs --no-link --print-out-paths ".#${{ matrix.config }}.config.system.build.toplevel")
+          echo "toplevel=$out" >> "$GITHUB_OUTPUT"
+
+      - name: Push ${{ matrix.host }}
+        if: ${{ !matrix.skip-push }}
+        run: bash .github/scripts/push-free-closure peacock0803sz "${{ matrix.config }}" "${{ steps.build.outputs.toplevel }}"

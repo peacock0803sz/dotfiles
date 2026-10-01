@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# ビルド済みの system closure のうち、brew cask / unfree を依存に含まない store path だけを cachix に push する。
+# cachix push は closure ごと送るため、除外対象を参照する path (toplevel 自身も含む) は丸ごと外す。
+# 使い方: push-free-closure <cache> <config-attr> <toplevel-path>
+#   例: push-free-closure peacock0803sz darwinConfigurations.nocturne /nix/store/...-darwin-system
+# macOS ランナーの bash 3.2 でも動くよう、mapfile などは使わない。
+set -euo pipefail
+
+cache=$1
+config=$2
+toplevel=$3
+
+work=$(mktemp -d)
+trap 'rm -rf "$work"' EXIT
+
+nix eval --json ".#${config}" --apply "$(cat "$(dirname "$0")/nonfree-paths.nix")" |
+  jq -r '.[]' | sort -u >"$work/excluded"
+nix path-info --recursive "$toplevel" | sort -u >"$work/closure"
+
+# closure に実在する除外対象と、それを (間接的に) 参照する path
+comm -12 "$work/excluded" "$work/closure" >"$work/roots"
+if [[ -s $work/roots ]]; then
+  xargs nix-store --query --referrers-closure <"$work/roots" | sort -u >"$work/tainted"
+else
+  : >"$work/tainted"
+fi
+comm -23 "$work/closure" "$work/tainted" >"$work/push"
+
+echo "closure: $(wc -l <"$work/closure"), excluded roots: $(wc -l <"$work/roots"), tainted: $(wc -l <"$work/tainted"), to push: $(wc -l <"$work/push")"
+echo "excluded roots:"
+sed 's/^/  /' "$work/roots"
+
+cachix push "$cache" <"$work/push"

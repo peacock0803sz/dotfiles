@@ -37,11 +37,11 @@
     "google": {
       "flake": false,
       "locked": {
-        "lastModified": 1790705578,
-        "narHash": "sha256-S+1/2iRb9Bw71RMMp5UkhM7sRboaXWml7cWV+X2cCY4=",
+        "lastModified": 1790808051,
+        "narHash": "sha256-UGmhjF4pBtFl4B6sWyKMlXd/LClwsQKP4qZKs1qQwrQ=",
         "owner": "google",
         "repo": "skills",
-        "rev": "3d36cb86cb1799bf579e7c06acc31e0c6d534180",
+        "rev": "d5d905232ec501743831cc68e6763af90da3cd69",
         "type": "github"
       },
       "original": {

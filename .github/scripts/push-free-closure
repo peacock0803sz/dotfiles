@@ -20,7 +20,9 @@ nix path-info --recursive "$toplevel" | sort -u >"$work/closure"
 # closure に実在する除外対象と、それを (間接的に) 参照する path
 comm -12 "$work/excluded" "$work/closure" >"$work/roots"
 if [[ -s $work/roots ]]; then
-  xargs nix-store --query --referrers-closure <"$work/roots" | sort -u >"$work/tainted"
+  # referrers-closure は store 全体 (他の世代など) を辿るので closure 内に絞る
+  xargs nix-store --query --referrers-closure <"$work/roots" | sort -u |
+    comm -12 - "$work/closure" >"$work/tainted"
 else
   : >"$work/tainted"
 fi

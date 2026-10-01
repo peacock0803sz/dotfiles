@@ -26,6 +26,3 @@
 
 [includeIf "gitdir:~/ghq/github.com/groove-x/"]
   path = ~/dotfiles/dot_config/git/.gitconfig.groove-x
-
-[includeIf "gitdir:~/worktrees/github.com/groove-x/"]
-  path = ~/dotfiles/dot_config/git/.gitconfig.groove-x

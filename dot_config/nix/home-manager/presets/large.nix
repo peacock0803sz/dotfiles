@@ -13,6 +13,7 @@ in
     ../programs/pi.nix
     # ../programs/emacs.nix
     ../programs/tmux.nix
+    ../programs/worktrunk.nix
   ];
 
   profile.levels = [ "large" ];

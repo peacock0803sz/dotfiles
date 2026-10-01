@@ -1,5 +1,7 @@
 # 各ホストの system closure をビルドし、peacock0803sz.cachix.org に push する。
 # ホストを足すときは matrix.include に { host, attr, runner } を 1 行追加する。
+# 任意で extra-substituters / extra-trusted-public-keys (ホスト固有キャッシュ) と
+# push-filter (push しない store path の正規表現) を指定できる。
 #   NixOS : attr = nixosConfigurations.<host>.config.system.build.toplevel
 #   darwin: attr = darwinConfigurations.<host>.system
 #   runner: x86_64-linux = ubuntu-latest / aarch64-linux = ubuntu-24.04-arm / aarch64-darwin = macos-15
@@ -33,6 +35,16 @@ jobs:
           - host: bassoon
             attr: nixosConfigurations.bassoon.config.system.build.toplevel
             runner: ubuntu-latest
+          - host: enigma
+            attr: nixosConfigurations.enigma.config.system.build.toplevel
+            runner: ubuntu-latest
+            # CUDA 系は unfree なので cache.nixos-cuda.org から取得し、自前キャッシュには push しない
+            extra-substituters: https://cache.nixos-cuda.org
+            extra-trusted-public-keys: cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=
+            push-filter: (cuda|cudnn|libcu|libnv|nccl|cutensor|tensorrt|nvidia)
+          - host: overture
+            attr: nixosConfigurations.overture.config.system.build.toplevel
+            runner: ubuntu-24.04-arm
           - host: nocturne
             attr: darwinConfigurations.nocturne.system
             runner: macos-15
@@ -47,13 +59,14 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            extra-substituters = https://cache.numtide.com https://nix-community.cachix.org
-            extra-trusted-public-keys = niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=
+            extra-substituters = https://cache.numtide.com https://nix-community.cachix.org ${{ matrix.extra-substituters }}
+            extra-trusted-public-keys = niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= ${{ matrix.extra-trusted-public-keys }}
 
       - uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
         with:
           name: peacock0803sz
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          pushFilter: ${{ matrix.push-filter }}
 
       - name: Build ${{ matrix.host }}
         run: nix build --print-build-logs --no-link ".#${{ matrix.attr }}"

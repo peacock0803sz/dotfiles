@@ -1,0 +1,53 @@
+# 各ホストの system closure をビルドし、peacock0803sz.cachix.org に push する。
+# ホストを足すときは matrix.include に { host, attr, runner } を 1 行追加する。
+#   NixOS : attr = nixosConfigurations.<host>.config.system.build.toplevel
+#   darwin: attr = darwinConfigurations.<host>.system
+#   runner: x86_64-linux = ubuntu-latest / aarch64-linux = ubuntu-24.04-arm / aarch64-darwin = macos-15
+# 前提: 対象ホストが --impure なしで評価できること。
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - flake.nix
+      - flake.lock
+      - dot_config/nix/**
+      - .github/workflows/build-cache.yml
+  # update-nix.yml は GITHUB_TOKEN で push するため push トリガーが発火しない。完了後に拾う
+  workflow_run:
+    workflows: [.github/workflows/update-nix.yml]
+    types: [completed]
+  workflow_dispatch:
+
+concurrency:
+  group: build-cache
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - host: bassoon
+            attr: nixosConfigurations.bassoon.config.system.build.toplevel
+            runner: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # v31.11.1
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            extra-substituters = https://cache.numtide.com https://nix-community.cachix.org
+            extra-trusted-public-keys = niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=
+
+      - uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
+        with:
+          name: peacock0803sz
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - name: Build ${{ matrix.host }}
+        run: nix build --print-build-logs --no-link ".#${{ matrix.attr }}"

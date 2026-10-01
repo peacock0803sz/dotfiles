@@ -25,7 +25,9 @@ on:
 
 concurrency:
   group: build-cache
-  cancel-in-progress: true
+  # 途中で打ち切ると push 前のビルドが無駄になる (overture のカーネルなど長いものがいつまでも終わらない)。
+  # 実行中は走りきらせ、後続は最新 1 件だけ待たせる
+  cancel-in-progress: false
 
 jobs:
   build:

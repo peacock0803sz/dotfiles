@@ -1,7 +1,7 @@
 # 各ホストの system closure をビルドし、peacock0803sz.cachix.org に push する。
 # ホストを足すときは matrix.include に { host, config, runner } を 1 行追加する。
 #   config: nixosConfigurations.<host> / darwinConfigurations.<host>
-#   runner: x86_64-linux = ubuntu-latest / aarch64-linux = ubuntu-24.04-arm / aarch64-darwin = macos-15
+#   runner: x86_64-linux = ubuntu-latest / aarch64-linux = ubuntu-26.04-arm / aarch64-darwin = macos-26
 # 任意で extra-substituters / extra-trusted-public-keys (ホスト固有キャッシュ) と
 # skip-push (ビルドのみで push しない) を指定できる。
 # push は .github/scripts/push-free-closure が brew cask / unfree を依存に含まない path だけに絞って行う。
@@ -46,13 +46,13 @@ jobs:
             skip-push: true
           - host: overture
             config: nixosConfigurations.overture
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
           - host: nocturne
             config: darwinConfigurations.nocturne
-            runner: macos-15
+            runner: macos-26
           - host: arpeggio
             config: darwinConfigurations.arpeggio
-            runner: macos-15
+            runner: macos-26
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 

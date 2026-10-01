@@ -13,12 +13,14 @@
     settings = {
       experimental-features = "nix-command flakes";
       trusted-users = [ "root" "${username}" ];
+      accept-flake-config = true;
       extra-substituters = [
         "https://cache.numtide.com"
         "https://cache.nixos.org"
         "https://cache.nixos.org/"
         "https://nix-community.cachix.org"
         "https://peacock0803sz.cachix.org"
+        "https://lanterna.cachix.org"
       ];
       extra-trusted-public-keys = [
         "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="

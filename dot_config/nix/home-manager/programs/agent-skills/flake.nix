@@ -109,13 +109,16 @@
           名前が分からないときは `ls ~/${googleLibraryDir}` で一覧を見る。
         '';
 
+        # 社内 private repo の手元 clone。--impure のときだけ見える (pure 評価では pathExists が false)。
+        # CI (pure) のビルドから外れるので、公開 cachix に中身が上がることもない
+        gxAgentRecipes = "${config.home.homeDirectory}/ghq/github.com/groove-x/gx-agent-recipes";
+        withGxAgentRecipes = hostName == "arpeggio" && builtins.pathExists "${gxAgentRecipes}/skills";
+
         # 全件 enable する source (旧 skills.enableAll 相当)
         discoveredSkills = {
           superpowers = discoverSkills inputs.superpowers.outPath "skills";
-        } // lib.optionalAttrs (hostName == "arpeggio") {
-          gx-agent-recipes = discoverSkills
-            "${config.home.homeDirectory}/ghq/github.com/groove-x/gx-agent-recipes"
-            "skills";
+        } // lib.optionalAttrs withGxAgentRecipes {
+          gx-agent-recipes = discoverSkills gxAgentRecipes "skills";
         };
 
         # skills.explicit 構築用 (curated + discovered)
@@ -176,9 +179,9 @@
             # path は programs/agent-skills.nix で与える
             local = { };
 
-          } // lib.optionalAttrs (hostName == "arpeggio") {
+          } // lib.optionalAttrs withGxAgentRecipes {
             gx-agent-recipes = {
-              path = "${config.home.homeDirectory}/ghq/github.com/groove-x/gx-agent-recipes";
+              path = gxAgentRecipes;
               subdir = "skills";
             };
           };

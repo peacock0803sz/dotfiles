@@ -1,7 +1,12 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
+  # ストアパスで TCC の許可が記録されると再ビルドのたびに外れるため、bundle identifier で識別させる
+  lemonadeApp = config.lib.appIdentity.mkAppBundle {
+    package = pkgs.lemonade;
+    identifier = "net.p3ac0ck.nix.lemonade";
+  };
   lemonadeArgs = [
-    "${pkgs.lemonade}/bin/lemonade"
+    lemonadeApp.mainExecutable
     "server"
     "--allow=0.0.0.0/0"
   ];

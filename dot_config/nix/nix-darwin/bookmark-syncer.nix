@@ -1,8 +1,16 @@
-{ pkgs, username, ... }: {
+{ config, pkgs, username, ... }:
+let
+  # neovim.nix と同じ引数なので同一の derivation になる
+  uvApp = config.lib.appIdentity.mkAppBundle {
+    package = pkgs.uv;
+    identifier = "net.p3ac0ck.nix.uv";
+  };
+in
+{
   launchd.user.agents.bookmark-syncer = {
     serviceConfig = {
       ProgramArguments = [
-        "${pkgs.uv}/bin/uv"
+        uvApp.mainExecutable
         "run"
         "--script"
         "/Users/${username}/dotfiles/bin/bookmark-syncer"

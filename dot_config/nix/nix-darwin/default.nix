@@ -1,4 +1,7 @@
 { pkgs, system, username, hostName, inputs, ... }: {
+  # launchd agent のバイナリを config.lib.appIdentity.mkAppBundle で包み、TCC の許可を再ビルド後も保つため
+  imports = [ inputs.nix-mac-app-identity.darwinModules.default ];
+
   nix = {
     enable = true;
     gc = {

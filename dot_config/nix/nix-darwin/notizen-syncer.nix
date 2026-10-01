@@ -1,4 +1,12 @@
-{ pkgs, username, ... }: {
+{ config, pkgs, username, ... }:
+let
+  # ストアパスで TCC の許可が記録されると再ビルドのたびに外れるため、bundle identifier で識別させる
+  notizenApp = config.lib.appIdentity.mkAppBundle {
+    package = pkgs.nur.repos.peacock0803sz.notizen;
+    identifier = "net.p3ac0ck.nix.notizen";
+  };
+in
+{
   launchd.user.agents = {
     notizen = {
       serviceConfig = {
@@ -24,7 +32,7 @@
           PATH = "${pkgs.git}/bin:${pkgs.openssh}/bin:/usr/bin:/bin";
         };
         ProgramArguments = [
-          "${pkgs.nur.repos.peacock0803sz.notizen}/bin/notizen"
+          notizenApp.mainExecutable
           "commit"
           "--root=/Users/${username}/notizen"
         ];

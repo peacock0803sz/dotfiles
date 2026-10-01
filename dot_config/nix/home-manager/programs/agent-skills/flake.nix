@@ -173,9 +173,8 @@
               filter.nameRegex = toNameRegex curatedSkills.vercel-labs;
             };
 
-            local = {
-              path = "${config.home.homeDirectory}/dotfiles/dot_config/agents/local-skills";
-            };
+            # path は programs/agent-skills.nix で与える
+            local = { };
 
           } // lib.optionalAttrs (hostName == "arpeggio") {
             gx-agent-recipes = {

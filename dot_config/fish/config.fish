@@ -35,6 +35,16 @@ function fzf-gwq
 end
 bind \ct fzf-gwq
 
+function fzf-wt
+    set --function _dir $(ghq list -p | while read -l repo
+        for wt in $repo/.worktrees/*/
+            string trim --right --chars / $wt
+        end
+    end | fzf --preview 'bat {}/README.md' --bind 'ctrl-d:preview-down,ctrl-u:preview-up')
+    test -n "$_dir"; and commandline "cd $_dir"
+end
+bind \et fzf-wt
+
 # neovim {{{
 if test (command -v nvim)
     # neovim

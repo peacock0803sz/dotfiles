@@ -65,6 +65,10 @@
       url = "github:numtide/llm-agents.nix";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+    cclens = {
+      url = "github:lambdalisue/cclens";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { flake-parts, ... }@inputs:

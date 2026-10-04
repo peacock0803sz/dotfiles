@@ -100,7 +100,10 @@ in
           "Bash(git add .)"
           "Bash(git push *)"
           "Bash(git status --untracked-files=no -:*)"
-          "Bash(.venv/bin/python*)"
+          "Bash(.venv/bin/python -c *)"
+          "Bash(.venv/bin/python3 -c *)"
+          "Bash(.venv/bin/python - *)"
+          "Bash(.venv/bin/python3 - *)"
           "Bash(python*)"
           "Bash(uv run *)"
         ];
@@ -118,6 +121,7 @@ in
           "Bash(.venv/bin/ruff)"
           "Bash(.venv/bin/ty)"
           "Bash(.venv/bin/pytest)"
+          "Bash(.venv/bin/python -m doctest *)"
           "Bash(.venv/bin/python3 -m doctest *)"
           "Bash(~/.claude/skills/archviz/scripts/spec2drawio.py *)"
         ];

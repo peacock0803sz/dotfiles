@@ -5,7 +5,7 @@ let
   homeDirectory = config.home.homeDirectory;
 
   # Top Shelf (Bartender) の AgentStatus ブリッジは macOS でしか動かない
-  notchbarEnabled = pkgs.stdenv.isDarwin;
+  notchbarEnabled = pkgs.stdenv.hostPlatform.isDarwin;
   notchbarHook = state: [{
     hooks = [{ type = "command"; command = "~/.codex/notchbar-event Codex ${state}"; }];
   }];

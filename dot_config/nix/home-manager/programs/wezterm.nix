@@ -7,5 +7,5 @@ in
   home.file = {
     ".config/wezterm".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/wezterm";
   };
-  home.packages = if pkgs.stdenv.isDarwin then [ pkgs.brewCasks.wezterm ] else [ pkgs.wezterm ];
+  home.packages = if pkgs.stdenv.hostPlatform.isDarwin then [ pkgs.brewCasks.wezterm ] else [ pkgs.wezterm ];
 }

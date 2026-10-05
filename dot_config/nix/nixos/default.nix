@@ -9,7 +9,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    package = nix-monitored.packages.${system}.default;
+    package = nix-monitored.packages.${system}.default.override { withNotify = true; };
     settings = {
       extra-substituters = [
         "https://cache.numtide.com"

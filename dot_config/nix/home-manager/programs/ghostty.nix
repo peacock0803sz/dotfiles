@@ -14,5 +14,5 @@ in
     ".config/ghostty/themes/peafowl.conf".source = mkOutOfStoreSymlink
       "${config.home.homeDirectory}/ghq/github.com/peacock0803sz/peafowl-colors/ghostty/peafowl.conf";
   };
-  home.packages = if pkgs.stdenv.isDarwin then [ pkgs.brewCasks.ghostty ] else [ pkgs.ghostty ];
+  home.packages = if pkgs.stdenv.hostPlatform.isDarwin then [ pkgs.brewCasks.ghostty ] else [ pkgs.ghostty ];
 }

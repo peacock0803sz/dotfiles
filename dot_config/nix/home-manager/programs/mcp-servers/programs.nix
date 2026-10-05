@@ -3,7 +3,7 @@
     enable = true;
     # macOS (darwin) ではシステムの Chrome を使用、NixOS では nixpkgs の chromium を使用
     executable =
-      if pkgs.stdenv.isDarwin
+      if pkgs.stdenv.hostPlatform.isDarwin
       then "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
       else "${pkgs.chromium}/bin/chromium";
   };

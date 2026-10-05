@@ -9,7 +9,7 @@
       options = "--delete-older-than 1d";
     };
     optimise.automatic = true;
-    package = inputs.nix-monitored.packages.${system}.default;
+    package = inputs.nix-monitored.packages.${system}.default.override { withNotify = false; };
     settings = {
       experimental-features = "nix-command flakes";
       trusted-users = [ "root" "${username}" ];

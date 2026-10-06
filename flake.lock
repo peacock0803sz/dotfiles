@@ -444,11 +444,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791215987,
-        "narHash": "sha256-hOn3YCkD/J78q8IfHk8hwmXJz1R1hYUYmgDL1E4Z4cE=",
+        "lastModified": 1791235570,
+        "narHash": "sha256-qyHHXSUirY9gyx5sSLMJESu2W913IYgysH8orc6cNS8=",
         "owner": "peacock0803sz",
         "repo": "Lanterna",
-        "rev": "642da774b822046188c842c32b6c327b65411ffb",
+        "rev": "1bd58cb1ec5f069124efc98972864f2f1215a0b6",
         "type": "github"
       },
       "original": {

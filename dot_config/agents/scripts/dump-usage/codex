@@ -22,6 +22,10 @@ USAGE_URL = "https://chatgpt.com/backend-api/wham/usage"
 RECORD_DIR = pathlib.Path(os.environ.get("CODEX_USAGE_RECORD_DIR", str(pathlib.Path.home() / ".local" / "state" / "codex-usage")))
 PROM_DIR = pathlib.Path(os.environ.get("CODEX_USAGE_PROM_DIR", "/var/lib/node-exporter-textfile"))
 PROM_PATH = PROM_DIR / "codex_usage.prom"
+# 設定されていれば textfile の代わりに Pushgateway へ PUT する
+# (例: http://host:9091/metrics/job/agents-usage/instance/arpeggio)。
+# PUT はグループ内の既存メトリクスを置き換えるので、消えた window が残らない
+PUSH_URL = os.environ.get("CODEX_USAGE_PUSH_URL")
 
 
 def read_auth() -> tuple:
@@ -167,8 +171,25 @@ def render_prom(raw, *, success: bool, now: int) -> str:
     return "\n".join(lines) + "\n"
 
 
+def push_prom(body: str) -> None:
+    req = urllib.request.Request(
+        PUSH_URL,
+        data=body.encode("utf-8"),
+        method="PUT",
+        headers={"Content-Type": "text/plain; version=0.0.4"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10):
+            pass
+    except (urllib.error.URLError, TimeoutError) as e:
+        print(f"cannot push to {PUSH_URL}: {e}", file=sys.stderr)
+
+
 def write_prom(raw, *, success: bool) -> None:
     now = int(datetime.now().astimezone().timestamp())
+    if PUSH_URL:
+        push_prom(render_prom(raw, success=success, now=now))
+        return
     try:
         PROM_DIR.mkdir(parents=True, exist_ok=True)
         tmp = PROM_DIR / "codex_usage.prom.tmp"

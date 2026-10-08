@@ -16,8 +16,14 @@ darwin-bootstrap:
 darwin-upgrade:
 ifeq ($(HOST),arpeggio)
 	git -C $(HOME)/ghq/github.com/groove-x/gx-agent-recipes pull || true
-endif
+
+	# root が非公開 flake (gx-nur) を git+ssh で取得できるよう、1Password の SSH エージェントを渡す
+	sock="$(HOME)/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"; \
+	if [ -S "$$sock" ]; then export SSH_AUTH_SOCK="$$sock"; fi; \
+	sudo env SSH_AUTH_SOCK="$$SSH_AUTH_SOCK" nix run nix-darwin -- switch --flake .#$(HOST) --impure --cores $(CORES)
+else
 	sudo nix run nix-darwin -- switch --flake .#$(HOST) --impure --cores $(CORES)
+endif
 
 .PHONY:
 nixos-bootstrap:

@@ -942,6 +942,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Claude Usage Kiosk",
-  "uid": "claude-usage-kiosk"
+  "title": "Agents Usage Kiosk",
+  "uid": "agents-usage-kiosk"
 }

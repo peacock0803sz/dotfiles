@@ -13,7 +13,7 @@
     "langsmith": "^0.10.5"
   },
   "devDependencies": {
-    "@earendil-works/pi-coding-agent": "0.87.1",
+    "@earendil-works/pi-coding-agent": "1.0.3",
     "@types/node": "^24.19.0",
     "oxfmt": "^0.70.0",
     "oxlint": "^1.85.0",

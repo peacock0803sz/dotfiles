@@ -189,6 +189,11 @@ p3ac0ck.*
 **/.pre-commit-config.yaml
 # }}}
 
+# Design docs {{{
+design.*
+*.design.*
+# }}}
+
 # jupyter notebooks {{{
 *.ipynb
 

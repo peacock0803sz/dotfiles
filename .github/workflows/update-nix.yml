@@ -7,8 +7,8 @@ on:
         required: false
         default: ''
   schedule:
-    - cron: 0 21 * * * # everyday 06:00 JST
-    - cron: 0 9 * * *  # everyday 18:00 JST
+    - cron: 0 18 * * * # everyday 03:00 JST
+    - cron: 0 6 * * *  # everyday 15:00 JST
 
 jobs:
   call:

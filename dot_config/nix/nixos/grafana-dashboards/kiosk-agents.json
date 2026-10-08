@@ -265,6 +265,243 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "mode": "fixed",
+            "fixedColor": "text"
+          },
+          "unit": "dateTimeAsLocalNoDateIfToday"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeFromNow"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 0,
+        "y": 7
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "13.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "max(claude_usage_resets_at_seconds{instance=\"enigma\",window=\"five_hour\",job=\"node\"}) * 1000 > 0",
+          "instant": true,
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "max(claude_usage_resets_at_seconds{instance=\"enigma\",window=\"five_hour\",job=\"node\"}) * 1000 > 0",
+          "instant": true,
+          "range": false,
+          "refId": "B"
+        }
+      ],
+      "title": "5-hour next reset",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "text"
+          },
+          "unit": "dateTimeAsLocalNoDateIfToday"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeFromNow"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 8,
+        "y": 7
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "13.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "max(claude_usage_resets_at_seconds{instance=\"enigma\",window=\"seven_day\",job=\"node\"}) * 1000 > 0",
+          "instant": true,
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "max(claude_usage_resets_at_seconds{instance=\"enigma\",window=\"seven_day\",job=\"node\"}) * 1000 > 0",
+          "instant": true,
+          "range": false,
+          "refId": "B"
+        }
+      ],
+      "title": "7-day next reset",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "text"
+          },
+          "unit": "dateTimeAsLocalNoDateIfToday"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeFromNow"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 16,
+        "y": 7
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "13.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "max(claude_limit_resets_at_seconds{instance=\"enigma\",kind=\"weekly_scoped\",job=\"node\"}) * 1000 > 0",
+          "instant": true,
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "max(claude_limit_resets_at_seconds{instance=\"enigma\",kind=\"weekly_scoped\",job=\"node\"}) * 1000 > 0",
+          "instant": true,
+          "range": false,
+          "refId": "B"
+        }
+      ],
+      "title": "Weekly scoped next reset",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
             "mode": "palette-classic"
           },
           "custom": {
@@ -327,7 +564,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 11
       },
       "id": 4,
       "options": {
@@ -425,7 +662,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 23
       },
       "id": 5,
       "options": {
@@ -527,7 +764,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 35
       },
       "id": 6,
       "options": {
@@ -619,7 +856,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 44
       },
       "id": 7,
       "options": {
@@ -662,7 +899,7 @@
     "list": []
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {

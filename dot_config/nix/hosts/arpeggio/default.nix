@@ -28,6 +28,7 @@ inputs.nix-darwin.lib.darwinSystem {
     inputs.home-manager.darwinModules.home-manager
     inputs.nix-index-database.darwinModules.nix-index
     ../../nix-darwin
+    ../../nix-darwin/agents-usage.nix
     ../../nix-darwin/bookmark-syncer.nix
     ../../nix-darwin/lemonade.nix
     ../../nix-darwin/neovim.nix

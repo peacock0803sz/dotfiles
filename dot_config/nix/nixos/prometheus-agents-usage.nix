@@ -1,7 +1,7 @@
 # AI エージェント系 CLI のレート制限を5分ごとに記録する。
 # cc-statusline は全ホストに配られるため触らず、enigma だけがこのファイルを import する。
 # - Claude Code: ~/.claude の OAuth token で api.anthropic.com/api/oauth/usage を叩く
-# - Codex: ~/.codex の ChatGPT OAuth token で chatgpt.com/backend-api/wham/usage を叩く
+# - Codex: arpeggio から Pushgateway へ送る (nix-darwin/agents-usage.nix)。enigma では記録しない
 # - OpenCode: ~/.local/share/opencode/opencode.db からトークン/コストを集計する (limit は概念が無いため対象外)
 # どちらも node_exporter の textfile 用に .prom を書き出し、Prometheus が既存の node job で収集する。
 # Claude Code を起動しない間も token が失効しないよう、refresh token での更新も定期実行する。
@@ -67,29 +67,6 @@
     timerConfig = {
       # スクリプトは期限1時間前から更新するので、30分間隔なら取りこぼさない
       OnCalendar = "*:0/30";
-      Persistent = true;
-    };
-  };
-
-  systemd.services.codex-usage-dump = {
-    description = "Record Codex rate limit windows";
-
-    wants = [ "network-online.target" ];
-    after = [ "network-online.target" ];
-
-    serviceConfig = {
-      Type = "oneshot";
-      User = username;
-      Environment = [ "HOME=/home/${username}" ];
-      ExecStart = "${pkgs.uv}/bin/uv run --script /home/${username}/dotfiles/dot_config/agents/scripts/dump-usage/codex";
-    };
-  };
-
-  systemd.timers.codex-usage-dump = {
-    description = "Timer for Codex rate limit recording";
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnCalendar = "*:0/5";
       Persistent = true;
     };
   };

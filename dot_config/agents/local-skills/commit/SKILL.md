@@ -26,22 +26,4 @@ description: Git commitの作成。pre-commit検査遵守、意味のある最�
 
 ### Emoji Prefix一覧
 
-| Emoji | 用途 |
-|-------|------|
-| :tada: | 最初のコミット/新機能(大) |
-| :sparkles: | 新機能(小) |
-| :bug: | バグフィックス |
-| :recycle: | リファクタリング |
-| :books: / :bulb: | ドキュメント |
-| :art: | フォーマット改善 |
-| :zap: | アップデート |
-| :fire: | コード/ファイル削除 |
-| :white_check_mark: | テストコード追加 |
-| :green_heart: | CI/CD関連修正 |
-| :arrow_up: / :arrow_down: | 依存関係変更 |
-| :wrench: | 設定ファイル関連 |
-| :snowflake: | Nix関連 |
-| :ambulance: | ホットフィックス |
-| :construction: | WIP |
-
-詳細は `$HOME/dotfiles/dot_config/git/commit-template` を参照。
+詳細は `$HOME/dotfiles/dot_config/git/commit-template` を参照(**ただし安易に `:sparkles:` を多用しない**)こと。

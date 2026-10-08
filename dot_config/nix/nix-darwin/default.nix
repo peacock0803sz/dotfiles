@@ -12,6 +12,7 @@
     package = inputs.nix-monitored.packages.${system}.default.override { withNotify = false; };
     settings = {
       experimental-features = "nix-command flakes";
+      extra-experimental-features = [ "configurable-impure-env" ];
       trusted-users = [ "root" "${username}" ];
       extra-substituters = [
         "https://cache.numtide.com"

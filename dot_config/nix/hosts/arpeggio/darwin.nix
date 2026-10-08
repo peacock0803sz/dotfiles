@@ -11,4 +11,8 @@
     KeepAlive = true;
     RunAtLoad = false;
   };
+
+  nix.extraOptions = ''
+    !include /etc/nix/gx-secrets.conf
+  '';
 }

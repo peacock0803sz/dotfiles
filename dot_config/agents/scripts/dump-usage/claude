@@ -4,6 +4,7 @@
 # node_exporter の textfile collector 用に Prometheus 形式でも書き出す
 
 import json
+import math
 import os
 import pathlib
 import platform
@@ -56,6 +57,46 @@ def resets_at_epoch(value) -> int:
         return 0
 
 
+def raw_value(value):
+    """JSON の葉を数値にする。数値・bool (1/0)・数値文字列・ISO 8601 日時 (Unix 秒) 以外は None"""
+    if isinstance(value, bool):
+        return 1 if value else 0
+    if isinstance(value, (int, float)):
+        return value if math.isfinite(value) else None
+    if isinstance(value, str):
+        try:
+            number = float(value)
+        except ValueError:
+            pass
+        else:
+            return number if math.isfinite(number) else None
+        try:
+            return int(datetime.fromisoformat(value).timestamp())
+        except ValueError:
+            return None
+    return None
+
+
+def flatten_raw(node, path: str = "") -> list:
+    """(ドット区切りの JSON パス, 値) の列。配列は添字をパスに含める。
+    個別に拾っていない項目 (extra_usage 等) もダッシュボードから参照できるようにする"""
+    if isinstance(node, dict):
+        items = node.items()
+    elif isinstance(node, list):
+        items = enumerate(node)
+    else:
+        value = raw_value(node)
+        return [(path, value)] if path and value is not None else []
+    out = []
+    for key, child in items:
+        out.extend(flatten_raw(child, f"{path}.{key}" if path else str(key)))
+    return out
+
+
+def label_value(value: str) -> str:
+    return value.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n")
+
+
 def render_prom(raw, *, success: bool, now: int) -> str:
     lines = [
         "# HELP claude_usage_utilization_percent Claude Code plan utilization (0-100).",
@@ -68,6 +109,8 @@ def render_prom(raw, *, success: bool, now: int) -> str:
         "# TYPE claude_limit_resets_at_seconds gauge",
         "# HELP claude_limit_active Whether the limit window is currently active (1/0).",
         "# TYPE claude_limit_active gauge",
+        "# HELP claude_usage_raw Every numeric leaf of the usage API response by JSON path (bools as 1/0, datetimes as Unix time).",
+        "# TYPE claude_usage_raw gauge",
         "# HELP claude_scrape_success Whether the last dump successfully fetched the usage API (1/0).",
         "# TYPE claude_scrape_success gauge",
         "# HELP claude_scrape_timestamp_seconds Unix time of the last dump attempt.",
@@ -97,6 +140,8 @@ def render_prom(raw, *, success: bool, now: int) -> str:
                 lines.append(
                     f'claude_limit_active{{kind="{kind}",group="{group}"}} {1 if limit["is_active"] else 0}'
                 )
+        for path, value in flatten_raw(raw):
+            lines.append(f'claude_usage_raw{{path="{label_value(path)}"}} {value}')
     lines.append(f"claude_scrape_success {1 if success else 0}")
     lines.append(f"claude_scrape_timestamp_seconds {now}")
     return "\n".join(lines) + "\n"

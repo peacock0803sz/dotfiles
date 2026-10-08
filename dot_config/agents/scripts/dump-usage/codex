@@ -8,6 +8,7 @@
 # (codex-rs/backend-client の rate_limit_status_url より)
 
 import json
+import math
 import os
 import pathlib
 import platform
@@ -125,6 +126,46 @@ def additional_windows(raw: dict) -> list:
     return out
 
 
+def raw_value(value):
+    """JSON の葉を数値にする。数値・bool (1/0)・数値文字列・ISO 8601 日時 (Unix 秒) 以外は None"""
+    if isinstance(value, bool):
+        return 1 if value else 0
+    if isinstance(value, (int, float)):
+        return value if math.isfinite(value) else None
+    if isinstance(value, str):
+        try:
+            number = float(value)
+        except ValueError:
+            pass
+        else:
+            return number if math.isfinite(number) else None
+        try:
+            return int(datetime.fromisoformat(value).timestamp())
+        except ValueError:
+            return None
+    return None
+
+
+def flatten_raw(node, path: str = "") -> list:
+    """(ドット区切りの JSON パス, 値) の列。配列は添字をパスに含める。
+    個別に拾っていない項目 (spend_control 等) もダッシュボードから参照できるようにする"""
+    if isinstance(node, dict):
+        items = node.items()
+    elif isinstance(node, list):
+        items = enumerate(node)
+    else:
+        value = raw_value(node)
+        return [(path, value)] if path and value is not None else []
+    out = []
+    for key, child in items:
+        out.extend(flatten_raw(child, f"{path}.{key}" if path else str(key)))
+    return out
+
+
+def label_value(value: str) -> str:
+    return value.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n")
+
+
 def render_prom(raw, *, success: bool, now: int) -> str:
     lines = [
         "# HELP codex_usage_utilization_percent Codex plan utilization (0-100).",
@@ -135,6 +176,8 @@ def render_prom(raw, *, success: bool, now: int) -> str:
         "# TYPE codex_limit_percent gauge",
         "# HELP codex_limit_resets_at_seconds Unix time when the limit window resets (0 when unknown).",
         "# TYPE codex_limit_resets_at_seconds gauge",
+        "# HELP codex_usage_raw Every numeric leaf of the usage API response by JSON path (bools as 1/0, datetimes as Unix time).",
+        "# TYPE codex_usage_raw gauge",
         "# HELP codex_account_info Codex account info (always 1).",
         "# TYPE codex_account_info gauge",
         "# HELP codex_scrape_success Whether the last dump successfully fetched the usage API (1/0).",
@@ -159,6 +202,8 @@ def render_prom(raw, *, success: bool, now: int) -> str:
             lines.append(
                 f'codex_limit_resets_at_seconds{{kind="{kind}"}} {resets_at_epoch(window, now)}'
             )
+        for path, value in flatten_raw(raw):
+            lines.append(f'codex_usage_raw{{path="{label_value(path)}"}} {value}')
         plan_type = raw.get("plan_type")
         if not isinstance(plan_type, str):
             container = raw.get("rate_limit")

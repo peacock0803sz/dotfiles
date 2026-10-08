@@ -268,7 +268,7 @@
             "mode": "fixed",
             "fixedColor": "text"
           },
-          "unit": "dateTimeAsLocalNoDateIfToday"
+          "unit": "dateTimeAsIsoNoDateIfToday"
         },
         "overrides": []
       },
@@ -323,7 +323,7 @@
             "mode": "fixed",
             "fixedColor": "text"
           },
-          "unit": "dateTimeAsLocalNoDateIfToday"
+          "unit": "dateTimeAsIsoNoDateIfToday"
         },
         "overrides": []
       },
@@ -378,7 +378,7 @@
             "mode": "fixed",
             "fixedColor": "text"
           },
-          "unit": "dateTimeAsLocalNoDateIfToday"
+          "unit": "dateTimeAsIsoNoDateIfToday"
         },
         "overrides": []
       },

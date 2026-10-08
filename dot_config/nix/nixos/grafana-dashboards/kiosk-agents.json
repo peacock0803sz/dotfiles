@@ -270,20 +270,7 @@
           },
           "unit": "dateTimeAsLocalNoDateIfToday"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byFrameRefID",
-              "options": "B"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "dateTimeFromNow"
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 4,
@@ -320,17 +307,6 @@
           "instant": true,
           "range": false,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "max(claude_usage_resets_at_seconds{instance=\"enigma\",window=\"five_hour\",job=\"node\"}) * 1000 > 0",
-          "instant": true,
-          "range": false,
-          "refId": "B"
         }
       ],
       "title": "5-hour next reset",
@@ -349,20 +325,7 @@
           },
           "unit": "dateTimeAsLocalNoDateIfToday"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byFrameRefID",
-              "options": "B"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "dateTimeFromNow"
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 4,
@@ -399,17 +362,6 @@
           "instant": true,
           "range": false,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "max(claude_usage_resets_at_seconds{instance=\"enigma\",window=\"seven_day\",job=\"node\"}) * 1000 > 0",
-          "instant": true,
-          "range": false,
-          "refId": "B"
         }
       ],
       "title": "7-day next reset",
@@ -428,20 +380,7 @@
           },
           "unit": "dateTimeAsLocalNoDateIfToday"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byFrameRefID",
-              "options": "B"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "dateTimeFromNow"
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 4,
@@ -478,17 +417,6 @@
           "instant": true,
           "range": false,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "max(claude_limit_resets_at_seconds{instance=\"enigma\",kind=\"weekly_scoped\",job=\"node\"}) * 1000 > 0",
-          "instant": true,
-          "range": false,
-          "refId": "B"
         }
       ],
       "title": "Weekly scoped next reset",

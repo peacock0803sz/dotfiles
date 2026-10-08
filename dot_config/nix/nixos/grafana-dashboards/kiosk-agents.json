@@ -268,7 +268,7 @@
             "mode": "fixed",
             "fixedColor": "text"
           },
-          "unit": "dateTimeAsIsoNoDateIfToday"
+          "unit": "time:HH:mm"
         },
         "overrides": []
       },
@@ -323,13 +323,13 @@
             "mode": "fixed",
             "fixedColor": "text"
           },
-          "unit": "dateTimeAsIsoNoDateIfToday"
+          "unit": "dateTimeAsIso"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 4,
-        "w": 8,
+        "w": 16,
         "x": 8,
         "y": 7
       },
@@ -364,62 +364,7 @@
           "refId": "A"
         }
       ],
-      "title": "7-day next reset",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "fixed",
-            "fixedColor": "text"
-          },
-          "unit": "dateTimeAsIsoNoDateIfToday"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 16,
-        "y": 7
-      },
-      "id": 11,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "vertical",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "value",
-        "wideLayout": true
-      },
-      "pluginVersion": "13.1.4",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "max(claude_limit_resets_at_seconds{instance=\"enigma\",kind=\"weekly_scoped\",job=\"node\"}) * 1000 > 0",
-          "instant": true,
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Weekly scoped next reset",
+      "title": "7-day / Weekly scoped next reset",
       "type": "stat"
     },
     {
@@ -694,7 +639,7 @@
             "mode": "fixed",
             "fixedColor": "text"
           },
-          "unit": "dateTimeAsIsoNoDateIfToday"
+          "unit": "time:HH:mm"
         },
         "overrides": []
       },
@@ -749,7 +694,7 @@
             "mode": "fixed",
             "fixedColor": "text"
           },
-          "unit": "dateTimeAsIsoNoDateIfToday"
+          "unit": "dateTimeAsIso"
         },
         "overrides": []
       },

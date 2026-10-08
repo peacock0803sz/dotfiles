@@ -8,6 +8,14 @@
     # Prometheus と同居しているのでループバックで足りる
     address = "127.0.0.1";
     ports.node = 9100;
+
+    # tailnet 上の他ホスト (arpeggio 等) から push を受ける口。ports とは別枠で、
+    # 収集は grafana.nix が個別に書く。push 側の nix-darwin/agents-usage.nix もここを読む。
+    # tailnet IP はノードごとに固定なので直書きする
+    pushgateway = {
+      address = "100.98.92.79";
+      port = 9091;
+    };
   };
 
   enigma = {

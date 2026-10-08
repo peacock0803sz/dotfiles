@@ -10,6 +10,8 @@ let
 
   target = host: port: "${host.address}:${toString port}";
 
+  inherit (targets.bassoon) pushgateway;
+
   # job 名と、prometheus-targets.nix の ports のキーの対応。
   # どのホストを収集するかはハードコードせず、その port を持つホストを拾う。
   # ホストを1件足せば収集対象に入るので、ここは触らなくてよい
@@ -143,7 +145,29 @@ in
 
     # 収集先のアドレスは prometheus-targets.nix 側が持つ。firewall が無効なので
     # bind 先がそのまま露出範囲になり、各ホストがどこに出すかはあちらの判断になる
-    scrapeConfigs = lib.flatten (lib.mapAttrsToList mkScrapeConfig jobs);
+    scrapeConfigs = lib.flatten (lib.mapAttrsToList mkScrapeConfig jobs) ++ [
+      {
+        job_name = "pushgateway";
+        # push 元が付けた job / instance をそのまま使う
+        honor_labels = true;
+        static_configs = [{ targets = [ (target pushgateway pushgateway.port) ]; }];
+      }
+    ];
+
+    # firewall が無効なので、tailnet IP に bind して LAN には出さない
+    pushgateway = {
+      enable = true;
+      web.listen-address = target pushgateway pushgateway.port;
+    };
+  };
+
+  # tailnet IP は tailscaled が上がって割り当てるまで存在せず、bind に失敗する。
+  # module 側の Restart = "always" に任せつつ、既定の 100ms 間隔だと
+  # StartLimitBurst に当たって諦めるので間隔を空ける
+  systemd.services.pushgateway = {
+    wants = [ "tailscaled.service" ];
+    after = [ "tailscaled.service" ];
+    serviceConfig.RestartSec = "5s";
   };
   # }}}
 

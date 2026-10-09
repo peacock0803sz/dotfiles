@@ -1029,11 +1029,11 @@
         "vim-src": "vim-src"
       },
       "locked": {
-        "lastModified": 1791439239,
-        "narHash": "sha256-K88rECatflnv3d3TZ0Se+/T+hOTUmHXyeAEUXNkv9sA=",
+        "lastModified": 1791523531,
+        "narHash": "sha256-cCuSC6W94GGktqk9TpkdgfPMHMetna6VoejWGFFy7JA=",
         "owner": "kawarimidoll",
         "repo": "vim-overlay",
-        "rev": "5151c18478429e3874d26466cea29c4e54478238",
+        "rev": "f2a411512d6d58d1f8e15044c9ab3f7b1c07bc92",
         "type": "github"
       },
       "original": {

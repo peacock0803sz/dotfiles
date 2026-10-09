@@ -700,7 +700,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 8,
+        "w": 16,
         "x": 8,
         "y": 30
       },
@@ -771,7 +771,7 @@
         }
       },
       "gridPos": {
-        "h": 10,
+        "h": 6,
         "w": 8,
         "x": 16,
         "y": 24
@@ -942,6 +942,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Claude Usage Kiosk",
-  "uid": "claude-usage-kiosk"
+  "title": "Agents Usage Kiosk",
+  "uid": "agents-usage-kiosk"
 }

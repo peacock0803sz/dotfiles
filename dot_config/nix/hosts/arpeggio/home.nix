@@ -13,6 +13,7 @@ in
     }))
 
     nur.repos.peacock0803sz.aqua
+    nur.repos.peacock0803sz.tccli
     gx-nur.gxcloud-cli
     gx-nur.lovot-tools
 

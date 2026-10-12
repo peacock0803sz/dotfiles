@@ -20,6 +20,7 @@ in
   home.packages = with pkgs; [
     git
     defaultbrowser
+    tart
 
     brewCasks.bartender
     brewCasks.cleanshot

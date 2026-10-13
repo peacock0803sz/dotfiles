@@ -81,7 +81,6 @@
             "bigquery-ai-ml"
             "bigquery-bigframes"
             "bigquery-observability"
-            "bigquery-slot-cost-optimizer"
             "datalineage-bigquery-asset-impact-analysis"
             "datalineage-summary"
             "dbt-sf-to-bq-translator"

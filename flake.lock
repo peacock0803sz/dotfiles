@@ -400,11 +400,11 @@
     "google": {
       "flake": false,
       "locked": {
-        "lastModified": 1791890270,
-        "narHash": "sha256-WnIrAAYq2T/4iEgD0J92P8CYw8fCaQuI7+5uDN9t9R4=",
+        "lastModified": 1791923978,
+        "narHash": "sha256-O0eNY2N3U5wxx+3yY4fePixNNAo9wxpVgoPRd193nUI=",
         "owner": "google",
         "repo": "skills",
-        "rev": "2a04065b8041c49ac5fece31cb0186adf5ff9602",
+        "rev": "56b016c3db73bec44dcb0e2baccf155e45b9f5ef",
         "type": "github"
       },
       "original": {

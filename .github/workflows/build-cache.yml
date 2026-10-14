@@ -39,6 +39,9 @@ jobs:
           - host: bassoon
             config: nixosConfigurations.bassoon
             runner: ubuntu-latest
+          - host: forte
+            config: nixosConfigurations.forte
+            runner: ubuntu-latest
           - host: overture
             config: nixosConfigurations.overture
             runner: ubuntu-26.04-arm

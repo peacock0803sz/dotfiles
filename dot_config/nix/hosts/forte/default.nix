@@ -23,6 +23,8 @@ nixpkgs.lib.nixosSystem {
   modules = [
     { nixpkgs.pkgs = pkgs; }
 
+    { networking.hosts."100.98.92.79" = [ "grafana.p3ac0ck.net" ]; }
+
     inputs.disko.nixosModules.disko
     inputs.nix-index-database.nixosModules.nix-index
     inputs.nix-monitored.nixosModules.default
@@ -30,6 +32,8 @@ nixpkgs.lib.nixosSystem {
     ../../nixos/docker.nix
     ../../nixos/neovim.nix
     ../../nixos/lemonade.nix
+    ../../nixos/prometheus-exporters.nix
+    # ../../nixos/prometheus-agents-usage.nix
 
     ./hardware.nix
     ./disk.nix

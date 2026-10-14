@@ -17,6 +17,8 @@ from datetime import datetime
 CREDENTIALS_PATH = pathlib.Path.home() / ".claude" / ".credentials.json"
 # macOS の Claude Code は Keychain に保存し、.credentials.json は更新しない
 KEYCHAIN_SERVICE = "Claude Code-credentials"
+# usage API はアカウント情報を返さないので、Claude Code がログイン時に書く値を使う
+CONFIG_PATH = pathlib.Path.home() / ".claude.json"
 USAGE_URL = "https://api.anthropic.com/api/oauth/usage"
 RECORD_DIR = pathlib.Path.home() / ".local" / "state" / "claude-usage"
 # node_exporter --collector.textfile.directory が読む場所。
@@ -41,6 +43,16 @@ def read_access_token() -> str:
     else:
         text = CREDENTIALS_PATH.read_text()
     return json.loads(text)["claudeAiOauth"]["accessToken"]
+
+
+def read_account_email():
+    """取れなければ None。info メトリクスが欠けるだけなので dump 自体は失敗させない"""
+    try:
+        email = json.loads(CONFIG_PATH.read_text())["oauthAccount"]["emailAddress"]
+    except (OSError, json.JSONDecodeError, KeyError, TypeError) as e:
+        print(f"cannot read account email from {CONFIG_PATH}: {e}", file=sys.stderr)
+        return None
+    return email if isinstance(email, str) and email else None
 
 
 def fetch_usage(token: str) -> dict:
@@ -128,6 +140,8 @@ def render_prom(raw, *, success: bool, now: int) -> str:
         "# TYPE claude_limit_active gauge",
         "# HELP claude_usage_raw Every numeric leaf of the usage API response by JSON path (bools as 1/0, datetimes as Unix time).",
         "# TYPE claude_usage_raw gauge",
+        "# HELP claude_account_info Claude account info such as email (always 1).",
+        "# TYPE claude_account_info gauge",
         "# HELP claude_scrape_success Whether the last dump successfully fetched the usage API (1/0).",
         "# TYPE claude_scrape_success gauge",
         "# HELP claude_scrape_timestamp_seconds Unix time of the last dump attempt.",
@@ -159,6 +173,9 @@ def render_prom(raw, *, success: bool, now: int) -> str:
                 )
         for path, value in flatten_raw(raw):
             lines.append(f'claude_usage_raw{{path="{label_value(path)}"}} {value}')
+        email = read_account_email()
+        if email:
+            lines.append(f'claude_account_info{{email="{label_value(email)}"}} 1')
     lines.append(f"claude_scrape_success {1 if success else 0}")
     lines.append(f"claude_scrape_timestamp_seconds {now}")
     return "\n".join(lines) + "\n"

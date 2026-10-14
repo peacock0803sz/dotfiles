@@ -1,6 +1,7 @@
-# 各ホストの system closure をビルドし、peacock0803sz.cachix.org に push する。
-# ホストを足すときは matrix.include に { host, config, runner } を 1 行追加する。
-#   config: nixosConfigurations.<host> / darwinConfigurations.<host>
+# 各ホストの system closure と各 preset の home-manager 構成をビルドし、peacock0803sz.cachix.org に push する。
+# ホストや preset を足すときは matrix.include に { name, config, runner } を 1 行追加する。
+#   config: nixosConfigurations.<host> / darwinConfigurations.<host> / homeConfigurations.<system>.<preset>
+#     (homeConfigurations は flake.nix で対象 preset を列挙している)
 #   runner: x86_64-linux = ubuntu-latest / aarch64-linux = ubuntu-26.04-arm / aarch64-darwin = macos-26
 # 任意で extra-substituters / extra-trusted-public-keys (ホスト固有キャッシュ) と
 # skip-push (ビルドのみで push しない) を指定できる。
@@ -36,15 +37,39 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - host: bassoon
+          - name: bassoon
             config: nixosConfigurations.bassoon
             runner: ubuntu-latest
-          - host: forte
+          - name: forte
             config: nixosConfigurations.forte
             runner: ubuntu-latest
-          - host: overture
+          - name: overture
             config: nixosConfigurations.overture
             runner: ubuntu-26.04-arm
+          - name: x86_64-linux.tiny
+            config: homeConfigurations.x86_64-linux.tiny
+            runner: ubuntu-latest
+          - name: x86_64-linux.small
+            config: homeConfigurations.x86_64-linux.small
+            runner: ubuntu-latest
+          - name: x86_64-linux.large
+            config: homeConfigurations.x86_64-linux.large
+            runner: ubuntu-latest
+          - name: x86_64-linux.huge
+            config: homeConfigurations.x86_64-linux.huge
+            runner: ubuntu-latest
+          - name: aarch64-linux.tiny
+            config: homeConfigurations.aarch64-linux.tiny
+            runner: ubuntu-26.04-arm
+          - name: aarch64-darwin.tiny
+            config: homeConfigurations.aarch64-darwin.tiny
+            runner: macos-26
+          - name: aarch64-darwin.small
+            config: homeConfigurations.aarch64-darwin.small
+            runner: macos-26
+          - name: aarch64-darwin.large
+            config: homeConfigurations.aarch64-darwin.large
+            runner: macos-26
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -66,12 +91,16 @@ jobs:
           skipPush: true
           skipAddingSubstituter: true
 
-      - name: Build ${{ matrix.host }}
+      - name: Build ${{ matrix.name }}
         id: build
         run: |
-          out=$(nix build --print-build-logs --no-link --print-out-paths ".#${{ matrix.config }}.config.system.build.toplevel")
+          case "${{ matrix.config }}" in
+            homeConfigurations.*) attr=activationPackage ;;
+            *) attr=config.system.build.toplevel ;;
+          esac
+          out=$(nix build --print-build-logs --no-link --print-out-paths ".#${{ matrix.config }}.$attr")
           echo "toplevel=$out" >> "$GITHUB_OUTPUT"
 
-      - name: Push ${{ matrix.host }}
+      - name: Push ${{ matrix.name }}
         if: ${{ !matrix.skip-push }}
         run: bash .github/scripts/push-free-closure peacock0803sz "${{ matrix.config }}" "${{ steps.build.outputs.toplevel }}"

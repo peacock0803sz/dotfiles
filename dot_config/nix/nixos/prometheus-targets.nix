@@ -40,4 +40,15 @@
     # ここに port を書いていない exporter は立たず、収集対象にもならない
     ports.node = 9100;
   };
+
+  forte = {
+    # GCE の VM で bassoon と同じ LAN にいないので、tailnet IP に bind して
+    # tailscale 越しに収集させる。VPC 内部 IP には出さない
+    address = "100.86.233.89";
+    ports = {
+      node = 9100;
+      # docker ホストなので enigma と同じ理由で 8080 を避ける
+      cadvisor = 9101;
+    };
+  };
 }

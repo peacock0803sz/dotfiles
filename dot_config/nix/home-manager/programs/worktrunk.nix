@@ -15,6 +15,6 @@ in
     };
   };
 
-  home.file.".config/worktrunk".source =
-    mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/worktrunk";
+  home.file.".config/worktrunk/config.toml".source =
+    mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/worktrunk/config.toml";
 }

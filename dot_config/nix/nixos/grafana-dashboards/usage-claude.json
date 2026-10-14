@@ -95,8 +95,8 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_scrape_success{instance=\"$instance\"}",
-          "legendFormat": "__auto",
+          "expr": "claude_scrape_success * on(instance, job) group_left() group by (instance, job) (last_over_time(claude_account_info{email=\"$email\"}[1d]))",
+          "legendFormat": "{{instance}}",
           "range": true,
           "refId": "A"
         }
@@ -168,7 +168,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_usage_utilization_percent{instance=\"$instance\",window=\"five_hour\",job=\"node\"}",
+          "expr": "max(claude_usage_utilization_percent{window=\"five_hour\"} * on(instance, job) group_left() claude_account_info{email=\"$email\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -241,7 +241,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_usage_utilization_percent{instance=\"$instance\",window=\"seven_day\",job=\"node\"}",
+          "expr": "max(claude_usage_utilization_percent{window=\"seven_day\"} * on(instance, job) group_left() claude_account_info{email=\"$email\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -314,7 +314,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_limit_percent{instance=\"$instance\",kind=\"weekly_scoped\",job=\"node\"}",
+          "expr": "max(claude_limit_percent{kind=\"weekly_scoped\"} * on(instance, job) group_left() claude_account_info{email=\"$email\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -385,7 +385,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "(claude_limit_resets_at_seconds{instance=\"$instance\",kind=\"weekly_all\",job=\"node\"} - time()) > 0",
+          "expr": "(max(claude_limit_resets_at_seconds{kind=\"weekly_all\"} * on(instance, job) group_left() claude_account_info{email=\"$email\"}) - time()) > 0",
           "legendFormat": "weekly reset in",
           "range": true,
           "refId": "A"
@@ -396,7 +396,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "(claude_usage_resets_at_seconds{instance=\"$instance\",window=\"five_hour\",job=\"node\"} - time()) > 0",
+          "expr": "(max(claude_usage_resets_at_seconds{window=\"five_hour\"} * on(instance, job) group_left() claude_account_info{email=\"$email\"}) - time()) > 0",
           "legendFormat": "5h reset in",
           "range": true,
           "refId": "B"
@@ -467,8 +467,8 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "time() - claude_scrape_timestamp_seconds{instance=\"$instance\"}",
-          "legendFormat": "since last dump",
+          "expr": "time() - (claude_scrape_timestamp_seconds * on(instance, job) group_left() group by (instance, job) (last_over_time(claude_account_info{email=\"$email\"}[1d])))",
+          "legendFormat": "{{instance}}",
           "range": true,
           "refId": "A"
         }
@@ -569,7 +569,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "max by (window) (claude_usage_utilization_percent{instance=\"$instance\"})",
+          "expr": "max by (window) (claude_usage_utilization_percent * on(instance, job) group_left() claude_account_info{email=\"$email\"})",
           "legendFormat": "{{window}}",
           "range": true,
           "refId": "A"
@@ -667,7 +667,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "max by (kind, group) (claude_limit_percent{instance=\"$instance\"})",
+          "expr": "max by (kind, group) (claude_limit_percent * on(instance, job) group_left() claude_account_info{email=\"$email\"})",
           "legendFormat": "{{kind}} ({{group}})",
           "range": true,
           "refId": "A"
@@ -687,27 +687,24 @@
     "list": [
       {
         "allowCustomValue": true,
-        "current": {
-          "text": "enigma",
-          "value": "enigma"
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "prometheus"
         },
-        "definition": "label_values(claude_scrape_success,instance)",
+        "definition": "label_values(claude_account_info,email)",
         "hide": 0,
         "includeAll": false,
         "multi": false,
-        "name": "instance",
+        "name": "email",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(claude_scrape_success,instance)",
+          "query": "label_values(claude_account_info,email)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "",
+        "regex": "/@groove-x[.]com$/",
         "regexApplyTo": "value",
         "skipUrlSync": false,
         "sort": 1,

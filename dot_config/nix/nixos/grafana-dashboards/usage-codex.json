@@ -85,7 +85,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "codex_usage_utilization_percent{instance=\"$instance\",window=\"five_hour\"}",
+          "expr": "max(codex_usage_utilization_percent{window=\"five_hour\"} * on(instance, job) group_left() codex_account_info{email=\"$email\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -156,7 +156,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "(codex_usage_resets_at_seconds{instance=\"$instance\",window=\"five_hour\"} - time()) > 0",
+          "expr": "(max(codex_usage_resets_at_seconds{window=\"five_hour\"} * on(instance, job) group_left() codex_account_info{email=\"$email\"}) - time()) > 0",
           "legendFormat": "5h reset in",
           "range": true,
           "refId": "A"
@@ -239,8 +239,8 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "codex_scrape_success{instance=\"$instance\"}",
-          "legendFormat": "__auto",
+          "expr": "codex_scrape_success * on(instance, job) group_left() group by (instance, job) (last_over_time(codex_account_info{email=\"$email\"}[1d]))",
+          "legendFormat": "{{instance}}",
           "range": true,
           "refId": "A"
         }
@@ -310,8 +310,8 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "time() - codex_scrape_timestamp_seconds{instance=\"$instance\"}",
-          "legendFormat": "since last dump",
+          "expr": "time() - (codex_scrape_timestamp_seconds * on(instance, job) group_left() group by (instance, job) (last_over_time(codex_account_info{email=\"$email\"}[1d])))",
+          "legendFormat": "{{instance}}",
           "range": true,
           "refId": "A"
         }
@@ -412,7 +412,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "codex_usage_utilization_percent{instance=\"$instance\"}",
+          "expr": "max by (window) (codex_usage_utilization_percent * on(instance, job) group_left() codex_account_info{email=\"$email\"})",
           "legendFormat": "{{window}}",
           "range": true,
           "refId": "A"
@@ -432,27 +432,24 @@
     "list": [
       {
         "allowCustomValue": true,
-        "current": {
-          "text": "enigma",
-          "value": "enigma"
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "prometheus"
         },
-        "definition": "label_values(codex_scrape_success,instance)",
+        "definition": "label_values(codex_account_info,email)",
         "hide": 0,
         "includeAll": false,
         "multi": false,
-        "name": "instance",
+        "name": "email",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(codex_scrape_success,instance)",
+          "query": "label_values(codex_account_info,email)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "",
+        "regex": "/@groove-x[.]com$/",
         "regexApplyTo": "value",
         "skipUrlSync": false,
         "sort": 1,

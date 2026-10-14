@@ -1,5 +1,5 @@
 # Codex / Claude Code のレート制限を5分ごとに bassoon の Pushgateway へ送る。
-# kiosk-agents ダッシュボードが instance="arpeggio" の値を表示する。
+# kiosk-agents ダッシュボードは *_account_info の email が @groove-x.com のものを表示する。
 # 取得・整形は enigma 用と同じ dump-usage/* を使い、出力先だけ環境変数で切り替える。
 # Pushgateway の PUT はグループ単位で置き換えるため、Claude は agent ラベルでグループを分ける
 { pkgs, username, hostName, ... }:

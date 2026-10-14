@@ -102,7 +102,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_usage_utilization_percent{instance=\"enigma\",window=\"five_hour\",job=\"node\"}",
+          "expr": "max(claude_usage_utilization_percent{window=\"five_hour\"} * on(instance, job) group_left() claude_account_info{email=~\".+@groove-x[.]com\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -175,7 +175,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_usage_utilization_percent{instance=\"enigma\",window=\"seven_day\",job=\"node\"}",
+          "expr": "max(claude_usage_utilization_percent{window=\"seven_day\"} * on(instance, job) group_left() claude_account_info{email=~\".+@groove-x[.]com\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -248,7 +248,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "claude_limit_percent{instance=\"enigma\",kind=\"weekly_scoped\",job=\"node\"}",
+          "expr": "max(claude_limit_percent{kind=\"weekly_scoped\"} * on(instance, job) group_left() claude_account_info{email=~\".+@groove-x[.]com\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -303,7 +303,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "max(claude_usage_resets_at_seconds{instance=\"enigma\",window=\"five_hour\",job=\"node\"}) * 1000 > 0",
+          "expr": "max(claude_usage_resets_at_seconds{window=\"five_hour\"} * on(instance, job) group_left() claude_account_info{email=~\".+@groove-x[.]com\"}) * 1000 > 0",
           "instant": true,
           "range": false,
           "refId": "A"
@@ -358,7 +358,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "max(claude_usage_resets_at_seconds{instance=\"enigma\",window=\"seven_day\",job=\"node\"}) * 1000 > 0",
+          "expr": "max(claude_usage_resets_at_seconds{window=\"seven_day\"} * on(instance, job) group_left() claude_account_info{email=~\".+@groove-x[.]com\"}) * 1000 > 0",
           "instant": true,
           "range": false,
           "refId": "A"
@@ -456,7 +456,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "max by (kind, group) (claude_limit_percent{instance=\"enigma\"})",
+          "expr": "max by (kind, group) (claude_limit_percent * on(instance, job) group_left() claude_account_info{email=~\".+@groove-x[.]com\"})",
           "legendFormat": "{{kind}} ({{group}})",
           "range": true,
           "refId": "A"
@@ -546,7 +546,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "codex_usage_utilization_percent{instance=\"arpeggio\",window=\"five_hour\",job=\"agents-usage\"}",
+          "expr": "max(codex_usage_utilization_percent{window=\"five_hour\"} * on(instance, job) group_left() codex_account_info{email=~\".+@groove-x[.]com\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -619,7 +619,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "codex_usage_utilization_percent{instance=\"arpeggio\",window=\"seven_day\",job=\"agents-usage\"}",
+          "expr": "max(codex_usage_utilization_percent{window=\"seven_day\"} * on(instance, job) group_left() codex_account_info{email=~\".+@groove-x[.]com\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -674,7 +674,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "max(codex_usage_resets_at_seconds{instance=\"arpeggio\",window=\"five_hour\",job=\"agents-usage\"}) * 1000 > 0",
+          "expr": "max(codex_usage_resets_at_seconds{window=\"five_hour\"} * on(instance, job) group_left() codex_account_info{email=~\".+@groove-x[.]com\"}) * 1000 > 0",
           "instant": true,
           "range": false,
           "refId": "A"
@@ -729,7 +729,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "max(codex_usage_resets_at_seconds{instance=\"arpeggio\",window=\"seven_day\",job=\"agents-usage\"}) * 1000 > 0",
+          "expr": "max(codex_usage_resets_at_seconds{window=\"seven_day\"} * on(instance, job) group_left() codex_account_info{email=~\".+@groove-x[.]com\"}) * 1000 > 0",
           "instant": true,
           "range": false,
           "refId": "A"
@@ -802,7 +802,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "codex_usage_raw{instance=\"arpeggio\",job=\"agents-usage\",path=\"spend_control.individual_limit.used_percent\"}",
+          "expr": "max(codex_usage_raw{path=\"spend_control.individual_limit.used_percent\"} * on(instance, job) group_left() codex_account_info{email=~\".+@groove-x[.]com\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -904,7 +904,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "codex_usage_utilization_percent{instance=\"arpeggio\",job=\"agents-usage\"}",
+          "expr": "max by (window) (codex_usage_utilization_percent * on(instance, job) group_left() codex_account_info{email=~\".+@groove-x[.]com\"})",
           "legendFormat": "{{window}}",
           "range": true,
           "refId": "A"

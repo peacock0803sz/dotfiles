@@ -29,12 +29,6 @@ function fzf-ghq
 end
 bind \cg fzf-ghq
 
-function fzf-gwq
-    set --function _dir $(gwq list --json | jq -r ".[].path" | fzf --preview 'bat {}/README.md' --bind 'ctrl-d:preview-down,ctrl-u:preview-up')
-    commandline "cd $_dir"
-end
-bind \ct fzf-gwq
-
 function fzf-wt
     set --function _dir $(ghq list -p | while read -l repo
         for wt in $repo/.worktrees/*/
@@ -43,7 +37,7 @@ function fzf-wt
     end | fzf --preview 'bat {}/README.md' --bind 'ctrl-d:preview-down,ctrl-u:preview-up')
     test -n "$_dir"; and commandline "cd $_dir"
 end
-bind \et fzf-wt
+bind \ct fzf-wt
 
 # neovim {{{
 if test (command -v nvim)

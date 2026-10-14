@@ -27,9 +27,9 @@ nixpkgs.lib.nixosSystem {
     inputs.nix-index-database.nixosModules.nix-index
     inputs.nix-monitored.nixosModules.default
     ../../nixos/default.nix
-    # ../../nixos/docker.nix
-    # ../../nixos/neovim.nix
-    # ../../nixos/lemonade.nix
+    ../../nixos/docker.nix
+    ../../nixos/neovim.nix
+    ../../nixos/lemonade.nix
 
     ./hardware.nix
     ./disk.nix
@@ -45,7 +45,7 @@ nixpkgs.lib.nixosSystem {
 
           ../../home-manager
           ../../home-manager/platforms/nixos.nix
-          ../../home-manager/presets/tiny.nix
+          ../../home-manager/presets/small.nix
           # ../../home-manager/presets/large.nix
           # ../../home-manager/programs/agent-skills.nix
         ];

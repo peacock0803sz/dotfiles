@@ -8,12 +8,15 @@ import math
 import os
 import pathlib
 import platform
+import subprocess
 import sys
 import urllib.error
 import urllib.request
 from datetime import datetime
 
 CREDENTIALS_PATH = pathlib.Path.home() / ".claude" / ".credentials.json"
+# macOS の Claude Code は Keychain に保存し、.credentials.json は更新しない
+KEYCHAIN_SERVICE = "Claude Code-credentials"
 USAGE_URL = "https://api.anthropic.com/api/oauth/usage"
 RECORD_DIR = pathlib.Path.home() / ".local" / "state" / "claude-usage"
 # node_exporter --collector.textfile.directory が読む場所。
@@ -23,7 +26,17 @@ PROM_PATH = PROM_DIR / "claude_usage.prom"
 
 
 def read_access_token() -> str:
-    return json.loads(CREDENTIALS_PATH.read_text())["claudeAiOauth"]["accessToken"]
+    if sys.platform == "darwin":
+        try:
+            text = subprocess.run(
+                ["/usr/bin/security", "find-generic-password", "-s", KEYCHAIN_SERVICE, "-w"],
+                capture_output=True, text=True, check=True, timeout=10,
+            ).stdout
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+            raise OSError(f"keychain item {KEYCHAIN_SERVICE!r} not readable: {e}") from e
+    else:
+        text = CREDENTIALS_PATH.read_text()
+    return json.loads(text)["claudeAiOauth"]["accessToken"]
 
 
 def fetch_usage(token: str) -> dict:
@@ -162,7 +175,7 @@ def main() -> int:
     try:
         token = read_access_token()
     except (OSError, json.JSONDecodeError, KeyError) as e:
-        print(f"cannot read access token from {CREDENTIALS_PATH}: {e}", file=sys.stderr)
+        print(f"cannot read access token: {e}", file=sys.stderr)
         write_prom(None, success=False)
         return 1
 

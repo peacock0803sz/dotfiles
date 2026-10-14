@@ -40,9 +40,6 @@ jobs:
           - name: bassoon
             config: nixosConfigurations.bassoon
             runner: ubuntu-latest
-          - name: forte
-            config: nixosConfigurations.forte
-            runner: ubuntu-latest
           - name: overture
             config: nixosConfigurations.overture
             runner: ubuntu-26.04-arm
@@ -63,12 +60,6 @@ jobs:
             runner: ubuntu-26.04-arm
           - name: aarch64-darwin.tiny
             config: homeConfigurations.aarch64-darwin.tiny
-            runner: macos-26
-          - name: aarch64-darwin.small
-            config: homeConfigurations.aarch64-darwin.small
-            runner: macos-26
-          - name: aarch64-darwin.large
-            config: homeConfigurations.aarch64-darwin.large
             runner: macos-26
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

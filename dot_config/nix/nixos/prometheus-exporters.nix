@@ -16,9 +16,18 @@ let
   # networking.useDHCP のホストでは LAN IP がまだ付いていない時刻に bind が
   # 失敗しうる。Restart = "always" はあるが既定の start limit で諦めてしまうので、
   # アドレスが確定する network-online.target まで待たせる
+  #
+  # tailnet IP (100.64.0.0/10) に bind するホストは network-online でも足りない。
+  # IP は tailscaled が繋がってから付くので、grafana.nix の pushgateway と同じく
+  # tailscaled の後に回し、Restart の間隔を空けて start limit に当たらないようにする
+  onTailnet = lib.hasPrefix "100." address;
   waitForAddress = {
     wants = [ "network-online.target" ];
     after = [ "network-online.target" ];
+  } // lib.optionalAttrs onTailnet {
+    wants = [ "network-online.target" "tailscaled.service" ];
+    after = [ "network-online.target" "tailscaled.service" ];
+    serviceConfig.RestartSec = "5s";
   };
 in
 {
@@ -57,7 +66,10 @@ in
   # postStart が自分の listen アドレスへ curl が通るまで待ち
   # TimeoutStartSec = 300 なので、bind 失敗は 5 分のハングになる。
   # network-online を待たせる意味は他の exporter より大きい
+  # cadvisor のモジュールは exporter と違って Restart を持たないので、
+  # tailnet IP への bind 失敗から戻れるように補う
   // lib.optionalAttrs (ports ? cadvisor) {
-    cadvisor = waitForAddress;
+    cadvisor = lib.recursiveUpdate waitForAddress
+      (lib.optionalAttrs onTailnet { serviceConfig.Restart = "on-failure"; });
   };
 }

@@ -53,15 +53,18 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            extra-substituters = https://cache.numtide.com https://nix-community.cachix.org ${{ matrix.extra-substituters }}
-            extra-trusted-public-keys = niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= ${{ matrix.extra-trusted-public-keys }}
+            extra-substituters = https://cache.numtide.com https://nix-community.cachix.org https://peacock0803sz.cachix.org ${{ matrix.extra-substituters }}
+            extra-trusted-public-keys = niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= peacock0803sz.cachix.org-1:dfSrzcK5CS+mrpCCM4md1zP9YxLv+ddWGewTI0pdfsE= ${{ matrix.extra-trusted-public-keys }}
 
-      # substituter の追加と認証だけ行う。ビルド結果の自動 push は closure ごと送ってしまうので切る
+      # 認証だけ行う。ビルド結果の自動 push は closure ごと送ってしまうので切る。
+      # substituter の追加 (cachix use) は ~/.config/nix/nix.conf に `substituters =` を書いて
+      # 上の extra-substituters を打ち消すので切り、上で直接指定する
       - uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
         with:
           name: peacock0803sz
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           skipPush: true
+          skipAddingSubstituter: true
 
       - name: Build ${{ matrix.host }}
         id: build

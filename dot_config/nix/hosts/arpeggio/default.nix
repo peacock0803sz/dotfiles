@@ -45,6 +45,7 @@ inputs.nix-darwin.lib.darwinSystem {
           ../../home-manager
           ../../home-manager/platforms/darwin.nix
           ../../home-manager/presets/huge.nix
+          ../../home-manager/presets/work.nix
           ../../home-manager/programs/agent-skills.nix
         ];
       };

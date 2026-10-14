@@ -1,7 +1,6 @@
 { pkgs, config, ... }:
 let
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
-  gx-nur = (builtins.getFlake "git+ssh://git@github.com/groove-x/gx-nur").packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   home.packages = with pkgs; [
@@ -11,19 +10,6 @@ in
         rm -f $out/bin/claude
       '';
     }))
-
-    nur.repos.peacock0803sz.aqua
-    nur.repos.peacock0803sz.tccli
-    gx-nur.gxcloud-cli
-    gx-nur.lovot-tools
-
-    yarn
-    lefthook
-
-    grpcurl
-    keto
-    kratos
-    ory
   ];
 
   home.file = {

@@ -1,0 +1,41 @@
+#:schema https://raw.githubusercontent.com/felis-terminal/felis/main/crates/felis-client-core/felis-config.schema.json
+# ghostty/base.config 相当。include がないので arpeggio.toml とは font.size_px 以外同一に保つ
+
+[font]
+family = "UDEV Gothic NF"
+size_px = 12
+features = ["-liga", "-dlig"]
+
+# peafowl-colors/ghostty/peafowl.conf から転記
+[theme]
+foreground = "#212121"
+background = "#EFEFEF"
+
+[theme.palette]
+black          = "#3C3C3C"
+red            = "#C9321A"
+green          = "#1F9E3A"
+yellow         = "#CE9314"
+blue           = "#1F90E1"
+magenta        = "#A322A3"
+cyan           = "#1A39E9"
+white          = "#CFCFCF"
+bright_black   = "#999999"
+bright_red     = "#C9321A"
+bright_green   = "#1F9E3A"
+bright_yellow  = "#E3E922"
+bright_blue    = "#1A39E9"
+bright_magenta = "#A322A3"
+bright_cyan    = "#1F9E3A"
+bright_white   = "#CFCFCF"
+
+[cursor]
+color = "#1F88F1"
+
+[mouse]
+scroll_multiplier = 0.5
+
+[keymap]
+# felis はタブ/ウィンドウを持たないので Cmd+N/T は新規セッションで代替
+"super+n" = { kind = "new_session" }
+"super+t" = { kind = "new_session" }

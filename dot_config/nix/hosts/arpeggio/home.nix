@@ -15,6 +15,8 @@ in
   home.file = {
     ".config/ghostty/config".source = mkOutOfStoreSymlink
       "${config.home.homeDirectory}/dotfiles/dot_config/ghostty/arpeggio.config";
+    "Library/Application Support/felis/config.toml".source = mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/dotfiles/dot_config/felis/arpeggio.toml";
     ".ssh/config".source = mkOutOfStoreSymlink
       "${config.home.homeDirectory}/dotfiles/dot_config/ssh/arpeggio.override.config";
   };

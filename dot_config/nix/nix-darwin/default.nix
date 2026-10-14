@@ -21,6 +21,7 @@
         "https://nix-community.cachix.org"
         "https://peacock0803sz.cachix.org"
         "https://lanterna.cachix.org"
+        "https://nix-cache.natsukium.com"
       ];
       extra-trusted-public-keys = [
         "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
@@ -28,9 +29,13 @@
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "peacock0803sz.cachix.org-1:dfSrzcK5CS+mrpCCM4md1zP9YxLv+ddWGewTI0pdfsE="
         "lanterna.cachix.org-1:ER2QRwMkbWgIZJ4yBsY6M6xawkxBYCBI9JMwx6iSgxc="
+        "niks3-1:SoIFTPtiPoCW3/OzUkIBKlLG5znMZfbihlr11XAOles="
       ];
     };
   };
+
+  # felis の daemon は launchd の環境を継承するので、ghostty の term = "xterm-256color" 相当をここで渡す
+  launchd.user.envVariables.FELIS_TERM = "xterm-256color";
 
   nixpkgs = {
     hostPlatform = system;

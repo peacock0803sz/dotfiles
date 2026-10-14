@@ -6,6 +6,7 @@ in
 {
   imports = [
     ../programs/alacritty.nix
+    ../programs/felis.nix
     ../programs/ghostty.nix
     ../programs/wezterm.nix
     inputs.nix-mac-app-identity.homeManagerModules.default

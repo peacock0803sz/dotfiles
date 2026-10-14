@@ -74,6 +74,8 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # nixpkgs を follows するとバイナリキャッシュが効かなくなるので揃えない
+    felis.url = "github:felis-terminal/felis";
   };
 
   outputs = { flake-parts, ... }@inputs:

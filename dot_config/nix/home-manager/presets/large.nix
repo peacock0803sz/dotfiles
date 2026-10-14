@@ -10,6 +10,7 @@ in
 
     ../programs/aibo.nix
     ../programs/claude-code.nix
+    ../programs/codex.nix
     ../programs/pi.nix
     # ../programs/emacs.nix
     ../programs/tmux.nix

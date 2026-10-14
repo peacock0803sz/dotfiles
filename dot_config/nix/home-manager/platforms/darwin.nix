@@ -22,6 +22,8 @@ in
     defaultbrowser
     tart
 
+    nur.repos.peacock0803sz.mado
+
     brewCasks.bartender
     brewCasks.cleanshot
     brewCasks.contexts

@@ -87,6 +87,7 @@
         nixosConfigurations = {
           bassoon = import ./dot_config/nix/hosts/bassoon { inherit inputs; };
           enigma = import ./dot_config/nix/hosts/enigma { inherit inputs; };
+          forte = import ./dot_config/nix/hosts/forte { inherit inputs; };
           overture = import ./dot_config/nix/hosts/overture { inherit inputs; };
         };
       };

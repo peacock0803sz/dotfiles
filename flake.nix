@@ -90,6 +90,20 @@
           forte = import ./dot_config/nix/hosts/forte { inherit inputs; };
           overture = import ./dot_config/nix/hosts/overture { inherit inputs; };
         };
+        # preset 単体のキャッシュビルド用 (homeConfigurations.<system>.<preset>)。
+        # work は private repo を getFlake するので対象外
+        homeConfigurations =
+          let
+            presets = {
+              x86_64-linux = [ "tiny" "small" "large" "huge" ];
+              aarch64-linux = [ "tiny" ];
+              aarch64-darwin = [ "tiny" "small" "large" ];
+            };
+          in
+          builtins.mapAttrs
+            (system: names: inputs.nixpkgs.lib.genAttrs names (preset:
+              import ./dot_config/nix/home-manager/standalone.nix { inherit inputs system preset; }))
+            presets;
       };
       perSystem = { ... }: { };
     };

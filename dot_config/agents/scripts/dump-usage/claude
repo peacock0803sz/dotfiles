@@ -23,6 +23,10 @@ RECORD_DIR = pathlib.Path.home() / ".local" / "state" / "claude-usage"
 # テスト時は CLAUDE_USAGE_PROM_DIR で差し替え可能
 PROM_DIR = pathlib.Path(os.environ.get("CLAUDE_USAGE_PROM_DIR", "/var/lib/node-exporter-textfile"))
 PROM_PATH = PROM_DIR / "claude_usage.prom"
+# 設定されていれば textfile の代わりに Pushgateway へ PUT する
+# (例: http://host:9091/metrics/job/agents-usage/instance/arpeggio/agent/claude)。
+# PUT はグループ内の既存メトリクスを置き換えるので、他エージェントとはグループを分ける
+PUSH_URL = os.environ.get("CLAUDE_USAGE_PUSH_URL")
 
 
 def read_access_token() -> str:
@@ -160,8 +164,25 @@ def render_prom(raw, *, success: bool, now: int) -> str:
     return "\n".join(lines) + "\n"
 
 
+def push_prom(body: str) -> None:
+    req = urllib.request.Request(
+        PUSH_URL,
+        data=body.encode("utf-8"),
+        method="PUT",
+        headers={"Content-Type": "text/plain; version=0.0.4"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10):
+            pass
+    except (urllib.error.URLError, TimeoutError) as e:
+        print(f"cannot push to {PUSH_URL}: {e}", file=sys.stderr)
+
+
 def write_prom(raw, *, success: bool) -> None:
     now = int(datetime.now().astimezone().timestamp())
+    if PUSH_URL:
+        push_prom(render_prom(raw, success=success, now=now))
+        return
     try:
         PROM_DIR.mkdir(parents=True, exist_ok=True)
         tmp = PROM_DIR / "claude_usage.prom.tmp"

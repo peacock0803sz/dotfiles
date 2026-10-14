@@ -178,7 +178,7 @@ def render_prom(raw, *, success: bool, now: int) -> str:
         "# TYPE codex_limit_resets_at_seconds gauge",
         "# HELP codex_usage_raw Every numeric leaf of the usage API response by JSON path (bools as 1/0, datetimes as Unix time).",
         "# TYPE codex_usage_raw gauge",
-        "# HELP codex_account_info Codex account info (always 1).",
+        "# HELP codex_account_info Codex account info such as plan_type and email (always 1).",
         "# TYPE codex_account_info gauge",
         "# HELP codex_scrape_success Whether the last dump successfully fetched the usage API (1/0).",
         "# TYPE codex_scrape_success gauge",
@@ -209,8 +209,15 @@ def render_prom(raw, *, success: bool, now: int) -> str:
             container = raw.get("rate_limit")
             if isinstance(container, dict):
                 plan_type = container.get("plan_type")
+        info = {}
         if isinstance(plan_type, str) and plan_type:
-            lines.append(f'codex_account_info{{plan_type="{plan_type}"}} 1')
+            info["plan_type"] = plan_type
+        email = raw.get("email")
+        if isinstance(email, str) and email:
+            info["email"] = email
+        if info:
+            labels = ",".join(f'{key}="{label_value(value)}"' for key, value in info.items())
+            lines.append(f"codex_account_info{{{labels}}} 1")
     lines.append(f"codex_scrape_success {1 if success else 0}")
     lines.append(f"codex_scrape_timestamp_seconds {now}")
     return "\n".join(lines) + "\n"

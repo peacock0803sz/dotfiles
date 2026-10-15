@@ -11,7 +11,7 @@ from datetime import datetime
 from pathlib import Path
 
 _ROOT = os.environ.get("TERRARCHIVE_ROOT")
-ROOT_DIR = Path(_ROOT) if _ROOT else Path.home() / "develop" / "terrarchive"
+ROOT_DIR = Path(_ROOT) if _ROOT else Path.home() / "Projects" / "terrarchive"
 
 
 def _run(cmd: list[str], cwd: Path | None = None) -> str:

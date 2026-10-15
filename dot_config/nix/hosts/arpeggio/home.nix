@@ -10,6 +10,7 @@ in
         rm -f $out/bin/claude
       '';
     }))
+    brewCasks.finetune
   ];
 
   home.file = {

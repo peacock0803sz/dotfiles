@@ -77,7 +77,6 @@ in
     ".codex/packages/standalone/current/codex".source =
       mkOutOfStoreSymlink "${homeDirectory}/.nix-profile/bin/codex";
   };
-  home.packages = with pkgs; [ bubblewrap ];
 
   programs.codex = {
     enable = true;

@@ -21,10 +21,10 @@ let
   # 無いため、表示時間は回数 (1回 = interval) で調整する。ホストを
   # prometheus-targets.nix に足したときは kiosk-<host> の追記が必要
   rotations = [
+    { uid = "agents-usage-kiosk"; times = 3; }
     { uid = "kiosk-bassoon"; times = 1; }
     { uid = "kiosk-enigma"; times = 2; }
     { uid = "kiosk-overture"; times = 1; }
-    { uid = "agents-usage-kiosk"; times = 5; }
   ];
 
   playlistDef = pkgs.writeText "kiosk-playlist.json" (builtins.toJSON {

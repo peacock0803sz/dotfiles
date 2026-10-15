@@ -24,7 +24,7 @@ let
     { uid = "kiosk-bassoon"; times = 1; }
     { uid = "kiosk-enigma"; times = 2; }
     { uid = "kiosk-overture"; times = 1; }
-    { uid = "agents-usage-kiosk"; times = 2; }
+    { uid = "agents-usage-kiosk"; times = 5; }
   ];
 
   playlistDef = pkgs.writeText "kiosk-playlist.json" (builtins.toJSON {

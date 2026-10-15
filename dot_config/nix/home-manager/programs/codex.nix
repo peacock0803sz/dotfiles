@@ -75,7 +75,7 @@ in
     # Point at the profile link rather than a /nix/store hash so the daemon follows
     # each Home Manager generation after a `home-manager switch`.
     ".codex/packages/standalone/current/codex".source =
-      mkOutOfStoreSymlink "${homeDirectory}/.nix-profile/bin/codex";
+      mkOutOfStoreSymlink "${config.home.profileDirectory}/bin/codex";
   };
 
   programs.codex = {

@@ -25,6 +25,9 @@ nixpkgs.lib.nixosSystem {
 
     { networking.hosts."100.98.92.79" = [ "grafana.p3ac0ck.net" ]; }
 
+    # Keep the user daemon available without an active SSH login.
+    { users.users.${username}.linger = true; }
+
     inputs.disko.nixosModules.disko
     inputs.nix-index-database.nixosModules.nix-index
     inputs.nix-monitored.nixosModules.default

@@ -30,12 +30,13 @@ end
 bind \cg fzf-ghq
 
 function fzf-wt
-    set --function _dir $(ghq list -p | while read -l repo
-        for wt in $repo/.worktrees/*/
-            string trim --right --chars / $wt
-        end
-    end | fzf --preview 'bat {}/README.md' --bind 'ctrl-d:preview-down,ctrl-u:preview-up')
-    test -n "$_dir"; and commandline "cd $_dir"
+    set --function _repo $(git rev-parse --show-toplevel 2>/dev/null)
+    if test -z "$_repo"
+        set _repo $(ghq list -p | fzf --preview 'bat {}/README.md' --bind 'ctrl-d:preview-down,ctrl-u:preview-up')
+        test -n "$_repo"; or return
+    end
+    wt -C $_repo switch
+    commandline -f repaint
 end
 bind \ct fzf-wt
 

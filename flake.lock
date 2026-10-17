@@ -138,11 +138,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792229346,
-        "narHash": "sha256-hC91CgH3sqOBMgiR/i0FGHQfy5IloDX1Wq5RbMiyd7g=",
+        "lastModified": 1792231472,
+        "narHash": "sha256-frBdSlj3LToboaYmWH934/qjcPxzb74hnXky111Ve0U=",
         "owner": "lambdalisue",
         "repo": "cclens",
-        "rev": "36f73a29d3bb9a906717cb46f8a42203b4d9b19e",
+        "rev": "408c64102a4ce0a9876eb40c355cac364defc279",
         "type": "github"
       },
       "original": {

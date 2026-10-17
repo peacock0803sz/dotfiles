@@ -129,6 +129,7 @@
       "inputs": {
         "crane": "crane",
         "flake-utils": "flake-utils",
+        "nix-github-release": "nix-github-release",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -137,11 +138,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789525842,
-        "narHash": "sha256-RdQsL8gnPvLbVwn2/A7huqJA2xBlqLzj7lxeOXIveFU=",
+        "lastModified": 1792229346,
+        "narHash": "sha256-hC91CgH3sqOBMgiR/i0FGHQfy5IloDX1Wq5RbMiyd7g=",
         "owner": "lambdalisue",
         "repo": "cclens",
-        "rev": "3df5f76eb14a53c4cb03d975fd4dbd4eb2f7cc70",
+        "rev": "36f73a29d3bb9a906717cb46f8a42203b4d9b19e",
         "type": "github"
       },
       "original": {
@@ -647,6 +648,28 @@
       "original": {
         "owner": "LnL7",
         "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
+    "nix-github-release": {
+      "inputs": {
+        "nixpkgs": [
+          "cclens",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792229108,
+        "narHash": "sha256-b/qstrahkUL3srof00dgB1fyzhI47Mx2KjowkV2/TmE=",
+        "owner": "lambdalisue",
+        "repo": "nix-github-release",
+        "rev": "e844b6e7523cf03de4f9ce50d5f70837b4ebd57f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lambdalisue",
+        "ref": "v0.1.0",
+        "repo": "nix-github-release",
         "type": "github"
       }
     },

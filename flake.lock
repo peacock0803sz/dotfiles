@@ -245,11 +245,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1792317025,
-        "narHash": "sha256-6w3t6JoiTLYEPOY+4x+ZwfkNXuhh33jy9sfs7oHiUcU=",
+        "lastModified": 1792343519,
+        "narHash": "sha256-febn/n4G0wcy/wmYk+3LIxFbz7bF73hYXUzBZjiN5AA=",
         "owner": "felis-terminal",
         "repo": "felis",
-        "rev": "ea600baf4d25f7cf9bdcd7ec6b36ff556147ae25",
+        "rev": "1fa8dcdba460ac649f8945072341215868f1e7dc",
         "type": "github"
       },
       "original": {
@@ -864,11 +864,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1791487292,
-        "narHash": "sha256-tqM7xDEsaeK1p6VvRygeZ9LkQRpUUkbRT02BHv6hnTM=",
+        "lastModified": 1792116957,
+        "narHash": "sha256-EjZqHKObBfIOeHZnMRVV87HB3pPq/WBkmRJWyFxmZu8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8edc0c72e3a38faf5434e40d1f19431125fe4b30",
+        "rev": "f20cd90e28fe0403873f473b29e42662cd86e8c4",
         "type": "github"
       },
       "original": {

@@ -24,11 +24,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1791801176,
-        "narHash": "sha256-7yMjYQUjpCy0IhItfGt2EJbOobNu1pkIrBX2GA3yOcU=",
+        "lastModified": 1792594212,
+        "narHash": "sha256-XWx3R/AIeYdyZ3guuZVNqirEUPPpehICrIRV3VabR+U=",
         "owner": "Kyure-A",
         "repo": "agent-skills-nix",
-        "rev": "2948865044b2af55c8c4e4eb2abda7de79d60f0e",
+        "rev": "f48aa227f3d157ae3abda12cd9c4ab867f400419",
         "type": "github"
       },
       "original": {
@@ -454,11 +454,11 @@
     "google": {
       "flake": false,
       "locked": {
-        "lastModified": 1792530273,
-        "narHash": "sha256-++ZvM6pDU9Xn2W1nSgzrBGVVhhaP73BNVwrmM1gsHTU=",
+        "lastModified": 1792609736,
+        "narHash": "sha256-TLvMgIYdSRWUrcemUlALDeHLSZ2pBKdfReUALlh5HFI=",
         "owner": "google",
         "repo": "skills",
-        "rev": "a0c086248586d2d12a433c95524a70aa6ebccf88",
+        "rev": "b571dd9fbd6444e0c0e7c92b9ffe322af28bb582",
         "type": "github"
       },
       "original": {
@@ -1048,11 +1048,11 @@
     "superpowers": {
       "flake": false,
       "locked": {
-        "lastModified": 1792527217,
-        "narHash": "sha256-hy6aavA88hoqdUsV7vCTa0nV4YooZDSBPPPX6Jb7ZCs=",
+        "lastModified": 1792616449,
+        "narHash": "sha256-9+69YEdjdaDu5sWTyAbufSVcZgGD7h6wAq4nUVY2syE=",
         "owner": "obra",
         "repo": "superpowers",
-        "rev": "b739a8af570e10a95898f2bdf6cec97467fa6c12",
+        "rev": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
         "type": "github"
       },
       "original": {

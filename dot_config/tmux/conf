@@ -62,6 +62,7 @@ bind -T prefix X split-window -fv -c "#{pane_current_path}"
 ## Session
 bind -T prefix Q kill-session
 bind -T prefix S new-session -c '~/'
+bind -T prefix S-S new-session -c '~/'
 bind -n M-S new-session -c '~/'
 bind -n M-L switch-client -n
 bind -n M-H switch-client -p

@@ -45,8 +45,8 @@ bind -T prefix s   new-window -c "#{pane_current_path}"
 bind -n M-s        new-window -c "#{pane_current_path}"
 # bind -T prefix s   run-shell '~/dotfiles/bin/tmux-smart-split new-window'
 # bind -n M-s        run-shell '~/dotfiles/bin/tmux-smart-split new-window'
-bind -n M-J        next-window
-bind -n M-K        previous-window
+bind -n M-S-J        next-window
+bind -n M-S-K        previous-window
 
 bind -T prefix v split-window -h  -c "#{pane_current_path}"
 bind -T prefix x split-window -v  -c "#{pane_current_path}"

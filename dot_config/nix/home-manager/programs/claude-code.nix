@@ -4,6 +4,7 @@ let
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
   homeDirectory = config.home.homeDirectory;
   mcp-servers = import ./mcp-servers { inherit pkgs mcp-servers-nix; };
+  openpencil = import ./mcp-servers/openpencil { inherit pkgs lib; };
 
   # Top Shelf (Bartender) の AgentStatus ブリッジは macOS でしか動かない
   notchbarEnabled = pkgs.stdenv.hostPlatform.isDarwin;
@@ -14,6 +15,9 @@ in
 {
   home.packages = [
     llm-agents.ccusage
+    # OpenPencil.app から Claude Code を ACP 経由で使う
+    llm-agents.claude-agent-acp
+    openpencil.mcp
     inputs.cclens.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
@@ -177,7 +181,8 @@ in
         host = "https://git.p3ac0ck.net";
         tokenSuffix = "git_p3ac0ck_net";
       });
-    } // (import ./mcp-servers/pencil { inherit pkgs lib; agent = "claudeCodeCLI"; })
+    } // openpencil.server
+      // (import ./mcp-servers/pencil { inherit pkgs lib; agent = "claudeCodeCLI"; })
       // (if hostName == "arpeggio" then {
       devin = (import ./mcp-servers/devin { inherit pkgs; });
       gcloud = (import ./mcp-servers/gcloud { inherit pkgs; });

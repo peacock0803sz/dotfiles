@@ -3,6 +3,7 @@ let
   inherit (inputs) mcp-servers-nix;
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
   homeDirectory = config.home.homeDirectory;
+  openpencil = import ./mcp-servers/openpencil { inherit pkgs lib; };
 
   # Top Shelf (Bartender) の AgentStatus ブリッジは macOS でしか動かない
   notchbarEnabled = pkgs.stdenv.hostPlatform.isDarwin;
@@ -37,7 +38,8 @@ let
         host = "https://git.p3ac0ck.net";
         tokenSuffix = "git_p3ac0ck_net";
       });
-    } // (import ./mcp-servers/pencil { inherit pkgs lib; agent = "codexCLI"; })
+    } // openpencil.server
+    // (import ./mcp-servers/pencil { inherit pkgs lib; agent = "codexCLI"; })
     // (if hostName == "arpeggio" then {
       devin = withSecrets "devin" "" (import ./mcp-servers/devin { inherit pkgs; });
       esa = withSecrets "esa" "" (import ./mcp-servers/esa { inherit pkgs; });
@@ -55,6 +57,9 @@ let
   };
 in
 {
+  # OpenPencil.app から Codex を ACP 経由で使う
+  home.packages = [ llm-agents.codex-acp openpencil.mcp ];
+
   home.file = lib.optionalAttrs notchbarEnabled
     {
       ".codex/notchbar-event".source =

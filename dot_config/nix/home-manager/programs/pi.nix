@@ -3,13 +3,15 @@ let
   inherit (inputs) mcp-servers-nix;
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
   homeDirectory = config.home.homeDirectory;
+  openpencil = import ./mcp-servers/openpencil { inherit pkgs lib; };
 
   mcpConfig = mcp-servers-nix.lib.mkConfig pkgs {
     fileName = "mcp.json";
     programs = import ./mcp-servers/programs.nix { inherit pkgs mcp-servers-nix; };
     settings.servers = {
       kubernetes = import ./mcp-servers/kubernetes { inherit pkgs; };
-    } // (import ./mcp-servers/pencil { inherit pkgs lib; });
+    } // openpencil.server
+    // (import ./mcp-servers/pencil { inherit pkgs lib; });
   };
 
   settingsJson = pkgs.writeText "pi-settings.json" (builtins.toJSON {
@@ -18,7 +20,7 @@ let
   });
 in
 {
-  home.packages = [ llm-agents.pi ];
+  home.packages = [ llm-agents.pi openpencil.harness openpencil.mcp ];
 
   home.file = {
     ".pi/agent/AGENTS.md".source = mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/AGENTS.md";

@@ -69,6 +69,12 @@
       commands = [{ command = "ALL"; options = [ "NOPASSWD" ]; }];
     }];
   };
+  # eMudhra 中間CAの秘密鍵漏洩 (2026-10) への暫定対処。nixpkgs の cacert が対応したら外す
+  # https://emudhra.we-have-a-problem.com
+  security.pki.caCertificateBlacklist = [
+    "Comodo AAA Services root"
+    "emSign ECC Root CA - G3"
+  ];
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;

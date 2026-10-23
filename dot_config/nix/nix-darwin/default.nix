@@ -121,5 +121,11 @@
       ${username} ALL=(ALL) NOPASSWD: ALL
     '';
     pam.services.sudo_local.touchIdAuth = true;
+    # eMudhra 中間CAの秘密鍵漏洩 (2026-10) への暫定対処。nixpkgs の cacert が対応したら外す
+    # https://emudhra.we-have-a-problem.com
+    pki.caCertificateBlacklist = [
+      "Comodo AAA Services root"
+      "emSign ECC Root CA - G3"
+    ];
   };
 }

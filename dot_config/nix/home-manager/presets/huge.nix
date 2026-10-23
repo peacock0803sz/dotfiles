@@ -14,6 +14,8 @@
     kustomize
     tflint
     tflint-plugins.tflint-ruleset-google
+    vagrant
+    packer
 
     act
     awscli2

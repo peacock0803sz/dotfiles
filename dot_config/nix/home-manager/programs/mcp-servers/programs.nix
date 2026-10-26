@@ -33,7 +33,8 @@
     ];
   };
   terraform.enable = true;
-  nixos.enable = true;
+  # mcp 2.x で fastmcp-slim が broken。NixOS/nixpkgs#563493 マージ後に戻す
+  # nixos.enable = true;
   time = {
     enable = true;
     args = [ "--local-timezone=Asia/Tokyo" ];

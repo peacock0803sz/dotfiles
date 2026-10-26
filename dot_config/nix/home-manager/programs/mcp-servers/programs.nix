@@ -1,4 +1,12 @@
-{ pkgs, ... }: {
+{ pkgs, mcp-servers-nix, ... }:
+let
+  # nixpkgs の mcp が 2.x に上がって mcp-server-time / mcp-nixos が壊れたため、
+  # mcp 1.x のままの mcp-servers-nix 側 nixpkgs で組んだものを使う。
+  # NixOS/nixpkgs#563493 がマージされ、本体の nixpkgs で通るようになったら外す
+  pinned = mcp-servers-nix.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.extend
+    mcp-servers-nix.overlays.default;
+in
+{
   playwright = {
     enable = true;
     # macOS (darwin) ではシステムの Chrome を使用、NixOS では nixpkgs の chromium を使用
@@ -33,10 +41,13 @@
     ];
   };
   terraform.enable = true;
-  # mcp 2.x で fastmcp-slim が broken。NixOS/nixpkgs#563493 マージ後に戻す
-  # nixos.enable = true;
+  nixos = {
+    enable = true;
+    package = pinned.mcp-nixos;
+  };
   time = {
     enable = true;
+    package = pinned.mcp-server-time;
     args = [ "--local-timezone=Asia/Tokyo" ];
   };
 }

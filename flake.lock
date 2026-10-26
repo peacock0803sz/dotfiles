@@ -498,11 +498,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792933793,
-        "narHash": "sha256-qDBpOHinUkho0xem4bxb7Xyo4V0MgjgtzpA2d6a/uSY=",
+        "lastModified": 1792979551,
+        "narHash": "sha256-DPE1OyUMMSQer7zUVWKKNG5ujtQzUM0Z3zUtKPb0dMM=",
         "owner": "peacock0803sz",
         "repo": "Lanterna",
-        "rev": "2aa8e605cd2cd95b768ce9a0f80eb29375af6d63",
+        "rev": "35cf7fef70f4549e6c0bcf295ff7700aa800c56f",
         "type": "github"
       },
       "original": {

@@ -6,9 +6,7 @@ on:
         type: string
         required: false
         default: ''
-  schedule:
-    - cron: 0 18 * * * # everyday 03:00 JST
-    - cron: 0 6 * * *  # everyday 15:00 JST
+  # 定期実行は enigma の systemd timer (dot_config/nix/nixos/update-flake.nix) に移行
 
 jobs:
   call:

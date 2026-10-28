@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ modulesPath, system, pkgs, lib, nix-monitored, ... }:
+{ modulesPath, system, pkgs, lib, nix-monitored, nixpkgs-staging, ... }:
 
 {
   nix = {
@@ -164,6 +164,7 @@
     };
     tailscale = {
       enable = true;
+      package = nixpkgs-staging.legacyPackages.${system}.tailscale;
       # 手で叩いた `tailscale up` が残した状態を、起動のたびに宣言へ引き戻す。
       #
       # 2026-09-19 に enigma で --accept-routes が入り、LAN ルータ (GL-MT6000) が

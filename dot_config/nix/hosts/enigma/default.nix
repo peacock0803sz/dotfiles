@@ -46,6 +46,7 @@ nixpkgs.lib.nixosSystem {
     ../../nixos/oksskolten.nix
     ../../nixos/prometheus-exporters.nix
     ../../nixos/prometheus-agents-usage.nix
+    ../../nixos/update-flake.nix
 
     ./hardware.nix
     ./disk.nix

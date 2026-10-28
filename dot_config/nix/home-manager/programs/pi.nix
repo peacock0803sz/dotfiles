@@ -17,6 +17,9 @@ let
   settingsJson = pkgs.writeText "pi-settings.json" (builtins.toJSON {
     theme = "light";
     compaction.enabled = false;
+    defaultProvider = "opencode-go";
+    defaultModel = "muse-spark-1.3-contributor";
+    defaultThinkingLevel = "xhigh";
   });
 in
 {

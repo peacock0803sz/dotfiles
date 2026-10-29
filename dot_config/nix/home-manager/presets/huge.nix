@@ -14,7 +14,9 @@
     kustomize
     tflint
     tflint-plugins.tflint-ruleset-google
-    vagrant
+    # Linux では withLibvirt が既定で有効になり、fuse2 削除で broken になった libguestfs を引き込む。
+    # libvirt は使っていないので無効にする。NixOS/nixpkgs#579283 が入ったら戻す
+    (vagrant.override { withLibvirt = false; })
     packer
 
     act

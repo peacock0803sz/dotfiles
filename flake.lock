@@ -1137,11 +1137,11 @@
         "vim-src": "vim-src"
       },
       "locked": {
-        "lastModified": 1793167133,
-        "narHash": "sha256-v9iaJXHAYexdE5szAI3hEZZufop52LgHeHGmlm0nH9M=",
+        "lastModified": 1793256722,
+        "narHash": "sha256-0OBmWQu32ik5JVTzYayq7JpwewDaWuQ7uk8oYGcd7kQ=",
         "owner": "kawarimidoll",
         "repo": "vim-overlay",
-        "rev": "0606eb123afd633a0e5d9008a92bcabae8ab1920",
+        "rev": "6343ec82fafb194f83ad02295999561dd9b4b8ea",
         "type": "github"
       },
       "original": {

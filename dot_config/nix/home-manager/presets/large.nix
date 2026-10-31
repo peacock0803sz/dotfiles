@@ -13,7 +13,6 @@ in
     ../programs/codex.nix
     ../programs/pi.nix
     # ../programs/emacs.nix
-    ../programs/herdr.nix
     ../programs/tmux.nix
     ../programs/worktrunk.nix
   ];
@@ -38,7 +37,6 @@ in
     typescript
 
     llm-agents.spec-kit
-    llm-agents.herdr
 
     astro-language-server
     bash-language-server

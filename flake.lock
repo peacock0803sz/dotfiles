@@ -538,11 +538,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1793635875,
-        "narHash": "sha256-MIFVsPrQ0zP++V6F36FIb7eo0R4yeCRMJmLqGvaNUyc=",
+        "lastModified": 1793692868,
+        "narHash": "sha256-YclmdbwMIqdQmTrxtaB2/ug4KQuwU89q6YUHdpt7xvg=",
         "owner": "natsukium",
         "repo": "mcp-servers-nix",
-        "rev": "b0a5e0afcd8af9558d19cc625b7c105269382718",
+        "rev": "364ab502bf8d627297b2e11bd734abdfecf9fd9f",
         "type": "github"
       },
       "original": {

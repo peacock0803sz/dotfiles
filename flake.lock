@@ -454,11 +454,11 @@
     "google": {
       "flake": false,
       "locked": {
-        "lastModified": 1793738782,
-        "narHash": "sha256-fEsHbJpV9UXZS2ClRuKG8bhRZAlxIBBwaaEj729bbxA=",
+        "lastModified": 1793769612,
+        "narHash": "sha256-dME2NpOJU/HZ/Sq3h+fHMrj9DEPaBfIupWXeOKdOBt4=",
         "owner": "google",
         "repo": "skills",
-        "rev": "ad3c2480907fe777826482de0f0214a46ae326c3",
+        "rev": "295a5eb93d9dcd4f056cbabb224c8433b44e95e4",
         "type": "github"
       },
       "original": {
@@ -1048,11 +1048,11 @@
     "superpowers": {
       "flake": false,
       "locked": {
-        "lastModified": 1792616449,
-        "narHash": "sha256-9+69YEdjdaDu5sWTyAbufSVcZgGD7h6wAq4nUVY2syE=",
+        "lastModified": 1793744227,
+        "narHash": "sha256-rP5YsyGuPd9YSW/Fj3aukrq1bLuV+nwwQMK4JaZQgkI=",
         "owner": "obra",
         "repo": "superpowers",
-        "rev": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
+        "rev": "22f0b463e7a5e579904dd6211a520321035526f7",
         "type": "github"
       },
       "original": {

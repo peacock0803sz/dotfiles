@@ -6,6 +6,7 @@ in
 {
   imports = [
     ../programs/alacritty.nix
+    ../programs/adroit.nix
     ../programs/felis.nix
     ../programs/ghostty.nix
     ../programs/wezterm.nix

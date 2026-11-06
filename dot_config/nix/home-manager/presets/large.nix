@@ -64,6 +64,7 @@ in
     vhs
 
     cloudflared
+    gh-stack
     octorus
     pinact
 

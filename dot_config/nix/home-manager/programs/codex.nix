@@ -49,6 +49,8 @@ let
         host = "https://gitea.groove-x.io";
         tokenSuffix = "gitea_groove_x_io";
       });
+      # Codex infers streamable HTTP from `url`; it has no `type` key
+      gx-creative-assets = { inherit (import ./mcp-servers/gx-creative-assets { }) url; };
       lovot = (import ./mcp-servers/lovot { inherit pkgs; });
       wrike = withSecrets "wrike" ''set argv[-1] "Authorization:Bearer $WRIKE_API_TOKEN"''
         (import ./mcp-servers/wrike { inherit pkgs; });

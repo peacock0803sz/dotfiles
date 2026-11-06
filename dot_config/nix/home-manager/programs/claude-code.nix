@@ -191,6 +191,7 @@ in
         host = "https://gitea.groove-x.io";
         tokenSuffix = "gitea_groove_x_io";
       });
+      gx-creative-assets = (import ./mcp-servers/gx-creative-assets { });
       lovot = (import ./mcp-servers/lovot { inherit pkgs; });
       slack = (import ./mcp-servers/slack { inherit pkgs; });
     } else { });

@@ -24,6 +24,7 @@ nixpkgs.lib.nixosSystem {
     inputs.nix-monitored.nixosModules.default
     inputs.nixos-hardware.nixosModules.gmktec-nucbox-g3-plus
     ../../nixos
+    ../../nixos/docker.nix
     ../../nixos/grafana.nix
     ../../nixos/grafana-kiosk.nix
     ../../nixos/grafana-signage.nix

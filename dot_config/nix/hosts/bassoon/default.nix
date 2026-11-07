@@ -30,6 +30,7 @@ nixpkgs.lib.nixosSystem {
     ../../nixos/grafana-signage.nix
     ../../nixos/lemonade.nix
     ../../nixos/notizen-server.nix
+    ../../nixos/oksskolten.nix
     ../../nixos/samba.nix
     ./hardware.nix
     ./disk.nix

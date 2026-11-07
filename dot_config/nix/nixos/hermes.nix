@@ -24,7 +24,7 @@ let
   gateway = "172.30.0.1";
 
   # 画面ビューアは secure context が要り、平文 HTTP の IP 直打ちでは開けない。
-  # tailnet の証明書で HTTPS にする。443 は nginx が 0.0.0.0 で使っているので避ける
+  # tailnet の証明書で HTTPS にする
   servePort = "8443";
   publicUrl = "https://enigma.tail2121a.ts.net:${servePort}";
 

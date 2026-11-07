@@ -44,7 +44,6 @@ nixpkgs.lib.nixosSystem {
     ../../nixos/neovim.nix
     ../../nixos/notizen-syncer.nix
     ../../nixos/lemonade.nix
-    ../../nixos/oksskolten.nix
     ../../nixos/prometheus-exporters.nix
     ../../nixos/prometheus-agents-usage.nix
     ../../nixos/update-flake.nix

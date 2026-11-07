@@ -40,6 +40,7 @@ nixpkgs.lib.nixosSystem {
     ../../nixos/default.nix
     ../../nixos/docker.nix
     ../../nixos/gitea-actions-runner.nix
+    ../../nixos/hermes.nix
     ../../nixos/neovim.nix
     ../../nixos/notizen-syncer.nix
     ../../nixos/lemonade.nix

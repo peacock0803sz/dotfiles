@@ -20,6 +20,13 @@ let
 
   network = "hermes";
   subnet = "172.30.0.0/24";
+  # 公開ポート経由の接続はコンテナからこのゲートウェイ発に見える
+  gateway = "172.30.0.1";
+
+  # 画面ビューアは secure context が要り、平文 HTTP の IP 直打ちでは開けない。
+  # tailnet の証明書で HTTPS にする。443 は nginx が 0.0.0.0 で使っているので避ける
+  servePort = "8443";
+  publicUrl = "https://enigma.tail2121a.ts.net:${servePort}";
 
   # コンテナから届かせない宛先。ボットは画面経由のプロンプトインジェクションを受け得るが、
   # enigma は networking.firewall.enable = false なので、遮断しないと enigma 本体の
@@ -48,9 +55,6 @@ let
       # 外への公開範囲は下の ports の 127.0.0.1 で絞る
       host = "0.0.0.0";
       port = 9120;
-      # 画面ビューアは secure context が要る。平文 HTTP では localhost 以外だと開けないので、
-      # tailnet 直ではなく SSH トンネルで使う
-      public_url = "http://localhost:9120";
     };
     terminal.backend = "local";
     bot_desktop = {
@@ -89,6 +93,30 @@ in
     "d ${dataDir} 0700 ${uid} ${uid} -"
     "C ${dataDir}/config.yaml 0600 ${uid} ${uid} - ${seedConfig}"
   ];
+
+  # 公開先は Nix 側の値に揃える。config.yaml は Hermes も書き換えるので該当キーだけ上書きする
+  systemd.services.docker-hermes.preStart = ''
+    ${pkgs.yq-go}/bin/yq -i '.webapp.public_url = "${publicUrl}" | .dashboard.trusted_proxies = ["${gateway}"]' ${dataDir}/config.yaml
+    chown ${uid}:${uid} ${dataDir}/config.yaml
+    chmod 0600 ${dataDir}/config.yaml
+  '';
+
+  systemd.services.hermes-tailscale-serve = {
+    description = "Expose the Hermes Webapp on the tailnet over HTTPS";
+    after = [ "tailscaled.service" "network-online.target" ];
+    wants = [ "tailscaled.service" "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      # 起動直後は tailscaled がまだ応答しないことがある
+      Restart = "on-failure";
+      RestartSec = 10;
+      TimeoutStartSec = 60;
+      ExecStart = "${config.services.tailscale.package}/bin/tailscale serve --bg --https=${servePort} http://127.0.0.1:9120";
+      ExecStop = "${config.services.tailscale.package}/bin/tailscale serve --https=${servePort} off";
+    };
+  };
 
   systemd.services.hermes-network = {
     description = "Docker network and egress rules for Hermes Agent";

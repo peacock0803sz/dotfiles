@@ -816,11 +816,11 @@
     },
     "nixpkgs-staging": {
       "locked": {
-        "lastModified": 1793994661,
-        "narHash": "sha256-t4P8S3sk2Bu9mPJYEcgkuFRYbcNvCR+Mf5jm+WCXtI8=",
+        "lastModified": 1794040809,
+        "narHash": "sha256-+DH1wYjFE/tuCwirB/m88HqpNZnLN6FMDf7Od5MGC2M=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "57403b6705f8ac314647ec37d1afddc6daf218b4",
+        "rev": "032ba0738ab0583e30b8a97a64cd357d4cc7de63",
         "type": "github"
       },
       "original": {

@@ -245,11 +245,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1794065498,
-        "narHash": "sha256-2vtELibaGRn3eV+iA+mxN0pR8ZHCD8SUxWeZBbpmYno=",
+        "lastModified": 1794126827,
+        "narHash": "sha256-M5RcIWkc87t4n8hvaW8XZ5dVPHciur9/wuZrmHDM8Xs=",
         "owner": "felis-terminal",
         "repo": "felis",
-        "rev": "0ecc5fb0c0166d52c9ba6d3b343f4cc412771049",
+        "rev": "0a926c61a1a5944f3e06f08bb3d400591352568c",
         "type": "github"
       },
       "original": {

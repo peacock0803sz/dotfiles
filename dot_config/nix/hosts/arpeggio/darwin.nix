@@ -15,4 +15,7 @@
   nix.extraOptions = ''
     !include /etc/nix/gx-secrets.conf
   '';
+
+  # ~/.orbstack/binのリンクが/Applications/OrbStack.appを指し、アプリも自己更新するのでbrew-nixではなくcaskで入れる
+  homebrew.casks = [ "orbstack" ];
 }

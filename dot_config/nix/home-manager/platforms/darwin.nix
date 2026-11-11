@@ -53,7 +53,7 @@ in
     (brewCasks.istat-menus.overrideAttrs (oldAttrs: {
       src = pkgs.fetchurl {
         url = builtins.head oldAttrs.src.urls;
-        hash = "sha256-jGM+3lHEMeDp3LqGSirDSZ6dwcL/XYSUULKx4Jx9PZI=";
+        hash = "sha256-5HfcdmBqYYFpdlLq1vPOl35xa4eBZawaqUXMRwuc4l0=";
       };
     }))
     (brewCasks.lasso-app.overrideAttrs (oldAttrs: {

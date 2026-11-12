@@ -30,13 +30,16 @@ in
       mkOutOfStoreSymlink "${homeDirectory}/dotfiles/dot_config/agents/scripts/notchbar-event";
   };
 
-  home.activation.syncClaudePlugins = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.syncClaudePlugins = lib.hm.dag.entryAfter [ "writeBoundary" "claudeCodeSettings" ] ''
     PATH="${pkgs.jq}/bin:${pkgs.coreutils}/bin:$PATH" \
       ${pkgs.bash}/bin/bash ${../../../agents/scripts/sync-claude-plugins}
   '';
 
   programs.claude-code = {
     enable = true;
+    # /effort などが ~/.claude/settings.json に書き込むため、store への symlink ではなく
+    # activation 時にマージされる書き込み可能ファイルにする
+    mutableSettings = true;
     package = llm-agents.claude-code;
     context = ../../../agents/AGENTS.md;
 

@@ -4,8 +4,12 @@ let
   jq = lib.getExe pkgs.jq;
   xdgCacheDir = "/Volumes/Cache/xdg-cache";
   orbstackDataDir = "/Volumes/Cache/orbstack";
+  tartHomeDir = "/Volumes/Cache/tart";
 in
 {
+  # tartはVMとpullしたイメージをTART_HOME配下に置く(未設定なら~/.tart)
+  home.sessionVariables.TART_HOME = tartHomeDir;
+
   home.packages = with pkgs; [
     brewCasks.chatgpt
     (brewCasks.claude.overrideAttrs (oldAttrs: {

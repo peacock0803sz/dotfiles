@@ -85,6 +85,7 @@
         darwinConfigurations = {
           nocturne = import ./dot_config/nix/hosts/nocturne { inherit inputs; };
           arpeggio = import ./dot_config/nix/hosts/arpeggio { inherit inputs; };
+          adlib = import ./dot_config/nix/hosts/adlib { inherit inputs; };
         };
         nixosConfigurations = {
           bassoon = import ./dot_config/nix/hosts/bassoon { inherit inputs; };

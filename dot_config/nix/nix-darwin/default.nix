@@ -50,34 +50,15 @@
   };
   programs.fish.enable = true;
 
+  # cask は隔離用の adlib にも入るので、ここには置かずホスト側で選ぶ (手元機は workstation.nix)
   homebrew = {
     enable = true;
-    taps = [
-      { name = "arto-app/tap"; trusted = true; }
-    ];
     onActivation = {
       autoUpdate = true;
       upgrade = true;
       cleanup = "uninstall";
       extraFlags = [ "--force-cleanup" ];
     };
-    casks = [
-      "1password"
-      "adobe-creative-cloud"
-      "arto-app/tap/arto"
-      # "chatgpt"
-      # "claude"
-      "font-udev-gothic-nf"
-      "font-jetbrains-mono-nerd-font"
-      "google-chrome"
-      "google-chrome@beta"
-      "google-chrome@dev"
-      "google-drive"
-      "karabiner-elements"
-      "tailscale-app"
-      "vivaldi"
-      "zoom"
-    ];
   };
   launchd.labelPrefix = "net.p3ac0ck.nix";
 

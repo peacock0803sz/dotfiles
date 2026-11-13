@@ -41,11 +41,16 @@ inputs.nix-darwin.lib.darwinSystem {
       home-manager.useGlobalPkgs = true;
       home-manager.extraSpecialArgs = { inherit hostName system inputs; };
       # 認証情報や業務設定を持ち込まないよう、platforms/darwin.nix や work.nix は入れない
-      home-manager.users.${username} = {
+      home-manager.users.${username} = { config, pkgs, ... }: {
         imports = [
           ../../home-manager
           ../../home-manager/presets/tiny.nix
         ];
+
+        # programs/ghostty.nix は peafowl-colors (ghq 配下) へのリンクも張るので使わない
+        home.packages = [ pkgs.brewCasks.ghostty ];
+        home.file.".config/ghostty/config".source = config.lib.file.mkOutOfStoreSymlink
+          "${config.home.homeDirectory}/dotfiles/dot_config/ghostty/adlib.config";
       };
     }
   ];

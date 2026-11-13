@@ -36,7 +36,7 @@ nixpkgs.lib.nixosSystem {
     ../../nixos/neovim.nix
     ../../nixos/lemonade.nix
     ../../nixos/prometheus-exporters.nix
-    ../../nixos/prometheus-agents-usage.nix
+    # ../../nixos/prometheus-agents-usage.nix
 
     ./hardware.nix
     ./disk.nix

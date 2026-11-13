@@ -28,12 +28,19 @@ inputs.nix-darwin.lib.darwinSystem {
       # エージェントは向こうから動き出すので、VM 内ではスリープも画面ロックもさせない
       power.sleep = { computer = "never"; display = "never"; };
 
-      homebrew.casks = [
-        "font-udev-gothic-nf"
-        "font-jetbrains-mono-nerd-font"
-        "google-chrome"
-        "karabiner-elements"
-      ];
+      homebrew = {
+        # クリップボード共有を担う tart-guest-agent はイメージに brew で入っているので、cleanup で消されないよう明示する
+        taps = [
+          { name = "openai/tools"; trusted = true; }
+        ];
+        brews = [ "openai/tools/tart-guest-agent" ];
+        casks = [
+          "font-udev-gothic-nf"
+          "font-jetbrains-mono-nerd-font"
+          "google-chrome"
+          "karabiner-elements"
+        ];
+      };
     }
 
     {

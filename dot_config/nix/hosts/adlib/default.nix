@@ -45,6 +45,7 @@ inputs.nix-darwin.lib.darwinSystem {
         imports = [
           ../../home-manager
           ../../home-manager/presets/tiny.nix
+          ../../home-manager/programs/tmux.nix
         ];
 
         # programs/ghostty.nix は peafowl-colors (ghq 配下) へのリンクも張るので使わない

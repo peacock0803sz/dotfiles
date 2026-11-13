@@ -13,9 +13,7 @@ end
 eval ($HOMEBREW_PREFIX/bin/brew shellenv)
 fish_add_path "$HOMEBREW_PREFIX/sbin"
 
-if [ $USER = peacock ]
-    source "$HOME/.config/op/plugins.sh"
-end
+source "$HOME/.config/op/plugins.sh"
 
 # vim
 alias vim@bsd /usr/bin/vim

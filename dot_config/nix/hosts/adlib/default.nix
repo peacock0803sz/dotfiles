@@ -39,6 +39,7 @@ inputs.nix-darwin.lib.darwinSystem {
           "font-jetbrains-mono-nerd-font"
           "google-chrome"
           "karabiner-elements"
+          "raycast"
         ];
       };
     }

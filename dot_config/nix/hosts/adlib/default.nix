@@ -29,7 +29,6 @@ inputs.nix-darwin.lib.darwinSystem {
       power.sleep = { computer = "never"; display = "never"; };
 
       homebrew.casks = [
-        "1password"
         "font-udev-gothic-nf"
         "font-jetbrains-mono-nerd-font"
         "google-chrome"

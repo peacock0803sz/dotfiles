@@ -35,9 +35,9 @@ inputs.nix-darwin.lib.darwinSystem {
         ];
         brews = [ "openai/tools/tart-guest-agent" ];
         casks = [
+          "firefox"
           "font-udev-gothic-nf"
           "font-jetbrains-mono-nerd-font"
-          "google-chrome"
           "karabiner-elements"
           "raycast"
         ];

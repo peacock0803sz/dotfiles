@@ -17,6 +17,7 @@
       "google-drive"
       "karabiner-elements"
       "tailscale-app"
+      "thaw@beta"
       "vivaldi"
       "zoom"
     ];

@@ -26,7 +26,6 @@ in
 
     nur.repos.peacock0803sz.mado
 
-    brewCasks.bartender
     brewCasks.cleanshot
     brewCasks.contexts
     brewCasks.coteditor

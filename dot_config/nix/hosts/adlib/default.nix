@@ -39,6 +39,7 @@ inputs.nix-darwin.lib.darwinSystem {
           "firefox"
           "font-udev-gothic-nf"
           "font-jetbrains-mono-nerd-font"
+          "google-chrome"
           "karabiner-elements"
           "raycast"
         ];

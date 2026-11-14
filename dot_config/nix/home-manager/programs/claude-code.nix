@@ -146,6 +146,10 @@ in
         "feature-dev@claude-plugins-official" = true;
         "codex@openai-codex" = true;
       };
+    } // lib.optionalAttrs (hostName == "arpeggio") {
+      # Claude in Chrome 拡張へ毎セッション接続する (/chrome の "Enabled by default" 相当)。
+      # ネイティブホストの manifest とラッパーは Claude Code が起動時に自分で書くので nix では置かない
+      env.CLAUDE_CODE_ENABLE_CFC = "1";
     };
 
     lspServers = {

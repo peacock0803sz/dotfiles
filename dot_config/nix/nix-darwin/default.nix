@@ -21,6 +21,7 @@
         "https://nix-community.cachix.org"
         "https://peacock0803sz.cachix.org"
         "https://lanterna.cachix.org"
+        "https://adroit.cachix.org"
         "https://nix-cache.natsukium.com"
       ];
       extra-trusted-public-keys = [
@@ -29,6 +30,7 @@
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "peacock0803sz.cachix.org-1:dfSrzcK5CS+mrpCCM4md1zP9YxLv+ddWGewTI0pdfsE="
         "lanterna.cachix.org-1:ER2QRwMkbWgIZJ4yBsY6M6xawkxBYCBI9JMwx6iSgxc="
+        "adroit.cachix.org-1:fWcTwjPH//igrya2gumlBcKRSzhRr3p4JqHAsFL8N9Y="
         "niks3-1:SoIFTPtiPoCW3/OzUkIBKlLG5znMZfbihlr11XAOles="
       ];
     };

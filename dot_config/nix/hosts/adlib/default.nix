@@ -36,9 +36,11 @@ inputs.nix-darwin.lib.darwinSystem {
         brews = [ "openai/tools/tart-guest-agent" ];
         casks = [
           "1password"
+          "claude"
           "firefox"
           "font-udev-gothic-nf"
           "font-jetbrains-mono-nerd-font"
+          "ghostty"
           "google-chrome"
           "karabiner-elements"
           "raycast"
@@ -61,8 +63,6 @@ inputs.nix-darwin.lib.darwinSystem {
         # programs/ghostty.nix は peafowl-colors (ghq 配下) へのリンクも張るので使わない
         home.packages = with pkgs; [
           _1password-cli
-
-          brewCasks.ghostty
         ];
         home.file.".config/ghostty/config".source = config.lib.file.mkOutOfStoreSymlink
           "${config.home.homeDirectory}/dotfiles/dot_config/ghostty/adlib.config";

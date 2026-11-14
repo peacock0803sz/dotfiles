@@ -18,7 +18,6 @@ in
     # OpenPencil.app から Claude Code を ACP 経由で使う
     llm-agents.claude-agent-acp
     openpencil.mcp
-    inputs.cclens.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   home.file = {
@@ -136,17 +135,16 @@ in
 
       extraKnownMarketplaces = {
         openai-codex = {
-          source = { source = "github"; repo = "openai/codex-plugin-cc"; };
-        };
-        cclens = {
-          source = { source = "github"; repo = "lambdalisue/cclens"; };
+          source = {
+            source = "github";
+            repo = "openai/codex-plugin-cc";
+          };
         };
       };
       enabledPlugins = {
         "pr-review-toolkit@claude-plugins-official" = true;
         "feature-dev@claude-plugins-official" = true;
         "codex@openai-codex" = true;
-        "cclens@cclens" = true;
       };
     };
 

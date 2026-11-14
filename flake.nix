@@ -65,15 +65,6 @@
       url = "github:numtide/llm-agents.nix";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
-    cclens = {
-      url = "github:lambdalisue/cclens";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
-    };
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     # nixpkgs を follows するとバイナリキャッシュが効かなくなるので揃えない
     felis.url = "github:felis-terminal/felis";
   };

@@ -8,11 +8,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1794655589,
-        "narHash": "sha256-nBplvbKCtUlXD1SxWCHNgI63R25LVbBks9IVPUnoCXE=",
+        "lastModified": 1794763687,
+        "narHash": "sha256-D4gIJLhuGZkcYZL0E5LN4bupGQ5CGgYqY7+1BsLClOs=",
         "owner": "adroit-app",
         "repo": "Adroit",
-        "rev": "bd3c1ed2ee3dc9a5f4066f5c9bec14e8ed45882a",
+        "rev": "38314a03d86fe510e6b64260cb74ddfd95c4b9f4",
         "type": "github"
       },
       "original": {

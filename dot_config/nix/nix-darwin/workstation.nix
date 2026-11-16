@@ -2,10 +2,12 @@
   homebrew = {
     taps = [
       { name = "arto-app/tap"; trusted = true; }
+      { name = "adroit-app/tap"; trusted = true; }
     ];
     casks = [
       "1password"
       "adobe-creative-cloud"
+      "adroit-app/tap/adroit"
       "arto-app/tap/arto"
       # "chatgpt"
       # "claude"

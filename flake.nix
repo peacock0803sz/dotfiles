@@ -67,7 +67,6 @@
     };
     # nixpkgs を follows するとバイナリキャッシュが効かなくなるので揃えない
     felis.url = "github:felis-terminal/felis";
-    adroit.url = "github:adroit-app/Adroit";
   };
 
   outputs = { flake-parts, ... }@inputs:

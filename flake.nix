@@ -67,6 +67,9 @@
     };
     # nixpkgs を follows するとバイナリキャッシュが効かなくなるので揃えない
     felis.url = "github:felis-terminal/felis";
+    # macOS 側の cask (リリース版) と揃えるためタグで固定する。adroit.cachix.org で
+    # pin されて残るのはリリースのビルドだけなので、キャッシュも確実に当たる
+    adroit.url = "github:adroit-app/Adroit/v0.4.0";
   };
 
   outputs = { flake-parts, ... }@inputs:

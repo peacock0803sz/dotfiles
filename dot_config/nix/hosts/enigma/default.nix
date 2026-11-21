@@ -34,6 +34,17 @@ nixpkgs.lib.nixosSystem {
       networking.hosts."100.98.92.79" = [ "grafana.p3ac0ck.net" ];
     }
 
+    {
+      # home-manager/programs/adroit-remote.nix で入れる adroit のビルド済みバイナリ
+      nix.settings = {
+        extra-substituters = [ "https://adroit.cachix.org" ];
+        extra-trusted-public-keys = [ "adroit.cachix.org-1:fWcTwjPH//igrya2gumlBcKRSzhRr3p4JqHAsFL8N9Y=" ];
+      };
+    }
+
+    # adroit の gateway (user service) をログイン無しでも動かす
+    { users.users.${username}.linger = true; }
+
     inputs.disko.nixosModules.disko
     inputs.nix-index-database.nixosModules.nix-index
     inputs.nix-monitored.nixosModules.default
@@ -64,6 +75,7 @@ nixpkgs.lib.nixosSystem {
           ../../home-manager/platforms/nixos.nix
           ../../home-manager/presets/large.nix
           ../../home-manager/programs/agent-skills.nix
+          ../../home-manager/programs/adroit-remote.nix
         ];
       };
     }

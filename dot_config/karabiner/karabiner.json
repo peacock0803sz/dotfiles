@@ -16,6 +16,7 @@
                       "^org\\.alacritty$",
                       "^com\\.github.\\wez\\.wezterm$",
                       "^com\\.mitchellh\\.ghostty$",
+                      "^com\\.drucial\\.ZenTerm$",
                       "^app\\.adroit\\.adroit$"
                     ],
                     "type": "frontmost_application_if"

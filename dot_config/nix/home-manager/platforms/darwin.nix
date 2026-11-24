@@ -10,6 +10,7 @@ in
     ../programs/felis.nix
     ../programs/ghostty.nix
     ../programs/wezterm.nix
+    ../programs/zen-term.nix
     inputs.nix-mac-app-identity.homeManagerModules.default
   ];
 

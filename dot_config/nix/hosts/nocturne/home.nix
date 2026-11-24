@@ -8,6 +8,8 @@ in
       "${config.home.homeDirectory}/dotfiles/dot_config/ghostty/nocturne.config";
     "Library/Application Support/felis/config.toml".source = mkOutOfStoreSymlink
       "${config.home.homeDirectory}/dotfiles/dot_config/felis/nocturne.toml";
+    ".config/zen-term/config".source = mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/dotfiles/dot_config/zen-term/nocturne.config";
     ".ssh/config".source = mkOutOfStoreSymlink
       "${config.home.homeDirectory}/dotfiles/dot_config/ssh/config.darwin";
   };

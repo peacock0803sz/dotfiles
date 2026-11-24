@@ -1,0 +1,17 @@
+# vim: ft=dosini
+# ZenTerm のワークスペース。tmux のセッション + vde-layout のプリセット相当
+# 書式は https://github.com/praxis-labs-io/zen-term/blob/main/docs/config/workspaces
+# Settings → Workspaces や ⌘P の Add Workspace… で編集すると、symlink を辿ってこのファイルが書き換わる
+#
+# main / right / bottom を zmx-pane (fish/zen-term.fish) で起動しておくと、ZenTerm を閉じてもプロセスが zmx に残り、
+# ⌘P で開き直したときに同じセッションへ attach し直す。セッション名は「親ディレクトリ-ディレクトリ.役割」で、
+# worktree から開いたときは別のセッションになる。zmx-pane を使わない行は普通のシェルで、閉じれば終わる
+
+# vde-layout の wide プリセット (aibo | editor / terminal) を main + ドロワーで組んだもの。
+# ZenTerm のドロワーは右と下にしか付かないので、aibo は左ではなく右に来る
+[dotfiles]
+path   = ~/dotfiles
+main   = "zmx-pane editor nvim"
+right  = "zmx-pane agent aibo"
+bottom = "zmx-pane shell"
+focus  = main

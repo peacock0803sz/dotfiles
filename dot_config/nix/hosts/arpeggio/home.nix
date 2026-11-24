@@ -25,6 +25,8 @@ in
       "${config.home.homeDirectory}/dotfiles/dot_config/ghostty/arpeggio.config";
     "Library/Application Support/felis/config.toml".source = mkOutOfStoreSymlink
       "${config.home.homeDirectory}/dotfiles/dot_config/felis/arpeggio.toml";
+    ".config/zen-term/config".source = mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/dotfiles/dot_config/zen-term/arpeggio.config";
     ".ssh/config".source = mkOutOfStoreSymlink
       "${config.home.homeDirectory}/dotfiles/dot_config/ssh/arpeggio.override.config";
 

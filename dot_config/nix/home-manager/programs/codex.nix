@@ -54,7 +54,8 @@ let
       lovot = (import ./mcp-servers/lovot { inherit pkgs; });
       wrike = withSecrets "wrike" ''set argv[-1] "Authorization:Bearer $WRIKE_API_TOKEN"''
         (import ./mcp-servers/wrike { inherit pkgs; });
-      slack = withSecrets "slack" "" (import ./mcp-servers/slack { inherit pkgs; });
+      slack_gx = withSecrets "slack-gx" "" (import ./mcp-servers/slack { inherit pkgs; workspace = "gx"; });
+      slack_pyconjp = withSecrets "slack-pyconjp" "" (import ./mcp-servers/slack { inherit pkgs; workspace = "pyconjp"; });
     } else { });
   };
 in

@@ -198,7 +198,8 @@ in
       });
       gx-creative-assets = (import ./mcp-servers/gx-creative-assets { });
       lovot = (import ./mcp-servers/lovot { inherit pkgs; });
-      slack = (import ./mcp-servers/slack { inherit pkgs; });
+      slack_gx = (import ./mcp-servers/slack { inherit pkgs; workspace = "gx"; });
+      slack_pyconjp = (import ./mcp-servers/slack { inherit pkgs; workspace = "pyconjp"; });
     } else { });
   };
 }

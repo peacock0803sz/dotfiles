@@ -65,6 +65,9 @@ end
 # tide prompts
 source $HOME/dotfiles/dot_config/fish/tide.fish
 
+# ZenTerm + zmx
+source $HOME/dotfiles/dot_config/fish/zen-term.fish
+
 if test -f $HOME/dotfiles/dot_config/fish/secrets.fish
     source $HOME/dotfiles/dot_config/fish/secrets.fish
 end

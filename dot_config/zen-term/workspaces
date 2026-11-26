@@ -11,7 +11,4 @@
 # ZenTerm のドロワーは右と下にしか付かないので、aibo は左ではなく右に来る
 [dotfiles]
 path   = ~/dotfiles
-main   = "zmx-pane editor nvim"
-right  = "zmx-pane agent aibo"
-bottom = "zmx-pane shell"
-focus  = main
+main   = "zmx-pane shell"

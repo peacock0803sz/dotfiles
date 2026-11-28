@@ -6,6 +6,49 @@
 if set -q ZEN_PANE; and test "$TERM" = xterm-ghostty
     set --global --export TERM xterm-256color
 end
+
+# ワークスペース名を先頭タブのメインペインのディレクトリ名に合わせる (ghq のリポジトリ内ならリポジトリ名)。
+# ZenTerm 自身は設定なしのワークスペースをアクティブなタブのフォルダで名付けるので、
+# 先頭タブのシェルで cd したときに `zen workspace rename` で上書きする。
+# rename した名前はそのセッションの間固定され、[Title] 付きのワークスペースも上書きされる。
+# nvim 内での移動やタブの並べ替えは、次に先頭タブで cd するまで反映されない
+if status is-interactive; and set -q ZEN_PANE
+    # ghq root 配下のリポジトリの中 (本体のチェックアウトでも worktrunk の .worktrees/<branch> などの worktree でも、
+    # そのサブディレクトリでも) にいるときはリポジトリ名、それ以外は今のディレクトリ名を返す
+    function _zen_workspace_name
+        # --git-common-dir は worktree の中でも本体の <repo>/.git を指す。submodule の中では .git/modules/<name> になるので外れる
+        set --local common (git rev-parse --path-format=absolute --git-common-dir 2>/dev/null)
+        if test -n "$common"; and test (path basename -- $common) = .git; and type -q ghq
+            set -q __zen_ghq_root; or set --global __zen_ghq_root (path resolve -- (ghq root 2>/dev/null))
+            set --local repo (path resolve -- (path dirname -- $common))
+            if test -n "$__zen_ghq_root"; and string match -q -- "$__zen_ghq_root/*" $repo
+                path basename -- $repo
+                return
+            end
+        end
+        path basename -- $PWD
+    end
+
+    function _zen_workspace_follow_first_tab --on-variable PWD
+        # zmx 内では ZEN_PANE が _zmx_env_hook で今のペインに取り込み直される
+        string match -qr '^\d+$' -- "$ZEN_PANE"; or return
+        type -q jq; or return
+        # zen はペインの PATH に入っているが、無ければアプリ内のものを使う
+        set --local zen (command -s zen; or echo /Applications/ZenTerm.app/Contents/MacOS/zen)
+        test -x "$zen"; or return
+        # このペインが属するワークスペースの先頭タブにいる (ドロワーとフロートは除く) ときだけ、今の名前が返る
+        set --local current ($zen list 2>/dev/null | jq -r --argjson p $ZEN_PANE '
+            .windows[].workspaces[]
+            | select(.tabs[0].panes // [] | any(.token == $p and .drawer == null and .float != true))
+            | .title')
+        test -n "$current"; or return
+        set --local name (_zen_workspace_name)
+        test -n "$name"; or return
+        test "$current" = "$name"; or $zen workspace rename -- $name >/dev/null 2>&1
+    end
+    # --on-variable はシェル起動時には発火しないので、一度呼んでおく
+    _zen_workspace_follow_first_tab
+end
 # }}}
 
 # zmx {{{
